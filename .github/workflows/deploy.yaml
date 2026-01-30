@@ -27,6 +27,8 @@ jobs:
           node-version: '20'
           cache: 'npm' # Adjust caching strategy and configuration if using other package managers
       - name: Install dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
         run: npm ci # Replace with appropriate command if using other package managers
       - name: Build Storybook
         run: npm run build-storybook
