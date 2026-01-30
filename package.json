@@ -2,13 +2,13 @@
   "name": "yale-ui-cl",
   "version": "1.0.0",
   "description": "Yale UI Component Library",
-  "homepage": "https://github.com/Yale-A11y/yale-ui-cl#readme",
+  "homepage": "https://github.com/yalesites-org/yale-ui-cl#readme",
   "bugs": {
-    "url": "https://github.com/Yale-A11y/yale-ui-cl/issues"
+    "url": "https://github.com/yalesites-org/yale-ui-cl/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yale-A11y/yale-ui-cl.git"
+    "url": "git+https://github.com/yalesites-org/yale-ui-cl.git"
   },
   "license": "ISC",
   "author": "",
@@ -30,5 +30,8 @@
     "playwright": "^1.57.0",
     "@vitest/browser-playwright": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17"
+  },
+  "dependencies": {
+    "@yalesites-org/tokens": "^1.31.0"
   }
 }
