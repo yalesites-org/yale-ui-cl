@@ -32,6 +32,6 @@
     "vitest": "^4.0.17"
   },
   "dependencies": {
-    "@yalesites-org/tokens": "^1.36.0"
+    "@yalesites-org/tokens": "~1.36.0"
   }
 }
