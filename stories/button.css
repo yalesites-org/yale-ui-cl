@@ -1,4 +1,4 @@
-@import url("@yalesites-org/tokens/build/css/tokens.css");
+@import url("base.css");
 
 .storybook-button {
   display: inline-block;
