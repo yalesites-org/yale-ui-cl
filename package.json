@@ -29,9 +29,11 @@
     "@vitest/coverage-v8": "^4.0.17",
     "playwright": "^1.57.0",
     "storybook": "^10.2.0",
+    "style-dictionary": "^5.2.0",
     "vitest": "^4.0.17"
   },
   "dependencies": {
-    "@yalesites-org/tokens": "~1.36.0"
+    "@yalesites-org/tokens": "~1.36.0",
+    "normalize.css": "^8.0.1"
   }
 }

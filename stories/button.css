@@ -1,3 +1,5 @@
+@import url("@yalesites-org/tokens/build/css/tokens.css");
+
 .storybook-button {
   display: inline-block;
   cursor: pointer;
@@ -8,7 +10,7 @@
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .storybook-button--primary {
-  background-color: #00356b;
+  background-color: var(--color-blue-yale);
   color: #ffffff;
 }
 .storybook-button--secondary {
