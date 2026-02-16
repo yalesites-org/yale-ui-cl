@@ -1,4 +1,4 @@
 @layer reset, tokens, components, utilities, overrides;
 
 @import "@yalesites-org/tokens/build/css/tokens.css" layer(tokens);
-@import "~normalize.css/normalize.css" layer(reset);
+@import "~/normalize.css/normalize.css" layer(reset);
