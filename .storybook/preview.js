@@ -1,4 +1,4 @@
-@type { import('@storybook/html-vite').Preview )
+/* @type { import('@storybook/html-vite').Preview ) */
 <<<<<<< HEAD
 import '../src/styles/base.css';
 =======
