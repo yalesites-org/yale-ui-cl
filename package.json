@@ -34,7 +34,7 @@
     "vitest": "^4.0.17"
   },
   "dependencies": {
-    "@emotion/css": "^11.13.5",
+    "@emotion/css": "~11.13.5",
     "@yalesites-org/tokens": "~1.36.0",
     "normalize.css": "^8.0.1"
   }
