@@ -25,6 +25,7 @@
     "@storybook/addon-docs": "^10.2.0",
     "@storybook/addon-vitest": "^10.2.0",
     "@storybook/html-vite": "^10.2.0",
+    "@storybook/web-components-vite": "^10.2.10",
     "@vitest/browser-playwright": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17",
     "playwright": "^1.57.0",
@@ -34,7 +35,6 @@
   },
   "dependencies": {
     "@yalesites-org/tokens": "~1.36.0",
-    "normalize.css": "^8.0.1",
-    "sass": "^1.97.3"
-  }
+    "normalize.css": "^8.0.1" 
+  }  
 }

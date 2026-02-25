@@ -1,6 +1,6 @@
 
 
-/* @type { import('@storybook/html-vite').StorybookConfig ) */
+/* @type { import('@storybook/web-components--vite').StorybookConfig ) */
 const config = {
   "stories": [
     "../src/**/*.mdx",
@@ -12,6 +12,6 @@ const config = {
     "@storybook/addon-a11y",
     "@storybook/addon-docs"
   ],
-  "framework": "@storybook/html-vite"
+  "framework": "@storybook/web-components-vite"
 };
 export default config;
