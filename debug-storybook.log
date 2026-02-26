@@ -1,42 +1,31 @@
-[13:51:03.231] [INFO] storybook v10.2.0
-[13:51:03.317] [ERROR] [38;2;241;97;97mSB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your [33m.storybook/main.js[39m file.
-
-Original error:
-[37m/.storybook/main.js:17
-export default config;
-^^^^^^
-
-SyntaxError: Unexpected token 'export'
-    at wrapSafe (node:internal/modules/cjs/loader:1734:18)
-    at Module._compile (node:internal/modules/cjs/loader:1777:20)
-    at Object..js (node:internal/modules/cjs/loader:1934:10)
-    at Module.load (node:internal/modules/cjs/loader:1524:32)
-    at Module._load (node:internal/modules/cjs/loader:1326:12)
-    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
-    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:338:3)
-    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:241:7)
-    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)[39m[39m
-    at loadMainConfig (file://./node_modules/storybook/dist/_node-chunks/chunk-6QCIDOPJ.js:11707:11)
-    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:7518:16)
-    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-5T2PCIM6.js:218:12)
+[08:40:40.950] [INFO] storybook v10.2.12
+[08:40:41.451] [DEBUG] Getting package.json info for /Users/nt433/Projects/yale-ui-cl/package.json...
+[08:40:41.917] [DEBUG] Serving static files from [36mnode_modules/@chromatic-com/storybook/assets[39m at [36m/addon-visual-tests-assets[39m
+[08:40:41.917] [INFO] Starting...
+[08:40:42.085] [DEBUG] Starting preview..
+[08:40:42.088] [WARN] 🚨 Unable to index ./src/Cta.stories.js:
+  SyntaxError: Unexpected token (7:2)
+    at constructor (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:12175:21)
+    at Parser.raise (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:16355:71)
+    at Parser.unexpected (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:16372:20)
+    at Parser.parseExprAtom (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19370:26)
+    at Parser.parseExprAtom (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:15099:181)
+    at Parser.parseExprSubscripts (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19165:105)
+    at Parser.parseUpdate (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19156:57)
+    at Parser.parseMaybeUnary (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19141:25)
+    at Parser.parseMaybeUnary (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:18365:95)
+    at Parser.parseMaybeUnaryOrPrivate (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19049:65)
+[08:40:42.091] [ERROR] Failed to build the preview
+[08:40:42.092] [ERROR] Error: Unable to index ./src/Cta.stories.js
+    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/storybook/dist/core-server/index.js:6085:15)
+    at async _StoryIndexGenerator.getIndex (file://./node_modules/storybook/dist/core-server/index.js:6074:13)
+    at async getOptimizeDeps (file://./node_modules/@storybook/web-components-vite/node_modules/@storybook/builder-vite/dist/index.js:1862:15)
+    at async createViteServer (file://./node_modules/@storybook/web-components-vite/node_modules/@storybook/builder-vite/dist/index.js:1888:19)
+    at async Module.start (file://./node_modules/@storybook/web-components-vite/node_modules/@storybook/builder-vite/dist/index.js:1923:17)
+    at async storybookDevServer (file://./node_modules/storybook/dist/core-server/index.js:7241:83)
+    at async buildOrThrow (file://./node_modules/storybook/dist/core-server/index.js:4504:12)
+    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:7611:66)
+    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-6JM2KRWM.js:218:12)
     at async dev (file://./node_modules/storybook/dist/bin/core.js:2734:3)
-    at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2801:92)
-[13:51:03.320] [WARN] Broken build, fix the error above.
+[08:40:42.092] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.
-[13:51:03.322] [WARN]   Failed to load preset: "/Users/nt433/Projects/yale-ui-cl/.storybook/main.js"
-[13:51:03.322] [ERROR] ./.storybook/main.js:17
-export default config;
-^^^^^^
-
-[38;2;241;97;97mSyntaxError: Unexpected token 'export'[39m
-    at wrapSafe (node:internal/modules/cjs/loader:1734:18)
-    at Module._compile (node:internal/modules/cjs/loader:1777:20)
-    at Object..js (node:internal/modules/cjs/loader:1934:10)
-    at Module.load (node:internal/modules/cjs/loader:1524:32)
-    at Module._load (node:internal/modules/cjs/loader:1326:12)
-    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
-    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:338:3)
-    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:241:7)
-    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)
