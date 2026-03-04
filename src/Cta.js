@@ -8,7 +8,7 @@ export class Cta extends HTMLElement {
   #shadow;
 
   static get observedAttributes() {
-    return ["href", "variant"];
+    return ["href", "class"];
   }
 
   constructor() {
