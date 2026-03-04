@@ -22,4 +22,6 @@ export const Primary = {
     label: 'Yale Homepage',
     URL: 'https://www.yale.edu',
   },
+  render: (args) =>
+    `<cta-link class="primary" href="${args.URL}">${args.label}</cta-link>`
 };

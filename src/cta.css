@@ -1,11 +1,14 @@
 .cta {
   display: inline-block;
   cursor: pointer;
-  border: 0;
   border-radius: 3em;
   font-weight: 700;
   line-height: 1;
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: var(--size-spacing-3);
+  text-decoration: none;
+  text-align: center;
+  border: solid var(--border-thickness-2) var(--color-cta-border);
 }
 .cta--primary {
   background-color: var(--color-blue-yale);
