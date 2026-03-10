@@ -1,6 +1,6 @@
 /* @type { import('@storybook/web-components--vite').Preview ) */
 
-import ('../src/style.scss');
+import ('../src/styles/base.css');
 
 const preview = {
   parameters: {
