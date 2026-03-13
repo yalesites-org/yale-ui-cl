@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
+    "@csstools/postcss-sass": "^5.1.1",
     "@storybook/addon-a11y": "^10.2.0",
     "@storybook/addon-docs": "^10.2.0",
     "@storybook/addon-vitest": "^10.2.0",
@@ -29,7 +30,10 @@
     "@vitest/browser-playwright": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17",
     "playwright": "^1.57.0",
+    "postcss": "^8.5.8",
+    "postcss-each": "^1.1.0",
     "postcss-load-config": "^6.0.1",
+    "postcss-mixins": "^12.1.2",
     "postcss-plugin": "^1.0.0",
     "storybook": "^10.2.0",
     "style-dictionary": "^5.2.0",
@@ -38,6 +42,9 @@
   },
   "dependencies": {
     "@yalesites-org/tokens": "~1.36.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "postcss-sassy-mixins": "^2.1.0",
+    "postcss-scss": "^4.0.9",
+    "postcss-simple-vars": "^7.0.1"
   }
 }

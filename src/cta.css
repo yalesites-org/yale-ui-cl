@@ -1,9 +1,26 @@
 
-
 .cta {
+  --color-slot-eight: var(--color-basic-white);
+  --color-slot-seven: var(--color-gray-800);
+  --color-slot-six: var(--color-blue-yale);
+  --color-slot-five: var(--color-gray-hale);
+  --color-slot-four: var(--color-blue-pewter);
+  --color-slot-three: var(--color-blue-light);
+  --color-slot-two: var(--color-blue-medium);
+  --color-slot-one: var(--color-blue-yale);
+  --color-action: var(--color-blue-yale);
+  --color-action-secondary: var(--color-basic-white);
+  --color-cta-action-secondary: var(--color-basic-white);
+  --color-cta-action: var(--color-blue-yale);
+  --color-link-base: var(--color-blue-medium);
+  --color-cta-bg: transparent;
+  --color-cta-bg-hover: var(--color-action);
+  --color-cta-border: var(--color-action);
+  --color-cta-text: var(--color-action);
+  --color-cta-text-hover: var(--color-action-secondary);
   display: inline-block;
   cursor: pointer;
-  border-radius: 3em;
+  border-radius: var(--border-radius-cta, var(--radius-0));
   font-weight: 700;
   line-height: 1;
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -11,11 +28,33 @@
   text-decoration: none;
   text-align: center;
   border: solid var(--border-thickness-2) var(--color-cta-border);
+  color: var(--color-cta-text);
+  background-color: var(--color-cta-bg);
 }
-.cta--primary {
-  background-color: var(--color-blue-yale);
-  color: #ffffff;
+  .cta:hover {
+    background-color: var(--color-cta-bg-hover);
+    color: var(--color-cta-text-hover);
+    fill: var(--color-cta-text-hover);
+  }
+
+
+.cta--filled {
+   
+  --color-cta-bg: var(--color-action);
+   --color-cta-bg-hover: transparent;
+   --color-cta-border: var(--color-action);
+   --color-cta-text: var(--color-action-secondary);
+   --color-cta-text-hover: var(--color-action);
 }
+
+.cta--radius-soft {
+  --border-radius-cta: var(--cta-radius-soft);
+}
+
+.cta--radius-pill {
+  --border-radius-cta: 100vmax;
+}
+
 .cta--secondary {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
   background-color: transparent;
