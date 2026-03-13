@@ -1,4 +1,4 @@
-import { createCTA } from './cta';
+import { createCTA } from './Cta';
 import './header.css';
 
 export const createHeader = ({ user, onLogout, onLogin, onCreateAccount }) => {
