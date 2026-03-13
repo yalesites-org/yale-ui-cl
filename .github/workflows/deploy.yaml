@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'storybook-static'
-	  # Rename CSS assets
+      # Rename CSS assets
 	  - name: Rename CSS assets
 	  	run: find ./dist/assets -name 'base.*.css' -execdir mv {} base.css \;
       # Deploy to Github Pages
