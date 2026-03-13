@@ -17,9 +17,6 @@ export class Cta extends HTMLElement {
   }
 
   connectedCallback() {
-  	const styleTag = document.createElement("style");
-  	styleTag.innerHTML = <link-to-css>;
-  	this.shadowRoot.appendChild(styleTag);
 	this.#shadow.appendChild(document.importNode(ctaTemplate.content, true));
 	this.#updateHref();
 	this.#updateVariant();
