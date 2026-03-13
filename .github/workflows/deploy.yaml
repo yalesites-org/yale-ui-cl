@@ -34,7 +34,7 @@ jobs:
         run: npm run build-storybook
       # Rename CSS assets
       - name: Rename CSS assets
-        run: find ./assets -name 'base.*.css' -execdir mv {} base.css \;
+        run: find ./storybook-static/assets -name 'base-*.css' -execdir mv {} base.css \;
       # Upload pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
