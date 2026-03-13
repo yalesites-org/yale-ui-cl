@@ -1,6 +1,6 @@
 @layer reset, tokens, util, components;
 @import "@yalesites-org/tokens/build/css/tokens.css" layer(tokens);
-@import "../Cta.css" layer(components.cta);
+@import "../cta.css" layer(components.cta);
 @import "normalize.css/normalize.css" layer(reset);
 
 @layer components {
