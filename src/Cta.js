@@ -25,7 +25,7 @@ export class Cta extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
 	if (name === "href") this.#updateHref();
-	if (name === "variant") this.#updateVariant();
+	if (name === "class") this.#updateVariant();
   }
 
   #updateHref() {
@@ -37,8 +37,8 @@ export class Cta extends HTMLElement {
   #updateVariant() {
     const a = this.#shadow.querySelector("a");
     if (!a) return;
-    const variant = this.getAttribute("class");
-    if (variant) a.classList.add(`cta--${variant}`);
+    const variant = this.classList;
+    if (variant) variant.forEach((variant) => { a.classList.add('cta--' + variant);});
   }
 }
  
