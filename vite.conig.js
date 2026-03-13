@@ -1,8 +1,12 @@
-import { defineConfig} from 'vite'
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
+import { dirname, resolve } from 'node:path'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [
-    cssInjectedByJsPlugin()
-  ]
+  build: {
+    lib: {
+      entry: resolve(import.meta.dirname, 'src/main.js'),
+      name: 'Yale Component Library',
+      fileName: 'yale-ui-cl',
+    },
+  },
 })
