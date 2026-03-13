@@ -1,4 +1,4 @@
-import { Cta } from "./CTA";
+import { Cta } from "./Cta";
 export default {
   title: 'CTA',
   component: 'cta-link',
