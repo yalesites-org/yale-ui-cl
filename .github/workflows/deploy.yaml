@@ -32,9 +32,6 @@ jobs:
           YALESITES_BUILD_TOKEN: ${{ secrets.YALESITES_BUILD_TOKEN }}
       - name: Build Storybook
         run: npm run build-storybook
-      # Rename CSS assets
-      - name: Rename CSS assets
-        run: find ./storybook-static/assets -name 'base-*.css' -execdir mv {} base.css \;
       # Upload pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
