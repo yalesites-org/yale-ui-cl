@@ -2,6 +2,7 @@
 @import "@yalesites-org/tokens/build/css/tokens.css" layer(tokens);
 @import "../cta.css" layer(components.cta);
 @import "normalize.css/normalize.css" layer(reset);
+@import "./utility.css" layer(util);
 
 @layer components {
   h1 {

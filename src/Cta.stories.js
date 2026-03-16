@@ -14,24 +14,31 @@ export default {
       name: 'Animation Type',
       type: 'select',
       options: ['fade', 'rise', 'wipe'],
-  },
+ 	 },
+	 radius: {
+	  name: 'Radius Type',
+	  type: 'select',
+	  options: ['soft', 'pill'],
+	 },
 },
   args: {
     label: 'Yale HomePage',
     URL: 'https://www.yale.edu',
     fill: 'filled',
     animate: 'fade',
+	radius: '',
 },
 
   render: (args) => 
-    `<cta-link class="${args.fill} ${args.animate}"href="${args.URL}">${args.label}</cta-link>`,
+    `<cta-link class="${args.fill} ${args.animate} ${args.radius}" href="${args.URL}">${args.label}</cta-link>`,
 };
 
 export const Filled = {
   args: {
     fill: 'filled',
+	 radius: '',
   },
 
   render: (args) =>
-    `<cta-link class="${args.fill} animate-${args.animate}" href="${args.URL}">${args.label}</cta-link>`
+    `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
 };
