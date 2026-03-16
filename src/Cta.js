@@ -1,12 +1,16 @@
+import ctaStyles from './cta.css?inline';
+import baseStyles from './styles/base.css?inline';
+const sheet = new CSSStyleSheet();
+sheet.replaceSync(ctaStyles);
+
+const baseSheet = new CSSStyleSheet();
+baseSheet.replaceSync(baseStyles);
 const ctaTemplate = document.createElement('template');
 ctaTemplate.innerHTML = `
-  <link rel="stylesheet" href="src/styles/base.css" />
   <a class="cta" href="#"><slot>Default Link</slot></a>
 `;
 
-export class Cta extends HTMLElement {
-  #shadow;
-
+export class Cta extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["href", "class"];
   }
@@ -14,6 +18,9 @@ export class Cta extends HTMLElement {
   constructor() {
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
+    console.log(baseSheet);
+    console.log(sheet);
+    this.#shadow.adoptedStyleSheets = [baseSheet, sheet]
   }
 
   connectedCallback() {
