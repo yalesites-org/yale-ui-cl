@@ -1,5 +1,5 @@
 import ctaStyles from './cta.css?inline';
-import baseStyles from './styles/base.css?inline';
+import baseStyles from '../../styles/base.css?inline';
 const sheet = new CSSStyleSheet();
 sheet.replaceSync(ctaStyles);
 
