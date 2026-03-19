@@ -1,4 +1,4 @@
-import { createCTA } from './Cta';
+import { createCTA } from './01-atoms/cta/Cta';
 import './header.css';
 
 export const createHeader = ({ user, onLogout, onLogin, onCreateAccount }) => {
