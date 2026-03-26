@@ -1,18 +1,26 @@
 .link {
-	color: var(--color-link-base);
-	fill: var(--color-link-base);
-	text-decoration: underline;
-	font-weight: var(--font-weights-mallory-book);
-	text-decoration-thickness: 0.1em;
-	line-height: normal;	
-	
+  --position: 0 1.15rem;
+  --thickness: var(--link-underline-size-default);
+  color: var(--color-link-base);
+  fill: var(--color-link-base);
+  text-decoration: none;
+  font-weight: var(--font-weights-mallory-book);
+  text-decoration-thickness: 0.1em;
+  line-height: normal;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: var(--position);
+  background-repeat: no-repeat;
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  };
+  background-size: 100% var(--thickness);
 }
 
-.link:hover { 
-	text-decoration: none;
-
+.link:hover {
+	  background-size: 0 var(--thickness);
 }
 
 .link--external {
-
 }
