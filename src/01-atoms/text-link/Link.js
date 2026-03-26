@@ -1,16 +1,16 @@
-import ctaStyles from './cta.css?inline';
+import linkStyles from './link.css?inline';
 import baseStyles from '../../styles/base.css?inline';
 const sheet = new CSSStyleSheet();
-sheet.replaceSync(ctaStyles);
+sheet.replaceSync(linkStyles);
 
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
-const ctaTemplate = document.createElement('template');
-ctaTemplate.innerHTML = `
-  <a class="cta" href="#"><slot>Default Link</slot></a>
+const linkTemplate = document.createElement('template');
+linkTemplate.innerHTML = `
+  <a class="link" href="#"><slot>Default Link</slot></a>
 `;
 
-export class Cta extends HTMLElement { #shadow;
+export class TextLink extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["href", "class"];
   }
@@ -24,7 +24,7 @@ export class Cta extends HTMLElement { #shadow;
   }
 
   connectedCallback() {
-	this.#shadow.appendChild(document.importNode(ctaTemplate.content, true));
+	this.#shadow.appendChild(document.importNode(linkTemplate.content, true));
 	this.#updateHref();
 	this.#updateVariant();
 
@@ -46,8 +46,8 @@ export class Cta extends HTMLElement { #shadow;
     const a = this.#shadow.querySelector("a");
     if (!a) return;
     const variant = this.classList;
-    if (variant) variant.forEach((variant) => { a.classList.add('cta--' + variant);});
+    if (variant) variant.forEach((variant) => { a.classList.add('link--' + variant);});
   }
 }
  
-customElements.define("cta-link", Cta);
+customElements.define("text-link", TextLink);
