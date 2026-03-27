@@ -9,10 +9,10 @@ const linkTemplate = document.createElement('template');
 linkTemplate.innerHTML = `
   <a class="link" href="#"><slot>Default Link</slot></a>
 `;
-
+const currentURL = window.location.origin;
 export class TextLink extends HTMLElement { #shadow;
   static get observedAttributes() {
-    return ["href", "class"];
+    return ["href", "class", "target"];
   }
 
   constructor() {
@@ -34,13 +34,21 @@ export class TextLink extends HTMLElement { #shadow;
 	if (oldValue === newValue) return;
 	if (name === "href") this.#updateHref();
 	if (name === "class") this.#updateVariant();
+	if (name === "target") this.#updateIcon();
   }
 
   #updateHref() {
     const a = this.#shadow.querySelector("a");
     if (!a) return;
     a.href = this.getAttribute("href") ?? "#";
+    if (a.href !== currentURL) {
+      a.insertAdjacentHTML("beforeend", `
+      <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually hidden">&nbsp;external link</span></span>
+	`);
+      a.classList.add('external-link');
+    }
   }
+  
 
   #updateVariant() {
     const a = this.#shadow.querySelector("a");
@@ -48,6 +56,11 @@ export class TextLink extends HTMLElement { #shadow;
     const variant = this.classList;
     if (variant) variant.forEach((variant) => { a.classList.add('link--' + variant);});
   }
-}
+
+  #updateIcon() {
+    const a = this.#shadow.querySelector("a");
+    if (!a) return;
+
+  }}
  
 customElements.define("text-link", TextLink);
