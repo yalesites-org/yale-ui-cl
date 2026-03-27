@@ -18,8 +18,6 @@ export class TextLink extends HTMLElement { #shadow;
   constructor() {
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
-    console.log(baseSheet);
-    console.log(sheet);
     this.#shadow.adoptedStyleSheets = [baseSheet, sheet]
   }
 
@@ -43,7 +41,7 @@ export class TextLink extends HTMLElement { #shadow;
     a.href = this.getAttribute("href") ?? "#";
     if (a.href !== currentURL) {
       a.insertAdjacentHTML("beforeend", `
-      <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually hidden">(link is external)</span></span>
+      <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually-hidden">(link is external)</span></span>
 	`);
     }
   }

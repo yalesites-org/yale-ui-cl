@@ -5,3 +5,6 @@
 @import "../00-tokens/typography/typography.css" layer(tokens);
 @import "normalize.css/normalize.css" layer(reset);
 @import "./utility.css" layer(util);
+@import "../fonts/fontawesome/css/fontawesome.css" layer(util);
+@import "../fonts/fontawesome/css/regular.css" layer(util);
+@import "../fonts/fontawesome/css/solid.css" layer(util);
