@@ -43,9 +43,8 @@ export class TextLink extends HTMLElement { #shadow;
     a.href = this.getAttribute("href") ?? "#";
     if (a.href !== currentURL) {
       a.insertAdjacentHTML("beforeend", `
-      <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually hidden">&nbsp;external link</span></span>
+      <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually hidden">(link is external)</span></span>
 	`);
-      a.classList.add('external-link');
     }
   }
   
