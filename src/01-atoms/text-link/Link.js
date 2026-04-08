@@ -2,14 +2,18 @@ import linkStyles from './link.css?inline';
 import baseStyles from '../../styles/base.css?inline';
 const sheet = new CSSStyleSheet();
 sheet.replaceSync(linkStyles);
-
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
+
 const linkTemplate = document.createElement('template');
 linkTemplate.innerHTML = `
   <a class="link" href="#"><slot>Default Link</slot></a>
 `;
 const currentURL = window.location.origin;
+
+
+
+
 export class TextLink extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["href", "class", "target"];
@@ -30,6 +34,9 @@ export class TextLink extends HTMLElement { #shadow;
 
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
+	const a = this.#shadow.querySelector("a");
+	const linkRenderer = textLinks.getLinkRenderer(a);
+	linkRenderer(a);
 	if (name === "href") this.#updateHref();
 	if (name === "class") this.#updateVariant();
 	if (name === "target") this.#updateIcon();
@@ -39,11 +46,13 @@ export class TextLink extends HTMLElement { #shadow;
     const a = this.#shadow.querySelector("a");
     if (!a) return;
     a.href = this.getAttribute("href") ?? "#";
-    if (a.href !== currentURL) {
+    console.log(a.origin);
+    console.log(currentURL);
+    if (a.origin !== currentURL) {
       a.insertAdjacentHTML("beforeend", `
       <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually-hidden">(link is external)</span></span>
 	`);
-    }
+   // }
   }
   
 
