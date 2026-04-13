@@ -35,8 +35,6 @@ export class TextLink extends HTMLElement { #shadow;
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
 	const a = this.#shadow.querySelector("a");
-	const linkRenderer = textLinks.getLinkRenderer(a);
-	linkRenderer(a);
 	if (name === "href") this.#updateHref();
 	if (name === "class") this.#updateVariant();
 	if (name === "target") this.#updateIcon();
@@ -52,7 +50,7 @@ export class TextLink extends HTMLElement { #shadow;
       a.insertAdjacentHTML("beforeend", `
       <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually-hidden">(link is external)</span></span>
 	`);
-   // }
+    }
   }
   
 

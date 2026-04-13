@@ -2,6 +2,7 @@
 @import "@yalesites-org/tokens/build/css/tokens.css" layer(tokens);
 @import "../01-atoms/cta/cta.css" layer(components.cta);
 @import "../01-atoms/text-link/link.css" layer(components.text-link);
+@import "../01-atoms/text-input/textinput.css" layer(components.text-input);
 @import "../00-tokens/typography/typography.css" layer(tokens);
 @import "normalize.css/normalize.css" layer(reset);
 @import "./utility.css" layer(util);
