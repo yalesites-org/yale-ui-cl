@@ -18,8 +18,6 @@ export class Cta extends HTMLElement { #shadow;
   constructor() {
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
-    console.log(baseSheet);
-    console.log(sheet);
     this.#shadow.adoptedStyleSheets = [baseSheet, sheet]
   }
 
