@@ -21,7 +21,7 @@ export default {
 	</text-input>`,
 };
 
-export const WithError = {
+export const Example = {
   args: {
   },
 
