@@ -31,7 +31,7 @@ export class TextInput extends HTMLElement {
 		};
 	}
 	static get observedAttributes() {
-		return ["class", "placeholder", "name", "autocomplete"];
+		return ["class", "placeholder", "name", "autocomplete", "textarea"];
 	}
 	
 	constructor() {
@@ -121,8 +121,10 @@ export class TextInput extends HTMLElement {
 		const input = this.#shadow.querySelector("input");
 		if (!input) return;
 		input.autocomplete = this.getAttribute("autocomplete") ?? "";
-
 	}
+	
+		
+	
 }
 
 customElements.define("text-input", TextInput);

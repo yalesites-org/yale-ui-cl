@@ -60,10 +60,11 @@
 }
 
 .form-item__error_icon__icon {
-  position: absolute;
-  top: auto;
-  right: var(--size-spacing-4);
+  position: relative;
+  top: -39.63285px;
+  right: -390px;
   fill: var(--color-alert-emergency-background-color);
   width: 1.7rem;
   height: 1.7rem;
+  display: block;
 }

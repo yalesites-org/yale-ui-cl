@@ -17,8 +17,17 @@ export default {
 
 export const Filled = {
   args: {
+    URL: "/index.html",
+    label: "Home"
   },
-
-  render: (args) =>
+  render:(args) =>
     `<text-link class="" href="${args.URL}">${args.label}</text-link>`
+};
+
+export const ExternalLink = {
+  args: {
+    label: "Yale Homepage",
+    URL: "https://www.yale.edu"
+  },
+  render:args => `<text-link class="" href="${args.URL}">${args.label}</text-link>`
 };

@@ -42,3 +42,25 @@ export const Filled = {
   render: (args) =>
     `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
 };
+
+export const Outline = {
+  args: {
+    label: "Yale HomePage",
+    URL: "https://www.yale.edu",
+    fill: "outline",
+    animate: "fade",
+    radius: ""
+  },
+  render:args => `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
+};
+
+export const OutlinePill = {
+  args: {
+    label: "Yale HomePage",
+    URL: "https://www.yale.edu",
+    fill: "outline",
+    animate: "fade",
+    radius: "pill"
+  },
+  render:args => `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
+};
