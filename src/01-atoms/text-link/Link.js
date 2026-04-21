@@ -11,9 +11,6 @@ linkTemplate.innerHTML = `
 `;
 const currentURL = window.location.origin;
 
-
-
-
 export class TextLink extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["href", "class", "target"];
@@ -22,49 +19,28 @@ export class TextLink extends HTMLElement { #shadow;
   constructor() {
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
-    this.#shadow.adoptedStyleSheets = [baseSheet, sheet]
-  }
-
-  connectedCallback() {
+    this.#shadow.adoptedStyleSheets = [baseSheet, sheet];
 	this.#shadow.appendChild(document.importNode(linkTemplate.content, true));
-	this.#updateHref();
-	this.#updateVariant();
-
+	this.link = this.#shadow.querySelector("a");
   }
+
 
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
-	const a = this.#shadow.querySelector("a");
-	if (name === "href") this.#updateHref();
-	if (name === "class") this.#updateVariant();
-	if (name === "target") this.#updateIcon();
+	if (name === "href") {
+		this.link.href = newValue;
+		if (this.link.origin != currentURL) {
+     	   this.link.insertAdjacentHTML("beforeend", `
+			<span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually-hidden">(link is external)</span></span>`);
+		};
+	}
+	if (name === "class") this.link.classList.add("link--" + newValue);
   }
 
-  #updateHref() {
-    const a = this.#shadow.querySelector("a");
-    if (!a) return;
-    a.href = this.getAttribute("href") ?? "#";
-    console.log(a.origin);
-    console.log(currentURL);
-    if (a.origin !== currentURL) {
-      a.insertAdjacentHTML("beforeend", `
-      <span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually-hidden">(link is external)</span></span>
-	`);
-    }
-  }
-  
+  get href() { return this.getAttribute("href"); }
 
-  #updateVariant() {
-    const a = this.#shadow.querySelector("a");
-    if (!a) return;
-    const variant = this.classList;
-    if (variant) variant.forEach((variant) => { a.classList.add('link--' + variant);});
-  }
+  set href(value) { return this.setAttribute("href", value); }
+}
 
-  #updateIcon() {
-    const a = this.#shadow.querySelector("a");
-    if (!a) return;
 
-  }}
- 
 customElements.define("text-link", TextLink);
