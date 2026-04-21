@@ -10,8 +10,8 @@ textInputTemplate.innerHTML = `
   	<div class="form-item">
 		<label for="input" class="form-item__label"><slot name="label"></slot></label>
 		<input id="input" class="form-item__textfield" type="text" aria-describedby="instructions errors" />
-		<div class="form-item__description id="instructions"><slot name="instructions"></slot></div>
-		<div class="form-item__error-text id="errors"><slot name="errors"></slot></div>
+		<div class="form-item__description" id="instructions"><slot name="instructions"></slot></div>
+		<div class="form-item__error-text" id="errors"><slot name="errors"></slot></div>
 	</div>
 `;
 
@@ -30,37 +30,34 @@ export class TextInput extends HTMLElement {
 			}
 		};
 	}
+	
 	static get observedAttributes() {
-		return ["class", "placeholder", "name", "autocomplete", "textarea"];
+		return ["class", "placeholder", "name", "autocomplete", "value", "disabled"];
 	}
 	
 	constructor() {
 		super();
 		this.internals_ = this.attachInternals();
-		this.#shadow = this.attachShadow({
-			mode: "closed"
-		});
+		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, sheet];
+		this.#shadow.appendChild(document.importNode(textInputTemplate.content, true),);
+		this.input = this.#shadow.querySelector("input");
+		this.label = this.#shadow.querySelector("label");
+		this.errorSlot = this.#shadow.querySelector("slot[name='errors']");
 		this.name = name;
 		this.required = false;
 		this.value = '';
 		this._requuired = false;
-		this.#updatePlaceholder();
-		this.#updateRequired();
-		this.#updateAutocomplete();
+		this.input.addEventListener("input", this.inputHandler);
+		this.errorSlot.addEventListener("slotchange", this.errorHandler);
 	}
-
-	connectedCallback() {
-		this.#shadow.appendChild(
-			document.importNode(textInputTemplate.content, true),
-		);
-		this.#updateRequired();
-		this.#updatePlaceholder();
-		this.#updateAutocomplete();
-		const slots = this.#shadow.querySelectorAll("slot");
-		const error = slots[2];
-		const errorSpan = error.assignedElements();
-		const input = this.#shadow.querySelector("input");
+	
+	inputHandler = () => {
+		this.value = this.input.value;
+	};
+	
+	errorHandler = () => {
+		const errorSpan = this.errorSlot.assignedElements();
 
 		//Create the error icon SVG
 		const errorIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -70,58 +67,49 @@ export class TextInput extends HTMLElement {
 		errorIcon.setAttribute("viewBox", "0 0 512 512");
 		errorIcon.classList.add("form-item__error_icon__icon");
 		errorIcon.ariaHidden = true;
-
-		// Is there content in the error slot?
-		error.addEventListener("slotchange", () => {
-
+		
+			// Error slot is empty
 			if (!errorSpan[0].innerHTML) {
-				input.ariaInvalid = false;
-				input.classList.remove("form-item__textfield--error");
+				this.input.ariaInvalid = false;
+				this.input.classList.remove("form-item__textfield--error");
 				return;
 			};
-
-			input.ariaInvalid = true;
-			input.classList.add("form-item__textfield--error");
-			input.insertAdjacentElement("afterend", errorIcon);
-		});
-
-		// set the value of the component to the value of the shadow DOM input
-		input.addEventListener("input", () => {
-			this.value = input.value;
-		});
-	}
+			
+			// There's content in the slot
+			this.input.ariaInvalid = true;
+			this.input.classList.add("form-item__textfield--error");
+			this.input.insertAdjacentElement("afterend", errorIcon);
+		};
+	
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
-		if (name === "placeholder") this.#updatePlaceholder();
-		if (name === "class" && newValue === "required") this.#updateRequired();
+		if (name === "placeholder") this.input.placeholder = newValue;
+		if (name === "class" && newValue === "required") {
+			this.input.required = true;
+			this.label.classList.add("form-item__label--" + newValue);
+		}
 		if (name === "name") this.name = newValue;
-		if (name === "autocomplete") this.#updateAutocomplete();
-	}
-
-	#updatePlaceholder() {
-		const input = this.#shadow.querySelector("input");
-		if (!input) return;
-		input.placeholder = this.getAttribute("placeholder") ?? "";
-	}
-
-	#updateRequired() {
-		const label = this.#shadow.querySelector("label");
-		const input = this.#shadow.querySelector("input");
-		if (!label && !input) return;
-		const variant = this.classList;
-		if (variant) {
-			variant.forEach((variant) => {
-				label.classList.add("form-item__label--" + variant);
-				input.required = true;
-			});
-		};
+		if (name === "autocomplete") this.input.autocomplete = newValue;
+		if (name === "disabled") this.input.disabled = newValue;
+		if (name === "value") this.input.value = newValue;
 	}
 	
-	#updateAutocomplete() {
-		const input = this.#shadow.querySelector("input");
-		if (!input) return;
-		input.autocomplete = this.getAttribute("autocomplete") ?? "";
+	// Getters and setters 
+	
+	get placeholder() { return this.getAttribute("placeholder"); }
+	get value() { return this.getAttribute("value"); }
+	get disabled() { return this.getAttribute("disabled");}
+	get autocomplete() { return this.getAttribute("autocomplete");}
+	get name() { return this.getAttribute("name"); }
+	
+	set placeholder(value) { return this.setAttribute("placeholder", value); }
+	set value(text) { return this.setAttribute("value", text); }
+	set disabled(value) {
+		if (value) this.setAttribute("disabled", "");
+		else this.removeAttribute("disabled");
 	}
+	set autocomplete(value) { return this.setAttribute("autocomplete", value);}
+	set name(value) { return this.setAttribute("name", value); }
 	
 		
 	

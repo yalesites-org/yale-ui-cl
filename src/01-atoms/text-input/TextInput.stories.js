@@ -65,7 +65,7 @@ export const WithError = {
         errors: "This has an error.",
         required: false
     },
-    render:args => `<text-input class="${args.required}">
+    render:args => `<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
@@ -79,7 +79,7 @@ export const Required = {
         errors: "",
         required: true
     },
-    render:args => `<text-input class="${args.required}">
+    render:args => `<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
