@@ -38,7 +38,13 @@ export class TextLink extends HTMLElement {
 
 	#updateIcon() {
 		const icon = this.#shadow.querySelector(".fa-icon");
-		const extension = this.link.href.split(".").pop().toLowerCase();
+		let extension = this.link.href.split(".").pop().toLowerCase();
+		
+		if (extension.includes("?")) {
+			extension = extension.split("?");
+			extension = extension[0];
+		}
+		
 		const downloadExts = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip', 'csv', 'xml', 'rtf'];
 
 		if (icon) icon.remove();
