@@ -52,8 +52,10 @@ export class TextLink extends HTMLElement { #shadow;
   }
 
   get href() { return this.getAttribute("href"); }
+  get target() { return this.getAttribute("target"); }
 
   set href(value) { return this.setAttribute("href", value); }
+  set target(value) { return this.setAttribute("target", value); }
   
 }
 

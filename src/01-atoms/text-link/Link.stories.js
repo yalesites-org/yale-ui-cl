@@ -15,7 +15,7 @@ export default {
     `<text-link class="" href="${args.URL}">${args.label}</text-link>`,
 };
 
-export const Filled = {
+export const InternalLink = {
   args: {
     URL: "/index.html",
     label: "Home"
