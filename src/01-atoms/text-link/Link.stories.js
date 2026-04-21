@@ -31,3 +31,11 @@ export const ExternalLink = {
   },
   render:args => `<text-link class="" href="${args.URL}">${args.label}</text-link>`
 };
+
+export const DownloadLink = {
+  args: {
+    label: "Yale Homepage",
+    URL: "https://www.yale.edu/download.pdf"
+  },
+  render:args => `<text-link class="" href="${args.URL}">${args.label}</text-link>`
+};
