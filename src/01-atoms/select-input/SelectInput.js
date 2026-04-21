@@ -47,7 +47,7 @@ export class SelectInput extends HTMLElement {
 		this.name = name;
 		this.required = false;
 		this.value = '';
-		this.input.addEventListener("input", this.inputHandler);
+		this.input.addEventListener("change", this.inputHandler);
 		this.errorSlot.addEventListener("slotchange", this.errorHandler);
 		this.host = this.#shadow.getRootNode().host;
 		this.options = this.host.querySelectorAll("option");
@@ -84,6 +84,9 @@ export class SelectInput extends HTMLElement {
 		
 		connectedCallback() {
 			this.input.append(...this.options);
+			this.value = this.input.value;
+			console.log(this.input);
+			console.log(this.input.value);
 		};
 	
 	attributeChangedCallback(name, oldValue, newValue) {
