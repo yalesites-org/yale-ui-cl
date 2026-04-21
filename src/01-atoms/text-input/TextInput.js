@@ -47,7 +47,6 @@ export class TextInput extends HTMLElement {
 		this.name = name;
 		this.required = false;
 		this.value = '';
-		this._requuired = false;
 		this.input.addEventListener("input", this.inputHandler);
 		this.errorSlot.addEventListener("slotchange", this.errorHandler);
 	}
@@ -90,7 +89,7 @@ export class TextInput extends HTMLElement {
 		}
 		if (name === "name") this.name = newValue;
 		if (name === "autocomplete") this.input.autocomplete = newValue;
-		if (name === "disabled") this.input.disabled = newValue;
+		if (name === "disabled") this.input.disabled = newValue !== null;
 		if (name === "value") this.input.value = newValue;
 	}
 	
