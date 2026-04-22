@@ -1,7 +1,7 @@
-import selectinputStyles from "./selectinput.css?inline";
+//import selectinputStyles from "./selectinput.css?inline";
 import baseStyles from "../../styles/base.css?inline";
-const sheet = new CSSStyleSheet();
-sheet.replaceSync(selectinputStyles);
+//const sheet = new CSSStyleSheet();
+//sheet.replaceSync(selectinputStyles);
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
@@ -9,7 +9,9 @@ const selectInputTemplate = document.createElement("template");
 selectInputTemplate.innerHTML = `
   	<div class="form-item">
 		<label for="input" class="form-item__label"><slot name="label"></slot></label>
-		<select id="input" class="form-item__textfield" type="text" aria-describedby="instructions errors"></select>
+		<div class="form-item__dropdown">
+			<select id="input" class="form-item__select" aria-describedby="instructions errors"></select>
+		</div>
 		<div class="form-item__description" id="instructions"><slot name="instructions"></slot></div>
 		<div class="form-item__error-text" id="errors"><slot name="errors"></slot></div>
 	</div>
@@ -39,7 +41,7 @@ export class SelectInput extends HTMLElement {
 		super();
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet, sheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet];
 		this.#shadow.appendChild(document.importNode(selectInputTemplate.content, true),);
 		this.input = this.#shadow.querySelector("select");
 		this.label = this.#shadow.querySelector("label");

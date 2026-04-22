@@ -1,7 +1,7 @@
-import textinputStyles from "./textinput.css?inline";
+//import textinputStyles from "./textinput.css?inline";
 import baseStyles from "../../styles/base.css?inline";
-const sheet = new CSSStyleSheet();
-sheet.replaceSync(textinputStyles);
+//const sheet = new CSSStyleSheet();
+//sheet.replaceSync(textinputStyles);
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
@@ -32,14 +32,14 @@ export class TextInput extends HTMLElement {
 	}
 	
 	static get observedAttributes() {
-		return ["class", "placeholder", "name", "autocomplete", "value", "disabled"];
+		return ["class", "placeholder", "name", "autocomplete", "value", "disabled",];
 	}
 	
 	constructor() {
 		super();
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet, sheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet];
 		this.#shadow.appendChild(document.importNode(textInputTemplate.content, true),);
 		this.input = this.#shadow.querySelector("input");
 		this.label = this.#shadow.querySelector("label");
@@ -91,6 +91,7 @@ export class TextInput extends HTMLElement {
 		if (name === "autocomplete") this.input.autocomplete = newValue;
 		if (name === "disabled") this.input.disabled = newValue !== null;
 		if (name === "value") this.input.value = newValue;
+		
 	}
 	
 	// Getters and setters 
