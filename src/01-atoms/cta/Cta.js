@@ -1,8 +1,4 @@
-import ctaStyles from './cta.css?inline';
 import baseStyles from '../../styles/base.css?inline';
-const sheet = new CSSStyleSheet();
-sheet.replaceSync(ctaStyles);
-
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 const ctaTemplate = document.createElement('template');
@@ -18,34 +14,24 @@ export class Cta extends HTMLElement { #shadow;
   constructor() {
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
-    this.#shadow.adoptedStyleSheets = [baseSheet, sheet]
-  }
-
-  connectedCallback() {
 	this.#shadow.appendChild(document.importNode(ctaTemplate.content, true));
-	this.#updateHref();
-	this.#updateVariant();
-
+    this.#shadow.adoptedStyleSheets = [baseSheet];
+	this.link = this.#shadow.querySelector("a");
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
-	if (name === "href") this.#updateHref();
-	if (name === "class") this.#updateVariant();
+	if (name === "href") this.link.href = newValue;
+	if (name === "class") {
+		let classes = newValue.split(" ");
+		classes.forEach((c) => {this.link.classList.add("cta--" + c) } );
+	}
   }
-
-  #updateHref() {
-    const a = this.#shadow.querySelector("a");
-    if (!a) return;
-    a.href = this.getAttribute("href") ?? "#";
-  }
-
-  #updateVariant() {
-    const a = this.#shadow.querySelector("a");
-    if (!a) return;
-    const variant = this.classList;
-    if (variant) variant.forEach((variant) => { a.classList.add('cta--' + variant);});
-  }
+  
+  get href() { return this.getAttribute("href"); }
+  
+  set href(value) { return this.setAttribute("href", value); }
 }
+
  
 customElements.define("cta-link", Cta);
