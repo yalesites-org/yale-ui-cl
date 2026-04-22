@@ -1,9 +1,9 @@
 import {
-	TextInput
-} from "./TextInput";
+	SelectInput
+} from "./SelectInput";
 export default {
-	title: 'Text Input',
-	component: 'text-input',
+	title: 'Select Input',
+	component: 'select-input',
 	argTypes: {
 		label: {
 			control: 'text'
@@ -31,18 +31,18 @@ export default {
 		},
 	},
 	args: {
-		label: 'Yale HomePage',
+		label: 'Example Select',
 		instructions: 'This is an example instruction.',
 		errors: 'This is an example error',
 		required: false,
 	},
 
 	render: (args) =>
-		`<text-input class="${args.required}">
+		`<select-input class="${args.required}">
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">This is an example instruction</span>
 		<span slot="errors">This is an error.</span>
-	</text-input>`,
+	</select-input>`,
 };
 
 export const Example = {
