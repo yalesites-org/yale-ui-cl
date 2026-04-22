@@ -1,14 +1,18 @@
 import baseStyles from '../../styles/base.css?inline';
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
-const ctaTemplate = document.createElement('template');
+const tableTemplate = document.createElement('template');
 ctaTemplate.innerHTML = `
-  <a class="cta" href="#"><slot>Default Link</slot></a>
+	<div class="table-wrapper">
+		<table>
+			<slot></slot>
+		</table>
+	</div>
 `;
 
-export class Cta extends HTMLElement { #shadow;
+export class Table extends HTMLElement { #shadow;
   static get observedAttributes() {
-    return ["href", "class"];
+    
   }
 
   constructor() {
@@ -16,22 +20,8 @@ export class Cta extends HTMLElement { #shadow;
     this.#shadow = this.attachShadow({ mode: 'closed' });
 	this.#shadow.appendChild(document.importNode(ctaTemplate.content, true));
     this.#shadow.adoptedStyleSheets = [baseSheet];
-	this.link = this.#shadow.querySelector("a");
   }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-	if (oldValue === newValue) return;
-	if (name === "href") this.link.href = newValue;
-	if (name === "class") {
-		let classes = newValue.split(" ");
-		classes.forEach((c) => {this.link.classList.add("cta--" + c) } );
-	}
-  }
-  
-  get href() { return this.getAttribute("href"); }
-  
-  set href(value) { return this.setAttribute("href", value); }
 }
 
  
-customElements.define("cta-link", Cta);
+customElements.define("yc-table", Table);
