@@ -93,9 +93,7 @@ export class TextInput extends HTMLElement {
 		if (name === "value") this.input.value = newValue;
 		
 	}
-	
-	// Getters and setters 
-	
+		
 	get placeholder() { return this.getAttribute("placeholder"); }
 	get value() { return this.getAttribute("value"); }
 	get disabled() { return this.getAttribute("disabled");}
