@@ -62,8 +62,18 @@
 	<h2>Select Inputs</h2>
 	<select-input>
 	<div slot="label">Example Select</div>
+	<div slot="errors">Example error</div>
 	<option>Example 1</option>
 	<option>Example 2</option>
+	</select-input>
+
+	<select-input>
+	<div slot="label">Example Select</div>
+	<optgroup label="Example">
+	<option>Example 1</option>
+	<option>Example 2</option>
+	</optgroup>
+
 </select-input>
 	<script type="text/javascript">
 		const input = document.getElementById("error");

@@ -53,6 +53,10 @@ export class SelectInput extends HTMLElement {
 		this.errorSlot.addEventListener("slotchange", this.errorHandler);
 		this.host = this.#shadow.getRootNode().host;
 		this.options = this.host.querySelectorAll("option");
+		if (this.host.querySelector("optgroup")) this.optgroups = this.host.querySelectorAll("optgroup");
+		console.log(this.host)
+		console.log(this.optgroups)	
+
 	}
 	
 	inputHandler = () => {
@@ -74,21 +78,30 @@ export class SelectInput extends HTMLElement {
 			// Error slot is empty
 			if (!errorSpan[0].innerHTML) {
 				this.input.ariaInvalid = false;
-				this.input.classList.remove("form-item__textfield--error");
+				this.input.classList.remove("form-item__select--error");
 				return;
 			};
 			
 			// There's content in the slot
+			const icon = this.#shadow.querySelector(".form-item__error_icon__icon");
+			console.log("Icon is: " + icon);
+			if (icon) icon.remove();			 
 			this.input.ariaInvalid = true;
-			this.input.classList.add("form-item__textfield--error");
+			this.input.classList.add("form-item__select--error");
 			this.input.insertAdjacentElement("afterend", errorIcon);
 		};
 		
 		connectedCallback() {
-			this.input.append(...this.options);
-			this.value = this.input.value;
-			console.log(this.input);
-			console.log(this.input.value);
+			
+			if (!this.optgroups) {
+				this.input.append(...this.options);
+			} else {
+				this.input.append(...this.optgroups);
+			}
+				
+				//const optgroups = this.#shadow.querySelectorAll("optgroup");
+				//optgroups.forEach((e) => e.append(this.options));
+
 		};
 	
 	attributeChangedCallback(name, oldValue, newValue) {
