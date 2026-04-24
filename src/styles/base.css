@@ -1,4 +1,4 @@
-@layer components, util, tokens, reset;
+@layer reset, tokens, components, util;
 @import "@yalesites-org/tokens/build/css/tokens.css" layer(tokens);
 @import "../01-atoms/cta/cta.css" layer(components.cta);
 @import "../01-atoms/text-link/link.css" layer(components.text-link);
