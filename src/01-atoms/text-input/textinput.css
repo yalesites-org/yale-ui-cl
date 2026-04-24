@@ -59,12 +59,12 @@
 	color: var(--color-form-item-error);
 }
 
-.form-item__error_icon__icon {
-  position: relative;
-  top: -39.63285px;
-  right: -390px;
+.form-item__textfield--error + .form-item__error_icon__icon {
+  position: absolute;
+  margin-top: -41px;
+  margin-left: 97cqb;
   fill: var(--color-alert-emergency-background-color);
   width: 1.7rem;
   height: 1.7rem;
-  display: block;
+  display: inline;
 }
