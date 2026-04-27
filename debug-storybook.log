@@ -1,31 +1,26 @@
-[08:40:40.950] [INFO] storybook v10.2.12
-[08:40:41.451] [DEBUG] Getting package.json info for /Users/nt433/Projects/yale-ui-cl/package.json...
-[08:40:41.917] [DEBUG] Serving static files from [36mnode_modules/@chromatic-com/storybook/assets[39m at [36m/addon-visual-tests-assets[39m
-[08:40:41.917] [INFO] Starting...
-[08:40:42.085] [DEBUG] Starting preview..
-[08:40:42.088] [WARN] 🚨 Unable to index ./src/Cta.stories.js:
-  SyntaxError: Unexpected token (7:2)
-    at constructor (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:12175:21)
-    at Parser.raise (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:16355:71)
-    at Parser.unexpected (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:16372:20)
-    at Parser.parseExprAtom (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19370:26)
-    at Parser.parseExprAtom (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:15099:181)
-    at Parser.parseExprSubscripts (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19165:105)
-    at Parser.parseUpdate (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19156:57)
-    at Parser.parseMaybeUnary (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19141:25)
-    at Parser.parseMaybeUnary (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:18365:95)
-    at Parser.parseMaybeUnaryOrPrivate (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-IJ4VBGAL.js:19049:65)
-[08:40:42.091] [ERROR] Failed to build the preview
-[08:40:42.092] [ERROR] Error: Unable to index ./src/Cta.stories.js
-    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/storybook/dist/core-server/index.js:6085:15)
+[11:27:56.605] [INFO] storybook v10.2.13
+[11:27:57.156] [DEBUG] Getting package.json info for /Users/nt433/Projects/yale-ui-cl/package.json...
+[11:27:57.701] [DEBUG] Serving static files from [36mnode_modules/@chromatic-com/storybook/assets[39m at [36m/addon-visual-tests-assets[39m
+[11:27:57.701] [INFO] Starting...
+[11:27:57.893] [DEBUG] Starting preview..
+[11:27:57.896] [WARN] 🚨 Unable to index files:
+- ./src/01-atoms/text-link/Link.stories.js,./src/01-atoms/yc-modal/Modal.stories.js: Duplicate stories with id: text-link--internal-link
+- ./src/01-atoms/text-link/Link.stories.js,./src/01-atoms/yc-modal/Modal.stories.js: Duplicate stories with id: text-link--external-link
+- ./src/01-atoms/text-link/Link.stories.js,./src/01-atoms/yc-modal/Modal.stories.js: Duplicate stories with id: text-link--download-link
+[11:27:57.899] [ERROR] Failed to build the preview
+[11:27:57.900] [ERROR] Error: [38;2;241;97;97mUnable to index files:
+- ./src/01-atoms/text-link/Link.stories.js,./src/01-atoms/yc-modal/Modal.stories.js: Duplicate stories with id: text-link--internal-link
+- ./src/01-atoms/text-link/Link.stories.js,./src/01-atoms/yc-modal/Modal.stories.js: Duplicate stories with id: text-link--external-link
+- ./src/01-atoms/text-link/Link.stories.js,./src/01-atoms/yc-modal/Modal.stories.js: Duplicate stories with id: text-link--download-link[39m
+    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/storybook/dist/core-server/index.js:6095:15)
     at async _StoryIndexGenerator.getIndex (file://./node_modules/storybook/dist/core-server/index.js:6074:13)
-    at async getOptimizeDeps (file://./node_modules/@storybook/web-components-vite/node_modules/@storybook/builder-vite/dist/index.js:1862:15)
-    at async createViteServer (file://./node_modules/@storybook/web-components-vite/node_modules/@storybook/builder-vite/dist/index.js:1888:19)
-    at async Module.start (file://./node_modules/@storybook/web-components-vite/node_modules/@storybook/builder-vite/dist/index.js:1923:17)
+    at async getOptimizeDeps (file://./node_modules/@storybook/builder-vite/dist/index.js:1861:15)
+    at async createViteServer (file://./node_modules/@storybook/builder-vite/dist/index.js:1887:19)
+    at async Module.start (file://./node_modules/@storybook/builder-vite/dist/index.js:1922:17)
     at async storybookDevServer (file://./node_modules/storybook/dist/core-server/index.js:7241:83)
     at async buildOrThrow (file://./node_modules/storybook/dist/core-server/index.js:4504:12)
     at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:7611:66)
-    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-6JM2KRWM.js:218:12)
+    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-WGZQUMPK.js:218:12)
     at async dev (file://./node_modules/storybook/dist/bin/core.js:2734:3)
-[08:40:42.092] [WARN] Broken build, fix the error above.
+[11:27:57.901] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.
