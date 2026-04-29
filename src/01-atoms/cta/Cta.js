@@ -1,4 +1,5 @@
 import baseStyles from '../../styles/base.css?inline';
+import * as Util from '../../utility.js';
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 const ctaTemplate = document.createElement('template');
@@ -18,17 +19,12 @@ export class Cta extends HTMLElement { #shadow;
     this.#shadow.adoptedStyleSheets = [baseSheet];
 	this.link = this.#shadow.querySelector("a");
   }
-  
-  #addClasses(a) {
-	  let classes = a.split(" ");
-	  classes.forEach((c) => {this.link.classList.add("cta--" + c)});
-  }
 
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
 	if (name === "href") this.link.href = newValue;
 	if (name === "class") {
-		this.#addClasses(newValue);
+		Util.addVariant(newValue, this.link, "cta");
 	}
   }
   

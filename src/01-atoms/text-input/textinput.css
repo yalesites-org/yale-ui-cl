@@ -62,11 +62,9 @@
 }
 
 .form-item__textfield--error + .form-item__error_icon__icon {
-  position: absolute;
-  margin-top: -41px;
-  margin-left: 97cqb;
+  position: relative;
   fill: var(--color-alert-emergency-background-color);
   width: 1.7rem;
   height: 1.7rem;
-  display: inline;
+  display: inline-block;
 }

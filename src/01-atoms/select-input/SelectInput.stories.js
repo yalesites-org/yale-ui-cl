@@ -38,7 +38,7 @@ export default {
 	},
 
 	render: (args) =>
-		`<select-input class="${args.required}">
+		`<select-input class="${args.required}"> 
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">This is an example instruction</span>
 		<span slot="errors">This is an error.</span>
@@ -51,11 +51,11 @@ export const Example = {
         label: "Name"
     },
 	render:(args) =>
-		`<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+		`<select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">${args.instructions}</span>
 		<span slot="errors">${args.errors}</span>
-	</text-input>`
+	</select-input>`
 };
 
 export const WithError = {
@@ -65,11 +65,13 @@ export const WithError = {
         errors: "This has an error.",
         required: false
     },
-    render:args => `<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
-    </text-input>`
+		<option>Example Value 1</option>
+		<option>Example Value 2</option>
+    </select-input>`
 };
 
 export const Required = {
