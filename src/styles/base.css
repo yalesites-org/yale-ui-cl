@@ -10,3 +10,4 @@
 @import "../fonts/fontawesome/css/fontawesome.css" layer(util);
 @import "../fonts/fontawesome/css/regular.css" layer(util);
 @import "../fonts/fontawesome/css/solid.css" layer(util);
+@import "../01-atoms/table/table.css" layer(components.table);
