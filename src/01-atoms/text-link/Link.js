@@ -1,7 +1,7 @@
-import linkStyles from './link.css?inline';
+//import linkStyles from './link.css?inline';
 import baseStyles from '../../styles/base.css?inline';
-const sheet = new CSSStyleSheet();
-sheet.replaceSync(linkStyles);
+//const sheet = new CSSStyleSheet();
+//sheet.replaceSync(linkStyles);
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
@@ -22,7 +22,7 @@ export class TextLink extends HTMLElement {
 		this.#shadow = this.attachShadow({
 			mode: 'closed'
 		});
-		this.#shadow.adoptedStyleSheets = [baseSheet, sheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet];
 		this.#shadow.appendChild(document.importNode(linkTemplate.content, true));
 		this.link = this.#shadow.querySelector("a");
 	}

@@ -1,21 +1,23 @@
-//import textinputStyles from "./textinput.css?inline";
+//import selectinputStyles from "./selectinput.css?inline";
 import baseStyles from "../../styles/base.css?inline";
 //const sheet = new CSSStyleSheet();
-//sheet.replaceSync(textinputStyles);
+//sheet.replaceSync(selectinputStyles);
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
-const textInputTemplate = document.createElement("template");
-textInputTemplate.innerHTML = `
+const selectInputTemplate = document.createElement("template");
+selectInputTemplate.innerHTML = `
   	<div class="form-item">
 		<label for="input" class="form-item__label"><slot name="label"></slot></label>
-		<input id="input" class="form-item__textfield" type="text" aria-describedby="instructions errors" />
+		<div class="form-item__dropdown">
+			<select id="input" class="form-item__select" aria-describedby="instructions errors"></select>
+		</div>
 		<div class="form-item__description" id="instructions"><slot name="instructions"></slot></div>
 		<div class="form-item__error-text" id="errors"><slot name="errors"></slot></div>
 	</div>
 `;
 
-export class TextInput extends HTMLElement {
+export class SelectInput extends HTMLElement {
 	#shadow;
 	static formAssociated = true;
 
@@ -32,7 +34,7 @@ export class TextInput extends HTMLElement {
 	}
 	
 	static get observedAttributes() {
-		return ["class", "placeholder", "name", "autocomplete", "value", "disabled",];
+		return ["class", "placeholder", "name", "autocomplete", "value", "disabled"];
 	}
 	
 	constructor() {
@@ -40,15 +42,21 @@ export class TextInput extends HTMLElement {
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet];
-		this.#shadow.appendChild(document.importNode(textInputTemplate.content, true),);
-		this.input = this.#shadow.querySelector("input");
+		this.#shadow.appendChild(document.importNode(selectInputTemplate.content, true),);
+		this.input = this.#shadow.querySelector("select");
 		this.label = this.#shadow.querySelector("label");
 		this.errorSlot = this.#shadow.querySelector("slot[name='errors']");
 		this.name = name;
 		this.required = false;
 		this.value = '';
-		this.input.addEventListener("input", this.inputHandler);
+		this.input.addEventListener("change", this.inputHandler);
 		this.errorSlot.addEventListener("slotchange", this.errorHandler);
+		this.host = this.#shadow.getRootNode().host;
+		this.options = this.host.querySelectorAll("option");
+		if (this.host.querySelector("optgroup")) this.optgroups = this.host.querySelectorAll("optgroup");
+		console.log(this.host)
+		console.log(this.optgroups)	
+
 	}
 	
 	inputHandler = () => {
@@ -70,14 +78,30 @@ export class TextInput extends HTMLElement {
 			// Error slot is empty
 			if (!errorSpan[0].innerHTML) {
 				this.input.ariaInvalid = false;
-				this.input.classList.remove("form-item__textfield--error");
+				this.input.classList.remove("form-item__select--error");
 				return;
 			};
 			
 			// There's content in the slot
+			const icon = this.#shadow.querySelector(".form-item__error_icon__icon");
+			console.log("Icon is: " + icon);
+			if (icon) icon.remove();			 
 			this.input.ariaInvalid = true;
-			this.input.classList.add("form-item__textfield--error");
+			this.input.classList.add("form-item__select--error");
 			this.input.insertAdjacentElement("afterend", errorIcon);
+		};
+		
+		connectedCallback() {
+			
+			if (!this.optgroups) {
+				this.input.append(...this.options);
+			} else {
+				this.input.append(...this.optgroups);
+			}
+				
+				//const optgroups = this.#shadow.querySelectorAll("optgroup");
+				//optgroups.forEach((e) => e.append(this.options));
+
 		};
 	
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -91,9 +115,10 @@ export class TextInput extends HTMLElement {
 		if (name === "autocomplete") this.input.autocomplete = newValue;
 		if (name === "disabled") this.input.disabled = newValue !== null;
 		if (name === "value") this.input.value = newValue;
-		
 	}
-		
+	
+	// Getters and setters 
+	
 	get placeholder() { return this.getAttribute("placeholder"); }
 	get value() { return this.getAttribute("value"); }
 	get disabled() { return this.getAttribute("disabled");}
@@ -113,4 +138,4 @@ export class TextInput extends HTMLElement {
 	
 }
 
-customElements.define("text-input", TextInput);
+customElements.define("select-input", SelectInput);

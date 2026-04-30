@@ -18,13 +18,17 @@ export class Cta extends HTMLElement { #shadow;
     this.#shadow.adoptedStyleSheets = [baseSheet];
 	this.link = this.#shadow.querySelector("a");
   }
+  
+  #addClasses(a) {
+	  let classes = a.split(" ");
+	  classes.forEach((c) => {this.link.classList.add("cta--" + c)});
+  }
 
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
 	if (name === "href") this.link.href = newValue;
 	if (name === "class") {
-		let classes = newValue.split(" ");
-		classes.forEach((c) => {this.link.classList.add("cta--" + c) } );
+		this.#addClasses(newValue);
 	}
   }
   

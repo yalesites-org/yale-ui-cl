@@ -11,13 +11,26 @@
     "url": "git+https://github.com/yalesites-org/yale-ui-cl.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "Nick Taylor",
   "type": "module",
-  "main": "./src/main.js",
+  "files": ["dist"],
+  "module": "./dist/yale-ui-cl.js",
+  "main": "./dist/yale-ui-cl.js",
+  "exports": {
+	  ".": {
+		  "import": "./dist/yale-ui-cl.js",
+		  "require": "./dist/yale-ui-cl.umd.cjs"
+	  }
+  },
+  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "dev": "vite", 
+    "build": "vite build",
+    "preview": "vite preview"
+	
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
