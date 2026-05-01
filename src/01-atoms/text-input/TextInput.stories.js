@@ -29,9 +29,13 @@ export default {
 		errors: {
 			control: 'text'
 		},
+		type: {
+			control: 'select',
+			options: ['text', 'date', 'datetime-local', 'tel', 'number', 'email', 'radio']
+		}
 	},
 	args: {
-		label: 'Yale HomePage',
+		label: 'Input with Error',
 		instructions: 'This is an example instruction.',
 		errors: 'This is an example error',
 		required: false,
@@ -48,10 +52,11 @@ export default {
 export const Example = {
 	args: {
         errors: "",
-        label: "Name"
+        label: "Name",
+        type: "date"
     },
 	render:(args) =>
-		`<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+		`<text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">${args.instructions}</span>
 		<span slot="errors">${args.errors}</span>
@@ -63,9 +68,10 @@ export const WithError = {
         label: "Yale HomePage",
         instructions: "This is an example instruction.",
         errors: "This has an error.",
-        required: false
+        required: false,
+        type: 'text'
     },
-    render:args => `<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
@@ -77,9 +83,10 @@ export const Required = {
         label: "Yale HomePage",
         instructions: "This is an example instruction.",
         errors: "",
-        required: true
+        required: true,
+        type: 'text'
     },
-    render:args => `<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>

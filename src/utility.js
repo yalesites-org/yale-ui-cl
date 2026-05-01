@@ -13,3 +13,4 @@ export function createErrorIcon() {
 		errorIcon.ariaHidden = true;
 		return errorIcon;
 };
+

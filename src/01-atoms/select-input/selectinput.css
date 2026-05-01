@@ -102,9 +102,9 @@
 }
 
 .form-item__select--error + .form-item__error_icon__icon {
-  position: absolute;
-  top: 23%;
-  left: 82cqb;
+  position: relative;
+  top: -9cqb;
+  left: 80cqb;
   fill: var(--color-alert-emergency-background-color);
   width: 1.7rem;
   height: 1.7rem;
