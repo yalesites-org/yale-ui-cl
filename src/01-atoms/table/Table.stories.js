@@ -1,66 +1,39 @@
-import { Cta } from "./Cta";
+import { Table } from "./Table";
 export default {
-  title: 'CTA',
-  component: 'cta-link',
+  title: 'Table',
+  component: 'yc-table',
   argTypes: {
     label: {control: 'text'},
-    URL: {control: 'text'},
-    fill: {
-      name: 'Fill Type',
-      type: 'select',
-      options: ['filled', 'outline'],
-    },
-    animate: {
-      name: 'Animation Type',
-      type: 'select',
-      options: ['fade', 'rise', 'wipe'],
- 	 },
-	 radius: {
-	  name: 'Radius Type',
-	  type: 'select',
-	  options: ['soft', 'pill'],
-	 },
+    
 },
   args: {
-    label: 'Yale HomePage',
-    URL: 'https://www.yale.edu',
-    fill: 'filled',
-    animate: 'fade',
-	radius: '',
+    label: 'Example Table',
 },
 
   render: (args) => 
     `<cta-link class="${args.fill} ${args.animate} ${args.radius}" href="${args.URL}">${args.label}</cta-link>`,
 };
 
-export const Filled = {
-  args: {
-    fill: 'filled',
-	 radius: '',
-  },
+export const Default = {
 
   render: (args) =>
-    `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
+    `<yc-table>
+      <table>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Content 1</td>
+            <td>Content 2</td>
+            <td>Content 3</td>
+          </tr>
+        </tbody>
+      </table>
+        `
 };
 
-export const Outline = {
-  args: {
-    label: "Yale HomePage",
-    URL: "https://www.yale.edu",
-    fill: "outline",
-    animate: "fade",
-    radius: ""
-  },
-  render:args => `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
-};
-
-export const OutlinePill = {
-  args: {
-    label: "Yale HomePage",
-    URL: "https://www.yale.edu",
-    fill: "outline",
-    animate: "fade",
-    radius: "pill"
-  },
-  render:args => `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
-};
