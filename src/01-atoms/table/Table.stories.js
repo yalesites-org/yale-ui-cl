@@ -34,6 +34,7 @@ export const Default = {
           </tr>
         </tbody>
       </table>
+    </yc-table>
         `
 };
 
