@@ -14,3 +14,10 @@ export function createErrorIcon() {
 		return errorIcon;
 };
 
+export function createListDivider() {
+	const listDivider = document.createElement("li");
+        listDivider.classList.add("taxonomy-list__divider");
+        listDivider.ariaHidden = true;
+        listDivider.innerHTML = "|";
+        return listDivider;
+}
