@@ -4,7 +4,10 @@ export default {
   title: 'Lists',
   component: 'yc-list',
   argTypes: {
-    type: {control: 'text'},
+    type: {      
+      name: "List Type",
+      type: 'select',
+      options: ['categories', 'tags'],},
     
 },
   args: {
