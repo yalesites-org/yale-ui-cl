@@ -56,7 +56,8 @@ ol {
 .taxonomy-list--tags {
   font: var(--font-style-body-s);
 
-  color: tokens.$color-blue-yale;
+  color: var(--color-blue-yale);
   font-weight: var(--font-weights-mallory-medium);
   margin-top: var(--size-spacing-4);
   text-transform: capitalize;
+}

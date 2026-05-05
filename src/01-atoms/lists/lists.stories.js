@@ -1,12 +1,14 @@
+import { List } from "./Lists.js";
+
 export default {
   title: 'Lists',
   component: 'yc-list',
   argTypes: {
-    label: {control: 'text'},
+    type: {control: 'text'},
     
 },
   args: {
-    label: 'Example List',
+    type: '',
 },
 
   render: (args) => 
@@ -14,13 +16,19 @@ export default {
 };
 
 export const Default = {
+  args: {
+    type: '',
+  },
 
   render: (args) =>
-    `<ul>
-        <li>List Item 1</li>
-        <li>List Item 2</li>
-        <li>List Item 3</li>
-      </ul>
+    `
+      <ycl-list class="${args.type}">
+        <ul>
+          <li>List Item 1</li>
+          <li>List Item 2</li>
+          <li>List Item 3</li>
+        </ul>
+      </ycl-list>
 
         `
 };
