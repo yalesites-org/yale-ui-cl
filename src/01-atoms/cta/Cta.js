@@ -7,6 +7,8 @@ ctaTemplate.innerHTML = `
   <a class="cta" href="#"><slot>Default Link</slot></a>
 `;
 
+const currentURL = window.location.origin;
+
 export class Cta extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["href", "class"];
@@ -15,17 +17,19 @@ export class Cta extends HTMLElement { #shadow;
   constructor() {
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
-	this.#shadow.appendChild(document.importNode(ctaTemplate.content, true));
+	   this.#shadow.appendChild(document.importNode(ctaTemplate.content, true));
     this.#shadow.adoptedStyleSheets = [baseSheet];
-	this.link = this.#shadow.querySelector("a");
+	   this.link = this.#shadow.querySelector("a");
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
+    this.icon = this.#shadow.querySelector(".fa-icon");
 	if (oldValue === newValue) return;
 	if (name === "href") this.link.href = newValue;
 	if (name === "class") {
 		Util.addVariant(newValue, this.link, "cta");
 	}
+  Util.updateLinkIcon(this.icon, this.link, currentURL);
   }
   
   get href() { return this.getAttribute("href"); }

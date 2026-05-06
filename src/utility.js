@@ -23,7 +23,6 @@ export function createListDivider() {
 }
 
 export function updateLinkIcon(icon, link, currentURL) {
-	console.log(link);
 	let extension = link.href.split(".").pop().toLowerCase();
 		
 		if (extension.includes("?")) {
@@ -32,8 +31,7 @@ export function updateLinkIcon(icon, link, currentURL) {
 		}
 		
 		const downloadExts = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip', 'csv', 'xml', 'rtf'];
-
-		console.log(icon)
+		
 		if (icon) icon.remove();
 		
 		if (downloadExts.includes(extension)) { // Download link

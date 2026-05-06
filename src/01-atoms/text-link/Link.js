@@ -30,7 +30,7 @@ export class TextLink extends HTMLElement {
 		this.icon = this.#shadow.querySelector(".fa-icon");
 		if (oldValue === newValue) return;
 		if (name === "href") this.link.href = newValue;
-		if (name === "class") this.link.classList.add("link--" + newValue);
+		if (name === "class") Util.addVariant(newValue, this.link, "link");
 		if (name === "target") this.link.target = newValue;
 		Util.updateLinkIcon(this.icon, this.link, currentURL);
 	}
