@@ -21,3 +21,29 @@ export function createListDivider() {
         listDivider.innerHTML = "|";
         return listDivider;
 }
+
+export function updateLinkIcon(icon, link, currentURL) {
+	console.log(link);
+	let extension = link.href.split(".").pop().toLowerCase();
+		
+		if (extension.includes("?")) {
+			extension = extension.split("?");
+			extension = extension[0];
+		}
+		
+		const downloadExts = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip', 'csv', 'xml', 'rtf'];
+
+		console.log(icon)
+		if (icon) icon.remove();
+		
+		if (downloadExts.includes(extension)) { // Download link
+			link.insertAdjacentHTML("beforeend", `
+	  		<span class="fa-icon fa-regular fa-circle-down"><span class="visually-hidden">(link is a download)</span></span>`);
+		} else if (link.origin != currentURL) { // External link
+			link.insertAdjacentHTML("beforeend", `
+		<span class="fa-icon fa-solid fa-arrow-up-right"><span class="visually-hidden">(link is external)</span></span>`);
+		} else if (link.target === "_blank") { // New window link
+			link.insertAdjacentHTML("beforeend", `
+		<span class="fa-icon fa-solid fa-arrow-up-right-from-square"><span class="visually-hidden">(link opens in new window)</span></span>`);
+		} else return;
+}
