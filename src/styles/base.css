@@ -5,6 +5,7 @@
 @import "../01-atoms/text-input/textinput.css" layer(components.text-input);
 @import "../01-atoms/select-input/selectinput.css" layer(components.select-input);
 @import "../01-atoms/lists/lists.css" layer(components.lists);
+@import "../02-molecules/ycl-callout/callout.css" layer(components.callout);
 @import "../00-tokens/typography/typography.css" layer(tokens);
 @import "normalize.css/normalize.css" layer(reset);
 @import "./utility.css" layer(util);

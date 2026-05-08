@@ -1,24 +1,19 @@
-[08:38:22.676] [INFO] storybook v10.3.5
-[08:38:23.200] [DEBUG] Getting package.json info for /Users/nt433/Projects/yale-ui-cl/package.json...
-[08:38:23.767] [WARN] 🚨 Unable to index ./src/01-atoms/lists/Lists.stories.js:
-  SyntaxError: Unexpected token, expected "," (21:3)
-    at constructor (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:12171:21)
-    at Parser.raise (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:16356:71)
-    at Parser.unexpected (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:16373:20)
-    at Parser.expect (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:16581:32)
-    at Parser.parseObjectLike (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:19571:25)
-    at Parser.parseExprAtom (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:19302:25)
-    at Parser.parseExprAtom (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:15093:181)
-    at Parser.parseExprSubscripts (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:19165:105)
-    at Parser.parseUpdate (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:19156:57)
-    at Parser.parseMaybeUnary (file:///Users/nt433/Projects/yale-ui-cl/node_modules/storybook/dist/_node-chunks/chunk-JXXWBFBF.js:19141:25)
-[08:38:23.771] [ERROR] Error: Unable to index ./src/01-atoms/lists/Lists.stories.js
-    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/storybook/dist/core-server/index.js:6282:15)
+[14:20:03.278] [INFO] storybook v10.3.5
+[14:20:03.828] [DEBUG] Getting package.json info for /Users/nt433/Projects/yale-ui-cl/package.json...
+[14:20:04.475] [WARN] 🚨 Unable to index files:
+- ./src/01-atoms/yc-modal/Modal.stories.js,./src/02-molecules/ycl-callout/Callout.stories.js: Duplicate stories with id: modal--internal-link
+- ./src/01-atoms/yc-modal/Modal.stories.js,./src/02-molecules/ycl-callout/Callout.stories.js: Duplicate stories with id: modal--external-link
+- ./src/01-atoms/yc-modal/Modal.stories.js,./src/02-molecules/ycl-callout/Callout.stories.js: Duplicate stories with id: modal--download-link
+[14:20:04.479] [ERROR] Error: [38;2;241;97;97mUnable to index files:
+- ./src/01-atoms/yc-modal/Modal.stories.js,./src/02-molecules/ycl-callout/Callout.stories.js: Duplicate stories with id: modal--internal-link
+- ./src/01-atoms/yc-modal/Modal.stories.js,./src/02-molecules/ycl-callout/Callout.stories.js: Duplicate stories with id: modal--external-link
+- ./src/01-atoms/yc-modal/Modal.stories.js,./src/02-molecules/ycl-callout/Callout.stories.js: Duplicate stories with id: modal--download-link[39m
+    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/storybook/dist/core-server/index.js:6292:15)
     at async _StoryIndexGenerator.getIndex (file://./node_modules/storybook/dist/core-server/index.js:6271:13)
     at async Object.experimental_serverChannel (file://./node_modules/@storybook/addon-vitest/dist/preset.js:464:14)
     at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:8027:32)
     at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-FIR43JGQ.js:225:12)
     at async dev (file://./node_modules/storybook/dist/bin/core.js:2736:3)
     at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2806:92)
-[08:38:23.771] [WARN] Broken build, fix the error above.
+[14:20:04.480] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.
