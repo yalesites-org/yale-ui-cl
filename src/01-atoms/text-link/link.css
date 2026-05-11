@@ -18,6 +18,11 @@
   background-size: 100% var(--thickness);
 }
 
+.link svg {
+  height: 1rem;
+  width: 1rem;
+}
+
 .link:hover {
 	  background-size: 0 var(--thickness);
 }

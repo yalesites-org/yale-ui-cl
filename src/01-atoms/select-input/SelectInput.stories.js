@@ -12,8 +12,9 @@ export default {
 			control: 'boolean',
 			mapping: {
 				true: "required",
-			},
+				false: "",
 		},
+	},
 		
 		autocomplete: {
 			control: 'text',
@@ -42,7 +43,7 @@ export default {
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">This is an example instruction</span>
 		<span slot="errors">This is an error.</span>
-	</select-input>`,
+	</select-input>`
 };
 
 export const Example = {
@@ -55,7 +56,9 @@ export const Example = {
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">${args.instructions}</span>
 		<span slot="errors">${args.errors}</span>
-	</select-input>`
+		<option>This is an option</option>
+		<option>This is another option</option>
+	</select-input>`,
 };
 
 export const WithError = {
@@ -63,7 +66,7 @@ export const WithError = {
         label: "Yale HomePage",
         instructions: "This is an example instruction.",
         errors: "This has an error.",
-        required: false
+        required: false,
     },
     render:args => `<select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
