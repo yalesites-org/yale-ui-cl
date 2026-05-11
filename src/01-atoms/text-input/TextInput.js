@@ -7,7 +7,7 @@ const textInputTemplate = document.createElement("template");
 textInputTemplate.innerHTML = `
   	<div class="form-item">
 		<label for="input" class="form-item__label"><slot name="label"></slot></label>
-		<input id="input" class="form-item__textfield" type="text" aria-describedby="instructions errors" />
+		<div class="form-item__inner"><input id="input" class="form-item__textfield" type="text" aria-describedby="instructions errors" /></div>
 		<div class="form-item__description" id="instructions"><slot name="instructions"></slot></div>
 		<div class="form-item__error-text" id="errors"><slot name="errors"></slot></div>
 	</div>
@@ -58,18 +58,21 @@ export class TextInput extends HTMLElement {
 		const errorSpan = this.errorSlot.assignedElements();
 		if (!errorSpan) return;
 		const errorIcon = Util.createErrorIcon();
+		const formInner = this.#shadow.querySelector(".form-item__inner");
 		
 			// Error slot is empty
 			if (!errorSpan[0].innerHTML) {
 				this.input.ariaInvalid = false;
 				this.valid = true;
 				this.input.classList.remove("form-item__textfield--error");
+				formInner.classList.remove("form-item__inner__with-icon");
 				return;
 			} else if (errorSpan[0]) {			
 			// There's content in the slot
 			this.input.ariaInvalid = true;
 			this.valid = false;
 			this.input.classList.add("form-item__textfield--error");
+			formInner.classList.add("form-item__inner__with-icon");
 			this.input.insertAdjacentElement("afterend", errorIcon);
 		}
 		};

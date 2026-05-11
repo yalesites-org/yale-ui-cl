@@ -63,7 +63,7 @@ export class SelectInput extends HTMLElement {
 	
 	errorHandler = () => {
 		const errorSpan = this.errorSlot.assignedElements();
-		const errorIcon = Util.createErrorIcon();
+		//const errorIcon = Util.createErrorIcon();
 
 			// Error slot is empty
 			if (!errorSpan[0]) {
@@ -73,8 +73,8 @@ export class SelectInput extends HTMLElement {
 			};
 			
 			// There's content in the slot
-			const icon = this.#shadow.querySelector(".form-item__error_icon__icon");
-			if (icon) icon.remove();			 
+		//	const icon = this.#shadow.querySelector(".form-item__error_icon__icon");
+		//	if (icon) icon.remove();			 
 			this.input.ariaInvalid = true;
 			this.input.classList.add("form-item__select--error");
 			this.input.insertAdjacentElement("afterend", errorIcon);
