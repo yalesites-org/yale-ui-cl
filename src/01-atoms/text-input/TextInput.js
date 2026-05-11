@@ -57,7 +57,7 @@ export class TextInput extends HTMLElement {
 	errorHandler = () => {
 		const errorSpan = this.errorSlot.assignedElements();
 		if (!errorSpan) return;
-		const errorIcon = Util.createErrorIcon();
+		//const errorIcon = Util.createErrorIcon();
 		const formInner = this.#shadow.querySelector(".form-item__inner");
 		
 			// Error slot is empty
@@ -73,7 +73,7 @@ export class TextInput extends HTMLElement {
 			this.valid = false;
 			this.input.classList.add("form-item__textfield--error");
 			formInner.classList.add("form-item__inner__with-icon");
-			this.input.insertAdjacentElement("afterend", errorIcon);
+			//this.input.insertAdjacentElement("afterend", errorIcon);
 		}
 		};
 	

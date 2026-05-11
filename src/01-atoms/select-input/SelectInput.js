@@ -77,7 +77,7 @@ export class SelectInput extends HTMLElement {
 		//	if (icon) icon.remove();			 
 			this.input.ariaInvalid = true;
 			this.input.classList.add("form-item__select--error");
-			this.input.insertAdjacentElement("afterend", errorIcon);
+			//this.input.insertAdjacentElement("afterend", errorIcon);
 		};
 		
 		connectedCallback() {
