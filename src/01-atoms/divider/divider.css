@@ -1,0 +1,44 @@
+
+
+/* $divider-widths: 100, 75, 50, 25; */
+
+.divider__width-25 {
+    --width-divider: var(--layout-width-25);
+}
+
+.divider__width-50{
+    --width-divider: var(--layout-width-50);
+}
+.divider__width-75{
+    --width-divider: var(--layout-width-75);
+}
+.divider__width-100{
+    --width-divider: var(--layout-width-100);
+}
+
+
+.divider__inner__position-left{
+    --position-divider: var(--layout-flex-position-left);
+  }
+
+.divider__inner__position-center{
+    --position-divider: var(--layout-flex-position-center);
+  }
+
+.divider__wrapper {
+  @include tokens.spacing-page-section;
+}
+
+.divider__inner {
+  display: flex;
+  justify-content: var(--position-divider);
+}
+
+.divider {
+  --color-divider: var(--color-layout-border);
+  background: var(--color-divider);
+  width: var(--width-divider);
+  height: var(--thickness-divider);
+  
+}
+

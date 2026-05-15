@@ -5,7 +5,7 @@ const dividerTemplate = document.createElement('template');
 dividerTemplate.innerHTML = `
         <div class="divider__wrapper"> 	
             <div class="divider__inner">
-                <div class="divider"></div>
+                <div class="divider divider__width-100"></div>
             </div>
         </div>
 `;
