@@ -12,3 +12,4 @@
 @import "../fonts/fontawesome/css/regular.css" layer(util);
 @import "../fonts/fontawesome/css/solid.css" layer(util);
 @import "../01-atoms/table/table.css" layer(components.table);
+@import "../01-atoms/divider/divider.css" layer(components.divider);
