@@ -5,4 +5,5 @@ import { TextInput } from "./01-atoms/text-input/TextInput.js";
 import { Table } from "./01-atoms/table/Table.js";
 import { SelectInput } from "./01-atoms/select-input/SelectInput.js";
 import { List } from "./01-atoms/lists/Lists.js";
+export {Accordion, AccordionItem} from "./02-molecules/accordions/Accordion.js";
 export { Cta, TextLink, TextInput, SelectInput, List }

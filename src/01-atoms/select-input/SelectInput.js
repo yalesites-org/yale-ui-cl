@@ -48,7 +48,7 @@ export class SelectInput extends HTMLElement {
 		this.required = false;
 		this.value = '';
 		this.input.addEventListener("change", this.inputHandler);
-		this.errorSlot.addEventListener("slotchange", this.errorHandler(this.errorSlot, this.input, this.#shadow));
+		this.errorSlot.addEventListener("slotchange", this.errorHandler());
 		this.host = this.#shadow.getRootNode().host;
 		this.options = this.host.querySelectorAll("option");
 		if (this.host.querySelector("optgroup")) this.optgroups = this.host.querySelectorAll("optgroup");

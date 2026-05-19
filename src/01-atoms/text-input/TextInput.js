@@ -47,7 +47,7 @@ export class TextInput extends HTMLElement {
 		this.value = '';
 		this.valid = true;
 		this.input.addEventListener("input", this.inputHandler);
-		this.errorSlot.addEventListener("slotchange", this.errorHandler());
+		this.errorSlot.addEventListener("slotchange", this.errorHandler);
 	}
 	
 	inputHandler = () => {
@@ -97,6 +97,7 @@ export class TextInput extends HTMLElement {
 				case "email":
 				case "text":
 					this.input.type = newValue;
+					break;
 				default: 
 					console.warn(newValue + " is not a valid type for the text-input component");
 					return;
@@ -111,15 +112,15 @@ export class TextInput extends HTMLElement {
 	get name() { return this.getAttribute("name"); }
 	get type() { return this.getAttribute("type"); }
 	
-	set placeholder(value) { return this.setAttribute("placeholder", value); }
-	set value(text) { return this.setAttribute("value", text); }
+	set placeholder(value) {  this.setAttribute("placeholder", value); }
+	set value(text) {  this.setAttribute("value", text); }
 	set disabled(value) {
 		if (value) this.setAttribute("disabled", "");
 		else this.removeAttribute("disabled");
 	}
-	set autocomplete(value) { return this.setAttribute("autocomplete", value);}
-	set name(value) { return this.setAttribute("name", value); }
-	set type(value) { return this.setAttribute("type", value) 
+	set autocomplete(value) {  this.setAttribute("autocomplete", value);}
+	set name(value) { this.setAttribute("name", value); }
+	set type(value) { this.setAttribute("type", value) 
 	}
 		
 	

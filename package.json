@@ -13,28 +13,29 @@
   "license": "ISC",
   "author": "Nick Taylor",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "module": "./dist/yale-ui-cl.js",
   "main": "./dist/yale-ui-cl.js",
   "exports": {
-	  ".": {
-		  "import": "./dist/yale-ui-cl.js",
-		  "require": "./dist/yale-ui-cl.umd.cjs"
-	  }
+    ".": {
+      "import": "./dist/yale-ui-cl.js",
+      "require": "./dist/yale-ui-cl.umd.cjs"
+    }
   },
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "dev": "vite", 
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
-	
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
     "@csstools/postcss-sass": "^5.1.1",
+    "@eslint/js": "^10.0.1",
     "@storybook/addon-a11y": "^10.2.0",
     "@storybook/addon-docs": "^10.2.0",
     "@storybook/addon-vitest": "^10.2.0",
@@ -42,6 +43,8 @@
     "@storybook/web-components-vite": "^10.2.12",
     "@vitest/browser-playwright": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17",
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0",
     "playwright": "^1.57.0",
     "postcss": "^8.5.8",
     "postcss-each": "^1.1.0",
