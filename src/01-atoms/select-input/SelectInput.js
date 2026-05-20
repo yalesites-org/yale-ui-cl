@@ -54,13 +54,10 @@ export class SelectInput extends HTMLElement {
 		this.errorSlot.addEventListener("slotchange", Util.errorHandler.bind(this, "select"));
 
 	}
-	
-	inputHandler = () => {
-		this.value = this.input.value;
-	};
-		
+
 		connectedCallback() {
-			
+			this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
+
 			if (!this.optgroups) {
 				this.input.append(...this.options);
 			} else {

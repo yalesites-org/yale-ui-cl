@@ -49,10 +49,10 @@ export class TextInput extends HTMLElement {
 		this.input.addEventListener("input", Util.inputHandler.bind(this));
 		this.errorSlot.addEventListener("slotchange", Util.errorHandler.bind(this, "textfield"));
 	}
-	
-	inputHandler = () => {
-		this.value = this.input.value;
-	};
+
+	connectedCallback() {
+		this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
+	}
 	
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
