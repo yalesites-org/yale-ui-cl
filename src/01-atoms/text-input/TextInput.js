@@ -46,36 +46,13 @@ export class TextInput extends HTMLElement {
 		this.required = false;
 		this.value = '';
 		this.valid = true;
-		this.input.addEventListener("input", this.inputHandler);
-		this.errorSlot.addEventListener("slotchange", this.errorHandler());
+		this.input.addEventListener("input", Util.inputHandler.bind(this));
+		this.errorSlot.addEventListener("slotchange", Util.errorHandler.bind(this, "textfield"));
 	}
 	
 	inputHandler = () => {
 		this.value = this.input.value;
 	};
-	
-	errorHandler = () => {
-		const errorSpan = this.errorSlot.assignedElements();
-		if (!errorSpan) return;
-		//const errorIcon = Util.createErrorIcon();
-		const formInner = this.#shadow.querySelector(".form-item__inner");
-		
-			// Error slot is empty
-			if (!errorSpan[0].innerHTML) {
-				this.input.ariaInvalid = false;
-				this.valid = true;
-				this.input.classList.remove("form-item__textfield--error");
-				formInner.classList.remove("form-item__inner__with-icon");
-				return;
-			} else if (errorSpan[0]) {			
-			// There's content in the slot
-			this.input.ariaInvalid = true;
-			this.valid = false;
-			this.input.classList.add("form-item__textfield--error");
-			formInner.classList.add("form-item__inner__with-icon");
-			//this.input.insertAdjacentElement("afterend", errorIcon);
-		}
-		};
 	
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
@@ -97,6 +74,7 @@ export class TextInput extends HTMLElement {
 				case "email":
 				case "text":
 					this.input.type = newValue;
+					break;
 				default: 
 					console.warn(newValue + " is not a valid type for the text-input component");
 					return;
@@ -111,15 +89,15 @@ export class TextInput extends HTMLElement {
 	get name() { return this.getAttribute("name"); }
 	get type() { return this.getAttribute("type"); }
 	
-	set placeholder(value) { return this.setAttribute("placeholder", value); }
-	set value(text) { return this.setAttribute("value", text); }
+	set placeholder(value) {  this.setAttribute("placeholder", value); }
+	set value(text) {  this.setAttribute("value", text); }
 	set disabled(value) {
 		if (value) this.setAttribute("disabled", "");
 		else this.removeAttribute("disabled");
 	}
-	set autocomplete(value) { return this.setAttribute("autocomplete", value);}
-	set name(value) { return this.setAttribute("name", value); }
-	set type(value) { return this.setAttribute("type", value) 
+	set autocomplete(value) {  this.setAttribute("autocomplete", value);}
+	set name(value) {  this.setAttribute("name", value); }
+	set type(value) {  this.setAttribute("type", value) 
 	}
 		
 	

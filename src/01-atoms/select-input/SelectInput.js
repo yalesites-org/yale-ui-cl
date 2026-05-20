@@ -47,36 +47,17 @@ export class SelectInput extends HTMLElement {
 		this.name = name;
 		this.required = false;
 		this.value = '';
-		this.input.addEventListener("change", this.inputHandler);
-		this.errorSlot.addEventListener("slotchange", this.errorHandler(this.errorSlot, this.input, this.#shadow));
+		this.input.addEventListener("change", Util.inputHandler.bind(this));
 		this.host = this.#shadow.getRootNode().host;
 		this.options = this.host.querySelectorAll("option");
 		if (this.host.querySelector("optgroup")) this.optgroups = this.host.querySelectorAll("optgroup");
-		console.log(this.host)
-		console.log(this.optgroups)	
+		this.errorSlot.addEventListener("slotchange", Util.errorHandler.bind(this, "select"));
 
 	}
 	
 	inputHandler = () => {
 		this.value = this.input.value;
 	};
-	
-	errorHandler = () => {
-		const errorSpan = this.errorSlot.assignedElements();
-		//const errorIcon = Util.createErrorIcon();
-
-			// Error slot is empty
-			if (!errorSpan[0].innerHTML) {
-				this.input.ariaInvalid = false;
-				this.input.classList.remove("form-item__select--error");
-				return;
-			};
-			
-			// There's content in the slot		 
-			this.input.ariaInvalid = true;
-			this.input.classList.add("form-item__select--error");
-			//this.input.insertAdjacentElement("afterend", errorIcon);
-		};
 		
 		connectedCallback() {
 			
