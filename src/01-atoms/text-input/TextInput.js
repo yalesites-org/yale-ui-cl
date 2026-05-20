@@ -1,4 +1,4 @@
-import * as Util from "../../utility.js"
+import * as Util from "../../utility.js";
 import baseStyles from "../../styles/base.css?inline";
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
@@ -21,39 +21,57 @@ export class TextInput extends HTMLElement {
 		return {
 			name: {
 				type: String,
-				reflect: true
+				reflect: true,
 			},
 			value: {
-				type: String
-			}
+				type: String,
+			},
 		};
 	}
-	
+
 	static get observedAttributes() {
-		return ["class", "placeholder", "name", "autocomplete", "value", "disabled", "valid", "type"];
+		return [
+			"class",
+			"placeholder",
+			"name",
+			"autocomplete",
+			"value",
+			"disabled",
+			"valid",
+			"type",
+		];
 	}
-	
+
 	constructor() {
 		super();
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet];
-		this.#shadow.appendChild(document.importNode(textInputTemplate.content, true),);
+		this.#shadow.appendChild(
+			document.importNode(textInputTemplate.content, true),
+		);
 		this.input = this.#shadow.querySelector("input");
 		this.label = this.#shadow.querySelector("label");
 		this.errorSlot = this.#shadow.querySelector("slot[name='errors']");
 		this.name = name;
 		this.required = false;
-		this.value = '';
+		this.value = "";
 		this.valid = true;
 		this.input.addEventListener("input", Util.inputHandler.bind(this));
-		this.errorSlot.addEventListener("slotchange", Util.errorHandler.bind(this, "textfield"));
+		this.errorSlot.addEventListener(
+			"slotchange",
+			Util.errorHandler.bind(this, "textfield"),
+		);
 	}
 
 	connectedCallback() {
-		this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
+		this.internals_.setValidity(
+			this.input.validity,
+			this.input.validationMessage,
+			this.input,
+		);
 	}
-	
+
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		if (name === "placeholder") this.input.placeholder = newValue;
@@ -75,32 +93,54 @@ export class TextInput extends HTMLElement {
 				case "text":
 					this.input.type = newValue;
 					break;
-				default: 
-					console.warn(newValue + " is not a valid type for the text-input component");
+				default:
+					console.warn(
+						newValue +
+							" is not a valid type for the text-input component",
+					);
 					return;
-		}
+			}
 		}
 	}
-		
-	get placeholder() { return this.getAttribute("placeholder"); }
-	get value() { return this.getAttribute("value"); }
-	get disabled() { return this.getAttribute("disabled");}
-	get autocomplete() { return this.getAttribute("autocomplete");}
-	get name() { return this.getAttribute("name"); }
-	get type() { return this.getAttribute("type"); }
-	
-	set placeholder(value) {  this.setAttribute("placeholder", value); }
-	set value(text) {  this.setAttribute("value", text); }
+
+	get placeholder() {
+		return this.getAttribute("placeholder");
+	}
+	get value() {
+		return this.getAttribute("value");
+	}
+	get disabled() {
+		return this.getAttribute("disabled");
+	}
+	get autocomplete() {
+		return this.getAttribute("autocomplete");
+	}
+	get name() {
+		return this.getAttribute("name");
+	}
+	get type() {
+		return this.getAttribute("type");
+	}
+
+	set placeholder(value) {
+		this.setAttribute("placeholder", value);
+	}
+	set value(text) {
+		this.setAttribute("value", text);
+	}
 	set disabled(value) {
 		if (value) this.setAttribute("disabled", "");
 		else this.removeAttribute("disabled");
 	}
-	set autocomplete(value) {  this.setAttribute("autocomplete", value);}
-	set name(value) {  this.setAttribute("name", value); }
-	set type(value) {  this.setAttribute("type", value) 
+	set autocomplete(value) {
+		this.setAttribute("autocomplete", value);
 	}
-		
-	
+	set name(value) {
+		this.setAttribute("name", value);
+	}
+	set type(value) {
+		this.setAttribute("type", value);
+	}
 }
 
 customElements.define("text-input", TextInput);

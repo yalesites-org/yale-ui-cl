@@ -64,8 +64,6 @@ export class SelectInput extends HTMLElement {
 				this.input.append(...this.optgroups);
 			}
 				
-				//const optgroups = this.#shadow.querySelectorAll("optgroup");
-				//optgroups.forEach((e) => e.append(this.options));
 
 		};
 	
@@ -81,9 +79,7 @@ export class SelectInput extends HTMLElement {
 		if (name === "disabled") this.input.disabled = newValue !== null;
 		if (name === "value") this.input.value = newValue;
 	}
-	
-	// Getters and setters 
-	
+		
 	get placeholder() { return this.getAttribute("placeholder"); }
 	get value() { return this.getAttribute("value"); }
 	get disabled() { return this.getAttribute("disabled");}
