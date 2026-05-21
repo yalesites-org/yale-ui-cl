@@ -8,12 +8,13 @@ accordionOuterTemplate.innerHTML = `
   	<div class="accordion">
 		<div class="accordion-inner">
 			<div><slot name="heading"></slot></div>
-			<ul style="" aria-label="Section controls" class="accordion__controls">
+			<ul style="list-style: none;" aria-label="Section controls" class="accordion__controls">
         		<li class="item">
-        			<button aria-expanded="false" class="accordion__toggle-all">Expand All
-        			
-        			</button>
+        			<button class="accordion__expand-all">Expand All</button>
           		</li>
+				<li class="item">
+					<button class="accordion__collapse-all">Collapse All</button>
+				</li>
       		</ul>
   			<ul><slot></slot></ul>
   		</div>
@@ -40,13 +41,27 @@ export class AccordionItem extends HTMLElement {
 		this.#shadow.adoptedStyleSheets = [baseSheet];
 		this.#shadow.appendChild(document.importNode(accordionItemTemplate.content, true));
 		this.trigger = this.#shadow.querySelector(".trigger");
-		this.trigger.addEventListener("click", this.clickHandler());
+		this.content = this.#shadow.querySelector(".accordion-item__content");
+		this.trigger.addEventListener("click", this.clickHandler);
+
+	};
+
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (oldValue === newValue) return;
+		if (name === "expanded") {
+			this.content.classList.remove("hidden")
+		}
 	}
 
 	clickHandler = () => {
-		console.log("You clicked the trigger!")
-	}
+		this.content.classList.toggle("hidden");
+	};
 
+	get expanded() { return this.getAttribute("expanded")}
+	set expanded(value) {
+		if (value) this.setAttribute("expanded", "");
+		else this.removeAttribute("expanded");
+	}
 }
 
 
