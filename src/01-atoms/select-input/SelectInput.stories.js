@@ -77,16 +77,20 @@ export const WithError = {
     </select-input>`
 };
 
-export const Required = {
+export const RequiredWithGroups = {
     args: {
         label: "Yale HomePage",
         instructions: "This is an example instruction.",
         errors: "",
         required: true
     },
-    render:args => `<text-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
-    </text-input>`
+    	<optgroup label="Example 1">
+    	<option>This is one option</option>
+    	<option>This is another option!</option>
+    	</optgroup>
+    </select-input>`
 };

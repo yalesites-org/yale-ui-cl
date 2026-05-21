@@ -47,47 +47,23 @@ export class SelectInput extends HTMLElement {
 		this.name = name;
 		this.required = false;
 		this.value = '';
-		this.input.addEventListener("change", this.inputHandler);
-		this.errorSlot.addEventListener("slotchange", this.errorHandler());
+		this.input.addEventListener("change", Util.inputHandler.bind(this));
 		this.host = this.#shadow.getRootNode().host;
 		this.options = this.host.querySelectorAll("option");
 		if (this.host.querySelector("optgroup")) this.optgroups = this.host.querySelectorAll("optgroup");
-		console.log(this.host)
-		console.log(this.optgroups)	
+		this.errorSlot.addEventListener("slotchange", Util.errorHandler.bind(this, "select"));
 
 	}
-	
-	inputHandler = () => {
-		this.value = this.input.value;
-	};
-	
-	errorHandler = () => {
-		const errorSpan = this.errorSlot.assignedElements();
-		//const errorIcon = Util.createErrorIcon();
 
-			// Error slot is empty
-			if (!errorSpan[0].innerHTML) {
-				this.input.ariaInvalid = false;
-				this.input.classList.remove("form-item__select--error");
-				return;
-			};
-			
-			// There's content in the slot		 
-			this.input.ariaInvalid = true;
-			this.input.classList.add("form-item__select--error");
-			//this.input.insertAdjacentElement("afterend", errorIcon);
-		};
-		
 		connectedCallback() {
-			
+			this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
+
 			if (!this.optgroups) {
 				this.input.append(...this.options);
 			} else {
 				this.input.append(...this.optgroups);
 			}
 				
-				//const optgroups = this.#shadow.querySelectorAll("optgroup");
-				//optgroups.forEach((e) => e.append(this.options));
 
 		};
 	
@@ -103,9 +79,7 @@ export class SelectInput extends HTMLElement {
 		if (name === "disabled") this.input.disabled = newValue !== null;
 		if (name === "value") this.input.value = newValue;
 	}
-	
-	// Getters and setters 
-	
+		
 	get placeholder() { return this.getAttribute("placeholder"); }
 	get value() { return this.getAttribute("value"); }
 	get disabled() { return this.getAttribute("disabled");}
