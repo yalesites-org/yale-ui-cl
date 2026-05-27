@@ -93,32 +93,17 @@ export class TextInput extends HTMLElement {
 				case "text":
 					this.input.type = newValue;
 					break;
-<<<<<<< HEAD
-				default: 
-					console.warn(newValue + " is not a valid type for the text-input component");
-=======
+
 				default:
 					console.warn(
 						newValue +
 							" is not a valid type for the text-input component",
 					);
->>>>>>> main
 					return;
 			}
 		}
 	}
-<<<<<<< HEAD
 		
-	get placeholder() { return this.getAttribute("placeholder"); }
-	get value() { return this.getAttribute("value"); }
-	get disabled() { return this.getAttribute("disabled");}
-	get autocomplete() { return this.getAttribute("autocomplete");}
-	get name() { return this.getAttribute("name"); }
-	get type() { return this.getAttribute("type"); }
-	
-	set placeholder(value) {  this.setAttribute("placeholder", value); }
-	set value(text) {  this.setAttribute("value", text); }
-=======
 
 	get placeholder() {
 		return this.getAttribute("placeholder");
@@ -145,16 +130,11 @@ export class TextInput extends HTMLElement {
 	set value(text) {
 		this.setAttribute("value", text);
 	}
->>>>>>> main
 	set disabled(value) {
 		if (value) this.setAttribute("disabled", "");
 		else this.removeAttribute("disabled");
 	}
-<<<<<<< HEAD
-	set autocomplete(value) {  this.setAttribute("autocomplete", value);}
-	set name(value) { this.setAttribute("name", value); }
-	set type(value) { this.setAttribute("type", value) 
-=======
+
 	set autocomplete(value) {
 		this.setAttribute("autocomplete", value);
 	}
@@ -163,7 +143,6 @@ export class TextInput extends HTMLElement {
 	}
 	set type(value) {
 		this.setAttribute("type", value);
->>>>>>> main
 	}
 }
 
