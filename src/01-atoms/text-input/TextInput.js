@@ -65,11 +65,6 @@ export class TextInput extends HTMLElement {
 	}
 
 	connectedCallback() {
-		/*this.internals_.setValidity(
-			this.input.validity,
-			this.input.validationMessage,
-			this.input,
-		);*/
 		Input.validityHandler.call(this);
 	}
 
