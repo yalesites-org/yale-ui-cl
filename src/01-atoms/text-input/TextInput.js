@@ -1,4 +1,4 @@
-import * as Util from "../../utility.js";
+import * as Input from "../../input.js";
 import baseStyles from "../../styles/base.css?inline";
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
@@ -57,10 +57,10 @@ export class TextInput extends HTMLElement {
 		this.required = false;
 		this.value = "";
 		this.valid = true;
-		this.input.addEventListener("input", Util.inputHandler.bind(this));
+		this.input.addEventListener("input", Input.inputHandler.bind(this));
 		this.errorSlot.addEventListener(
 			"slotchange",
-			Util.errorHandler.bind(this, "textfield"),
+			Input.errorHandler.bind(this, "textfield"),
 		);
 	}
 
@@ -74,7 +74,8 @@ export class TextInput extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
-		if (name === "placeholder") this.input.placeholder = newValue;
+		Input.attributeHandler.call(this, name, newValue);
+		/*if (name === "placeholder") this.input.placeholder = newValue;
 		if (name === "class" && newValue === "required") {
 			this.input.required = true;
 			this.label.classList.add("form-item__label--" + newValue);
@@ -82,7 +83,7 @@ export class TextInput extends HTMLElement {
 		if (name === "name") this.name = newValue;
 		if (name === "autocomplete") this.input.autocomplete = newValue;
 		if (name === "disabled") this.input.disabled = newValue !== null;
-		if (name === "value") this.input.value = newValue;
+		if (name === "value") this.input.value = newValue; */
 		if (name === "type") {
 			switch (newValue) {
 				case "tel":
