@@ -56,7 +56,8 @@ export class SelectInput extends HTMLElement {
 	}
 
 		connectedCallback() {
-			this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
+			Input.validityHandler.call(this);
+			//this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
 
 			if (!this.optgroups) {
 				this.input.append(...this.options);
@@ -70,15 +71,6 @@ export class SelectInput extends HTMLElement {
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		Input.attributeHandler.call(this, name, newValue);
-		/*if (name === "placeholder") this.input.placeholder = newValue;
-		if (name === "class" && newValue === "required") {
-			this.input.required = true;
-			this.label.classList.add("form-item__label--" + newValue);
-		}
-		if (name === "name") this.name = newValue;
-		if (name === "autocomplete") this.input.autocomplete = newValue;
-		if (name === "disabled") this.input.disabled = newValue !== null;
-		if (name === "value") this.input.value = newValue;*/
 	}
 		
 	get placeholder() { return this.getAttribute("placeholder"); }
