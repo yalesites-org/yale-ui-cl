@@ -1,5 +1,5 @@
 import baseStyles from "../../styles/base.css?inline";
-import * as Util from "../../utility.js";
+import * as Input from "../../input.js";
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
@@ -47,16 +47,17 @@ export class SelectInput extends HTMLElement {
 		this.name = name;
 		this.required = false;
 		this.value = '';
-		this.input.addEventListener("change", Util.inputHandler.bind(this));
+		this.input.addEventListener("change", Input.inputHandler.bind(this));
 		this.host = this.#shadow.getRootNode().host;
 		this.options = this.host.querySelectorAll("option");
 		if (this.host.querySelector("optgroup")) this.optgroups = this.host.querySelectorAll("optgroup");
-		this.errorSlot.addEventListener("slotchange", Util.errorHandler.bind(this, "select"));
+		this.errorSlot.addEventListener("slotchange", Input.errorHandler.bind(this, "select"));
 
 	}
 
 		connectedCallback() {
-			this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
+			Input.validityHandler.call(this);
+			//this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
 
 			if (!this.optgroups) {
 				this.input.append(...this.options);
@@ -69,15 +70,7 @@ export class SelectInput extends HTMLElement {
 	
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
-		if (name === "placeholder") this.input.placeholder = newValue;
-		if (name === "class" && newValue === "required") {
-			this.input.required = true;
-			this.label.classList.add("form-item__label--" + newValue);
-		}
-		if (name === "name") this.name = newValue;
-		if (name === "autocomplete") this.input.autocomplete = newValue;
-		if (name === "disabled") this.input.disabled = newValue !== null;
-		if (name === "value") this.input.value = newValue;
+		Input.attributeHandler.call(this, name, newValue);
 	}
 		
 	get placeholder() { return this.getAttribute("placeholder"); }

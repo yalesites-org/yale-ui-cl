@@ -22,30 +22,6 @@ export function createListDivider() {
         return listDivider;
 };
 
-export function errorHandler(type) {
-	const errorSpan = this.errorSlot.assignedElements();
-		if (!errorSpan) return;
-		
-			// Error slot is empty
-			if (!errorSpan[0].innerHTML) {
-				this.input.ariaInvalid = false;
-				this.valid = true;
-				this.input.classList.remove(`form-item__${type}--error`);
-				return;
-			} else if (errorSpan[0].innerHTML) {			
-			// There's content in the slot
-			this.input.ariaInvalid = true;
-			this.valid = false;
-			this.input.classList.add(`form-item__${type}--error`);
-			return;
-			
-};
-
-}
-
-export function inputHandler() {
-	this.value = this.input.value;
-};
 
 
 export function createIconSvg(icon, label) {
