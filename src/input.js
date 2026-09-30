@@ -1,9 +1,8 @@
 export function errorHandler(type) {
 	const errorSpan = this.errorSlot.assignedElements();
-		if (!errorSpan) return;
-		
+
 			// Error slot is empty
-			if (!errorSpan[0].innerHTML) {
+			if (!errorSpan.length || !errorSpan[0].innerHTML) {
 				this.input.ariaInvalid = false;
 				this.valid = true;
 				this.input.classList.remove(`form-item__${type}--error`);
@@ -24,14 +23,20 @@ export function inputHandler() {
 
 export function attributeHandler(name, newValue) {
 	if (name === "placeholder") this.input.placeholder = newValue;
-		if (name === "class" && newValue === "required") {
-			this.input.required = true;
-			this.label.classList.add("form-item__label--" + newValue);
+		if (name === "class") {
+			const required = (newValue ?? "").split(/\s+/).includes("required");
+			this.input.required = required;
+			this.label.classList.toggle("form-item__label--required", required);
 		};
 		if (name === "name") this.name = newValue;
 		if (name === "autocomplete") this.input.autocomplete = newValue;
 		if (name === "disabled") this.input.disabled = newValue !== null;
-		if (name === "value") this.input.value = newValue;
+		if (name === "value") {
+			this.input.value = newValue;
+			this.internals_.setFormValue(newValue);
+		}
+		// Value, required, disabled, and type all affect validity, so recompute it on every change
+		validityHandler.call(this);
 };
 
 export function validityHandler() {

@@ -44,30 +44,32 @@ export class SelectInput extends HTMLElement {
 		this.input = this.#shadow.querySelector("select");
 		this.label = this.#shadow.querySelector("label");
 		this.errorSlot = this.#shadow.querySelector("slot[name='errors']");
-		this.name = name;
-		this.required = false;
-		this.value = '';
 		this.input.addEventListener("change", Input.inputHandler.bind(this));
-		this.host = this.#shadow.getRootNode().host;
-		this.options = this.host.querySelectorAll("option");
-		if (this.host.querySelector("optgroup")) this.optgroups = this.host.querySelectorAll("optgroup");
 		this.errorSlot.addEventListener("slotchange", Input.errorHandler.bind(this, "select"));
-
+		// Options added to the light DOM after connection still need to be moved into the <select>
+		this.optionObserver = new MutationObserver(() => this.syncOptions());
 	}
 
-		connectedCallback() {
-			Input.validityHandler.call(this);
-			//this.internals_.setValidity(this.input.validity, this.input.validationMessage, this.input);
+	connectedCallback() {
+		this.syncOptions();
+		this.optionObserver.observe(this, { childList: true });
+	};
 
-			if (!this.optgroups) {
-				this.input.append(...this.options);
-			} else {
-				this.input.append(...this.optgroups);
-			}
-				
+	disconnectedCallback() {
+		this.optionObserver.disconnect();
+	}
 
-		};
-	
+	// Move light-DOM <option>/<optgroup> children into the shadow <select>, preserving their order
+	syncOptions() {
+		const options = this.querySelectorAll(":scope > option, :scope > optgroup");
+		if (options.length) this.input.append(...options);
+
+		// The value attribute may have been set before its option existed, so re-apply it
+		if (this.value !== null) this.input.value = this.value;
+		this.internals_.setFormValue(this.input.value);
+		Input.validityHandler.call(this);
+	}
+
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		Input.attributeHandler.call(this, name, newValue);
@@ -78,15 +80,17 @@ export class SelectInput extends HTMLElement {
 	get disabled() { return this.getAttribute("disabled");}
 	get autocomplete() { return this.getAttribute("autocomplete");}
 	get name() { return this.getAttribute("name"); }
-	
-	set placeholder(value) { return this.setAttribute("placeholder", value); }
-	set value(text) { return this.setAttribute("value", text); }
+	get required() { return this.classList.contains("required"); }
+
+	set placeholder(value) { this.setAttribute("placeholder", value); }
+	set value(text) { this.setAttribute("value", text); }
 	set disabled(value) {
 		if (value) this.setAttribute("disabled", "");
 		else this.removeAttribute("disabled");
 	}
-	set autocomplete(value) { return this.setAttribute("autocomplete", value);}
-	set name(value) { return this.setAttribute("name", value); }
+	set autocomplete(value) { this.setAttribute("autocomplete", value);}
+	set name(value) { this.setAttribute("name", value); }
+	set required(value) { this.classList.toggle("required", Boolean(value)); }
 	
 		
 	

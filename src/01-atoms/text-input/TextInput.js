@@ -53,9 +53,6 @@ export class TextInput extends HTMLElement {
 		this.input = this.#shadow.querySelector("input");
 		this.label = this.#shadow.querySelector("label");
 		this.errorSlot = this.#shadow.querySelector("slot[name='errors']");
-		this.name = name;
-		this.required = false;
-		this.value = "";
 		this.valid = true;
 		this.input.addEventListener("input", Input.inputHandler.bind(this));
 		this.errorSlot.addEventListener(
@@ -80,6 +77,7 @@ export class TextInput extends HTMLElement {
 				case "email":
 				case "text":
 					this.input.type = newValue;
+					Input.validityHandler.call(this);
 					break;
 
 				default:
@@ -111,6 +109,9 @@ export class TextInput extends HTMLElement {
 	get type() {
 		return this.getAttribute("type");
 	}
+	get required() {
+		return this.classList.contains("required");
+	}
 
 	set placeholder(value) {
 		this.setAttribute("placeholder", value);
@@ -131,6 +132,9 @@ export class TextInput extends HTMLElement {
 	}
 	set type(value) {
 		this.setAttribute("type", value);
+	}
+	set required(value) {
+		this.classList.toggle("required", Boolean(value));
 	}
 }
 
