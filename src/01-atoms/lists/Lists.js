@@ -7,6 +7,8 @@ listTemplate.innerHTML = `
   <slot></slot>
 `;
 
+const taxonomyTypes = ["categories", "tags"];
+
 export class List extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["class"];
@@ -17,35 +19,40 @@ export class List extends HTMLElement { #shadow;
     this.#shadow = this.attachShadow({ mode: 'closed' });
 	  this.#shadow.appendChild(document.importNode(listTemplate.content, true));
     this.#shadow.adoptedStyleSheets = [baseSheet];
-    this.list = this.#shadow.host.querySelector("ul");
-    this.listItem = this.#shadow.host.querySelectorAll("li");
-    console.log(this.list)
-
-
   }
 
   connectedCallback() {
-        
+    this.render();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
 	if (oldValue === newValue) return;
-  if (name === "class") {
-     switch(newValue) {
-      case "categories":
-      case "tags":
-      this.list.classList.add("taxonomy-list");
-      Util.addVariant(newValue, this.list, "taxonomy-list");
-      this.listItem.forEach((c) => {
-        c.classList.add("taxonomy-list__item");
-        const listDivider = Util.createListDivider();
-        c.insertAdjacentElement("afterend", listDivider);
-      });
-    }
+    if (name === "class" && this.isConnected) this.render();
   }
 
+  // Look up the slotted list on every render so it works however (and whenever) the children arrive
+  render() {
+    const list = this.querySelector("ul, ol");
+    if (!list) return;
+
+    // Undo any previous render so class changes don't stack dividers or leave stale modifiers
+    list.querySelectorAll(":scope > .taxonomy-list__divider").forEach((d) => d.remove());
+    list.classList.remove("taxonomy-list");
+    Util.addVariant(null, list, "taxonomy-list");
+    const items = list.querySelectorAll(":scope > li");
+    items.forEach((item) => item.classList.remove("taxonomy-list__item"));
+
+    const types = (this.getAttribute("class") ?? "").split(/\s+/).filter((c) => taxonomyTypes.includes(c));
+    if (!types.length) return;
+
+    list.classList.add("taxonomy-list");
+    Util.addVariant(types.join(" "), list, "taxonomy-list");
+    items.forEach((item) => {
+      item.classList.add("taxonomy-list__item");
+      item.insertAdjacentElement("afterend", Util.createListDivider());
+    });
   }
 }
 
- 
+
 customElements.define("ycl-list", List);
