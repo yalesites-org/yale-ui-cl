@@ -1,5 +1,9 @@
-export function addVariant(classNames, componentObject, componentName) { 
-	let variants = classNames.split(" ");
+export function addVariant(classNames, componentObject, componentName) {
+	// Clear previous variants so a changed or removed class doesn't leave stale modifiers behind
+	[...componentObject.classList]
+		.filter((c) => c.startsWith(componentName + "--"))
+		.forEach((c) => componentObject.classList.remove(c));
+	let variants = (classNames ?? "").split(/\s+/).filter(Boolean);
 	variants.forEach((c) => {componentObject.classList.add(componentName + "--" + c)});
 };
 
@@ -29,6 +33,7 @@ export function createIconSvg(icon, label) {
 	const createdIconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	createdIcon.setAttribute("viewBox", "0 0 512 512");
 	createdIcon.setAttribute("style", "padding-left: .2rem")
+	createdIcon.classList.add("fa-icon");
 	createdIcon.role = "img";
 	createdIcon.ariaLabel = label;
 
@@ -49,25 +54,19 @@ export function createIconSvg(icon, label) {
 }
 
 export function updateLinkIcon(icon, link, currentURL) {
-	let extension = link.href.split(".").pop().toLowerCase();
-		
-		if (extension.includes("?")) {
-			extension = extension.split("?");
-			extension = extension[0];
-		}
-		
-		const downloadExts = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip', 'csv', 'xml', 'rtf'];
-		const downloadIcon = createIconSvg("circle-arrow-down", "(link is a download)");
-		const externalIcon = createIconSvg("arrow-up-right", "(link is external)");
-		const newWindowIcon = createIconSvg("fa-arrow-up-right-from-square", "(opens in new window)");
+	// pathname excludes the query string and hash, so "file.pdf?x=1#page=2" still reads as "pdf"
+	const extension = link.pathname.split(".").pop().toLowerCase();
+	const downloadExts = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip', 'csv', 'xml', 'rtf'];
+	// mailto:, tel:, etc. have an origin of "null", so only http(s) links can be external
+	const isWebLink = link.protocol === "http:" || link.protocol === "https:";
 
-		if (icon) icon.remove();
-		
-		if (downloadExts.includes(extension)) { // Download link
-			link.insertAdjacentElement("beforeend", downloadIcon);
-		} else if (link.origin != currentURL) { // External link
-			link.insertAdjacentElement("beforeend", externalIcon);
-		} else if (link.target === "_blank") { // New window link
-			link.insertAdjacentElement("beforeend", newWindowIcon);
-		} else return;
+	if (icon) icon.remove();
+
+	if (isWebLink && downloadExts.includes(extension)) { // Download link
+		link.insertAdjacentElement("beforeend", createIconSvg("circle-arrow-down", "(link is a download)"));
+	} else if (isWebLink && link.origin !== currentURL) { // External link
+		link.insertAdjacentElement("beforeend", createIconSvg("arrow-up-right", "(link is external)"));
+	} else if (link.target === "_blank") { // New window link
+		link.insertAdjacentElement("beforeend", createIconSvg("fa-arrow-up-right-from-square", "(opens in new window)"));
+	}
 }
