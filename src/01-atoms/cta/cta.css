@@ -1,6 +1,12 @@
-.cta {
+/* Action colours are defaults on the host so a themed parent can override them on a slotted
+   cta-link; the outer tree's declarations win over :host rules. :root covers light-DOM .cta use. */
+:root,
+:host(cta-link) {
   --color-action: var(--color-blue-yale);
   --color-action-secondary: var(--color-basic-white);
+}
+
+.cta {
   --color-cta-bg: transparent;
   --color-cta-bg-hover: var(--color-action);
   --color-cta-action-secondary: var(--color-basic-white);
