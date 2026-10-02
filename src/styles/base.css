@@ -11,3 +11,7 @@
 
 @import "../01-atoms/table/table.css" layer(components.table);
 @import "../02-molecules/accordions/accordion.css" layer(components.accordion);
+@import "../01-atoms/button/button.css" layer(components.button);
+@import "../01-atoms/text-copy-button/text-copy-button.css" layer(components.text-copy-button);
+@import "../01-atoms/checkbox/checkbox.css" layer(components.checkbox);
+@import "../01-atoms/radio/radio.css" layer(components.radio);

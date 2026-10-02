@@ -1,0 +1,69 @@
+/* Custom elements default to display: inline. */
+:host(ycl-text-copy-button) {
+  display: block;
+}
+
+.text-copy-button__button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  color: var(--color-link-base);
+  font-weight: var(--font-weights-mallory-medium);
+  line-height: normal;
+  cursor: pointer;
+  text-underline-offset: 0.22rem;
+}
+
+.text-copy-button__button:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+}
+
+/* Global and basic themes are set by data attributes on ancestors in the page, which shadow-root
+   CSS can't see, so these rules only take effect when base.css is also loaded in the document. */
+[data-global-theme="one"] ycl-text-copy-button {
+  --color-link-hover: var(--global-themes-one-colors-slot-two);
+}
+
+[data-global-theme="two"] ycl-text-copy-button {
+  --color-link-hover: var(--global-themes-two-colors-slot-two);
+}
+
+[data-global-theme="three"] ycl-text-copy-button {
+  --color-link-hover: var(--global-themes-three-colors-slot-two);
+}
+
+[data-global-theme="four"] ycl-text-copy-button {
+  --color-link-hover: var(--global-themes-four-colors-slot-two);
+}
+
+[data-global-theme="five"] ycl-text-copy-button {
+  --color-link-hover: var(--global-themes-five-colors-slot-two);
+}
+
+[data-global-theme="six"] ycl-text-copy-button {
+  --color-link-hover: var(--global-themes-six-colors-slot-two);
+}
+
+/* Basic (section background) themes come after global themes so link colours keep their contrast on dark sections. */
+[data-basic-theme="blue-yale"] ycl-text-copy-button {
+  --color-link-base: var(--color-link-theme-blue-yale-base);
+  --color-link-hover: var(--color-link-theme-blue-yale-hover);
+}
+
+[data-basic-theme="gray-200"] ycl-text-copy-button {
+  --color-link-base: var(--color-link-theme-gray-200-base);
+  --color-link-hover: var(--color-link-theme-gray-200-hover);
+}
+
+[data-basic-theme="gray-700"] ycl-text-copy-button {
+  --color-link-base: var(--color-link-theme-gray-700-base);
+  --color-link-hover: var(--color-link-theme-gray-700-hover);
+}
+
+[data-basic-theme="gray-800"] ycl-text-copy-button {
+  --color-link-base: var(--color-link-theme-gray-800-base);
+  --color-link-hover: var(--color-link-theme-gray-800-hover);
+}

@@ -1,0 +1,11 @@
+/* Custom elements default to display: inline; each radio sits on its own line like the
+   Twig template's list items. */
+:host(ycl-radio) {
+  display: block;
+}
+
+.form-item--radio__item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

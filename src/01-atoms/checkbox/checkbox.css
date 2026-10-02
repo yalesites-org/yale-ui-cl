@@ -1,0 +1,11 @@
+/* Custom elements default to display: inline; each checkbox sits on its own line like the
+   Twig template's list items. */
+:host(ycl-checkbox) {
+  display: block;
+}
+
+.form-item--checkbox__item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

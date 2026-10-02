@@ -1,0 +1,46 @@
+/* Custom elements default to display: inline. */
+:host(ycl-button) {
+  display: inline-block;
+}
+
+/* The reset that yds-button applies to buttons that shouldn't look like traditional buttons;
+   the authoring context supplies the visual style. */
+.button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-spacing-3);
+  cursor: pointer;
+}
+
+.button:disabled {
+  cursor: default;
+}
+
+/* Firefox otherwise picks up normalize.css's dotted button focus ring. */
+.button:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-link-base);
+  outline-offset: var(--size-thickness-2);
+}
+
+.button__icon {
+  height: 1em;
+  width: 1em;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+[aria-expanded="true"] > .button__icon {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button__icon {
+    transition: transform var(--animation-speed-default) ease-in-out;
+  }
+}
