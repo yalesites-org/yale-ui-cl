@@ -1,0 +1,32 @@
+:host(ycl-video-embed) {
+  display: block;
+}
+
+:host(ycl-video-embed[ratio="4x3"]) {
+  --video-embed-aspect-ratio: 4 / 3;
+}
+
+:host(ycl-video-embed[ratio="1x1"]) {
+  --video-embed-aspect-ratio: 1;
+}
+
+/* aspect-ratio keeps the embed's proportions at any width, whatever width/height the provider's
+   embed code hard-codes. */
+.video-embed {
+  aspect-ratio: var(--video-embed-aspect-ratio, 16 / 9);
+}
+
+/* !important because page styles beat ::slotted() rules, and embed codes often carry their own
+   sizing. */
+.video-embed ::slotted(*),
+.video-embed__iframe {
+  display: block;
+  height: 100% !important;
+  width: 100% !important;
+  border: 0;
+}
+
+/* A slotted embed takes precedence over one built from the src attribute. */
+.video-embed--slotted .video-embed__iframe {
+  display: none;
+}

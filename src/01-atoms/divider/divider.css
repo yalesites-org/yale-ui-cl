@@ -1,0 +1,78 @@
+:host(ycl-divider) {
+  display: block;
+}
+
+/* --color-divider and --thickness-divider can be set by the page to restyle a divider, as in
+   the Twig library. Neither exists in the tokens release, so these are the defaults the Twig
+   stories use. */
+:host(ycl-divider) {
+  --width-divider: var(--layout-width-100);
+  --position-divider: var(--layout-flex-position-center);
+}
+
+:host(ycl-divider[width="75"]) {
+  --width-divider: var(--layout-width-75);
+}
+
+:host(ycl-divider[width="50"]) {
+  --width-divider: var(--layout-width-50);
+}
+
+:host(ycl-divider[width="25"]) {
+  --width-divider: var(--layout-width-25);
+}
+
+:host(ycl-divider[position="left"]) {
+  --position-divider: var(--layout-flex-position-left);
+}
+
+:host(ycl-divider[position="right"]) {
+  --position-divider: var(--layout-flex-position-right);
+}
+
+:host(ycl-divider[thickness="hairline"]) {
+  --thickness-divider: var(--size-thickness-hairline);
+}
+
+:host(ycl-divider[thickness="1"]) {
+  --thickness-divider: var(--size-thickness-1);
+}
+
+:host(ycl-divider[thickness="2"]) {
+  --thickness-divider: var(--size-thickness-2);
+}
+
+:host(ycl-divider[thickness="4"]) {
+  --thickness-divider: var(--size-thickness-4);
+}
+
+:host(ycl-divider[thickness="6"]) {
+  --thickness-divider: var(--size-thickness-6);
+}
+
+:host(ycl-divider[thickness="8"]) {
+  --thickness-divider: var(--size-thickness-8);
+}
+
+.divider__inner {
+  display: flex;
+  justify-content: var(--position-divider);
+}
+
+.divider {
+  background: var(--color-divider, var(--color-gray-500));
+  width: var(--width-divider);
+  height: var(--thickness-divider, var(--size-thickness-hairline));
+}
+
+/* The line only starts collapsed when it can animate, so it's never stuck invisible. */
+@media (prefers-reduced-motion: no-preference) {
+  :host(ycl-divider[animate]) .divider {
+    transform: scaleX(0);
+    transition: transform var(--animation-speed-slow) ease-in-out;
+  }
+
+  :host(ycl-divider[animate]) .divider.animate {
+    transform: scaleX(1);
+  }
+}

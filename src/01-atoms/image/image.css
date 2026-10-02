@@ -1,0 +1,79 @@
+:host(ycl-image) {
+  display: block;
+}
+
+/* ratio crops the image to a fixed aspect ratio, standing in for the Drupal image styles the
+   Twig version relies on. Without it the image keeps its natural shape. */
+:host(ycl-image[ratio="16x9"]) {
+  --image-aspect-ratio: 16 / 9;
+}
+
+:host(ycl-image[ratio="3x2"]) {
+  --image-aspect-ratio: 3 / 2;
+}
+
+:host(ycl-image[ratio="4x3"]) {
+  --image-aspect-ratio: 4 / 3;
+}
+
+:host(ycl-image[ratio="1x1"]) {
+  --image-aspect-ratio: 1;
+}
+
+:host(ycl-image[ratio="2x3"]) {
+  --image-aspect-ratio: 2 / 3;
+}
+
+:host(ycl-image[ratio="1x1.6"]) {
+  --image-aspect-ratio: 1 / 1.6;
+}
+
+:host(ycl-image) .figure {
+  margin: 0;
+}
+
+:host(ycl-image) .figure ::slotted(img),
+:host(ycl-image) .figure ::slotted(picture) {
+  display: block;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+:host(ycl-image) .figure ::slotted(img) {
+  aspect-ratio: var(--image-aspect-ratio, auto);
+  object-fit: cover;
+}
+
+/* ::slotted() only reaches top-level slotted elements, so the <img> inside a slotted <picture>
+   and links inside the caption are styled from the document. These rules only take effect when
+   base.css is also loaded in the document (as index.html and Storybook do). */
+ycl-image > picture img {
+  display: block;
+  height: auto;
+  width: 100%;
+  aspect-ratio: var(--image-aspect-ratio, auto);
+  object-fit: cover;
+}
+
+ycl-image > [slot="caption"] a {
+  color: var(--color-link-base);
+}
+
+ycl-image > [slot="caption"] a:hover {
+  color: var(--color-gray-800);
+}
+
+:host(ycl-image) .caption {
+  font: var(--font-style-body-s-condensed);
+  color: var(--color-basic-brown-gray);
+  margin-top: var(--size-spacing-4);
+}
+
+:host(ycl-image) .caption[hidden] {
+  display: none;
+}
+
+:host(ycl-image) .caption ::slotted(*) {
+  margin: 0 !important;
+}

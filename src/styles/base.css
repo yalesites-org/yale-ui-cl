@@ -15,3 +15,10 @@
 @import "../01-atoms/text-copy-button/text-copy-button.css" layer(components.text-copy-button);
 @import "../01-atoms/checkbox/checkbox.css" layer(components.checkbox);
 @import "../01-atoms/radio/radio.css" layer(components.radio);
+@import "../01-atoms/divider/divider.css" layer(components.divider);
+@import "../01-atoms/headings/heading.css" layer(components.heading);
+@import "../01-atoms/image/image.css" layer(components.image);
+@import "../01-atoms/icons/icon.css" layer(components.icon);
+@import "../01-atoms/date-time/date-time.css" layer(components.date-time);
+@import "../01-atoms/audio/audio.css" layer(components.audio);
+@import "../01-atoms/video-embed/video-embed.css" layer(components.video-embed);

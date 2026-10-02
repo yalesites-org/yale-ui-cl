@@ -1,0 +1,279 @@
+:host(ycl-audio) {
+  display: block;
+}
+
+.audio-embed__content {
+  font: var(--font-style-body-s);
+}
+
+/* Uses the ambient --color-text / --color-background rather than fixed grays so the player
+   stays legible on dark pages; the 1px border keeps it reading as a contained surface even when
+   its background matches the page. */
+.audio-embed__content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-4);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  border: var(--border-thickness-1) solid var(--color-text);
+  padding: var(--size-spacing-4) var(--size-spacing-5);
+  max-width: var(--size-component-layout-width-content);
+}
+
+.audio-embed__player {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--size-spacing-5);
+}
+
+.audio-embed__controls {
+  display: flex;
+  flex-direction: row;
+  flex: 0 var(--size-spacing-7);
+}
+
+.audio-embed__control,
+.audio-embed__speed-control,
+.audio-embed__speed-options-control,
+.audio-embed__volume-control-option {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.audio-embed svg {
+  fill: currentColor;
+}
+
+.audio-embed__icon {
+  display: block;
+  width: var(--size-spacing-7);
+  height: var(--size-spacing-7);
+}
+
+.audio-embed[is-playing="true"] .audio-embed__control--play,
+.audio-embed__control--pause {
+  display: none;
+}
+
+.audio-embed[is-playing="true"] .audio-embed__control--pause {
+  display: block;
+}
+
+.audio-embed__icon--pause {
+  fill: var(--color-link-base);
+}
+
+.audio-embed__time {
+  font: var(--font-style-body-xs);
+  display: flex;
+  flex-direction: row;
+  flex: 0 auto;
+  white-space: nowrap;
+}
+
+.audio-embed__progress {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  flex: 0 auto;
+}
+
+.audio-embed__progress-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+/* One range-slider appearance shared by progress and volume so the two can't drift apart.
+   The thumb is ringed in the page background so it stays distinct from the track even where a
+   theme maps --color-link-base and --color-text to the same value. */
+.audio-embed__progress-bar-input,
+.audio-embed__volume-control {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: var(--size-spacing-4);
+  margin: 0;
+}
+
+.audio-embed__progress-bar-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.audio-embed__progress-bar-input::-webkit-slider-runnable-track,
+.audio-embed__volume-control::-webkit-slider-runnable-track {
+  width: 100%;
+  height: var(--border-thickness-4);
+  background: var(--color-text);
+}
+
+.audio-embed__progress-bar-input::-moz-range-track,
+.audio-embed__volume-control::-moz-range-track {
+  width: 100%;
+  height: var(--border-thickness-4);
+  background: var(--color-text);
+}
+
+.audio-embed__progress-bar-input::-webkit-slider-thumb,
+.audio-embed__volume-control::-webkit-slider-thumb {
+  appearance: none;
+  width: var(--size-spacing-4);
+  height: var(--size-spacing-4);
+  background: var(--color-link-base);
+  border: var(--border-thickness-2) solid var(--color-background);
+  border-radius: 100%;
+  margin-top: calc((var(--border-thickness-4) - var(--size-spacing-4)) / 2);
+  box-shadow: none;
+}
+
+.audio-embed__progress-bar-input::-moz-range-thumb,
+.audio-embed__volume-control::-moz-range-thumb {
+  width: var(--size-spacing-4);
+  height: var(--size-spacing-4);
+  background: var(--color-link-base);
+  border: var(--border-thickness-2) solid var(--color-background);
+  border-radius: 100%;
+}
+
+.audio-embed__speed {
+  display: flex;
+  align-items: center;
+  gap: var(--size-spacing-4);
+  flex: 0 auto;
+  padding: var(--size-spacing-2) var(--size-spacing-3);
+  border: var(--border-thickness-1) solid var(--color-text);
+  cursor: pointer;
+}
+
+.audio-embed__speed-options {
+  display: flex;
+  flex: 0 auto;
+  gap: var(--size-spacing-4);
+}
+
+.audio-embed__speed-control {
+  font: var(--font-style-body-xs);
+  white-space: nowrap;
+}
+
+.audio-embed__speed:not([options-open="true"]) .audio-embed__speed-control:not(.active) {
+  display: none;
+}
+
+.audio-embed__speed-control.active {
+  color: var(--color-link-base);
+  font-weight: 700;
+}
+
+.audio-embed__icon--speed {
+  display: block;
+  height: var(--size-spacing-5);
+  width: var(--size-spacing-5);
+}
+
+.audio-embed__speed[options-open="true"] .audio-embed__icon--speed {
+  fill: var(--color-link-base);
+}
+
+.audio-embed__volume {
+  display: flex;
+  align-items: center;
+  gap: var(--size-spacing-4);
+  flex: 1 auto;
+}
+
+.audio-embed__volume[hidden] {
+  display: none;
+}
+
+.audio-embed__volume-control {
+  max-width: var(--size-spacing-12);
+}
+
+.audio-embed__icon--volume,
+.audio-embed__icon--volume-muted {
+  flex: 0 var(--size-spacing-5);
+  height: var(--size-spacing-5);
+  width: var(--size-spacing-5);
+}
+
+.audio-embed__icon--volume {
+  display: block;
+}
+
+.audio-embed__icon--volume-muted,
+[aria-pressed="true"] > .audio-embed__icon--volume {
+  display: none;
+}
+
+[aria-pressed="true"] > .audio-embed__icon--volume-muted {
+  display: block;
+  fill: var(--color-link-base);
+}
+
+/* 991.95px is --break-mobile-max; custom properties can't be used in media queries. */
+@media (max-width: 991.95px) {
+  .audio-embed__player {
+    flex-flow: row wrap;
+  }
+
+  .audio-embed__time {
+    flex: 0 1 var(--size-spacing-10);
+  }
+
+  .audio-embed__progress {
+    flex: 1 calc(100% - (var(--size-spacing-7) + var(--size-spacing-13)));
+  }
+
+  .audio-embed__progress-bar-input,
+  .audio-embed__volume-control {
+    height: var(--size-spacing-5);
+  }
+
+  .audio-embed__progress-bar-input::-webkit-slider-runnable-track {
+    height: var(--border-thickness-6);
+  }
+
+  .audio-embed__progress-bar-input::-moz-range-track {
+    height: var(--border-thickness-6);
+  }
+
+  .audio-embed__progress-bar-input::-webkit-slider-thumb {
+    width: var(--size-spacing-5);
+    height: var(--size-spacing-5);
+    margin-top: calc((var(--border-thickness-6) - var(--size-spacing-5)) / 2);
+  }
+
+  .audio-embed__progress-bar-input::-moz-range-thumb {
+    width: var(--size-spacing-5);
+    height: var(--size-spacing-5);
+  }
+
+  .audio-embed__speed-options-control {
+    height: var(--size-spacing-6);
+  }
+
+  .audio-embed__icon--speed {
+    height: var(--size-spacing-6);
+    width: var(--size-spacing-6);
+  }
+
+  /* Volume does nothing on phones (the hardware buttons own it), so the control is hidden. */
+  .audio-embed__volume {
+    display: none;
+  }
+}
+
+/* Slotted content keeps its semantics but takes the content type style; !important because the
+   document's own rules would otherwise beat ::slotted(). */
+.audio-embed__content ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}

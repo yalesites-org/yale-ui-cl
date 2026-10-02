@@ -1,0 +1,16 @@
+:host(ycl-date-time) {
+  display: inline;
+}
+
+.date-time {
+  font-variant-numeric: oldstyle-nums;
+  font-variant-caps: small-caps;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+/* All-day events read as plain text rather than small caps. */
+.date-time--all-day {
+  font-variant-caps: normal;
+  text-transform: none;
+}

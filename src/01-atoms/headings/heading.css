@@ -1,0 +1,88 @@
+:host(ycl-heading) {
+  display: block;
+}
+
+/* Type styles come from the same tokens as src/00-tokens/typography/typography.css; they're
+   restated here so the appearance attribute can decouple the look from the level. */
+:host(ycl-heading) .heading {
+  margin: 0;
+  color: var(--color-heading);
+}
+
+:host(ycl-heading) .heading--h1 {
+  font: var(--font-style-heading-h1-yale-new);
+}
+
+:host(ycl-heading) .heading--h2 {
+  font: var(--font-style-heading-h2-yale-new);
+}
+
+:host(ycl-heading) .heading--h3 {
+  font: var(--font-style-heading-h3-yale-new);
+}
+
+:host(ycl-heading) .heading--h4 {
+  font: var(--font-style-heading-h4-yale-new);
+}
+
+:host(ycl-heading) .heading--h5 {
+  font: var(--font-style-heading-h5-yale-new);
+}
+
+:host(ycl-heading) .heading--h6 {
+  font: var(--font-style-heading-h6-yale-new);
+}
+
+/* `font` resets font-variant-numeric, so it has to be restated after the type styles. */
+:host(ycl-heading) .heading[class*="heading--h"] {
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* The Twig atom leaves the prefix unstyled; this follows the page title / reference card
+   eyebrow treatment (uppercase, brown-gray) at a size relative to the heading. */
+.heading__prefix {
+  display: block;
+  margin-bottom: 0.25em;
+  color: var(--color-basic-brown-gray);
+  font-size: 0.6em;
+  text-transform: uppercase;
+}
+
+.heading__prefix-icon {
+  display: inline-block;
+  margin-inline-end: 0.3em;
+}
+
+.heading__prefix-icon[hidden],
+.heading__prefix[hidden],
+.heading-link[hidden] {
+  display: none;
+}
+
+.heading__icon {
+  height: 0.8em;
+  width: 0.8em;
+  fill: currentColor;
+}
+
+.heading-link {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 var(--link-underline-size-default);
+}
+
+.heading-link:hover {
+  color: var(--color-link-hover);
+  background-size: 100% var(--link-underline-size-default);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heading-link {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  }
+}
