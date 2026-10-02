@@ -1,0 +1,159 @@
+/* Custom elements default to display: inline. */
+:host(ycl-image-banner) {
+  display: block;
+  /* --site-header-height isn't a token (YaleSites sets it from the rendered header), so the tall
+     banner is 95vh, minus a header offset only if the page provides one. */
+  --image-banner-min-height: calc(95vh - var(--image-banner-header-offset, 0px));
+  --color-image-banner-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+}
+
+:host(ycl-image-banner[size="short"]) {
+  --image-banner-min-height: 28rem;
+}
+
+:host(ycl-image-banner[size="mini"]) {
+  --image-banner-min-height: 14rem;
+}
+
+/* The background shows while the image loads, and behind images that don't fill the banner.
+   Each theme takes its colour from one slot: the global theme's when one is set (see below),
+   otherwise that component theme's palette token. */
+:host(ycl-image-banner[theme="two"]) {
+  --color-image-banner-background: var(--color-slot-four, var(--component-themes-two-slot-four));
+}
+
+:host(ycl-image-banner[theme="three"]) {
+  --color-image-banner-background: var(--color-slot-five, var(--component-themes-three-slot-five));
+}
+
+:host(ycl-image-banner[theme="four"]) {
+  --color-image-banner-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
+}
+
+:host(ycl-image-banner[theme="five"]) {
+  --color-image-banner-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
+}
+
+/* Theme six has no component palette and slot-nine isn't in the current tokens release. */
+:host(ycl-image-banner[theme="six"]) {
+  --color-image-banner-background: var(--color-slot-nine, var(--color-gray-200));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). */
+[data-global-theme="one"] ycl-image-banner {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+}
+
+[data-global-theme="two"] ycl-image-banner {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+}
+
+[data-global-theme="three"] ycl-image-banner {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+}
+
+/* Global theme four swaps slots two and five so each component theme keeps its intended
+   background. */
+[data-global-theme="four"] ycl-image-banner {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+}
+
+[data-global-theme="five"] ycl-image-banner {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+}
+
+[data-global-theme="six"] ycl-image-banner {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+}
+
+.image-banner {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: end;
+  width: 100%;
+  max-width: var(--break-max-width);
+  min-height: var(--image-banner-min-height);
+  margin: 0 auto;
+  background-color: var(--color-image-banner-background);
+}
+
+:host(ycl-image-banner[width="full"]) .image-banner {
+  width: 100vw;
+  max-width: 100vw;
+  margin-inline-start: calc(50% - 50vw);
+  margin-inline-end: 0;
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  .image-banner {
+    align-items: center;
+  }
+}
+
+.image-banner__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+/* Covers an <img> or a background <video>. Slot an <img> directly rather than a <picture>:
+   ::slotted() can't reach the <img> inside one. */
+.image-banner__image ::slotted(:not([slot])) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: var(--image-banner-min-height);
+  object-fit: cover;
+}
+
+/* The caption sits on a fixed white bar, so it uses slot-seven, the palette's "text on a light
+   background" colour, rather than the theme's text colour. */
+.image-banner__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--size-spacing-2);
+  background-color: var(--color-basic-white);
+  color: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+  font: var(--font-style-body-xs);
+  text-align: center;
+}

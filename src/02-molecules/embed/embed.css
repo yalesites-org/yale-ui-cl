@@ -1,0 +1,95 @@
+/* Custom elements default to display: inline. */
+:host(ycl-embed) {
+  display: block;
+  --embed-width: var(--size-component-layout-width-site);
+  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
+     spacing tokens it steps through. */
+  --embed-gutter: var(--size-spacing-5);
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  :host(ycl-embed) {
+    --embed-gutter: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  :host(ycl-embed) {
+    --embed-gutter: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl */
+@media (min-width: 1200px) {
+  :host(ycl-embed) {
+    --embed-gutter: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl */
+@media (min-width: 1400px) {
+  :host(ycl-embed) {
+    --embed-gutter: var(--size-spacing-10);
+  }
+}
+
+:host(ycl-embed[width="max"]) {
+  --embed-width: var(--size-component-layout-width-max);
+}
+
+:host(ycl-embed[width="highlight"]) {
+  --embed-width: var(--size-component-layout-width-highlight);
+}
+
+:host(ycl-embed[width="content"]) {
+  --embed-width: var(--size-component-layout-width-content);
+}
+
+/* An iframe embed replaces any slotted fallback content. */
+:host(ycl-embed[src]) .embed__inner slot {
+  display: none;
+}
+
+.embed {
+  padding-inline: var(--embed-gutter);
+}
+
+.embed__inner {
+  width: 100%;
+  max-width: var(--embed-width);
+  margin-inline: auto;
+}
+
+.embed__iframe {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 90vh;
+  border: var(--border-thickness-2) solid;
+}
+
+:host(ycl-embed[type="audio"]) .embed__iframe {
+  height: 130px;
+}
+
+:host(ycl-embed[type="unknown"]) .embed__iframe {
+  height: 70vh;
+}
+
+/* Fixed vh heights cut video off, so video, map and calendar size from their aspect ratio. */
+:host(ycl-embed[type="video"]) .embed__iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+:host(ycl-embed[type="map"]) .embed__iframe {
+  aspect-ratio: 3 / 2;
+  height: auto;
+}
+
+:host(ycl-embed[type="calendar"]) .embed__iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}

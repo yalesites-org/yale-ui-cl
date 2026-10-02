@@ -1,0 +1,463 @@
+/* Custom elements default to display: inline. */
+:host(ycl-action-banner) {
+  display: block;
+  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
+     spacing tokens it steps through. */
+  --action-banner-gutter: var(--size-spacing-5);
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  :host(ycl-action-banner) {
+    --action-banner-gutter: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  :host(ycl-action-banner) {
+    --action-banner-gutter: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl */
+@media (min-width: 1200px) {
+  :host(ycl-action-banner) {
+    --action-banner-gutter: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl */
+@media (min-width: 1400px) {
+  :host(ycl-action-banner) {
+    --action-banner-gutter: var(--size-spacing-10);
+  }
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). Without one, each component theme falls back to its
+   own palette tokens. */
+[data-global-theme="one"] ycl-action-banner {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+}
+
+[data-global-theme="two"] ycl-action-banner {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+}
+
+[data-global-theme="three"] ycl-action-banner {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+}
+
+/* Global theme four swaps slots two and five so each component theme keeps its intended
+   background. */
+[data-global-theme="four"] ycl-action-banner {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+}
+
+/* Lighter visited links keep contrast on theme three's background under global theme four. */
+[data-global-theme="four"] ycl-action-banner[theme="three"] {
+  --color-banner-visited-base: var(--color-gray-100);
+  --color-banner-visited-hover: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="five"] ycl-action-banner {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+}
+
+[data-global-theme="six"] ycl-action-banner {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+}
+
+/* The banner. */
+.cta-banner {
+  --banner-content-max-width: 37rem;
+  --color-text: var(--color-banner-text);
+  --color-heading: var(--color-banner-heading);
+  --color-action: var(--color-banner-action);
+  --color-action-secondary: var(--color-banner-action-secondary);
+  --color-link-base: var(--color-banner-heading);
+  --color-link-hover: var(--color-banner-heading);
+
+  max-width: var(--break-max-width);
+  margin-inline: auto;
+  padding: 0;
+  background-color: var(--color-banner-background);
+}
+
+.cta-banner[data-banner-width="full"] {
+  width: 100vw;
+  max-width: 100vw;
+  margin-inline-start: calc(50% - 50vw);
+  margin-inline-end: 0;
+}
+
+/* Component themes. Each takes its colours from the global theme's slots when one is set,
+   otherwise from that component theme's own palette tokens. */
+.cta-banner[data-component-theme="one"] {
+  --color-banner-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-banner-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
+  --color-banner-action-secondary: var(--color-banner-background);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+.cta-banner[data-component-theme="two"] {
+  --color-banner-background: var(--color-slot-four, var(--component-themes-two-slot-four));
+  --color-banner-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
+  --color-banner-action-secondary: var(--color-slot-eight, var(--component-themes-two-slot-eight));
+}
+
+.cta-banner[data-component-theme="three"] {
+  --color-banner-background: var(--color-slot-five, var(--component-themes-three-slot-five));
+  --color-banner-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
+  --color-banner-action-secondary: var(--color-slot-one, var(--component-themes-three-slot-one));
+  --color-link-visited-base: var(--color-banner-visited-base, var(--color-link-visited-light));
+  --color-link-visited-hover: var(--color-banner-visited-hover, var(--color-link-visited-light-hover));
+}
+
+.cta-banner[data-component-theme="four"] {
+  --color-banner-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
+  --color-banner-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
+  --color-banner-action-secondary: var(--color-slot-eight, var(--component-themes-four-colors-slot-eight));
+}
+
+.cta-banner[data-component-theme="five"] {
+  --color-banner-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
+  --color-banner-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
+  --color-banner-action-secondary: var(--color-slot-one, var(--component-themes-five-colors-slot-one));
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+/* Theme six has no component palette and slot-nine isn't in the current tokens release, so it
+   falls back to a light gray that keeps the dark slot-seven text readable. */
+.cta-banner[data-component-theme="six"] {
+  --color-banner-background: var(--color-slot-nine, var(--color-gray-200));
+  --color-banner-text: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
+  --color-banner-action-secondary: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-link-visited-base: var(--color-banner-text);
+  --color-link-visited-hover: var(--color-banner-text);
+}
+
+.cta-banner__content-wrapper {
+  position: relative;
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  .cta-banner__content-wrapper {
+    aspect-ratio: 16 / 5;
+  }
+
+  [data-banner-content-layout="bottom"] .cta-banner__content-wrapper {
+    display: flex;
+    align-items: flex-end;
+    padding-top: var(--size-spacing-12);
+  }
+}
+
+/* The image. Below the breakpoint it sits above the content; above it, it fills the banner and
+   the content overlays it. */
+.cta-banner__image ::slotted(*) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 991.95px is just under --break-l */
+@media (max-width: 991.95px) {
+  .cta-banner__image {
+    aspect-ratio: 16 / 5;
+  }
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  .cta-banner__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* The content panel. Its background is drawn by ::before so it can be translucent over the
+   image without fading the text. */
+.cta-banner__content {
+  display: flex;
+  position: relative;
+  color: var(--color-text);
+  background-color: transparent;
+}
+
+.cta-banner__content > * {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-banner__content::before {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  content: "";
+  background-color: var(--color-banner-background);
+  z-index: 1;
+}
+
+[data-banner-content-layout="bottom"] .cta-banner__content {
+  width: 100%;
+  max-width: 100%;
+}
+
+[data-banner-content-layout="left"] .cta-banner__content,
+[data-banner-content-layout="right"] .cta-banner__content {
+  max-width: calc(var(--size-component-layout-width-site) + var(--size-spacing-10));
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  .cta-banner__content::before {
+    opacity: 0.85;
+  }
+
+  [data-banner-content-layout="left"] .cta-banner__content,
+  [data-banner-content-layout="right"] .cta-banner__content {
+    width: 100%;
+    max-width: calc(var(--size-component-layout-width-site) + (var(--action-banner-gutter) * 2));
+    min-height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  [data-banner-content-layout="right"] .cta-banner__content {
+    justify-content: flex-end;
+  }
+
+  [data-banner-content-layout="left"] .cta-banner__content::before,
+  [data-banner-content-layout="right"] .cta-banner__content::before,
+  [data-banner-content-layout="left"] .cta-banner__outer-wrap,
+  [data-banner-content-layout="right"] .cta-banner__outer-wrap {
+    max-width: var(--banner-content-max-width);
+  }
+}
+
+.cta-banner__outer-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.cta-banner__wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  box-sizing: border-box;
+  max-width: calc(var(--size-component-layout-width-site) + var(--size-spacing-10));
+  padding: var(--size-spacing-6) var(--size-spacing-7) var(--size-spacing-7);
+}
+
+[data-banner-content-layout="left"] .cta-banner__wrap,
+[data-banner-content-layout="right"] .cta-banner__wrap {
+  width: 100%;
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  .cta-banner__wrap {
+    max-width: calc(var(--size-component-layout-width-site) + (var(--action-banner-gutter) * 2));
+    margin: 0 auto;
+    padding: var(--size-spacing-6) var(--action-banner-gutter) var(--size-spacing-7);
+  }
+
+  [data-banner-content-layout="bottom"] .cta-banner__wrap {
+    gap: var(--size-spacing-5);
+    flex-basis: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: var(--size-spacing-5);
+    min-height: auto;
+    width: 100%;
+  }
+
+  /* Left-aligned buttons in the bottom layout wrap onto their own row under the text. */
+  [data-banner-content-layout="bottom"][data-banner-button-alignment="left"] .cta-banner__wrap {
+    flex-wrap: wrap;
+  }
+
+  [data-banner-content-layout="bottom"][data-banner-button-alignment="left"] .cta-banner__text {
+    order: 1;
+    flex-shrink: 0;
+  }
+}
+
+/* Slotted headings keep their semantics but take the banner heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.cta-banner__heading {
+  font: var(--font-style-heading-h2-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-banner-heading);
+  margin-bottom: var(--size-spacing-2);
+}
+
+.cta-banner__heading ::slotted(*) {
+  font: inherit !important;
+  color: inherit !important;
+  margin: 0 !important;
+}
+
+.cta-banner__snippet {
+  font: var(--font-style-body-default-condensed);
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  [data-banner-content-layout="bottom"] .cta-banner__snippet ::slotted(:last-child) {
+    margin-bottom: 0;
+  }
+}
+
+/* The actions. */
+.cta-banner__button-group {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--size-spacing-5);
+}
+
+.cta-banner__button-group[hidden] {
+  display: none;
+}
+
+.cta-banner__button-group[data-button-alignment="left"] {
+  justify-content: flex-start;
+}
+
+.cta-banner__button-group[data-button-alignment="center"] {
+  justify-content: center;
+}
+
+.cta-banner__button-group[data-button-alignment="right"] {
+  justify-content: flex-end;
+}
+
+/* Set on the slotted elements themselves so they override any defaults a link component
+   declares on its own host. */
+.cta-banner__button-group ::slotted(*) {
+  --color-action: var(--color-banner-action);
+  --color-action-secondary: var(--color-banner-action-secondary);
+  flex: 0 0 auto;
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  [data-banner-content-layout="bottom"] .cta-banner__button-group {
+    flex: 0 0 auto;
+  }
+
+  [data-banner-content-layout="bottom"] .cta-banner__button-group[data-button-alignment="left"] {
+    order: 2;
+    flex-basis: 100%;
+    margin-top: var(--size-spacing-4);
+  }
+
+  [data-banner-content-layout="bottom"] .cta-banner__button-group[data-button-alignment="center"] {
+    margin-inline: auto;
+  }
+}
+
+/* The optional pattern overlay, faded in toward the far edge of the content panel by a mask. */
+.cta-banner__overlay_image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: var(--overlay-bg-image);
+  background-size: auto;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  background-position: left bottom;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: linear-gradient(to right, transparent 0%, transparent 50%, black 100%);
+}
+
+[data-banner-content-layout="bottom"] .cta-banner__overlay_image {
+  mask-image: linear-gradient(to right, transparent, transparent 40%, black 70%);
+}
+
+[data-banner-content-layout="left"] .cta-banner__overlay_image,
+[data-banner-content-layout="right"] .cta-banner__overlay_image {
+  max-width: var(--banner-content-max-width);
+  mask-image: linear-gradient(to bottom, transparent 0%, transparent 50%, black 100%);
+}
+
+[data-banner-content-layout="right"] .cta-banner__overlay_image {
+  right: 0;
+  left: auto;
+}
+
+/* 991.95px is just under --break-l */
+@media (max-width: 991.95px) {
+  [data-banner-content-layout="left"] .cta-banner__overlay_image,
+  [data-banner-content-layout="right"] .cta-banner__overlay_image {
+    right: 0;
+    left: auto;
+    mask-image: linear-gradient(to right, transparent, transparent 60%, black 70%);
+  }
+}

@@ -1,0 +1,99 @@
+/* Custom elements default to display: inline. */
+:host(ycl-video) {
+  display: block;
+  --video-width: var(--size-component-layout-width-content);
+  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
+     spacing tokens it steps through. */
+  --video-gutter: var(--size-spacing-5);
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  :host(ycl-video) {
+    --video-gutter: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  :host(ycl-video) {
+    --video-gutter: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl */
+@media (min-width: 1200px) {
+  :host(ycl-video) {
+    --video-gutter: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl */
+@media (min-width: 1400px) {
+  :host(ycl-video) {
+    --video-gutter: var(--size-spacing-10);
+  }
+}
+
+:host(ycl-video[width="max"]) {
+  --video-width: var(--size-component-layout-width-max);
+}
+
+:host(ycl-video[width="site"]) {
+  --video-width: var(--size-component-layout-width-site);
+}
+
+:host(ycl-video[width="highlight"]) {
+  --video-width: var(--size-component-layout-width-highlight);
+}
+
+.video {
+  padding-inline: var(--video-gutter);
+}
+
+.video__inner {
+  display: grid;
+  gap: var(--size-spacing-3);
+  width: 100%;
+  max-width: var(--video-width);
+  margin-inline: auto;
+}
+
+:host(ycl-video[alignment="center"]) .video__inner {
+  place-items: center;
+}
+
+.video__video,
+.video__content {
+  max-width: var(--size-component-layout-width-content);
+  width: 100%;
+}
+
+/* A bare iframe (e.g. a YouTube embed with fixed width/height attributes) scales to the column
+   at 16:9. */
+.video__video ::slotted(iframe) {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+.video__heading {
+  font: var(--font-style-body-default-condensed);
+}
+
+/* Slotted headings keep their semantics but take the video heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.video__heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 0 var(--size-spacing-2) !important;
+}
+
+.video__text {
+  font: var(--font-style-body-s);
+}
+
+.video__text ::slotted(:last-child) {
+  margin-bottom: 0;
+}

@@ -22,3 +22,8 @@
 @import "../01-atoms/date-time/date-time.css" layer(components.date-time);
 @import "../01-atoms/audio/audio.css" layer(components.audio);
 @import "../01-atoms/video-embed/video-embed.css" layer(components.video-embed);
+@import "../02-molecules/embed/embed.css" layer(components.embed);
+@import "../02-molecules/video/video.css" layer(components.video);
+@import "../02-molecules/modal/modal.css" layer(components.modal);
+@import "../02-molecules/banner/action/action-banner.css" layer(components.action-banner);
+@import "../02-molecules/banner/image/image-banner.css" layer(components.image-banner);

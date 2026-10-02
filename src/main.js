@@ -16,3 +16,8 @@ export { Icon } from "./01-atoms/icons/Icon.js";
 export { DateTime } from "./01-atoms/date-time/DateTime.js";
 export { AudioPlayer } from "./01-atoms/audio/AudioPlayer.js";
 export { VideoEmbed } from "./01-atoms/video-embed/VideoEmbed.js";
+export { Embed } from "./02-molecules/embed/Embed.js";
+export { Video } from "./02-molecules/video/Video.js";
+export { Modal } from "./02-molecules/modal/Modal.js";
+export { ActionBanner } from "./02-molecules/banner/action/ActionBanner.js";
+export { ImageBanner } from "./02-molecules/banner/image/ImageBanner.js";

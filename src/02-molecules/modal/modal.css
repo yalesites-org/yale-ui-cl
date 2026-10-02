@@ -1,0 +1,106 @@
+/* The dialog lives in the top layer, so the host itself takes no space in the page. */
+:host(ycl-modal) {
+  display: contents;
+  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
+     spacing tokens it steps through. */
+  --modal-gutter: var(--size-spacing-5);
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  :host(ycl-modal) {
+    --modal-gutter: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  :host(ycl-modal) {
+    --modal-gutter: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl */
+@media (min-width: 1200px) {
+  :host(ycl-modal) {
+    --modal-gutter: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl */
+@media (min-width: 1400px) {
+  :host(ycl-modal) {
+    --modal-gutter: var(--size-spacing-10);
+  }
+}
+
+.modal {
+  box-sizing: border-box;
+  width: calc(100% - (var(--modal-gutter) * 2));
+  max-width: none;
+  max-height: calc(100vh - var(--modal-gutter));
+  padding: 0;
+  border: 0;
+  background-color: var(--color-basic-white);
+  box-shadow: var(--drop-shadow-level-1);
+  color: var(--color-gray-800);
+  overflow-y: auto;
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  .modal {
+    width: 42rem;
+  }
+}
+
+.modal::backdrop {
+  background: rgb(0 0 0 / 25%);
+}
+
+.modal__container {
+  padding: var(--size-spacing-7);
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--size-spacing-4);
+  margin-bottom: var(--size-spacing-8);
+}
+
+.modal__title {
+  font: var(--font-style-heading-h4-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-gray-800);
+}
+
+/* Slotted headings keep their semantics but take the modal title's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.modal__title ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+/* A 24px minimum box around the icon meets WCAG 2.2's 24x24 target size (SC 2.5.8) without
+   making the button taller than the header. */
+.modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--size-spacing-6);
+  min-width: var(--size-spacing-6);
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.modal__close-icon {
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+}
