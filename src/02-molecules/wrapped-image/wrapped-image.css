@@ -1,0 +1,159 @@
+/* Custom elements default to display: inline. --spacing-page-inner isn't in the tokens release;
+   spacing-7 is its value. */
+:host(ycl-wrapped-image) {
+  display: block;
+  margin-bottom: var(--size-spacing-7);
+}
+
+:host(ycl-wrapped-image) [hidden] {
+  display: none !important;
+}
+
+/* Links in the slotted text and caption are light DOM, out of reach of ::slotted(), so they're
+   coloured from the document (only when base.css is loaded there). */
+ycl-wrapped-image a {
+  color: var(--color-link-base);
+}
+
+ycl-wrapped-image a:visited {
+  color: var(--color-link-visited-base);
+}
+
+ycl-wrapped-image a:hover {
+  color: var(--color-link-hover);
+}
+
+/* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
+ycl-wrapped-image picture[slot="image"] img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The component. Its inline padding is the site gutter, which grows with the viewport.
+   --size-spacing-site-gutter isn't in the tokens release, so its steps are repeated here.
+   The offset style drops the gutter so the image can push towards the viewport edge. */
+.wrapped-image {
+  --color-text-shadow: var(--color-basic-white);
+
+  padding-inline: var(--size-spacing-5);
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  .wrapped-image {
+    padding-inline: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l. */
+@media (min-width: 992px) {
+  .wrapped-image {
+    padding-inline: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl. */
+@media (min-width: 1200px) {
+  .wrapped-image {
+    padding-inline: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl. */
+@media (min-width: 1400px) {
+  .wrapped-image {
+    padding-inline: var(--size-spacing-10);
+  }
+}
+
+:host(ycl-wrapped-image[image-style="offset"]) .wrapped-image {
+  padding-inline: 0;
+}
+
+/* Clear the float so whatever follows the component starts below the image. */
+.wrapped-image::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.wrapped-image__inner {
+  position: relative;
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+}
+
+.wrapped-image__content-wrapper {
+  max-width: var(--size-component-layout-width-content);
+  margin: 0;
+}
+
+/* Image. */
+.wrapped-image__image {
+  margin-bottom: var(--size-spacing-7);
+}
+
+.wrapped-image__image .figure {
+  margin: 0;
+}
+
+.wrapped-image__image ::slotted(img),
+.wrapped-image__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 992px is --break-l. The image floats at half width, its top lined up with the text. */
+@media (min-width: 992px) {
+  .wrapped-image__image {
+    width: 50%;
+    margin-top: var(--size-spacing-4);
+    margin-bottom: var(--size-spacing-4);
+    float: left;
+    margin-right: 5%;
+  }
+
+  :host(ycl-wrapped-image[alignment="right"]) .wrapped-image__image {
+    float: right;
+    margin-right: 0;
+    margin-left: 5%;
+  }
+
+  :host(ycl-wrapped-image[image-style="offset"]) .wrapped-image__image {
+    transform: translateX(-2rem);
+    margin-right: 1rem;
+  }
+
+  :host(ycl-wrapped-image[image-style="offset"][alignment="right"]) .wrapped-image__image {
+    transform: translateX(2rem);
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+}
+
+/* 1550px is the Twig component's own offset breakpoint (no token). */
+@media (min-width: 1550px) {
+  :host(ycl-wrapped-image[image-style="offset"]) .wrapped-image__image {
+    transform: translateX(-20%);
+    margin-right: -5%;
+  }
+
+  :host(ycl-wrapped-image[image-style="offset"][alignment="right"]) .wrapped-image__image {
+    transform: translateX(20%);
+    margin-right: 0;
+    margin-left: -5%;
+  }
+}
+
+.wrapped-image__caption {
+  font: var(--font-style-body-s-condensed);
+  color: var(--color-basic-brown-gray);
+  margin-top: var(--size-spacing-4);
+}
+
+.wrapped-image__caption ::slotted(p) {
+  margin: 0;
+}

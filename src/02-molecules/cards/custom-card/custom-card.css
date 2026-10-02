@@ -1,0 +1,242 @@
+/* Custom elements default to display: inline. */
+:host(ycl-custom-card) {
+  display: block;
+}
+
+:host(ycl-custom-card) [hidden] {
+  display: none !important;
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document. Slots one and two colour the bar and the heading link hover. */
+[data-global-theme="one"] ycl-custom-card {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+}
+
+[data-global-theme="two"] ycl-custom-card {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+}
+
+[data-global-theme="three"] ycl-custom-card {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+}
+
+[data-global-theme="four"] ycl-custom-card {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-two);
+}
+
+[data-global-theme="five"] ycl-custom-card {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+}
+
+[data-global-theme="six"] ycl-custom-card {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+}
+
+/* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
+ycl-custom-card picture[slot="image"] img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The card. */
+.custom-card {
+  --card-border: var(--border-thickness-1) solid var(--color-gray-200);
+  --color-text-shadow: var(--color-basic-white);
+  --color-card-bar-long: var(--color-slot-two, var(--color-blue-shale));
+  --color-card-bar-short: var(--color-slot-one, var(--color-blue-horizon));
+
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+}
+
+.custom-card[data-with-image="false"] {
+  border: var(--card-border);
+}
+
+/* The whole card is clickable, so the card shows the focus ring rather than the link. */
+.custom-card:has(.custom-card__heading-link:focus-visible) {
+  outline: var(--size-thickness-2) solid var(--color-link-base);
+  outline-offset: var(--size-thickness-2);
+}
+
+/* Content. */
+.custom-card__content {
+  padding: var(--size-spacing-5) 0;
+}
+
+.custom-card[data-with-image="false"] .custom-card__content {
+  padding: var(--size-spacing-5);
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  .custom-card__content {
+    padding: var(--size-spacing-6) var(--size-spacing-5) var(--size-spacing-5) var(--size-spacing-5);
+  }
+
+  /* Without an image, let the content grow so cards in a row stretch to match. */
+  .custom-card[data-with-image="false"] .custom-card__content {
+    flex: 1 auto;
+  }
+
+  .custom-card[data-with-image="true"] .custom-card__content {
+    border-top: 0;
+    border-left: var(--card-border);
+    border-right: var(--card-border);
+    border-bottom: var(--card-border);
+    flex: 1;
+  }
+}
+
+.custom-card__heading {
+  color: var(--color-heading);
+  font: var(--font-style-heading-h4-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  margin-bottom: var(--size-spacing-3);
+}
+
+/* Slotted headings keep their semantics but take the card heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted().
+   They render inline so the link's underline can run beneath their text. */
+.custom-card__heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+  display: inline !important;
+}
+
+/* Heading link: no underline until the card is hovered, then one slides in. The text-shadow
+   "cuts" the underline around descenders. */
+.custom-card__heading-link {
+  --thickness: var(--link-underline-size-default);
+  --position: 0 1.05em;
+
+  color: currentcolor;
+  font: inherit;
+  font-weight: var(--font-weights-yalenew-bold);
+  letter-spacing: var(--font-letter-spacing-yalenew-bold);
+  text-decoration: none;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: var(--position);
+  background-repeat: no-repeat;
+  background-size: 0 var(--thickness);
+  text-shadow:
+    0.03em 0 var(--color-text-shadow), -0.03em 0 var(--color-text-shadow),
+    0 0.03em var(--color-text-shadow), 0 -0.03em var(--color-text-shadow),
+    0.06em 0 var(--color-text-shadow), -0.06em 0 var(--color-text-shadow),
+    0.09em 0 var(--color-text-shadow), -0.09em 0 var(--color-text-shadow),
+    0.12em 0 var(--color-text-shadow), -0.12em 0 var(--color-text-shadow),
+    0.15em 0 var(--color-text-shadow), -0.15em 0 var(--color-text-shadow);
+}
+
+/* Stretch the link's hit area over the whole card. */
+.custom-card__heading-link[href]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* The card draws the focus ring, so the link's own would be a second, redundant ring.
+   !important is needed to beat the util layer's :focus-visible outline. */
+.custom-card__heading-link:focus {
+  outline: none !important;
+}
+
+.custom-card__heading-link[href]:visited {
+  color: var(--color-link-visited-base);
+}
+
+.custom-card:hover .custom-card__heading-link[href],
+.custom-card__heading-link[href]:focus-visible {
+  background-size: 100% var(--thickness);
+  color: var(--color-slot-two, var(--color-link-hover));
+}
+
+.custom-card:hover .custom-card__heading-link[href]:visited {
+  color: var(--color-link-visited-hover);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .custom-card__heading-link {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  }
+}
+
+.custom-card__snippet {
+  font: var(--font-style-body-default-condensed);
+}
+
+.custom-card__snippet ::slotted(p) {
+  margin-top: 0;
+}
+
+.custom-card__snippet ::slotted(:last-child) {
+  margin-bottom: 0;
+}
+
+/* Image. */
+.custom-card__image ::slotted(img),
+.custom-card__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Linked images get the card border on every side but the bottom, which the content draws. */
+.custom-card[data-with-image="true"] .custom-card__image {
+  border-top: var(--card-border);
+  border-left: var(--card-border);
+  border-right: var(--card-border);
+}
+
+:host(ycl-custom-card:not([featured])) .custom-card__image {
+  min-height: 0.25rem;
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  :host(ycl-custom-card:not([featured])) .custom-card__image {
+    min-height: 0.375rem;
+    margin-bottom: var(--size-spacing-0);
+  }
+}
+
+/* A non-featured card without an image shows a two-tone bar across its top, whose short end
+   retracts on hover. With a global theme the bar takes the theme's slot colours. */
+:host(ycl-custom-card:not([featured])) .custom-card[data-with-image="false"] .custom-card__image {
+  background-color: var(--color-card-bar-long);
+  position: relative;
+}
+
+:host(ycl-custom-card:not([featured])) .custom-card[data-with-image="false"] .custom-card__image::before {
+  content: "";
+  background-color: var(--color-card-bar-short);
+  height: 100%;
+  width: 25%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+:host(ycl-custom-card:not([featured])) .custom-card:hover .custom-card__image::before {
+  width: 0%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .custom-card__image::before {
+    transition: width var(--animation-speed-default) ease-in-out;
+  }
+}

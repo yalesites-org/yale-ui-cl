@@ -1,0 +1,372 @@
+/* Custom elements default to display: inline. */
+:host(ycl-text-with-image) {
+  display: block;
+}
+
+:host(ycl-text-with-image) [hidden] {
+  display: none !important;
+}
+
+/* Component themes.
+   Each theme maps its background, text and link colours to colour slots. The slots come from the
+   site's global theme when one is set (see below), otherwise from that component theme's tokens.
+   They're set on the host so slotted content inherits them. */
+:host(ycl-text-with-image[theme="one"]) {
+  --color-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-text-with-image[theme="two"]) {
+  --color-background: var(--color-slot-four, var(--component-themes-two-slot-four));
+  --color-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+}
+
+:host(ycl-text-with-image[theme="three"]) {
+  --color-background: var(--color-slot-five, var(--component-themes-three-slot-five));
+  --color-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--text-with-image-global-visited, var(--color-link-visited-light));
+  --color-link-visited-hover: var(--text-with-image-global-visited-hover, var(--color-link-visited-light-hover));
+}
+
+:host(ycl-text-with-image[theme="four"]) {
+  --color-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
+  --color-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+}
+
+:host(ycl-text-with-image[theme="five"]) {
+  --color-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
+  --color-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+/* There's no component-themes-six in the current tokens release, and slot-nine isn't in it
+   either; gray-100 stands in for the light background, with theme one's dark text slot. */
+:host(ycl-text-with-image[theme="six"]) {
+  --color-background: var(--color-slot-nine, var(--color-gray-100));
+  --color-text: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-text);
+  --color-link-visited-hover: var(--color-text);
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document. */
+[data-global-theme="one"] ycl-text-with-image {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+}
+
+[data-global-theme="two"] ycl-text-with-image {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+}
+
+[data-global-theme="three"] ycl-text-with-image {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+}
+
+/* Global four swaps slots two and five so each component theme gets its intended background,
+   and needs lighter visited links on theme three. */
+[data-global-theme="four"] ycl-text-with-image {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="four"] ycl-text-with-image[theme="three"] {
+  --text-with-image-global-visited: var(--color-gray-100);
+  --text-with-image-global-visited-hover: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="five"] ycl-text-with-image {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+}
+
+[data-global-theme="six"] ycl-text-with-image {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+}
+
+/* Links in the slotted text and caption are light DOM, out of reach of ::slotted(), so they're
+   coloured from the document (again only when base.css is loaded there). */
+ycl-text-with-image > :not([slot="ctas"]) a {
+  color: var(--color-link-base);
+}
+
+ycl-text-with-image > :not([slot="ctas"]) a:visited {
+  color: var(--color-link-visited-base);
+}
+
+ycl-text-with-image > :not([slot="ctas"]) a:hover {
+  color: var(--color-link-hover);
+}
+
+/* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
+ycl-text-with-image picture[slot="image"] img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The component. Its inline padding is the site gutter, which grows with the viewport.
+   --size-spacing-site-gutter isn't in the tokens release, so its steps are repeated here. */
+.text-with-image {
+  --color-text-shadow: var(--color-basic-white);
+
+  padding-inline: var(--size-spacing-5);
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l. */
+@media (min-width: 992px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl. */
+@media (min-width: 1200px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl. */
+@media (min-width: 1400px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-10);
+  }
+}
+
+/* With a component theme the component gets a background and vertical padding. */
+:host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image {
+  --color-text-shadow: var(--color-background);
+
+  padding-block: var(--size-spacing-10);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+:host(ycl-text-with-image[theme="six"]) .text-with-image {
+  --color-text-shadow: transparent;
+}
+
+.text-with-image__inner {
+  --component-width: var(--size-component-layout-width-site);
+
+  display: grid;
+  width: 100%;
+  max-width: var(--component-width);
+  margin-inline: auto;
+}
+
+:host(ycl-text-with-image[width="highlight"]) .text-with-image__inner {
+  --component-width: var(--size-component-layout-width-highlight);
+}
+
+/* 991.95px is just under --break-mobile; below it the image stacks above the content. */
+@media (max-width: 991.95px) {
+  .text-with-image__inner {
+    gap: var(--size-spacing-6);
+  }
+
+  .text-with-image__content {
+    order: 1;
+  }
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  .text-with-image__inner {
+    grid-template: "primary secondary";
+    grid-template-columns: 1fr 1fr;
+    gap: var(--size-spacing-8);
+    align-items: flex-start;
+  }
+
+  :host(ycl-text-with-image[vertical-align="middle"]) .text-with-image__inner {
+    align-items: center;
+  }
+
+  :host(ycl-text-with-image[vertical-align="bottom"]) .text-with-image__inner {
+    align-items: flex-end;
+  }
+
+  /* The offset style lets the image push past the site width. */
+  :host(ycl-text-with-image[image-style="offset"]) .text-with-image__inner {
+    --component-width: calc(var(--size-component-layout-width-site) + var(--size-spacing-10));
+  }
+
+  /* Focus gives the image or the content the wider column. */
+  :host(ycl-text-with-image[focus="content"]:not([position="image-right"])) .text-with-image__inner,
+  :host(ycl-text-with-image[focus="image"][position="image-right"]) .text-with-image__inner {
+    grid-template-columns: 3fr 5fr;
+  }
+
+  :host(ycl-text-with-image[focus="image"]:not([position="image-right"])) .text-with-image__inner,
+  :host(ycl-text-with-image[focus="content"][position="image-right"]) .text-with-image__inner {
+    grid-template-columns: 5fr 3fr;
+  }
+
+  .text-with-image__image {
+    margin-top: var(--size-spacing-2);
+    grid-area: primary;
+  }
+
+  .text-with-image__content {
+    grid-area: secondary;
+  }
+
+  :host(ycl-text-with-image[position="image-right"]) .text-with-image__image {
+    grid-area: secondary;
+  }
+
+  :host(ycl-text-with-image[position="image-right"]) .text-with-image__content {
+    grid-area: primary;
+  }
+
+  /* Balance the offset image with a margin on the content. */
+  :host(ycl-text-with-image[image-style="offset"][position="image-right"]) .text-with-image__content {
+    margin-inline-start: var(--size-spacing-8);
+  }
+
+  :host(ycl-text-with-image[image-style="offset"]:not([position="image-right"])) .text-with-image__content {
+    margin-inline-end: var(--size-spacing-8);
+  }
+}
+
+/* Content. Spacing goes between visible parts only, so hidden empty ones don't add any. */
+.text-with-image__content > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--size-spacing-5);
+}
+
+.text-with-image__overline {
+  font: var(--font-style-heading-h6-yale-new);
+  text-transform: var(--font-text-transform-h6-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-gray-500);
+}
+
+.text-with-image__heading {
+  font: var(--font-style-heading-h3-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-heading);
+}
+
+.text-with-image__subheading {
+  font: var(--font-style-heading-h5-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-text);
+}
+
+/* Slotted headings keep their semantics but take the component's type styles.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.text-with-image__overline ::slotted(*),
+.text-with-image__heading ::slotted(*),
+.text-with-image__subheading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+.text-with-image__text {
+  color: var(--color-text);
+}
+
+.text-with-image__text ::slotted(:first-child) {
+  margin-top: 0;
+}
+
+.text-with-image__text ::slotted(:last-child) {
+  margin-bottom: 0;
+}
+
+.text-with-image__ctas {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-5);
+}
+
+/* Image and caption. */
+.text-with-image__image .figure {
+  margin: 0;
+}
+
+.text-with-image__image ::slotted(img),
+.text-with-image__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.text-with-image__caption {
+  font: var(--font-style-body-s-condensed);
+  margin-top: var(--size-spacing-4);
+  color: var(--color-gray-800);
+}
+
+:host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image__caption {
+  color: var(--color-text);
+}
+
+.text-with-image__caption ::slotted(p) {
+  margin: 0;
+}

@@ -1,0 +1,363 @@
+/* Custom elements default to display: inline. */
+:host(ycl-content-spotlight-portrait) {
+  display: block;
+}
+
+:host(ycl-content-spotlight-portrait) [hidden] {
+  display: none !important;
+}
+
+/* Component themes.
+   Each theme maps its background, text and link colours to colour slots. The slots come from the
+   site's global theme when one is set (see below), otherwise from that component theme's tokens.
+   They're set on the host so slotted content inherits them. */
+:host(ycl-content-spotlight-portrait[theme="one"]) {
+  --color-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-content-spotlight-portrait[theme="two"]) {
+  --color-background: var(--color-slot-four, var(--component-themes-two-slot-four));
+  --color-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+}
+
+:host(ycl-content-spotlight-portrait[theme="three"]) {
+  --color-background: var(--color-slot-five, var(--component-themes-three-slot-five));
+  --color-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--content-spotlight-portrait-global-visited, var(--color-link-visited-light));
+  --color-link-visited-hover: var(--content-spotlight-portrait-global-visited-hover, var(--color-link-visited-light-hover));
+}
+
+:host(ycl-content-spotlight-portrait[theme="four"]) {
+  --color-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
+  --color-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+}
+
+:host(ycl-content-spotlight-portrait[theme="five"]) {
+  --color-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
+  --color-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+/* There's no component-themes-six in the current tokens release, and slot-nine isn't in it
+   either; gray-100 stands in for the light background, with theme one's dark text slot. */
+:host(ycl-content-spotlight-portrait[theme="six"]) {
+  --color-background: var(--color-slot-nine, var(--color-gray-100));
+  --color-text: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-text);
+  --color-link-visited-hover: var(--color-text);
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document. */
+[data-global-theme="one"] ycl-content-spotlight-portrait {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+}
+
+[data-global-theme="two"] ycl-content-spotlight-portrait {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+}
+
+[data-global-theme="three"] ycl-content-spotlight-portrait {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+}
+
+/* Global four swaps slots two and five so each component theme gets its intended background,
+   and needs lighter visited links on theme three. */
+[data-global-theme="four"] ycl-content-spotlight-portrait {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="four"] ycl-content-spotlight-portrait[theme="three"] {
+  --content-spotlight-portrait-global-visited: var(--color-gray-100);
+  --content-spotlight-portrait-global-visited-hover: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="five"] ycl-content-spotlight-portrait {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+}
+
+[data-global-theme="six"] ycl-content-spotlight-portrait {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+}
+
+/* Links in the slotted text and caption are light DOM, out of reach of ::slotted(), so they're
+   coloured from the document (again only when base.css is loaded there). */
+ycl-content-spotlight-portrait > :not([slot="ctas"]) a {
+  color: var(--color-link-base);
+}
+
+ycl-content-spotlight-portrait > :not([slot="ctas"]) a:visited {
+  color: var(--color-link-visited-base);
+}
+
+ycl-content-spotlight-portrait > :not([slot="ctas"]) a:hover {
+  color: var(--color-link-hover);
+}
+
+/* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
+ycl-content-spotlight-portrait picture[slot="image"] img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The component. Its inline padding is the site gutter, which grows with the viewport.
+   --size-spacing-site-gutter isn't in the tokens release, so its steps are repeated here. */
+.content-spotlight-portrait {
+  --color-text-shadow: var(--color-basic-white);
+
+  padding-inline: var(--size-spacing-5);
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  .content-spotlight-portrait {
+    padding-inline: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l. */
+@media (min-width: 992px) {
+  .content-spotlight-portrait {
+    padding-inline: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl. */
+@media (min-width: 1200px) {
+  .content-spotlight-portrait {
+    padding-inline: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl. */
+@media (min-width: 1400px) {
+  .content-spotlight-portrait {
+    padding-inline: var(--size-spacing-10);
+  }
+}
+
+/* With a component theme the component gets a background and vertical padding. */
+:host(ycl-content-spotlight-portrait[theme]:not([theme="default"])) .content-spotlight-portrait {
+  --color-text-shadow: var(--color-background);
+
+  padding-block: var(--size-spacing-10);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+:host(ycl-content-spotlight-portrait[theme="six"]) .content-spotlight-portrait {
+  --color-text-shadow: transparent;
+}
+
+.content-spotlight-portrait__inner {
+  --component-width: var(--size-component-layout-width-site);
+
+  display: flex;
+  flex-flow: column nowrap;
+  gap: var(--size-spacing-6);
+  width: 100%;
+  max-width: var(--component-width);
+  margin-inline: auto;
+}
+
+/* 991.95px is just under --break-mobile; below it the image stacks above the content at half
+   width. */
+@media (max-width: 991.95px) {
+  .content-spotlight-portrait__image {
+    max-width: 50%;
+  }
+
+  .content-spotlight-portrait__content {
+    order: 1;
+  }
+}
+
+/* 992px is --break-mobile. The portrait image takes a narrow column beside the content. */
+@media (min-width: 992px) {
+  .content-spotlight-portrait__inner {
+    flex-flow: row nowrap;
+    gap: var(--size-spacing-8);
+    align-items: center;
+  }
+
+  :host(ycl-content-spotlight-portrait[vertical-align="top"]) .content-spotlight-portrait__inner {
+    align-items: flex-start;
+  }
+
+  :host(ycl-content-spotlight-portrait[vertical-align="bottom"]) .content-spotlight-portrait__inner {
+    align-items: flex-end;
+  }
+
+  /* The offset style lets the image push past the site width. */
+  :host(ycl-content-spotlight-portrait[image-style="offset"]) .content-spotlight-portrait__inner {
+    --component-width: calc(var(--size-component-layout-width-site) + var(--size-spacing-10));
+  }
+
+  .content-spotlight-portrait__image {
+    margin-top: var(--size-spacing-2);
+    width: 100%;
+    max-width: 20%;
+    order: 1;
+  }
+
+  .content-spotlight-portrait__content {
+    width: 100%;
+    max-width: 80%;
+    order: 2;
+  }
+
+  :host(ycl-content-spotlight-portrait[position="image-right"]) .content-spotlight-portrait__image {
+    order: 2;
+  }
+
+  :host(ycl-content-spotlight-portrait[position="image-right"]) .content-spotlight-portrait__content {
+    order: 1;
+  }
+
+  /* Balance the offset image with a margin on the content. */
+  :host(ycl-content-spotlight-portrait[image-style="offset"][position="image-right"]) .content-spotlight-portrait__content {
+    margin-inline-start: var(--size-spacing-8);
+  }
+
+  :host(ycl-content-spotlight-portrait[image-style="offset"]:not([position="image-right"])) .content-spotlight-portrait__content {
+    margin-inline-end: var(--size-spacing-8);
+  }
+}
+
+/* Content. Spacing goes between visible parts only, so hidden empty ones don't add any. */
+.content-spotlight-portrait__content > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--size-spacing-5);
+}
+
+.content-spotlight-portrait__overline {
+  font: var(--font-style-heading-h6-yale-new);
+  text-transform: var(--font-text-transform-h6-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-text);
+}
+
+.content-spotlight-portrait__heading {
+  font: var(--font-style-heading-h3-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-heading);
+}
+
+.content-spotlight-portrait__subheading {
+  font: var(--font-style-heading-h5-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-text);
+}
+
+/* Slotted headings keep their semantics but take the component's type styles.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.content-spotlight-portrait__overline ::slotted(*),
+.content-spotlight-portrait__heading ::slotted(*),
+.content-spotlight-portrait__subheading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+.content-spotlight-portrait__text {
+  color: var(--color-text);
+}
+
+.content-spotlight-portrait__text ::slotted(:first-child) {
+  margin-top: 0;
+}
+
+.content-spotlight-portrait__text ::slotted(:last-child) {
+  margin-bottom: 0;
+}
+
+.content-spotlight-portrait__ctas {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-5);
+}
+
+/* Image and caption. */
+.content-spotlight-portrait__image .figure {
+  margin: 0;
+}
+
+.content-spotlight-portrait__image ::slotted(img),
+.content-spotlight-portrait__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.content-spotlight-portrait__caption {
+  font: var(--font-style-body-s-condensed);
+  margin-top: var(--size-spacing-4);
+  color: var(--color-basic-brown-gray);
+}
+
+:host(ycl-content-spotlight-portrait[theme]:not([theme="default"])) .content-spotlight-portrait__caption {
+  color: var(--color-text);
+}
+
+.content-spotlight-portrait__caption ::slotted(p) {
+  margin: 0;
+}

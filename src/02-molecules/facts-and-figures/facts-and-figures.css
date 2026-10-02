@@ -1,0 +1,195 @@
+/* Custom elements default to display: inline. */
+:host(ycl-facts-and-figures) {
+  display: block;
+}
+
+:host(ycl-facts-and-figures) [hidden] {
+  display: none !important;
+}
+
+/* Component themes.
+   Each theme maps its background and content colours to colour slots. The slots come from the
+   site's global theme when one is set (see below), otherwise from that component theme's tokens.
+   No theme attribute is theme one. theme="default" has no background and inherits its colour,
+   for stats placed inside an already-themed group. */
+:host(ycl-facts-and-figures) {
+  --color-facts-and-figures-theme: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-facts-and-figures-content: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+}
+
+:host(ycl-facts-and-figures[theme="two"]) {
+  --color-facts-and-figures-theme: var(--color-slot-two, var(--component-themes-two-slot-two));
+  --color-facts-and-figures-content: var(--color-slot-eight, var(--component-themes-two-slot-eight));
+}
+
+:host(ycl-facts-and-figures[theme="three"]) {
+  --color-facts-and-figures-theme: var(--color-slot-three, var(--component-themes-three-slot-three));
+  --color-facts-and-figures-content: var(--color-slot-seven, var(--component-themes-three-slot-seven));
+}
+
+:host(ycl-facts-and-figures[theme="four"]) {
+  --color-facts-and-figures-theme: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
+  --color-facts-and-figures-content: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+}
+
+:host(ycl-facts-and-figures[theme="five"]) {
+  --color-facts-and-figures-theme: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
+  --color-facts-and-figures-content: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+}
+
+:host(ycl-facts-and-figures[theme="default"]) {
+  --color-facts-and-figures-theme: transparent;
+  --color-facts-and-figures-content: currentcolor;
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document. */
+[data-global-theme="one"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+}
+
+[data-global-theme="two"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+}
+
+[data-global-theme="three"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+}
+
+[data-global-theme="four"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-two);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-five);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="five"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+}
+
+[data-global-theme="six"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+}
+
+/* The stat. */
+.facts-and-figures {
+  --eyebrow-width: var(--size-spacing-11);
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-facts-and-figures-theme);
+  color: var(--color-facts-and-figures-content);
+}
+
+:host(ycl-facts-and-figures:not([alignment="left"])) .facts-and-figures {
+  --eyebrow-width: 100%;
+}
+
+/* The Twig stat's padding is vertical only; its group adds the horizontal padding. A standalone
+   stat on a coloured background needs it too, so `padded` adds it here. */
+.facts-and-figures__inner {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--size-spacing-8) 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+:host(ycl-facts-and-figures[padded]) .facts-and-figures__inner {
+  padding: var(--size-spacing-8);
+}
+
+:host(ycl-facts-and-figures[alignment="left"]) .facts-and-figures__inner {
+  text-align: left;
+}
+
+.facts-and-figures__stat {
+  font: var(--font-style-heading-h3-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  width: 100%;
+  position: relative;
+}
+
+/* Slotted stats keep their semantics but take the stat's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.facts-and-figures__stat ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+/* The basic presentation style draws a rule above the stat: short when left-aligned, full width
+   when centred. */
+:host(ycl-facts-and-figures:not([presentation])) .facts-and-figures__stat::before,
+:host(ycl-facts-and-figures[presentation="basic"]) .facts-and-figures__stat::before {
+  content: "";
+  display: block;
+  position: relative;
+  width: var(--eyebrow-width);
+  border-bottom: var(--size-spacing-1) solid var(--color-facts-and-figures-content);
+  margin-bottom: var(--size-spacing-4);
+}
+
+.facts-and-figures__icon {
+  align-self: center;
+  margin-bottom: var(--size-spacing-2);
+}
+
+:host(ycl-facts-and-figures[alignment="left"]) .facts-and-figures__icon {
+  align-self: flex-start;
+}
+
+/* 48px max, matching the Twig icon. */
+.facts-and-figures__icon ::slotted(svg) {
+  max-width: var(--size-spacing-9);
+  max-height: var(--size-spacing-9);
+  fill: var(--color-facts-and-figures-content);
+}
+
+.facts-and-figures__content {
+  font: var(--font-style-body-default);
+  width: 100%;
+}
+
+.facts-and-figures__content ::slotted(p) {
+  margin: 0;
+}

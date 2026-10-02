@@ -1,0 +1,188 @@
+/* Custom elements default to display: inline. */
+:host(ycl-directory-listing-card) {
+  display: block;
+}
+
+:host(ycl-directory-listing-card) [hidden] {
+  display: none !important;
+}
+
+/* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
+ycl-directory-listing-card picture[slot="image"] img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The card.
+   The layout attribute stands in for the data-collection-type the Twig card reads from its
+   card collection: "directory-listing" or "profile-directory". */
+.directory-listing-card {
+  --color-text-shadow: var(--color-basic-white);
+
+  display: flex;
+  flex-flow: column-reverse;
+  gap: var(--size-spacing-4);
+}
+
+/* 576px is --break-s and 767.95px is just under --break-m; the image sits beside the content in
+   that range. */
+@media (min-width: 576px) and (max-width: 767.95px) {
+  :host(ycl-directory-listing-card[layout="directory-listing"]) .directory-listing-card {
+    flex-flow: row-reverse nowrap;
+    gap: var(--size-spacing-6);
+    align-items: flex-start;
+  }
+
+  :host(ycl-directory-listing-card[layout="directory-listing"][featured]) .directory-listing-card__content {
+    flex: 1 0 50%;
+  }
+
+  :host(ycl-directory-listing-card[layout="directory-listing"]:not([featured])) .directory-listing-card__content {
+    flex: 1 0 66%;
+  }
+}
+
+/* Image. */
+.directory-listing-card__image ::slotted(img),
+.directory-listing-card__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 575.95px is just under --break-s. */
+@media (max-width: 575.95px) {
+  .directory-listing-card__image {
+    margin-bottom: var(--size-spacing-5);
+  }
+
+  :host(ycl-directory-listing-card[layout="directory-listing"]) .directory-listing-card__image {
+    max-width: 50%;
+  }
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  :host(ycl-directory-listing-card[layout="directory-listing"]) .directory-listing-card__image {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+/* Content. */
+.directory-listing-card__content {
+  width: 100%;
+}
+
+.directory-listing-card__overline {
+  font: var(--font-style-body-s);
+  font-variant-numeric: oldstyle-nums;
+  margin-bottom: var(--size-spacing-3);
+  color: var(--color-gray-500);
+  font-variant-caps: small-caps;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+.directory-listing-card__heading {
+  color: var(--color-heading);
+  font: var(--font-style-heading-h5-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  font-weight: var(--font-weights-yalenew-bold);
+}
+
+:host(ycl-directory-listing-card[featured]) .directory-listing-card__heading {
+  font: var(--font-style-heading-h4-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  font-weight: var(--font-weights-yalenew-bold);
+}
+
+/* Slotted headings keep their semantics but take the card heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted().
+   They render inline so the link's underline can run beneath their text. */
+.directory-listing-card__heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+  display: inline !important;
+}
+
+/* Heading link: no underline until hovered or focused, then one slides in. */
+.directory-listing-card__heading-link {
+  --thickness: var(--link-underline-size-default);
+  --position: 0 1.15em;
+
+  color: currentcolor;
+  font: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: var(--position);
+  background-repeat: no-repeat;
+  background-size: 0 var(--thickness);
+}
+
+.directory-listing-card__heading-link[href]:hover,
+.directory-listing-card__heading-link[href]:focus-visible {
+  background-size: 100% var(--thickness);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .directory-listing-card__heading-link {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  }
+}
+
+/* Subheading items are separated by a bar. The Twig '|' pseudo-element can't be generated on
+   slotted elements reliably, so each item draws a left border instead, and the row is pulled left
+   under a clip so the first bar on every line is hidden. */
+.directory-listing-card__subheading {
+  margin-top: var(--size-spacing-3);
+  overflow: hidden;
+  font: var(--font-style-body-default-condensed);
+}
+
+:host(ycl-directory-listing-card[featured]) .directory-listing-card__subheading {
+  font: var(--font-style-heading-h5-yale-new);
+  font-variant-numeric: oldstyle-nums;
+}
+
+.directory-listing-card__subheading slot {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(var(--size-spacing-5) * -2);
+}
+
+.directory-listing-card__subheading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 0 0 var(--size-spacing-5) !important;
+  padding-left: var(--size-spacing-5);
+  border-left: var(--border-thickness-1) solid currentcolor;
+}
+
+.directory-listing-card__snippet {
+  margin-top: var(--size-spacing-3);
+}
+
+.directory-listing-card__snippet ::slotted(p) {
+  margin: 0;
+}
+
+:host(ycl-directory-listing-card:not([featured])) .directory-listing-card__snippet,
+.directory-listing-card__email,
+.directory-listing-card__phone {
+  font: var(--font-style-body-default-condensed);
+}
+
+/* Profile directories use a smaller type size for their non-featured cards. */
+:host(ycl-directory-listing-card[layout="profile-directory"]:not([featured])) .directory-listing-card__subheading,
+:host(ycl-directory-listing-card[layout="profile-directory"]:not([featured])) .directory-listing-card__snippet,
+:host(ycl-directory-listing-card[layout="profile-directory"]:not([featured])) .directory-listing-card__email,
+:host(ycl-directory-listing-card[layout="profile-directory"]:not([featured])) .directory-listing-card__phone {
+  font: var(--font-style-body-s-condensed);
+}
+
+.directory-listing-card__phone ::slotted(*),
+.directory-listing-card__email ::slotted(p) {
+  margin: 0;
+}

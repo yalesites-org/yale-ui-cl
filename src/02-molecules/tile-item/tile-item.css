@@ -1,0 +1,332 @@
+/* Custom elements default to display: inline. */
+:host(ycl-tile-item) {
+  display: block;
+}
+
+:host(ycl-tile-item) [hidden] {
+  display: none !important;
+}
+
+/* Component themes.
+   Each theme maps its background, content and hover-bar colours to colour slots. The slots come
+   from the site's global theme when one is set (see below), otherwise from that component
+   theme's tokens. They're set on the host so slotted content inherits the colours too.
+   No theme attribute is theme one. */
+:host(ycl-tile-item) {
+  --color-tile-item-theme: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-tile-item-content: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-tile-animation-border: var(--tile-item-global-border, var(--color-slot-two, var(--component-themes-one-slot-two)));
+  --color-link-base: var(--color-tile-item-content);
+  --color-link-hover: var(--color-tile-item-content);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-tile-item[theme="two"]) {
+  --color-tile-item-theme: var(--color-slot-two, var(--component-themes-two-slot-two));
+  --color-tile-item-content: var(--color-slot-eight, var(--component-themes-two-slot-eight));
+  --color-tile-animation-border: var(--color-slot-three, var(--component-themes-two-slot-three));
+  --color-link-visited-base: var(--tile-item-global-visited, var(--color-link-visited-light));
+  --color-link-visited-hover: var(--tile-item-global-visited-hover, var(--color-link-visited-light-hover));
+}
+
+:host(ycl-tile-item[theme="three"]) {
+  --color-tile-item-theme: var(--color-slot-three, var(--component-themes-three-slot-three));
+  --color-tile-item-content: var(--color-slot-seven, var(--component-themes-three-slot-seven));
+  --color-tile-animation-border: var(--tile-item-global-border, var(--color-slot-two, var(--component-themes-three-slot-two)));
+  --color-link-visited-base: var(--color-purple-visited);
+  --color-link-visited-hover: var(--color-purple-visited-hover);
+}
+
+:host(ycl-tile-item[theme="four"]) {
+  --color-tile-item-theme: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
+  --color-tile-item-content: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+  --color-tile-animation-border: var(--color-slot-five, var(--component-themes-four-colors-slot-five));
+  --color-link-visited-base: var(--color-purple-visited);
+  --color-link-visited-hover: var(--color-purple-visited-hover);
+}
+
+:host(ycl-tile-item[theme="five"]) {
+  --color-tile-item-theme: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
+  --color-tile-item-content: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+  --color-tile-animation-border: var(--color-slot-three, var(--component-themes-five-colors-slot-three));
+}
+
+/* There's no component-themes-six in the current tokens release, and slot-nine isn't in it
+   either; gray-100 stands in for the light background, with theme one's dark text slot. */
+:host(ycl-tile-item[theme="six"]) {
+  --color-tile-item-theme: var(--color-slot-nine, var(--color-gray-100));
+  --color-tile-item-content: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+  --color-tile-animation-border: var(--color-slot-three, var(--component-themes-one-slot-three));
+  --color-link-visited-base: var(--color-tile-item-content);
+  --color-link-visited-hover: var(--color-tile-item-content);
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document. */
+[data-global-theme="one"] ycl-tile-item {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+}
+
+[data-global-theme="two"] ycl-tile-item {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+}
+
+[data-global-theme="three"] ycl-tile-item {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+}
+
+[data-global-theme="four"] ycl-tile-item {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-two);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-five);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="five"] ycl-tile-item {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+}
+
+[data-global-theme="six"] ycl-tile-item {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+}
+
+/* Per-global-theme tweaks: some pairings swap the hover bar to a slot with better contrast, and
+   global four needs lighter visited links on theme two. */
+[data-global-theme="one"] ycl-tile-item:is(:not([theme]), [theme="one"]),
+[data-global-theme="three"] ycl-tile-item:is(:not([theme]), [theme="one"]),
+[data-global-theme="four"] ycl-tile-item:is(:not([theme]), [theme="one"]) {
+  --tile-item-global-border: var(--color-slot-three);
+}
+
+[data-global-theme="three"] ycl-tile-item[theme="three"] {
+  --tile-item-global-border: var(--color-slot-one);
+}
+
+[data-global-theme="four"] ycl-tile-item[theme="two"] {
+  --tile-item-global-visited: var(--color-gray-100);
+  --tile-item-global-visited-hover: var(--color-slot-eight);
+}
+
+/* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
+ycl-tile-item picture[slot="image"] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The tile. It's its own stacking context so the background image can sit at z-index -1
+   without dropping behind the page. */
+.tile__item {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-color: var(--color-tile-item-theme);
+  color: var(--color-tile-item-content);
+}
+
+.tile__item__inner {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: var(--size-spacing-8) var(--size-spacing-6);
+  height: 100%;
+  align-items: flex-start;
+}
+
+:host(ycl-tile-item[alignment="right"]) .tile__item__inner {
+  align-items: flex-end;
+}
+
+:host(ycl-tile-item[alignment="center"]) .tile__item__inner {
+  align-items: center;
+}
+
+/* With a heading or icon, that part grows to push the content down; text-only tiles get there
+   by justifying the column to the end. */
+:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__inner {
+  justify-content: flex-end;
+}
+
+/* Hover bar along the bottom edge. */
+:host(ycl-tile-item[animated]) .tile__item::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--border-thickness-6);
+  width: 0;
+  background-color: var(--color-tile-animation-border);
+  z-index: 1;
+}
+
+:host(ycl-tile-item[animated]) .tile__item:hover::before {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tile__item::before {
+    transition: width var(--animation-speed-default) ease-in-out;
+  }
+}
+
+/* Heading, e.g. a large number. */
+.tile__item__heading {
+  font: var(--font-style-heading-h2-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  position: relative;
+  flex: 0 auto;
+  margin-bottom: var(--size-spacing-5);
+}
+
+/* Slotted headings keep their semantics but take the tile heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.tile__item__heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+.tile__item__icon {
+  margin-bottom: var(--size-spacing-2);
+  flex: 0 auto;
+}
+
+:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__heading,
+:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__icon {
+  flex: 1 auto;
+}
+
+/* 48px max, matching the Twig icon. */
+.tile__item__icon ::slotted(svg) {
+  max-width: var(--size-spacing-9);
+  max-height: var(--size-spacing-9);
+  fill: var(--color-tile-item-content);
+}
+
+/* Content. */
+.tile__item__content {
+  font: var(--font-style-body-default);
+  color: inherit;
+  flex: 1 auto;
+  text-align: left;
+}
+
+.tile__item__content ::slotted(p) {
+  margin: 0;
+}
+
+:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__content {
+  flex: 0 auto;
+}
+
+:host(ycl-tile-item[alignment="right"]) .tile__item__heading,
+:host(ycl-tile-item[alignment="right"]) .tile__item__content {
+  text-align: right;
+}
+
+:host(ycl-tile-item[alignment="center"]) .tile__item__heading,
+:host(ycl-tile-item[alignment="center"]) .tile__item__content {
+  text-align: center;
+}
+
+/* Linked content: underlined while the tile is hovered or focused. Its ::after stretches over
+   the whole tile so anywhere on it follows the link. */
+.tile__item__link {
+  color: var(--color-tile-item-content);
+  text-decoration: none;
+}
+
+.tile__item__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.tile__item__link:visited {
+  color: var(--color-link-visited-base);
+}
+
+.tile__item:hover .tile__item__link,
+.tile__item:focus-within .tile__item__link {
+  text-decoration: underline;
+}
+
+.tile__item:hover .tile__item__link:visited,
+.tile__item:focus-within .tile__item__link:visited {
+  color: var(--color-link-visited-hover);
+}
+
+/* Background image, tinted with the theme colour so the content stays legible. */
+.tile__item__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.tile__item__image ::slotted(img),
+.tile__item__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile__item__image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-tile-item-theme);
+  opacity: 0.85;
+}
+
+.tile__item:has(.tile__item__link):hover .tile__item__image::before {
+  opacity: 0.95;
+}
