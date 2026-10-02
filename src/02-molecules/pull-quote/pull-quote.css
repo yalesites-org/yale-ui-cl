@@ -1,0 +1,196 @@
+/* Custom elements default to display: inline. */
+:host(ycl-pull-quote) {
+  display: block;
+
+  /* Mirrors YaleSites' layout gutter, which isn't a token. */
+  --size-spacing-site-gutter: var(--size-spacing-5);
+  --color-pull-quote-quote: var(--color-gray-800);
+  --color-pull-quote-attribution: var(--color-basic-brown-gray);
+}
+
+/* 768px is --break-m, 992px --break-l, 1200px --break-xl, 1400px --break-2xl. */
+@media (min-width: 768px) {
+  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-6); }
+}
+
+@media (min-width: 992px) {
+  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-7); }
+}
+
+@media (min-width: 1200px) {
+  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-8); }
+}
+
+@media (min-width: 1400px) {
+  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-10); }
+}
+
+/* Accent themes. Theme one is the default.
+   Each theme takes its accent from one colour slot. The slots come from the site's global theme
+   when one is set (see below), otherwise from the component theme tokens. */
+:host(ycl-pull-quote) {
+  --color-pull-quote-accent: var(--color-slot-one, var(--component-themes-one-slot-one));
+}
+
+:host(ycl-pull-quote[theme="two"]) {
+  --color-pull-quote-accent: var(--color-slot-three, var(--component-themes-two-slot-three));
+}
+
+:host(ycl-pull-quote[theme="three"]) {
+  --color-pull-quote-accent: var(--color-slot-five, var(--component-themes-three-slot-five));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). Global theme four swaps slots two and five so each
+   component theme gets its intended accent. */
+[data-global-theme="one"] ycl-pull-quote {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+}
+
+[data-global-theme="two"] ycl-pull-quote {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+}
+
+[data-global-theme="three"] ycl-pull-quote {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+}
+
+[data-global-theme="four"] ycl-pull-quote {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+}
+
+[data-global-theme="five"] ycl-pull-quote {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+}
+
+[data-global-theme="six"] ycl-pull-quote {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+}
+
+/* The pull quote. */
+.pull-quote [hidden] {
+  display: none;
+}
+
+.pull-quote {
+  padding-inline: var(--size-spacing-site-gutter);
+}
+
+.pull-quote__inner {
+  max-width: var(--size-component-layout-width-content);
+  margin-inline: auto;
+}
+
+.pull-quote__figure {
+  --pull-quote-border-height: 100%;
+
+  position: relative;
+  margin: 0;
+}
+
+.pull-quote__quote {
+  margin: 0;
+  font: var(--font-style-body-xl);
+  color: var(--color-pull-quote-quote);
+}
+
+.pull-quote__quote ::slotted(:first-child) {
+  margin-top: 0;
+}
+
+.pull-quote__quote ::slotted(:last-child) {
+  margin-bottom: 0;
+}
+
+.pull-quote__attribution {
+  font: var(--font-style-body-default);
+  color: var(--color-pull-quote-attribution);
+  margin-top: 0.4em;
+}
+
+/* Bar variants; bar-left is the default. */
+:host(ycl-pull-quote:not([variant="bar-right"], [variant="quote-left"])) .pull-quote__figure::before,
+:host(ycl-pull-quote[variant="bar-right"]) .pull-quote__figure::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: var(--pull-quote-border-height);
+  width: var(--border-thickness-4);
+  background-color: var(--color-pull-quote-accent);
+}
+
+:host(ycl-pull-quote:not([variant="bar-right"], [variant="quote-left"])) .pull-quote__figure {
+  padding-left: var(--size-spacing-6);
+}
+
+:host(ycl-pull-quote:not([variant="bar-right"], [variant="quote-left"])) .pull-quote__figure::before {
+  left: calc(var(--border-thickness-4) * -1);
+}
+
+:host(ycl-pull-quote[variant="bar-right"]) .pull-quote__figure {
+  padding-right: var(--size-spacing-6);
+  text-align: right;
+}
+
+:host(ycl-pull-quote[variant="bar-right"]) .pull-quote__figure::before {
+  right: calc(var(--border-thickness-4) * -1);
+}
+
+:host(ycl-pull-quote[variant="quote-left"]) .pull-quote__figure {
+  padding-left: var(--size-spacing-8);
+}
+
+:host(ycl-pull-quote[variant="quote-left"]) .pull-quote__figure::before {
+  content: '“';
+  font-family: var(--font-families-yalenew);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 4em;
+  line-height: 0.8;
+  color: var(--color-pull-quote-accent);
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  .pull-quote__figure {
+    max-width: calc(var(--size-component-layout-width-content) - 11rem);
+  }
+
+  :host(ycl-pull-quote:not([variant="bar-right"], [variant="quote-left"])) .pull-quote__figure {
+    margin-left: var(--size-spacing-7);
+  }
+
+  :host(ycl-pull-quote[variant="bar-right"]) .pull-quote__figure {
+    margin-left: 9rem;
+  }
+
+  :host(ycl-pull-quote[variant="quote-left"]) .pull-quote__figure {
+    margin-left: var(--size-spacing-6);
+  }
+}

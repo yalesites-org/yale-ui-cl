@@ -1,0 +1,258 @@
+/* Custom elements default to display: inline. */
+:host(ycl-inline-message) {
+  display: block;
+
+  /* Mirrors YaleSites' layout gutter, which isn't a token. */
+  --size-spacing-site-gutter: var(--size-spacing-5);
+  --size-icon: 1.5rem;
+}
+
+/* 768px is --break-m, 992px --break-l, 1200px --break-xl, 1400px --break-2xl. */
+@media (min-width: 768px) {
+  :host(ycl-inline-message) { --size-spacing-site-gutter: var(--size-spacing-6); }
+}
+
+@media (min-width: 992px) {
+  :host(ycl-inline-message) { --size-spacing-site-gutter: var(--size-spacing-7); }
+}
+
+@media (min-width: 1200px) {
+  :host(ycl-inline-message) { --size-spacing-site-gutter: var(--size-spacing-8); }
+}
+
+@media (min-width: 1400px) {
+  :host(ycl-inline-message) { --size-spacing-site-gutter: var(--size-spacing-10); }
+}
+
+/* Component themes. Theme one is the default.
+   Each theme takes its colours from slots. The slots come from the site's global theme when one
+   is set (see below), otherwise from the component theme tokens. */
+:host(ycl-inline-message) {
+  --color-inline-message-background: var(--color-slot-four, var(--component-themes-one-slot-four));
+  --color-inline-message-text: var(--color-slot-six, var(--component-themes-one-slot-six));
+  --color-link-base: var(--color-inline-message-text);
+}
+
+:host(ycl-inline-message[theme="two"]) {
+  --color-inline-message-background: var(--color-slot-one, var(--component-themes-two-slot-one));
+  --color-inline-message-text: var(--color-slot-eight, var(--component-themes-two-slot-eight));
+  --color-link-base: var(--color-inline-message-text);
+  --color-link-hover: var(--color-inline-message-text);
+  --color-link-visited-base: var(--color-inline-message-text);
+  --color-link-visited-hover: var(--color-inline-message-text);
+}
+
+:host(ycl-inline-message[theme="three"]) {
+  --color-inline-message-background: var(--color-slot-two, var(--component-themes-three-slot-two));
+  --color-inline-message-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+  --color-link-base: var(--color-inline-message-text);
+  --color-link-hover: var(--color-inline-message-text);
+  --color-link-visited-base: var(--color-inline-message-text);
+  --color-link-visited-hover: var(--color-inline-message-text);
+}
+
+:host(ycl-inline-message[theme="four"]) {
+  --color-inline-message-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
+  --color-inline-message-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+  --color-link-base: var(--color-inline-message-text);
+  --color-link-hover: var(--color-inline-message-text);
+  --color-link-visited-base: var(--color-inline-message-text);
+  --color-link-visited-hover: var(--color-inline-message-text);
+}
+
+:host(ycl-inline-message[theme="five"]) {
+  --color-inline-message-background: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
+  --color-inline-message-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+  --color-link-base: var(--color-inline-message-text);
+  --color-link-hover: var(--color-inline-message-text);
+  --color-link-visited-base: var(--color-inline-message-text);
+  --color-link-visited-hover: var(--color-inline-message-text);
+}
+
+/* There's no component theme six or slot-nine in the current tokens release; a light gray
+   background keeps the theme's dark slot-seven text legible without them. */
+:host(ycl-inline-message[theme="six"]) {
+  --color-inline-message-background: var(--color-slot-nine, var(--color-gray-100));
+  --color-inline-message-text: var(--color-slot-seven, var(--color-gray-800));
+  --color-link-base: var(--color-inline-message-text);
+  --color-link-hover: var(--color-inline-message-text);
+  --color-link-visited-base: var(--color-inline-message-text);
+  --color-link-visited-hover: var(--color-inline-message-text);
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). The same goes for links nested in slotted content,
+   which ::slotted() can't reach. */
+[data-global-theme="one"] ycl-inline-message {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-six: var(--global-themes-one-colors-slot-six);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
+}
+
+[data-global-theme="two"] ycl-inline-message {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-six: var(--global-themes-two-colors-slot-six);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
+}
+
+[data-global-theme="three"] ycl-inline-message {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-six: var(--global-themes-three-colors-slot-six);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
+}
+
+[data-global-theme="four"] ycl-inline-message {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-two);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-five);
+  --color-slot-six: var(--global-themes-four-colors-slot-six);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
+}
+
+[data-global-theme="five"] ycl-inline-message {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-six: var(--global-themes-five-colors-slot-six);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
+}
+
+[data-global-theme="six"] ycl-inline-message {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-six: var(--global-themes-six-colors-slot-six);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+}
+
+/* A lighter visited colour keeps visited links legible on this pairing's dark background. */
+[data-global-theme="four"] ycl-inline-message[theme="three"] {
+  --color-link-visited-base: var(--color-gray-100);
+  --color-link-visited-hover: var(--color-slot-eight);
+}
+
+ycl-inline-message a {
+  color: var(--color-link-base);
+}
+
+ycl-inline-message a:visited {
+  color: var(--color-link-visited-base);
+}
+
+ycl-inline-message a:visited:hover {
+  color: var(--color-link-visited-hover);
+}
+
+/* The message. */
+.inline-message [hidden] {
+  display: none;
+}
+
+.inline-message {
+  background-color: var(--color-inline-message-background);
+  color: var(--color-inline-message-text);
+  padding-inline: var(--size-spacing-site-gutter);
+}
+
+.inline-message__inner {
+  display: flex;
+  align-items: flex-start;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+  padding-block: var(--size-spacing-6);
+}
+
+.inline-message__icon {
+  display: flex;
+  margin-right: var(--size-spacing-3);
+  margin-top: var(--size-spacing-2);
+  flex: 0 0 var(--size-icon);
+}
+
+.inline-message__icon svg,
+.inline-message__icon ::slotted(svg) {
+  height: var(--size-icon);
+  width: var(--size-icon);
+  fill: currentColor;
+}
+
+.inline-message__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: column nowrap;
+  gap: var(--size-spacing-2);
+  align-items: flex-start;
+}
+
+/* Slotted headings keep their semantics but take the message's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.inline-message__heading ::slotted(*) {
+  font: var(--font-style-heading-h5-yale-new) !important;
+  font-variant-numeric: oldstyle-nums !important;
+  margin: 0 !important;
+  color: inherit;
+}
+
+.inline-message__text {
+  font: var(--font-style-body-default);
+  max-width: var(--size-component-layout-width-content);
+}
+
+/* A lone paragraph sits flush; several keep their spacing between them. */
+.inline-message__text ::slotted(:last-child) {
+  margin-bottom: 0;
+}
+
+.inline-message__text ::slotted(p:first-child) {
+  margin-top: 0;
+}
+
+.inline-message__link {
+  font: var(--font-style-body-s);
+  margin-bottom: var(--size-spacing-2);
+}
+
+/* 991.95px is --break-mobile-max. */
+@media (max-width: 991.95px) {
+  .inline-message__icon {
+    padding-top: var(--size-spacing-1);
+  }
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  .inline-message__icon {
+    margin-right: var(--size-spacing-5);
+  }
+}

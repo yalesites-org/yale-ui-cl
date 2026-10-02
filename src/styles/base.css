@@ -27,3 +27,9 @@
 @import "../02-molecules/modal/modal.css" layer(components.modal);
 @import "../02-molecules/banner/action/action-banner.css" layer(components.action-banner);
 @import "../02-molecules/banner/image/image-banner.css" layer(components.image-banner);
+@import "../02-molecules/alert/alert.css" layer(components.alert);
+@import "../02-molecules/inline-message/inline-message.css" layer(components.inline-message);
+@import "../02-molecules/callout/callout.css" layer(components.callout);
+@import "../02-molecules/quote-callout/quote-callout.css" layer(components.quote-callout);
+@import "../02-molecules/pull-quote/pull-quote.css" layer(components.pull-quote);
+@import "../02-molecules/wrapped-callout/wrapped-callout.css" layer(components.wrapped-callout);

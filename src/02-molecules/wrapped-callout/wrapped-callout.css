@@ -1,0 +1,210 @@
+/* Custom elements default to display: inline. */
+:host(ycl-wrapped-callout) {
+  display: block;
+
+  /* Mirrors YaleSites' layout gutter, which isn't a token. */
+  --size-spacing-site-gutter: var(--size-spacing-5);
+}
+
+/* 768px is --break-m, 992px --break-l, 1200px --break-xl, 1400px --break-2xl. */
+@media (min-width: 768px) {
+  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-6); }
+}
+
+@media (min-width: 992px) {
+  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-7); }
+}
+
+@media (min-width: 1200px) {
+  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-8); }
+}
+
+@media (min-width: 1400px) {
+  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-10); }
+}
+
+/* Component themes. Theme one is the default.
+   Each theme takes its border colour from one colour slot. The slots come from the site's global
+   theme when one is set (see below), otherwise from the component theme tokens. */
+:host(ycl-wrapped-callout) {
+  --color-wrapped-callout-theme: var(--color-slot-one, var(--component-themes-one-slot-one));
+}
+
+/* YaleSites has no "default" theme colours, so its border drops out entirely. */
+:host(ycl-wrapped-callout[theme="default"]) {
+  --color-wrapped-callout-theme: transparent;
+}
+
+:host(ycl-wrapped-callout[theme="two"]) {
+  --color-wrapped-callout-theme: var(--color-slot-two, var(--component-themes-two-slot-two));
+}
+
+:host(ycl-wrapped-callout[theme="three"]) {
+  --color-wrapped-callout-theme: var(--color-slot-three, var(--component-themes-three-slot-three));
+}
+
+:host(ycl-wrapped-callout[theme="four"]) {
+  --color-wrapped-callout-theme: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
+}
+
+:host(ycl-wrapped-callout[theme="five"]) {
+  --color-wrapped-callout-theme: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
+}
+
+/* slot-nine isn't in the current tokens release; gray-700 matches the accordion's fallback. */
+:host(ycl-wrapped-callout[theme="six"]) {
+  --color-wrapped-callout-theme: var(--color-slot-nine, var(--color-gray-700));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). The same goes for links nested in slotted content,
+   which ::slotted() can't reach. */
+[data-global-theme="one"] ycl-wrapped-callout {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-six: var(--global-themes-one-colors-slot-six);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
+  --color-heading: var(--color-slot-seven);
+}
+
+[data-global-theme="two"] ycl-wrapped-callout {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-six: var(--global-themes-two-colors-slot-six);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
+  --color-heading: var(--color-slot-seven);
+}
+
+[data-global-theme="three"] ycl-wrapped-callout {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-six: var(--global-themes-three-colors-slot-six);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
+  --color-heading: var(--color-slot-seven);
+}
+
+[data-global-theme="four"] ycl-wrapped-callout {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-two);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-five);
+  --color-slot-six: var(--global-themes-four-colors-slot-six);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
+  --color-heading: var(--color-slot-seven);
+}
+
+[data-global-theme="five"] ycl-wrapped-callout {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-six: var(--global-themes-five-colors-slot-six);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
+  --color-heading: var(--color-slot-seven);
+}
+
+[data-global-theme="six"] ycl-wrapped-callout {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-six: var(--global-themes-six-colors-slot-six);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+  --color-heading: var(--color-slot-seven);
+}
+
+ycl-wrapped-callout [slot="callout"] a {
+  color: var(--color-link-base);
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+}
+
+ycl-wrapped-callout [slot="callout"] a:hover {
+  text-decoration: none;
+}
+
+/* The wrapped callout. */
+.wrapped-callout [hidden] {
+  display: none;
+}
+
+.wrapped-callout {
+  padding-inline: var(--size-spacing-site-gutter);
+}
+
+.wrapped-callout__inner {
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+}
+
+/* flow-root contains the floated box so whatever follows the component doesn't wrap around it. */
+.wrapped-callout__content-wrapper {
+  display: flow-root;
+  max-width: var(--size-component-layout-width-content);
+}
+
+.wrapped-callout__callout {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding: var(--size-spacing-8) var(--size-spacing-6);
+  border: var(--border-thickness-2) solid var(--color-wrapped-callout-theme);
+}
+
+/* Slotted headings keep their semantics but take the callout's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.wrapped-callout__callout ::slotted(h2) {
+  font: var(--font-style-heading-h4-yale-new) !important;
+  font-variant-numeric: oldstyle-nums !important;
+  color: var(--color-heading, currentcolor);
+}
+
+.wrapped-callout__callout ::slotted(:first-child) {
+  margin-top: 0 !important;
+}
+
+.wrapped-callout__callout ::slotted(:last-child) {
+  margin-bottom: 0 !important;
+}
+
+/* With body text alongside, the box floats left or right (left is the default) and the text
+   wraps around it. 992px is --break-l. */
+@media (min-width: 992px) {
+  .wrapped-callout--has-content .wrapped-callout__callout {
+    max-width: 35%;
+    float: left;
+    margin-right: 3%;
+    margin-bottom: 2%;
+  }
+
+  :host(ycl-wrapped-callout[alignment="right"]) .wrapped-callout--has-content .wrapped-callout__callout {
+    float: right;
+    margin-right: 0;
+    margin-left: 3%;
+  }
+}

@@ -1,0 +1,211 @@
+/* Custom elements default to display: inline. */
+:host(ycl-alert) {
+  display: block;
+
+  /* Mirrors YaleSites' layout gutter, which isn't a token. */
+  --size-spacing-site-gutter: var(--size-spacing-5);
+  --size-icon: 1.25rem;
+  --color-link-base: currentcolor;
+  --color-link-hover: currentcolor;
+  --color-link-visited-base: currentcolor;
+  --color-link-visited-hover: currentcolor;
+}
+
+/* 768px is --break-m, 992px --break-l, 1200px --break-xl, 1400px --break-2xl. */
+@media (min-width: 768px) {
+  :host(ycl-alert) { --size-spacing-site-gutter: var(--size-spacing-6); }
+}
+
+@media (min-width: 992px) {
+  :host(ycl-alert) { --size-spacing-site-gutter: var(--size-spacing-7); }
+}
+
+@media (min-width: 1200px) {
+  :host(ycl-alert) { --size-spacing-site-gutter: var(--size-spacing-8); }
+}
+
+@media (min-width: 1400px) {
+  :host(ycl-alert) { --size-spacing-site-gutter: var(--size-spacing-10); }
+}
+
+/* Alert types. Only emergency has a text token; the others inherit the page text colour.
+   `initial` stops an outer emergency alert's text colour leaking into a nested one. */
+:host(ycl-alert),
+:host(ycl-alert[type="announcement"]) {
+  --color-alert-background: var(--color-alert-announcement-background-color);
+  --color-alert-border: var(--color-alert-announcement-border-color);
+  --color-alert-text: initial;
+}
+
+:host(ycl-alert[type="emergency"]) {
+  --color-alert-background: var(--color-alert-emergency-background-color);
+  --color-alert-border: var(--color-alert-emergency-border-color);
+  --color-alert-text: var(--color-alert-emergency-text);
+}
+
+:host(ycl-alert[type="marketing"]) {
+  --color-alert-background: var(--color-alert-marketing-background-color);
+  --color-alert-border: var(--color-alert-marketing-border-color);
+  --color-alert-text: initial;
+}
+
+.alert [hidden] {
+  display: none;
+}
+
+/* max-height is what lets the dismissal animate. */
+.alert {
+  position: relative;
+  z-index: 3;
+  background-color: var(--color-alert-background);
+  color: var(--color-alert-text, var(--color-text));
+  max-height: 25rem;
+  opacity: 1;
+  overflow: hidden;
+  padding-inline: var(--size-spacing-site-gutter);
+}
+
+:host(ycl-alert[state="dismissed"]) .alert {
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0;
+}
+
+.alert__inner {
+  display: flex;
+  align-items: flex-start;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+  padding-block: var(--size-spacing-5);
+}
+
+.alert__icon {
+  display: flex;
+  margin-right: var(--size-spacing-3);
+  flex: 0 0 var(--size-icon);
+}
+
+.alert__icon svg,
+.alert__toggle svg {
+  height: var(--size-icon);
+  width: var(--size-icon);
+  fill: currentColor;
+}
+
+.alert__content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: var(--size-spacing-3);
+}
+
+/* Slotted headings keep their semantics but take the alert's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.alert__heading ::slotted(*) {
+  font: var(--font-style-heading-h5-yale-new) !important;
+  font-variant-numeric: oldstyle-nums !important;
+  margin: 0 !important;
+  color: inherit;
+}
+
+.alert__text {
+  font: var(--font-style-body-s-condensed);
+  margin-top: var(--size-spacing-2);
+  max-width: var(--size-component-layout-width-content);
+}
+
+.alert__text ::slotted(:last-child) {
+  margin-bottom: 0;
+}
+
+.alert__link {
+  font: var(--font-style-body-s);
+  margin-bottom: var(--size-spacing-2);
+}
+
+.alert__link ::slotted(a) {
+  color: inherit;
+}
+
+:host(ycl-alert[state="collapsed"]) .alert__text,
+:host(ycl-alert[state="collapsed"]) .alert__link {
+  display: none;
+}
+
+.alert__toggle {
+  --size-icon: 1.25rem;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  flex: 0 0 var(--size-icon);
+  display: flex;
+  transform: rotate(180deg);
+  cursor: pointer;
+
+  /* 2px of padding brings the 20px icon up to WCAG 2.2's 24px minimum target size. */
+  padding: var(--size-spacing-1);
+}
+
+:host(ycl-alert[state="collapsed"]) .alert__toggle {
+  transform: rotate(0deg);
+}
+
+/* 991.95px is --break-mobile-max. */
+@media (max-width: 991.95px) {
+  .alert__icon {
+    padding-top: var(--size-spacing-1);
+  }
+
+  .alert__content {
+    gap: var(--size-spacing-3);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  .alert__inner {
+    align-items: center;
+  }
+
+  .alert__icon {
+    --size-icon: 2.125rem;
+
+    margin-right: var(--size-spacing-5);
+    align-self: flex-start;
+  }
+
+  :host(ycl-alert[state="collapsed"]) .alert__icon {
+    --size-icon: 1.5625rem;
+
+    align-self: auto;
+  }
+
+  .alert__content {
+    gap: var(--size-spacing-5);
+    justify-content: space-between;
+    align-items: center;
+    padding-right: var(--size-spacing-7);
+    border-right: var(--border-thickness-1) solid var(--color-alert-border);
+  }
+
+  :host(ycl-alert[state="collapsed"]) .alert__content {
+    border: none;
+  }
+
+  .alert__toggle {
+    --size-icon: 1.5625rem;
+
+    padding: var(--size-spacing-3);
+    margin-left: var(--size-spacing-5);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .alert__animate {
+    transition: all var(--animation-speed-slow) ease-in-out;
+  }
+}
