@@ -1,0 +1,284 @@
+/* Custom elements default to display: inline. */
+:host(ycl-taxonomy-display),
+:host(ycl-taxonomy-display-item) {
+  display: block;
+}
+
+:host(ycl-taxonomy-display[hidden]),
+:host(ycl-taxonomy-display-item[hidden]) {
+  display: none;
+}
+
+/* Component themes.
+   Colours are handed to the items (and to any slotted text-link) through inherited custom
+   properties. Each theme reads its colour slots from the site's global theme when one is set (see
+   below), otherwise from the component theme tokens. */
+:host(ycl-taxonomy-display) {
+  padding-block: var(--size-spacing-6);
+  background-color: var(--color-gray-100);
+}
+
+:host(ycl-taxonomy-display[theme]:not([theme="default"])) {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+:host(ycl-taxonomy-display[theme="one"]) {
+  --color-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-taxonomy-display[theme="two"]) {
+  --color-background: var(--color-slot-four, var(--component-themes-two-slot-four));
+  --color-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+}
+
+:host(ycl-taxonomy-display[theme="three"]) {
+  --color-background: var(--color-slot-five, var(--component-themes-three-slot-five));
+  --color-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-taxonomy-display[theme="four"]) {
+  --color-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
+  --color-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+}
+
+:host(ycl-taxonomy-display[theme="five"]) {
+  --color-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
+  --color-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+/* There are no component-theme-six tokens and slot-nine isn't in the current tokens release, so
+   without a global theme this renders with no background, as the reference does. Text falls back
+   to gray-800, the slot-seven value in every other theme. */
+:host(ycl-taxonomy-display[theme="six"]) {
+  --color-background: var(--color-slot-nine, transparent);
+  --color-text: var(--color-slot-seven, var(--color-gray-800));
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-text);
+  --color-link-visited-hover: var(--color-text);
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). */
+[data-global-theme="one"] ycl-taxonomy-display {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-six: var(--global-themes-one-colors-slot-six);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
+}
+
+[data-global-theme="two"] ycl-taxonomy-display {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-six: var(--global-themes-two-colors-slot-six);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
+}
+
+[data-global-theme="three"] ycl-taxonomy-display {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-six: var(--global-themes-three-colors-slot-six);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
+}
+
+/* Global theme four swaps slots two and five so each component theme keeps its intended
+   background. */
+[data-global-theme="four"] ycl-taxonomy-display {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+  --color-slot-six: var(--global-themes-four-colors-slot-six);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
+}
+
+/* Lighter visited links keep contrast on this background. */
+[data-global-theme="four"] ycl-taxonomy-display[theme="three"] {
+  --color-link-visited-base: var(--color-gray-100);
+  --color-link-visited-hover: var(--color-slot-eight);
+}
+
+[data-global-theme="five"] ycl-taxonomy-display {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-six: var(--global-themes-five-colors-slot-six);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
+}
+
+[data-global-theme="six"] ycl-taxonomy-display {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-six: var(--global-themes-six-colors-slot-six);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+}
+
+/* Layout. */
+.taxonomy-display__inner {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+}
+
+:host(ycl-taxonomy-display[width="content"]) .taxonomy-display__inner {
+  max-width: var(--size-component-layout-width-content);
+}
+
+:host(ycl-taxonomy-display[width="highlight"]) .taxonomy-display__inner {
+  max-width: var(--size-component-layout-width-highlight);
+}
+
+.taxonomy-display__list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  column-gap: var(--size-spacing-6);
+  row-gap: var(--size-spacing-4);
+}
+
+/* 992px is --break-mobile; custom properties can't be used in media queries. */
+@media (min-width: 992px) {
+  .taxonomy-display__content {
+    width: 100%;
+    max-width: 80%;
+  }
+
+  .taxonomy-display__list {
+    column-gap: var(--size-spacing-8);
+    row-gap: var(--size-spacing-6);
+  }
+}
+
+/* Items. */
+.taxonomy-display__item {
+  display: inline-flex;
+  gap: var(--size-spacing-5);
+  align-items: center;
+}
+
+.taxonomy-display__item__label {
+  text-transform: uppercase;
+  font-weight: var(--font-weights-yalenew-bold);
+  font-family: var(--font-families-mallory);
+  font-size: var(--font-size-14);
+}
+
+.taxonomy-display__item__label::after {
+  content: ":";
+}
+
+.taxonomy-display__item__list {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--size-spacing-3);
+  padding-bottom: var(--size-spacing-3);
+}
+
+.taxonomy-display__item__list--empty {
+  padding-bottom: 0;
+}
+
+.taxonomy-display__item__none {
+  text-transform: uppercase;
+  font-family: var(--font-families-mallory);
+  font-size: var(--font-size-14);
+}
+
+.taxonomy-display__item__none[hidden] {
+  display: none;
+}
+
+/* Terms: plain <a>s or text-links. The comma is positioned out of flow so it sits outside the
+   link's underline even though, for a plain <a>, it's inside the link box. */
+.taxonomy-display__item__list ::slotted(*) {
+  position: relative;
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weights-mallory-book);
+}
+
+.taxonomy-display__item__list ::slotted(:not(:last-child))::after {
+  content: ",";
+  position: absolute;
+  left: 100%;
+  color: var(--color-text);
+}
+
+.taxonomy-display__item__list ::slotted(a) {
+  --thickness: var(--link-underline-size-default);
+  color: var(--color-link-base);
+  text-decoration: none;
+  line-height: normal;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0 1.15em;
+  background-repeat: no-repeat;
+  background-size: 100% var(--thickness);
+}
+
+.taxonomy-display__item__list ::slotted(a:hover) {
+  color: var(--color-link-hover);
+  background-size: 0 var(--thickness);
+}
+
+.taxonomy-display__item__list ::slotted(a:visited) {
+  color: var(--color-link-visited-base);
+}
+
+.taxonomy-display__item__list ::slotted(a:visited:hover) {
+  color: var(--color-link-visited-hover);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .taxonomy-display__item__list ::slotted(a) {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  }
+}

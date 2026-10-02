@@ -1,0 +1,89 @@
+/* Custom elements default to display: inline. */
+:host(ycl-image-block) {
+  display: block;
+  /* The Twig spacing-page-inner mixin uses --spacing-page-inner, which the Twig layout defines
+     (not the tokens package) as --size-spacing-7. */
+  margin-bottom: var(--size-spacing-7);
+}
+
+:host(ycl-image-block[hidden]) {
+  display: none;
+}
+
+/* Content is the default width for this component. */
+.content-image__inner {
+  width: 100%;
+  max-width: var(--size-component-layout-width-content);
+  margin-inline: auto;
+}
+
+:host(ycl-image-block[width="highlight"]) .content-image__inner {
+  max-width: var(--size-component-layout-width-highlight);
+}
+
+:host(ycl-image-block[width="site"]) .content-image__inner {
+  max-width: var(--size-component-layout-width-site);
+}
+
+:host(ycl-image-block[width="max"]) .content-image__inner {
+  max-width: var(--size-component-layout-width-max);
+}
+
+.content-image .figure {
+  margin: 0;
+}
+
+:host(ycl-image-block[alignment="left"]) .figure {
+  max-width: var(--size-component-layout-width-content);
+}
+
+.content-image ::slotted(img),
+.content-image ::slotted(picture) {
+  display: block;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* A <picture>'s <img> is nested, out of ::slotted()'s reach, so this is a document rule; it only
+   applies when base.css is also loaded in the document (as index.html and Storybook do). */
+ycl-image-block > picture img {
+  display: block;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+.content-image .caption {
+  font: var(--font-style-body-s-condensed);
+  color: var(--color-basic-brown-gray);
+  margin-top: var(--size-spacing-4);
+}
+
+.content-image .caption ::slotted(p) {
+  margin: 0;
+}
+
+/* Caption links use the plain underline style rather than the animated one. Links are usually
+   nested inside the slotted caption element, out of ::slotted()'s reach, so these are document
+   rules; they only apply when base.css is also loaded in the document. */
+ycl-image-block > [slot="caption"] a,
+ycl-image-block > a[slot="caption"] {
+  color: var(--color-link-base);
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  font-weight: var(--font-weights-mallory-book);
+  line-height: normal;
+  cursor: pointer;
+}
+
+ycl-image-block > [slot="caption"] a:hover,
+ycl-image-block > a[slot="caption"]:hover {
+  text-decoration: none;
+  color: var(--color-gray-800);
+}
+
+ycl-image-block > [slot="caption"] a:visited,
+ycl-image-block > a[slot="caption"]:visited {
+  color: var(--color-link-visited-base);
+}

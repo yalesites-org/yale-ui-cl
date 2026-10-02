@@ -1,0 +1,89 @@
+/* Custom elements default to display: inline. */
+:host(ycl-related-content),
+:host(ycl-related-content-item) {
+  display: block;
+}
+
+:host(ycl-related-content[hidden]),
+:host(ycl-related-content-item[hidden]) {
+  display: none;
+}
+
+:host(ycl-related-content) {
+  margin-block-start: var(--size-spacing-10);
+}
+
+.related-content__inner {
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin: 0 auto;
+}
+
+:host(ycl-related-content[width="content"]) .related-content__inner {
+  max-width: var(--size-component-layout-width-content);
+}
+
+.related-content__heading {
+  font: var(--font-style-heading-h3-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-heading);
+  margin-block-end: var(--size-spacing-7);
+}
+
+.related-content__heading[hidden] {
+  display: none;
+}
+
+/* Slotted headings keep their semantics (h2) but take the h3 visual size, matching the
+   card-collection "related" treatment. !important is needed because, without it, the document's
+   h1-h6 rules beat ::slotted(). */
+.related-content__heading ::slotted(*) {
+  font: inherit !important;
+  color: inherit !important;
+  margin: 0 !important;
+}
+
+/* The default slot's children (cards) are the grid items. */
+.related-content__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--size-spacing-7);
+}
+
+/* 768px is --break-m; custom properties can't be used in media queries. */
+@media (min-width: 768px) {
+  .related-content__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Related card (one per item). */
+.related-card__eyebrow {
+  font: var(--font-style-body-s);
+  color: var(--color-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 var(--size-spacing-3);
+}
+
+.related-card__title {
+  font: var(--font-style-heading-h4-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  margin: 0;
+}
+
+.related-card__title ::slotted(*) {
+  font: inherit !important;
+  color: inherit !important;
+  margin: 0 !important;
+}
+
+.related-card__link {
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+.related-card__link:hover,
+.related-card__link:focus-visible {
+  text-decoration: underline;
+}

@@ -1,0 +1,124 @@
+/* Custom elements default to display: inline. */
+:host(ycl-page-title) {
+  display: block;
+  /* The Twig spacing-page-inner mixin uses --spacing-page-inner, which the Twig layout defines
+     (not the tokens package) as --size-spacing-7. */
+  margin-bottom: var(--size-spacing-7);
+}
+
+/* A :host display rule would otherwise beat the UA's [hidden] rule. */
+:host(ycl-page-title[hidden]),
+:host(ycl-page-title[display="hidden"]) {
+  display: none;
+}
+
+/* The title stays in the accessibility tree (and document outline) but isn't shown. */
+:host(ycl-page-title[display="visually-hidden"]) {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  margin: 0;
+  word-wrap: normal;
+}
+
+.page-title__inner {
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+}
+
+:host(ycl-page-title[width="content"]) .page-title__inner {
+  max-width: var(--size-component-layout-width-content);
+}
+
+:host(ycl-page-title[width="highlight"]) .page-title__inner {
+  max-width: var(--size-component-layout-width-highlight);
+}
+
+:host(ycl-page-title[width="max"]) .page-title__inner {
+  max-width: var(--size-component-layout-width-max);
+}
+
+.page-title__heading {
+  font: var(--font-style-heading-h1-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-heading);
+  margin: 0;
+}
+
+:host(ycl-page-title:not([width])) .page-title__heading,
+:host(ycl-page-title[width="site"]) .page-title__heading {
+  max-width: var(--size-component-layout-width-highlight);
+}
+
+.page-title__prefix {
+  font: var(--font-style-heading-h2-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-basic-brown-gray);
+  text-transform: uppercase;
+}
+
+.page-title__social-links {
+  display: flex;
+  margin-top: var(--size-spacing-5);
+}
+
+.page-title__social-links[hidden],
+.page-title .basic-meta[hidden] {
+  display: none;
+}
+
+/* Event variation: the image slot sits beside the title on wide screens. */
+:host(ycl-page-title[variation="event"]) .page-title__top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--size-spacing-6);
+}
+
+/* 992px is --break-l; custom properties can't be used in media queries. */
+@media (min-width: 992px) {
+  :host(ycl-page-title[variation="event"]) .page-title__top {
+    flex-direction: row;
+  }
+
+  :host(ycl-page-title[variation="event"]) .page-title__title-wrap {
+    flex: 1 0 50%;
+  }
+}
+
+/* Meta line (the Twig basic-meta molecule). */
+.page-title .basic-meta {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-gray-600);
+  margin-top: var(--size-spacing-4);
+  font: var(--font-style-body-s);
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  .page-title .basic-meta {
+    flex-direction: row;
+    font: var(--font-style-body-default-condensed);
+  }
+
+  /* The "|" separators go between meta items. ::slotted() can't use combinators, and
+     :not(:first-child) would count the author's other slotted siblings, so this is a document
+     rule; it only applies when base.css is also loaded in the document (as index.html and
+     Storybook do). Without it the items still lay out, just without separators. */
+  ycl-page-title > [slot="meta"] ~ [slot="meta"] {
+    position: relative;
+    margin-left: var(--size-spacing-5);
+    padding-left: var(--size-spacing-5);
+  }
+
+  ycl-page-title > [slot="meta"] ~ [slot="meta"]::before {
+    position: absolute;
+    content: "|";
+    left: -0.225rem;
+  }
+}

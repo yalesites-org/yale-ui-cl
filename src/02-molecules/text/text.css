@@ -1,0 +1,113 @@
+/* Custom elements default to display: inline. */
+:host(ycl-text) {
+  display: block;
+  /* The Twig spacing-page-inner mixin uses --spacing-page-inner, which the Twig layout defines
+     (not the tokens package) as --size-spacing-7. */
+  margin-bottom: var(--size-spacing-7);
+}
+
+:host(ycl-text[hidden]) {
+  display: none;
+}
+
+.text-field__inner {
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+}
+
+:host(ycl-text[width="content"]) .text-field__inner {
+  max-width: var(--size-component-layout-width-content);
+}
+
+:host(ycl-text[width="highlight"]) .text-field__inner {
+  max-width: var(--size-component-layout-width-highlight);
+}
+
+:host(ycl-text[width="max"]) .text-field__inner {
+  max-width: var(--size-component-layout-width-max);
+}
+
+:host(ycl-text[alignment="left"]) .text {
+  max-width: var(--size-component-layout-width-content);
+}
+
+/* Intro text: the slotted prose inherits the larger size. */
+:host(ycl-text[variation="emphasized"]) .text-field {
+  font: var(--font-style-body-xl);
+}
+
+/* Prose. These are document rules rather than ::slotted() ones, because ::slotted() only reaches
+   the top-level slotted elements and WYSIWYG content nests. They only apply when base.css is
+   loaded in the document (as index.html and Storybook do); every selector is scoped to ycl-text
+   so they can't leak into the rest of the page. */
+ycl-text :is(h1, h2, h3, h4, h5, h6):not([class]) {
+  color: var(--color-heading);
+  margin-top: 0;
+  margin-block-end: 0.6em;
+}
+
+ycl-text :is(h1, h2, h3, h4, h5, h6):not([class]):not(:first-child) {
+  margin-top: 1em;
+}
+
+ycl-text p {
+  margin-block-end: var(--font-spacing-paragraph);
+}
+
+ycl-text p:last-child {
+  margin-bottom: 0;
+}
+
+ycl-text strong {
+  font-weight: var(--font-weights-mallory-medium);
+}
+
+ycl-text li {
+  padding-left: var(--size-spacing-1);
+}
+
+ycl-text pre code {
+  display: block;
+  padding: var(--size-spacing-5);
+  overflow-x: auto;
+}
+
+ycl-text a {
+  --thickness: var(--link-underline-size-default);
+  color: var(--color-link-base);
+  text-decoration: none;
+  font-weight: var(--font-weights-mallory-book);
+  line-height: normal;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0 1.15em;
+  background-repeat: no-repeat;
+  background-size: 100% var(--thickness);
+}
+
+ycl-text a:hover {
+  color: var(--color-link-hover);
+  background-size: 0 var(--thickness);
+}
+
+/* The underline is dropped while the focus ring is showing. */
+ycl-text a:focus-visible {
+  background-size: 0 var(--thickness);
+}
+
+ycl-text a:visited {
+  color: var(--color-link-visited-base);
+}
+
+ycl-text a:visited:hover,
+ycl-text a:visited:focus {
+  color: var(--color-link-visited-hover);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ycl-text a {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  }
+}

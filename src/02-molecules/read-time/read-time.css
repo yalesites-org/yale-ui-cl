@@ -1,0 +1,15 @@
+/* Custom elements default to display: inline. The Twig version stays hidden until JS runs; a
+   custom element only renders once its script has defined it, so that guard isn't needed. */
+:host(ycl-read-time) {
+  display: block;
+}
+
+:host(ycl-read-time[hidden]) {
+  display: none;
+}
+
+.read-time {
+  font: var(--font-style-body-s);
+  color: var(--color-gray-600);
+  margin-top: var(--size-spacing-4);
+}

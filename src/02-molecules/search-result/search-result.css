@@ -1,0 +1,150 @@
+/* Custom elements default to display: inline. */
+:host(ycl-search-result) {
+  display: block;
+}
+
+:host(ycl-search-result[hidden]) {
+  display: none;
+}
+
+.search-result {
+  padding: var(--size-spacing-6) 0;
+  border-bottom: var(--border-thickness-1) solid var(--color-gray-300);
+}
+
+/* 991.95px is --break-mobile-max; custom properties can't be used in media queries. */
+@media (min-width: 991.95px) {
+  .search-result {
+    max-width: var(--size-component-layout-width-content);
+    padding: var(--size-spacing-7) 0;
+  }
+}
+
+.search-result:hover {
+  box-shadow: var(--drop-shadow-level-1-bottom-shadow-only);
+}
+
+/* The whole result shows the focus ring for its title link, so the link's own ring is dropped.
+   !important is needed to beat the util layer's *:focus-visible rule. */
+.search-result:has(.search-result__heading-link:focus-visible) {
+  outline: var(--size-thickness-2) solid var(--color-link-base);
+  outline-offset: var(--size-thickness-2);
+}
+
+.search-result__heading-link:focus-visible {
+  outline: none !important;
+}
+
+.search-result__content-type {
+  font: var(--font-style-body-s);
+  color: var(--color-blue-yale);
+  font-size: 1rem;
+  font-weight: var(--font-weights-mallory-medium);
+  text-transform: capitalize;
+  margin-bottom: var(--size-spacing-3);
+}
+
+.search-result__heading {
+  font: var(--font-style-heading-h4-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-gray-800);
+}
+
+/* Slotted headings keep their semantics but take the result heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.search-result__heading ::slotted(*) {
+  font: inherit !important;
+  color: inherit !important;
+  margin: 0 !important;
+  display: inline !important;
+}
+
+/* The underline slides in when anywhere on the result is hovered. */
+.search-result__heading-link {
+  --thickness: var(--link-underline-size-default);
+  color: currentcolor;
+  text-decoration: none;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0 1.05em;
+  background-repeat: no-repeat;
+  background-size: 0 var(--thickness);
+}
+
+.search-result__heading-link:visited {
+  color: var(--color-link-visited-base);
+}
+
+.search-result:hover .search-result__heading-link,
+.search-result__heading-link:focus-visible {
+  background-size: 100% var(--thickness);
+}
+
+.search-result:hover .search-result__heading-link {
+  color: var(--color-link-hover);
+}
+
+.search-result:hover .search-result__heading-link:visited {
+  color: var(--color-link-visited-hover);
+}
+
+.search-result__prefix-icon {
+  display: none;
+}
+
+:host(ycl-search-result[cas]) .search-result__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--size-spacing-3);
+}
+
+:host(ycl-search-result[cas]) .search-result__prefix-icon {
+  display: inline-flex;
+}
+
+:host(ycl-search-result[cas]) .search-result__details {
+  display: none;
+}
+
+.search-result__icon {
+  width: var(--size-spacing-5);
+  height: var(--size-spacing-5);
+  fill: currentColor;
+}
+
+.search-result__breadcrumbs {
+  font: var(--font-style-body-s);
+  color: var(--color-basic-brown-gray);
+}
+
+.search-result__highlighted,
+.search-result__teaser {
+  margin: var(--size-spacing-3) 0;
+}
+
+.search-result__highlighted ::slotted(*),
+.search-result__teaser ::slotted(*) {
+  margin-block: 0;
+}
+
+.search-result__teaser {
+  color: var(--color-gray-600);
+}
+
+.search-result__highlighted ::slotted(strong) {
+  color: var(--color-gray-800);
+}
+
+/* The matched term is usually a <strong> inside the slotted excerpt, which ::slotted() can't
+   reach, so this is a document rule; it only applies when base.css is also loaded in the document
+   (as index.html and Storybook do). */
+ycl-search-result > [slot="highlighted"] strong {
+  color: var(--color-gray-800);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .search-result__heading-link {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  }
+}
