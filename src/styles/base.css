@@ -48,3 +48,10 @@
 @import "../02-molecules/wrapped-image/wrapped-image.css" layer(components.wrapped-image);
 @import "../02-molecules/content-spotlight-portrait/content-spotlight-portrait.css" layer(components.content-spotlight-portrait);
 @import "../02-molecules/facts-and-figures/facts-and-figures.css" layer(components.facts-and-figures);
+@import "../02-molecules/link-group/link-group.css" layer(components.link-group);
+@import "../02-molecules/link-grid/link-grid.css" layer(components.link-grid);
+@import "../02-molecules/link-skip/link-skip.css" layer(components.link-skip);
+@import "../02-molecules/social-links/social-links.css" layer(components.social-links);
+@import "../02-molecules/pager/pager.css" layer(components.pager);
+@import "../02-molecules/tabs/tabs.css" layer(components.tabs);
+@import "../02-molecules/quick-links/quick-links.css" layer(components.quick-links);

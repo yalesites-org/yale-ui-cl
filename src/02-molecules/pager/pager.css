@@ -1,0 +1,114 @@
+/* Custom elements default to display: inline. */
+:host(ycl-pager) {
+  display: block;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pager[hidden] {
+  display: none;
+}
+
+.pager__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-spacing-3);
+}
+
+.pager__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pager__item--previous {
+  margin-right: var(--size-spacing-6);
+}
+
+.pager__item--next {
+  margin-left: var(--size-spacing-6);
+}
+
+.pager__link {
+  display: flex;
+  gap: var(--size-spacing-1);
+  min-height: var(--size-click-target-minimum);
+  min-width: var(--size-click-target-minimum);
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  color: var(--color-heading);
+  text-decoration: none;
+  border: var(--size-thickness-2) solid transparent;
+  padding: var(--size-spacing-2);
+  border-radius: var(--radius-4);
+}
+
+.pager__link:focus-visible {
+  color: var(--color-link-base);
+}
+
+/* Page numbers fill on hover; the arrows only change colour. */
+a.pager__link:not(.pager__link--previous, .pager__link--next):hover {
+  background-color: var(--color-link-base);
+  border-color: var(--color-link-base);
+  color: var(--color-basic-white);
+}
+
+.pager__link--previous:hover,
+.pager__link--next:hover {
+  color: var(--color-link-base);
+}
+
+.pager__link.is-active {
+  color: var(--color-basic-brown-gray);
+  border-color: var(--color-basic-brown-gray);
+}
+
+.pager__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--size-click-target-minimum);
+  min-width: var(--size-click-target-minimum);
+  color: var(--color-text);
+  font-weight: 600;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pager__icon {
+  height: 0.8em;
+  width: 0.8em;
+  fill: currentColor;
+}
+
+.pager__icon--previous {
+  transform: rotate(90deg);
+}
+
+.pager__icon--next {
+  transform: rotate(-90deg);
+}
+
+/* 991.95px is just under --break-mobile; custom properties can't be used in media queries. */
+@media (max-width: 991.95px) {
+  .pager__item--desktop,
+  .pager__item--ellipsis {
+    display: none;
+  }
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  .pager__item--mobile {
+    display: none;
+  }
+}

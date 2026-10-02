@@ -1,0 +1,292 @@
+/* Custom elements default to display: inline. */
+:host(ycl-quick-links) {
+  display: block;
+}
+
+/* Component themes. These are set on the host, not namespaced, because the slotted description
+   and links have to pick up the theme's text and link colours too.
+   Each theme takes its colours from the slots. The slots come from the site's global theme when
+   one is set (see below), otherwise from global theme one, the YaleSites default. */
+:host(ycl-quick-links) {
+  --color-background: var(--color-slot-one, var(--global-themes-one-colors-slot-one));
+  --color-text: var(--color-basic-white);
+  --color-heading: var(--color-basic-white);
+  --color-action: var(--color-basic-white);
+  --color-action-secondary: var(--color-slot-one, var(--global-themes-one-colors-slot-one));
+  --color-link-base: var(--color-slot-eight, var(--global-themes-one-colors-slot-eight));
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-quick-links[theme="two"]) {
+  --color-background: var(--color-slot-four, var(--global-themes-one-colors-slot-four));
+  --color-text: var(--color-gray-800);
+  --color-heading: var(--color-gray-800);
+  --color-action: var(--color-gray-800);
+  --color-action-secondary: var(--color-basic-white);
+  --color-link-base: var(--color-slot-seven, var(--global-themes-one-colors-slot-seven));
+  --color-link-visited-base: var(--color-purple-visited);
+  --color-link-visited-hover: var(--color-purple-visited-hover);
+}
+
+:host(ycl-quick-links[theme="three"]) {
+  --color-background: var(--color-slot-five, var(--global-themes-one-colors-slot-five));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). */
+[data-global-theme="one"] ycl-quick-links {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+}
+
+[data-global-theme="two"] ycl-quick-links {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+}
+
+[data-global-theme="three"] ycl-quick-links {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+}
+
+[data-global-theme="four"] ycl-quick-links {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-five);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+}
+
+[data-global-theme="five"] ycl-quick-links {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+}
+
+[data-global-theme="six"] ycl-quick-links {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+}
+
+/* The inline padding is the YaleSites site gutter, which isn't a token. */
+.quick-links {
+  position: relative;
+  overflow: hidden;
+  padding-inline: var(--size-spacing-5);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.quick-links__inner {
+  display: grid;
+  gap: var(--size-spacing-6);
+  align-items: center;
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+}
+
+:host(ycl-quick-links:not([variation="subtle"])) .quick-links__inner {
+  padding-block: var(--size-spacing-9);
+}
+
+.quick-links__text {
+  z-index: 1;
+  display: grid;
+  gap: var(--size-spacing-4);
+}
+
+.quick-links__text > [hidden],
+.quick-links__inner > [hidden] {
+  display: none;
+}
+
+.quick-links__heading {
+  font: var(--font-style-heading-h2-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-heading);
+}
+
+/* Slotted headings keep their semantics but take the component's heading type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.quick-links__heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+[data-quick-links-layout="stacked"] .quick-links__heading,
+[data-quick-links-layout="stacked"] .quick-links__description {
+  text-align: center;
+}
+
+.quick-links__description ::slotted(:last-child) {
+  margin-bottom: 0;
+}
+
+.quick-links__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: grid;
+  align-items: start;
+  row-gap: var(--size-spacing-6);
+  column-gap: var(--size-spacing-7);
+}
+
+.quick-links__list-item {
+  height: 100%;
+}
+
+:host(ycl-quick-links:not([variation="subtle"])) .quick-links__list-item {
+  display: grid;
+}
+
+/* Links are outline CTAs. */
+.quick-links__list-item ::slotted(a) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: var(--size-click-target-minimum);
+  padding: var(--size-spacing-3) var(--size-spacing-6);
+  border: var(--border-thickness-2) solid var(--color-action);
+  border-radius: var(--radius-0);
+  background-color: transparent;
+  color: var(--color-action);
+  fill: var(--color-action);
+  font-weight: var(--font-weights-mallory-medium);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.quick-links__list-item ::slotted(a:hover) {
+  background-color: var(--color-action);
+  color: var(--color-action-secondary);
+  fill: var(--color-action-secondary);
+}
+
+.quick-links__list-item ::slotted(a:focus-visible) {
+  outline: var(--size-thickness-2) solid var(--color-link-base);
+  outline-offset: var(--size-thickness-2);
+}
+
+/* In the promotional variation the image is a faint full-bleed backdrop. */
+:host(ycl-quick-links:not([variation="subtle"])) .quick-links__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-blend-mode: multiply;
+  background-color: var(--color-background);
+  opacity: 0.15;
+}
+
+:host(ycl-quick-links:not([variation="subtle"])) .quick-links__image ::slotted(img) {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.quick-links__image ::slotted(img) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 576px is --break-s; custom properties can't be used in media queries. */
+@media (min-width: 576px) {
+  .quick-links__inner {
+    gap: var(--size-spacing-7);
+  }
+
+  :host(ycl-quick-links:not([variation="subtle"])) .quick-links__links {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  .quick-links {
+    padding-inline: var(--size-spacing-6);
+  }
+
+  .quick-links__text {
+    gap: var(--size-spacing-5);
+  }
+
+  :host(ycl-quick-links:not([variation="subtle"])) .quick-links__links {
+    gap: var(--size-spacing-7) var(--size-spacing-9);
+  }
+}
+
+/* 992px is --break-l. */
+@media (min-width: 992px) {
+  .quick-links {
+    padding-inline: var(--size-spacing-7);
+  }
+
+  .quick-links__inner {
+    gap: var(--size-spacing-8);
+  }
+
+  :host(ycl-quick-links:not([variation="subtle"])) .quick-links__links {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* 1200px is --break-xl. */
+@media (min-width: 1200px) {
+  .quick-links {
+    padding-inline: var(--size-spacing-8);
+  }
+
+  .quick-links__inner {
+    gap: var(--size-spacing-9);
+  }
+
+  [data-quick-links-layout="fluid"] .quick-links__inner {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .quick-links__text {
+    gap: var(--size-spacing-6);
+  }
+
+  :host(ycl-quick-links:not([variation="subtle"])) [data-quick-links-layout="stacked"] .quick-links__links {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  :host(ycl-quick-links:not([variation="subtle"])) [data-quick-links-layout="fluid"] .quick-links__links {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 1400px is --break-2xl. */
+@media (min-width: 1400px) {
+  .quick-links {
+    padding-inline: var(--size-spacing-10);
+  }
+
+  :host(ycl-quick-links:not([variation="subtle"])) [data-quick-links-layout="fluid"] .quick-links__links {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

@@ -1,0 +1,250 @@
+/* Custom elements default to display: inline. */
+:host(ycl-tabs) {
+  display: block;
+}
+
+/* Component themes. Each theme takes its accent from one colour slot. The slots come from the
+   site's global theme when one is set (see below), otherwise from global theme one, the YaleSites
+   default. Themes four and five have no overrides in the Twig either, so they render as theme one;
+   the Twig's theme six depends on slot-nine, which isn't in the current tokens release. */
+:host(ycl-tabs) {
+  --color-tabs-action: var(--color-slot-one, var(--global-themes-one-colors-slot-one));
+  --color-tabs-background: var(--color-gray-100);
+  --color-tabs-selected: var(--color-basic-white);
+  --color-tabs-border: var(--color-gray-300);
+  --color-tabs-border-selected: var(--color-gray-500);
+  --color-heading: var(--color-gray-700);
+  --size-tabs-control: 4rem;
+}
+
+:host(ycl-tabs[theme="two"]) {
+  --color-tabs-action: var(--color-slot-two, var(--global-themes-one-colors-slot-two));
+}
+
+:host(ycl-tabs[theme="three"]) {
+  --color-tabs-action: var(--color-slot-five, var(--global-themes-one-colors-slot-five));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). */
+[data-global-theme="one"] ycl-tabs {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+}
+
+[data-global-theme="two"] ycl-tabs {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+}
+
+[data-global-theme="three"] ycl-tabs {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+}
+
+[data-global-theme="four"] ycl-tabs {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-two);
+  --color-slot-five: var(--global-themes-four-colors-slot-five);
+}
+
+[data-global-theme="five"] ycl-tabs {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+}
+
+[data-global-theme="six"] ycl-tabs {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+}
+
+.tabs {
+  overflow: hidden;
+  position: relative;
+  border-bottom: var(--size-thickness-1) solid var(--color-tabs-border-selected);
+}
+
+.tabs__tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: var(--size-tabs-control);
+}
+
+.tabs__tabs::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: var(--size-thickness-1) solid var(--color-tabs-border-selected);
+}
+
+/* Hidden scroll buttons use visibility so they can't be clicked through. */
+.tabs__control {
+  position: absolute;
+  top: var(--size-thickness-1);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--size-tabs-control) - var(--size-thickness-2));
+  height: calc(var(--size-tabs-control) - var(--size-thickness-2));
+  padding: 0;
+  background-color: var(--color-tabs-background);
+  border: var(--size-thickness-1) solid var(--color-tabs-border);
+  color: inherit;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tabs__control:hover {
+  color: var(--color-link-base);
+}
+
+.tabs__control svg {
+  height: 2.5em;
+  width: 2.5em;
+  fill: currentColor;
+}
+
+.tabs__control--left {
+  left: 0;
+  transform: rotate(90deg);
+}
+
+.tabs__control--right {
+  right: 0;
+  transform: rotate(-90deg);
+}
+
+[data-overflow="left"] .tabs__control--left,
+[data-overflow="both"] .tabs__control--left,
+[data-overflow="right"] .tabs__control--right,
+[data-overflow="both"] .tabs__control--right {
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+}
+
+/* scroll-padding keeps a tab scrolled into view clear of the overlaid scroll buttons. */
+.tabs__nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-padding-inline: var(--size-tabs-control);
+  scrollbar-width: none;
+}
+
+.tabs__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs__item {
+  flex-shrink: 0;
+  border-top: var(--size-thickness-1) solid var(--color-tabs-border);
+  border-left: var(--size-thickness-1) solid var(--color-tabs-border);
+  overflow: hidden;
+}
+
+.tabs__item:last-child {
+  border-right: var(--size-thickness-1) solid var(--color-tabs-border);
+}
+
+.tabs__item:has([aria-selected="true"]) {
+  border-color: var(--color-tabs-border-selected);
+}
+
+.tabs__item:has([aria-selected="true"]) + .tabs__item {
+  border-left-color: var(--color-tabs-border-selected);
+}
+
+.tabs__link {
+  display: block;
+  position: relative;
+  height: 100%;
+  margin: 0;
+  padding: var(--size-spacing-3) var(--size-spacing-7) var(--size-spacing-5);
+  border: 0;
+  border-top: var(--size-thickness-6) solid transparent;
+  background-color: var(--color-tabs-background);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tabs__link:hover {
+  color: var(--color-link-base);
+}
+
+.tabs__link:focus-visible {
+  outline-offset: -2px;
+}
+
+.tabs__link[aria-selected="true"] {
+  border-top-color: var(--color-tabs-action);
+  background-color: var(--color-tabs-selected);
+}
+
+/* Covers the strip's bottom border so the selected tab joins its panel. */
+.tabs__link[aria-selected="true"]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: var(--size-spacing-3) solid var(--color-tabs-selected);
+  z-index: 1;
+}
+
+.tabs__container {
+  padding-block: var(--size-spacing-9);
+}
+
+.tabs__inner {
+  max-width: var(--size-component-layout-width-content);
+  margin-inline: auto;
+}
+
+.tabs__content ::slotted(ycl-tab) {
+  display: block;
+}
+
+@keyframes tabs-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tabs__nav {
+    scroll-behavior: smooth;
+  }
+
+  /* On hide, visibility flips only after the fade finishes. */
+  .tabs__control {
+    transition:
+      opacity var(--animation-speed-default) ease-in-out,
+      visibility 0s linear var(--animation-speed-default);
+  }
+
+  [data-overflow="left"] .tabs__control--left,
+  [data-overflow="both"] .tabs__control--left,
+  [data-overflow="right"] .tabs__control--right,
+  [data-overflow="both"] .tabs__control--right {
+    transition-delay: 0s;
+  }
+
+  .tabs__container:not([hidden]) {
+    animation: tabs-fade-in 800ms ease-in-out;
+  }
+}

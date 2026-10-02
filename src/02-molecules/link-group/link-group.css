@@ -1,0 +1,112 @@
+/* Custom elements default to display: inline. */
+:host(ycl-link-group) {
+  display: block;
+}
+
+.link-group__inner {
+  --color-link-group-border: var(--color-gray-700);
+
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* The ul [hidden] attribute needs restating once display is set elsewhere. */
+.link-group__inner > [hidden] {
+  display: none;
+}
+
+/* --thickness-divider isn't in the tokens; YaleSites defaults it to --size-thickness-1. */
+.link-group__heading {
+  box-sizing: border-box;
+  font: var(--font-style-heading-h6-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  text-transform: var(--font-text-transform-h6-yale-new);
+  border-left: var(--size-thickness-1) solid var(--color-link-group-border);
+  padding: 0 var(--size-spacing-6) var(--size-spacing-3);
+}
+
+/* Needed if only one heading is present: it spans both columns and pushes the second down. */
+.link-group__heading--one {
+  flex: 1 0 100%;
+}
+
+.link-group__heading--two-headings {
+  flex: 1 0 50%;
+}
+
+/* Slotted headings keep their semantics but take the group heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.link-group__heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+.link-group__links-column {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-left: var(--size-thickness-1) solid var(--color-link-group-border);
+}
+
+/* Links take the CTA box (padding, click target) without any of its colours, like the Twig. */
+.link-group__list-item ::slotted(a) {
+  display: block;
+  box-sizing: border-box;
+  min-height: var(--size-click-target-minimum);
+  padding: var(--size-spacing-3) var(--size-spacing-6);
+  color: inherit;
+  font-weight: var(--font-weights-mallory-book);
+  line-height: 1.2;
+  text-align: left;
+  text-decoration: none;
+}
+
+.link-group__list-item ::slotted(a:hover) {
+  color: var(--color-link-base);
+}
+
+.link-group__list-item ::slotted(a:focus-visible) {
+  outline: var(--size-thickness-2) solid var(--color-link-base);
+  outline-offset: var(--size-thickness-2);
+}
+
+/* 767.95px is just under --break-m; custom properties can't be used in media queries. */
+@media (max-width: 767.95px) {
+  .link-group__inner {
+    display: grid;
+    grid-template:
+      'header-one'
+      'links-one'
+      'header-two'
+      'links-two'
+      / 1fr;
+  }
+
+  .link-group__heading--one {
+    grid-area: header-one;
+  }
+
+  .link-group__heading--two {
+    grid-area: header-two;
+  }
+
+  .link-group__links-column--one {
+    grid-area: links-one;
+    margin-bottom: var(--size-spacing-8);
+  }
+
+  .link-group__links-column--two {
+    grid-area: links-two;
+  }
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  .link-group__links-column {
+    flex: 0 0 50%;
+    margin-bottom: var(--size-spacing-3);
+  }
+}

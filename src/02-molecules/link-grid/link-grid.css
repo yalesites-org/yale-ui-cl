@@ -1,0 +1,234 @@
+/* Custom elements default to display: inline. */
+:host(ycl-link-grid) {
+  display: block;
+}
+
+/* Component themes. The accent drives the column borders only.
+   Each theme takes its accent from one colour slot. The slots come from the site's global theme
+   when one is set (see below), otherwise from global theme one, the YaleSites default. */
+:host(ycl-link-grid) {
+  --color-link-grid-action: var(--color-slot-one, var(--global-themes-one-colors-slot-one));
+}
+
+:host(ycl-link-grid[theme="two"]) {
+  --color-link-grid-action: var(--color-slot-three, var(--global-themes-one-colors-slot-three));
+}
+
+:host(ycl-link-grid[theme="three"]) {
+  --color-link-grid-action: var(--color-slot-five, var(--global-themes-one-colors-slot-five));
+}
+
+:host(ycl-link-grid[theme="four"]) {
+  --color-link-grid-action: var(--color-slot-four, var(--global-themes-one-colors-slot-four));
+}
+
+:host(ycl-link-grid[theme="five"]) {
+  --color-link-grid-action: var(--color-slot-two, var(--global-themes-one-colors-slot-two));
+}
+
+/* slot-nine isn't in the current tokens release; gray-700 is what the reference renders without it. */
+:host(ycl-link-grid[theme="six"]) {
+  --color-link-grid-action: var(--color-slot-nine, var(--color-gray-700));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). */
+[data-global-theme] ycl-link-grid {
+  --color-link-hover: var(--color-slot-two);
+}
+
+[data-global-theme="one"] ycl-link-grid {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
+}
+
+[data-global-theme="two"] ycl-link-grid {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
+}
+
+[data-global-theme="three"] ycl-link-grid {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
+}
+
+/* Global theme four swaps slots two and five so each component theme keeps its intended colour. */
+[data-global-theme="four"] ycl-link-grid {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
+}
+
+[data-global-theme="five"] ycl-link-grid {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
+}
+
+[data-global-theme="six"] ycl-link-grid {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+}
+
+.link-grid__inner {
+  --color-link-grid-border: var(--color-link-grid-action);
+
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin-inline: auto;
+}
+
+/* The heading paints no background of its own, so it takes the surrounding heading colour. */
+.link-grid__heading {
+  flex: 1 0 100%;
+  margin-bottom: var(--size-spacing-6);
+  font: var(--font-style-heading-h2-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-heading);
+}
+
+.link-grid__heading[hidden] {
+  display: none;
+}
+
+/* Slotted headings keep their semantics but take the grid's type styles.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.link-grid__heading ::slotted(*),
+.link-grid__column-heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+.link-grid__column-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: var(--size-spacing-7);
+  border-left: var(--size-thickness-1) solid var(--color-link-grid-border);
+  padding: var(--size-spacing-4) 0;
+}
+
+.link-grid__column-wrapper--has-heading {
+  padding-top: 0;
+}
+
+/* Line treatments. The default alternates: the first column gets the strong line. */
+:host(ycl-link-grid:not([line-treatment]))
+  .link-grid__heading + .link-grid__column-wrapper,
+:host(ycl-link-grid[line-treatment="default"])
+  .link-grid__heading + .link-grid__column-wrapper,
+:host(ycl-link-grid[line-treatment="all-strong-lines"]) .link-grid__column-wrapper {
+  border-left-width: var(--size-thickness-4);
+}
+
+:host(ycl-link-grid[line-treatment="no-lines"]) .link-grid__column-wrapper {
+  border-left: none;
+}
+
+/* Bottom padding matches the list items' bottom margin. */
+.link-grid__column-heading {
+  padding: 0 var(--size-spacing-6) var(--size-spacing-6);
+  font: var(--font-style-heading-h6-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  text-transform: var(--font-text-transform-h6-yale-new);
+}
+
+.link-grid__links-column {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.link-grid__list-item {
+  padding: 0 var(--size-spacing-6);
+  margin-bottom: var(--size-spacing-6);
+  line-height: 1.2;
+}
+
+.link-grid__list-item:last-child {
+  margin-bottom: 0;
+}
+
+/* The underline is a background image so it can slide away on hover. */
+.link-grid__list-item ::slotted(a) {
+  --thickness: var(--link-underline-size-default);
+
+  color: var(--color-link-base);
+  font-weight: var(--font-weights-mallory-book);
+  text-align: left;
+  text-decoration: none;
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0 1.15em;
+  background-repeat: no-repeat;
+  background-size: 100% var(--thickness);
+}
+
+.link-grid__list-item ::slotted(a:hover) {
+  color: var(--color-link-hover);
+  background-size: 0 var(--thickness);
+}
+
+.link-grid__list-item ::slotted(a:visited) {
+  color: var(--color-link-visited-base);
+}
+
+.link-grid__list-item ::slotted(a:visited:hover) {
+  color: var(--color-link-visited-hover);
+}
+
+.link-grid__list-item ::slotted(a:focus-visible) {
+  background-size: 0 var(--thickness);
+  outline: var(--size-thickness-2) solid var(--color-link-base);
+  outline-offset: var(--size-thickness-2);
+}
+
+/* 768px is --break-m: two columns. */
+@media (min-width: 768px) {
+  .link-grid__inner {
+    flex-flow: row wrap;
+  }
+
+  .link-grid__column-wrapper {
+    flex: 1 1 50%;
+  }
+}
+
+/* 992px is --break-l: four columns. */
+@media (min-width: 992px) {
+  .link-grid__column-wrapper {
+    flex: 1 1 25%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .link-grid__list-item ::slotted(a) {
+    transition:
+      background-size var(--animation-speed-default) linear,
+      color var(--animation-speed-default) ease-in-out;
+  }
+}

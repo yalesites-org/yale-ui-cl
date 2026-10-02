@@ -1,0 +1,42 @@
+/* Custom elements default to display: inline. */
+:host(ycl-link-skip) {
+  display: block;
+}
+
+.link-skip__link {
+  display: block;
+  width: 100%;
+  max-width: var(--size-component-layout-width-site);
+  margin: var(--size-spacing-4) auto;
+  padding-inline-start: 0;
+  color: var(--color-link-base);
+  font-weight: var(--font-weights-mallory-book);
+  line-height: normal;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+}
+
+.link-skip__link:hover {
+  color: var(--color-link-hover);
+  text-decoration: none;
+}
+
+.link-skip__link:visited {
+  color: var(--color-link-visited-base);
+}
+
+.link-skip__link:visited:focus,
+.link-skip__link:visited:hover {
+  color: var(--color-link-visited-hover);
+}
+
+/* Visually hidden (same technique as the .visually-hidden utility) until focused. */
+.link-skip__link:not(:focus) {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  margin: 0;
+  word-wrap: normal;
+}

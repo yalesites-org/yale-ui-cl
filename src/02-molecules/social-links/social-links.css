@@ -1,0 +1,33 @@
+/* Custom elements default to display: inline. */
+:host(ycl-social-links) {
+  display: block;
+}
+
+.social-links__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-spacing-6);
+}
+
+/* --color-social-links-hover can be set on the host; the site footer themes it in YaleSites. */
+.social-links__link {
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--size-click-target-minimum);
+  min-width: var(--size-click-target-minimum);
+}
+
+.social-links__link:hover {
+  color: var(--color-social-links-hover, var(--color-link-base));
+}
+
+.social-links__icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: currentColor;
+}
