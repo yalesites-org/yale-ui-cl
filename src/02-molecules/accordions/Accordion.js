@@ -2,17 +2,20 @@ import baseStyles from "../../styles/base.css?inline";
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
+// Font Awesome Free "angle-down" (CC BY 4.0), decorative only
+const angleDownIcon = (className) => `<svg class="${className}" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>`;
+
 const accordionOuterTemplate = document.createElement("template");
 accordionOuterTemplate.innerHTML = `
   	<div class="accordion">
-		<div class="accordion-inner">
-			<div><slot name="heading"></slot></div>
-			<ul style="list-style: none;" aria-label="Section controls" class="accordion__controls">
+		<div class="accordion__inner">
+			<div class="accordion__heading"><slot name="heading"></slot></div>
+			<ul aria-label="Section controls" class="accordion__controls">
         		<li class="item">
-        			<button class="accordion__expand-all">Expand All</button>
+        			<button class="accordion__toggle-all accordion__expand-all">Expand All ${angleDownIcon("accordion__icon")}</button>
           		</li>
 				<li class="item">
-					<button class="accordion__collapse-all">Collapse All</button>
+					<button class="accordion__toggle-all accordion__collapse-all">Collapse All ${angleDownIcon("accordion__icon accordion__icon--up")}</button>
 				</li>
       		</ul>
   			<div class="accordion__items"><slot></slot></div>
@@ -26,9 +29,11 @@ const accordionItemTemplate = document.createElement("template");
 accordionItemTemplate.innerHTML = `
 	<div class="accordion-item">
 		<div class="accordion-item__heading">
-			<button class="trigger" id="trigger" aria-expanded="false" aria-controls="content"><slot name="heading"></slot></button>
+			<button class="accordion-item__toggle" id="trigger" aria-expanded="false" aria-controls="content"><slot name="heading"></slot>${angleDownIcon("accordion-item__icon")}</button>
 		</div>
-		<div class="accordion-item__content" id="content" role="region" aria-labelledby="trigger" hidden><slot></slot></div>
+		<div class="accordion-item__content" id="content" role="region" aria-labelledby="trigger">
+			<div class="accordion-item__content-inner"><div class="accordion-item__body"><slot></slot></div></div>
+		</div>
 	</div>
 `
 
@@ -43,16 +48,15 @@ export class AccordionItem extends HTMLElement {
 		this.#shadow = this.attachShadow({ mode: "closed"});
 		this.#shadow.adoptedStyleSheets = [baseSheet];
 		this.#shadow.appendChild(document.importNode(accordionItemTemplate.content, true));
-		this.trigger = this.#shadow.querySelector(".trigger");
-		this.content = this.#shadow.querySelector(".accordion-item__content");
+		this.trigger = this.#shadow.querySelector(".accordion-item__toggle");
 		this.trigger.addEventListener("click", this.clickHandler);
 	};
 
-	// The expanded attribute is the single source of truth; the DOM always mirrors it
+	// The expanded attribute is the single source of truth; the DOM always mirrors it.
+	// Content visibility is driven from CSS via :host([expanded]) so it can animate.
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		if (name === "expanded") {
-			this.content.hidden = !this.expanded;
 			this.trigger.setAttribute("aria-expanded", String(this.expanded));
 		}
 	}

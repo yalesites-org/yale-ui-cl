@@ -1,0 +1,266 @@
+/* Custom elements default to display: inline. */
+:host(ycl-accordion),
+:host(ycl-accordion-item) {
+  display: block;
+}
+
+/* Component themes.
+   Items render in their own shadow roots, so the accordion hands its theme down through
+   inherited custom properties. Resetting them to `initial` first stops a theme leaking into an
+   accordion nested inside a themed one. */
+:host(ycl-accordion) {
+  --accordion-item-background: initial;
+  --accordion-item-border-bottom: initial;
+  --accordion-item-border-left: initial;
+  --accordion-item-color: initial;
+  --accordion-item-hover-color: initial;
+  --accordion-item-margin-bottom: initial;
+  --accordion-item-padding: initial;
+  --accordion-item-heading-margin-bottom: initial;
+  --accordion-item-heading-padding-start: initial;
+  --accordion-item-content-offset: initial;
+}
+
+:host(ycl-accordion[theme]:not([theme="default"])) {
+  --accordion-item-background: var(--color-gray-100);
+  --accordion-item-border-bottom: none;
+  --accordion-item-border-left: var(--border-thickness-6) solid var(--color-accordion-accent);
+  --accordion-item-color: var(--color-gray-700);
+  --accordion-item-hover-color: var(--color-gray-700);
+  --accordion-item-margin-bottom: var(--size-spacing-5);
+  --accordion-item-padding: var(--size-spacing-3) var(--size-spacing-4);
+  --accordion-item-heading-margin-bottom: 0;
+  --accordion-item-heading-padding-start: var(--size-spacing-5);
+  --accordion-item-content-offset: var(--size-spacing-5);
+}
+
+/* Each theme takes its accent from one colour slot. The slots come from the site's global theme
+   when one is set (see below), otherwise from the component theme tokens. */
+:host(ycl-accordion[theme="one"]) {
+  --color-accordion-accent: var(--color-slot-one, var(--component-themes-one-slot-one));
+}
+
+:host(ycl-accordion[theme="two"]) {
+  --color-accordion-accent: var(--color-slot-two, var(--component-themes-two-slot-two));
+}
+
+:host(ycl-accordion[theme="three"]) {
+  --color-accordion-accent: var(--color-slot-three, var(--component-themes-three-slot-three));
+}
+
+:host(ycl-accordion[theme="four"]) {
+  --color-accordion-accent: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
+}
+
+:host(ycl-accordion[theme="five"]) {
+  --color-accordion-accent: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
+}
+
+/* slot-nine isn't in the current tokens release; gray-700 is what the reference renders without it. */
+:host(ycl-accordion[theme="six"]) {
+  --color-accordion-accent: var(--color-slot-nine, var(--color-gray-700));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document (as index.html and Storybook do). */
+[data-global-theme="one"] ycl-accordion {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
+}
+
+[data-global-theme="two"] ycl-accordion {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
+}
+
+[data-global-theme="three"] ycl-accordion {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
+}
+
+[data-global-theme="four"] ycl-accordion {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-two);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-five);
+  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
+}
+
+[data-global-theme="five"] ycl-accordion {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
+}
+
+[data-global-theme="six"] ycl-accordion {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+}
+
+/* The accordion group. */
+.accordion__heading ::slotted(*) {
+  margin: 0 0 var(--size-spacing-5);
+}
+
+.accordion__controls {
+  list-style: none;
+  margin: 0 0 var(--size-spacing-5);
+  padding: 0;
+  display: flex;
+}
+
+.accordion__controls > *:not(:last-child) {
+  padding-right: var(--size-spacing-5);
+  margin-right: var(--size-spacing-5);
+  border-right: var(--border-thickness-1) solid;
+}
+
+.accordion__icon {
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+}
+
+.accordion__icon--up {
+  transform: rotate(180deg);
+}
+
+.accordion__toggle-all {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: var(--font-style-body-s);
+  display: flex;
+  gap: var(--size-spacing-3);
+  align-items: center;
+  cursor: pointer;
+}
+
+.accordion__toggle-all:hover {
+  color: var(--color-link-base);
+}
+
+/* Individual accordion items. */
+.accordion-item {
+  border-bottom: var(--accordion-item-border-bottom, var(--border-thickness-1) solid);
+  border-left: var(--accordion-item-border-left, none);
+  background-color: var(--accordion-item-background, transparent);
+  color: var(--accordion-item-color, inherit);
+  margin-bottom: var(--accordion-item-margin-bottom, 0);
+  padding: var(--accordion-item-padding, var(--size-spacing-5) 0 0);
+}
+
+.accordion-item__heading {
+  font: var(--font-style-body-l);
+  margin-bottom: var(--accordion-item-heading-margin-bottom, var(--size-spacing-5));
+  padding-inline-start: var(--accordion-item-heading-padding-start, 0);
+}
+
+/* Slotted headings keep their semantics but take the item heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.accordion-item__heading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+.accordion-item__toggle {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  display: flex;
+  gap: var(--size-spacing-5);
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--size-spacing-3) var(--size-spacing-4) var(--size-spacing-3) 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion-item__toggle:hover {
+  color: var(--accordion-item-hover-color, var(--color-link-base));
+}
+
+.accordion-item__icon {
+  height: 1em;
+  width: 1em;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+[aria-expanded="true"] > .accordion-item__icon {
+  transform: rotate(180deg);
+}
+
+/* Collapsing grid rows from 1fr to 0fr animates to the content's natural height without
+   measuring it in JS. visibility keeps collapsed content out of the tab order and a11y tree. */
+.accordion-item__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  padding-inline: var(--size-spacing-6);
+}
+
+.accordion-item__content-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Padding lives a level below the overflow wrapper, which the 0fr row can shrink to zero. */
+.accordion-item__body {
+  padding-top: var(--accordion-item-content-offset, 0);
+}
+
+:host([expanded]) .accordion-item__content {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  margin-bottom: var(--size-spacing-6);
+}
+
+/* 992px is --break-mobile; custom properties can't be used in media queries. */
+@media (min-width: 992px) {
+  .accordion-item__content {
+    padding-inline: var(--size-spacing-8);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .accordion-item__icon {
+    transition: transform var(--animation-speed-default) ease-in-out;
+  }
+
+  /* On collapse, visibility flips only after the rows finish shrinking. */
+  .accordion-item__content {
+    transition:
+      grid-template-rows var(--animation-speed-slow) ease-in-out,
+      margin-bottom var(--animation-speed-slow) ease-in-out,
+      visibility 0s linear var(--animation-speed-slow);
+  }
+
+  :host([expanded]) .accordion-item__content {
+    transition-delay: 0s;
+  }
+}

@@ -10,3 +10,4 @@
 @import "./utility.css" layer(util);
 
 @import "../01-atoms/table/table.css" layer(components.table);
+@import "../02-molecules/accordions/accordion.css" layer(components.accordion);
