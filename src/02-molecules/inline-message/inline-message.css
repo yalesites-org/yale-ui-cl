@@ -31,6 +31,9 @@
   --color-inline-message-background: var(--color-slot-four, var(--component-themes-one-slot-four));
   --color-inline-message-text: var(--color-slot-six, var(--component-themes-one-slot-six));
   --color-link-base: var(--color-inline-message-text);
+  /* The default visited-hover purple drops below 4.5:1 on some global themes' slot-four (e.g.
+     global theme three's gold), so visited links keep the darker visited purple on hover. */
+  --color-link-visited-hover: var(--color-link-visited-base);
 }
 
 :host(ycl-inline-message[theme="two"]) {
@@ -201,7 +204,8 @@ ycl-inline-message a:visited:hover {
 }
 
 .inline-message__icon svg,
-.inline-message__icon ::slotted(svg) {
+.inline-message__icon ::slotted(svg),
+.inline-message__icon ::slotted(ycl-icon) {
   height: var(--size-icon);
   width: var(--size-icon);
   fill: currentColor;

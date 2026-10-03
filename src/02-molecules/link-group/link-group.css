@@ -73,6 +73,30 @@
   outline-offset: var(--size-thickness-2);
 }
 
+/* A slotted text-link gets the same box through text-link's styling hooks, which put the padding
+   on its inner <a> so the whole box is clickable, and drop its underline. Colours go through the
+   inherited --color-link-* properties: currentColor makes the link take the surrounding text
+   colour, and hover keeps the site link colour (captured on the list item before it's
+   overridden). */
+.link-group__list-item {
+  --color-link-group-hover: var(--color-link-base);
+}
+
+.link-group__list-item ::slotted(text-link) {
+  --color-link-base: currentColor;
+  --color-link-visited-base: currentColor;
+  --color-link-hover: var(--color-link-group-hover);
+  --color-link-visited-hover: var(--color-link-group-hover);
+  --link-underline-thickness: 0;
+  --link-display: block;
+  --link-padding: var(--size-spacing-3) var(--size-spacing-6);
+
+  display: grid;
+  min-height: var(--size-click-target-minimum);
+  line-height: 1.2;
+  text-align: left;
+}
+
 /* 767.95px is just under --break-m; custom properties can't be used in media queries. */
 @media (max-width: 767.95px) {
   .link-group__inner {

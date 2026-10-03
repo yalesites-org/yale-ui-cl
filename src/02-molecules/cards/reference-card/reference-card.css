@@ -180,7 +180,8 @@ ycl-reference-card:is(:not([layout]), [layout="grid"]) picture[slot="image"] img
 }
 
 .reference-card__image ::slotted(img),
-.reference-card__image ::slotted(picture) {
+.reference-card__image ::slotted(picture),
+.reference-card__image ::slotted(ycl-image) {
   display: block;
   width: 100%;
   height: auto;
@@ -256,9 +257,16 @@ ycl-reference-card:is(:not([layout]), [layout="grid"]) picture[slot="image"] img
   object-fit: cover;
 }
 
+/* A slotted ycl-image fills the ratio box too, cropping its image to cover it. */
+:host(ycl-reference-card:not([layout])) .reference-card__image ::slotted(ycl-image),
+:host(ycl-reference-card[layout="grid"]) .reference-card__image ::slotted(ycl-image) {
+  --image-fill-height: 100%;
+}
+
 :host(ycl-reference-card:not([layout])[source="resource"]) .reference-card__image ::slotted(*),
 :host(ycl-reference-card[layout="grid"][source="resource"]) .reference-card__image ::slotted(*) {
   object-position: top;
+  --image-object-position: top;
 }
 
 :host(ycl-reference-card:not([layout])[source="profile"]) .reference-card__image,

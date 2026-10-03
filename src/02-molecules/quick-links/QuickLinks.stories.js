@@ -1,4 +1,6 @@
 import "./QuickLinks";
+import "../../01-atoms/cta/Cta";
+import "../../01-atoms/image/ResponsiveImage";
 
 // A local stand-in for a photo so the story doesn't depend on a network image.
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><defs><linearGradient id="g" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient></defs><rect width="16" height="9" fill="url(#g)"/></svg>')}`;
@@ -42,11 +44,11 @@ export default {
       <ycl-quick-links theme="${args.theme}" variation="${args.variation}">
         <h2 slot="heading">${args.heading}</h2>
         ${args.description ? `<p slot="description">${args.description}</p>` : ''}
-        ${args.image ? `<img slot="image" src="${placeholderImage}" alt="">` : ''}
-        <a href="#">This is a link</a>
-        <a href="https://google.com">This is another link</a>
-        <a href="https://google.com/download.pdf">This is a very long link that will wrap lines</a>
-        <a href="#">Link #4</a>
+        ${args.image ? `<ycl-image slot="image"><img src="${placeholderImage}" alt=""></ycl-image>` : ''}
+        <cta-link class="outline" href="#">This is a link</cta-link>
+        <cta-link class="outline" href="https://google.com">This is another link</cta-link>
+        <cta-link class="outline" href="https://google.com/download.pdf">This is a very long link that will wrap lines</cta-link>
+        <cta-link class="outline" href="#">Link #4</cta-link>
       </ycl-quick-links>
     </div>`,
 };

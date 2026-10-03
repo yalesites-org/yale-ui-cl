@@ -207,8 +207,9 @@
 }
 
 /* The image. Below the breakpoint it sits above the content; above it, it fills the banner and
-   the content overlays it. */
+   the content overlays it. A slotted ycl-image passes the fill height down to its own <img>. */
 .cta-banner__image ::slotted(*) {
+  --image-fill-height: 100%;
   display: block;
   width: 100%;
   height: 100%;

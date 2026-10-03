@@ -207,6 +207,13 @@
   outline-offset: var(--size-thickness-2);
 }
 
+/* A slotted text-link draws the same sliding underline itself. Its colours come from the inherited
+   --color-link-* properties, so the global theme's hover colour above reaches it without a rule here;
+   only the box needs setting. */
+.link-grid__list-item ::slotted(text-link) {
+  text-align: left;
+}
+
 /* 768px is --break-m: two columns. */
 @media (min-width: 768px) {
   .link-grid__inner {

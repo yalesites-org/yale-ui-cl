@@ -243,6 +243,13 @@ ycl-tile-item picture[slot="image"] img {
   fill: var(--color-tile-item-content);
 }
 
+.tile__item__icon ::slotted(ycl-icon) {
+  display: block;
+  width: var(--size-spacing-9);
+  height: var(--size-spacing-9);
+  color: var(--color-tile-item-content);
+}
+
 /* Content. */
 .tile__item__content {
   font: var(--font-style-body-default);
@@ -314,6 +321,12 @@ ycl-tile-item picture[slot="image"] img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* A slotted ycl-image fills the tile, cropping its image to cover it. */
+.tile__item__image ::slotted(ycl-image) {
+  height: 100%;
+  --image-fill-height: 100%;
 }
 
 .tile__item__image::before {

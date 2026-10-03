@@ -88,6 +88,17 @@
   :host(ycl-page-title[variation="event"]) .page-title__title-wrap {
     flex: 1 0 50%;
   }
+
+  /* A ycl-image sizes its <img> to its own width, so in the row it needs a width of its own
+     (a bare <img> brings its intrinsic width instead). */
+  :host(ycl-page-title[variation="event"]) ::slotted(ycl-image[slot="image"]) {
+    flex: 0 1 50%;
+  }
+}
+
+/* Stacked, a slotted ycl-image fills the column. */
+:host(ycl-page-title[variation="event"]) ::slotted(ycl-image[slot="image"]) {
+  width: 100%;
 }
 
 /* Meta line (the Twig basic-meta molecule). */

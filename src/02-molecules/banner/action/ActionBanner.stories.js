@@ -1,6 +1,7 @@
 import "./ActionBanner";
 import "../../../01-atoms/cta/Cta";
 import "../../../01-atoms/text-link/Link";
+import "../../../01-atoms/image/ResponsiveImage";
 
 // Inline placeholders so the story doesn't depend on hosted images.
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#978d85"/><text x="800" y="450" font-family="sans-serif" font-size="96" fill="#fff" text-anchor="middle" dominant-baseline="middle">16 x 9</text></svg>')}`;
@@ -79,7 +80,7 @@ export default {
   render: (args) =>
     `<div data-global-theme="${args.globalTheme}">
       <ycl-action-banner theme="${args.theme}" layout="${args.layout}" button-alignment="${args.buttonAlignment}" width="${args.width}"${args.overlay ? ` overlay-image="${patternImage}"` : ''}>
-        <img slot="image" src="${placeholderImage}" alt="A 16 by 9 image">
+        <ycl-image slot="image"><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>
         <h2 slot="heading">${args.heading}</h2>
         <p>${args.snippet}</p>
         ${links(args)}

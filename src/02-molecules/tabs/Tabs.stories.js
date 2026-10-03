@@ -1,4 +1,5 @@
 import "./Tabs";
+import "../../01-atoms/text-link/Link";
 export default {
   title: 'Tabs',
   component: 'ycl-tabs',
@@ -23,14 +24,14 @@ export default {
     `<div data-global-theme="${args.globalTheme}">
       <ycl-tabs theme="${args.theme}" label="Registration">
         <ycl-tab label="Before registration">
-          <p>Review the <a href="#">course catalog</a> and meet with your adviser to plan your schedule. Check that any prerequisites are complete and that you have no holds on your account.</p>
+          <p>Review the <text-link href="#">course catalog</text-link> and meet with your adviser to plan your schedule. Check that any prerequisites are complete and that you have no holds on your account.</p>
         </ycl-tab>
         <ycl-tab label="During registration">
           <p>Registration opens by class year. Add courses to your worksheet ahead of time so you can submit as soon as your window opens.</p>
-          <p>If a course is full, join the <a href="#">waitlist</a> and check back regularly.</p>
+          <p>If a course is full, join the <text-link href="#">waitlist</text-link> and check back regularly.</p>
         </ycl-tab>
         <ycl-tab label="Year-round">
-          <p>Keep your contact details up to date and review the <a href="#">academic calendar</a> for add/drop deadlines.</p>
+          <p>Keep your contact details up to date and review the <text-link href="#">academic calendar</text-link> for add/drop deadlines.</p>
         </ycl-tab>
       </ycl-tabs>
     </div>`,

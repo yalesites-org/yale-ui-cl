@@ -1,5 +1,6 @@
 import "./DirectoryListingCard";
 import "../../../01-atoms/text-link/Link";
+import "../../../01-atoms/image/ResponsiveImage";
 
 // Self-contained placeholder so the stories don't depend on an image host.
 const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
@@ -40,13 +41,13 @@ export default {
 		`<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-8);">
 			<li>
 				<ycl-directory-listing-card href="${args.href}" layout="${args.layout}" ${args.featured ? "featured" : ""}>
-					<img slot="image" src="${placeholder(400, 400)}" alt="">
+					<ycl-image slot="image"><img src="${placeholder(400, 400)}" alt=""></ycl-image>
 					<span slot="overline">${args.overline}</span>
 					<h3 slot="heading">${args.heading}</h3>
 					<span slot="subheading">${args.subheading}</span>
 					<p>${args.snippet}</p>
 					${args.email ? `<text-link slot="email" href="mailto:${args.email}">Email</text-link>` : ""}
-					${args.phone ? `<span slot="phone">${args.phone}</span>` : ""}
+					${args.phone ? `<text-link slot="phone" href="tel:${args.phone.replace(/[^\d+]/g, "")}">${args.phone}</text-link>` : ""}
 				</ycl-directory-listing-card>
 			</li>
 		</ul>`,

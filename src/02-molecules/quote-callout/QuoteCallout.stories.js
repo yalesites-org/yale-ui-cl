@@ -1,4 +1,5 @@
 import "./QuoteCallout";
+import "../../01-atoms/image/ResponsiveImage";
 import quoteImage from "../../assets/avif-test-image.avif";
 
 export default {
@@ -40,7 +41,7 @@ export default {
   render: (args) =>
     `<div data-global-theme="${args.globalTheme}">
       <ycl-quote-callout variant="${args.variant}" quote-alignment="${args.quoteAlignment}" theme="${args.theme}">
-        <img slot="image" src="${quoteImage}" alt="">
+        <ycl-image slot="image" ratio="1x1"><img src="${quoteImage}" alt=""></ycl-image>
         <p>${args.quote}</p>
         <span slot="attribution">${args.attribution}</span>
       </ycl-quote-callout>

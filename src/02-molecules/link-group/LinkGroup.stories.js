@@ -1,4 +1,5 @@
 import "./LinkGroup";
+import "../../01-atoms/text-link/Link";
 export default {
   title: 'Link Group',
   component: 'ycl-link-group',
@@ -15,14 +16,14 @@ export default {
     `<ycl-link-group>
       ${args.headingOne ? `<h2 slot="heading-one">${args.headingOne}</h2>` : ''}
       ${args.headingTwo ? `<h2 slot="heading-two">${args.headingTwo}</h2>` : ''}
-      <a slot="links-one" href="#">This is a link</a>
-      <a slot="links-one" href="#">This is another link</a>
-      <a slot="links-one" href="#">This is a very long link that will wrap lines</a>
-      <a slot="links-one" href="https://google.com">Link #4</a>
-      <a slot="links-two" href="#">This is a link</a>
-      <a slot="links-two" href="#">This is another link</a>
-      <a slot="links-two" href="#">This is a very long link that will wrap lines</a>
-      <a slot="links-two" href="https://google.com/download.pdf">Link #4</a>
+      <text-link slot="links-one" href="#">This is a link</text-link>
+      <text-link slot="links-one" href="#">This is another link</text-link>
+      <text-link slot="links-one" href="#">This is a very long link that will wrap lines</text-link>
+      <text-link slot="links-one" href="https://google.com">Link #4</text-link>
+      <text-link slot="links-two" href="#">This is a link</text-link>
+      <text-link slot="links-two" href="#">This is another link</text-link>
+      <text-link slot="links-two" href="#">This is a very long link that will wrap lines</text-link>
+      <text-link slot="links-two" href="https://google.com/download.pdf">Link #4</text-link>
     </ycl-link-group>`,
 };
 

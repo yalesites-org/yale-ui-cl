@@ -1,4 +1,5 @@
 import "./Video";
+import "../../01-atoms/video-embed/VideoEmbed";
 export default {
   title: 'Video',
   component: 'ycl-video',
@@ -28,7 +29,7 @@ export default {
 
   render: (args) =>
     `<ycl-video alignment="${args.alignment}" width="${args.width}">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/GL5XhmKCXo0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <ycl-video-embed src="https://www.youtube-nocookie.com/embed/GL5XhmKCXo0" video-title="YouTube video player"></ycl-video-embed>
       ${args.heading ? `<h2 slot="heading">${args.heading}</h2>` : ''}
       ${args.text ? `<p slot="text">${args.text}</p>` : ''}
     </ycl-video>`,

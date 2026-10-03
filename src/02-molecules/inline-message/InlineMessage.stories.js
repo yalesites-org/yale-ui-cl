@@ -1,5 +1,6 @@
 import "./InlineMessage";
 import "../../01-atoms/text-link/Link";
+import "../../01-atoms/icons/Icon";
 
 export default {
   title: 'Inline Message',
@@ -14,6 +15,11 @@ export default {
       name: 'Icon',
       type: 'select',
       options: ['default', 'none'],
+    },
+    customIcon: {
+      name: 'Custom Icon',
+      control: 'text',
+      description: 'A ycl-icon name slotted in place of the type\'s default icon.',
     },
     heading: {control: 'text'},
     content: {control: 'text'},
@@ -32,6 +38,7 @@ export default {
   args: {
     type: 'general',
     icon: 'default',
+    customIcon: '',
     heading: 'This is a general message heading',
     content: 'This is a general message content',
     linkContent: 'This is a link',
@@ -42,6 +49,7 @@ export default {
   render: (args) =>
     `<div data-global-theme="${args.globalTheme}">
       <ycl-inline-message type="${args.type}" theme="${args.theme}"${args.icon === 'none' ? ' icon="none"' : ''}>
+        ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
         <h2 slot="heading">${args.heading}</h2>
         <p>${args.content}</p>
         <text-link slot="link" href="#">${args.linkContent}</text-link>
@@ -68,5 +76,11 @@ export const TextOnly = {
 export const Themed = {
   args: {
     theme: 'three',
+  },
+};
+
+export const CustomIcon = {
+  args: {
+    customIcon: 'lightbulb-solid',
   },
 };

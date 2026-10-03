@@ -185,6 +185,13 @@
   fill: var(--color-facts-and-figures-content);
 }
 
+.facts-and-figures__icon ::slotted(ycl-icon) {
+  display: block;
+  width: var(--size-spacing-9);
+  height: var(--size-spacing-9);
+  color: var(--color-facts-and-figures-content);
+}
+
 .facts-and-figures__content {
   font: var(--font-style-body-default);
   width: 100%;

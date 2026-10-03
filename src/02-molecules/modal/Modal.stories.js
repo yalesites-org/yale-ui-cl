@@ -1,4 +1,5 @@
 import "./Modal";
+import "../../01-atoms/button/Button";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 export default {
@@ -14,7 +15,7 @@ export default {
   },
 
   render: (args) =>
-    `<button type="button" onclick="document.getElementById('demo-modal').show()">Demo Modal</button>
+    `<ycl-button onclick="document.getElementById('demo-modal').show()">Demo Modal</ycl-button>
     <ycl-modal id="demo-modal">
       <h2 slot="heading">${args.heading}</h2>
       <p>${args.content}</p>
@@ -28,7 +29,7 @@ export const WithLinks = {
     heading: 'Visiting Campus',
   },
   render: (args) =>
-    `<button type="button" onclick="document.getElementById('links-modal').show()">Plan a visit</button>
+    `<ycl-button onclick="document.getElementById('links-modal').show()">Plan a visit</ycl-button>
     <ycl-modal id="links-modal">
       <h2 slot="heading">${args.heading}</h2>
       <p>Tours of Yale's campus leave from the Visitor Center at 149 Elm Street.</p>

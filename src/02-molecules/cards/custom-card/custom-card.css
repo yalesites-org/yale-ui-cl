@@ -189,7 +189,8 @@ ycl-custom-card picture[slot="image"] img {
 
 /* Image. */
 .custom-card__image ::slotted(img),
-.custom-card__image ::slotted(picture) {
+.custom-card__image ::slotted(picture),
+.custom-card__image ::slotted(ycl-image) {
   display: block;
   width: 100%;
   height: auto;

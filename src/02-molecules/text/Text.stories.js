@@ -1,13 +1,14 @@
 import "./Text";
+import "../../01-atoms/text-link/Link";
 
 const sampleContent = `
   <h2>About YDS</h2>
   <p>“From scholars and researchers to politicians and athletes, we have produced some of the world’s most influential leaders since the school’s inception in 1822. To date, we have put forward more presidents and deans of colleges, universities and seminaries, as well as heads of denominations, than any other divinity school or seminary in the United States.”</p>
   <h2>Admissions & Financial Aid</h2>
   <h3>Yale Divinity School - Inspiring the Minds That Inspire the World!</h3>
-  <p>Yale University Divinity School is a <a href="#">graduate professional school</a> within a world-class research university and is both a rigorous academic institution and an ecumenical community of faith. We educate and prepare the scholars, ministers, and leaders of the future.</p>
+  <p>Yale University Divinity School is a <text-link href="#">graduate professional school</text-link> within a world-class research university and is both a rigorous academic institution and an ecumenical community of faith. We educate and prepare the scholars, ministers, and leaders of the future.</p>
   <h4>Tuition and Financial Aid</h4>
-  <p><a href="https://www.yale.edu">Information</a> on the cost to attend, applying for financial aid, international student financial aid, fees, and more.</p>
+  <p><text-link href="https://www.yale.edu">Information</text-link> on the cost to attend, applying for financial aid, international student financial aid, fees, and more.</p>
   <h5>Financial planning with iGrad</h5>
   <p>A powerful online organizational tool to assist you in planning for your financial needs now and in the future.</p>
   <h6>How does it work?</h6>

@@ -73,7 +73,8 @@
   --color-text: var(--color-gray-800);
   --color-heading: var(--color-gray-800);
   --color-link-base: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
-  --color-link-hover: var(--color-gray-700);
+  /* gray-700 falls just short of 4.5:1 on this light background. */
+  --color-link-hover: var(--color-gray-800);
   --color-link-visited-base: var(--color-gray-800);
   --color-link-visited-hover: var(--color-gray-800);
 }
@@ -297,8 +298,12 @@ ycl-callout-item a:visited {
   margin-top: var(--size-spacing-4);
 }
 
+/* cta-link sets default action colours on its own host, which would beat the theme's inherited
+   ones; an outer ::slotted() declaration wins over :host, so the theme reaches the CTA. */
 .callout__inner > slot[name="link"]::slotted(cta-link) {
   margin-top: var(--size-spacing-6);
+  --color-action: inherit;
+  --color-action-secondary: inherit;
 }
 
 /* 991.95px is --break-mobile-max. */

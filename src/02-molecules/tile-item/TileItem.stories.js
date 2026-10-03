@@ -1,19 +1,21 @@
 import "./TileItem";
+import "../../01-atoms/icons/Icon";
+import "../../01-atoms/image/ResponsiveImage";
 
 // Self-contained placeholder so the stories don't depend on an image host.
 const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 	`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${Math.round(h / 8)}" fill="#4a4a4a">${w} x ${h}</text></svg>`
 )}`;
 
-// A simple decorative star; any inline SVG can go in the icon slot.
-const starIcon = `<svg slot="icon" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" focusable="false"><polygon points="12,2 14.9,8.6 22,9.3 16.6,14 18.2,21 12,17.3 5.8,21 7.4,14 2,9.3 9.1,8.6"/></svg>`;
+// Decorative, so unlabelled; an inline SVG can also go in the icon slot.
+const icon = `<ycl-icon slot="icon" name="lightbulb-solid"></ycl-icon>`;
 
 const tile = (args, heading) => `
 	<li>
 		<ycl-tile-item theme="${args.theme}" alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""} style="min-height: 18rem;">
-			${args.presentation === "icon" ? starIcon : ""}
+			${args.presentation === "icon" ? icon : ""}
 			${args.presentation === "heading" ? `<span slot="heading">${heading}</span>` : ""}
-			${args.withImage ? `<img slot="image" src="${placeholder(600, 600)}" alt="">` : ""}
+			${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
 			${args.content}
 		</ycl-tile-item>
 	</li>`;

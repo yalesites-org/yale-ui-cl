@@ -1,5 +1,6 @@
 import "./TextWithImage";
 import "../../01-atoms/text-link/Link";
+import "../../01-atoms/image/ResponsiveImage";
 
 // Self-contained placeholder so the stories don't depend on an image host.
 const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
@@ -55,7 +56,7 @@ export default {
 		overline: "By Charlyn Paradis",
 		heading: "Admitted Students Envision Themselves as Yale Chemists During Visiting Days",
 		subheading: "Submitted February 28, 2022",
-		text: "Prospective students joined the Yale Chemistry community on Feb. 10 – 11 to learn about the research program and campus life at the much anticipated ‘Visiting Days’ event. See more at <a href=\"https://www.yale.edu\">Yale</a>.",
+		text: "Prospective students joined the Yale Chemistry community on Feb. 10 – 11 to learn about the research program and campus life at the much anticipated ‘Visiting Days’ event. See more at <text-link href=\"https://www.yale.edu\">Yale</text-link>.",
 		linkContent: "Visiting Days",
 		linkTwoContent: "View all featured content",
 		caption: "This is an image caption.",
@@ -71,7 +72,7 @@ export default {
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
 			<ycl-text-with-image theme="${args.theme}" width="${args.width}" position="${args.position}" vertical-align="${args.verticalAlign}" image-style="${args.imageStyle}" focus="${args.focus}">
-				<img slot="image" src="${placeholder(900, 600)}" alt="Students touring a chemistry lab">
+				<ycl-image slot="image"><img src="${placeholder(900, 600)}" alt="Students touring a chemistry lab"></ycl-image>
 				${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
 				${args.overline ? `<p slot="overline">${args.overline}</p>` : ""}
 				<h2 slot="heading">${args.heading}</h2>
