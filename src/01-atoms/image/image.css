@@ -28,14 +28,17 @@
   --image-aspect-ratio: 1 / 1.6;
 }
 
+/* --image-fill-height lets a parent make the image fill a fixed-height box (e.g. a banner or card
+   image area): set it to 100% along with height: 100% on the ycl-image. */
 :host(ycl-image) .figure {
   margin: 0;
+  height: var(--image-fill-height, auto);
 }
 
 :host(ycl-image) .figure ::slotted(img),
 :host(ycl-image) .figure ::slotted(picture) {
   display: block;
-  height: auto;
+  height: var(--image-fill-height, auto);
   width: 100%;
   max-width: 100%;
 }
@@ -43,6 +46,7 @@
 :host(ycl-image) .figure ::slotted(img) {
   aspect-ratio: var(--image-aspect-ratio, auto);
   object-fit: cover;
+  object-position: var(--image-object-position, center);
 }
 
 /* ::slotted() only reaches top-level slotted elements, so the <img> inside a slotted <picture>
@@ -50,10 +54,11 @@
    base.css is also loaded in the document (as index.html and Storybook do). */
 ycl-image > picture img {
   display: block;
-  height: auto;
+  height: var(--image-fill-height, auto);
   width: 100%;
   aspect-ratio: var(--image-aspect-ratio, auto);
   object-fit: cover;
+  object-position: var(--image-object-position, center);
 }
 
 ycl-image > [slot="caption"] a {

@@ -4,9 +4,8 @@ const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
 const linkTemplate = document.createElement('template');
-linkTemplate.innerHTML = `
-  <a class="link" href="#"><slot></slot></a>
-`;
+// No whitespace around the <a>: the host is inline, so it would render as a stray space.
+linkTemplate.innerHTML = `<a class="link" href="#"><slot></slot></a>`;
 const currentURL = window.location.origin;
 
 export class TextLink extends HTMLElement {

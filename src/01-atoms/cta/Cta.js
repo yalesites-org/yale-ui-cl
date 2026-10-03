@@ -3,9 +3,8 @@ import * as Util from '../../utility.js';
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 const ctaTemplate = document.createElement('template');
-ctaTemplate.innerHTML = `
-  <a class="cta" href="#"><slot>Default Link</slot></a>
-`;
+// No whitespace around the <a>: the host is inline, so it would render as a stray space.
+ctaTemplate.innerHTML = `<a class="cta" href="#"><slot>Default Link</slot></a>`;
 
 const currentURL = window.location.origin;
 

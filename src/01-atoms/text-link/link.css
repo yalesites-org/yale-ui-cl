@@ -1,8 +1,18 @@
+/* Styling hooks, read from inherited custom properties so a parent component can restyle a
+   slotted text-link (its <a> is in a closed shadow root):
+   - --color-link-base, --color-link-hover, --color-link-visited-base, --color-link-visited-hover
+   - --link-underline-thickness: 0 removes the underline
+   - --link-display and --link-padding: put padding on the <a> itself so all of it is clickable */
 .link {
-  --position: 0 1.15rem;
-  --thickness: var(--link-underline-size-default);
+  /* The underline sits at the bottom of the link's own box; a fixed offset gets clipped when the
+     font's line box is shorter than the offset. */
+  --position: 0 100%;
+  --thickness: var(--link-underline-thickness, var(--link-underline-size-default));
+  display: var(--link-display, inline);
+  padding: var(--link-padding, 0);
   color: var(--color-link-base);
-  fill: var(--color-link-base);
+  fill: currentColor;
+  box-sizing: border-box;
   text-decoration: none;
   font-weight: var(--font-weights-mallory-book);
   text-decoration-thickness: 0.1em;
@@ -24,7 +34,20 @@
 }
 
 .link:hover {
-	  background-size: 0 var(--thickness);
+  color: var(--color-link-hover);
+  background-size: 0 var(--thickness);
+}
+
+.link:visited {
+  color: var(--color-link-visited-base);
+}
+
+.link:visited:hover {
+  color: var(--color-link-visited-hover);
+}
+
+.link:focus-visible {
+  background-size: 0 var(--thickness);
 }
 
 .link--external {

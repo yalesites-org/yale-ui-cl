@@ -15,7 +15,10 @@
   --color-cta-border: var(--color-action);
   --color-cta-text: var(--color-action);
   --color-cta-text-hover: var(--color-action-secondary);
-  display: inline-block;
+  /* inline-flex keeps the label centred when a parent stretches the CTA (e.g. quick-links). */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border-radius: var(--border-radius-cta, var(--radius-0));
   font-weight: 700;
