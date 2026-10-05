@@ -6,6 +6,21 @@ export default {
   argTypes: {
     content: {control: 'text'},
     href: {control: 'text'},
+    fill: {
+      name: 'Fill Type',
+      type: 'select',
+      options: ['outline', 'filled'],
+    },
+    radius: {
+      name: 'Radius Type',
+      type: 'select',
+      options: ['none', 'radius-soft', 'radius-pill'],
+    },
+    animate: {
+      name: 'Animation Type',
+      type: 'select',
+      options: ['none', 'animate-fade', 'animate-rise', 'animate-wipe'],
+    },
     controlType: {
       name: 'Control Type',
       type: 'select',
@@ -20,6 +35,9 @@ export default {
   args: {
     content: 'Show more events',
     href: '',
+    fill: 'outline',
+    radius: 'none',
+    animate: 'none',
     controlType: 'default',
     expanded: 'none',
     disabled: false,
@@ -27,6 +45,7 @@ export default {
 
   render: (args) =>
     `<ycl-button
+      class="${[args.fill, args.radius, args.animate].filter((c) => c && c !== 'none').join(' ')}"
       ${args.href ? `href="${args.href}"` : ''}
       ${args.controlType === 'dropdown' ? 'control-type="dropdown"' : ''}
       ${args.expanded !== 'none' ? `expanded="${args.expanded}"` : ''}
@@ -34,6 +53,20 @@ export default {
 };
 
 export const Default = {};
+
+export const Filled = {
+  args: {
+    fill: 'filled',
+  },
+};
+
+export const Pill = {
+  args: {
+    fill: 'filled',
+    radius: 'radius-pill',
+    animate: 'animate-fade',
+  },
+};
 
 export const Dropdown = {
   args: {

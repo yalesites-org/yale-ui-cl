@@ -1,4 +1,5 @@
 import baseStyles from "../../styles/base.css?inline";
+import * as Util from "../../utility.js";
 const baseSheet = new CSSStyleSheet();
 baseSheet.replaceSync(baseStyles);
 
@@ -6,10 +7,11 @@ baseSheet.replaceSync(baseStyles);
 const angleDownIcon = (className) => `<svg class="${className}" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>`;
 
 const buttonTemplate = document.createElement("template");
-buttonTemplate.innerHTML = `<button class="button" type="button"><slot></slot></button>`;
+buttonTemplate.innerHTML = `<button class="button cta" type="button"><slot></slot></button>`;
 
-// The base control: a <button> with browser styling removed, or an <a class="link"> when given
-// an href (matching yds-control.twig). Dropdowns are always buttons, whatever the href.
+// A <button> styled as a CTA, or an <a> when given an href (matching yds-control.twig). Dropdowns
+// are always buttons, whatever the href. CTA variants come from the class attribute, as on
+// cta-link (e.g. class="filled radius-pill").
 export class Button extends HTMLElement {
 	#shadow;
 	#internals;
@@ -18,7 +20,7 @@ export class Button extends HTMLElement {
 	static formAssociated = true;
 
 	static get observedAttributes() {
-		return ["href", "type", "disabled", "expanded", "label", "control-type"];
+		return ["href", "type", "disabled", "expanded", "label", "control-type", "class"];
 	}
 
 	constructor() {
@@ -75,11 +77,12 @@ export class Button extends HTMLElement {
 		}
 		const control = this.#control;
 
+		control.className = "button cta";
+		Util.addVariant(this.getAttribute("class"), control, "cta");
+
 		if (this.#isLink) {
-			control.className = "link";
 			control.href = this.href;
 		} else {
-			control.className = "button";
 			control.type = "button";
 			control.disabled = this.#isDisabled;
 			// expanded is tri-state: absent means "not a toggle", so no aria-expanded at all.

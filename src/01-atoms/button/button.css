@@ -3,23 +3,21 @@
   display: inline-block;
 }
 
-/* The reset that yds-button applies to buttons that shouldn't look like traditional buttons;
-   the authoring context supplies the visual style. */
+/* The visual style comes from the CTA (.cta in cta.css). This layer loads after the CTA's, so it
+   only sets what a native <button> needs on top of it and must not reset the CTA's box. */
 .button {
-  border: 0;
-  background: transparent;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  text-align: inherit;
-  display: inline-flex;
-  align-items: center;
   gap: var(--size-spacing-3);
-  cursor: pointer;
 }
 
 .button:disabled {
-  cursor: default;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* No hover swap on a disabled button. */
+.button.cta:disabled:hover {
+  color: var(--color-cta-text);
+  background-color: var(--color-cta-bg);
 }
 
 /* Firefox otherwise picks up normalize.css's dotted button focus ring. */
