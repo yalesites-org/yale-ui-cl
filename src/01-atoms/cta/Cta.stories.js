@@ -1,4 +1,13 @@
-import { Cta } from "./Cta";
+import "./Cta";
+
+// cta.css variants are prefixed (cta--animate-fade, cta--radius-pill), so the class names are
+// built from the arg values, skipping "none".
+const variantClasses = (args) => [
+  args.fill,
+  args.animate !== 'none' && `animate-${args.animate}`,
+  args.radius !== 'none' && `radius-${args.radius}`,
+].filter(Boolean).join(' ');
+
 export default {
   title: 'CTA',
   component: 'cta-link',
@@ -13,54 +22,41 @@ export default {
     animate: {
       name: 'Animation Type',
       type: 'select',
-      options: ['fade', 'rise', 'wipe'],
- 	 },
-	 radius: {
-	  name: 'Radius Type',
-	  type: 'select',
-	  options: ['soft', 'pill'],
-	 },
-},
+      options: ['none', 'fade', 'rise', 'wipe'],
+    },
+    radius: {
+      name: 'Radius Type',
+      type: 'select',
+      options: ['none', 'soft', 'pill'],
+    },
+  },
   args: {
     label: 'Yale HomePage',
     URL: 'https://www.yale.edu',
     fill: 'filled',
     animate: 'fade',
-	radius: '',
-},
+    radius: 'none',
+  },
 
-  render: (args) => 
-    `<cta-link class="${args.fill} ${args.animate} ${args.radius}" href="${args.URL}">${args.label}</cta-link>`,
+  render: (args) =>
+    `<cta-link class="${variantClasses(args)}" href="${args.URL}">${args.label}</cta-link>`,
 };
 
 export const Filled = {
   args: {
     fill: 'filled',
-	 radius: '',
   },
-
-  render: (args) =>
-    `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
 };
 
 export const Outline = {
   args: {
-    label: "Yale HomePage",
-    URL: "https://www.yale.edu",
-    fill: "outline",
-    animate: "fade",
-    radius: ""
+    fill: 'outline',
   },
-  render:args => `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
 };
 
 export const OutlinePill = {
   args: {
-    label: "Yale HomePage",
-    URL: "https://www.yale.edu",
-    fill: "outline",
-    animate: "fade",
-    radius: "pill"
+    fill: 'outline',
+    radius: 'pill',
   },
-  render:args => `<cta-link class="${args.fill} animate-${args.animate} radius-${args.radius}" href="${args.URL}">${args.label}</cta-link>`
 };
