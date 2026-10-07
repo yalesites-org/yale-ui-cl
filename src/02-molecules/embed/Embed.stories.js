@@ -1,6 +1,6 @@
 import "./Embed";
 export default {
-  title: 'Embed',
+  title: 'Molecules/Embed',
   component: 'ycl-embed',
   argTypes: {
     src: {control: 'text'},

@@ -1,7 +1,7 @@
 import "./Video";
 import "../../01-atoms/video-embed/VideoEmbed";
 export default {
-  title: 'Video',
+  title: 'Molecules/Video',
   component: 'ycl-video',
   parameters: {
     layout: 'fullscreen',

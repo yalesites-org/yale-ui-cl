@@ -5,7 +5,7 @@ import "../../01-atoms/icons/Icon";
 const icon = (name) => `<ycl-icon slot="icon" name="${name}"></ycl-icon>`;
 
 export default {
-	title: "Facts and Figures",
+	title: "Molecules/Facts and Figures",
 	component: "ycl-facts-and-figures",
 	argTypes: {
 		stat: { name: "Statistic", control: "text" },

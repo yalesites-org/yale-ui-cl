@@ -1,6 +1,6 @@
 import "./Divider";
 export default {
-  title: 'Divider',
+  title: 'Atoms/Divider',
   component: 'ycl-divider',
   argTypes: {
     width: {

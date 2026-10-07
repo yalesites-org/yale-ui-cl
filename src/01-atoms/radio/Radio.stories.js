@@ -1,6 +1,6 @@
 import "./Radio";
 export default {
-  title: 'Radio',
+  title: 'Atoms/Radio',
   component: 'ycl-radio',
   argTypes: {
     legend: {control: 'text'},

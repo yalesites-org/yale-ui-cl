@@ -3,7 +3,7 @@ import "../../01-atoms/image/ResponsiveImage";
 import quoteImage from "../../assets/avif-test-image.avif";
 
 export default {
-  title: 'Quote Callout',
+  title: 'Molecules/Quote Callout',
   component: 'ycl-quote-callout',
   argTypes: {
     quote: {control: 'text'},

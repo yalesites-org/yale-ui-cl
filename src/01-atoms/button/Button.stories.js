@@ -1,7 +1,7 @@
 import "./Button";
 import "../text-input/TextInput";
 export default {
-  title: 'Button',
+  title: 'Atoms/Button',
   component: 'ycl-button',
   argTypes: {
     content: {control: 'text'},

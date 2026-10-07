@@ -4,7 +4,7 @@ import "../../01-atoms/text-link/Link";
 const breadcrumbs = ['Home', 'Academic Programs', 'Undergraduate Chemistry'];
 
 export default {
-  title: 'Search Result',
+  title: 'Molecules/Search Result',
   component: 'ycl-search-result',
   argTypes: {
     heading: {control: 'text'},

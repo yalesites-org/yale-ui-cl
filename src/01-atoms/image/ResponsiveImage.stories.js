@@ -14,7 +14,7 @@ const ratios = {
 };
 
 export default {
-  title: 'Image',
+  title: 'Atoms/Image',
   component: 'ycl-image',
   argTypes: {
     aspectRatio: {

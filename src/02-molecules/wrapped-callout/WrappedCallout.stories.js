@@ -7,7 +7,7 @@ const body = `
   <p>HRBPs assess staffing needs and support departments during the hiring process in partnership with the Talent Acquisition team. They work with staff throughout their employment at Yale and play a critical role in talent planning and the performance management and merit processes.</p>`;
 
 export default {
-  title: 'Wrapped Callout',
+  title: 'Molecules/Wrapped Callout',
   component: 'ycl-wrapped-callout',
   parameters: {
     layout: 'fullscreen',

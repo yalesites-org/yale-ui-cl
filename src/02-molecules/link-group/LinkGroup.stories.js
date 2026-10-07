@@ -1,7 +1,7 @@
 import "./LinkGroup";
 import "../../01-atoms/text-link/Link";
 export default {
-  title: 'Link Group',
+  title: 'Molecules/Link Group',
   component: 'ycl-link-group',
   argTypes: {
     headingOne: {control: 'text'},

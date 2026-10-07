@@ -1,7 +1,7 @@
 import "./PullQuote";
 
 export default {
-  title: 'Pull Quote',
+  title: 'Molecules/Pull Quote',
   component: 'ycl-pull-quote',
   argTypes: {
     quote: {control: 'text'},

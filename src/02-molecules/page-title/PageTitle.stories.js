@@ -7,7 +7,7 @@ import "../../01-atoms/image/ResponsiveImage";
 const placeholder = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><rect width="16" height="9" fill="#dddddd"/></svg>')}`;
 
 export default {
-  title: 'Page Title',
+  title: 'Molecules/Page Title',
   component: 'ycl-page-title',
   argTypes: {
     heading: {control: 'text'},

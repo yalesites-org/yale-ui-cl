@@ -33,7 +33,7 @@ const sampleContent = `
 `;
 
 export default {
-  title: 'Text',
+  title: 'Molecules/Text',
   component: 'ycl-text',
   argTypes: {
     variation: {

@@ -9,7 +9,7 @@ const variantClasses = (args) => [
 ].filter(Boolean).join(' ');
 
 export default {
-  title: 'CTA',
+  title: 'Atoms/CTA',
   component: 'cta-link',
   argTypes: {
     label: {control: 'text'},

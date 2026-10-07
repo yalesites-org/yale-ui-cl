@@ -1,6 +1,6 @@
 import "./Pager";
 export default {
-  title: 'Pager',
+  title: 'Molecules/Pager',
   component: 'ycl-pager',
   argTypes: {
     currentPage: {control: { type: 'number', min: 1, max: 50, step: 1 }},

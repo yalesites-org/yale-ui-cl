@@ -5,7 +5,7 @@ import "../../../01-atoms/image/ResponsiveImage";
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#978d85"/><text x="800" y="450" font-family="sans-serif" font-size="96" fill="#fff" text-anchor="middle" dominant-baseline="middle">16 x 9</text></svg>')}`;
 
 export default {
-  title: 'Image Banner',
+  title: 'Molecules/Banners/Image Banner',
   component: 'ycl-image-banner',
   parameters: {
     layout: 'fullscreen',

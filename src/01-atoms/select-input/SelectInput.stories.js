@@ -2,7 +2,7 @@ import {
 	SelectInput
 } from "./SelectInput";
 export default {
-	title: 'Select Input',
+	title: 'Atoms/Select Input',
 	component: 'select-input',
 	argTypes: {
 		label: {

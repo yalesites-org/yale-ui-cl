@@ -16,7 +16,7 @@ const card = (args, heading, snippet) => `
 	</li>`;
 
 export default {
-	title: "Custom Card",
+	title: "Molecules/Cards/Custom Card",
 	component: "ycl-custom-card",
 	argTypes: {
 		heading: { control: "text" },

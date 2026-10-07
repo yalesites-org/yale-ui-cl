@@ -1,6 +1,6 @@
 import "./Checkbox";
 export default {
-  title: 'Checkbox',
+  title: 'Atoms/Checkbox',
   component: 'ycl-checkbox',
   argTypes: {
     legend: {control: 'text'},

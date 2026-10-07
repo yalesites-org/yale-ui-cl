@@ -6,7 +6,7 @@ import "../../01-atoms/image/ResponsiveImage";
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><defs><linearGradient id="g" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient></defs><rect width="16" height="9" fill="url(#g)"/></svg>')}`;
 
 export default {
-  title: 'Quick Links',
+  title: 'Molecules/Quick Links',
   component: 'ycl-quick-links',
   parameters: {
     layout: 'fullscreen',

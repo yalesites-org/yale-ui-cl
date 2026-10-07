@@ -1,6 +1,6 @@
 import "./VideoEmbed";
 export default {
-  title: 'Video Embed',
+  title: 'Atoms/Video Embed',
   component: 'ycl-video-embed',
   argTypes: {
     src: { name: 'Embed URL', control: 'text' },

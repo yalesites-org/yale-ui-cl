@@ -8,7 +8,7 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 )}`;
 
 export default {
-	title: "Wrapped Image",
+	title: "Molecules/Wrapped Image",
 	component: "ycl-wrapped-image",
 	argTypes: {
 		caption: { control: "text" },

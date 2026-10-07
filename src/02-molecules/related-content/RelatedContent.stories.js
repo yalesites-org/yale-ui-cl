@@ -10,7 +10,7 @@ const sampleItems = [
 ];
 
 export default {
-  title: 'Related Content',
+  title: 'Molecules/Related Content',
   component: 'ycl-related-content',
   argTypes: {
     heading: {control: 'text'},

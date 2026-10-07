@@ -8,7 +8,7 @@ const paragraphs = [
 ];
 
 export default {
-  title: 'Read Time',
+  title: 'Molecules/Read Time',
   component: 'ycl-read-time',
   argTypes: {
     label: {control: 'text'},

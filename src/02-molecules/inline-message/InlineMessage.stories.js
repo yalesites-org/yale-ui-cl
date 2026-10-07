@@ -3,7 +3,7 @@ import "../../01-atoms/text-link/Link";
 import "../../01-atoms/icons/Icon";
 
 export default {
-  title: 'Inline Message',
+  title: 'Molecules/Inline Message',
   component: 'ycl-inline-message',
   argTypes: {
     type: {

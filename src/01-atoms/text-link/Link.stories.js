@@ -1,6 +1,6 @@
 import { TextLink } from "./Link";
 export default {
-  title: 'Text Link',
+  title: 'Atoms/Text Link',
   component: 'text-link',
   argTypes: {
     label: {control: 'text'},

@@ -1,6 +1,6 @@
 import "./AudioPlayer";
 export default {
-  title: 'Audio Player',
+  title: 'Atoms/Audio Player',
   component: 'ycl-audio',
   argTypes: {
     content: {

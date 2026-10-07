@@ -8,7 +8,7 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 )}`;
 
 export default {
-	title: "Content Spotlight Portrait",
+	title: "Molecules/Content Spotlight Portrait",
 	component: "ycl-content-spotlight-portrait",
 	argTypes: {
 		overline: { control: "text" },

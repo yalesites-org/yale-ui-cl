@@ -16,6 +16,20 @@ const unescapeStringSource = (code) => {
 
 const preview = {
   parameters: {
+    options: {
+      // Group by atomic tier, then alphabetize components within a tier while
+      // keeping each file's own story order. Storybook serializes this
+      // function, so it can't reference anything outside its body.
+      storySort: (a, b) => {
+        const tiers = ['Configure your project', 'Tokens', 'Atoms', 'Molecules', 'Organisms', 'Templates', 'Pages'];
+        const rank = (title) => {
+          const i = tiers.indexOf(title.split('/')[0]);
+          return i === -1 ? tiers.length : i;
+        };
+        if (a.title === b.title) return 0;
+        return rank(a.title) - rank(b.title) || a.title.localeCompare(b.title);
+      },
+    },
     controls: {
       matchers: {
        color: /(background|color)$/i,

@@ -13,7 +13,7 @@ const item = (args) => `
   </ycl-callout-item>`;
 
 export default {
-  title: 'Callout',
+  title: 'Molecules/Callout',
   component: 'ycl-callout',
   parameters: {
     layout: 'fullscreen',

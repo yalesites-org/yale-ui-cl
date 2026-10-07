@@ -6,7 +6,7 @@ import "../../01-atoms/text-link/Link";
 const placeholder = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#dddddd"/><text x="800" y="470" font-family="sans-serif" font-size="64" text-anchor="middle" fill="#4a4a4a">16:9</text></svg>')}`;
 
 export default {
-  title: 'Image Block',
+  title: 'Molecules/Image Block',
   component: 'ycl-image-block',
   argTypes: {
     alt: {name: 'Alt Text', control: 'text'},

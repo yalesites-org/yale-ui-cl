@@ -1,6 +1,6 @@
 import "./TextCopyButton";
 export default {
-  title: 'Text Copy Button',
+  title: 'Atoms/Text Copy Button',
   component: 'ycl-text-copy-button',
   argTypes: {
     text: {control: 'text'},

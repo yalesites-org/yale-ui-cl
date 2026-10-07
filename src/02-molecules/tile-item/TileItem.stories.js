@@ -21,7 +21,7 @@ const tile = (args, heading) => `
 	</li>`;
 
 export default {
-	title: "Tile Item",
+	title: "Molecules/Tile Item",
 	component: "ycl-tile-item",
 	argTypes: {
 		heading: { control: "text" },

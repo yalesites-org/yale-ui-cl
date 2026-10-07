@@ -3,7 +3,7 @@ import "../../01-atoms/button/Button";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 export default {
-  title: 'Modal',
+  title: 'Molecules/Modal',
   component: 'ycl-modal',
   argTypes: {
     heading: {control: 'text'},

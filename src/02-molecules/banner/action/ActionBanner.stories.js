@@ -18,7 +18,7 @@ const links = (args) => {
 };
 
 export default {
-  title: 'Action Banner',
+  title: 'Molecules/Banners/Action Banner',
   component: 'ycl-action-banner',
   parameters: {
     layout: 'fullscreen',

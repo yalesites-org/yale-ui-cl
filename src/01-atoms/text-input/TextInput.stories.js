@@ -2,7 +2,7 @@ import {
 	TextInput
 } from "./TextInput";
 export default {
-	title: 'Text Input',
+	title: 'Atoms/Text Input',
 	component: 'text-input',
 	argTypes: {
 		label: {

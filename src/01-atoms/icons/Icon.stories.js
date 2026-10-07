@@ -4,7 +4,7 @@ import { icons } from "./icons.js";
 const names = Object.keys(icons);
 
 export default {
-  title: 'Icon',
+  title: 'Atoms/Icon',
   component: 'ycl-icon',
   argTypes: {
     name: {

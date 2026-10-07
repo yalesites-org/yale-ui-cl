@@ -1,6 +1,6 @@
 import "./Accordion";
 export default {
-  title: 'Accordion',
+  title: 'Molecules/Accordion',
   component: 'ycl-accordion',
   argTypes: {
     heading: {control: 'text'},

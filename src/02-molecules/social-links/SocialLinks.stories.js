@@ -1,6 +1,6 @@
 import "./SocialLinks";
 export default {
-  title: 'Social Links',
+  title: 'Molecules/Social Links',
   component: 'ycl-social-links',
   argTypes: {
     xTwitter: {name: 'X (formerly Twitter) URL', control: 'text'},

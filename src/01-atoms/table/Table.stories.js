@@ -1,6 +1,6 @@
 import { Table } from "./Table";
 export default {
-  title: 'Table',
+  title: 'Atoms/Table',
   component: 'yc-table',
   argTypes: {
     label: {control: 'text'},

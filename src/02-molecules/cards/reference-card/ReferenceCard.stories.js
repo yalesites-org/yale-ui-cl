@@ -24,7 +24,7 @@ const card = (args, { heading, snippet, overline, image = placeholder(600, 400),
 	</li>`;
 
 export default {
-	title: "Reference Card",
+	title: "Molecules/Cards/Reference Card",
 	component: "ycl-reference-card",
 	argTypes: {
 		heading: { control: "text" },

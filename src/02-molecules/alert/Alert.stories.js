@@ -4,7 +4,7 @@ import "../../01-atoms/text-link/Link";
 const resetButton = `<p><button type="button" onclick="Object.keys(localStorage).filter((k) => k.startsWith('ys-alert-id-')).forEach((k) => localStorage.removeItem(k)); location.reload();">Reset dismissed alerts</button></p>`;
 
 export default {
-  title: 'Site Alert',
+  title: 'Molecules/Site Alert',
   component: 'ycl-alert',
   parameters: {
     layout: 'fullscreen',

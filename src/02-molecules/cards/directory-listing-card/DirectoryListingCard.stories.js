@@ -8,7 +8,7 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 )}`;
 
 export default {
-	title: "Directory Listing Card",
+	title: "Molecules/Cards/Directory Listing Card",
 	component: "ycl-directory-listing-card",
 	argTypes: {
 		overline: { control: "text" },

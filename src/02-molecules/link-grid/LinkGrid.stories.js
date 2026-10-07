@@ -1,7 +1,7 @@
 import "./LinkGrid";
 import "../../01-atoms/text-link/Link";
 export default {
-  title: 'Link Grid',
+  title: 'Molecules/Link Grid',
   component: 'ycl-link-grid',
   argTypes: {
     heading: {control: 'text'},

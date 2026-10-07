@@ -1,6 +1,6 @@
 import "./Heading";
 export default {
-  title: 'Heading',
+  title: 'Atoms/Heading',
   component: 'ycl-heading',
   argTypes: {
     heading: { control: 'text' },

@@ -8,7 +8,7 @@ const items = [
 ];
 
 export default {
-  title: 'Taxonomy Display',
+  title: 'Molecules/Taxonomy Display',
   component: 'ycl-taxonomy-display',
   parameters: {
     layout: 'fullscreen',

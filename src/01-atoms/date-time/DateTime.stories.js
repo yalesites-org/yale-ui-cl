@@ -1,6 +1,6 @@
 import "./DateTime";
 export default {
-  title: 'Date Time',
+  title: 'Atoms/Date Time',
   component: 'ycl-date-time',
   argTypes: {
     start: { name: 'Start (ISO 8601)', control: 'text' },
