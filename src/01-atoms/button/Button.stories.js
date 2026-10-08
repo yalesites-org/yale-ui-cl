@@ -19,7 +19,7 @@ export default {
     animate: {
       name: 'Animation Type',
       type: 'select',
-      options: ['none', 'animate-fade', 'animate-rise', 'animate-wipe'],
+      options: ['animate-fade', 'animate-none', 'animate-rise', 'animate-wipe'],
     },
     controlType: {
       name: 'Control Type',
@@ -37,7 +37,7 @@ export default {
     href: '',
     fill: 'outline',
     radius: 'none',
-    animate: 'none',
+    animate: 'animate-fade',
     controlType: 'default',
     expanded: 'none',
     disabled: false,
@@ -45,7 +45,7 @@ export default {
 
   render: (args) =>
     `<ycl-button
-      class="${[args.fill, args.radius, args.animate].filter((c) => c && c !== 'none').join(' ')}"
+      class="${[args.fill, args.radius, args.animate].filter((c) => c && c !== 'none' && c !== 'animate-fade').join(' ')}"
       ${args.href ? `href="${args.href}"` : ''}
       ${args.controlType === 'dropdown' ? 'control-type="dropdown"' : ''}
       ${args.expanded !== 'none' ? `expanded="${args.expanded}"` : ''}
@@ -64,7 +64,6 @@ export const Pill = {
   args: {
     fill: 'filled',
     radius: 'radius-pill',
-    animate: 'animate-fade',
   },
 };
 

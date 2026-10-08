@@ -1,10 +1,11 @@
 import "./Cta";
 
-// cta.css variants are prefixed (cta--animate-fade, cta--radius-pill), so the class names are
-// built from the arg values, skipping "none".
+// cta.css variants are prefixed (cta--animate-rise, cta--radius-pill), so the class names are
+// built from the arg values. Fade is the default animation, so it adds no class; "none" opts out
+// with animate-none.
 const variantClasses = (args) => [
   args.fill,
-  args.animate !== 'none' && `animate-${args.animate}`,
+  args.animate !== 'fade' && `animate-${args.animate}`,
   args.radius !== 'none' && `radius-${args.radius}`,
 ].filter(Boolean).join(' ');
 

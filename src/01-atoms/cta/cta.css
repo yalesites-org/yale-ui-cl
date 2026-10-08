@@ -32,6 +32,10 @@
   border: solid var(--border-thickness-2) var(--color-cta-border);
   color: var(--color-cta-text);
   background-color: var(--color-cta-bg);
+  /* Fade is the default animation; the other animate variants replace this transition. */
+  transition:
+    background-color var(--animation-speed-default) ease-in-out 0ms,
+    color var(--animation-speed-default) ease-in-out 0ms;
 }
 
 .cta:hover {
@@ -80,11 +84,8 @@
   font-size: 16px;
 }
 
-.cta--animate-fade {
-  transition:
-    background-color var(--animation-speed-default) ease-in-out 0ms,
-    color var(--animation-speed-default) ease-in-out 0ms;
-
+.cta--animate-none {
+  transition: none;
 }
 
 .cta--animate-rise {
