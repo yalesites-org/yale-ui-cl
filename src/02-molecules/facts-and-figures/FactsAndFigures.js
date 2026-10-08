@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./facts-and-figures.css?inline";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -28,7 +27,7 @@ export class FactsAndFigures extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "facts-and-figures")];
 		this.#shadow.appendChild(document.importNode(factsAndFiguresTemplate.content, true));
 
 		this.#shadow.querySelectorAll("slot").forEach((slot) => {
@@ -43,4 +42,4 @@ export class FactsAndFigures extends HTMLElement {
 	set alignment(value) { this.setAttribute("alignment", value); }
 }
 
-customElements.define("ycl-facts-and-figures", FactsAndFigures);
+if (!customElements.get("ycl-facts-and-figures")) customElements.define("ycl-facts-and-figures", FactsAndFigures);

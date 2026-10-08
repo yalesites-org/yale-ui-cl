@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./video-embed.css?inline";
 
 const videoEmbedTemplate = document.createElement("template");
 videoEmbedTemplate.innerHTML = `
@@ -18,7 +17,7 @@ export class VideoEmbed extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "video-embed")];
 		this.#shadow.appendChild(document.importNode(videoEmbedTemplate.content, true));
 		this.container = this.#shadow.querySelector(".video-embed");
 		this.#shadow.querySelector("slot").addEventListener("slotchange", this.slotHandler);
@@ -61,4 +60,4 @@ export class VideoEmbed extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-video-embed", VideoEmbed);
+if (!customElements.get("ycl-video-embed")) customElements.define("ycl-video-embed", VideoEmbed);

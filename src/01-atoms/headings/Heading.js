@@ -1,7 +1,6 @@
-import baseStyles from "../../styles/base.css?inline";
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./heading.css?inline";
 import { iconSvg } from "../icons/icons.js";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 
 // The hN element itself is created in JS, because its tag has to follow the level attribute.
 const headingTemplate = document.createElement("template");
@@ -23,7 +22,7 @@ export class Heading extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "heading")];
 		const content = document.importNode(headingTemplate.content, true);
 		this.prefixIcon = content.querySelector(".heading__prefix-icon");
 		this.prefixText = content.querySelector(".heading__prefix");
@@ -89,4 +88,4 @@ export class Heading extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-heading", Heading);
+if (!customElements.get("ycl-heading")) customElements.define("ycl-heading", Heading);

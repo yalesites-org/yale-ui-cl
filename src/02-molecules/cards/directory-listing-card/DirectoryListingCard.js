@@ -1,6 +1,5 @@
-import baseStyles from "../../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../../styles/shadow.js";
+import componentStyles from "./directory-listing-card.css?inline";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -37,7 +36,7 @@ export class DirectoryListingCard extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "directory-listing-card")];
 		this.#shadow.appendChild(document.importNode(directoryListingCardTemplate.content, true));
 		this.link = this.#shadow.querySelector(".directory-listing-card__heading-link");
 
@@ -64,4 +63,4 @@ export class DirectoryListingCard extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-directory-listing-card", DirectoryListingCard);
+if (!customElements.get("ycl-directory-listing-card")) customElements.define("ycl-directory-listing-card", DirectoryListingCard);

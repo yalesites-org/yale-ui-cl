@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./link-skip.css?inline";
 
 const linkSkipTemplate = document.createElement("template");
 linkSkipTemplate.innerHTML = `
@@ -17,7 +16,7 @@ export class LinkSkip extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "link-skip")];
 		this.#shadow.appendChild(document.importNode(linkSkipTemplate.content, true));
 		this.link = this.#shadow.querySelector("a");
 	}
@@ -31,4 +30,4 @@ export class LinkSkip extends HTMLElement {
 	set href(value) { this.setAttribute("href", value); }
 }
 
-customElements.define("ycl-link-skip", LinkSkip);
+if (!customElements.get("ycl-link-skip")) customElements.define("ycl-link-skip", LinkSkip);

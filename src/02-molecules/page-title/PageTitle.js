@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./page-title.css?inline";
 
 // A page has exactly one page title, so the h1 lives in the shadow root rather than being slotted:
 // the level is never the author's choice here. The heading text comes from the default slot.
@@ -32,7 +31,7 @@ export class PageTitle extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "page-title")];
 		this.#shadow.appendChild(document.importNode(pageTitleTemplate.content, true));
 		this.prefixEl = this.#shadow.querySelector(".page-title__prefix");
 
@@ -62,4 +61,4 @@ export class PageTitle extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-page-title", PageTitle);
+if (!customElements.get("ycl-page-title")) customElements.define("ycl-page-title", PageTitle);

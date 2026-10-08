@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./radio.css?inline";
 
 const radioTemplate = document.createElement("template");
 radioTemplate.innerHTML = `
@@ -32,7 +31,7 @@ export class Radio extends HTMLElement {
 		super();
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed", delegatesFocus: true });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "radio")];
 		this.#shadow.appendChild(document.importNode(radioTemplate.content, true));
 		this.input = this.#shadow.querySelector("input");
 		this.input.addEventListener("change", this.changeHandler);
@@ -170,4 +169,4 @@ export class Radio extends HTMLElement {
 	set name(value) { this.setAttribute("name", value); }
 }
 
-customElements.define("ycl-radio", Radio);
+if (!customElements.get("ycl-radio")) customElements.define("ycl-radio", Radio);

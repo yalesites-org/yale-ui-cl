@@ -1,7 +1,6 @@
-import baseStyles from "../../styles/base.css?inline";
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./icon.css?inline";
 import { icons } from "./icons.js";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 
 const iconTemplate = document.createElement("template");
 iconTemplate.innerHTML = `
@@ -17,7 +16,7 @@ export class Icon extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "icon")];
 		this.#shadow.appendChild(document.importNode(iconTemplate.content, true));
 		this.svg = this.#shadow.querySelector(".icon");
 		this.path = this.svg.querySelector("path");
@@ -55,4 +54,4 @@ export class Icon extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-icon", Icon);
+if (!customElements.get("ycl-icon")) customElements.define("ycl-icon", Icon);

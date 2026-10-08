@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./taxonomy-display.css?inline";
 
 const taxonomyDisplayTemplate = document.createElement("template");
 taxonomyDisplayTemplate.innerHTML = `
@@ -39,7 +38,7 @@ export class TaxonomyDisplayItem extends HTMLElement {
 		this.#internals = this.attachInternals();
 		this.#internals.role = "listitem";
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "taxonomy-display")];
 		this.#shadow.appendChild(document.importNode(taxonomyDisplayItemTemplate.content, true));
 		this.labelEl = this.#shadow.querySelector(".taxonomy-display__item__label");
 		this.listEl = this.#shadow.querySelector(".taxonomy-display__item__list");
@@ -70,10 +69,10 @@ export class TaxonomyDisplay extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "taxonomy-display")];
 		this.#shadow.appendChild(document.importNode(taxonomyDisplayTemplate.content, true));
 	}
 }
 
-customElements.define("ycl-taxonomy-display", TaxonomyDisplay);
-customElements.define("ycl-taxonomy-display-item", TaxonomyDisplayItem);
+if (!customElements.get("ycl-taxonomy-display")) customElements.define("ycl-taxonomy-display", TaxonomyDisplay);
+if (!customElements.get("ycl-taxonomy-display-item")) customElements.define("ycl-taxonomy-display-item", TaxonomyDisplayItem);

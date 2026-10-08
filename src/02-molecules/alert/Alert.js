@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./alert.css?inline";
 
 // Font Awesome Free icons (CC BY 4.0), decorative only
 const svg = (viewBox, path) => `<svg viewBox="${viewBox}" aria-hidden="true" focusable="false"><path d="${path}"/></svg>`;
@@ -55,7 +54,7 @@ export class Alert extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "alert")];
 		this.#shadow.appendChild(document.importNode(alertTemplate.content, true));
 		this.alert = this.#shadow.querySelector(".alert");
 		this.icon = this.#shadow.querySelector(".alert__icon");
@@ -128,4 +127,4 @@ export class Alert extends HTMLElement {
 	set state(value) { this.setAttribute("state", value); }
 }
 
-customElements.define("ycl-alert", Alert);
+if (!customElements.get("ycl-alert")) customElements.define("ycl-alert", Alert);

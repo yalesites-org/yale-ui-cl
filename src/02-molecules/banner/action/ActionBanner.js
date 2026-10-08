@@ -1,6 +1,5 @@
-import baseStyles from "../../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../../styles/shadow.js";
+import componentStyles from "./action-banner.css?inline";
 
 const actionBannerTemplate = document.createElement("template");
 actionBannerTemplate.innerHTML = `
@@ -39,7 +38,7 @@ export class ActionBanner extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "action-banner")];
 		this.#shadow.appendChild(document.importNode(actionBannerTemplate.content, true));
 		this.#banner = this.#shadow.querySelector(".cta-banner");
 		this.#overlay = this.#shadow.querySelector(".cta-banner__overlay_image");
@@ -73,4 +72,4 @@ export class ActionBanner extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-action-banner", ActionBanner);
+if (!customElements.get("ycl-action-banner")) customElements.define("ycl-action-banner", ActionBanner);

@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./accordion.css?inline";
 
 // Font Awesome Free "angle-down" (CC BY 4.0), decorative only
 const angleDownIcon = (className) => `<svg class="${className}" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>`;
@@ -46,7 +45,7 @@ export class AccordionItem extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed"});
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "accordion")];
 		this.#shadow.appendChild(document.importNode(accordionItemTemplate.content, true));
 		this.trigger = this.#shadow.querySelector(".accordion-item__toggle");
 		this.trigger.addEventListener("click", this.clickHandler);
@@ -79,7 +78,7 @@ export class Accordion extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "accordion")];
 		this.#shadow.appendChild(document.importNode(accordionOuterTemplate.content, true),);
 		this.#shadow.querySelector(".accordion__expand-all").addEventListener("click", () => this.setAll(true));
 		this.#shadow.querySelector(".accordion__collapse-all").addEventListener("click", () => this.setAll(false));
@@ -92,5 +91,5 @@ export class Accordion extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-accordion", Accordion);
-customElements.define("ycl-accordion-item", AccordionItem)
+if (!customElements.get("ycl-accordion")) customElements.define("ycl-accordion", Accordion);
+if (!customElements.get("ycl-accordion-item")) customElements.define("ycl-accordion-item", AccordionItem);

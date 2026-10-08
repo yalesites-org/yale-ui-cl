@@ -1,7 +1,6 @@
-import baseStyles from '../../styles/base.css?inline';
+import { baseSheet, componentSheet } from '../../styles/shadow.js';
+import componentStyles from './cta.css?inline';
 import * as Util from '../../utility.js';
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 const ctaTemplate = document.createElement('template');
 // No whitespace around the <a>: the host is inline, so it would render as a stray space.
 ctaTemplate.innerHTML = `<a class="cta" href="#"><slot>Default Link</slot></a>`;
@@ -17,7 +16,7 @@ export class Cta extends HTMLElement { #shadow;
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
 	   this.#shadow.appendChild(document.importNode(ctaTemplate.content, true));
-    this.#shadow.adoptedStyleSheets = [baseSheet];
+    this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, 'cta')];
 	   this.link = this.#shadow.querySelector("a");
   }
 
@@ -37,4 +36,4 @@ export class Cta extends HTMLElement { #shadow;
 }
 
  
-customElements.define("cta-link", Cta);
+if (!customElements.get("cta-link")) customElements.define("cta-link", Cta);

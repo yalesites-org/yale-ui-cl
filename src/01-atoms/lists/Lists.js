@@ -1,7 +1,6 @@
-import baseStyles from '../../styles/base.css?inline';
+import { baseSheet, componentSheet } from '../../styles/shadow.js';
+import componentStyles from './lists.css?inline';
 import * as Util from '../../utility.js';
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 const listTemplate = document.createElement('template');
 listTemplate.innerHTML = `
   <slot></slot>
@@ -18,7 +17,7 @@ export class List extends HTMLElement { #shadow;
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
 	  this.#shadow.appendChild(document.importNode(listTemplate.content, true));
-    this.#shadow.adoptedStyleSheets = [baseSheet];
+    this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, 'lists')];
   }
 
   connectedCallback() {
@@ -55,4 +54,4 @@ export class List extends HTMLElement { #shadow;
 }
 
 
-customElements.define("ycl-list", List);
+if (!customElements.get("ycl-list")) customElements.define("ycl-list", List);

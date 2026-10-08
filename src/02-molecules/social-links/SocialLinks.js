@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./social-links.css?inline";
 
 // Font Awesome Free brand icons (CC BY 4.0), decorative only: the platform name is announced
 // from visually hidden text instead. Listed in the order the YaleSites footer renders them.
@@ -31,7 +30,7 @@ export class SocialLinks extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "social-links")];
 		this.#shadow.appendChild(document.importNode(socialLinksTemplate.content, true));
 		this.list = this.#shadow.querySelector(".social-links__list");
 	}
@@ -54,4 +53,4 @@ export class SocialLinks extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-social-links", SocialLinks);
+if (!customElements.get("ycl-social-links")) customElements.define("ycl-social-links", SocialLinks);

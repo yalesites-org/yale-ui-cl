@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./pager.css?inline";
 
 // Font Awesome Free "angle-down" (CC BY 4.0), decorative only; rotated in CSS to point sideways.
 const angleDownIcon = (className) => `<svg class="${className}" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>`;
@@ -40,7 +39,7 @@ export class Pager extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "pager")];
 		this.#shadow.appendChild(document.importNode(pagerTemplate.content, true));
 		this.nav = this.#shadow.querySelector(".pager");
 		this.list = this.#shadow.querySelector(".pager__items");
@@ -161,4 +160,4 @@ export class Pager extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-pager", Pager);
+if (!customElements.get("ycl-pager")) customElements.define("ycl-pager", Pager);

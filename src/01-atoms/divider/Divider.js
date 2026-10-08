@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./divider.css?inline";
 
 const dividerTemplate = document.createElement("template");
 dividerTemplate.innerHTML = `
@@ -22,7 +21,7 @@ export class Divider extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "divider")];
 		this.#shadow.appendChild(document.importNode(dividerTemplate.content, true));
 		this.line = this.#shadow.querySelector(".divider");
 	}
@@ -63,4 +62,4 @@ export class Divider extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-divider", Divider);
+if (!customElements.get("ycl-divider")) customElements.define("ycl-divider", Divider);

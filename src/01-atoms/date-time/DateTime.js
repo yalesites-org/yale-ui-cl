@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./date-time.css?inline";
 
 const dateTimeTemplate = document.createElement("template");
 dateTimeTemplate.innerHTML = `<time class="date-time"><slot></slot></time>`;
@@ -66,7 +65,7 @@ export class DateTime extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "date-time")];
 		this.#shadow.appendChild(document.importNode(dateTimeTemplate.content, true));
 		this.time = this.#shadow.querySelector("time");
 		this.fallback = this.#shadow.querySelector("slot");
@@ -125,4 +124,4 @@ export class DateTime extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-date-time", DateTime);
+if (!customElements.get("ycl-date-time")) customElements.define("ycl-date-time", DateTime);

@@ -1,0 +1,6 @@
+/* Shared base adopted by every component's shadow root, alongside the component's own sheet.
+   Tokens aren't included: postcss/lock-tokens.js inlines them into component CSS at build time. */
+@layer reset, tokens, components, util;
+@import "normalize.css/normalize.css" layer(reset);
+@import "../00-tokens/typography/typography.css" layer(tokens);
+@import "./utility.css" layer(util);

@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./callout.css?inline";
 
 const calloutsTemplate = document.createElement("template");
 calloutsTemplate.innerHTML = `
@@ -29,7 +28,7 @@ export class CalloutItem extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "callout")];
 		this.#shadow.appendChild(document.importNode(calloutItemTemplate.content, true));
 	}
 }
@@ -44,7 +43,7 @@ export class Callout extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "callout")];
 		this.#shadow.appendChild(document.importNode(calloutsTemplate.content, true));
 		this.overlay = this.#shadow.querySelector(".callouts__overlay_image");
 	}
@@ -67,5 +66,5 @@ export class Callout extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-callout", Callout);
-customElements.define("ycl-callout-item", CalloutItem);
+if (!customElements.get("ycl-callout")) customElements.define("ycl-callout", Callout);
+if (!customElements.get("ycl-callout-item")) customElements.define("ycl-callout-item", CalloutItem);

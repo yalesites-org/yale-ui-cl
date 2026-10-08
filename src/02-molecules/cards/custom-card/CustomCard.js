@@ -1,6 +1,5 @@
-import baseStyles from "../../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../../styles/shadow.js";
+import componentStyles from "./custom-card.css?inline";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -34,7 +33,7 @@ export class CustomCard extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "custom-card")];
 		this.#shadow.appendChild(document.importNode(customCardTemplate.content, true));
 		this.card = this.#shadow.querySelector(".custom-card");
 		this.link = this.#shadow.querySelector(".custom-card__heading-link");
@@ -65,4 +64,4 @@ export class CustomCard extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-custom-card", CustomCard);
+if (!customElements.get("ycl-custom-card")) customElements.define("ycl-custom-card", CustomCard);

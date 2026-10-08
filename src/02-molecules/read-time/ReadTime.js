@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./read-time.css?inline";
 
 // Reportedly the low end of average adult reading speed in the US (same figure as the Twig behavior).
 const DEFAULT_WORDS_PER_MINUTE = 200;
@@ -27,7 +26,7 @@ export class ReadTime extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "read-time")];
 		this.#shadow.appendChild(document.importNode(readTimeTemplate.content, true));
 		this.labelEl = this.#shadow.querySelector(".read-time__label");
 		this.timeEl = this.#shadow.querySelector(".read-time__time");
@@ -82,4 +81,4 @@ export class ReadTime extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-read-time", ReadTime);
+if (!customElements.get("ycl-read-time")) customElements.define("ycl-read-time", ReadTime);

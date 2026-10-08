@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./tabs.css?inline";
 
 // Font Awesome Free "angle-down" (CC BY 4.0), decorative only; rotated in CSS to point sideways.
 const angleDownIcon = `<svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>`;
@@ -48,7 +47,7 @@ export class Tabs extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed", slotAssignment: "manual" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "tabs")];
 		this.#shadow.appendChild(document.importNode(tabsTemplate.content, true));
 		this.root = this.#shadow.querySelector(".tabs");
 		this.nav = this.#shadow.querySelector(".tabs__nav");
@@ -182,5 +181,5 @@ export class Tabs extends HTMLElement {
 }
 
 // ycl-tab first, so its accessors exist by the time ycl-tabs upgrades and reads its children.
-customElements.define("ycl-tab", Tab);
-customElements.define("ycl-tabs", Tabs);
+if (!customElements.get("ycl-tab")) customElements.define("ycl-tab", Tab);
+if (!customElements.get("ycl-tabs")) customElements.define("ycl-tabs", Tabs);

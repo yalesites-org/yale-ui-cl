@@ -1,7 +1,6 @@
-import baseStyles from "../../styles/base.css?inline";
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./audio.css?inline";
 import { iconSvg } from "../icons/icons.js";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 
 const speeds = [
 	{ modifier: "half", rate: 0.5, label: "0.5x" },
@@ -85,7 +84,7 @@ export class AudioPlayer extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "audio")];
 		this.#shadow.appendChild(document.importNode(audioTemplate.content, true));
 		const $ = (selector) => this.#shadow.querySelector(selector);
 		this.root = $(".audio-embed");
@@ -280,4 +279,4 @@ export class AudioPlayer extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-audio", AudioPlayer);
+if (!customElements.get("ycl-audio")) customElements.define("ycl-audio", AudioPlayer);

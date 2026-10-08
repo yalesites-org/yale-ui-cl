@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./content-spotlight-portrait.css?inline";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -38,7 +37,7 @@ export class ContentSpotlightPortrait extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "content-spotlight-portrait")];
 		this.#shadow.appendChild(document.importNode(contentSpotlightPortraitTemplate.content, true));
 
 		// Empty optional parts are hidden so they don't leave stray spacing.
@@ -54,4 +53,4 @@ export class ContentSpotlightPortrait extends HTMLElement {
 	set position(value) { this.setAttribute("position", value); }
 }
 
-customElements.define("ycl-content-spotlight-portrait", ContentSpotlightPortrait);
+if (!customElements.get("ycl-content-spotlight-portrait")) customElements.define("ycl-content-spotlight-portrait", ContentSpotlightPortrait);

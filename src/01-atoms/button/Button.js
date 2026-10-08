@@ -1,7 +1,7 @@
-import baseStyles from "../../styles/base.css?inline";
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./button.css?inline";
+import ctaStyles from "../cta/cta.css?inline";
 import * as Util from "../../utility.js";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 
 // Font Awesome Free "angle-down" (CC BY 4.0), decorative only
 const angleDownIcon = (className) => `<svg class="${className}" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>`;
@@ -27,7 +27,7 @@ export class Button extends HTMLElement {
 		super();
 		this.#internals = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed", delegatesFocus: true });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(ctaStyles, "cta"), componentSheet(componentStyles, "button")];
 		this.#shadow.appendChild(document.importNode(buttonTemplate.content, true));
 		this.#control = this.#shadow.querySelector(".button");
 		// Listening on the shadow root rather than the control survives swapping <button> for <a>.
@@ -137,4 +137,4 @@ export class Button extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-button", Button);
+if (!customElements.get("ycl-button")) customElements.define("ycl-button", Button);

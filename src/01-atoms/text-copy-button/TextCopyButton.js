@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./text-copy-button.css?inline";
 
 const FEEDBACK_DURATION = 1700;
 
@@ -23,7 +22,7 @@ export class TextCopyButton extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed", delegatesFocus: true });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "text-copy-button")];
 		this.#shadow.appendChild(document.importNode(textCopyButtonTemplate.content, true));
 		this.button = this.#shadow.querySelector(".text-copy-button__button");
 		this.label = this.#shadow.querySelector(".text-copy-button__label");
@@ -84,4 +83,4 @@ export class TextCopyButton extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-text-copy-button", TextCopyButton);
+if (!customElements.get("ycl-text-copy-button")) customElements.define("ycl-text-copy-button", TextCopyButton);

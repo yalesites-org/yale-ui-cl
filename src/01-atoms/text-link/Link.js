@@ -1,7 +1,6 @@
-import baseStyles from '../../styles/base.css?inline';
+import { baseSheet, componentSheet } from '../../styles/shadow.js';
+import componentStyles from './link.css?inline';
 import * as Util from '../../utility.js'
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 
 const linkTemplate = document.createElement('template');
 // No whitespace around the <a>: the host is inline, so it would render as a stray space.
@@ -19,7 +18,7 @@ export class TextLink extends HTMLElement {
 		this.#shadow = this.attachShadow({
 			mode: 'closed'
 		});
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, 'text-link')];
 		this.#shadow.appendChild(document.importNode(linkTemplate.content, true));
 		this.link = this.#shadow.querySelector("a");
 		
@@ -51,4 +50,4 @@ export class TextLink extends HTMLElement {
 }
 
 
-customElements.define("text-link", TextLink);
+if (!customElements.get("text-link")) customElements.define("text-link", TextLink);

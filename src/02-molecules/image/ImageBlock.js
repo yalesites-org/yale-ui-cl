@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./image.css?inline";
 
 // The image (an <img>, <picture> or ycl-image) goes in the default slot, the caption in "caption".
 const imageBlockTemplate = document.createElement("template");
@@ -21,7 +20,7 @@ export class ImageBlock extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "image-block")];
 		this.#shadow.appendChild(document.importNode(imageBlockTemplate.content, true));
 		const figure = this.#shadow.querySelector("figure");
 		const caption = this.#shadow.querySelector("figcaption");
@@ -39,4 +38,4 @@ export class ImageBlock extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-image-block", ImageBlock);
+if (!customElements.get("ycl-image-block")) customElements.define("ycl-image-block", ImageBlock);

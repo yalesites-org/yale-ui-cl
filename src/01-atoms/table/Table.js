@@ -1,6 +1,5 @@
-import baseStyles from '../../styles/base.css?inline';
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from '../../styles/shadow.js';
+import componentStyles from './table.css?inline';
 const tableTemplate = document.createElement('template');
 tableTemplate.innerHTML = `
 	<div class="table-wrapper">
@@ -17,9 +16,9 @@ export class Table extends HTMLElement { #shadow;
     super();
     this.#shadow = this.attachShadow({ mode: 'closed' });
 	this.#shadow.appendChild(document.importNode(tableTemplate.content, true));
-    this.#shadow.adoptedStyleSheets = [baseSheet];
+    this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, 'table')];
   }
 }
 
  
-customElements.define("yc-table", Table);
+if (!customElements.get("yc-table")) customElements.define("yc-table", Table);

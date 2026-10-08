@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./inline-message.css?inline";
 
 // Font Awesome Free icons (CC BY 4.0), decorative only
 const svg = (path) => `<svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="${path}"/></svg>`;
@@ -39,7 +38,7 @@ export class InlineMessage extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "inline-message")];
 		this.#shadow.appendChild(document.importNode(inlineMessageTemplate.content, true));
 		this.iconSlot = this.#shadow.querySelector('slot[name="icon"]');
 		this.iconWrapper = this.#shadow.querySelector(".inline-message__icon");
@@ -74,4 +73,4 @@ export class InlineMessage extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-inline-message", InlineMessage);
+if (!customElements.get("ycl-inline-message")) customElements.define("ycl-inline-message", InlineMessage);

@@ -1,7 +1,6 @@
-import baseStyles from "../../styles/base.css?inline";
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./selectinput.css?inline";
 import * as Input from "../../input.js";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
 
 const selectInputTemplate = document.createElement("template");
 selectInputTemplate.innerHTML = `
@@ -39,7 +38,7 @@ export class SelectInput extends HTMLElement {
 		super();
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "select-input")];
 		this.#shadow.appendChild(document.importNode(selectInputTemplate.content, true),);
 		this.input = this.#shadow.querySelector("select");
 		this.label = this.#shadow.querySelector("label");
@@ -96,4 +95,4 @@ export class SelectInput extends HTMLElement {
 	
 }
 
-customElements.define("select-input", SelectInput);
+if (!customElements.get("select-input")) customElements.define("select-input", SelectInput);

@@ -1,6 +1,5 @@
-import baseStyles from "../../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../../styles/shadow.js";
+import componentStyles from "./reference-card.css?inline";
 
 // Runs onChange(filled) whenever a slot gains or loses content, so empty optional parts can be
 // hidden instead of leaving stray spacing. Whitespace-only text doesn't count as content.
@@ -46,7 +45,7 @@ export class ReferenceCard extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "reference-card")];
 		this.#shadow.appendChild(document.importNode(referenceCardTemplate.content, true));
 		this.card = this.#shadow.querySelector(".reference-card");
 		this.link = this.#shadow.querySelector(".reference-card__heading-link");
@@ -94,4 +93,4 @@ export class ReferenceCard extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-reference-card", ReferenceCard);
+if (!customElements.get("ycl-reference-card")) customElements.define("ycl-reference-card", ReferenceCard);

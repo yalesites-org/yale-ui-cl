@@ -3,3 +3,5 @@ node_modules/
 debug-storybook.log
 CLAUDE.md
 eslint.config.js
+dist/
+storybook-static/

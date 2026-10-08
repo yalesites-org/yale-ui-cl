@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./embed.css?inline";
 
 const embedTemplate = document.createElement("template");
 embedTemplate.innerHTML = `
@@ -23,7 +22,7 @@ export class Embed extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "embed")];
 		this.#shadow.appendChild(document.importNode(embedTemplate.content, true));
 		this.#inner = this.#shadow.querySelector(".embed__inner");
 	}
@@ -65,4 +64,4 @@ export class Embed extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-embed", Embed);
+if (!customElements.get("ycl-embed")) customElements.define("ycl-embed", Embed);

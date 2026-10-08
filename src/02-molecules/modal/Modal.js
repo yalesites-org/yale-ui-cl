@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./modal.css?inline";
 
 // Font Awesome Free "xmark" (CC BY 4.0), decorative only; the button carries the label
 const closeIcon = `<svg class="modal__close-icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>`;
@@ -34,7 +33,7 @@ export class Modal extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "modal")];
 		this.#shadow.appendChild(document.importNode(modalTemplate.content, true));
 		this.#dialog = this.#shadow.querySelector("dialog");
 		this.#shadow.querySelector(".modal__close").addEventListener("click", () => this.close());
@@ -99,4 +98,4 @@ export class Modal extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-modal", Modal);
+if (!customElements.get("ycl-modal")) customElements.define("ycl-modal", Modal);

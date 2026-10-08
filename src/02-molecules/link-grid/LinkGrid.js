@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./link-grid.css?inline";
 
 const columns = ["one", "two", "three", "four"];
 
@@ -23,7 +22,7 @@ export class LinkGrid extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed", slotAssignment: "manual" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "link-grid")];
 		this.#shadow.appendChild(document.importNode(linkGridTemplate.content, true));
 		this.#observer = new MutationObserver((records) => {
 			// Only direct children matter; changes inside a link (e.g. its text) don't need a re-render.
@@ -74,4 +73,4 @@ export class LinkGrid extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-link-grid", LinkGrid);
+if (!customElements.get("ycl-link-grid")) customElements.define("ycl-link-grid", LinkGrid);

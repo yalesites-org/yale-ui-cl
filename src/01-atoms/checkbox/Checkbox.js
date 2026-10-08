@@ -1,7 +1,6 @@
 import * as Input from "../../input.js";
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./checkbox.css?inline";
 
 const checkboxTemplate = document.createElement("template");
 checkboxTemplate.innerHTML = `
@@ -26,7 +25,7 @@ export class Checkbox extends HTMLElement {
 		super();
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed", delegatesFocus: true });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "checkbox")];
 		this.#shadow.appendChild(document.importNode(checkboxTemplate.content, true));
 		this.input = this.#shadow.querySelector("input");
 		this.input.addEventListener("change", this.changeHandler);
@@ -98,4 +97,4 @@ export class Checkbox extends HTMLElement {
 	set name(value) { this.setAttribute("name", value); }
 }
 
-customElements.define("ycl-checkbox", Checkbox);
+if (!customElements.get("ycl-checkbox")) customElements.define("ycl-checkbox", Checkbox);

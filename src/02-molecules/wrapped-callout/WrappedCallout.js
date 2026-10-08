@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./wrapped-callout.css?inline";
 
 // Whitespace-only text (template formatting) doesn't count as content.
 const hasContent = (slot) => slot.assignedNodes({ flatten: true })
@@ -26,7 +25,7 @@ export class WrappedCallout extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "wrapped-callout")];
 		this.#shadow.appendChild(document.importNode(wrappedCalloutTemplate.content, true));
 
 		// The box only floats when there's body text to wrap around it.
@@ -43,4 +42,4 @@ export class WrappedCallout extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-wrapped-callout", WrappedCallout);
+if (!customElements.get("ycl-wrapped-callout")) customElements.define("ycl-wrapped-callout", WrappedCallout);

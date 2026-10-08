@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./related-content.css?inline";
 
 let headingCount = 0;
 
@@ -36,7 +35,7 @@ export class RelatedContentItem extends HTMLElement {
 		this.#internals = this.attachInternals();
 		this.#internals.role = "article";
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "related-content")];
 		this.#shadow.appendChild(document.importNode(relatedContentItemTemplate.content, true));
 		this.link = this.#shadow.querySelector(".related-card__link");
 		this.typeEl = this.#shadow.querySelector(".related-card__type");
@@ -68,7 +67,7 @@ export class RelatedContent extends HTMLElement {
 		super();
 		this.#internals = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "related-content")];
 		this.#shadow.appendChild(document.importNode(relatedContentTemplate.content, true));
 		this.headingWrapper = this.#shadow.querySelector(".related-content__heading");
 		const slot = this.#shadow.querySelector('slot[name="heading"]');
@@ -92,5 +91,5 @@ export class RelatedContent extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-related-content", RelatedContent);
-customElements.define("ycl-related-content-item", RelatedContentItem);
+if (!customElements.get("ycl-related-content")) customElements.define("ycl-related-content", RelatedContent);
+if (!customElements.get("ycl-related-content-item")) customElements.define("ycl-related-content-item", RelatedContentItem);

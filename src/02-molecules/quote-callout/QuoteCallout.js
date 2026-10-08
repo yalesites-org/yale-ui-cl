@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./quote-callout.css?inline";
 
 // Whitespace-only text (template formatting) doesn't count as content.
 const hasContent = (slot) => slot.assignedNodes({ flatten: true })
@@ -27,7 +26,7 @@ export class QuoteCallout extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "quote-callout")];
 		this.#shadow.appendChild(document.importNode(quoteCalloutTemplate.content, true));
 
 		// No attribution means no figcaption, or the em dash would be left on its own.
@@ -38,4 +37,4 @@ export class QuoteCallout extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-quote-callout", QuoteCallout);
+if (!customElements.get("ycl-quote-callout")) customElements.define("ycl-quote-callout", QuoteCallout);

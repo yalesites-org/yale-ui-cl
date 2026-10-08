@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./text-with-image.css?inline";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -38,7 +37,7 @@ export class TextWithImage extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "text-with-image")];
 		this.#shadow.appendChild(document.importNode(textWithImageTemplate.content, true));
 
 		// Empty optional parts are hidden so they don't leave stray spacing.
@@ -54,4 +53,4 @@ export class TextWithImage extends HTMLElement {
 	set position(value) { this.setAttribute("position", value); }
 }
 
-customElements.define("ycl-text-with-image", TextWithImage);
+if (!customElements.get("ycl-text-with-image")) customElements.define("ycl-text-with-image", TextWithImage);

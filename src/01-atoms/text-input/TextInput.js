@@ -1,7 +1,6 @@
 import * as Input from "../../input.js";
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./textinput.css?inline";
 
 const textInputTemplate = document.createElement("template");
 textInputTemplate.innerHTML = `
@@ -46,7 +45,7 @@ export class TextInput extends HTMLElement {
 		super();
 		this.internals_ = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "text-input")];
 		this.#shadow.appendChild(
 			document.importNode(textInputTemplate.content, true),
 		);
@@ -138,4 +137,4 @@ export class TextInput extends HTMLElement {
 	}
 }
 
-customElements.define("text-input", TextInput);
+if (!customElements.get("text-input")) customElements.define("text-input", TextInput);

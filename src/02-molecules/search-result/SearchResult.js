@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./search-result.css?inline";
 
 // Font Awesome Free "lock" (CC BY 4.0). It's the only cue that a result needs a Yale login, so it
 // carries a name rather than being hidden from assistive tech.
@@ -35,7 +34,7 @@ export class SearchResult extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "search-result")];
 		this.#shadow.appendChild(document.importNode(searchResultTemplate.content, true));
 		this.link = this.#shadow.querySelector(".search-result__heading-link");
 		this.contentTypeEl = this.#shadow.querySelector(".search-result__content-type");
@@ -74,4 +73,4 @@ export class SearchResult extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-search-result", SearchResult);
+if (!customElements.get("ycl-search-result")) customElements.define("ycl-search-result", SearchResult);

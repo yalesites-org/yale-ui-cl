@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./quick-links.css?inline";
 
 const quickLinksTemplate = document.createElement("template");
 quickLinksTemplate.innerHTML = `
@@ -26,7 +25,7 @@ export class QuickLinks extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed", slotAssignment: "manual" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "quick-links")];
 		this.#shadow.appendChild(document.importNode(quickLinksTemplate.content, true));
 		this.#observer = new MutationObserver((records) => {
 			// Only direct children matter; changes inside a link (e.g. its text) don't need a re-render.
@@ -69,4 +68,4 @@ export class QuickLinks extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-quick-links", QuickLinks);
+if (!customElements.get("ycl-quick-links")) customElements.define("ycl-quick-links", QuickLinks);

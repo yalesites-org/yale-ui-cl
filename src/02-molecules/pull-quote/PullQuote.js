@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./pull-quote.css?inline";
 
 // Whitespace-only text (template formatting) doesn't count as content.
 const hasContent = (slot) => slot.assignedNodes({ flatten: true })
@@ -25,7 +24,7 @@ export class PullQuote extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "pull-quote")];
 		this.#shadow.appendChild(document.importNode(pullQuoteTemplate.content, true));
 
 		// No attribution means no figcaption, or the em dash would be left on its own.
@@ -36,4 +35,4 @@ export class PullQuote extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-pull-quote", PullQuote);
+if (!customElements.get("ycl-pull-quote")) customElements.define("ycl-pull-quote", PullQuote);

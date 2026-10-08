@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./video.css?inline";
 
 const videoTemplate = document.createElement("template");
 videoTemplate.innerHTML = `
@@ -23,7 +22,7 @@ export class Video extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "video")];
 		this.#shadow.appendChild(document.importNode(videoTemplate.content, true));
 		this.#content = this.#shadow.querySelector(".video__content");
 		this.#slots = this.#shadow.querySelectorAll("slot[name]");
@@ -38,4 +37,4 @@ export class Video extends HTMLElement {
 	};
 }
 
-customElements.define("ycl-video", Video);
+if (!customElements.get("ycl-video")) customElements.define("ycl-video", Video);

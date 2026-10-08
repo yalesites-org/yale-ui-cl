@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./link-group.css?inline";
 
 const linkGroupTemplate = document.createElement("template");
 linkGroupTemplate.innerHTML = `
@@ -23,7 +22,7 @@ export class LinkGroup extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed", slotAssignment: "manual" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "link-group")];
 		this.#shadow.appendChild(document.importNode(linkGroupTemplate.content, true));
 		this.#observer = new MutationObserver((records) => {
 			// Only direct children matter; changes inside a link (e.g. its text) don't need a re-render.
@@ -67,4 +66,4 @@ export class LinkGroup extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-link-group", LinkGroup);
+if (!customElements.get("ycl-link-group")) customElements.define("ycl-link-group", LinkGroup);

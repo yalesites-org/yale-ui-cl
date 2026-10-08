@@ -1,6 +1,5 @@
-import baseStyles from "../../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../../styles/shadow.js";
+import componentStyles from "./image-banner.css?inline";
 
 const imageBannerTemplate = document.createElement("template");
 imageBannerTemplate.innerHTML = `
@@ -18,7 +17,7 @@ export class ImageBanner extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "image-banner")];
 		this.#shadow.appendChild(document.importNode(imageBannerTemplate.content, true));
 		const caption = this.#shadow.querySelector(".image-banner__caption");
 		const captionSlot = this.#shadow.querySelector('slot[name="caption"]');
@@ -29,4 +28,4 @@ export class ImageBanner extends HTMLElement {
 	}
 }
 
-customElements.define("ycl-image-banner", ImageBanner);
+if (!customElements.get("ycl-image-banner")) customElements.define("ycl-image-banner", ImageBanner);

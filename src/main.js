@@ -1,3 +1,7 @@
+// Document-level styles (tokens on :root, reset, typography). Emitted as
+// dist/yale-ui-cl.css in the library build; consumers must load it.
+import "./styles/base.css";
+
 export { Cta } from "./01-atoms/cta/Cta.js";
 export { TextLink } from "./01-atoms/text-link/Link.js";
 export { TextInput } from "./01-atoms/text-input/TextInput.js";

@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./image.css?inline";
 
 const imageTemplate = document.createElement("template");
 imageTemplate.innerHTML = `
@@ -17,7 +16,7 @@ export class ResponsiveImage extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "image")];
 		this.#shadow.appendChild(document.importNode(imageTemplate.content, true));
 		this.figure = this.#shadow.querySelector(".figure");
 		this.caption = this.#shadow.querySelector(".caption");
@@ -34,4 +33,4 @@ export class ResponsiveImage extends HTMLElement {
 	};
 }
 
-customElements.define("ycl-image", ResponsiveImage);
+if (!customElements.get("ycl-image")) customElements.define("ycl-image", ResponsiveImage);

@@ -1,6 +1,5 @@
-import baseStyles from "../../styles/base.css?inline";
-const baseSheet = new CSSStyleSheet();
-baseSheet.replaceSync(baseStyles);
+import { baseSheet, componentSheet } from "../../styles/shadow.js";
+import componentStyles from "./text.css?inline";
 
 // The shadow root only handles the wrapper (width, alignment, the emphasized type size, which the
 // slotted prose inherits). The prose itself stays in the light DOM and is styled by document rules
@@ -21,9 +20,9 @@ export class Text extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet];
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "text")];
 		this.#shadow.appendChild(document.importNode(textTemplate.content, true));
 	}
 }
 
-customElements.define("ycl-text", Text);
+if (!customElements.get("ycl-text")) customElements.define("ycl-text", Text);
