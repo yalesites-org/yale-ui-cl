@@ -1,4 +1,3 @@
-import { defineMain } from '@storybook/web-components-vite/node';
 
 /* @type { import('@storybook/web-components--vite').StorybookConfig ) */
 const config = {

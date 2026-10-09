@@ -1,4 +1,4 @@
-import { Table } from "./Table";
+import "./Table";
 export default {
   title: 'Atoms/Table',
   component: 'yc-table',
@@ -16,7 +16,7 @@ export default {
 
 export const Default = {
 
-  render: (args) =>
+  render: () =>
     `<yc-table>
       <table>
         <thead>

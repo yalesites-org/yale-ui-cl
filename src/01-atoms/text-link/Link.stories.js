@@ -1,4 +1,4 @@
-import { TextLink } from "./Link";
+import "./Link";
 export default {
   title: 'Atoms/Text Link',
   component: 'text-link',

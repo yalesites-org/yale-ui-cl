@@ -1,6 +1,4 @@
-import {
-	SelectInput
-} from "./SelectInput";
+import "./SelectInput";
 export default {
 	title: 'Atoms/Select Input',
 	component: 'select-input',

@@ -9,7 +9,7 @@ tableTemplate.innerHTML = `
 
 export class Table extends HTMLElement { #shadow;
   static get observedAttributes() {
-    
+    return [];
   }
 
   constructor() {

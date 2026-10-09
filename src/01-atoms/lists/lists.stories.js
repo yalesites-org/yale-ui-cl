@@ -1,4 +1,4 @@
-import { List } from "./Lists.js";
+import "./Lists.js";
 
 export default {
   title: 'Atoms/Lists',
@@ -14,7 +14,7 @@ export default {
     type: '',
 },
 
-  render: (args) => 
+  render: () => 
     ``,
 };
 

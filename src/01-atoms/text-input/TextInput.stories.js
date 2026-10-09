@@ -1,6 +1,4 @@
-import {
-	TextInput
-} from "./TextInput";
+import "./TextInput";
 export default {
 	title: 'Atoms/Text Input',
 	component: 'text-input',

@@ -32,7 +32,7 @@ export class Cta extends HTMLElement { #shadow;
   
   get href() { return this.getAttribute("href"); }
   
-  set href(value) { return this.setAttribute("href", value); }
+  set href(value) { this.setAttribute("href", value); }
 }
 
  

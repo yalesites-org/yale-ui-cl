@@ -41,10 +41,10 @@ export class TextLink extends HTMLElement {
 	}
 
 	set href(value) {
-		return this.setAttribute("href", value);
+		this.setAttribute("href", value);
 	}
 	set target(value) {
-		return this.setAttribute("target", value);
+		this.setAttribute("target", value);
 	}
 
 }
