@@ -8,7 +8,7 @@ import lockTokens from "./postcss/lock-tokens.js";
 // registers ycl-accordion and ycl-accordion-item. These names are public import paths.
 function componentEntries() {
 	const entries = {};
-	for (const file of globSync("src/0*-*/**/*.js", { exclude: (f) => f.endsWith(".stories.js") })) {
+	for (const file of globSync("src/0*-*/**/*.js", { exclude: (f) => /\.(stories|test)\.js$/.test(f) })) {
 		const tags = new Map(
 			[...readFileSync(file, "utf8").matchAll(/customElements\.define\(["']([\w-]+)["'], (\w+)\)/g)].map((m) => [m[2], m[1]]),
 		);

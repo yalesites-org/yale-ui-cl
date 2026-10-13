@@ -4,3 +4,5 @@ debug-storybook.log
 CLAUDE.md
 dist/
 storybook-static/
+__screenshots__/
+.vitest-attachments/

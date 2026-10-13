@@ -16,6 +16,10 @@ const unescapeStringSource = (code) => {
 
 const preview = {
   parameters: {
+    // Axe violations fail the story's test (npm test) instead of only being reported.
+    a11y: {
+      test: 'error',
+    },
     options: {
       // Group by atomic tier, then alphabetize components within a tier while
       // keeping each file's own story order. Storybook serializes this
