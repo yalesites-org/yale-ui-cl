@@ -55,3 +55,4 @@
 @import "../02-molecules/pager/pager.css" layer(components.pager);
 @import "../02-molecules/tabs/tabs.css" layer(components.tabs);
 @import "../02-molecules/quick-links/quick-links.css" layer(components.quick-links);
+@import "../02-molecules/data-table/data-table.css" layer(components.data-table);

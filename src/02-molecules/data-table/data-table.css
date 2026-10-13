@@ -1,0 +1,79 @@
+/* Custom elements default to display: inline. */
+:host(ycl-data-table) {
+  display: block;
+}
+
+.data-table__search {
+  max-width: 30rem;
+  margin-bottom: var(--size-spacing-5);
+}
+
+/* Kept rendered while empty so screen readers already know the live region when it first updates. */
+.data-table__status {
+  min-height: 1lh;
+  margin: var(--size-spacing-2) 0 0;
+  font: var(--font-style-body-s);
+  color: var(--color-gray-700);
+}
+
+/* The table and its sort buttons are light DOM, so the rules below only take effect from the
+   document stylesheet (base.css). */
+ycl-data-table th:has(> .data-table__sort) {
+  padding: 0;
+}
+
+ycl-data-table .data-table__sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-spacing-3);
+  width: 100%;
+  padding: var(--size-spacing-3) var(--size-spacing-5);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+ycl-data-table .data-table__sort:hover .data-table__sort-label {
+  text-decoration: underline;
+}
+
+ycl-data-table .data-table__sort:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-link-base);
+  outline-offset: calc(-1 * var(--size-thickness-2));
+}
+
+ycl-data-table .data-table__sort-icon {
+  display: flex;
+  flex: none;
+  color: var(--color-gray-500);
+
+  & svg {
+    width: 0.625em;
+    height: 1em;
+    fill: currentColor;
+  }
+}
+
+ycl-data-table [aria-sort] .data-table__sort-icon {
+  color: inherit;
+}
+
+/* The table atom stripes and closes off rows by position; count only the rows the search left
+   visible so the pattern holds while filtering. */
+ycl-data-table tbody tr:nth-child(odd of :not([hidden])) td {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+ycl-data-table tbody tr:nth-child(even of :not([hidden])) td {
+  background-color: var(--color-basic-white);
+  color: var(--color-basic-black);
+}
+
+ycl-data-table tbody tr:nth-last-child(1 of :not([hidden])) :is(td, th) {
+  border-bottom: var(--size-thickness-2) solid var(--color-gray-700);
+}
