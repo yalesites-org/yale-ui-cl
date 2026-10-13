@@ -1,4 +1,5 @@
 import "./InlineMessage";
+import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/icons/Icon";
 
@@ -50,7 +51,7 @@ export default {
     `<div data-global-theme="${args.globalTheme}">
       <ycl-inline-message type="${args.type}" theme="${args.theme}"${args.icon === 'none' ? ' icon="none"' : ''}>
         ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
-        <h2 slot="heading">${args.heading}</h2>
+        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
         <p>${args.content}</p>
         <text-link slot="link" href="#">${args.linkContent}</text-link>
       </ycl-inline-message>

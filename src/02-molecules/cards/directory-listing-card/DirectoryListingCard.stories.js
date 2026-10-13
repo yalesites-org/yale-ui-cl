@@ -1,4 +1,5 @@
 import "./DirectoryListingCard";
+import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/text-link/Link";
 import "../../../01-atoms/image/ResponsiveImage";
 
@@ -43,7 +44,7 @@ export default {
 				<ycl-directory-listing-card href="${args.href}" layout="${args.layout}" ${args.featured ? "featured" : ""}>
 					<ycl-image slot="image"><img src="${placeholder(400, 400)}" alt=""></ycl-image>
 					<span slot="overline">${args.overline}</span>
-					<h3 slot="heading">${args.heading}</h3>
+					<ycl-heading level="3" slot="heading">${args.heading}</ycl-heading>
 					<span slot="subheading">${args.subheading}</span>
 					<p>${args.snippet}</p>
 					${args.email ? `<text-link slot="email" href="mailto:${args.email}">Email</text-link>` : ""}

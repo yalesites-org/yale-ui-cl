@@ -1,9 +1,10 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./search-result.css?inline";
+import { iconSvg } from "../../01-atoms/icons/icons.js";
 
-// Font Awesome Free "lock" (CC BY 4.0). It's the only cue that a result needs a Yale login, so it
+// It's the only cue that a result needs a Yale login, so it
 // carries a name rather than being hidden from assistive tech.
-const lockIcon = `<svg class="search-result__icon" viewBox="0 0 448 512" role="img" aria-label="Yale login required" focusable="false"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>`;
+const lockIcon = iconSvg("lock-solid", "search-result__icon", "Yale login required");
 
 // The author's heading (h2, h3...) is slotted inside the link so it keeps its semantics while the
 // whole title stays one link target, as in the Twig heading-with-url.

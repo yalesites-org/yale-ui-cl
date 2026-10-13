@@ -1,4 +1,5 @@
 import "./ReferenceCard";
+import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/cta/Cta";
 import "../../../01-atoms/image/ResponsiveImage";
 import "../../../01-atoms/date-time/DateTime";
@@ -16,7 +17,7 @@ const card = (args, { heading, snippet, overline, image = placeholder(600, 400),
 	<li>
 		<ycl-reference-card href="${args.href}" layout="${args.layout}" ${args.featured ? "featured" : ""} ${args.overlay ? `overlay="${args.overlay}"` : ""} ${args.source ? `source="${args.source}"` : ""}>
 			${args.withImage ? `<ycl-image slot="image"><img src="${image}" alt=""></ycl-image>` : ""}
-			<h3 slot="heading">${heading}</h3>
+			<ycl-heading level="3" slot="heading">${heading}</ycl-heading>
 			${overline ? `<ycl-date-time slot="overline" start="${overline}" format="date" time-zone="America/New_York">${overline}</ycl-date-time>` : ""}
 			${snippet ? `<p>${snippet}</p>` : ""}
 			${extra}

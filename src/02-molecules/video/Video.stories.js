@@ -1,4 +1,5 @@
 import "./Video";
+import "../../01-atoms/headings/Heading";
 import "../../01-atoms/video-embed/VideoEmbed";
 export default {
   title: 'Molecules/Video',
@@ -30,7 +31,7 @@ export default {
   render: (args) =>
     `<ycl-video alignment="${args.alignment}" width="${args.width}">
       <ycl-video-embed src="https://www.youtube-nocookie.com/embed/GL5XhmKCXo0" video-title="YouTube video player"></ycl-video-embed>
-      ${args.heading ? `<h2 slot="heading">${args.heading}</h2>` : ''}
+      ${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
       ${args.text ? `<p slot="text">${args.text}</p>` : ''}
     </ycl-video>`,
 };

@@ -1,4 +1,5 @@
 import "./LinkGrid";
+import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 export default {
   title: 'Molecules/Link Grid',
@@ -31,15 +32,15 @@ export default {
   render: (args) =>
     `<div data-global-theme="${args.globalTheme}">
       <ycl-link-grid theme="${args.theme}" line-treatment="${args.lineTreatment}">
-        <h2 slot="heading">${args.heading}</h2>
+        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
 
-        <h3 slot="heading-one">Heading for link group one</h3>
+        <ycl-heading level="3" slot="heading-one">Heading for link group one</ycl-heading>
         <text-link slot="links-one" href="#">This is a link</text-link>
         <text-link slot="links-one" href="#">This is another link</text-link>
         <text-link slot="links-one" href="https://google.com">This is a very long link that will wrap lines</text-link>
         <text-link slot="links-one" href="https://google.com/download.pdf">Link #4</text-link>
 
-        <h3 slot="heading-two">Heading for link group two</h3>
+        <ycl-heading level="3" slot="heading-two">Heading for link group two</ycl-heading>
         <text-link slot="links-two" href="#">This is a link in the second column</text-link>
         <text-link slot="links-two" href="#">This is another link, column two</text-link>
         <text-link slot="links-two" href="#">This is a very long link that will wrap lines</text-link>

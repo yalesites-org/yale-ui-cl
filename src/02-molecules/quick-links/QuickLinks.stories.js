@@ -1,4 +1,5 @@
 import "./QuickLinks";
+import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/image/ResponsiveImage";
 
@@ -42,7 +43,7 @@ export default {
   render: (args) =>
     `<div data-global-theme="${args.globalTheme}">
       <ycl-quick-links theme="${args.theme}" variation="${args.variation}">
-        <h2 slot="heading">${args.heading}</h2>
+        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
         ${args.description ? `<p slot="description">${args.description}</p>` : ''}
         ${args.image ? `<ycl-image slot="image"><img src="${placeholderImage}" alt=""></ycl-image>` : ''}
         <cta-link class="outline" href="#">This is a link</cta-link>

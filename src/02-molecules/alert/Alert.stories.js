@@ -1,4 +1,5 @@
 import "./Alert";
+import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 
 const resetButton = `<p><button type="button" onclick="Object.keys(localStorage).filter((k) => k.startsWith('ys-alert-id-')).forEach((k) => localStorage.removeItem(k)); location.reload();">Reset dismissed alerts</button></p>`;
@@ -34,7 +35,7 @@ export default {
 
   render: (args) =>
     `<ycl-alert type="${args.type}"${args.alertId ? ` alert-id="${args.alertId}"` : ''}>
-      <h2 slot="heading">${args.heading}</h2>
+      <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
       <p>${args.content}</p>
       <text-link slot="link" href="https://www.yale.edu">${args.linkContent}</text-link>
     </ycl-alert>
@@ -65,7 +66,7 @@ export const AllTypes = {
   render: (args) =>
     ['emergency', 'announcement', 'marketing'].map((type) =>
       `<ycl-alert type="${type}">
-        <h2 slot="heading">${args.heading}</h2>
+        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
         <p>${args.content}</p>
         <text-link slot="link" href="https://www.yale.edu">${args.linkContent}</text-link>
       </ycl-alert>`).join(''),

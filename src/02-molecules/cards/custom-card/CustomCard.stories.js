@@ -1,4 +1,5 @@
 import "./CustomCard";
+import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/image/ResponsiveImage";
 
 // Self-contained placeholder so the stories don't depend on an image host.
@@ -10,7 +11,7 @@ const card = (args, heading, snippet) => `
 	<li>
 		<ycl-custom-card href="${args.href}" ${args.featured ? "featured" : ""}>
 			${args.withImage ? `<ycl-image slot="image" ratio="3x2"><img src="${placeholder(600, 400)}" alt=""></ycl-image>` : ""}
-			<h3 slot="heading">${heading}</h3>
+			<ycl-heading level="3" slot="heading">${heading}</ycl-heading>
 			<p>${snippet}</p>
 		</ycl-custom-card>
 	</li>`;

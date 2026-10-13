@@ -178,10 +178,13 @@ ycl-wrapped-callout [slot="callout"] a:hover {
 
 /* Slotted headings keep their semantics but take the callout's type style.
    !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
-.wrapped-callout__callout ::slotted(h2) {
+.wrapped-callout__callout ::slotted(h2),
+.wrapped-callout__callout ::slotted(ycl-heading) {
   font: var(--font-style-heading-h4-yale-new) !important;
   font-variant-numeric: oldstyle-nums !important;
   color: var(--color-heading, currentcolor);
+  /* Set here rather than left to the browser's h2 margin, which ycl-heading doesn't have. */
+  margin-bottom: var(--size-spacing-6);
 }
 
 .wrapped-callout__callout ::slotted(:first-child) {

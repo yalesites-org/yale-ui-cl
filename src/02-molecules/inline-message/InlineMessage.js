@@ -1,12 +1,9 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./inline-message.css?inline";
+import { iconSvg } from "../../01-atoms/icons/icons.js";
 
-// Font Awesome Free icons (CC BY 4.0), decorative only
-const svg = (path) => `<svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="${path}"/></svg>`;
-const icons = {
-	general: svg("M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"),
-	marketing: svg("M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"),
-};
+// Each type's default icon, from the shared icon registry.
+const typeIcons = { general: "circle-info", marketing: "circle-exclamation" };
 
 // Whitespace-only text (template formatting) doesn't count as content.
 const hasContent = (slot) => slot.assignedNodes({ flatten: true })
@@ -59,7 +56,7 @@ export class InlineMessage extends HTMLElement {
 	}
 
 	#render() {
-		this.iconSlot.innerHTML = icons[this.type] ?? icons.marketing;
+		this.iconSlot.innerHTML = iconSvg(typeIcons[this.type] ?? typeIcons.marketing);
 		this.iconWrapper.hidden = this.icon === "none";
 	}
 

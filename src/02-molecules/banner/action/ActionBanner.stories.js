@@ -1,4 +1,5 @@
 import "./ActionBanner";
+import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/cta/Cta";
 import "../../../01-atoms/text-link/Link";
 import "../../../01-atoms/image/ResponsiveImage";
@@ -81,7 +82,7 @@ export default {
     `<div data-global-theme="${args.globalTheme}">
       <ycl-action-banner theme="${args.theme}" layout="${args.layout}" button-alignment="${args.buttonAlignment}" width="${args.width}"${args.overlay ? ` overlay-image="${patternImage}"` : ''}>
         <ycl-image slot="image"><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>
-        <h2 slot="heading">${args.heading}</h2>
+        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
         <p>${args.snippet}</p>
         ${links(args)}
       </ycl-action-banner>

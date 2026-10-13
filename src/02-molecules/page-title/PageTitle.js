@@ -1,8 +1,10 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./page-title.css?inline";
+import "../../01-atoms/headings/Heading.js";
 
-// A page has exactly one page title, so the h1 lives in the shadow root rather than being slotted:
-// the level is never the author's choice here. The heading text comes from the default slot.
+// A page has exactly one page title, so the heading lives in the shadow root rather than being
+// slotted: it's always level 1, never the author's choice. The heading text comes from the
+// default slot.
 const pageTitleTemplate = document.createElement("template");
 pageTitleTemplate.innerHTML = `
 	<div class="page-title">
@@ -10,7 +12,7 @@ pageTitleTemplate.innerHTML = `
 			<div class="page-title__top">
 				<div class="page-title__title-wrap">
 					<slot name="overline"></slot>
-					<h1 class="page-title__heading"><span class="page-title__prefix" hidden></span> <slot></slot></h1>
+					<ycl-heading class="page-title__heading" level="1"><slot></slot></ycl-heading>
 					<slot name="extra"></slot>
 				</div>
 				<slot name="image"></slot>
@@ -33,7 +35,7 @@ export class PageTitle extends HTMLElement {
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "page-title")];
 		this.#shadow.appendChild(document.importNode(pageTitleTemplate.content, true));
-		this.prefixEl = this.#shadow.querySelector(".page-title__prefix");
+		this.heading = this.#shadow.querySelector(".page-title__heading");
 
 		// Wrappers start hidden and only show once something is slotted, so empty ones don't leave
 		// margins behind. slotchange never fires for a slot that stays empty.
@@ -49,8 +51,8 @@ export class PageTitle extends HTMLElement {
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		if (name === "prefix") {
-			this.prefixEl.textContent = newValue ?? "";
-			this.prefixEl.hidden = !newValue;
+			if (newValue) this.heading.setAttribute("prefix", newValue);
+			else this.heading.removeAttribute("prefix");
 		}
 	}
 

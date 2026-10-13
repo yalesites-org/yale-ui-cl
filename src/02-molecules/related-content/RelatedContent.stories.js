@@ -1,4 +1,5 @@
 import "./RelatedContent";
+import "../../01-atoms/headings/Heading";
 
 const sampleItems = [
   {type: 'Resource', category: 'Video', title: 'Voter ID Laws and the Erosion of Equal Access'},
@@ -29,9 +30,9 @@ export default {
 
   render: (args) =>
     `<ycl-related-content width="${args.width}">
-      ${args.heading ? `<h2 slot="heading">${args.heading}</h2>` : ''}
+      ${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
       ${sampleItems.slice(0, args.itemCount).map((item) => `<ycl-related-content-item href="#" type="${item.type}"${item.category ? ` category="${item.category}"` : ''}>
-        <h3 slot="heading">${item.title}</h3>
+        <ycl-heading level="3" slot="heading">${item.title}</ycl-heading>
       </ycl-related-content-item>`).join('')}
     </ycl-related-content>`,
 };

@@ -1,4 +1,5 @@
 import "./ContentSpotlightPortrait";
+import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/image/ResponsiveImage";
 
@@ -65,7 +66,7 @@ export default {
 				<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="Portrait of a chemistry student"></ycl-image>
 				${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
 				${args.overline ? `<p slot="overline">${args.overline}</p>` : ""}
-				<h2 slot="heading">${args.heading}</h2>
+				<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
 				${args.subheading ? `<p slot="subheading">${args.subheading}</p>` : ""}
 				${args.linkContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkContent}</text-link>` : ""}
 				${args.linkTwoContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkTwoContent}</text-link>` : ""}

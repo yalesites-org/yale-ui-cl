@@ -1,11 +1,12 @@
 import "./Callout";
+import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 import overlayImage from "../../assets/avif-test-image.avif";
 
 const item = (args) => `
   <ycl-callout-item>
-    <h2 slot="heading">${args.heading}</h2>
+    <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
     <p>${args.text}</p>
     ${args.linkType === 'link'
     ? `<text-link slot="link" href="https://www.yale.edu">${args.linkText}</text-link>`

@@ -3,9 +3,10 @@ import componentStyles from "./heading.css?inline";
 import { iconSvg } from "../icons/icons.js";
 
 // The hN element itself is created in JS, because its tag has to follow the level attribute.
+// The prefix is exposed as a part so components that use this atom can restyle it.
 const headingTemplate = document.createElement("template");
 headingTemplate.innerHTML = `
-	<span class="heading__prefix" hidden></span>
+	<span class="heading__prefix" part="prefix" hidden></span>
 	<span class="heading__prefix-icon" hidden></span>
 	<a class="heading-link" hidden></a>
 	<slot></slot>
@@ -16,7 +17,7 @@ const levels = ["1", "2", "3", "4", "5", "6"];
 export class Heading extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
-		return ["level", "appearance", "prefix", "prefix-icon", "href", "id"];
+		return ["level", "prefix", "prefix-icon", "href", "id"];
 	}
 
 	constructor() {
@@ -54,9 +55,9 @@ export class Heading extends HTMLElement {
 			this.heading.replaceWith(heading);
 			this.heading = heading;
 		}
-		// appearance lets the visual style differ from the document outline level.
-		const appearance = this.getAttribute("appearance")?.replace(/^h/, "");
-		this.heading.className = `heading heading--h${levels.includes(appearance) ? appearance : level}`;
+		// Type styles key off the host's level and appearance attributes in CSS, so appearance can
+		// differ from the outline level.
+		this.heading.className = "heading";
 
 		const prefix = this.getAttribute("prefix");
 		this.prefixText.textContent = prefix ?? "";
