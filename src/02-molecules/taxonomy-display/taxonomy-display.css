@@ -10,7 +10,7 @@
 }
 
 /* Component themes.
-   Colours are handed to the items (and to any slotted text-link) through inherited custom
+   Colours are handed to the items (and to any slotted ycl-text-link) through inherited custom
    properties. Each theme reads its colour slots from the site's global theme when one is set (see
    below), otherwise from the component theme tokens. */
 :host(ycl-taxonomy-display) {

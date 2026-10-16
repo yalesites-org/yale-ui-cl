@@ -50,4 +50,4 @@ export class TextLink extends HTMLElement {
 }
 
 
-if (!customElements.get("text-link")) customElements.define("text-link", TextLink);
+if (!customElements.get("ycl-text-link")) customElements.define("ycl-text-link", TextLink);

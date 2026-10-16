@@ -36,4 +36,4 @@ export class Cta extends HTMLElement { #shadow;
 }
 
  
-if (!customElements.get("cta-link")) customElements.define("cta-link", Cta);
+if (!customElements.get("ycl-cta-link")) customElements.define("ycl-cta-link", Cta);

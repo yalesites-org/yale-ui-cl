@@ -1,7 +1,7 @@
 import "./TextInput";
 export default {
 	title: 'Atoms/Text Input',
-	component: 'text-input',
+	component: 'ycl-text-input',
 	argTypes: {
 		label: {
 			control: 'text'
@@ -40,11 +40,11 @@ export default {
 	},
 
 	render: (args) =>
-		`<text-input class="${args.required}">
+		`<ycl-text-input class="${args.required}">
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">This is an example instruction</span>
 		<span slot="errors">This is an error.</span>
-	</text-input>`,
+	</ycl-text-input>`,
 };
 
 export const Example = {
@@ -54,11 +54,11 @@ export const Example = {
         type: "date"
     },
 	render:(args) =>
-		`<text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+		`<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">${args.instructions}</span>
 		<span slot="errors">${args.errors}</span>
-	</text-input>`
+	</ycl-text-input>`
 };
 
 export const WithError = {
@@ -69,11 +69,11 @@ export const WithError = {
         required: false,
         type: 'text'
     },
-    render:args => `<text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
-    </text-input>`
+    </ycl-text-input>`
 };
 
 export const Required = {
@@ -84,9 +84,9 @@ export const Required = {
         required: true,
         type: 'text'
     },
-    render:args => `<text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
-    </text-input>`
+    </ycl-text-input>`
 };

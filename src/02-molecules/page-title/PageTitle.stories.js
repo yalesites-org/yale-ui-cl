@@ -34,8 +34,8 @@ export default {
       ${args.showMeta ? `<span slot="meta">By Charlyn Paradis</span>
       <ycl-date-time slot="meta" start="2022-01-25T12:00:00" format="date"></ycl-date-time>` : ''}
       ${args.socialLinks ? `<div slot="social-links" style="display: flex; gap: 1rem;">
-        <text-link href="https://www.facebook.com/sharer/sharer.php">Share on Facebook</text-link>
-        <text-link href="https://www.linkedin.com/sharing/share-offsite/">Share on LinkedIn</text-link>
+        <ycl-text-link href="https://www.facebook.com/sharer/sharer.php">Share on Facebook</ycl-text-link>
+        <ycl-text-link href="https://www.linkedin.com/sharing/share-offsite/">Share on LinkedIn</ycl-text-link>
       </div>` : ''}
     </ycl-page-title>`,
 };

@@ -127,8 +127,8 @@ export const EventWithCtas = {
 					extra: `<ycl-date-time slot="subheading" start="2022-10-14T19:30:00-04:00" format="day__full" time-zone="America/New_York"></ycl-date-time>
 						<ycl-date-time slot="subheading" start="2022-10-14T19:30:00-04:00" format="time" time-zone="America/New_York"></ycl-date-time>
 						<span slot="subheading">In-person</span>
-						<cta-link slot="ctas" class="filled" href="https://www.yale.edu">Buy Tickets</cta-link>
-						<cta-link slot="ctas" class="outline" href="https://www.yale.edu">Add to Calendar</cta-link>`,
+						<ycl-cta-link slot="ctas" class="filled" href="https://www.yale.edu">Buy Tickets</ycl-cta-link>
+						<ycl-cta-link slot="ctas" class="outline" href="https://www.yale.edu">Add to Calendar</ycl-cta-link>`,
 				})}
 			</ul>
 		</div>`,

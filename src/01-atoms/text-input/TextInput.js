@@ -82,7 +82,7 @@ export class TextInput extends HTMLElement {
 				default:
 					console.warn(
 						newValue +
-							" is not a valid type for the text-input component",
+							" is not a valid type for the ycl-text-input component",
 					);
 					return;
 			}
@@ -137,4 +137,4 @@ export class TextInput extends HTMLElement {
 	}
 }
 
-if (!customElements.get("text-input")) customElements.define("text-input", TextInput);
+if (!customElements.get("ycl-text-input")) customElements.define("ycl-text-input", TextInput);

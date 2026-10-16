@@ -95,4 +95,4 @@ export class SelectInput extends HTMLElement {
 	
 }
 
-if (!customElements.get("select-input")) customElements.define("select-input", SelectInput);
+if (!customElements.get("ycl-select-input")) customElements.define("ycl-select-input", SelectInput);

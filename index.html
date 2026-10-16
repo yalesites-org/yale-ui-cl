@@ -8,71 +8,71 @@
   <body>
     <h1>Test Page</h1>
     <h2>Calls to Action</h2>
-    <cta-link href="https://www.google.com"
-      >This is an example link going to Google</cta-link
+    <ycl-cta-link href="https://www.google.com"
+      >This is an example link going to Google</ycl-cta-link
     >
-    <cta-link
+    <ycl-cta-link
       class="filled radius-soft animate-fade"
       href="https://www.yale.edu"
-      >Yale Homepage</cta-link
+      >Yale Homepage</ycl-cta-link
     >
-    <cta-link
+    <ycl-cta-link
       class="outline radius-pill animate-rise"
       href="https://usability.yale.edu"
-      >Usability & Accessibility Website</cta-link
+      >Usability & Accessibility Website</ycl-cta-link
     >
-    <cta-link class="filled animate-wipe" href="https://www.google.com"
-      >Google again</cta-link
+    <ycl-cta-link class="filled animate-wipe" href="https://www.google.com"
+      >Google again</ycl-cta-link
     >
-    <cta-link class="outline animate-wipe" href="https://www.yahoo.com"
-      >Yahoo!</cta-link
+    <ycl-cta-link class="outline animate-wipe" href="https://www.yahoo.com"
+      >Yahoo!</ycl-cta-link
     >
     <input type="submit" class="cta cta--filled cta--animate-fade" />
     <h2>Text Links</h2>
     <p>
-      <text-link href="index.html">Local Link</text-link>
-      <text-link href="https://www.yale.edu">Yale</text-link>
+      <ycl-text-link href="index.html">Local Link</ycl-text-link>
+      <ycl-text-link href="https://www.yale.edu">Yale</ycl-text-link>
     </p>
 	
 	<h2>Text Inputs</h2>
 	<p>
-		<text-input placeholder="Placeholder">
+		<ycl-text-input placeholder="Placeholder">
 			<span slot="label">Input Label</span>
 			<span slot="instructions">Associated instructions</span>
-		</text-input>
+		</ycl-text-input>
 		<br />
 		<form class="form" id="error-form">
-		<text-input name="test" id="error" class="required" error="This has an error"> 
+		<ycl-text-input name="test" id="error" class="required" error="This has an error"> 
 			<span slot="label">Last Name</span>
 			<span slot="instructions">Enter your Last Name</span>
-		</text-input>
-		<text-input name="date" placeholder="Example Placeholder" type="date" class="example required">
+		</ycl-text-input>
+		<ycl-text-input name="date" placeholder="Example Placeholder" type="date" class="example required">
 		<span slot="label">Birthdate</span>
-	</text-input>
-		<text-input class="required">
+	</ycl-text-input>
+		<ycl-text-input class="required">
 		<span slot="label">Multiple error types</span>
 		<div slot="errors">This has a <a href="#">Link</a> in it</div>
-	</text-input>
+	</ycl-text-input>
 		<input type="submit" />
 	</form>
 	</p>
 	
 	<h2>Select Inputs</h2>
-	<select-input>
+	<ycl-select-input>
 	<div slot="label">Example Select</div>
 	<div slot="errors">Example error</div>
 	<option>Example 1</option>
 	<option>Example 2</option>
-	</select-input>
+	</ycl-select-input>
 
-	<select-input>
+	<ycl-select-input>
 	<div slot="label">Example Select</div>
 	<optgroup label="Example">
 	<option>Example 1</option>
 	<option>Example 2</option>
 	</optgroup>
 
-</select-input>
+</ycl-select-input>
 	<script type="text/javascript">
 		const input = document.getElementById("error");
 		const form = document.getElementById("error-form");
@@ -82,7 +82,7 @@
 		});
 		
 	</script>
-	<yc-table>
+	<ycl-table>
 		<table>
 			<thead>
 				<tr>
@@ -104,7 +104,7 @@
 				</tr>
 			</tbody>
 		</table>
-	</yc-table>
+	</ycl-table>
 	<h2>Lists</h2>
 	<h3>Unordered List</h3>
 	<ycl-list>

@@ -11,7 +11,7 @@ const variantClasses = (args) => [
 
 export default {
   title: 'Atoms/CTA',
-  component: 'cta-link',
+  component: 'ycl-cta-link',
   argTypes: {
     label: {control: 'text'},
     URL: {control: 'text'},
@@ -40,7 +40,7 @@ export default {
   },
 
   render: (args) =>
-    `<cta-link class="${variantClasses(args)}" href="${args.URL}">${args.label}</cta-link>`,
+    `<ycl-cta-link class="${variantClasses(args)}" href="${args.URL}">${args.label}</ycl-cta-link>`,
 };
 
 export const Filled = {

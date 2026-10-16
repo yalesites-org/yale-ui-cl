@@ -36,7 +36,7 @@ export default {
     `<div data-global-theme="${args.globalTheme}">
       <ycl-taxonomy-display theme="${args.theme}">
         ${items.map((item) => `<ycl-taxonomy-display-item label="${item.label}">
-          ${args.showTaxonomy ? item.terms.map((term) => `<text-link href="#">${term}</text-link>`).join('') : ''}
+          ${args.showTaxonomy ? item.terms.map((term) => `<ycl-text-link href="#">${term}</ycl-text-link>`).join('') : ''}
         </ycl-taxonomy-display-item>`).join('')}
       </ycl-taxonomy-display>
     </div>`,

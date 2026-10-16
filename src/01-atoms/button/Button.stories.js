@@ -92,9 +92,9 @@ export const Disabled = {
 export const InAForm = {
   render: () =>
     `<form onsubmit="event.preventDefault(); this.querySelector('output').value = 'Submitted';">
-      <text-input name="email" type="email">
+      <ycl-text-input name="email" type="email">
         <span slot="label">Email address</span>
-      </text-input>
+      </ycl-text-input>
       <ycl-button type="submit">Subscribe</ycl-button>
       <ycl-button type="reset">Clear</ycl-button>
       <output role="status"></output>

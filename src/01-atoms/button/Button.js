@@ -11,7 +11,7 @@ buttonTemplate.innerHTML = `<button class="button cta" type="button"><slot></slo
 
 // A <button> styled as a CTA, or an <a> when given an href (matching yds-control.twig). Dropdowns
 // are always buttons, whatever the href. CTA variants come from the class attribute, as on
-// cta-link (e.g. class="filled radius-pill").
+// ycl-cta-link (e.g. class="filled radius-pill").
 export class Button extends HTMLElement {
 	#shadow;
 	#internals;
