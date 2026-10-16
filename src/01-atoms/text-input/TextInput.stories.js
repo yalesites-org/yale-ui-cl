@@ -10,6 +10,7 @@ export default {
 			control: 'boolean',
 			mapping: {
 				true: "required",
+				false: "",
 			},
 		},
 		
@@ -40,7 +41,7 @@ export default {
 	},
 
 	render: (args) =>
-		`<ycl-text-input class="${args.required}">
+		`<ycl-text-input ${args.required}>
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">This is an example instruction</span>
 		<span slot="errors">This is an error.</span>
@@ -54,7 +55,7 @@ export const Example = {
         type: "date"
     },
 	render:(args) =>
-		`<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+		`<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" ${args.required}>
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">${args.instructions}</span>
 		<span slot="errors">${args.errors}</span>
@@ -69,7 +70,7 @@ export const WithError = {
         required: false,
         type: 'text'
     },
-    render:args => `<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" ${args.required}>
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
@@ -84,7 +85,7 @@ export const Required = {
         required: true,
         type: 'text'
     },
-    render:args => `<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<ycl-text-input type="${args.type}" placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" ${args.required}>
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>

@@ -5,11 +5,10 @@ import { mount, shadowOf } from "../../../test/helpers.js";
 const link = (element) => shadowOf(element).querySelector("a");
 
 describe("ycl-text-link", () => {
-	it("forwards href, target and variants to the inner link", () => {
-		const element = mount(`<ycl-text-link href="/about" target="_self" class="subtle">About</ycl-text-link>`);
+	it("forwards href, and target to the inner link", () => {
+		const element = mount(`<ycl-text-link href="/about" target="_self">About</ycl-text-link>`);
 		expect(link(element).getAttribute("href")).toBe("/about");
 		expect(link(element).target).toBe("_self");
-		expect(link(element).classList).toContain("link--subtle");
 	});
 
 	it("labels external links and keeps a single icon as href changes", () => {

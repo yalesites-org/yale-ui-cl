@@ -37,7 +37,7 @@ export default {
 	},
 
 	render: (args) =>
-		`<ycl-select-input class="${args.required}"> 
+		`<ycl-select-input ${args.required}> 
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">This is an example instruction</span>
 		<span slot="errors">This is an error.</span>
@@ -50,7 +50,7 @@ export const Example = {
         label: "Name"
     },
 	render:(args) =>
-		`<ycl-select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+		`<ycl-select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" ${args.required}>
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">${args.instructions}</span>
 		<span slot="errors">${args.errors}</span>
@@ -66,7 +66,7 @@ export const WithError = {
         errors: "This has an error.",
         required: false,
     },
-    render:args => `<ycl-select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<ycl-select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" ${args.required}>
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>
@@ -82,7 +82,7 @@ export const RequiredWithGroups = {
         errors: "",
         required: true
     },
-    render:args => `<ycl-select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
+    render:args => `<ycl-select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" ${args.required}>
         <span slot="label">${args.label}</span>
         <span slot="instructions">${args.instructions}</span>
         <span slot="errors">${args.errors}</span>

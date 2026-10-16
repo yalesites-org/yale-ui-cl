@@ -2,7 +2,7 @@ import "./Lists.js";
 
 export default {
   title: 'Atoms/Lists',
-  component: 'yc-list',
+  component: 'ycl-list',
   argTypes: {
     type: {      
       name: "List Type",
@@ -25,7 +25,7 @@ export const Default = {
 
   render: (args) =>
     `
-      <ycl-list class="${args.type}">
+      <ycl-list type="${args.type}">
         <ul>
           <li>List Item 1</li>
           <li>List Item 2</li>

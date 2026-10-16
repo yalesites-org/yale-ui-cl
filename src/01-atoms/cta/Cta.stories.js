@@ -1,12 +1,11 @@
 import "./Cta";
 
-// cta.css variants are prefixed (cta--animate-rise, cta--radius-pill), so the class names are
-// built from the arg values. Fade is the default animation, so it adds no class; "none" opts out
-// with animate-none.
-const variantClasses = (args) => [
-  args.fill,
-  args.animate !== 'fade' && `animate-${args.animate}`,
-  args.radius !== 'none' && `radius-${args.radius}`,
+// Fade is the default animation and square corners the default radius, so those add no attribute;
+// animate="none" opts out of animation entirely.
+const optionAttributes = (args) => [
+  `variant="${args.variant}"`,
+  args.animate !== 'fade' && `animate="${args.animate}"`,
+  args.radius !== 'none' && `radius="${args.radius}"`,
 ].filter(Boolean).join(' ');
 
 export default {
@@ -15,8 +14,8 @@ export default {
   argTypes: {
     label: {control: 'text'},
     URL: {control: 'text'},
-    fill: {
-      name: 'Fill Type',
+    variant: {
+      name: 'Variant',
       type: 'select',
       options: ['filled', 'outline'],
     },
@@ -34,30 +33,30 @@ export default {
   args: {
     label: 'Yale HomePage',
     URL: 'https://www.yale.edu',
-    fill: 'filled',
+    variant: 'filled',
     animate: 'fade',
     radius: 'none',
   },
 
   render: (args) =>
-    `<ycl-cta-link class="${variantClasses(args)}" href="${args.URL}">${args.label}</ycl-cta-link>`,
+    `<ycl-cta-link ${optionAttributes(args)} href="${args.URL}">${args.label}</ycl-cta-link>`,
 };
 
 export const Filled = {
   args: {
-    fill: 'filled',
+    variant: 'filled',
   },
 };
 
 export const Outline = {
   args: {
-    fill: 'outline',
+    variant: 'outline',
   },
 };
 
 export const OutlinePill = {
   args: {
-    fill: 'outline',
+    variant: 'outline',
     radius: 'pill',
   },
 };

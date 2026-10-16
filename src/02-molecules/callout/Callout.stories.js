@@ -10,7 +10,7 @@ const item = (args) => `
     <p>${args.text}</p>
     ${args.linkType === 'link'
     ? `<ycl-text-link slot="link" href="https://www.yale.edu">${args.linkText}</ycl-text-link>`
-    : `<ycl-cta-link slot="link" class="outline" href="https://www.yale.edu">${args.linkText}</ycl-cta-link>`}
+    : `<ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">${args.linkText}</ycl-cta-link>`}
   </ycl-callout-item>`;
 
 export default {

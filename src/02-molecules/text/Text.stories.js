@@ -36,8 +36,8 @@ export default {
   title: 'Molecules/Text',
   component: 'ycl-text',
   argTypes: {
-    variation: {
-      name: 'Text Field Variation',
+    variant: {
+      name: 'Text Field Variant',
       type: 'select',
       options: ['default', 'emphasized'],
     },
@@ -48,19 +48,19 @@ export default {
     },
 },
   args: {
-    variation: 'default',
+    variant: 'default',
     alignment: 'center',
 },
 
   render: (args) =>
-    `<ycl-text variation="${args.variation}" alignment="${args.alignment}">${sampleContent}</ycl-text>`,
+    `<ycl-text variant="${args.variant}" alignment="${args.alignment}">${sampleContent}</ycl-text>`,
 };
 
 export const Default = {};
 
 export const Emphasized = {
   render: () =>
-    `<ycl-text variation="emphasized">
+    `<ycl-text variant="emphasized">
       <p>Yale Divinity School educates and prepares the scholars, ministers, and leaders of the future.</p>
     </ycl-text>`,
 };

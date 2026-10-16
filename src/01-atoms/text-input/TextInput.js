@@ -30,7 +30,7 @@ export class TextInput extends HTMLElement {
 
 	static get observedAttributes() {
 		return [
-			"class",
+			"required",
 			"placeholder",
 			"name",
 			"autocomplete",
@@ -109,7 +109,7 @@ export class TextInput extends HTMLElement {
 		return this.getAttribute("type");
 	}
 	get required() {
-		return this.classList.contains("required");
+		return this.hasAttribute("required");
 	}
 
 	set placeholder(value) {
@@ -133,7 +133,7 @@ export class TextInput extends HTMLElement {
 		this.setAttribute("type", value);
 	}
 	set required(value) {
-		this.classList.toggle("required", Boolean(value));
+		this.toggleAttribute("required", Boolean(value));
 	}
 }
 

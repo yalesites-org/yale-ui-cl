@@ -35,6 +35,6 @@ export const WithLinks = {
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
       <p>Tours of Yale's campus leave from the Visitor Center at 149 Elm Street.</p>
       <p><ycl-text-link href="https://www.yale.edu">Yale University</ycl-text-link></p>
-      <ycl-cta-link class="filled" href="https://www.yale.edu">Book a tour</ycl-cta-link>
+      <ycl-cta-link variant="filled" href="https://www.yale.edu">Book a tour</ycl-cta-link>
     </ycl-modal>`,
 };

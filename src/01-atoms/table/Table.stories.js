@@ -9,9 +9,6 @@ export default {
   args: {
     label: 'Example Table',
 },
-
-  render: (args) => 
-    `<ycl-cta-link class="${args.fill} ${args.animate} ${args.radius}" href="${args.URL}">${args.label}</ycl-cta-link>`,
 };
 
 export const Default = {

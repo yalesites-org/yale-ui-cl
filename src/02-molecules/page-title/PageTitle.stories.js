@@ -56,7 +56,7 @@ export const WithSocialLinks = {
 
 export const Event = {
   render: () =>
-    `<ycl-page-title variation="event">
+    `<ycl-page-title variant="event">
       Yale Commencement 2026
       <ycl-image slot="image" ratio="16x9"><img src="${placeholder}" alt="Graduates gathered on Old Campus"></ycl-image>
       <ycl-date-time slot="meta" start="2026-05-18T12:00:00" format="day__long"></ycl-date-time>

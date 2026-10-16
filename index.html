@@ -21,10 +21,10 @@
       href="https://usability.yale.edu"
       >Usability & Accessibility Website</ycl-cta-link
     >
-    <ycl-cta-link class="filled animate-wipe" href="https://www.google.com"
+    <ycl-cta-link variant="filled" animate="wipe" href="https://www.google.com"
       >Google again</ycl-cta-link
     >
-    <ycl-cta-link class="outline animate-wipe" href="https://www.yahoo.com"
+    <ycl-cta-link variant="outline" animate="wipe" href="https://www.yahoo.com"
       >Yahoo!</ycl-cta-link
     >
     <input type="submit" class="cta cta--filled cta--animate-fade" />
@@ -42,14 +42,14 @@
 		</ycl-text-input>
 		<br />
 		<form class="form" id="error-form">
-		<ycl-text-input name="test" id="error" class="required" error="This has an error"> 
+		<ycl-text-input name="test" id="error" required error="This has an error"> 
 			<span slot="label">Last Name</span>
 			<span slot="instructions">Enter your Last Name</span>
 		</ycl-text-input>
-		<ycl-text-input name="date" placeholder="Example Placeholder" type="date" class="example required">
+		<ycl-text-input name="date" placeholder="Example Placeholder" type="date" class="example" required>
 		<span slot="label">Birthdate</span>
 	</ycl-text-input>
-		<ycl-text-input class="required">
+		<ycl-text-input required>
 		<span slot="label">Multiple error types</span>
 		<div slot="errors">This has a <a href="#">Link</a> in it</div>
 	</ycl-text-input>
@@ -127,7 +127,7 @@
 		</ol>
 	</ycl-list>
 	<h3>Tags List</h3>
-	<ycl-list class="tags">
+	<ycl-list type="tags">
 		<ul>
 			<li>List Item 1</li>
 			<li>List Item 2</li>
@@ -136,7 +136,7 @@
 	</ycl-list>
 
 	<h3>Categories List</h3>
-	<ycl-list class="categories">
+	<ycl-list type="categories">
 		<ul>
 			<li>List Item 1</li>
 			<li>List Item 2</li>

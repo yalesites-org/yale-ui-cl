@@ -5,6 +5,15 @@ import { mount, settle, shadowOf } from "../../../test/helpers.js";
 const inner = (element) => shadowOf(element).querySelector("select");
 
 describe("ycl-select-input", () => {
+	it("reflects the required attribute onto the inner select and the property", () => {
+		const element = mount(`<ycl-select-input required></ycl-select-input>`);
+		expect(element.required).toBe(true);
+		expect(inner(element).required).toBe(true);
+		element.required = false;
+		expect(element.hasAttribute("required")).toBe(false);
+		expect(inner(element).required).toBe(false);
+	});
+
 	it("moves light-DOM options into the inner select", () => {
 		const element = mount(`<ycl-select-input><option value="a">A</option><optgroup label="G"><option value="b">B</option></optgroup></ycl-select-input>`);
 		expect(element.children).toHaveLength(0);

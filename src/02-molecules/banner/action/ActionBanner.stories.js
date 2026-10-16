@@ -14,8 +14,8 @@ const links = (args) => {
     return `<ycl-text-link slot="actions" href="https://google.com">${args.linkContent}</ycl-text-link>
       <ycl-text-link slot="actions" href="https://yale.edu">${args.linkContentTwo}</ycl-text-link>`;
   }
-  return `<ycl-cta-link slot="actions" class="filled" href="https://google.com">${args.linkContent}</ycl-cta-link>
-    <ycl-cta-link slot="actions" class="outline" href="https://yale.edu">${args.linkContentTwo}</ycl-cta-link>`;
+  return `<ycl-cta-link slot="actions" variant="filled" href="https://google.com">${args.linkContent}</ycl-cta-link>
+    <ycl-cta-link slot="actions" variant="outline" href="https://yale.edu">${args.linkContentTwo}</ycl-cta-link>`;
 };
 
 export default {

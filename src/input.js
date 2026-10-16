@@ -23,8 +23,8 @@ export function inputHandler() {
 
 export function attributeHandler(name, newValue) {
 	if (name === "placeholder") this.input.placeholder = newValue;
-		if (name === "class") {
-			const required = (newValue ?? "").split(/\s+/).includes("required");
+		if (name === "required") {
+			const required = newValue !== null;
 			this.input.required = required;
 			this.label.classList.toggle("form-item__label--required", required);
 		};

@@ -33,7 +33,7 @@ describe("ycl-text-input", () => {
 	});
 
 	it("is invalid while required and empty", () => {
-		const element = mount(`<ycl-text-input class="required"></ycl-text-input>`);
+		const element = mount(`<ycl-text-input required></ycl-text-input>`);
 		expect(element.required).toBe(true);
 		expect(element.internals_.validity.valueMissing).toBe(true);
 		expect(shadowOf(element).querySelector("label").classList).toContain("form-item__label--required");

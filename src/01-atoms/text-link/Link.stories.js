@@ -12,7 +12,7 @@ export default {
 },
 
   render: (args) => 
-    `<ycl-text-link class="" href="${args.URL}">${args.label}</ycl-text-link>`,
+    `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`,
 };
 
 export const InternalLink = {
@@ -21,7 +21,7 @@ export const InternalLink = {
     label: "Home"
   },
   render:(args) =>
-    `<ycl-text-link class="" href="${args.URL}">${args.label}</ycl-text-link>`
+    `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`
 };
 
 export const ExternalLink = {
@@ -29,7 +29,7 @@ export const ExternalLink = {
     label: "Yale Homepage",
     URL: "https://www.yale.edu"
   },
-  render:args => `<ycl-text-link class="" href="${args.URL}">${args.label}</ycl-text-link>`
+  render:args => `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`
 };
 
 export const DownloadLink = {
@@ -37,5 +37,5 @@ export const DownloadLink = {
     label: "Yale Homepage",
     URL: "https://www.yale.edu/download.pdf"
   },
-  render:args => `<ycl-text-link class="" href="${args.URL}">${args.label}</ycl-text-link>`
+  render:args => `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`
 };
