@@ -69,12 +69,15 @@ export class FactsAndFigures extends HTMLElement {
 		const stats = children.filter((child) => child.localName === "ycl-facts-and-figures-item" && !named.includes(child.slot));
 		const list = this.#shadow.querySelector(".facts-and-figures__items");
 		list.hidden = stats.length === 0;
-		list.replaceChildren(...stats.map((stat) => {
+		const slots = stats.map(() => document.createElement("slot"));
+		list.replaceChildren(...slots.map((slot) => {
 			const item = document.createElement("li");
 			item.className = "facts-and-figures__item";
-			item.appendChild(document.createElement("slot")).assign(stat);
+			item.appendChild(slot);
 			return item;
 		}));
+		// Assign once the slots are in the shadow root, rather than relying on assignment surviving insertion.
+		slots.forEach((slot, i) => slot.assign(stats[i]));
 	}
 
 	get theme() { return this.getAttribute("theme"); }

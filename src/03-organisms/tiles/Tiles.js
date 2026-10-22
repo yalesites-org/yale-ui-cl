@@ -40,12 +40,15 @@ export class Tiles extends HTMLElement {
 		// Only tiles are listed, so a stray element (a <template>, a wrapper) doesn't get an empty cell.
 		const tiles = [...this.children].filter((child) => child.localName === "ycl-tile-item");
 		const list = this.#shadow.querySelector(".tiles__items");
-		list.replaceChildren(...tiles.map((tile) => {
+		const slots = tiles.map(() => document.createElement("slot"));
+		list.replaceChildren(...slots.map((slot) => {
 			const item = document.createElement("li");
 			item.className = "tiles__item";
-			item.appendChild(document.createElement("slot")).assign(tile);
+			item.appendChild(slot);
 			return item;
 		}));
+		// Assign once the slots are in the shadow root, rather than relying on assignment surviving insertion.
+		slots.forEach((slot, i) => slot.assign(tiles[i]));
 	}
 }
 
