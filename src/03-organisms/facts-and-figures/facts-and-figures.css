@@ -106,8 +106,11 @@
   overflow: hidden;
 }
 
+/* ::slotted() can't reach the <img> inside a slotted <picture>, so that one is sized from the
+   document (base.css loads this file into the page too). */
 .facts-and-figures__image ::slotted(img),
-.facts-and-figures__image ::slotted(picture) {
+.facts-and-figures__image ::slotted(picture),
+ycl-facts-and-figures > picture[slot="image"] img {
   display: block;
   width: 100%;
   height: 100%;

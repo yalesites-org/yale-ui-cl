@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import "./FactsAndFigures.js";
+// The document-level rules (base.css loads this file into the page) aren't applied in unit tests otherwise.
+import "./facts-and-figures.css";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
 
 const named = ["heading", "intro", "link", "image"];
@@ -114,6 +116,24 @@ describe("ycl-facts-and-figures children and themes", () => {
 		const overlay = (el) => getComputedStyle(shadowOf(el).querySelector(".facts-and-figures__image"), "::before").backgroundColor;
 		expect(overlay(group)).toBe(overlay(themed));
 		expect(overlay(group)).not.toBe("rgba(0, 0, 0, 0)");
+	});
+
+	it("stretches the img inside a slotted picture to fill the image wrapper", async () => {
+		const group = mount(`
+			<ycl-facts-and-figures style="display: block; width: 40rem; min-height: 20rem;">
+				<picture slot="image"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'/%3E" alt=""></picture>
+				<ycl-facts-and-figures-item><span slot="stat">14</span>Residential colleges</ycl-facts-and-figures-item>
+			</ycl-facts-and-figures>
+		`);
+		const img = group.querySelector("picture img");
+		await img.decode();
+		await settle();
+		const box = shadowOf(group).querySelector(".facts-and-figures__image").getBoundingClientRect();
+		const picture = group.querySelector("picture").getBoundingClientRect();
+		const image = img.getBoundingClientRect();
+		expect(box.height).toBeGreaterThan(100);
+		expect({ width: picture.width, height: picture.height }).toEqual({ width: box.width, height: box.height });
+		expect({ width: image.width, height: image.height }).toEqual({ width: box.width, height: box.height });
 	});
 });
 
