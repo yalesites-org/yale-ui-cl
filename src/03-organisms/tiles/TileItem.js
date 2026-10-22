@@ -1,5 +1,8 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./tile-item.css?inline";
+import * as Util from "../../utility.js";
+
+const currentURL = window.location.origin;
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -54,6 +57,9 @@ export class TileItem extends HTMLElement {
 			this.content.classList.toggle("tile__item__link", newValue !== null);
 			if (newValue === null) this.content.removeAttribute("href");
 			else this.content.setAttribute("href", newValue);
+			// Same external/download/new-window icon as ycl-cta-link and ycl-text-link. Without an
+			// href the old icon is just removed: the <a> isn't a web link, so none is added.
+			Util.updateLinkIcon(this.content.querySelector(".fa-icon"), this.content, currentURL);
 		}
 	}
 

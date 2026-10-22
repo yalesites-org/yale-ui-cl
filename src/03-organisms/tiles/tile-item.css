@@ -1,6 +1,9 @@
-/* Custom elements default to display: inline. */
+/* Custom elements default to display: inline. A flex column (rather than height: 100% on the
+   tile) lets the tile fill whatever height the host gets: a min-height on the tile, or the row
+   height when ycl-tiles stretches it in its grid, including the single-column mobile layout. */
 :host(ycl-tile-item) {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 :host(ycl-tile-item) [hidden] {
@@ -155,10 +158,10 @@ ycl-tile-item picture[slot="image"] img {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
+  flex: 1 1 auto;
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: 100%;
   z-index: 0;
   background-color: var(--color-tile-item-theme);
   color: var(--color-tile-item-content);
@@ -167,8 +170,8 @@ ycl-tile-item picture[slot="image"] img {
 .tile__item__inner {
   display: flex;
   flex-flow: column nowrap;
+  flex: 1 1 auto;
   padding: var(--size-spacing-8) var(--size-spacing-6);
-  height: 100%;
   align-items: flex-start;
 }
 
@@ -288,6 +291,15 @@ ycl-tile-item picture[slot="image"] img {
   position: absolute;
   inset: 0;
   z-index: 1;
+}
+
+/* External, download and new-window icon, added by updateLinkIcon() in utility.js. */
+.tile__item__link .fa-icon {
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  fill: currentcolor;
+  vertical-align: baseline;
 }
 
 .tile__item__link:visited {

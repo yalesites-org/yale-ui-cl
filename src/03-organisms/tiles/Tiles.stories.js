@@ -1,4 +1,4 @@
-import "./TileItem";
+import "./Tiles";
 import "../../01-atoms/icons/Icon";
 import "../../01-atoms/image/ResponsiveImage";
 
@@ -10,19 +10,18 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = `<ycl-icon slot="icon" name="lightbulb-solid"></ycl-icon>`;
 
+// The item options are set on every tile; ycl-tiles doesn't forward them.
 const tile = (args, heading) => `
-	<li>
-		<ycl-tile-item theme="${args.theme}" alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""} style="min-height: 18rem;">
-			${args.presentation === "icon" ? icon : ""}
-			${args.presentation === "heading" ? `<span slot="heading">${heading}</span>` : ""}
-			${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
-			${args.content}
-		</ycl-tile-item>
-	</li>`;
+	<ycl-tile-item theme="${args.theme}" alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""}>
+		${args.presentation === "icon" ? icon : ""}
+		${args.presentation === "heading" ? `<span slot="heading">${heading}</span>` : ""}
+		${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
+		${args.content}
+	</ycl-tile-item>`;
 
 export default {
-	title: "Molecules/Tile Item",
-	component: "ycl-tile-item",
+	title: "Organisms/Tiles",
+	component: "ycl-tiles",
 	argTypes: {
 		heading: { control: "text" },
 		content: { control: "text" },
@@ -69,24 +68,12 @@ export default {
 
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
-			<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-6);">
+			<ycl-tiles>
 				${tile(args, args.heading)}
 				${tile(args, "02")}
 				${tile(args, "03")}
-			</ul>
+			</ycl-tiles>
 		</div>`,
 };
 
 export const Default = {};
-
-export const Icon = {
-	args: { presentation: "icon", theme: "three", alignment: "center" },
-};
-
-export const TextOnlyBottom = {
-	args: { presentation: "text-only", verticalAlignment: "bottom", theme: "two", href: "" },
-};
-
-export const WithImage = {
-	args: { withImage: true, animated: true },
-};

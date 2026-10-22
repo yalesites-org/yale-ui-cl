@@ -1,0 +1,130 @@
+/* Custom elements default to display: inline. */
+:host(ycl-facts-and-figures) {
+  display: block;
+}
+
+:host(ycl-facts-and-figures) [hidden] {
+  display: none !important;
+}
+
+/* Group themes. No theme, or a value other than one to three, means no background: the group
+   takes the page's colours (an image still gets theme one's tint). Themes one to three give the
+   group a background, mapped to colour slots the same way the matching item themes are; the
+   slots come from the site's global theme when one is set (see facts-and-figures-item.css),
+   otherwise from that component theme's tokens. The colours are inherited, so slotted
+   content and items with theme="default" pick them up. With no theme the text colour is left
+   unset, so `color` below is invalid at computed-value time and falls back to inheriting. */
+:host(ycl-facts-and-figures) {
+  --color-facts-and-figures-background: transparent;
+}
+
+:host(ycl-facts-and-figures[theme="one"]),
+:host(ycl-facts-and-figures:not([theme="two"], [theme="three"])) .facts-and-figures--has-image {
+  --color-facts-and-figures-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-facts-and-figures-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+}
+
+:host(ycl-facts-and-figures[theme="two"]) {
+  --color-facts-and-figures-background: var(--color-slot-two, var(--component-themes-two-slot-two));
+  --color-facts-and-figures-text: var(--color-slot-eight, var(--component-themes-two-slot-eight));
+}
+
+:host(ycl-facts-and-figures[theme="three"]) {
+  --color-facts-and-figures-background: var(--color-slot-three, var(--component-themes-three-slot-three));
+  --color-facts-and-figures-text: var(--color-slot-seven, var(--component-themes-three-slot-seven));
+}
+
+/* The global-theme colour slots for the group are set alongside the item's, in
+   facts-and-figures-item.css; both files are loaded into the document by base.css. */
+
+/* The group. It's its own stacking context so the background image can sit at z-index -1
+   without dropping behind the page. */
+.facts-and-figures {
+  position: relative;
+  z-index: 0;
+  background-color: var(--color-facts-and-figures-background);
+  color: var(--color-facts-and-figures-text);
+}
+
+:host(ycl-facts-and-figures:is([theme="one"], [theme="two"], [theme="three"])) .facts-and-figures,
+.facts-and-figures--has-image {
+  padding: var(--size-spacing-9) var(--size-spacing-7);
+}
+
+.facts-and-figures__inner {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: var(--size-spacing-6);
+}
+
+/* Slotted headings keep their semantics but take the group heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.facts-and-figures__heading ::slotted(*) {
+  font: var(--font-style-heading-h2-yale-new) !important;
+  margin: 0 !important;
+  color: inherit;
+}
+
+.facts-and-figures__intro {
+  font: var(--font-style-body-default);
+  max-width: 48rem;
+}
+
+.facts-and-figures__intro ::slotted(p) {
+  margin: 0;
+}
+
+/* A grid list of stats: one column on narrow screens, as many 14rem-plus columns as fit above
+   that. Each cell is a grid so the slotted stat stretches to its row's height. */
+.facts-and-figures__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--size-spacing-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts-and-figures__item {
+  display: grid;
+}
+
+/* ycl-cta-link sets default action colours on its own host, which would beat the theme's inherited
+   ones; an outer ::slotted() declaration wins over :host, so a themed group reaches the CTA. */
+:host(ycl-facts-and-figures:is([theme="one"], [theme="two"], [theme="three"])) .facts-and-figures__link ::slotted(ycl-cta-link),
+.facts-and-figures--has-image .facts-and-figures__link ::slotted(ycl-cta-link) {
+  --color-action: var(--color-facts-and-figures-text);
+  --color-action-secondary: var(--color-facts-and-figures-background);
+}
+
+/* Background image, behind the content, tinted with the group's theme colour (theme one when no
+   theme is set) so the text over it keeps its contrast. */
+.facts-and-figures__image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.facts-and-figures__image ::slotted(img),
+.facts-and-figures__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* A slotted ycl-image fills the group, cropping its image to cover it. */
+.facts-and-figures__image ::slotted(ycl-image) {
+  height: 100%;
+  --image-fill-height: 100%;
+}
+
+.facts-and-figures__image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: var(--color-facts-and-figures-background);
+  opacity: 0.85;
+}
