@@ -90,3 +90,11 @@ export default {
 };
 
 export const Default = {};
+
+export const LeftWithIcon = {
+	args: { alignment: "left", withIcon: true, theme: "three" },
+};
+
+export const WithBackgroundImage = {
+	args: { withImage: true, groupTheme: "two" },
+};

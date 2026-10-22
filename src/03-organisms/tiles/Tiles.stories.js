@@ -77,3 +77,15 @@ export default {
 };
 
 export const Default = {};
+
+export const Icon = {
+	args: { presentation: "icon", theme: "three", alignment: "center" },
+};
+
+export const TextOnlyBottom = {
+	args: { presentation: "text-only", verticalAlignment: "bottom", theme: "two", href: "" },
+};
+
+export const WithImage = {
+	args: { withImage: true, animated: true },
+};
