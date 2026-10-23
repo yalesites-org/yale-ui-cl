@@ -47,6 +47,14 @@ describe("ycl-tiles", () => {
 		expect(box(short).top).toBe(box(long).top);
 		expect(box(short).height).toBe(box(long).height);
 	});
+
+	it("sizes a row to its content rather than a fixed minimum height", async () => {
+		const tiles = mount(`<ycl-tiles style="display: block; width: 40rem;"><ycl-tile-item>Short</ycl-tile-item></ycl-tiles>`);
+		const alone = mount(`<ycl-tile-item style="width: 40rem;">Short</ycl-tile-item>`);
+		await settle();
+		const height = (tile) => tile.getBoundingClientRect().height;
+		expect(height(tiles.querySelector("ycl-tile-item"))).toBe(height(alone));
+	});
 });
 
 describe("ycl-tile-item", () => {
