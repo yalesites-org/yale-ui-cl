@@ -100,17 +100,64 @@ describe("ycl-facts-and-figures children and themes", () => {
 		expect(slots.map((slot) => slot.assignedElements())).toEqual([[group.querySelector("ycl-facts-and-figures-item")]]);
 	});
 
-	it("treats an unknown theme like no theme", async () => {
-		const plain = mount(`<ycl-facts-and-figures><ycl-facts-and-figures-item><span slot="stat">1</span>x</ycl-facts-and-figures-item></ycl-facts-and-figures>`);
-		const unknown = mount(`<ycl-facts-and-figures theme="four"><ycl-facts-and-figures-item><span slot="stat">1</span>x</ycl-facts-and-figures-item></ycl-facts-and-figures>`);
+	it("defaults to theme one, and treats an unknown theme as theme one", async () => {
+		const stat = `<ycl-facts-and-figures-item><span slot="stat">1</span>x</ycl-facts-and-figures-item>`;
+		const plain = mount(`<ycl-facts-and-figures>${stat}</ycl-facts-and-figures>`);
+		const one = mount(`<ycl-facts-and-figures theme="one">${stat}</ycl-facts-and-figures>`);
+		const unknown = mount(`<ycl-facts-and-figures theme="seven">${stat}</ycl-facts-and-figures>`);
 		await settle();
 		const styleOf = (el) => getComputedStyle(shadowOf(el).querySelector(".facts-and-figures"));
-		expect(styleOf(unknown).paddingTop).toBe(styleOf(plain).paddingTop);
-		expect(styleOf(unknown).backgroundColor).toBe(styleOf(plain).backgroundColor);
+		expect(plain.theme).toBe("one");
+		expect(styleOf(plain).backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
+		[plain, unknown].forEach((el) => {
+			expect(styleOf(el).paddingTop).toBe(styleOf(one).paddingTop);
+			expect(styleOf(el).backgroundColor).toBe(styleOf(one).backgroundColor);
+			expect(styleOf(el).color).toBe(styleOf(one).color);
+		});
+	});
+
+	it("gives each of themes one to six its own background", async () => {
+		const themes = ["one", "two", "three", "four", "five", "six"];
+		const groups = themes.map((theme) => mount(`<ycl-facts-and-figures theme="${theme}"></ycl-facts-and-figures>`));
+		await settle();
+		const colours = groups.map((el) => getComputedStyle(shadowOf(el).querySelector(".facts-and-figures")).backgroundColor);
+		colours.forEach((colour, i) => expect(colour, themes[i]).not.toBe("rgba(0, 0, 0, 0)"));
+		expect(new Set(colours).size).toBe(themes.length);
+	});
+
+	it("gives stats inside the group no background of their own, whatever their theme", async () => {
+		const group = mount(`
+			<ycl-facts-and-figures theme="two">
+				<ycl-facts-and-figures-item><span slot="stat">1</span>x</ycl-facts-and-figures-item>
+				<ycl-facts-and-figures-item theme="three"><span slot="stat">2</span>y</ycl-facts-and-figures-item>
+			</ycl-facts-and-figures>
+		`);
+		await settle();
+		const groupColour = getComputedStyle(shadowOf(group).querySelector(".facts-and-figures")).color;
+		group.querySelectorAll("ycl-facts-and-figures-item").forEach((item) => {
+			const stat = getComputedStyle(shadowOf(item).querySelector(".facts-and-figures-item"));
+			expect(stat.backgroundColor).toBe("rgba(0, 0, 0, 0)");
+			expect(stat.color).toBe(groupColour);
+		});
+	});
+
+	it("drops a stat's horizontal padding inside the group unless it is padded", async () => {
+		const group = mount(`
+			<ycl-facts-and-figures>
+				<ycl-facts-and-figures-item><span slot="stat">1</span>x</ycl-facts-and-figures-item>
+				<ycl-facts-and-figures-item padded><span slot="stat">2</span>y</ycl-facts-and-figures-item>
+			</ycl-facts-and-figures>
+		`);
+		await settle();
+		const [plain, padded] = [...group.querySelectorAll("ycl-facts-and-figures-item")]
+			.map((item) => getComputedStyle(shadowOf(item).querySelector(".facts-and-figures-item__inner")));
+		expect(plain.paddingLeft).toBe("0px");
+		expect(plain.paddingTop).not.toBe("0px");
+		expect(padded.paddingLeft).toBe(padded.paddingTop);
 	});
 
 	it("tints a background image with theme one when the theme is unknown", async () => {
-		const group = mount(`<ycl-facts-and-figures theme="four"><img slot="image" src="data:," alt=""></ycl-facts-and-figures>`);
+		const group = mount(`<ycl-facts-and-figures theme="seven"><img slot="image" src="data:," alt=""></ycl-facts-and-figures>`);
 		const themed = mount(`<ycl-facts-and-figures theme="one"><img slot="image" src="data:," alt=""></ycl-facts-and-figures>`);
 		await settle();
 		const overlay = (el) => getComputedStyle(shadowOf(el).querySelector(".facts-and-figures__image"), "::before").backgroundColor;

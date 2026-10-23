@@ -8,14 +8,15 @@ import backgroundImage from "../../assets/avif-test-image.avif";
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = (name) => `<ycl-icon slot="icon" name="${name}"></ycl-icon>`;
 
-// The item options are set on every stat; ycl-facts-and-figures doesn't forward them. The first
-// stat takes the Statistic and Content controls.
+// The item options are set on every stat; ycl-facts-and-figures doesn't forward them. Stats have
+// no theme of their own inside the group: the group's Theme colours them. The first stat takes
+// the Statistic and Content controls.
 const stats = (args) => [
 	{ stat: args.stat, content: args.content, icon: "hand-holding-dollar-solid" },
 	{ stat: "6:1", content: "Student to faculty ratio", icon: "chalkboard-user-solid" },
 	{ stat: "14", content: "Residential colleges", icon: "building-columns-solid" },
 ].map((item) => `
-	<ycl-facts-and-figures-item theme="${args.theme}" alignment="${args.alignment}" presentation="${args.presentation}" ${args.padded ? "padded" : ""}>
+	<ycl-facts-and-figures-item alignment="${args.alignment}" presentation="${args.presentation}" ${args.padded ? "padded" : ""}>
 		${args.withIcon ? icon(item.icon) : ""}
 		<span slot="stat">${item.stat}</span>
 		${item.content}
@@ -30,18 +31,13 @@ export default {
 		linkText: { name: "Group Link Text", control: "text" },
 		linkUrl: { name: "Group Link URL", control: "text" },
 		withImage: { name: "Group Background Image", control: "boolean" },
-		groupTheme: {
-			name: "Group Theme",
+		theme: {
+			name: "Theme",
 			type: "select",
-			options: ["none", "one", "two", "three"],
+			options: ["one", "two", "three", "four", "five", "six"],
 		},
 		stat: { name: "Statistic", control: "text" },
 		content: { control: "text" },
-		theme: {
-			name: "Component Theme",
-			type: "select",
-			options: ["default", "one", "two", "three", "four", "five"],
-		},
 		alignment: {
 			type: "select",
 			options: ["center", "left"],
@@ -52,8 +48,8 @@ export default {
 			options: ["basic", "plain"],
 		},
 		withIcon: { name: "With Icon", control: "boolean" },
-		// Only a stat without a background (theme "default") can drop its horizontal padding.
-		padded: { name: "Padded", control: "boolean", if: { arg: "theme", eq: "default" } },
+		// Stats have no background inside the group, so they drop their horizontal padding unless padded.
+		padded: { name: "Padded", control: "boolean" },
 		globalTheme: {
 			name: "Site Global Theme",
 			type: "select",
@@ -66,10 +62,9 @@ export default {
 		linkText: "Explore more facts",
 		linkUrl: "https://www.yale.edu",
 		withImage: false,
-		groupTheme: "none",
+		theme: "one",
 		stat: "$52,000",
 		content: "Annual grant of Undergraduate students",
-		theme: "one",
 		alignment: "center",
 		presentation: "basic",
 		withIcon: false,
@@ -79,7 +74,7 @@ export default {
 
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
-			<ycl-facts-and-figures ${args.groupTheme !== "none" ? `theme="${args.groupTheme}"` : ""}>
+			<ycl-facts-and-figures theme="${args.theme}">
 				${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ""}
 				${args.intro ? `<p slot="intro">${args.intro}</p>` : ""}
 				${args.withImage ? `<ycl-image slot="image"><img src="${backgroundImage}" alt=""></ycl-image>` : ""}
@@ -96,5 +91,5 @@ export const LeftWithIcon = {
 };
 
 export const WithBackgroundImage = {
-	args: { withImage: true, groupTheme: "two" },
+	args: { withImage: true, theme: "two" },
 };

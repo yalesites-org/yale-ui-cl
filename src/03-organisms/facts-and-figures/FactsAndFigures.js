@@ -24,9 +24,10 @@ factsAndFiguresTemplate.innerHTML = `
 // "image" go there; every other ycl-facts-and-figures-item child is a stat. Slots are assigned by hand so every stat gets its
 // own <li> (named slots can only project into a single place); role="list" keeps the semantics in
 // Safari, which drops them from lists styled with list-style: none.
-// The group's own option is `theme` (its background). Item options (theme, alignment,
-// presentation) stay on each item and aren't forwarded; an item with theme="default" has no
-// background of its own and takes the group's text colour.
+// The group's one theme option is `theme`, one to six (default one), as in YaleSites. Stats inside
+// the group have no background of their own and take the group's colours, whatever their own
+// theme (see the CSS). Other item options (alignment, presentation, padded) stay on each item and
+// aren't forwarded.
 export class FactsAndFigures extends HTMLElement {
 	#shadow;
 	#observer;
@@ -60,9 +61,6 @@ export class FactsAndFigures extends HTMLElement {
 			const wrapper = this.#shadow.querySelector(`.facts-and-figures__${name}`);
 			wrapper.hidden = nodes.length === 0;
 			wrapper.querySelector("slot").assign(...nodes);
-			if (name === "image") {
-				this.#shadow.querySelector(".facts-and-figures").classList.toggle("facts-and-figures--has-image", nodes.length > 0);
-			}
 		});
 
 		// Only items become stats, so a stray element (a <template>, a misspelled slot) isn't listed.
@@ -80,7 +78,7 @@ export class FactsAndFigures extends HTMLElement {
 		slots.forEach((slot, i) => slot.assign(stats[i]));
 	}
 
-	get theme() { return this.getAttribute("theme"); }
+	get theme() { return this.getAttribute("theme") ?? "one"; }
 	set theme(value) {
 		if (value) this.setAttribute("theme", value);
 		else this.removeAttribute("theme");

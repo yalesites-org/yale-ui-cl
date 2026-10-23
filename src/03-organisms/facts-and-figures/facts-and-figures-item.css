@@ -12,8 +12,9 @@
 /* Component themes.
    Each theme maps its background and content colours to colour slots. The slots come from the
    site's global theme when one is set (see below), otherwise from that component theme's tokens.
-   No theme attribute is theme one. theme="default" has no background and inherits its colour,
-   for stats placed inside an already-themed group. */
+   No theme attribute is theme one. theme="default" has no background and inherits its colour.
+   Inside ycl-facts-and-figures the group overrides these, so stats there never have a background
+   (see facts-and-figures.css). */
 :host(ycl-facts-and-figures-item) {
   --color-facts-and-figures-item-theme: var(--color-slot-one, var(--component-themes-one-slot-one));
   --color-facts-and-figures-item-content: var(--color-slot-eight, var(--component-themes-one-slot-eight));
@@ -47,7 +48,7 @@
 /* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
    shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
    document. */
-[data-global-theme="one"] :is(ycl-facts-and-figures, ycl-facts-and-figures-item) {
+[data-global-theme="one"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-one-colors-slot-one);
   --color-slot-two: var(--global-themes-one-colors-slot-two);
   --color-slot-three: var(--global-themes-one-colors-slot-three);
@@ -57,7 +58,7 @@
   --color-slot-eight: var(--global-themes-one-colors-slot-eight);
 }
 
-[data-global-theme="two"] :is(ycl-facts-and-figures, ycl-facts-and-figures-item) {
+[data-global-theme="two"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-two-colors-slot-one);
   --color-slot-two: var(--global-themes-two-colors-slot-two);
   --color-slot-three: var(--global-themes-two-colors-slot-three);
@@ -67,7 +68,7 @@
   --color-slot-eight: var(--global-themes-two-colors-slot-eight);
 }
 
-[data-global-theme="three"] :is(ycl-facts-and-figures, ycl-facts-and-figures-item) {
+[data-global-theme="three"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-three-colors-slot-one);
   --color-slot-two: var(--global-themes-three-colors-slot-two);
   --color-slot-three: var(--global-themes-three-colors-slot-three);
@@ -77,7 +78,7 @@
   --color-slot-eight: var(--global-themes-three-colors-slot-eight);
 }
 
-[data-global-theme="four"] :is(ycl-facts-and-figures, ycl-facts-and-figures-item) {
+[data-global-theme="four"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-four-colors-slot-one);
   --color-slot-two: var(--global-themes-four-colors-slot-two);
   --color-slot-three: var(--global-themes-four-colors-slot-three);
@@ -87,7 +88,7 @@
   --color-slot-eight: var(--global-themes-four-colors-slot-eight);
 }
 
-[data-global-theme="five"] :is(ycl-facts-and-figures, ycl-facts-and-figures-item) {
+[data-global-theme="five"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-five-colors-slot-one);
   --color-slot-two: var(--global-themes-five-colors-slot-two);
   --color-slot-three: var(--global-themes-five-colors-slot-three);
@@ -97,7 +98,7 @@
   --color-slot-eight: var(--global-themes-five-colors-slot-eight);
 }
 
-[data-global-theme="six"] :is(ycl-facts-and-figures, ycl-facts-and-figures-item) {
+[data-global-theme="six"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-six-colors-slot-one);
   --color-slot-two: var(--global-themes-six-colors-slot-two);
   --color-slot-three: var(--global-themes-six-colors-slot-three);
@@ -124,8 +125,8 @@
 
 /* A stat with a background (any theme but "default") always has horizontal padding, so the
    eyebrow rule above the stat sits inside the card padding rather than running edge to edge.
-   theme="default" has no background, so it's padded vertically only unless `padded` is set.
-   The inner box stretches across the stat (no width: 100%, which put the padding outside the
+   theme="default" (and any stat inside ycl-facts-and-figures) has no background, so it's padded
+   vertically only unless `padded` is set. The inner box stretches across the stat (no width: 100%, which put the padding outside the
    card and ran the full-width rule edge to edge). */
 .facts-and-figures-item__inner {
   display: flex;
@@ -133,12 +134,12 @@
   flex: 1 1 auto;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: var(--size-spacing-8);
+  padding: var(--size-spacing-8) var(--facts-and-figures-item-padding-inline, var(--size-spacing-8));
   text-align: center;
 }
 
-:host(ycl-facts-and-figures-item[theme="default"]:not([padded])) .facts-and-figures-item__inner {
-  padding: var(--size-spacing-8) 0;
+:host(ycl-facts-and-figures-item[theme="default"]:not([padded])) {
+  --facts-and-figures-item-padding-inline: 0;
 }
 
 :host(ycl-facts-and-figures-item[alignment="left"]) .facts-and-figures-item__inner {
