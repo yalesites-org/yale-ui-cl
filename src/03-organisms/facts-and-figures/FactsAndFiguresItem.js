@@ -1,5 +1,5 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
-import componentStyles from "./facts-and-figures.css?inline";
+import componentStyles from "./facts-and-figures-item.css?inline";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -10,25 +10,25 @@ const watchSlot = (slot, onChange) => {
 	update();
 };
 
-const factsAndFiguresTemplate = document.createElement("template");
-factsAndFiguresTemplate.innerHTML = `
-	<div class="facts-and-figures">
-		<div class="facts-and-figures__inner">
-			<div class="facts-and-figures__icon"><slot name="icon"></slot></div>
-			<div class="facts-and-figures__stat"><slot name="stat"></slot></div>
-			<div class="facts-and-figures__content"><slot></slot></div>
+const factsAndFiguresItemTemplate = document.createElement("template");
+factsAndFiguresItemTemplate.innerHTML = `
+	<div class="facts-and-figures-item">
+		<div class="facts-and-figures-item__inner">
+			<div class="facts-and-figures-item__icon"><slot name="icon"></slot></div>
+			<div class="facts-and-figures-item__stat"><slot name="stat"></slot></div>
+			<div class="facts-and-figures-item__content"><slot></slot></div>
 		</div>
 	</div>
 `;
 
-export class FactsAndFigures extends HTMLElement {
+export class FactsAndFiguresItem extends HTMLElement {
 	#shadow;
 
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({ mode: "closed" });
-		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "facts-and-figures")];
-		this.#shadow.appendChild(document.importNode(factsAndFiguresTemplate.content, true));
+		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "facts-and-figures-item")];
+		this.#shadow.appendChild(document.importNode(factsAndFiguresItemTemplate.content, true));
 
 		this.#shadow.querySelectorAll("slot").forEach((slot) => {
 			watchSlot(slot, (filled) => { slot.parentElement.hidden = !filled; });
@@ -42,4 +42,4 @@ export class FactsAndFigures extends HTMLElement {
 	set alignment(value) { this.setAttribute("alignment", value); }
 }
 
-if (!customElements.get("ycl-facts-and-figures")) customElements.define("ycl-facts-and-figures", FactsAndFigures);
+if (!customElements.get("ycl-facts-and-figures-item")) customElements.define("ycl-facts-and-figures-item", FactsAndFiguresItem);

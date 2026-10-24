@@ -43,11 +43,9 @@
 @import "../02-molecules/cards/reference-card/reference-card.css" layer(components.reference-card);
 @import "../02-molecules/cards/custom-card/custom-card.css" layer(components.custom-card);
 @import "../02-molecules/cards/directory-listing-card/directory-listing-card.css" layer(components.directory-listing-card);
-@import "../02-molecules/tile-item/tile-item.css" layer(components.tile-item);
 @import "../02-molecules/text-with-image/text-with-image.css" layer(components.text-with-image);
 @import "../02-molecules/wrapped-image/wrapped-image.css" layer(components.wrapped-image);
 @import "../02-molecules/content-spotlight-portrait/content-spotlight-portrait.css" layer(components.content-spotlight-portrait);
-@import "../02-molecules/facts-and-figures/facts-and-figures.css" layer(components.facts-and-figures);
 @import "../02-molecules/link-group/link-group.css" layer(components.link-group);
 @import "../02-molecules/link-grid/link-grid.css" layer(components.link-grid);
 @import "../02-molecules/link-skip/link-skip.css" layer(components.link-skip);
@@ -56,3 +54,7 @@
 @import "../02-molecules/tabs/tabs.css" layer(components.tabs);
 @import "../02-molecules/quick-links/quick-links.css" layer(components.quick-links);
 @import "../02-molecules/data-table/data-table.css" layer(components.data-table);
+@import "../03-organisms/tiles/tiles.css" layer(components.tiles);
+@import "../03-organisms/tiles/tile-item.css" layer(components.tile-item);
+@import "../03-organisms/facts-and-figures/facts-and-figures.css" layer(components.facts-and-figures);
+@import "../03-organisms/facts-and-figures/facts-and-figures-item.css" layer(components.facts-and-figures-item);

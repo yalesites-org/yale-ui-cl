@@ -1,51 +1,54 @@
-/* Custom elements default to display: inline. */
-:host(ycl-facts-and-figures) {
-  display: block;
+/* Custom elements default to display: inline. A flex column lets the stat fill the host's height
+   (e.g. a stretched grid cell in ycl-facts-and-figures) rather than relying on height: 100%. */
+:host(ycl-facts-and-figures-item) {
+  display: flex;
+  flex-direction: column;
 }
 
-:host(ycl-facts-and-figures) [hidden] {
+:host(ycl-facts-and-figures-item) [hidden] {
   display: none !important;
 }
 
 /* Component themes.
    Each theme maps its background and content colours to colour slots. The slots come from the
    site's global theme when one is set (see below), otherwise from that component theme's tokens.
-   No theme attribute is theme one. theme="default" has no background and inherits its colour,
-   for stats placed inside an already-themed group. */
-:host(ycl-facts-and-figures) {
-  --color-facts-and-figures-theme: var(--color-slot-one, var(--component-themes-one-slot-one));
-  --color-facts-and-figures-content: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+   No theme attribute is theme one. theme="default" has no background and inherits its colour.
+   Inside ycl-facts-and-figures the group overrides these, so stats there never have a background
+   (see facts-and-figures.css). */
+:host(ycl-facts-and-figures-item) {
+  --color-facts-and-figures-item-theme: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-facts-and-figures-item-content: var(--color-slot-eight, var(--component-themes-one-slot-eight));
 }
 
-:host(ycl-facts-and-figures[theme="two"]) {
-  --color-facts-and-figures-theme: var(--color-slot-two, var(--component-themes-two-slot-two));
-  --color-facts-and-figures-content: var(--color-slot-eight, var(--component-themes-two-slot-eight));
+:host(ycl-facts-and-figures-item[theme="two"]) {
+  --color-facts-and-figures-item-theme: var(--color-slot-two, var(--component-themes-two-slot-two));
+  --color-facts-and-figures-item-content: var(--color-slot-eight, var(--component-themes-two-slot-eight));
 }
 
-:host(ycl-facts-and-figures[theme="three"]) {
-  --color-facts-and-figures-theme: var(--color-slot-three, var(--component-themes-three-slot-three));
-  --color-facts-and-figures-content: var(--color-slot-seven, var(--component-themes-three-slot-seven));
+:host(ycl-facts-and-figures-item[theme="three"]) {
+  --color-facts-and-figures-item-theme: var(--color-slot-three, var(--component-themes-three-slot-three));
+  --color-facts-and-figures-item-content: var(--color-slot-seven, var(--component-themes-three-slot-seven));
 }
 
-:host(ycl-facts-and-figures[theme="four"]) {
-  --color-facts-and-figures-theme: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
-  --color-facts-and-figures-content: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+:host(ycl-facts-and-figures-item[theme="four"]) {
+  --color-facts-and-figures-item-theme: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
+  --color-facts-and-figures-item-content: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
 }
 
-:host(ycl-facts-and-figures[theme="five"]) {
-  --color-facts-and-figures-theme: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
-  --color-facts-and-figures-content: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+:host(ycl-facts-and-figures-item[theme="five"]) {
+  --color-facts-and-figures-item-theme: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
+  --color-facts-and-figures-item-content: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
 }
 
-:host(ycl-facts-and-figures[theme="default"]) {
-  --color-facts-and-figures-theme: transparent;
-  --color-facts-and-figures-content: currentcolor;
+:host(ycl-facts-and-figures-item[theme="default"]) {
+  --color-facts-and-figures-item-theme: transparent;
+  --color-facts-and-figures-item-content: currentcolor;
 }
 
 /* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
    shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
    document. */
-[data-global-theme="one"] ycl-facts-and-figures {
+[data-global-theme="one"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-one-colors-slot-one);
   --color-slot-two: var(--global-themes-one-colors-slot-two);
   --color-slot-three: var(--global-themes-one-colors-slot-three);
@@ -55,7 +58,7 @@
   --color-slot-eight: var(--global-themes-one-colors-slot-eight);
 }
 
-[data-global-theme="two"] ycl-facts-and-figures {
+[data-global-theme="two"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-two-colors-slot-one);
   --color-slot-two: var(--global-themes-two-colors-slot-two);
   --color-slot-three: var(--global-themes-two-colors-slot-three);
@@ -65,7 +68,7 @@
   --color-slot-eight: var(--global-themes-two-colors-slot-eight);
 }
 
-[data-global-theme="three"] ycl-facts-and-figures {
+[data-global-theme="three"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-three-colors-slot-one);
   --color-slot-two: var(--global-themes-three-colors-slot-two);
   --color-slot-three: var(--global-themes-three-colors-slot-three);
@@ -75,7 +78,7 @@
   --color-slot-eight: var(--global-themes-three-colors-slot-eight);
 }
 
-[data-global-theme="four"] ycl-facts-and-figures {
+[data-global-theme="four"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-four-colors-slot-one);
   --color-slot-two: var(--global-themes-four-colors-slot-two);
   --color-slot-three: var(--global-themes-four-colors-slot-three);
@@ -85,7 +88,7 @@
   --color-slot-eight: var(--global-themes-four-colors-slot-eight);
 }
 
-[data-global-theme="five"] ycl-facts-and-figures {
+[data-global-theme="five"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-five-colors-slot-one);
   --color-slot-two: var(--global-themes-five-colors-slot-two);
   --color-slot-three: var(--global-themes-five-colors-slot-three);
@@ -95,7 +98,7 @@
   --color-slot-eight: var(--global-themes-five-colors-slot-eight);
 }
 
-[data-global-theme="six"] ycl-facts-and-figures {
+[data-global-theme="six"] ycl-facts-and-figures-item {
   --color-slot-one: var(--global-themes-six-colors-slot-one);
   --color-slot-two: var(--global-themes-six-colors-slot-two);
   --color-slot-three: var(--global-themes-six-colors-slot-three);
@@ -106,44 +109,44 @@
 }
 
 /* The stat. */
-.facts-and-figures {
+.facts-and-figures-item {
   --eyebrow-width: var(--size-spacing-11);
 
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-facts-and-figures-theme);
-  color: var(--color-facts-and-figures-content);
+  flex: 1 1 auto;
+  background-color: var(--color-facts-and-figures-item-theme);
+  color: var(--color-facts-and-figures-item-content);
 }
 
-:host(ycl-facts-and-figures:not([alignment="left"])) .facts-and-figures {
+:host(ycl-facts-and-figures-item:not([alignment="left"])) .facts-and-figures-item {
   --eyebrow-width: 100%;
 }
 
-/* The Twig stat's padding is vertical only; its group adds the horizontal padding. A standalone
-   stat on a coloured background needs it too, so `padded` adds it here. */
-.facts-and-figures__inner {
+/* A stat with a background (any theme but "default") always has horizontal padding, so the
+   eyebrow rule above the stat sits inside the card padding rather than running edge to edge.
+   theme="default" (and any stat inside ycl-facts-and-figures) has no background, so it's padded
+   vertically only unless `padded` is set. The inner box stretches across the stat (no width: 100%, which put the padding outside the
+   card and ran the full-width rule edge to edge). */
+.facts-and-figures-item__inner {
   display: flex;
   flex-flow: column nowrap;
+  flex: 1 1 auto;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: var(--size-spacing-8) 0;
-  height: 100%;
-  width: 100%;
+  padding: var(--size-spacing-8) var(--facts-and-figures-item-padding-inline, var(--size-spacing-8));
   text-align: center;
 }
 
-:host(ycl-facts-and-figures[padded]) .facts-and-figures__inner {
-  padding: var(--size-spacing-8);
+:host(ycl-facts-and-figures-item[theme="default"]:not([padded])) {
+  --facts-and-figures-item-padding-inline: 0;
 }
 
-:host(ycl-facts-and-figures[alignment="left"]) .facts-and-figures__inner {
+:host(ycl-facts-and-figures-item[alignment="left"]) .facts-and-figures-item__inner {
   text-align: left;
 }
 
-.facts-and-figures__stat {
+.facts-and-figures-item__stat {
   font: var(--font-style-heading-h3-yale-new);
   font-variant-numeric: oldstyle-nums;
   width: 100%;
@@ -152,51 +155,51 @@
 
 /* Slotted stats keep their semantics but take the stat's type style.
    !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
-.facts-and-figures__stat ::slotted(*) {
+.facts-and-figures-item__stat ::slotted(*) {
   font: inherit !important;
   margin: 0 !important;
 }
 
 /* The basic presentation style draws a rule above the stat: short when left-aligned, full width
    when centred. */
-:host(ycl-facts-and-figures:not([presentation])) .facts-and-figures__stat::before,
-:host(ycl-facts-and-figures[presentation="basic"]) .facts-and-figures__stat::before {
+:host(ycl-facts-and-figures-item:not([presentation])) .facts-and-figures-item__stat::before,
+:host(ycl-facts-and-figures-item[presentation="basic"]) .facts-and-figures-item__stat::before {
   content: "";
   display: block;
   position: relative;
   width: var(--eyebrow-width);
-  border-bottom: var(--size-spacing-1) solid var(--color-facts-and-figures-content);
+  border-bottom: var(--size-spacing-1) solid var(--color-facts-and-figures-item-content);
   margin-bottom: var(--size-spacing-4);
 }
 
-.facts-and-figures__icon {
+.facts-and-figures-item__icon {
   align-self: center;
   margin-bottom: var(--size-spacing-2);
 }
 
-:host(ycl-facts-and-figures[alignment="left"]) .facts-and-figures__icon {
+:host(ycl-facts-and-figures-item[alignment="left"]) .facts-and-figures-item__icon {
   align-self: flex-start;
 }
 
 /* 48px max, matching the Twig icon. */
-.facts-and-figures__icon ::slotted(svg) {
+.facts-and-figures-item__icon ::slotted(svg) {
   max-width: var(--size-spacing-9);
   max-height: var(--size-spacing-9);
-  fill: var(--color-facts-and-figures-content);
+  fill: var(--color-facts-and-figures-item-content);
 }
 
-.facts-and-figures__icon ::slotted(ycl-icon) {
+.facts-and-figures-item__icon ::slotted(ycl-icon) {
   display: block;
   width: var(--size-spacing-9);
   height: var(--size-spacing-9);
-  color: var(--color-facts-and-figures-content);
+  color: var(--color-facts-and-figures-item-content);
 }
 
-.facts-and-figures__content {
+.facts-and-figures-item__content {
   font: var(--font-style-body-default);
   width: 100%;
 }
 
-.facts-and-figures__content ::slotted(p) {
+.facts-and-figures-item__content ::slotted(p) {
   margin: 0;
 }
