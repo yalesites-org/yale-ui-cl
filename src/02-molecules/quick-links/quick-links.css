@@ -102,7 +102,7 @@
   margin-inline: auto;
 }
 
-:host(ycl-quick-links:not([variation="subtle"])) .quick-links__inner {
+:host(ycl-quick-links:not([variant="subtle"])) .quick-links__inner {
   padding-block: var(--size-spacing-9);
 }
 
@@ -154,7 +154,7 @@
   height: 100%;
 }
 
-:host(ycl-quick-links:not([variation="subtle"])) .quick-links__list-item {
+:host(ycl-quick-links:not([variant="subtle"])) .quick-links__list-item {
   display: grid;
 }
 
@@ -188,11 +188,11 @@
   outline-offset: var(--size-thickness-2);
 }
 
-/* A slotted cta-link (class="outline") draws the same outline CTA. Its :host rule sets default action
+/* A slotted ycl-cta-link (variant="outline") draws the same outline CTA. Its :host rule sets default action
    colours, so they're re-inherited here to pick up the theme's. Its inner link can't be styled from
    here, but as a grid container the host stretches that link to fill the cell and the minimum
    click target, like the raw link. (The text can't be vertically centred from here, though.) */
-.quick-links__list-item ::slotted(cta-link) {
+.quick-links__list-item ::slotted(ycl-cta-link) {
   --color-action: inherit;
   --color-action-secondary: inherit;
 
@@ -200,8 +200,8 @@
   min-height: var(--size-click-target-minimum);
 }
 
-/* In the promotional variation the image is a faint full-bleed backdrop. */
-:host(ycl-quick-links:not([variation="subtle"])) .quick-links__image {
+/* In the promotional variant the image is a faint full-bleed backdrop. */
+:host(ycl-quick-links:not([variant="subtle"])) .quick-links__image {
   position: absolute;
   top: 0;
   left: 0;
@@ -212,7 +212,7 @@
   opacity: 0.15;
 }
 
-:host(ycl-quick-links:not([variation="subtle"])) .quick-links__image ::slotted(img) {
+:host(ycl-quick-links:not([variant="subtle"])) .quick-links__image ::slotted(img) {
   display: block;
   height: 100%;
   width: 100%;
@@ -225,7 +225,7 @@
 }
 
 /* A slotted ycl-image fills the backdrop the same way, via its fill-height hook. */
-:host(ycl-quick-links:not([variation="subtle"])) .quick-links__image ::slotted(ycl-image) {
+:host(ycl-quick-links:not([variant="subtle"])) .quick-links__image ::slotted(ycl-image) {
   height: 100%;
   --image-fill-height: 100%;
 }
@@ -236,7 +236,7 @@
     gap: var(--size-spacing-7);
   }
 
-  :host(ycl-quick-links:not([variation="subtle"])) .quick-links__links {
+  :host(ycl-quick-links:not([variant="subtle"])) .quick-links__links {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -251,7 +251,7 @@
     gap: var(--size-spacing-5);
   }
 
-  :host(ycl-quick-links:not([variation="subtle"])) .quick-links__links {
+  :host(ycl-quick-links:not([variant="subtle"])) .quick-links__links {
     gap: var(--size-spacing-7) var(--size-spacing-9);
   }
 }
@@ -266,7 +266,7 @@
     gap: var(--size-spacing-8);
   }
 
-  :host(ycl-quick-links:not([variation="subtle"])) .quick-links__links {
+  :host(ycl-quick-links:not([variant="subtle"])) .quick-links__links {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
@@ -289,11 +289,11 @@
     gap: var(--size-spacing-6);
   }
 
-  :host(ycl-quick-links:not([variation="subtle"])) [data-quick-links-layout="stacked"] .quick-links__links {
+  :host(ycl-quick-links:not([variant="subtle"])) [data-quick-links-layout="stacked"] .quick-links__links {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
-  :host(ycl-quick-links:not([variation="subtle"])) [data-quick-links-layout="fluid"] .quick-links__links {
+  :host(ycl-quick-links:not([variant="subtle"])) [data-quick-links-layout="fluid"] .quick-links__links {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -304,7 +304,7 @@
     padding-inline: var(--size-spacing-10);
   }
 
-  :host(ycl-quick-links:not([variation="subtle"])) [data-quick-links-layout="fluid"] .quick-links__links {
+  :host(ycl-quick-links:not([variant="subtle"])) [data-quick-links-layout="fluid"] .quick-links__links {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
