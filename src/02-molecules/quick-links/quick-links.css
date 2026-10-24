@@ -188,7 +188,7 @@
   outline-offset: var(--size-thickness-2);
 }
 
-/* A slotted ycl-cta-link (class="outline") draws the same outline CTA. Its :host rule sets default action
+/* A slotted ycl-cta-link (variant="outline") draws the same outline CTA. Its :host rule sets default action
    colours, so they're re-inherited here to pick up the theme's. Its inner link can't be styled from
    here, but as a grid container the host stretches that link to fill the cell and the minimum
    click target, like the raw link. (The text can't be vertically centred from here, though.) */
