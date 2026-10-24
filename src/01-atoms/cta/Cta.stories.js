@@ -1,12 +1,5 @@
 import "./Cta";
-
-// Fade is the default animation and square corners the default radius, so those add no attribute;
-// animate="none" opts out of animation entirely.
-const optionAttributes = (args) => [
-  `variant="${args.variant}"`,
-  args.animate !== 'fade' && `animate="${args.animate}"`,
-  args.radius !== 'none' && `radius="${args.radius}"`,
-].filter(Boolean).join(' ');
+import { optionAttributes, optionArgTypes } from "./cta-story-options.js";
 
 export default {
   title: 'Atoms/CTA',
@@ -14,21 +7,7 @@ export default {
   argTypes: {
     label: {control: 'text'},
     URL: {control: 'text'},
-    variant: {
-      name: 'Variant',
-      type: 'select',
-      options: ['filled', 'outline'],
-    },
-    animate: {
-      name: 'Animation Type',
-      type: 'select',
-      options: ['none', 'fade', 'rise', 'wipe'],
-    },
-    radius: {
-      name: 'Radius Type',
-      type: 'select',
-      options: ['none', 'soft', 'pill'],
-    },
+    ...optionArgTypes,
   },
   args: {
     label: 'Yale HomePage',
