@@ -12,11 +12,17 @@ tilesTemplate.innerHTML = `
 // The Tiles organism: a responsive grid of ycl-tile-item children. Slots are assigned by hand so
 // every tile gets its own <li>, giving assistive tech real list markup (named slots can only
 // project into a single place). role="list" keeps the semantics in Safari, which drops them from
-// lists styled with list-style: none. Options (theme, alignment, href, ...) stay on each
-// ycl-tile-item; the group doesn't forward them, so tiles in one group can differ.
+// lists styled with list-style: none. alignment, vertical-alignment and presentation set on the
+// group are copied onto every tile, over the tile's own; theme, href, animated and image stay per tile.
+const forwarded = ["alignment", "vertical-alignment", "presentation"];
+
 export class Tiles extends HTMLElement {
 	#shadow;
 	#observer;
+
+	static get observedAttributes() {
+		return forwarded;
+	}
 
 	constructor() {
 		super();
@@ -36,9 +42,25 @@ export class Tiles extends HTMLElement {
 		this.#observer.disconnect();
 	}
 
-	#render() {
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (oldValue === newValue) return;
+		// A group option that's removed is removed from the tiles too; one never set leaves theirs alone.
+		this.#tiles().forEach((tile) => {
+			if (newValue === null) tile.removeAttribute(name);
+			else tile.setAttribute(name, newValue);
+		});
+	}
+
+	#tiles() {
 		// Only tiles are listed, so a stray element (a <template>, a wrapper) doesn't get an empty cell.
-		const tiles = [...this.children].filter((child) => child.localName === "ycl-tile-item");
+		return [...this.children].filter((child) => child.localName === "ycl-tile-item");
+	}
+
+	#render() {
+		const tiles = this.#tiles();
+		forwarded.forEach((name) => {
+			if (this.hasAttribute(name)) tiles.forEach((tile) => tile.setAttribute(name, this.getAttribute(name)));
+		});
 		const list = this.#shadow.querySelector(".tiles__items");
 		const slots = tiles.map(() => document.createElement("slot"));
 		list.replaceChildren(...slots.map((slot) => {
@@ -50,6 +72,15 @@ export class Tiles extends HTMLElement {
 		// Assign once the slots are in the shadow root, rather than relying on assignment surviving insertion.
 		slots.forEach((slot, i) => slot.assign(tiles[i]));
 	}
+
+	get alignment() { return this.getAttribute("alignment"); }
+	set alignment(value) { this.setAttribute("alignment", value); }
+
+	get verticalAlignment() { return this.getAttribute("vertical-alignment"); }
+	set verticalAlignment(value) { this.setAttribute("vertical-alignment", value); }
+
+	get presentation() { return this.getAttribute("presentation"); }
+	set presentation(value) { this.setAttribute("presentation", value); }
 }
 
 if (!customElements.get("ycl-tiles")) customElements.define("ycl-tiles", Tiles);

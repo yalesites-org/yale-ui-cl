@@ -10,6 +10,14 @@
   display: none !important;
 }
 
+/* presentation shows only its area; without it, each area hides itself when its slot is empty. */
+:host(ycl-tile-item[presentation="heading"]) .tile__item__icon,
+:host(ycl-tile-item[presentation="icon"]) .tile__item__heading,
+:host(ycl-tile-item[presentation="text-only"]) .tile__item__icon,
+:host(ycl-tile-item[presentation="text-only"]) .tile__item__heading {
+  display: none !important;
+}
+
 /* Component themes.
    Each theme maps its background, content and hover-bar colours to colour slots. The slots come
    from the site's global theme when one is set (see below), otherwise from that component

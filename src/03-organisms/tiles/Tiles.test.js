@@ -100,3 +100,91 @@ describe("ycl-tiles children", () => {
 		expect(slots.map((slot) => slot.assignedElements())).toEqual([[tiles.querySelector("ycl-tile-item")]]);
 	});
 });
+
+describe("ycl-tiles options", () => {
+	const options = { alignment: "center", "vertical-alignment": "bottom", presentation: "icon" };
+
+	it("copies its alignment, vertical-alignment and presentation onto every tile, over the tile's own", async () => {
+		const tiles = mount(`
+			<ycl-tiles alignment="center" vertical-alignment="bottom" presentation="icon">
+				<ycl-tile-item>One</ycl-tile-item>
+				<ycl-tile-item alignment="right" presentation="heading">Two</ycl-tile-item>
+			</ycl-tiles>
+		`);
+		await settle();
+		[...tiles.children].forEach((tile) => {
+			Object.entries(options).forEach(([name, value]) => expect(tile.getAttribute(name), name).toBe(value));
+		});
+	});
+
+	it("copies its options onto a tile added later", async () => {
+		const tiles = mount(`<ycl-tiles alignment="center" vertical-alignment="bottom" presentation="icon"></ycl-tiles>`);
+		await settle();
+		const tile = document.createElement("ycl-tile-item");
+		tiles.append(tile);
+		await settle();
+		Object.entries(options).forEach(([name, value]) => expect(tile.getAttribute(name), name).toBe(value));
+	});
+
+	it("updates its tiles when an option changes, and removes it from them when it's removed", async () => {
+		const tiles = mount(`<ycl-tiles alignment="center"><ycl-tile-item>One</ycl-tile-item></ycl-tiles>`);
+		await settle();
+		const tile = tiles.querySelector("ycl-tile-item");
+		tiles.alignment = "right";
+		expect(tile.getAttribute("alignment")).toBe("right");
+		tiles.removeAttribute("alignment");
+		expect(tile.hasAttribute("alignment")).toBe(false);
+	});
+
+	it("leaves a tile's own options alone when the group doesn't set them", async () => {
+		const tiles = mount(`
+			<ycl-tiles>
+				<ycl-tile-item alignment="right" vertical-alignment="bottom" presentation="heading">One</ycl-tile-item>
+			</ycl-tiles>
+		`);
+		await settle();
+		const tile = tiles.querySelector("ycl-tile-item");
+		expect(tile.getAttribute("alignment")).toBe("right");
+		expect(tile.getAttribute("vertical-alignment")).toBe("bottom");
+		expect(tile.getAttribute("presentation")).toBe("heading");
+	});
+
+	it("exposes its options as properties", () => {
+		const tiles = mount(`<ycl-tiles alignment="center"></ycl-tiles>`);
+		expect(tiles.alignment).toBe("center");
+		tiles.verticalAlignment = "bottom";
+		tiles.presentation = "text-only";
+		expect(tiles.getAttribute("vertical-alignment")).toBe("bottom");
+		expect(tiles.getAttribute("presentation")).toBe("text-only");
+	});
+});
+
+describe("ycl-tile-item presentation", () => {
+	const shown = (tile) => {
+		const display = (name) => getComputedStyle(shadowOf(tile).querySelector(`.tile__item__${name}`)).display !== "none";
+		return { icon: display("icon"), heading: display("heading") };
+	};
+	const markup = (presentation) => `
+		<ycl-tile-item ${presentation ? `presentation="${presentation}"` : ""}>
+			<span slot="icon">*</span><span slot="heading">01</span>Content
+		</ycl-tile-item>`;
+
+	it("shows only the area its presentation names", async () => {
+		const heading = mount(markup("heading"));
+		const icon = mount(markup("icon"));
+		const textOnly = mount(markup("text-only"));
+		await settle();
+		expect(shown(heading)).toEqual({ icon: false, heading: true });
+		expect(shown(icon)).toEqual({ icon: true, heading: false });
+		expect(shown(textOnly)).toEqual({ icon: false, heading: false });
+		expect(textOnly.presentation).toBe("text-only");
+	});
+
+	it("shows whatever is slotted without a presentation", async () => {
+		const tile = mount(markup());
+		const empty = mount(`<ycl-tile-item>Content</ycl-tile-item>`);
+		await settle();
+		expect(shown(tile)).toEqual({ icon: true, heading: true });
+		expect(shown(empty)).toEqual({ icon: false, heading: false });
+	});
+});

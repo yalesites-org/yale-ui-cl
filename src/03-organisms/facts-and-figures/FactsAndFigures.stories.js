@@ -8,15 +8,15 @@ import backgroundImage from "../../assets/avif-test-image.avif";
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = (name) => `<ycl-icon slot="icon" name="${name}"></ycl-icon>`;
 
-// The item options are set on every stat; ycl-facts-and-figures doesn't forward them. Stats have
-// no theme of their own inside the group: the group's Theme colours them. The first stat takes
-// the Statistic and Content controls.
+// Alignment, presentation and padded are set once on ycl-facts-and-figures, which copies them
+// onto every stat. Stats have no theme of their own inside the group: the group's Theme colours
+// them. The first stat takes the Statistic and Content controls.
 const stats = (args) => [
 	{ stat: args.stat, content: args.content, icon: "hand-holding-dollar-solid" },
 	{ stat: "6:1", content: "Student to faculty ratio", icon: "chalkboard-user-solid" },
 	{ stat: "14", content: "Residential colleges", icon: "building-columns-solid" },
 ].map((item) => `
-	<ycl-facts-and-figures-item alignment="${args.alignment}" presentation="${args.presentation}" ${args.padded ? "padded" : ""}>
+	<ycl-facts-and-figures-item>
 		${args.withIcon ? icon(item.icon) : ""}
 		<span slot="stat">${item.stat}</span>
 		${item.content}
@@ -74,7 +74,7 @@ export default {
 
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
-			<ycl-facts-and-figures theme="${args.theme}">
+			<ycl-facts-and-figures theme="${args.theme}" alignment="${args.alignment}" presentation="${args.presentation}" ${args.padded ? "padded" : ""}>
 				${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ""}
 				${args.intro ? `<p slot="intro">${args.intro}</p>` : ""}
 				${args.withImage ? `<ycl-image slot="image"><img src="${backgroundImage}" alt=""></ycl-image>` : ""}

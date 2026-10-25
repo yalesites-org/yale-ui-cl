@@ -10,9 +10,10 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = `<ycl-icon slot="icon" name="lightbulb-solid"></ycl-icon>`;
 
-// The item options are set on every tile; ycl-tiles doesn't forward them.
+// Alignment, vertical alignment and presentation are set once on ycl-tiles, which copies them
+// onto every tile; presentation still decides what each tile is given. The rest is per tile.
 const tile = (args, heading) => `
-	<ycl-tile-item theme="${args.theme}" alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""}>
+	<ycl-tile-item theme="${args.theme}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""}>
 		${args.presentation === "icon" ? icon : ""}
 		${args.presentation === "heading" ? `<span slot="heading">${heading}</span>` : ""}
 		${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
@@ -68,7 +69,7 @@ export default {
 
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
-			<ycl-tiles>
+			<ycl-tiles alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" presentation="${args.presentation}">
 				${tile(args, args.heading)}
 				${tile(args, "02")}
 				${tile(args, "03")}

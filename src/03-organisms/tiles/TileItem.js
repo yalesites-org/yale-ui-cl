@@ -14,8 +14,9 @@ const watchSlot = (slot, onChange) => {
 };
 
 // The Twig presentation styles (heading, icon, text-only) fall out of what's slotted: the icon
-// and heading wrappers hide themselves when empty. With an href the content becomes a link whose
-// ::after stretches over the tile, making the whole tile clickable.
+// and heading wrappers hide themselves when empty, and a presentation attribute shows only its
+// area. With an href the content becomes a link whose ::after stretches over the tile, making the
+// whole tile clickable.
 const tileItemTemplate = document.createElement("template");
 tileItemTemplate.innerHTML = `
 	<div class="tile__item" data-component-has-image="false">
@@ -65,6 +66,9 @@ export class TileItem extends HTMLElement {
 
 	get href() { return this.getAttribute("href"); }
 	set href(value) { this.setAttribute("href", value); }
+
+	get presentation() { return this.getAttribute("presentation"); }
+	set presentation(value) { this.setAttribute("presentation", value); }
 
 	get theme() { return this.getAttribute("theme") ?? "one"; }
 	set theme(value) { this.setAttribute("theme", value); }
