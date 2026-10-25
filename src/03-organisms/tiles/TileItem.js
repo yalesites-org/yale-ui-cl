@@ -70,6 +70,10 @@ export class TileItem extends HTMLElement {
 	get presentation() { return this.getAttribute("presentation"); }
 	set presentation(value) { this.setAttribute("presentation", value); }
 
+	// Bottom unless the attribute is top, matching the CSS.
+	get verticalAlignment() { return this.getAttribute("vertical-alignment") === "top" ? "top" : "bottom"; }
+	set verticalAlignment(value) { this.setAttribute("vertical-alignment", value); }
+
 	get theme() { return this.getAttribute("theme") ?? "one"; }
 	set theme(value) { this.setAttribute("theme", value); }
 

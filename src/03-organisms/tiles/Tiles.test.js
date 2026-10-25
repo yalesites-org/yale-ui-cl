@@ -188,3 +188,30 @@ describe("ycl-tile-item presentation", () => {
 		expect(shown(empty)).toEqual({ icon: false, heading: false });
 	});
 });
+
+describe("ycl-tile-item vertical alignment", () => {
+	const justify = (tile) => getComputedStyle(shadowOf(tile).querySelector(".tile__item__inner")).justifyContent;
+
+	it("aligns its content to the bottom by default", async () => {
+		const tile = mount(`<ycl-tile-item>Content</ycl-tile-item>`);
+		await settle();
+		expect(justify(tile)).toBe("flex-end");
+		expect(tile.verticalAlignment).toBe("bottom");
+	});
+
+	it("aligns its content to the top when vertical-alignment is top", async () => {
+		const tile = mount(`<ycl-tile-item vertical-alignment="top">Content</ycl-tile-item>`);
+		await settle();
+		expect(["flex-start", "normal"]).toContain(justify(tile));
+		expect(tile.verticalAlignment).toBe("top");
+	});
+
+	it("reflects the verticalAlignment property to the attribute", () => {
+		const tile = mount(`<ycl-tile-item>Content</ycl-tile-item>`);
+		tile.verticalAlignment = "top";
+		expect(tile.getAttribute("vertical-alignment")).toBe("top");
+		expect(tile.verticalAlignment).toBe("top");
+		tile.verticalAlignment = "bottom";
+		expect(tile.verticalAlignment).toBe("bottom");
+	});
+});

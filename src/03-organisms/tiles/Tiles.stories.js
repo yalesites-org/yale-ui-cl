@@ -60,7 +60,7 @@ export default {
 		href: "https://www.yale.edu",
 		presentation: "heading",
 		alignment: "left",
-		verticalAlignment: "top",
+		verticalAlignment: "bottom",
 		theme: "one",
 		withImage: false,
 		animated: false,

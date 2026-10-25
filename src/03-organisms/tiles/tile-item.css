@@ -191,9 +191,10 @@ ycl-tile-item picture[slot="image"] img {
   align-items: center;
 }
 
-/* With a heading or icon, that part grows to push the content down; text-only tiles get there
+/* Content sits at the bottom of the tile unless vertical-alignment is top, as in YaleSites.
+   With a heading or icon, that part grows to push the content down; text-only tiles get there
    by justifying the column to the end. */
-:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__inner {
+:host(ycl-tile-item:not([vertical-alignment="top"])) .tile__item__inner {
   justify-content: flex-end;
 }
 
@@ -242,8 +243,8 @@ ycl-tile-item picture[slot="image"] img {
   flex: 0 auto;
 }
 
-:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__heading,
-:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__icon {
+:host(ycl-tile-item:not([vertical-alignment="top"])) .tile__item__heading,
+:host(ycl-tile-item:not([vertical-alignment="top"])) .tile__item__icon {
   flex: 1 auto;
 }
 
@@ -273,7 +274,7 @@ ycl-tile-item picture[slot="image"] img {
   margin: 0;
 }
 
-:host(ycl-tile-item[vertical-alignment="bottom"]) .tile__item__content {
+:host(ycl-tile-item:not([vertical-alignment="top"])) .tile__item__content {
   flex: 0 auto;
 }
 
