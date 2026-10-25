@@ -1,6 +1,7 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./facts-and-figures.css?inline";
 import "./FactsAndFiguresItem.js";
+import { forwardAttribute, forwardAttributes } from "../../utility.js";
 
 const named = ["heading", "intro", "link", "image"];
 const forwarded = ["alignment", "presentation", "padded"];
@@ -64,15 +65,12 @@ export class FactsAndFigures extends HTMLElement {
 		if (oldValue === newValue) return;
 		// A group option that's removed is removed from the stats too; one never set leaves theirs alone.
 		// The observer only watches slot attributes, so this doesn't re-render.
-		this.#stats().forEach((stat) => {
-			if (newValue === null) stat.removeAttribute(name);
-			else stat.setAttribute(name, newValue);
-		});
+		forwardAttribute(this.#stats(), name, newValue);
 	}
 
-	#stats() {
+	#stats(children = [...this.children]) {
 		// Only items become stats, so a stray element (a <template>, a misspelled slot) isn't listed.
-		return [...this.children].filter((child) => child.localName === "ycl-facts-and-figures-item" && !named.includes(child.slot));
+		return children.filter((child) => child.localName === "ycl-facts-and-figures-item" && !named.includes(child.slot));
 	}
 
 	#render() {
@@ -84,10 +82,8 @@ export class FactsAndFigures extends HTMLElement {
 			wrapper.querySelector("slot").assign(...nodes);
 		});
 
-		const stats = this.#stats();
-		forwarded.forEach((name) => {
-			if (this.hasAttribute(name)) stats.forEach((stat) => stat.setAttribute(name, this.getAttribute(name)));
-		});
+		const stats = this.#stats(children);
+		forwardAttributes(this, forwarded, stats);
 		const list = this.#shadow.querySelector(".facts-and-figures__items");
 		list.hidden = stats.length === 0;
 		const slots = stats.map(() => document.createElement("slot"));

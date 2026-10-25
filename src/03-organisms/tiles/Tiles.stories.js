@@ -11,11 +11,12 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 const icon = `<ycl-icon slot="icon" name="lightbulb-solid"></ycl-icon>`;
 
 // Alignment, vertical alignment and presentation are set once on ycl-tiles, which copies them
-// onto every tile; presentation still decides what each tile is given. The rest is per tile.
+// onto every tile. Every tile gets a heading and an icon; presentation shows one, or neither. The
+// rest is per tile.
 const tile = (args, heading) => `
 	<ycl-tile-item theme="${args.theme}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""}>
-		${args.presentation === "icon" ? icon : ""}
-		${args.presentation === "heading" ? `<span slot="heading">${heading}</span>` : ""}
+		${icon}
+		<span slot="heading">${heading}</span>
 		${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
 		${args.content}
 	</ycl-tile-item>`;

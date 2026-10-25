@@ -1,6 +1,7 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./tiles.css?inline";
 import "./TileItem.js";
+import { forwardAttribute, forwardAttributes } from "../../utility.js";
 
 const tilesTemplate = document.createElement("template");
 tilesTemplate.innerHTML = `
@@ -45,10 +46,7 @@ export class Tiles extends HTMLElement {
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		// A group option that's removed is removed from the tiles too; one never set leaves theirs alone.
-		this.#tiles().forEach((tile) => {
-			if (newValue === null) tile.removeAttribute(name);
-			else tile.setAttribute(name, newValue);
-		});
+		forwardAttribute(this.#tiles(), name, newValue);
 	}
 
 	#tiles() {
@@ -58,9 +56,7 @@ export class Tiles extends HTMLElement {
 
 	#render() {
 		const tiles = this.#tiles();
-		forwarded.forEach((name) => {
-			if (this.hasAttribute(name)) tiles.forEach((tile) => tile.setAttribute(name, this.getAttribute(name)));
-		});
+		forwardAttributes(this, forwarded, tiles);
 		const list = this.#shadow.querySelector(".tiles__items");
 		const slots = tiles.map(() => document.createElement("slot"));
 		list.replaceChildren(...slots.map((slot) => {

@@ -22,6 +22,21 @@ export function ctaVariants(host) {
 		.join(" ");
 }
 
+// Group options copied onto a group's items (ycl-tiles, ycl-facts-and-figures). A null value
+// removes the option from the items; called with names, it copies every option the host has.
+export function forwardAttribute(targets, name, value) {
+	targets.forEach((target) => {
+		if (value === null) target.removeAttribute(name);
+		else target.setAttribute(name, value);
+	});
+}
+
+export function forwardAttributes(host, names, targets) {
+	names.forEach((name) => {
+		if (host.hasAttribute(name)) forwardAttribute(targets, name, host.getAttribute(name));
+	});
+}
+
 export function createErrorIcon() {
 		const errorIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 		const errorIconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
