@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import "./FactsAndFigures.js";
+import "../../01-atoms/text-link/Link.js";
 // The document-level rules (base.css loads this file into the page) aren't applied in unit tests otherwise.
 import "./facts-and-figures.css";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
@@ -270,6 +271,22 @@ describe("ycl-facts-and-figures options", () => {
 		named.forEach((name) => {
 			const child = group.querySelector(`[slot="${name}"]`);
 			["alignment", "presentation", "padded"].forEach((attr) => expect(child.hasAttribute(attr), `${name} ${attr}`).toBe(false));
+		});
+	});
+
+	it("gives a slotted text link the group's text colour, whatever the theme", async () => {
+		const themes = ["one", "two", "three", "four", "five", "six"];
+		const groups = themes.map((theme) => mount(`
+			<ycl-facts-and-figures theme="${theme}">
+				<p slot="intro">Some intro text.</p>
+				<ycl-text-link slot="link" href="https://example.com/facts">More facts</ycl-text-link>
+			</ycl-facts-and-figures>
+		`));
+		await settle();
+		groups.forEach((group, i) => {
+			const textColour = getComputedStyle(group.querySelector('[slot="intro"]')).color;
+			const anchor = shadowOf(group.querySelector("ycl-text-link")).querySelector("a");
+			expect(getComputedStyle(anchor).color, themes[i]).toBe(textColour);
 		});
 	});
 });

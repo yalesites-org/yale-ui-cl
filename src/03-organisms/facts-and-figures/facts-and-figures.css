@@ -181,6 +181,17 @@
   --color-action-secondary: var(--color-facts-and-figures-background);
 }
 
+/* The group's link is a text link, as in YaleSites. ycl-text-link reads its colours from the
+   inherited link variables, which default to the page's blue link colours; set them all, visited
+   included, to the group's text colour so the link is readable on every theme. Its underline
+   animation still marks hover. */
+.facts-and-figures__link ::slotted(ycl-text-link) {
+  --color-link-base: var(--color-facts-and-figures-text);
+  --color-link-hover: var(--color-facts-and-figures-text);
+  --color-link-visited-base: var(--color-facts-and-figures-text);
+  --color-link-visited-hover: var(--color-facts-and-figures-text);
+}
+
 /* Background image, behind the content, tinted with the group's theme colour so the text over it
    keeps its contrast. */
 .facts-and-figures__image {

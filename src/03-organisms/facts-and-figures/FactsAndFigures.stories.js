@@ -1,6 +1,6 @@
 import "./FactsAndFigures";
 import "../../01-atoms/headings/Heading";
-import "../../01-atoms/cta/Cta";
+import "../../01-atoms/text-link/Link";
 import "../../01-atoms/icons/Icon";
 import "../../01-atoms/image/ResponsiveImage";
 import backgroundImage from "../../assets/avif-test-image.avif";
@@ -79,7 +79,7 @@ export default {
 				${args.intro ? `<p slot="intro">${args.intro}</p>` : ""}
 				${args.withImage ? `<ycl-image slot="image"><img src="${backgroundImage}" alt=""></ycl-image>` : ""}
 				${stats(args)}
-				${args.linkText && args.linkUrl ? `<ycl-cta-link slot="link" variant="outline" href="${args.linkUrl}">${args.linkText}</ycl-cta-link>` : ""}
+				${args.linkText && args.linkUrl ? `<ycl-text-link slot="link" href="${args.linkUrl}">${args.linkText}</ycl-text-link>` : ""}
 			</ycl-facts-and-figures>
 		</div>`,
 };
