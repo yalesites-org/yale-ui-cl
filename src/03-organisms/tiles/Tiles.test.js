@@ -157,6 +157,19 @@ describe("ycl-tiles options", () => {
 		expect(tiles.getAttribute("vertical-alignment")).toBe("bottom");
 		expect(tiles.getAttribute("presentation")).toBe("text-only");
 	});
+
+	it("removes an option when its property is cleared", async () => {
+		const tiles = mount(`<ycl-tiles alignment="center" vertical-alignment="top" presentation="icon"><ycl-tile-item>One</ycl-tile-item></ycl-tiles>`);
+		await settle();
+		tiles.alignment = null;
+		tiles.verticalAlignment = null;
+		tiles.presentation = "";
+		const tile = tiles.querySelector("ycl-tile-item");
+		["alignment", "vertical-alignment", "presentation"].forEach((name) => {
+			expect(tiles.hasAttribute(name)).toBe(false);
+			expect(tile.hasAttribute(name)).toBe(false);
+		});
+	});
 });
 
 describe("ycl-tile-item presentation", () => {

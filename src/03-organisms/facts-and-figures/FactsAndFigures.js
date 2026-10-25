@@ -108,10 +108,16 @@ export class FactsAndFigures extends HTMLElement {
 	}
 
 	get alignment() { return this.getAttribute("alignment"); }
-	set alignment(value) { this.setAttribute("alignment", value); }
+	set alignment(value) {
+		if (value) this.setAttribute("alignment", value);
+		else this.removeAttribute("alignment");
+	}
 
 	get presentation() { return this.getAttribute("presentation"); }
-	set presentation(value) { this.setAttribute("presentation", value); }
+	set presentation(value) {
+		if (value) this.setAttribute("presentation", value);
+		else this.removeAttribute("presentation");
+	}
 
 	get padded() { return this.hasAttribute("padded"); }
 	set padded(value) {

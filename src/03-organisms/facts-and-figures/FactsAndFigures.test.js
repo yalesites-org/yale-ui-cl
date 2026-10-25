@@ -290,3 +290,17 @@ describe("ycl-facts-and-figures options", () => {
 		});
 	});
 });
+
+describe("ycl-facts-and-figures option properties", () => {
+	it("removes an option when its property is cleared", async () => {
+		const group = mount(`<ycl-facts-and-figures alignment="left" presentation="plain"><ycl-facts-and-figures-item>One</ycl-facts-and-figures-item></ycl-facts-and-figures>`);
+		await settle();
+		group.alignment = null;
+		group.presentation = "";
+		const stat = group.querySelector("ycl-facts-and-figures-item");
+		["alignment", "presentation"].forEach((name) => {
+			expect(group.hasAttribute(name)).toBe(false);
+			expect(stat.hasAttribute(name)).toBe(false);
+		});
+	});
+});

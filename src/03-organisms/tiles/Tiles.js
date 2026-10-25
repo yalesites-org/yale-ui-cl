@@ -70,13 +70,22 @@ export class Tiles extends HTMLElement {
 	}
 
 	get alignment() { return this.getAttribute("alignment"); }
-	set alignment(value) { this.setAttribute("alignment", value); }
+	set alignment(value) {
+		if (value) this.setAttribute("alignment", value);
+		else this.removeAttribute("alignment");
+	}
 
 	get verticalAlignment() { return this.getAttribute("vertical-alignment"); }
-	set verticalAlignment(value) { this.setAttribute("vertical-alignment", value); }
+	set verticalAlignment(value) {
+		if (value) this.setAttribute("vertical-alignment", value);
+		else this.removeAttribute("vertical-alignment");
+	}
 
 	get presentation() { return this.getAttribute("presentation"); }
-	set presentation(value) { this.setAttribute("presentation", value); }
+	set presentation(value) {
+		if (value) this.setAttribute("presentation", value);
+		else this.removeAttribute("presentation");
+	}
 }
 
 if (!customElements.get("ycl-tiles")) customElements.define("ycl-tiles", Tiles);
