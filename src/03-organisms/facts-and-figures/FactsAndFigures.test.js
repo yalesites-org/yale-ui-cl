@@ -116,6 +116,14 @@ describe("ycl-facts-and-figures children and themes", () => {
 		});
 	});
 
+	it("reports theme one from the theme property unless the attribute is one to six", () => {
+		const themeOf = (attrs) => mount(`<ycl-facts-and-figures ${attrs}></ycl-facts-and-figures>`).theme;
+		expect(themeOf("")).toBe("one");
+		expect(themeOf('theme="four"')).toBe("four");
+		expect(themeOf('theme="seven"')).toBe("one");
+		expect(themeOf('theme=""')).toBe("one");
+	});
+
 	it("gives each of themes one to six its own background", async () => {
 		const themes = ["one", "two", "three", "four", "five", "six"];
 		const groups = themes.map((theme) => mount(`<ycl-facts-and-figures theme="${theme}"></ycl-facts-and-figures>`));

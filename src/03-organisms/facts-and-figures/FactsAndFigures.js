@@ -4,6 +4,7 @@ import "./FactsAndFiguresItem.js";
 
 const named = ["heading", "intro", "link", "image"];
 const forwarded = ["alignment", "presentation", "padded"];
+const themes = ["one", "two", "three", "four", "five", "six"];
 
 // The image sits behind everything else, under an overlay in the group's theme colour (see the
 // CSS) so the heading, intro and stats keep their contrast.
@@ -100,7 +101,11 @@ export class FactsAndFigures extends HTMLElement {
 		slots.forEach((slot, i) => slot.assign(stats[i]));
 	}
 
-	get theme() { return this.getAttribute("theme") ?? "one"; }
+	// Any value outside one to six renders as theme one (see the CSS), so report it as one.
+	get theme() {
+		const theme = this.getAttribute("theme");
+		return themes.includes(theme) ? theme : "one";
+	}
 	set theme(value) {
 		if (value) this.setAttribute("theme", value);
 		else this.removeAttribute("theme");
