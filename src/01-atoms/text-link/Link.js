@@ -10,7 +10,7 @@ const currentURL = window.location.origin;
 export class TextLink extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
-		return ["href", "class", "target"];
+		return ["href", "class", "target", "aria-current"];
 	}
 
 	constructor() {
@@ -30,6 +30,12 @@ export class TextLink extends HTMLElement {
 		if (name === "href") this.link.href = newValue;
 		if (name === "class") Util.addVariant(newValue, this.link, "link");
 		if (name === "target") this.link.target = newValue;
+		// Focus lands on the inner link, so that's where "current page" has to be announced.
+		if (name === "aria-current") {
+			if (newValue === null) this.link.removeAttribute("aria-current");
+			else this.link.setAttribute("aria-current", newValue);
+			return;
+		}
 		Util.updateLinkIcon(this.icon, this.link, currentURL);
 	}
 

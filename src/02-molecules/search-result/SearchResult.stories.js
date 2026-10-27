@@ -1,6 +1,7 @@
 import "./SearchResult";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
+import "../breadcrumbs/Breadcrumbs";
 
 const breadcrumbs = ['Home', 'Academic Programs', 'Undergraduate Chemistry'];
 
@@ -24,15 +25,14 @@ export default {
     isCas: false,
 },
 
-  // Breadcrumbs are slotted, so any breadcrumb markup can be dropped in; this is a minimal stand-in.
+  // The trail says where the result sits rather than marking a current page, hence no-current;
+  // wrap keeps long trails on several lines instead of scrolling inside the result.
   render: (args) =>
     `<ycl-search-result href="${args.url}" content-type="${args.contentType}"${args.isCas ? ' cas' : ''}>
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-      <nav slot="breadcrumbs" aria-label="Breadcrumb">
-        <ol style="display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0;">
-          ${breadcrumbs.map((crumb, i) => `<li>${i ? '/ ' : ''}<text-link href="#" style="--color-link-base: currentColor; --color-link-visited-base: currentColor;">${crumb}</text-link></li>`).join('')}
-        </ol>
-      </nav>
+      <ycl-breadcrumbs slot="breadcrumbs" wrap no-current>
+        ${breadcrumbs.map((crumb) => `<text-link href="#">${crumb}</text-link>`).join('')}
+      </ycl-breadcrumbs>
       ${args.highlighted ? `<p slot="highlighted">${args.highlighted}</p>` : ''}
       ${args.teaser ? `<p slot="teaser">${args.teaser}</p>` : ''}
     </ycl-search-result>`,

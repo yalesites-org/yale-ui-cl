@@ -54,3 +54,4 @@ export { SocialLinks } from "./02-molecules/social-links/SocialLinks.js";
 export { Pager } from "./02-molecules/pager/Pager.js";
 export { Tabs, Tab } from "./02-molecules/tabs/Tabs.js";
 export { QuickLinks } from "./02-molecules/quick-links/QuickLinks.js";
+export { Breadcrumbs } from "./02-molecules/breadcrumbs/Breadcrumbs.js";
