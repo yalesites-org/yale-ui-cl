@@ -8,7 +8,7 @@ import backgroundImage from "../../assets/avif-test-image.avif";
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = (name) => `<ycl-icon slot="icon" name="${name}"></ycl-icon>`;
 
-// Alignment, presentation and padded are set once on ycl-facts-and-figures, which copies them
+// Alignment and presentation are set once on ycl-facts-and-figures, which copies them
 // onto every stat. Stats have no theme of their own inside the group: the group's Theme colours
 // them. The first stat takes the Statistic and Content controls.
 const stats = (args) => [
@@ -48,8 +48,6 @@ export default {
 			options: ["basic", "plain"],
 		},
 		withIcon: { name: "With Icon", control: "boolean" },
-		// Stats have no background inside the group, so they drop their horizontal padding unless padded.
-		padded: { name: "Padded", control: "boolean" },
 		globalTheme: {
 			name: "Site Global Theme",
 			type: "select",
@@ -68,13 +66,12 @@ export default {
 		alignment: "center",
 		presentation: "basic",
 		withIcon: false,
-		padded: false,
 		globalTheme: "one",
 	},
 
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
-			<ycl-facts-and-figures theme="${args.theme}" alignment="${args.alignment}" presentation="${args.presentation}" ${args.padded ? "padded" : ""}>
+			<ycl-facts-and-figures theme="${args.theme}" alignment="${args.alignment}" presentation="${args.presentation}">
 				${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ""}
 				${args.intro ? `<p slot="intro">${args.intro}</p>` : ""}
 				${args.withImage ? `<ycl-image slot="image"><img src="${backgroundImage}" alt=""></ycl-image>` : ""}

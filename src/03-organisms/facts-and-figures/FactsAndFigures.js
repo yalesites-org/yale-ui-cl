@@ -4,7 +4,7 @@ import "./FactsAndFiguresItem.js";
 import { forwardAttribute, forwardAttributes } from "../../utility.js";
 
 const named = ["heading", "intro", "link", "image"];
-const forwarded = ["alignment", "presentation", "padded"];
+const forwarded = ["alignment", "presentation"];
 const themes = ["one", "two", "three", "four", "five", "six"];
 
 // The image sits behind everything else, under an overlay in the group's theme colour (see the
@@ -29,8 +29,8 @@ factsAndFiguresTemplate.innerHTML = `
 // Safari, which drops them from lists styled with list-style: none.
 // The group's one theme option is `theme`, one to six (default one), as in YaleSites. Stats inside
 // the group have no background of their own and take the group's colours, whatever their own
-// theme (see the CSS). alignment, presentation and padded set on the group are copied onto every
-// stat, over the stat's own.
+// theme (see the CSS). alignment and presentation set on the group are copied onto every stat,
+// over the stat's own.
 export class FactsAndFigures extends HTMLElement {
 	#shadow;
 	#observer;
@@ -117,12 +117,6 @@ export class FactsAndFigures extends HTMLElement {
 	set presentation(value) {
 		if (value) this.setAttribute("presentation", value);
 		else this.removeAttribute("presentation");
-	}
-
-	get padded() { return this.hasAttribute("padded"); }
-	set padded(value) {
-		if (value) this.setAttribute("padded", "");
-		else this.removeAttribute("padded");
 	}
 }
 

@@ -207,9 +207,9 @@ describe("ycl-facts-and-figures re-rendering", () => {
 describe("ycl-facts-and-figures options", () => {
 	const stat = (attrs = "") => `<ycl-facts-and-figures-item ${attrs}><span slot="stat">1</span>x</ycl-facts-and-figures-item>`;
 
-	it("copies its alignment, presentation and padded onto every stat, over the stat's own", async () => {
+	it("copies its alignment and presentation onto every stat, over the stat's own", async () => {
 		const group = mount(`
-			<ycl-facts-and-figures alignment="left" presentation="plain" padded>
+			<ycl-facts-and-figures alignment="left" presentation="plain">
 				${stat()}
 				${stat('alignment="center" presentation="basic"')}
 			</ycl-facts-and-figures>
@@ -218,23 +218,41 @@ describe("ycl-facts-and-figures options", () => {
 		group.querySelectorAll("ycl-facts-and-figures-item").forEach((item) => {
 			expect(item.getAttribute("alignment")).toBe("left");
 			expect(item.getAttribute("presentation")).toBe("plain");
-			expect(item.hasAttribute("padded")).toBe(true);
 		});
 	});
 
+	it("has no padded option, so a padded attribute on the group isn't copied onto its stats", async () => {
+		const group = mount(`<ycl-facts-and-figures padded>${stat()}</ycl-facts-and-figures>`);
+		await settle();
+		expect("padded" in group).toBe(false);
+		const item = group.querySelector("ycl-facts-and-figures-item");
+		expect(item.hasAttribute("padded")).toBe(false);
+		group.append(document.createElement("ycl-facts-and-figures-item"));
+		await settle();
+		group.querySelectorAll("ycl-facts-and-figures-item").forEach((child) => expect(child.hasAttribute("padded")).toBe(false));
+	});
+
+	it("leaves a stat's own padded alone when a padded attribute on the group is removed", async () => {
+		const group = mount(`<ycl-facts-and-figures padded>${stat("padded")}</ycl-facts-and-figures>`);
+		await settle();
+		const item = group.querySelector("ycl-facts-and-figures-item");
+		group.removeAttribute("padded");
+		await settle();
+		expect(item.hasAttribute("padded")).toBe(true);
+	});
+
 	it("copies its options onto a stat added later", async () => {
-		const group = mount(`<ycl-facts-and-figures alignment="left" presentation="plain" padded></ycl-facts-and-figures>`);
+		const group = mount(`<ycl-facts-and-figures alignment="left" presentation="plain"></ycl-facts-and-figures>`);
 		await settle();
 		const item = document.createElement("ycl-facts-and-figures-item");
 		group.append(item);
 		await settle();
 		expect(item.getAttribute("alignment")).toBe("left");
 		expect(item.getAttribute("presentation")).toBe("plain");
-		expect(item.hasAttribute("padded")).toBe(true);
 	});
 
 	it("updates its stats when an option changes, and removes it from them when it's removed", async () => {
-		const group = mount(`<ycl-facts-and-figures alignment="left" padded>${stat()}</ycl-facts-and-figures>`);
+		const group = mount(`<ycl-facts-and-figures alignment="left">${stat()}</ycl-facts-and-figures>`);
 		await settle();
 		const item = group.querySelector("ycl-facts-and-figures-item");
 		const before = shadowOf(group).querySelector(".facts-and-figures__items > li");
@@ -242,9 +260,7 @@ describe("ycl-facts-and-figures options", () => {
 		group.presentation = "plain";
 		expect(item.getAttribute("alignment")).toBe("center");
 		expect(item.getAttribute("presentation")).toBe("plain");
-		group.padded = false;
 		group.removeAttribute("alignment");
-		expect(item.hasAttribute("padded")).toBe(false);
 		expect(item.hasAttribute("alignment")).toBe(false);
 		await settle();
 		// Setting options on stats doesn't re-render the list.
@@ -262,7 +278,7 @@ describe("ycl-facts-and-figures options", () => {
 
 	it("doesn't copy its options onto heading, intro, link or image children", async () => {
 		const group = mount(`
-			<ycl-facts-and-figures alignment="left" presentation="plain" padded>
+			<ycl-facts-and-figures alignment="left" presentation="plain">
 				${named.map((name) => `<ycl-facts-and-figures-item slot="${name}"></ycl-facts-and-figures-item>`).join("")}
 				${stat()}
 			</ycl-facts-and-figures>
@@ -270,7 +286,7 @@ describe("ycl-facts-and-figures options", () => {
 		await settle();
 		named.forEach((name) => {
 			const child = group.querySelector(`[slot="${name}"]`);
-			["alignment", "presentation", "padded"].forEach((attr) => expect(child.hasAttribute(attr), `${name} ${attr}`).toBe(false));
+			["alignment", "presentation"].forEach((attr) => expect(child.hasAttribute(attr), `${name} ${attr}`).toBe(false));
 		});
 	});
 
