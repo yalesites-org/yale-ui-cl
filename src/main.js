@@ -15,6 +15,7 @@ export { TextCopyButton } from "./01-atoms/text-copy-button/TextCopyButton.js";
 export { Checkbox } from "./01-atoms/checkbox/Checkbox.js";
 export { Radio } from "./01-atoms/radio/Radio.js";
 export { Divider } from "./01-atoms/divider/Divider.js";
+export { Wordmark } from "./01-atoms/wordmark/Wordmark.js";
 export { Heading } from "./01-atoms/headings/Heading.js";
 export { ResponsiveImage } from "./01-atoms/image/ResponsiveImage.js";
 export { Icon } from "./01-atoms/icons/Icon.js";
