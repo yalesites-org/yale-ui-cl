@@ -32,7 +32,7 @@ export class CustomCard extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "custom-card")];
 		this.#shadow.appendChild(document.importNode(customCardTemplate.content, true));
 		this.card = this.#shadow.querySelector(".custom-card");

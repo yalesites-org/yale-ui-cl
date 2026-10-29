@@ -19,7 +19,7 @@ export class ImageBlock extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "image-block")];
 		this.#shadow.appendChild(document.importNode(imageBlockTemplate.content, true));
 		const figure = this.#shadow.querySelector("figure");

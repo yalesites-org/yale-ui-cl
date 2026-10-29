@@ -26,7 +26,7 @@ export class Button extends HTMLElement {
 	constructor() {
 		super();
 		this.#internals = this.attachInternals();
-		this.#shadow = this.attachShadow({ mode: "closed", delegatesFocus: true });
+		this.#shadow = this.attachShadow({ mode: "open", delegatesFocus: true });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(ctaStyles, "cta"), componentSheet(componentStyles, "button")];
 		this.#shadow.appendChild(document.importNode(buttonTemplate.content, true));
 		this.#control = this.#shadow.querySelector(".button");

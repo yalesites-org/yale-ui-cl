@@ -13,8 +13,9 @@ taxonomyDisplayTemplate.innerHTML = `
 `;
 
 // Each item lives in its own shadow root, so it can't be a real <li> of the parent's list; it takes
-// the listitem role through ElementInternals instead. The terms are slotted links grouped under
-// the label, which also names the group for screen readers.
+// the listitem role through ElementInternals, and also on the host attribute (see
+// connectedCallback). The terms are slotted links grouped under the label, which also names the
+// group for screen readers.
 const taxonomyDisplayItemTemplate = document.createElement("template");
 taxonomyDisplayItemTemplate.innerHTML = `
 	<div class="taxonomy-display__item">
@@ -37,7 +38,7 @@ export class TaxonomyDisplayItem extends HTMLElement {
 		super();
 		this.#internals = this.attachInternals();
 		this.#internals.role = "listitem";
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "taxonomy-display")];
 		this.#shadow.appendChild(document.importNode(taxonomyDisplayItemTemplate.content, true));
 		this.labelEl = this.#shadow.querySelector(".taxonomy-display__item__label");
@@ -54,6 +55,13 @@ export class TaxonomyDisplayItem extends HTMLElement {
 		this.listEl.classList.add("taxonomy-display__item__list--empty");
 	}
 
+	// Browsers read the ElementInternals role, but tools that inspect the DOM (axe among them) only
+	// see attributes, and report the parent list as having no list items. Reflect the role on the
+	// host too, unless the author has given the item a role of their own.
+	connectedCallback() {
+		if (!this.hasAttribute("role")) this.setAttribute("role", "listitem");
+	}
+
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		if (name === "label") this.labelEl.textContent = newValue ?? "";
@@ -68,7 +76,7 @@ export class TaxonomyDisplay extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "taxonomy-display")];
 		this.#shadow.appendChild(document.importNode(taxonomyDisplayTemplate.content, true));
 	}

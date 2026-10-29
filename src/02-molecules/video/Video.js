@@ -21,7 +21,7 @@ export class Video extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "video")];
 		this.#shadow.appendChild(document.importNode(videoTemplate.content, true));
 		this.#content = this.#shadow.querySelector(".video__content");

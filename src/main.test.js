@@ -27,7 +27,7 @@ describe.each(Object.entries(library))("%s", (_, Component) => {
 	});
 });
 
-it("gives every component except ycl-tab a shadow root", () => {
+it("gives every component except ycl-tab an open shadow root", () => {
 	const missing = Object.values(library)
 		.map((Component) => document.createElement(customElements.getName(Component)))
 		.filter((element) => {

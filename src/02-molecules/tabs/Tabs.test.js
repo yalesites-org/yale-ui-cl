@@ -64,6 +64,19 @@ describe("ycl-tabs", () => {
 		expect(tabs.children[0].selected).toBe(false);
 	});
 
+	// The first panel is part of the page, not a change the user made, so it shows at full opacity
+	// straight away (and axe measures its real contrast). Panels fade in only when the selection moves.
+	it("fades a panel in only when the selection changes", async () => {
+		const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const tabs = mount(markup);
+		expect(panels(tabs)[0].getAnimations()).toEqual([]);
+		tabs.append(Object.assign(document.createElement("ycl-tab"), { label: "Four" }));
+		await settle();
+		expect(panels(tabs)[0].getAnimations()).toEqual([]);
+		tabButtons(tabs)[1].click();
+		expect(panels(tabs)[1].getAnimations()).toHaveLength(reducedMotion ? 0 : 1);
+	});
+
 	it("rebuilds when tabs are added or relabelled", async () => {
 		const tabs = mount(markup);
 		const tab = document.createElement("ycl-tab");

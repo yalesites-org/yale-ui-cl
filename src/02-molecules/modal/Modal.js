@@ -33,7 +33,7 @@ export class Modal extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "modal")];
 		this.#shadow.appendChild(document.importNode(modalTemplate.content, true));
 		this.#dialog = this.#shadow.querySelector("dialog");

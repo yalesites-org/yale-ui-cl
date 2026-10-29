@@ -21,7 +21,7 @@ export class Embed extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "embed")];
 		this.#shadow.appendChild(document.importNode(embedTemplate.content, true));
 		this.#inner = this.#shadow.querySelector(".embed__inner");

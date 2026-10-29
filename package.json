@@ -51,6 +51,7 @@
     "@vitest/browser-playwright": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17",
     "@yalesites-org/tokens": "~1.36.0",
+    "axe-core": "^4.11.3",
     "eslint": "^10.4.0",
     "globals": "^17.6.0",
     "normalize.css": "^8.0.1",

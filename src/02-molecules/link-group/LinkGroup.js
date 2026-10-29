@@ -21,7 +21,7 @@ export class LinkGroup extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed", slotAssignment: "manual" });
+		this.#shadow = this.attachShadow({ mode: "open", slotAssignment: "manual" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "link-group")];
 		this.#shadow.appendChild(document.importNode(linkGroupTemplate.content, true));
 		this.#observer = new MutationObserver((records) => {

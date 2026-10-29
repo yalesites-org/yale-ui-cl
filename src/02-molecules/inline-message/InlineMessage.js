@@ -34,7 +34,7 @@ export class InlineMessage extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "inline-message")];
 		this.#shadow.appendChild(document.importNode(inlineMessageTemplate.content, true));
 		this.iconSlot = this.#shadow.querySelector('slot[name="icon"]');

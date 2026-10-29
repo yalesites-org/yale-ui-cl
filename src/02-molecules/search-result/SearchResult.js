@@ -34,7 +34,7 @@ export class SearchResult extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "search-result")];
 		this.#shadow.appendChild(document.importNode(searchResultTemplate.content, true));
 		this.link = this.#shadow.querySelector(".search-result__heading-link");

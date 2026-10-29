@@ -64,7 +64,7 @@ export class DateTime extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "date-time")];
 		this.#shadow.appendChild(document.importNode(dateTimeTemplate.content, true));
 		this.time = this.#shadow.querySelector("time");

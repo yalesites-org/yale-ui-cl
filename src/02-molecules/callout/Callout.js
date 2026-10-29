@@ -27,7 +27,7 @@ export class CalloutItem extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "callout")];
 		this.#shadow.appendChild(document.importNode(calloutItemTemplate.content, true));
 	}
@@ -42,7 +42,7 @@ export class Callout extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "callout")];
 		this.#shadow.appendChild(document.importNode(calloutsTemplate.content, true));
 		this.overlay = this.#shadow.querySelector(".callouts__overlay_image");

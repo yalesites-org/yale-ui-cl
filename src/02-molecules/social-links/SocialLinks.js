@@ -31,7 +31,7 @@ export class SocialLinks extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "social-links")];
 		this.#shadow.appendChild(document.importNode(socialLinksTemplate.content, true));
 		this.list = this.#shadow.querySelector(".social-links__list");

@@ -25,7 +25,7 @@ export class ReadTime extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "read-time")];
 		this.#shadow.appendChild(document.importNode(readTimeTemplate.content, true));
 		this.labelEl = this.#shadow.querySelector(".read-time__label");

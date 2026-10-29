@@ -24,7 +24,7 @@ export class WrappedCallout extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "wrapped-callout")];
 		this.#shadow.appendChild(document.importNode(wrappedCalloutTemplate.content, true));
 

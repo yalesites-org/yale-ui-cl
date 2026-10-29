@@ -15,7 +15,7 @@ export class List extends HTMLElement { #shadow;
 
   constructor() {
     super();
-    this.#shadow = this.attachShadow({ mode: 'closed' });
+    this.#shadow = this.attachShadow({ mode: 'open' });
 	  this.#shadow.appendChild(document.importNode(listTemplate.content, true));
     this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, 'lists')];
   }

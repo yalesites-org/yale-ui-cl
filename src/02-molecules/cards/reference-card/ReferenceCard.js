@@ -44,7 +44,7 @@ export class ReferenceCard extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "reference-card")];
 		this.#shadow.appendChild(document.importNode(referenceCardTemplate.content, true));
 		this.card = this.#shadow.querySelector(".reference-card");

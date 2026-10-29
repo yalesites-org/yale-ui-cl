@@ -15,7 +15,7 @@ export class LinkSkip extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "link-skip")];
 		this.#shadow.appendChild(document.importNode(linkSkipTemplate.content, true));
 		this.link = this.#shadow.querySelector("a");

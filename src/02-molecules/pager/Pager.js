@@ -39,7 +39,7 @@ export class Pager extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "pager")];
 		this.#shadow.appendChild(document.importNode(pagerTemplate.content, true));
 		this.nav = this.#shadow.querySelector(".pager");

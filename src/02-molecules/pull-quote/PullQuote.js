@@ -23,7 +23,7 @@ export class PullQuote extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "pull-quote")];
 		this.#shadow.appendChild(document.importNode(pullQuoteTemplate.content, true));
 

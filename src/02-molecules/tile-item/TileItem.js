@@ -33,7 +33,7 @@ export class TileItem extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "tile-item")];
 		this.#shadow.appendChild(document.importNode(tileItemTemplate.content, true));
 		this.tile = this.#shadow.querySelector(".tile__item");
