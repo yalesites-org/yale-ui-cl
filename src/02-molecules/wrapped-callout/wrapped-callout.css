@@ -1,26 +1,6 @@
 /* Custom elements default to display: inline. */
 :host(ycl-wrapped-callout) {
   display: block;
-
-  /* Mirrors YaleSites' layout gutter, which isn't a token. */
-  --size-spacing-site-gutter: var(--size-spacing-5);
-}
-
-/* 768px is --break-m, 992px --break-l, 1200px --break-xl, 1400px --break-2xl. */
-@media (min-width: 768px) {
-  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-6); }
-}
-
-@media (min-width: 992px) {
-  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-7); }
-}
-
-@media (min-width: 1200px) {
-  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-8); }
-}
-
-@media (min-width: 1400px) {
-  :host(ycl-wrapped-callout) { --size-spacing-site-gutter: var(--size-spacing-10); }
 }
 
 /* Component themes. Theme one is the default.

@@ -1,28 +1,10 @@
 /* Custom elements default to display: inline. */
 :host(ycl-pull-quote) {
   display: block;
-
-  /* Mirrors YaleSites' layout gutter, which isn't a token. */
-  --size-spacing-site-gutter: var(--size-spacing-5);
   --color-pull-quote-quote: var(--color-gray-800);
   --color-pull-quote-attribution: var(--color-basic-brown-gray);
-}
 
-/* 768px is --break-m, 992px --break-l, 1200px --break-xl, 1400px --break-2xl. */
-@media (min-width: 768px) {
-  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-6); }
-}
-
-@media (min-width: 992px) {
-  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-7); }
-}
-
-@media (min-width: 1200px) {
-  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-8); }
-}
-
-@media (min-width: 1400px) {
-  :host(ycl-pull-quote) { --size-spacing-site-gutter: var(--size-spacing-10); }
+  margin-block: var(--spacing-page-section);
 }
 
 /* Accent themes. Theme one is the default.
