@@ -5,25 +5,24 @@
 }
 
 :host(ycl-callout) {
-  /* Mirrors YaleSites' layout gutter, which isn't a token. */
-  --size-spacing-site-gutter: var(--size-spacing-5);
+  /* Mirrors YaleSites' banner spacing (callouts use the spacing-page-section mixin's banner
+     spacing, --spacing-component-banner), which isn't a token. */
+  --spacing-component-banner: var(--size-spacing-9);
+
+  margin-block: var(--spacing-component-banner);
 }
 
-/* 768px is --break-m, 992px --break-l, 1200px --break-xl, 1400px --break-2xl. */
-@media (min-width: 768px) {
-  :host(ycl-callout) { --size-spacing-site-gutter: var(--size-spacing-6); }
-}
-
+/* 992px is --break-l, 1200px --break-xl, 1400px --break-2xl. */
 @media (min-width: 992px) {
-  :host(ycl-callout) { --size-spacing-site-gutter: var(--size-spacing-7); }
+  :host(ycl-callout) { --spacing-component-banner: var(--size-spacing-10); }
 }
 
 @media (min-width: 1200px) {
-  :host(ycl-callout) { --size-spacing-site-gutter: var(--size-spacing-8); }
+  :host(ycl-callout) { --spacing-component-banner: var(--size-spacing-11); }
 }
 
 @media (min-width: 1400px) {
-  :host(ycl-callout) { --size-spacing-site-gutter: var(--size-spacing-10); }
+  :host(ycl-callout) { --spacing-component-banner: var(--size-spacing-12); }
 }
 
 /* Component themes. Theme one is the default.

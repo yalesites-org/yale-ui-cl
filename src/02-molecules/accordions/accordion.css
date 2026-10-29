@@ -4,6 +4,10 @@
   display: block;
 }
 
+:host(ycl-accordion) {
+  margin-block: var(--spacing-page-section);
+}
+
 /* Component themes.
    Items render in their own shadow roots, so the accordion hands its theme down through
    inherited custom properties. Resetting them to `initial` first stops a theme leaking into an

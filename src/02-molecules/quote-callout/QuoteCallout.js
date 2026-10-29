@@ -13,7 +13,7 @@ quoteCalloutTemplate.innerHTML = `
 		<div class="quote-callout__inner">
 			<div class="quote-callout__image"><slot name="image"></slot></div>
 			<figure class="quote-callout__figure">
-				<blockquote class="quote-callout__quote"><slot></slot></blockquote>
+				<blockquote class="quote-callout__quote slotted-text"><slot></slot></blockquote>
 				<figcaption class="quote-callout__attribution"><span aria-hidden="true">—</span><slot name="attribution"></slot></figcaption>
 			</figure>
 		</div>

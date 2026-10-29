@@ -330,13 +330,7 @@ ycl-text-with-image picture[slot="image"] img {
   color: var(--color-text);
 }
 
-.text-with-image__text ::slotted(:first-child) {
-  margin-top: 0;
-}
-
-.text-with-image__text ::slotted(:last-child) {
-  margin-bottom: 0;
-}
+/* Slotted paragraph spacing comes from .slotted-text in the shared shadow styles. */
 
 .text-with-image__ctas {
   align-items: flex-start;

@@ -18,7 +18,7 @@ inlineMessageTemplate.innerHTML = `
 			<div class="inline-message__icon"><slot name="icon"></slot></div>
 			<div class="inline-message__content">
 				<div class="inline-message__heading"><slot name="heading"></slot></div>
-				<div class="inline-message__text"><slot></slot></div>
+				<div class="inline-message__text slotted-text"><slot></slot></div>
 				<div class="inline-message__link"><slot name="link"></slot></div>
 			</div>
 		</div>
