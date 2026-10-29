@@ -32,4 +32,34 @@ describe("select-input", () => {
 		inner(element).dispatchEvent(new Event("change"));
 		expect(element.value).toBe("b");
 	});
+
+	it("lets clicks on the arrow reach the select", () => {
+		const element = mount(`<select-input><option>A</option></select-input>`);
+		const dropdown = shadowOf(element).querySelector(".form-item__dropdown");
+		expect(getComputedStyle(dropdown, "::after").pointerEvents).toBe("none");
+	});
+
+	it("draws one border, on the wrapper, not on the select", () => {
+		const element = mount(`<select-input><option>A</option></select-input>`);
+		const select = getComputedStyle(inner(element));
+		expect(select.borderTopColor).toBe("rgba(0, 0, 0, 0)");
+		expect(select.borderTopWidth).toBe("1px");
+	});
+
+	it("keeps the select's own border transparent while focused", () => {
+		const element = mount(`<select-input><option>A</option></select-input>`);
+		inner(element).focus();
+		expect(shadowOf(element).activeElement).toBe(inner(element));
+		expect(getComputedStyle(inner(element)).borderTopColor).toBe("rgba(0, 0, 0, 0)");
+	});
+
+	it("turns the arrow blue when the select has focus", () => {
+		const element = mount(`<select-input><option>A</option></select-input>`);
+		const dropdown = shadowOf(element).querySelector(".form-item__dropdown");
+		const before = getComputedStyle(dropdown, "::after").backgroundColor;
+		inner(element).focus();
+		const after = getComputedStyle(dropdown, "::after").backgroundColor;
+		expect(after).not.toBe(before);
+		expect(after).toBe("rgb(62, 117, 172)"); // --color-blue-horizon, hsl(210, 47%, 46%)
+	});
 });

@@ -1,4 +1,13 @@
+/* Lives in yc-table's shadow root: wide tables scroll sideways inside it rather than overflowing the page.
+   The font is set here too so the slotted table inherits it even without the document stylesheet. */
+.table-wrapper {
+    overflow-x: auto;
+    font: var(--font-style-body-s-condensed);
+}
+
 table {
+    font: var(--font-style-body-s-condensed);
+
     width: 100%;
     max-width: 100%;
     overflow: hidden;
