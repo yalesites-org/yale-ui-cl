@@ -1,7 +1,7 @@
 import "./Tabs";
 import "../../01-atoms/text-link/Link";
 export default {
-  title: 'Molecules/Tabs',
+  title: 'Organisms/Tabs',
   component: 'ycl-tabs',
   argTypes: {
     theme: {
