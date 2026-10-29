@@ -27,6 +27,9 @@ const card = (args, { heading, snippet, overline, image = placeholder(600, 400),
 export default {
 	title: "Molecules/Cards/Reference Card",
 	component: "ycl-reference-card",
+	parameters: {
+		yalesites: { name: "Post, Event, Page and Resource Cards", story: "molecules-cards--post-card" },
+	},
 	argTypes: {
 		heading: { control: "text" },
 		snippet: { control: "text" },

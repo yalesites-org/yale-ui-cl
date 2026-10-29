@@ -8,6 +8,7 @@ export default {
   title: 'Molecules/Banners/Image Banner',
   component: 'ycl-image-banner',
   parameters: {
+    yalesites: { name: 'Image Banner', story: 'organisms-banners-image-banner--image-banner' },
     layout: 'fullscreen',
   },
   argTypes: {

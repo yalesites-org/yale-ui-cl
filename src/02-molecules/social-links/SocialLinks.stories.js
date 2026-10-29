@@ -2,6 +2,9 @@ import "./SocialLinks";
 export default {
   title: 'Molecules/Social Links',
   component: 'ycl-social-links',
+  parameters: {
+    yalesites: { name: 'Social Links', story: 'molecules-social-links--social-links' },
+  },
   argTypes: {
     xTwitter: {name: 'X (formerly Twitter) URL', control: 'text'},
     facebook: {name: 'Facebook URL', control: 'text'},

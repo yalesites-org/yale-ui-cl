@@ -1,4 +1,4 @@
-import "./TaxonomyDisplay";
+import "./TagGroups";
 import "../../01-atoms/text-link/Link";
 
 const items = [
@@ -8,9 +8,10 @@ const items = [
 ];
 
 export default {
-  title: 'Molecules/Taxonomy Display',
-  component: 'ycl-taxonomy-display',
+  title: 'Molecules/Tag Groups',
+  component: 'ycl-tag-groups',
   parameters: {
+    yalesites: { name: 'Taxonomy Display', story: 'molecules-taxonomy-display--taxonomy-display' },
     layout: 'fullscreen',
   },
   argTypes: {
@@ -24,21 +25,21 @@ export default {
       type: 'select',
       options: ['one', 'two', 'three', 'four', 'five', 'six'],
     },
-    showTaxonomy: {name: 'Show Taxonomy', control: 'boolean'},
+    showTags: {name: 'Show Tags', control: 'boolean'},
 },
   args: {
     theme: 'default',
     globalTheme: 'one',
-    showTaxonomy: true,
+    showTags: true,
 },
 
   render: (args) =>
     `<div data-global-theme="${args.globalTheme}">
-      <ycl-taxonomy-display theme="${args.theme}">
-        ${items.map((item) => `<ycl-taxonomy-display-item label="${item.label}">
-          ${args.showTaxonomy ? item.terms.map((term) => `<text-link href="#">${term}</text-link>`).join('') : ''}
-        </ycl-taxonomy-display-item>`).join('')}
-      </ycl-taxonomy-display>
+      <ycl-tag-groups theme="${args.theme}">
+        ${items.map((item) => `<ycl-tag-group label="${item.label}">
+          ${args.showTags ? item.terms.map((term) => `<text-link href="#">${term}</text-link>`).join('') : ''}
+        </ycl-tag-group>`).join('')}
+      </ycl-tag-groups>
     </div>`,
 };
 
@@ -52,14 +53,14 @@ export const Themed = {
 
 export const Empty = {
   args: {
-    showTaxonomy: false,
+    showTags: false,
   },
 };
 
 export const PlainLinks = {
   render: () =>
-    `<ycl-taxonomy-display>
-      <ycl-taxonomy-display-item label="Audience"><a href="#">Undergraduates</a><a href="#">Graduates</a></ycl-taxonomy-display-item>
-      <ycl-taxonomy-display-item label="Type"><a href="#">How To</a></ycl-taxonomy-display-item>
-    </ycl-taxonomy-display>`,
+    `<ycl-tag-groups>
+      <ycl-tag-group label="Audience"><a href="#">Undergraduates</a><a href="#">Graduates</a></ycl-tag-group>
+      <ycl-tag-group label="Type"><a href="#">How To</a></ycl-tag-group>
+    </ycl-tag-groups>`,
 };

@@ -10,6 +10,9 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 export default {
 	title: "Molecules/Wrapped Image",
 	component: "ycl-wrapped-image",
+	parameters: {
+		yalesites: { name: "Wrapped Image", story: "molecules-wrapped-image--wrapped-image" },
+	},
 	argTypes: {
 		caption: { control: "text" },
 		alignment: {

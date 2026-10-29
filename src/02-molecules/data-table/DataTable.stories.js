@@ -43,6 +43,9 @@ const table = ({ presort } = {}) => `
 export default {
   title: 'Molecules/Data Table',
   component: 'ycl-data-table',
+  parameters: {
+    yalesites: { none: true },
+  },
   argTypes: {
     label: { control: 'text' },
     placeholder: { control: 'text' },

@@ -35,6 +35,9 @@ const sampleContent = `
 export default {
   title: 'Molecules/Text',
   component: 'ycl-text',
+  parameters: {
+    yalesites: { name: 'Text', story: 'atoms-text--text-field' },
+  },
   argTypes: {
     variation: {
       name: 'Text Field Variation',

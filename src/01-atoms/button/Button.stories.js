@@ -3,6 +3,9 @@ import "../text-input/TextInput";
 export default {
   title: 'Atoms/Button',
   component: 'ycl-button',
+  parameters: {
+    yalesites: { name: 'Forms (contact form example)', story: 'atoms-forms--example-form' },
+  },
   argTypes: {
     content: {control: 'text'},
     href: {control: 'text'},

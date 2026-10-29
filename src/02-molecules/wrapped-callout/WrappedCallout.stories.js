@@ -11,6 +11,7 @@ export default {
   title: 'Molecules/Wrapped Callout',
   component: 'ycl-wrapped-callout',
   parameters: {
+    yalesites: { name: 'Wrapped Callout', story: 'molecules-wrapped-callout--wrapped-callout' },
     layout: 'fullscreen',
   },
   argTypes: {

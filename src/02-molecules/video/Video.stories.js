@@ -5,6 +5,7 @@ export default {
   title: 'Molecules/Video',
   component: 'ycl-video',
   parameters: {
+    yalesites: { name: 'Video', story: 'molecules-video--video' },
     layout: 'fullscreen',
   },
   argTypes: {

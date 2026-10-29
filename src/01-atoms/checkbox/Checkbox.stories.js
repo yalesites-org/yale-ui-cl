@@ -2,6 +2,9 @@ import "./Checkbox";
 export default {
   title: 'Atoms/Checkbox',
   component: 'ycl-checkbox',
+  parameters: {
+    yalesites: { name: 'Forms (checkbox)', story: 'atoms-forms--example-form' },
+  },
   argTypes: {
     legend: {control: 'text'},
     required: {control: 'boolean'},

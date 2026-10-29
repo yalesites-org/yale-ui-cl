@@ -2,6 +2,9 @@ import "./Pager";
 export default {
   title: 'Molecules/Pager',
   component: 'ycl-pager',
+  parameters: {
+    yalesites: { name: 'Pager', story: 'molecules-pager--interactive' },
+  },
   argTypes: {
     currentPage: {control: { type: 'number', min: 1, max: 50, step: 1 }},
     totalPages: {control: { type: 'number', min: 1, max: 50, step: 1 }},

@@ -11,6 +11,9 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 export default {
 	title: "Molecules/Cards/Directory Listing Card",
 	component: "ycl-directory-listing-card",
+	parameters: {
+		yalesites: { name: "Profile Card (directory listing)", story: "molecules-cards--profile-card-directory-listing" },
+	},
 	argTypes: {
 		overline: { control: "text" },
 		heading: { control: "text" },

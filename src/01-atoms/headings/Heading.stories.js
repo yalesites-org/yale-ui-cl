@@ -2,6 +2,9 @@ import "./Heading";
 export default {
   title: 'Atoms/Heading',
   component: 'ycl-heading',
+  parameters: {
+    yalesites: { name: 'Typography (heading styles)', story: 'tokens-typography--heading-styles' },
+  },
   argTypes: {
     heading: { control: 'text' },
     level: {

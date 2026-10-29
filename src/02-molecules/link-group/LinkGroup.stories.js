@@ -4,6 +4,9 @@ import "../../01-atoms/text-link/Link";
 export default {
   title: 'Molecules/Link Group',
   component: 'ycl-link-group',
+  parameters: {
+    yalesites: { name: 'Link Group', story: 'molecules-link-group--link-group' },
+  },
   argTypes: {
     headingOne: {control: 'text'},
     headingTwo: {control: 'text'},

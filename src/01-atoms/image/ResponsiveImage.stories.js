@@ -16,6 +16,9 @@ const ratios = {
 export default {
   title: 'Atoms/Image',
   component: 'ycl-image',
+  parameters: {
+    yalesites: { name: 'Images', story: 'atoms-images--images' },
+  },
   argTypes: {
     aspectRatio: {
       name: 'Aspect Ratio',

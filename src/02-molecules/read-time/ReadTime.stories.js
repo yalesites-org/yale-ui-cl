@@ -10,6 +10,9 @@ const paragraphs = [
 export default {
   title: 'Molecules/Read Time',
   component: 'ycl-read-time',
+  parameters: {
+    yalesites: { name: 'Read Time', story: 'atoms-read-time--read-time' },
+  },
   argTypes: {
     label: {control: 'text'},
     repeat: {name: 'Content length (x4 paragraphs)', control: {type: 'number', min: 0, max: 10, step: 1}},

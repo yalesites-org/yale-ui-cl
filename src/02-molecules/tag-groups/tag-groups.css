@@ -1,11 +1,11 @@
 /* Custom elements default to display: inline. */
-:host(ycl-taxonomy-display),
-:host(ycl-taxonomy-display-item) {
+:host(ycl-tag-groups),
+:host(ycl-tag-group) {
   display: block;
 }
 
-:host(ycl-taxonomy-display[hidden]),
-:host(ycl-taxonomy-display-item[hidden]) {
+:host(ycl-tag-groups[hidden]),
+:host(ycl-tag-group[hidden]) {
   display: none;
 }
 
@@ -13,17 +13,17 @@
    Colours are handed to the items (and to any slotted text-link) through inherited custom
    properties. Each theme reads its colour slots from the site's global theme when one is set (see
    below), otherwise from the component theme tokens. */
-:host(ycl-taxonomy-display) {
+:host(ycl-tag-groups) {
   padding-block: var(--size-spacing-6);
   background-color: var(--color-gray-100);
 }
 
-:host(ycl-taxonomy-display[theme]:not([theme="default"])) {
+:host(ycl-tag-groups[theme]:not([theme="default"])) {
   background-color: var(--color-background);
   color: var(--color-text);
 }
 
-:host(ycl-taxonomy-display[theme="one"]) {
+:host(ycl-tag-groups[theme="one"]) {
   --color-background: var(--color-slot-one, var(--component-themes-one-slot-one));
   --color-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
   --color-link-base: var(--color-text);
@@ -32,14 +32,14 @@
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-:host(ycl-taxonomy-display[theme="two"]) {
+:host(ycl-tag-groups[theme="two"]) {
   --color-background: var(--color-slot-four, var(--component-themes-two-slot-four));
   --color-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
 }
 
-:host(ycl-taxonomy-display[theme="three"]) {
+:host(ycl-tag-groups[theme="three"]) {
   --color-background: var(--color-slot-five, var(--component-themes-three-slot-five));
   --color-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
   --color-link-base: var(--color-text);
@@ -48,14 +48,14 @@
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-:host(ycl-taxonomy-display[theme="four"]) {
+:host(ycl-tag-groups[theme="four"]) {
   --color-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
   --color-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
 }
 
-:host(ycl-taxonomy-display[theme="five"]) {
+:host(ycl-tag-groups[theme="five"]) {
   --color-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
   --color-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
   --color-link-base: var(--color-text);
@@ -67,7 +67,7 @@
 /* There are no component-theme-six tokens and slot-nine isn't in the current tokens release, so
    without a global theme this renders with no background, as the reference does. Text falls back
    to gray-800, the slot-seven value in every other theme. */
-:host(ycl-taxonomy-display[theme="six"]) {
+:host(ycl-tag-groups[theme="six"]) {
   --color-background: var(--color-slot-nine, transparent);
   --color-text: var(--color-slot-seven, var(--color-gray-800));
   --color-link-base: var(--color-text);
@@ -79,7 +79,7 @@
 /* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
    shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
    document (as index.html and Storybook do). */
-[data-global-theme="one"] ycl-taxonomy-display {
+[data-global-theme="one"] ycl-tag-groups {
   --color-slot-one: var(--global-themes-one-colors-slot-one);
   --color-slot-two: var(--global-themes-one-colors-slot-two);
   --color-slot-three: var(--global-themes-one-colors-slot-three);
@@ -91,7 +91,7 @@
   --color-slot-nine: var(--global-themes-one-colors-slot-nine);
 }
 
-[data-global-theme="two"] ycl-taxonomy-display {
+[data-global-theme="two"] ycl-tag-groups {
   --color-slot-one: var(--global-themes-two-colors-slot-one);
   --color-slot-two: var(--global-themes-two-colors-slot-two);
   --color-slot-three: var(--global-themes-two-colors-slot-three);
@@ -103,7 +103,7 @@
   --color-slot-nine: var(--global-themes-two-colors-slot-nine);
 }
 
-[data-global-theme="three"] ycl-taxonomy-display {
+[data-global-theme="three"] ycl-tag-groups {
   --color-slot-one: var(--global-themes-three-colors-slot-one);
   --color-slot-two: var(--global-themes-three-colors-slot-two);
   --color-slot-three: var(--global-themes-three-colors-slot-three);
@@ -117,7 +117,7 @@
 
 /* Global theme four swaps slots two and five so each component theme keeps its intended
    background. */
-[data-global-theme="four"] ycl-taxonomy-display {
+[data-global-theme="four"] ycl-tag-groups {
   --color-slot-one: var(--global-themes-four-colors-slot-one);
   --color-slot-two: var(--global-themes-four-colors-slot-five);
   --color-slot-three: var(--global-themes-four-colors-slot-three);
@@ -130,12 +130,12 @@
 }
 
 /* Lighter visited links keep contrast on this background. */
-[data-global-theme="four"] ycl-taxonomy-display[theme="three"] {
+[data-global-theme="four"] ycl-tag-groups[theme="three"] {
   --color-link-visited-base: var(--color-gray-100);
   --color-link-visited-hover: var(--color-slot-eight);
 }
 
-[data-global-theme="five"] ycl-taxonomy-display {
+[data-global-theme="five"] ycl-tag-groups {
   --color-slot-one: var(--global-themes-five-colors-slot-one);
   --color-slot-two: var(--global-themes-five-colors-slot-two);
   --color-slot-three: var(--global-themes-five-colors-slot-three);
@@ -147,7 +147,7 @@
   --color-slot-nine: var(--global-themes-five-colors-slot-nine);
 }
 
-[data-global-theme="six"] ycl-taxonomy-display {
+[data-global-theme="six"] ycl-tag-groups {
   --color-slot-one: var(--global-themes-six-colors-slot-one);
   --color-slot-two: var(--global-themes-six-colors-slot-two);
   --color-slot-three: var(--global-themes-six-colors-slot-three);
@@ -160,7 +160,7 @@
 }
 
 /* Layout. */
-.taxonomy-display__inner {
+.tag-groups__inner {
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
@@ -168,15 +168,15 @@
   margin-inline: auto;
 }
 
-:host(ycl-taxonomy-display[width="content"]) .taxonomy-display__inner {
+:host(ycl-tag-groups[width="content"]) .tag-groups__inner {
   max-width: var(--size-component-layout-width-content);
 }
 
-:host(ycl-taxonomy-display[width="highlight"]) .taxonomy-display__inner {
+:host(ycl-tag-groups[width="highlight"]) .tag-groups__inner {
   max-width: var(--size-component-layout-width-highlight);
 }
 
-.taxonomy-display__list {
+.tag-groups__list {
   display: inline-flex;
   flex-wrap: wrap;
   column-gap: var(--size-spacing-6);
@@ -185,36 +185,36 @@
 
 /* 992px is --break-mobile; custom properties can't be used in media queries. */
 @media (min-width: 992px) {
-  .taxonomy-display__content {
+  .tag-groups__content {
     width: 100%;
     max-width: 80%;
   }
 
-  .taxonomy-display__list {
+  .tag-groups__list {
     column-gap: var(--size-spacing-8);
     row-gap: var(--size-spacing-6);
   }
 }
 
 /* Items. */
-.taxonomy-display__item {
+.tag-groups__item {
   display: inline-flex;
   gap: var(--size-spacing-5);
   align-items: center;
 }
 
-.taxonomy-display__item__label {
+.tag-groups__item__label {
   text-transform: uppercase;
   font-weight: var(--font-weights-yalenew-bold);
   font-family: var(--font-families-mallory);
   font-size: var(--font-size-14);
 }
 
-.taxonomy-display__item__label::after {
+.tag-groups__item__label::after {
   content: ":";
 }
 
-.taxonomy-display__item__list {
+.tag-groups__item__list {
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
@@ -222,36 +222,36 @@
   padding-bottom: var(--size-spacing-3);
 }
 
-.taxonomy-display__item__list--empty {
+.tag-groups__item__list--empty {
   padding-bottom: 0;
 }
 
-.taxonomy-display__item__none {
+.tag-groups__item__none {
   text-transform: uppercase;
   font-family: var(--font-families-mallory);
   font-size: var(--font-size-14);
 }
 
-.taxonomy-display__item__none[hidden] {
+.tag-groups__item__none[hidden] {
   display: none;
 }
 
 /* Terms: plain <a>s or text-links. The comma is positioned out of flow so it sits outside the
    link's underline even though, for a plain <a>, it's inside the link box. */
-.taxonomy-display__item__list ::slotted(*) {
+.tag-groups__item__list ::slotted(*) {
   position: relative;
   font-size: var(--font-size-15);
   font-weight: var(--font-weights-mallory-book);
 }
 
-.taxonomy-display__item__list ::slotted(:not(:last-child))::after {
+.tag-groups__item__list ::slotted(:not(:last-child))::after {
   content: ",";
   position: absolute;
   left: 100%;
   color: var(--color-text);
 }
 
-.taxonomy-display__item__list ::slotted(a) {
+.tag-groups__item__list ::slotted(a) {
   --thickness: var(--link-underline-size-default);
   color: var(--color-link-base);
   text-decoration: none;
@@ -262,21 +262,21 @@
   background-size: 100% var(--thickness);
 }
 
-.taxonomy-display__item__list ::slotted(a:hover) {
+.tag-groups__item__list ::slotted(a:hover) {
   color: var(--color-link-hover);
   background-size: 0 var(--thickness);
 }
 
-.taxonomy-display__item__list ::slotted(a:visited) {
+.tag-groups__item__list ::slotted(a:visited) {
   color: var(--color-link-visited-base);
 }
 
-.taxonomy-display__item__list ::slotted(a:visited:hover) {
+.tag-groups__item__list ::slotted(a:visited:hover) {
   color: var(--color-link-visited-hover);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .taxonomy-display__item__list ::slotted(a) {
+  .tag-groups__item__list ::slotted(a) {
     transition:
       background-size var(--animation-speed-default) linear,
       color var(--animation-speed-default) ease-in-out;

@@ -6,6 +6,9 @@ import "../../01-atoms/icons/Icon";
 export default {
   title: 'Molecules/Inline Message',
   component: 'ycl-inline-message',
+  parameters: {
+    yalesites: { name: 'Inline Message', story: 'molecules-inline-message--inline-message' },
+  },
   argTypes: {
     type: {
       name: 'Type',

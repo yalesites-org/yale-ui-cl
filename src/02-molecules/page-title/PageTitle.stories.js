@@ -9,6 +9,9 @@ const placeholder = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:/
 export default {
   title: 'Molecules/Page Title',
   component: 'ycl-page-title',
+  parameters: {
+    yalesites: { name: 'Page Header', story: 'molecules-page-header--default' },
+  },
   argTypes: {
     heading: {control: 'text'},
     prefix: {control: 'text'},

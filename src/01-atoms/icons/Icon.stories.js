@@ -6,6 +6,9 @@ const names = Object.keys(icons);
 export default {
   title: 'Atoms/Icon',
   component: 'ycl-icon',
+  parameters: {
+    yalesites: { name: 'Images (icons)', story: 'atoms-images--icons' },
+  },
   argTypes: {
     name: {
       name: 'Icon',

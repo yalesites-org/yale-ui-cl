@@ -8,6 +8,7 @@ export default {
   title: 'Molecules/Site Alert',
   component: 'ycl-alert',
   parameters: {
+    yalesites: { name: 'Site Alert', story: 'molecules-site-alert--alert' },
     layout: 'fullscreen',
   },
   argTypes: {

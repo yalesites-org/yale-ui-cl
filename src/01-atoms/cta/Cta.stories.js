@@ -12,6 +12,9 @@ const variantClasses = (args) => [
 export default {
   title: 'Atoms/CTA',
   component: 'cta-link',
+  parameters: {
+    yalesites: { name: 'CTA', story: 'atoms-controls--cta' },
+  },
   argTypes: {
     label: {control: 'text'},
     URL: {control: 'text'},

@@ -35,7 +35,7 @@
 @import "../02-molecules/wrapped-callout/wrapped-callout.css" layer(components.wrapped-callout);
 @import "../02-molecules/page-title/page-title.css" layer(components.page-title);
 @import "../02-molecules/read-time/read-time.css" layer(components.read-time);
-@import "../02-molecules/taxonomy-display/taxonomy-display.css" layer(components.taxonomy-display);
+@import "../02-molecules/tag-groups/tag-groups.css" layer(components.tag-groups);
 @import "../02-molecules/search-result/search-result.css" layer(components.search-result);
 @import "../02-molecules/related-content/related-content.css" layer(components.related-content);
 @import "../02-molecules/text/text.css" layer(components.text);

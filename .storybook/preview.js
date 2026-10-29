@@ -1,6 +1,7 @@
 /* @type { import('@storybook/web-components--vite').Preview ) */
 
 import ('../src/styles/base.css');
+import { DocsPage } from './yalesites.js';
 
 // The web-components source decorator renders story output with lit; when a
 // story returns an HTML string, lit treats it as text, so the serialized
@@ -15,6 +16,8 @@ const unescapeStringSource = (code) => {
 };
 
 const preview = {
+  // Every component gets a docs page (see ./yalesites.js for its layout).
+  tags: ['autodocs'],
   parameters: {
     // Axe violations fail the story's test (npm test) instead of only being reported.
     a11y: {
@@ -41,6 +44,7 @@ const preview = {
       },
     },
 	docs: {
+		page: DocsPage,
 		codePanel: true,
 		source: {
 			transform: unescapeStringSource,
