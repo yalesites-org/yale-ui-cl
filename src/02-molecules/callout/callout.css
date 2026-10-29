@@ -26,168 +26,60 @@
   :host(ycl-callout) { --size-spacing-site-gutter: var(--size-spacing-10); }
 }
 
-/* Component themes. Theme one is the default.
-   Items render in their own shadow roots, so the group hands its theme down through inherited
-   custom properties. Each theme takes its colours from slots, which come from the site's global
-   theme when one is set (see below), otherwise from the component theme tokens. */
+/* Colour options, named after the palette colour each one takes its background from. Primary
+   is the default. Pages set the palette with the --color-theme-* custom properties, which inherit
+   into the shadow root; without them the Old Blues defaults apply.
+   Items render in their own shadow roots, so the group hands its colours down through inherited
+   custom properties. */
 :host(ycl-callout) {
-  --color-callouts-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-callouts-background: var(--color-theme-primary, var(--color-blue-yale));
   --color-action: var(--color-basic-white);
   --color-action-secondary: var(--color-callouts-background);
   --color-text: var(--color-basic-white);
   --color-heading: var(--color-basic-white);
   --color-link-base: var(--color-basic-white);
-  --color-link-hover: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-link-hover: var(--color-basic-white);
   --color-link-visited-base: var(--color-basic-white);
   --color-link-visited-hover: var(--color-basic-white);
 }
 
-:host(ycl-callout[theme="two"]) {
-  --color-callouts-background: var(--color-slot-four, var(--component-themes-two-slot-four));
+:host(ycl-callout[theme="accent-1"]) {
+  --color-callouts-background: var(--color-theme-accent-1, var(--color-gray-100));
   --color-action: var(--color-gray-800);
   --color-action-secondary: var(--color-basic-white);
   --color-text: var(--color-gray-800);
   --color-heading: var(--color-gray-800);
-  --color-link-base: var(--color-slot-seven, var(--component-themes-two-slot-seven));
-  --color-link-hover: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+  --color-link-base: var(--color-gray-800);
+  --color-link-hover: var(--color-gray-800);
   --color-link-visited-base: var(--color-gray-800);
   --color-link-visited-hover: var(--color-gray-800);
 }
 
-:host(ycl-callout[theme="three"]) {
-  --color-callouts-background: var(--color-slot-five, var(--component-themes-three-slot-five));
-  --color-action: var(--color-basic-white);
-  --color-action-secondary: var(--color-slot-one, var(--component-themes-three-slot-one));
-  --color-text: var(--color-basic-white);
-  --color-heading: var(--color-basic-white);
-  --color-link-base: var(--color-basic-white);
-  --color-link-hover: var(--color-slot-eight, var(--component-themes-three-slot-eight));
-  --color-link-visited-base: var(--color-basic-white);
-  --color-link-visited-hover: var(--color-basic-white);
+:host(ycl-callout[theme="accent-2"]) {
+  --color-callouts-background: var(--color-theme-accent-2, var(--color-gray-800));
+  --color-action-secondary: var(--color-theme-primary, var(--color-blue-yale));
 }
 
-:host(ycl-callout[theme="four"]) {
-  --color-callouts-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
+:host(ycl-callout[theme="tertiary"]) {
+  --color-callouts-background: var(--color-theme-tertiary, var(--color-blue-light));
   --color-action: var(--color-gray-800);
   --color-action-secondary: var(--color-basic-white);
   --color-text: var(--color-gray-800);
   --color-heading: var(--color-gray-800);
-  --color-link-base: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+  --color-link-base: var(--color-gray-800);
   /* gray-700 falls just short of 4.5:1 on this light background. */
   --color-link-hover: var(--color-gray-800);
   --color-link-visited-base: var(--color-gray-800);
   --color-link-visited-hover: var(--color-gray-800);
 }
 
-:host(ycl-callout[theme="five"]) {
-  --color-callouts-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
-  --color-action: var(--color-basic-white);
-  --color-action-secondary: var(--color-slot-one, var(--component-themes-five-colors-slot-one));
-  --color-text: var(--color-basic-white);
-  --color-heading: var(--color-basic-white);
-  --color-link-base: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
-  --color-link-hover: var(--color-basic-white);
-  --color-link-visited-base: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
-  --color-link-visited-hover: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+:host(ycl-callout[theme="secondary"]) {
+  --color-callouts-background: var(--color-theme-secondary, var(--color-blue-medium));
+  --color-action-secondary: var(--color-theme-primary, var(--color-blue-yale));
 }
 
-/* There's no component theme six or slot-nine in the current tokens release; a light gray
-   background keeps the theme's dark slot-seven text legible without them. */
-:host(ycl-callout[theme="six"]) {
-  --color-callouts-background: var(--color-slot-nine, var(--color-gray-100));
-  --color-action: var(--color-slot-seven, var(--color-gray-800));
-  --color-action-secondary: var(--color-slot-eight, var(--color-basic-white));
-  --color-text: var(--color-slot-seven, var(--color-gray-800));
-  --color-heading: var(--color-slot-seven, var(--color-gray-800));
-  --color-link-base: var(--color-slot-seven, var(--color-gray-800));
-  --color-link-hover: var(--color-slot-seven, var(--color-gray-800));
-  --color-link-visited-base: var(--color-slot-seven, var(--color-gray-800));
-  --color-link-visited-hover: var(--color-slot-seven, var(--color-gray-800));
-}
-
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document (as index.html and Storybook do). The same goes for links nested in slotted content,
-   which ::slotted() can't reach. */
-[data-global-theme="one"] ycl-callout {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-  --color-slot-three: var(--global-themes-one-colors-slot-three);
-  --color-slot-four: var(--global-themes-one-colors-slot-four);
-  --color-slot-five: var(--global-themes-one-colors-slot-five);
-  --color-slot-six: var(--global-themes-one-colors-slot-six);
-  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
-}
-
-[data-global-theme="two"] ycl-callout {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-  --color-slot-three: var(--global-themes-two-colors-slot-three);
-  --color-slot-four: var(--global-themes-two-colors-slot-four);
-  --color-slot-five: var(--global-themes-two-colors-slot-five);
-  --color-slot-six: var(--global-themes-two-colors-slot-six);
-  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
-}
-
-[data-global-theme="three"] ycl-callout {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-  --color-slot-three: var(--global-themes-three-colors-slot-three);
-  --color-slot-four: var(--global-themes-three-colors-slot-four);
-  --color-slot-five: var(--global-themes-three-colors-slot-five);
-  --color-slot-six: var(--global-themes-three-colors-slot-six);
-  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
-}
-
-/* Global theme four swaps slots two and five so each component theme gets its intended background. */
-[data-global-theme="four"] ycl-callout {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-five);
-  --color-slot-three: var(--global-themes-four-colors-slot-three);
-  --color-slot-four: var(--global-themes-four-colors-slot-four);
-  --color-slot-five: var(--global-themes-four-colors-slot-two);
-  --color-slot-six: var(--global-themes-four-colors-slot-six);
-  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
-}
-
-[data-global-theme="four"] ycl-callout[theme="two"] {
-  --color-action: var(--color-slot-six);
-  --color-text: var(--color-slot-six);
-  --color-heading: var(--color-slot-six);
-}
-
-[data-global-theme="five"] ycl-callout {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-  --color-slot-three: var(--global-themes-five-colors-slot-three);
-  --color-slot-four: var(--global-themes-five-colors-slot-four);
-  --color-slot-five: var(--global-themes-five-colors-slot-five);
-  --color-slot-six: var(--global-themes-five-colors-slot-six);
-  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
-}
-
-[data-global-theme="six"] ycl-callout {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-  --color-slot-three: var(--global-themes-six-colors-slot-three);
-  --color-slot-four: var(--global-themes-six-colors-slot-four);
-  --color-slot-five: var(--global-themes-six-colors-slot-five);
-  --color-slot-six: var(--global-themes-six-colors-slot-six);
-  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
-}
-
+/* Links nested in slotted content are light DOM, which ::slotted() can't reach, so these rules
+   only take effect when base.css is also loaded in the document. */
 ycl-callout-item a {
   color: var(--color-link-base);
 }

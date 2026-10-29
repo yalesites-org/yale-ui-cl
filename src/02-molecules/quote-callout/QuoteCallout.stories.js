@@ -19,14 +19,9 @@ export default {
       options: ['left', 'right'],
     },
     theme: {
-      name: 'Accent Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['primary', 'tertiary', 'accent-2', 'accent-1', 'secondary'],
     },
   },
   args: {
@@ -34,18 +29,15 @@ export default {
     attribution: 'Annie Nymity',
     variant: 'bar',
     quoteAlignment: 'left',
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'primary',
   },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-quote-callout variant="${args.variant}" quote-alignment="${args.quoteAlignment}" theme="${args.theme}">
-        <ycl-image slot="image" ratio="1x1"><img src="${quoteImage}" alt=""></ycl-image>
-        <p>${args.quote}</p>
-        <span slot="attribution">${args.attribution}</span>
-      </ycl-quote-callout>
-    </div>`,
+    `<ycl-quote-callout variant="${args.variant}" quote-alignment="${args.quoteAlignment}" theme="${args.theme}">
+      <ycl-image slot="image" ratio="1x1"><img src="${quoteImage}" alt=""></ycl-image>
+      <p>${args.quote}</p>
+      <span slot="attribution">${args.attribution}</span>
+    </ycl-quote-callout>`,
 };
 
 export const Default = {};
@@ -70,6 +62,6 @@ export const WithImage = {
 
 export const Themed = {
   args: {
-    theme: 'two',
+    theme: 'tertiary',
   },
 };

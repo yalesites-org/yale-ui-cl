@@ -12,14 +12,9 @@ export default {
   },
   argTypes: {
     theme: {
-      name: 'Component Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['primary', 'accent-1', 'accent-2', 'tertiary', 'secondary'],
     },
     size: {
       name: 'Image Size',
@@ -34,20 +29,17 @@ export default {
     },
   },
   args: {
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'primary',
     size: 'tall',
     caption: 'Image Caption',
     width: 'site',
   },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-image-banner theme="${args.theme}" size="${args.size}" width="${args.width}">
-        <ycl-image><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>
-        ${args.caption ? `<span slot="caption">${args.caption}</span>` : ''}
-      </ycl-image-banner>
-    </div>`,
+    `<ycl-image-banner theme="${args.theme}" size="${args.size}" width="${args.width}">
+      <ycl-image><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>
+      ${args.caption ? `<span slot="caption">${args.caption}</span>` : ''}
+    </ycl-image-banner>`,
 };
 
 export const Default = {};

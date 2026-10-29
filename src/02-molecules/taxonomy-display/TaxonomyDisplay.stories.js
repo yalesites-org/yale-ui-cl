@@ -15,38 +15,30 @@ export default {
   },
   argTypes: {
     theme: {
-      name: 'Component Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['default', 'one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['default', 'primary', 'accent-1', 'accent-2', 'tertiary', 'secondary'],
     },
     showTaxonomy: {name: 'Show Taxonomy', control: 'boolean'},
 },
   args: {
     theme: 'default',
-    globalTheme: 'one',
     showTaxonomy: true,
 },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-taxonomy-display theme="${args.theme}">
-        ${items.map((item) => `<ycl-taxonomy-display-item label="${item.label}">
-          ${args.showTaxonomy ? item.terms.map((term) => `<text-link href="#">${term}</text-link>`).join('') : ''}
-        </ycl-taxonomy-display-item>`).join('')}
-      </ycl-taxonomy-display>
-    </div>`,
+    `<ycl-taxonomy-display theme="${args.theme}">
+      ${items.map((item) => `<ycl-taxonomy-display-item label="${item.label}">
+        ${args.showTaxonomy ? item.terms.map((term) => `<text-link href="#">${term}</text-link>`).join('') : ''}
+      </ycl-taxonomy-display-item>`).join('')}
+    </ycl-taxonomy-display>`,
 };
 
 export const Default = {};
 
 export const Themed = {
   args: {
-    theme: 'one',
+    theme: 'primary',
   },
 };
 

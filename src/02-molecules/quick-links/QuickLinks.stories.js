@@ -21,14 +21,9 @@ export default {
       options: ['promotional', 'subtle'],
     },
     theme: {
-      name: 'Component Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['one', 'two', 'three'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['primary', 'accent-1', 'accent-2'],
     },
 },
   args: {
@@ -36,22 +31,19 @@ export default {
     description: 'This is a Quick Links description.',
     image: true,
     variation: 'promotional',
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'primary',
 },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-quick-links theme="${args.theme}" variation="${args.variation}">
-        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-        ${args.description ? `<p slot="description">${args.description}</p>` : ''}
-        ${args.image ? `<ycl-image slot="image"><img src="${placeholderImage}" alt=""></ycl-image>` : ''}
-        <cta-link class="outline" href="#">This is a link</cta-link>
-        <cta-link class="outline" href="https://google.com">This is another link</cta-link>
-        <cta-link class="outline" href="https://google.com/download.pdf">This is a very long link that will wrap lines</cta-link>
-        <cta-link class="outline" href="#">Link #4</cta-link>
-      </ycl-quick-links>
-    </div>`,
+    `<ycl-quick-links theme="${args.theme}" variation="${args.variation}">
+      <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+      ${args.description ? `<p slot="description">${args.description}</p>` : ''}
+      ${args.image ? `<ycl-image slot="image"><img src="${placeholderImage}" alt=""></ycl-image>` : ''}
+      <cta-link class="outline" href="#">This is a link</cta-link>
+      <cta-link class="outline" href="https://google.com">This is another link</cta-link>
+      <cta-link class="outline" href="https://google.com/download.pdf">This is a very long link that will wrap lines</cta-link>
+      <cta-link class="outline" href="#">Link #4</cta-link>
+    </ycl-quick-links>`,
 };
 
 export const Default = {};
@@ -71,6 +63,6 @@ export const Subtle = {
 
 export const ThemeTwo = {
   args: {
-    theme: 'two',
+    theme: 'accent-1',
   },
 };

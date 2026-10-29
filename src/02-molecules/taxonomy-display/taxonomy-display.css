@@ -9,10 +9,12 @@
   display: none;
 }
 
-/* Component themes.
+/* Colour options, named after the palette colour each one takes its background from. With no
+   option (or "default") the display sits on a light gray background. Pages set the palette with
+   the --color-theme-* custom properties, which inherit into the shadow root; without them the Old
+   Blues defaults apply.
    Colours are handed to the items (and to any slotted text-link) through inherited custom
-   properties. Each theme reads its colour slots from the site's global theme when one is set (see
-   below), otherwise from the component theme tokens. */
+   properties. */
 :host(ycl-taxonomy-display) {
   padding-block: var(--size-spacing-6);
   background-color: var(--color-gray-100);
@@ -23,140 +25,49 @@
   color: var(--color-text);
 }
 
-:host(ycl-taxonomy-display[theme="one"]) {
-  --color-background: var(--color-slot-one, var(--component-themes-one-slot-one));
-  --color-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+:host(ycl-taxonomy-display[theme="primary"]) {
+  --color-background: var(--color-theme-primary, var(--color-blue-yale));
+  --color-text: var(--color-basic-white);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
   --color-link-visited-base: var(--color-link-visited-light);
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-:host(ycl-taxonomy-display[theme="two"]) {
-  --color-background: var(--color-slot-four, var(--component-themes-two-slot-four));
-  --color-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+:host(ycl-taxonomy-display[theme="accent-1"]) {
+  --color-background: var(--color-theme-accent-1, var(--color-gray-100));
+  --color-text: var(--color-gray-800);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
 }
 
-:host(ycl-taxonomy-display[theme="three"]) {
-  --color-background: var(--color-slot-five, var(--component-themes-three-slot-five));
-  --color-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+:host(ycl-taxonomy-display[theme="accent-2"]) {
+  --color-background: var(--color-theme-accent-2, var(--color-gray-800));
+  --color-text: var(--color-basic-white);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
   --color-link-visited-base: var(--color-link-visited-light);
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-:host(ycl-taxonomy-display[theme="four"]) {
-  --color-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
-  --color-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+:host(ycl-taxonomy-display[theme="tertiary"]) {
+  --color-background: var(--color-theme-tertiary, var(--color-blue-light));
+  --color-text: var(--color-gray-800);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
-}
-
-:host(ycl-taxonomy-display[theme="five"]) {
-  --color-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
-  --color-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
-  --color-link-base: var(--color-text);
-  --color-link-hover: var(--color-text);
-  --color-link-visited-base: var(--color-link-visited-light);
-  --color-link-visited-hover: var(--color-link-visited-light-hover);
-}
-
-/* There are no component-theme-six tokens and slot-nine isn't in the current tokens release, so
-   without a global theme this renders with no background, as the reference does. Text falls back
-   to gray-800, the slot-seven value in every other theme. */
-:host(ycl-taxonomy-display[theme="six"]) {
-  --color-background: var(--color-slot-nine, transparent);
-  --color-text: var(--color-slot-seven, var(--color-gray-800));
-  --color-link-base: var(--color-text);
-  --color-link-hover: var(--color-text);
+  /* The purple visited colours fall short of 4.5:1 on this light blue. */
   --color-link-visited-base: var(--color-text);
   --color-link-visited-hover: var(--color-text);
 }
 
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document (as index.html and Storybook do). */
-[data-global-theme="one"] ycl-taxonomy-display {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-  --color-slot-three: var(--global-themes-one-colors-slot-three);
-  --color-slot-four: var(--global-themes-one-colors-slot-four);
-  --color-slot-five: var(--global-themes-one-colors-slot-five);
-  --color-slot-six: var(--global-themes-one-colors-slot-six);
-  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
-}
-
-[data-global-theme="two"] ycl-taxonomy-display {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-  --color-slot-three: var(--global-themes-two-colors-slot-three);
-  --color-slot-four: var(--global-themes-two-colors-slot-four);
-  --color-slot-five: var(--global-themes-two-colors-slot-five);
-  --color-slot-six: var(--global-themes-two-colors-slot-six);
-  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
-}
-
-[data-global-theme="three"] ycl-taxonomy-display {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-  --color-slot-three: var(--global-themes-three-colors-slot-three);
-  --color-slot-four: var(--global-themes-three-colors-slot-four);
-  --color-slot-five: var(--global-themes-three-colors-slot-five);
-  --color-slot-six: var(--global-themes-three-colors-slot-six);
-  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
-}
-
-/* Global theme four swaps slots two and five so each component theme keeps its intended
-   background. */
-[data-global-theme="four"] ycl-taxonomy-display {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-five);
-  --color-slot-three: var(--global-themes-four-colors-slot-three);
-  --color-slot-four: var(--global-themes-four-colors-slot-four);
-  --color-slot-five: var(--global-themes-four-colors-slot-two);
-  --color-slot-six: var(--global-themes-four-colors-slot-six);
-  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
-}
-
-/* Lighter visited links keep contrast on this background. */
-[data-global-theme="four"] ycl-taxonomy-display[theme="three"] {
-  --color-link-visited-base: var(--color-gray-100);
-  --color-link-visited-hover: var(--color-slot-eight);
-}
-
-[data-global-theme="five"] ycl-taxonomy-display {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-  --color-slot-three: var(--global-themes-five-colors-slot-three);
-  --color-slot-four: var(--global-themes-five-colors-slot-four);
-  --color-slot-five: var(--global-themes-five-colors-slot-five);
-  --color-slot-six: var(--global-themes-five-colors-slot-six);
-  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
-}
-
-[data-global-theme="six"] ycl-taxonomy-display {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-  --color-slot-three: var(--global-themes-six-colors-slot-three);
-  --color-slot-four: var(--global-themes-six-colors-slot-four);
-  --color-slot-five: var(--global-themes-six-colors-slot-five);
-  --color-slot-six: var(--global-themes-six-colors-slot-six);
-  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+:host(ycl-taxonomy-display[theme="secondary"]) {
+  --color-background: var(--color-theme-secondary, var(--color-blue-medium));
+  --color-text: var(--color-basic-white);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  /* The light visited colours fall short of 4.5:1 on this mid blue. */
+  --color-link-visited-base: var(--color-text);
+  --color-link-visited-hover: var(--color-text);
 }
 
 /* Layout. */

@@ -25,11 +25,6 @@ export default {
 		href: { control: "text" },
 		featured: { control: "boolean" },
 		withImage: { name: "With Image", control: "boolean" },
-		globalTheme: {
-			name: "Site Global Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-		},
 	},
 	args: {
 		heading: "Card Title",
@@ -37,17 +32,14 @@ export default {
 		href: "https://www.yale.edu",
 		featured: true,
 		withImage: true,
-		globalTheme: "one",
 	},
 
 	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: var(--size-spacing-8);">
-				${card(args, args.heading, args.snippet)}
-				${card(args, "Undergraduate Research", "Find opportunities to work with faculty on original research.")}
-				${card(args, "Visiting Campus", "Plan a visit, take a tour, and explore New Haven.")}
-			</ul>
-		</div>`,
+		`<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: var(--size-spacing-8);">
+			${card(args, args.heading, args.snippet)}
+			${card(args, "Undergraduate Research", "Find opportunities to work with faculty on original research.")}
+			${card(args, "Visiting Campus", "Plan a visit, take a tour, and explore New Haven.")}
+		</ul>`,
 };
 
 export const Default = {};

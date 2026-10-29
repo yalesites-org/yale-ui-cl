@@ -26,14 +26,9 @@ export default {
     content: {control: 'text'},
     linkContent: {name: 'Link Text', control: 'text'},
     theme: {
-      name: 'Component Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['accent-1', 'primary', 'secondary', 'tertiary', 'accent-2'],
     },
   },
   args: {
@@ -43,19 +38,16 @@ export default {
     heading: 'This is a general message heading',
     content: 'This is a general message content',
     linkContent: 'This is a link',
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'accent-1',
   },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-inline-message type="${args.type}" theme="${args.theme}"${args.icon === 'none' ? ' icon="none"' : ''}>
-        ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
-        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-        <p>${args.content}</p>
-        <text-link slot="link" href="#">${args.linkContent}</text-link>
-      </ycl-inline-message>
-    </div>`,
+    `<ycl-inline-message type="${args.type}" theme="${args.theme}"${args.icon === 'none' ? ' icon="none"' : ''}>
+      ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
+      <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+      <p>${args.content}</p>
+      <text-link slot="link" href="#">${args.linkContent}</text-link>
+    </ycl-inline-message>`,
 };
 
 export const Default = {};
@@ -76,7 +68,7 @@ export const TextOnly = {
 
 export const Themed = {
   args: {
-    theme: 'three',
+    theme: 'secondary',
   },
 };
 
