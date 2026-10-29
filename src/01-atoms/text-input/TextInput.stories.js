@@ -2,6 +2,9 @@ import "./TextInput";
 export default {
 	title: 'Atoms/Text Input',
 	component: 'text-input',
+	parameters: {
+		yalesites: { name: 'Forms (text fields)', story: 'atoms-forms--textfields-examples' },
+	},
 	argTypes: {
 		label: {
 			control: 'text'

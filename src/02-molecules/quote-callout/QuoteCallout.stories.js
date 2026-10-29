@@ -5,6 +5,9 @@ import quoteImage from "../../assets/avif-test-image.avif";
 export default {
   title: 'Molecules/Quote Callout',
   component: 'ycl-quote-callout',
+  parameters: {
+    yalesites: { name: 'Quote Callout', story: 'molecules-quotes-quote-callout--quote-callout' },
+  },
   argTypes: {
     quote: {control: 'text'},
     attribution: {control: 'text'},

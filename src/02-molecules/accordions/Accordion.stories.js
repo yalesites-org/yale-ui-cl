@@ -3,6 +3,9 @@ import "../../01-atoms/headings/Heading";
 export default {
   title: 'Molecules/Accordion',
   component: 'ycl-accordion',
+  parameters: {
+    yalesites: { name: 'Accordion', story: 'molecules-accordion--accordion' },
+  },
   argTypes: {
     heading: {control: 'text'},
     theme: {

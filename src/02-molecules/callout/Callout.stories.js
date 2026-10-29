@@ -17,6 +17,7 @@ export default {
   title: 'Molecules/Callout',
   component: 'ycl-callout',
   parameters: {
+    yalesites: { name: 'Callout', story: 'molecules-callout--callout-single' },
     layout: 'fullscreen',
   },
   argTypes: {

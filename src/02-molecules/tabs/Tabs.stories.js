@@ -3,6 +3,9 @@ import "../../01-atoms/text-link/Link";
 export default {
   title: 'Molecules/Tabs',
   component: 'ycl-tabs',
+  parameters: {
+    yalesites: { name: 'Tabs', story: 'organisms-tabs--interactive' },
+  },
   argTypes: {
     theme: {
       name: 'Component Theme',

@@ -19,6 +19,9 @@ const card = (args, heading, snippet) => `
 export default {
 	title: "Molecules/Cards/Custom Card",
 	component: "ycl-custom-card",
+	parameters: {
+		yalesites: { name: "Custom Card", story: "molecules-cards--custom-card" },
+	},
 	argTypes: {
 		heading: { control: "text" },
 		snippet: { control: "text" },

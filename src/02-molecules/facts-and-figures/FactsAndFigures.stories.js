@@ -7,6 +7,9 @@ const icon = (name) => `<ycl-icon slot="icon" name="${name}"></ycl-icon>`;
 export default {
 	title: "Molecules/Facts and Figures",
 	component: "ycl-facts-and-figures",
+	parameters: {
+		yalesites: { name: "Facts and Figures", story: "molecules-facts-and-figures--interactive" },
+	},
 	argTypes: {
 		stat: { name: "Statistic", control: "text" },
 		content: { control: "text" },

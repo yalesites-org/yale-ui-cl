@@ -2,6 +2,9 @@ import "./Radio";
 export default {
   title: 'Atoms/Radio',
   component: 'ycl-radio',
+  parameters: {
+    yalesites: { name: 'Forms (radio)', story: 'atoms-forms--example-form' },
+  },
   argTypes: {
     legend: {control: 'text'},
     required: {control: 'boolean'},

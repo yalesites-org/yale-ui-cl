@@ -22,6 +22,7 @@ export default {
   title: 'Molecules/Banners/Action Banner',
   component: 'ycl-action-banner',
   parameters: {
+    yalesites: { name: 'Action Banner', story: 'organisms-banners-action-banner--action-banner' },
     layout: 'fullscreen',
   },
   argTypes: {

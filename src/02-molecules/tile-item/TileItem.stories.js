@@ -23,6 +23,9 @@ const tile = (args, heading) => `
 export default {
 	title: "Molecules/Tile Item",
 	component: "ycl-tile-item",
+	parameters: {
+		yalesites: { name: "Tile Item", story: "molecules-tile-item--tile-item" },
+	},
 	argTypes: {
 		heading: { control: "text" },
 		content: { control: "text" },

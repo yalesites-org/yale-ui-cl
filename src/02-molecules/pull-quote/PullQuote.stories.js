@@ -3,6 +3,9 @@ import "./PullQuote";
 export default {
   title: 'Molecules/Pull Quote',
   component: 'ycl-pull-quote',
+  parameters: {
+    yalesites: { name: 'Pull Quote', story: 'molecules-quotes-pull-quote--pull-quote' },
+  },
   argTypes: {
     quote: {control: 'text'},
     attribution: {control: 'text'},

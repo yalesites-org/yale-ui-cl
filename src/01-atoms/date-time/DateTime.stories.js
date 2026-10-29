@@ -2,6 +2,9 @@ import "./DateTime";
 export default {
   title: 'Atoms/Date Time',
   component: 'ycl-date-time',
+  parameters: {
+    yalesites: { none: true },
+  },
   argTypes: {
     start: { name: 'Start (ISO 8601)', control: 'text' },
     end: { name: 'End (ISO 8601)', control: 'text' },

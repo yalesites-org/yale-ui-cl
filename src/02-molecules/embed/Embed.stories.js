@@ -2,6 +2,9 @@ import "./Embed";
 export default {
   title: 'Molecules/Embed',
   component: 'ycl-embed',
+  parameters: {
+    yalesites: { name: 'Embed', story: 'molecules-embed--interactive' },
+  },
   argTypes: {
     src: {control: 'text'},
     label: {control: 'text'},

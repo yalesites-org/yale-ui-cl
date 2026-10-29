@@ -2,6 +2,9 @@ import "./TextCopyButton";
 export default {
   title: 'Atoms/Text Copy Button',
   component: 'ycl-text-copy-button',
+  parameters: {
+    yalesites: { name: 'Text Copy Button', story: 'atoms-controls--text-copy-button' },
+  },
   argTypes: {
     text: {control: 'text'},
     content: {control: 'text'},

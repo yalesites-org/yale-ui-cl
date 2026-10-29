@@ -2,6 +2,9 @@ import "./Table";
 export default {
   title: 'Atoms/Table',
   component: 'yc-table',
+  parameters: {
+    yalesites: { name: 'Table', story: 'atoms-table--table' },
+  },
   argTypes: {
     label: {control: 'text'},
     

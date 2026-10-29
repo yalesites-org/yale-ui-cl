@@ -11,6 +11,9 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 export default {
 	title: "Molecules/Content Spotlight Portrait",
 	component: "ycl-content-spotlight-portrait",
+	parameters: {
+		yalesites: { name: "Content Spotlight Portrait", story: "organisms-content-spotlight-content-spotlight-portrait--content-spotlight-portrait" },
+	},
 	argTypes: {
 		overline: { control: "text" },
 		heading: { control: "text" },

@@ -2,6 +2,9 @@ import "./LinkSkip";
 export default {
   title: 'Molecules/Link Skip',
   component: 'ycl-link-skip',
+  parameters: {
+    yalesites: { name: 'Link Skip', story: 'atoms-link-skip--link-skip' },
+  },
   argTypes: {
     content: {control: 'text'},
     url: {control: 'text'},

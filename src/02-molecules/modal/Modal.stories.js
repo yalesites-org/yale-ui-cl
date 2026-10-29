@@ -6,6 +6,9 @@ import "../../01-atoms/text-link/Link";
 export default {
   title: 'Molecules/Modal',
   component: 'ycl-modal',
+  parameters: {
+    yalesites: { name: 'Modal', story: 'molecules-modal--modal' },
+  },
   argTypes: {
     heading: {control: 'text'},
     content: {control: 'text'},

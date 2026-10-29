@@ -2,6 +2,9 @@ import "./Divider";
 export default {
   title: 'Atoms/Divider',
   component: 'ycl-divider',
+  parameters: {
+    yalesites: { name: 'Divider', story: 'atoms-divider--interactive' },
+  },
   argTypes: {
     width: {
       name: 'Divider width',

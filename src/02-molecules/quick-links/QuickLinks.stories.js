@@ -10,6 +10,7 @@ export default {
   title: 'Molecules/Quick Links',
   component: 'ycl-quick-links',
   parameters: {
+    yalesites: { name: 'Quick Links', story: 'molecules-quick-links--quick-links' },
     layout: 'fullscreen',
   },
   argTypes: {

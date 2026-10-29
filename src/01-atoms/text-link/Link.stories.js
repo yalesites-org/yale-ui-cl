@@ -2,6 +2,9 @@ import "./Link";
 export default {
   title: 'Atoms/Text Link',
   component: 'text-link',
+  parameters: {
+    yalesites: { name: 'Text Link', story: 'atoms-controls--text-link' },
+  },
   argTypes: {
     label: {control: 'text'},
     URL: {control: 'text'},

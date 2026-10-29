@@ -2,6 +2,9 @@ import "./AudioPlayer";
 export default {
   title: 'Atoms/Audio Player',
   component: 'ycl-audio',
+  parameters: {
+    yalesites: { name: 'Audio Player', story: 'molecules-audio-player--audio-embed' },
+  },
   argTypes: {
     content: {
       name: 'Content',

@@ -3,6 +3,9 @@ import "./Lists.js";
 export default {
   title: 'Atoms/Lists',
   component: 'yc-list',
+  parameters: {
+    yalesites: { name: 'Lists', story: 'atoms-lists--interactive' },
+  },
   argTypes: {
     type: {      
       name: "List Type",

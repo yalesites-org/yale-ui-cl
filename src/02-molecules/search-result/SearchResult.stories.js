@@ -7,6 +7,9 @@ const breadcrumbs = ['Home', 'Academic Programs', 'Undergraduate Chemistry'];
 export default {
   title: 'Molecules/Search Result',
   component: 'ycl-search-result',
+  parameters: {
+    yalesites: { name: 'Search Result', story: 'molecules-search-result--search-result' },
+  },
   argTypes: {
     heading: {control: 'text'},
     url: {name: 'URL', control: 'text'},

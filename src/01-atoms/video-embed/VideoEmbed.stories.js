@@ -2,6 +2,9 @@ import "./VideoEmbed";
 export default {
   title: 'Atoms/Video Embed',
   component: 'ycl-video-embed',
+  parameters: {
+    yalesites: { name: 'Video Embed', story: 'atoms-videos-video-embed--video-embed' },
+  },
   argTypes: {
     src: { name: 'Embed URL', control: 'text' },
     title: { name: 'Accessible title', control: 'text' },

@@ -4,6 +4,9 @@ import "../../01-atoms/text-link/Link";
 export default {
   title: 'Molecules/Link Grid',
   component: 'ycl-link-grid',
+  parameters: {
+    yalesites: { name: 'Link Grid', story: 'molecules-link-grid--link-grid' },
+  },
   argTypes: {
     heading: {control: 'text'},
     theme: {

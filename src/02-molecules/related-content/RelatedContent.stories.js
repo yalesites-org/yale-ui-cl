@@ -13,6 +13,9 @@ const sampleItems = [
 export default {
   title: 'Molecules/Related Content',
   component: 'ycl-related-content',
+  parameters: {
+    yalesites: { name: 'Related Content', story: 'molecules-related-content--related-content' },
+  },
   argTypes: {
     heading: {control: 'text'},
     itemCount: {name: 'Number of Items', control: {type: 'number', min: 0, max: 6, step: 1}},

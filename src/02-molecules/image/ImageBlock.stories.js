@@ -8,6 +8,9 @@ const placeholder = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:/
 export default {
   title: 'Molecules/Image Block',
   component: 'ycl-image-block',
+  parameters: {
+    yalesites: { name: 'Image', story: 'molecules-image--content-image' },
+  },
   argTypes: {
     alt: {name: 'Alt Text', control: 'text'},
     caption: {name: 'Caption', control: 'text'},

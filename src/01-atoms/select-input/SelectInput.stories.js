@@ -2,6 +2,9 @@ import "./SelectInput";
 export default {
 	title: 'Atoms/Select Input',
 	component: 'select-input',
+	parameters: {
+		yalesites: { name: 'Forms (select dropdowns)', story: 'atoms-forms--select-dropdowns' },
+	},
 	argTypes: {
 		label: {
 			control: 'text'
