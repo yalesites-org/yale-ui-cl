@@ -40,11 +40,6 @@ export default {
 		},
 		featured: { control: "boolean" },
 		withImage: { name: "With Image", control: "boolean" },
-		globalTheme: {
-			name: "Site Global Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-		},
 	},
 	args: {
 		heading: "Wu Tsai Institute postdocs bridge disciplines in the study of cognition",
@@ -55,25 +50,22 @@ export default {
 		layout: "grid",
 		featured: true,
 		withImage: true,
-		globalTheme: "one",
 	},
 
 	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ul style="${collectionStyle(args.layout)}">
-				${card(args, args)}
-				${args.layout === "single" ? "" : card(args, {
-					heading: "Admitted students envision themselves as Yale chemists",
-					snippet: "Prospective students joined the Yale Chemistry community to learn about the research program and campus life.",
-					overline: "2022-02-28T12:00:00-05:00",
-				})}
-				${args.layout === "single" ? "" : card(args, {
-					heading: "New exhibition opens at the Yale University Art Gallery",
-					snippet: "The exhibition brings together more than 100 works from the gallery's collection.",
-					overline: "2022-01-12T12:00:00-05:00",
-				})}
-			</ul>
-		</div>`,
+		`<ul style="${collectionStyle(args.layout)}">
+			${card(args, args)}
+			${args.layout === "single" ? "" : card(args, {
+				heading: "Admitted students envision themselves as Yale chemists",
+				snippet: "Prospective students joined the Yale Chemistry community to learn about the research program and campus life.",
+				overline: "2022-02-28T12:00:00-05:00",
+			})}
+			${args.layout === "single" ? "" : card(args, {
+				heading: "New exhibition opens at the Yale University Art Gallery",
+				snippet: "The exhibition brings together more than 100 works from the gallery's collection.",
+				overline: "2022-01-12T12:00:00-05:00",
+			})}
+		</ul>`,
 };
 
 export const Default = {};
@@ -103,33 +95,29 @@ export const Profile = {
 		source: "profile",
 	},
 	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ul style="${collectionStyle(args.layout)}">
-				${card(args, {
-					heading: "Person Namertone",
-					snippet: "Subtitle/Lede",
-					image: placeholder(400, 400),
-					extra: `<span slot="pronouns">They/Them</span>
-						<span slot="subheading">Professional Title</span>
-						<span slot="subheading">Professor of Subject</span>`,
-				})}
-			</ul>
-		</div>`,
+		`<ul style="${collectionStyle(args.layout)}">
+			${card(args, {
+				heading: "Person Namertone",
+				snippet: "Subtitle/Lede",
+				image: placeholder(400, 400),
+				extra: `<span slot="pronouns">They/Them</span>
+					<span slot="subheading">Professional Title</span>
+					<span slot="subheading">Professor of Subject</span>`,
+			})}
+		</ul>`,
 };
 
 export const EventWithCtas = {
 	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ul style="${collectionStyle(args.layout)}">
-				${card(args, {
-					heading: "Yale Symphony Orchestra: Fall Concert",
-					snippet: "Join the Yale Symphony Orchestra for an evening of music in Woolsey Hall.",
-					extra: `<ycl-date-time slot="subheading" start="2022-10-14T19:30:00-04:00" format="day__full" time-zone="America/New_York"></ycl-date-time>
-						<ycl-date-time slot="subheading" start="2022-10-14T19:30:00-04:00" format="time" time-zone="America/New_York"></ycl-date-time>
-						<span slot="subheading">In-person</span>
-						<cta-link slot="ctas" class="filled" href="https://www.yale.edu">Buy Tickets</cta-link>
-						<cta-link slot="ctas" class="outline" href="https://www.yale.edu">Add to Calendar</cta-link>`,
-				})}
-			</ul>
-		</div>`,
+		`<ul style="${collectionStyle(args.layout)}">
+			${card(args, {
+				heading: "Yale Symphony Orchestra: Fall Concert",
+				snippet: "Join the Yale Symphony Orchestra for an evening of music in Woolsey Hall.",
+				extra: `<ycl-date-time slot="subheading" start="2022-10-14T19:30:00-04:00" format="day__full" time-zone="America/New_York"></ycl-date-time>
+					<ycl-date-time slot="subheading" start="2022-10-14T19:30:00-04:00" format="time" time-zone="America/New_York"></ycl-date-time>
+					<span slot="subheading">In-person</span>
+					<cta-link slot="ctas" class="filled" href="https://www.yale.edu">Buy Tickets</cta-link>
+					<cta-link slot="ctas" class="outline" href="https://www.yale.edu">Add to Calendar</cta-link>`,
+			})}
+		</ul>`,
 };

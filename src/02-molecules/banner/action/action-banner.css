@@ -34,82 +34,12 @@
   }
 }
 
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document (as index.html and Storybook do). Without one, each component theme falls back to its
-   own palette tokens. */
-[data-global-theme="one"] ycl-action-banner {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-  --color-slot-three: var(--global-themes-one-colors-slot-three);
-  --color-slot-four: var(--global-themes-one-colors-slot-four);
-  --color-slot-five: var(--global-themes-one-colors-slot-five);
-  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
-}
-
-[data-global-theme="two"] ycl-action-banner {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-  --color-slot-three: var(--global-themes-two-colors-slot-three);
-  --color-slot-four: var(--global-themes-two-colors-slot-four);
-  --color-slot-five: var(--global-themes-two-colors-slot-five);
-  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
-}
-
-[data-global-theme="three"] ycl-action-banner {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-  --color-slot-three: var(--global-themes-three-colors-slot-three);
-  --color-slot-four: var(--global-themes-three-colors-slot-four);
-  --color-slot-five: var(--global-themes-three-colors-slot-five);
-  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
-}
-
-/* Global theme four swaps slots two and five so each component theme keeps its intended
-   background. */
-[data-global-theme="four"] ycl-action-banner {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-five);
-  --color-slot-three: var(--global-themes-four-colors-slot-three);
-  --color-slot-four: var(--global-themes-four-colors-slot-four);
-  --color-slot-five: var(--global-themes-four-colors-slot-two);
-  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
-}
-
-/* Lighter visited links keep contrast on theme three's background under global theme four. */
-[data-global-theme="four"] ycl-action-banner[theme="three"] {
-  --color-banner-visited-base: var(--color-gray-100);
-  --color-banner-visited-hover: var(--global-themes-four-colors-slot-eight);
-}
-
-[data-global-theme="five"] ycl-action-banner {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-  --color-slot-three: var(--global-themes-five-colors-slot-three);
-  --color-slot-four: var(--global-themes-five-colors-slot-four);
-  --color-slot-five: var(--global-themes-five-colors-slot-five);
-  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
-}
-
-[data-global-theme="six"] ycl-action-banner {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-  --color-slot-three: var(--global-themes-six-colors-slot-three);
-  --color-slot-four: var(--global-themes-six-colors-slot-four);
-  --color-slot-five: var(--global-themes-six-colors-slot-five);
-  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
-}
-
 /* The banner. */
 .cta-banner {
   --banner-content-max-width: 37rem;
   --color-text: var(--color-banner-text);
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
   --color-heading: var(--color-banner-heading);
   --color-action: var(--color-banner-action);
   --color-action-secondary: var(--color-banner-action-secondary);
@@ -129,62 +59,45 @@
   margin-inline-end: 0;
 }
 
-/* Component themes. Each takes its colours from the global theme's slots when one is set,
-   otherwise from that component theme's own palette tokens. */
-.cta-banner[data-component-theme="one"] {
-  --color-banner-background: var(--color-slot-one, var(--component-themes-one-slot-one));
-  --color-banner-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
-  --color-banner-heading: var(--color-banner-text);
-  --color-banner-action: var(--color-banner-text);
+/* Colour options, named after the palette colour each one takes its background from. Primary
+   is the default. Pages set the palette with the --color-theme-* custom properties, which inherit
+   into the shadow root; without them the Old Blues defaults apply. */
+.cta-banner[data-component-theme="primary"] {
+  --color-banner-background: var(--color-theme-primary, var(--color-blue-yale));
+  --color-banner-text: var(--color-basic-white);
   --color-banner-action-secondary: var(--color-banner-background);
   --color-link-visited-base: var(--color-link-visited-light);
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-.cta-banner[data-component-theme="two"] {
-  --color-banner-background: var(--color-slot-four, var(--component-themes-two-slot-four));
-  --color-banner-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
-  --color-banner-heading: var(--color-banner-text);
-  --color-banner-action: var(--color-banner-text);
-  --color-banner-action-secondary: var(--color-slot-eight, var(--component-themes-two-slot-eight));
+.cta-banner[data-component-theme="accent-1"] {
+  --color-banner-background: var(--color-theme-accent-1, var(--color-gray-100));
+  --color-banner-text: var(--color-gray-800);
+  --color-banner-action-secondary: var(--color-basic-white);
 }
 
-.cta-banner[data-component-theme="three"] {
-  --color-banner-background: var(--color-slot-five, var(--component-themes-three-slot-five));
-  --color-banner-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
-  --color-banner-heading: var(--color-banner-text);
-  --color-banner-action: var(--color-banner-text);
-  --color-banner-action-secondary: var(--color-slot-one, var(--component-themes-three-slot-one));
-  --color-link-visited-base: var(--color-banner-visited-base, var(--color-link-visited-light));
-  --color-link-visited-hover: var(--color-banner-visited-hover, var(--color-link-visited-light-hover));
-}
-
-.cta-banner[data-component-theme="four"] {
-  --color-banner-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
-  --color-banner-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
-  --color-banner-heading: var(--color-banner-text);
-  --color-banner-action: var(--color-banner-text);
-  --color-banner-action-secondary: var(--color-slot-eight, var(--component-themes-four-colors-slot-eight));
-}
-
-.cta-banner[data-component-theme="five"] {
-  --color-banner-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
-  --color-banner-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
-  --color-banner-heading: var(--color-banner-text);
-  --color-banner-action: var(--color-banner-text);
-  --color-banner-action-secondary: var(--color-slot-one, var(--component-themes-five-colors-slot-one));
+.cta-banner[data-component-theme="accent-2"] {
+  --color-banner-background: var(--color-theme-accent-2, var(--color-gray-800));
+  --color-banner-text: var(--color-basic-white);
+  --color-banner-action-secondary: var(--color-theme-primary, var(--color-blue-yale));
   --color-link-visited-base: var(--color-link-visited-light);
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-/* Theme six has no component palette and slot-nine isn't in the current tokens release, so it
-   falls back to a light gray that keeps the dark slot-seven text readable. */
-.cta-banner[data-component-theme="six"] {
-  --color-banner-background: var(--color-slot-nine, var(--color-gray-200));
-  --color-banner-text: var(--color-slot-seven, var(--component-themes-one-slot-seven));
-  --color-banner-heading: var(--color-banner-text);
-  --color-banner-action: var(--color-banner-text);
-  --color-banner-action-secondary: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+.cta-banner[data-component-theme="tertiary"] {
+  --color-banner-background: var(--color-theme-tertiary, var(--color-blue-light));
+  --color-banner-text: var(--color-gray-800);
+  --color-banner-action-secondary: var(--color-basic-white);
+  /* The purple visited colours fall short of 4.5:1 on this light blue. */
+  --color-link-visited-base: var(--color-banner-text);
+  --color-link-visited-hover: var(--color-banner-text);
+}
+
+.cta-banner[data-component-theme="secondary"] {
+  --color-banner-background: var(--color-theme-secondary, var(--color-blue-medium));
+  --color-banner-text: var(--color-basic-white);
+  --color-banner-action-secondary: var(--color-theme-primary, var(--color-blue-yale));
+  /* The light visited colours fall short of 4.5:1 on this mid blue. */
   --color-link-visited-base: var(--color-banner-text);
   --color-link-visited-hover: var(--color-banner-text);
 }

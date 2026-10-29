@@ -35,7 +35,7 @@ export class FactsAndFigures extends HTMLElement {
 		});
 	}
 
-	get theme() { return this.getAttribute("theme") ?? "one"; }
+	get theme() { return this.getAttribute("theme") ?? "primary"; }
 	set theme(value) { this.setAttribute("theme", value); }
 
 	get alignment() { return this.getAttribute("alignment") ?? "center"; }

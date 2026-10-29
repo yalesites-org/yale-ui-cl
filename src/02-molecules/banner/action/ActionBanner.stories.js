@@ -30,14 +30,9 @@ export default {
     linkContent: {control: 'text'},
     linkContentTwo: {control: 'text'},
     theme: {
-      name: 'Component Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['primary', 'accent-1', 'accent-2', 'tertiary', 'secondary'],
     },
     linkStyle: {
       name: 'Link Style',
@@ -69,8 +64,7 @@ export default {
     snippet: 'Text option, in case there is more that needs to be said.',
     linkContent: 'This is a link',
     linkContentTwo: 'This is another link',
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'primary',
     linkStyle: 'cta',
     layout: 'bottom',
     buttonAlignment: 'right',
@@ -79,14 +73,12 @@ export default {
   },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-action-banner theme="${args.theme}" layout="${args.layout}" button-alignment="${args.buttonAlignment}" width="${args.width}"${args.overlay ? ` overlay-image="${patternImage}"` : ''}>
-        <ycl-image slot="image"><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>
-        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-        <p>${args.snippet}</p>
-        ${links(args)}
-      </ycl-action-banner>
-    </div>`,
+    `<ycl-action-banner theme="${args.theme}" layout="${args.layout}" button-alignment="${args.buttonAlignment}" width="${args.width}"${args.overlay ? ` overlay-image="${patternImage}"` : ''}>
+      <ycl-image slot="image"><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>
+      <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+      <p>${args.snippet}</p>
+      ${links(args)}
+    </ycl-action-banner>`,
 };
 
 export const Default = {};
@@ -119,7 +111,7 @@ export const WithOverlay = {
 
 export const Themed = {
   args: {
-    theme: 'two',
+    theme: 'accent-1',
     linkStyle: 'text-link',
   },
 };

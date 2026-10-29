@@ -20,9 +20,9 @@ export default {
 		linkTwoContent: { name: "Second Link Content", control: "text" },
 		caption: { control: "text" },
 		theme: {
-			name: "Component Theme",
+			name: "Color Option",
 			type: "select",
-			options: ["default", "one", "two", "three", "four", "five", "six"],
+			options: ["default", "primary", "accent-1", "accent-2", "tertiary", "secondary"],
 		},
 		position: {
 			name: "Image Position",
@@ -39,11 +39,6 @@ export default {
 			type: "select",
 			options: ["inline", "offset"],
 		},
-		globalTheme: {
-			name: "Site Global Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-		},
 	},
 	args: {
 		overline: "By Charlyn Paradis",
@@ -57,22 +52,19 @@ export default {
 		position: "image-left",
 		verticalAlign: "middle",
 		imageStyle: "inline",
-		globalTheme: "one",
 	},
 
 	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ycl-content-spotlight-portrait theme="${args.theme}" position="${args.position}" vertical-align="${args.verticalAlign}" image-style="${args.imageStyle}">
-				<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="Portrait of a chemistry student"></ycl-image>
-				${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
-				${args.overline ? `<p slot="overline">${args.overline}</p>` : ""}
-				<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-				${args.subheading ? `<p slot="subheading">${args.subheading}</p>` : ""}
-				${args.linkContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkContent}</text-link>` : ""}
-				${args.linkTwoContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkTwoContent}</text-link>` : ""}
-				<p>${args.text}</p>
-			</ycl-content-spotlight-portrait>
-		</div>`,
+		`<ycl-content-spotlight-portrait theme="${args.theme}" position="${args.position}" vertical-align="${args.verticalAlign}" image-style="${args.imageStyle}">
+			<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="Portrait of a chemistry student"></ycl-image>
+			${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
+			${args.overline ? `<p slot="overline">${args.overline}</p>` : ""}
+			<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+			${args.subheading ? `<p slot="subheading">${args.subheading}</p>` : ""}
+			${args.linkContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkContent}</text-link>` : ""}
+			${args.linkTwoContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkTwoContent}</text-link>` : ""}
+			<p>${args.text}</p>
+		</ycl-content-spotlight-portrait>`,
 };
 
 export const Default = {};
@@ -82,5 +74,5 @@ export const ImageRight = {
 };
 
 export const Themed = {
-	args: { theme: "three" },
+	args: { theme: "accent-2" },
 };

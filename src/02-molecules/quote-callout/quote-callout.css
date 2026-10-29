@@ -23,136 +23,54 @@
   :host(ycl-quote-callout) { --size-spacing-site-gutter: var(--size-spacing-10); }
 }
 
-/* Component themes. Theme one is the default.
-   Each theme takes its colours from slots. The slots come from the site's global theme when one
-   is set (see below), otherwise from the component theme tokens. */
+/* Colour options, named after the palette colour each one takes its background from. Primary
+   is the default. Pages set the palette with the --color-theme-* custom properties, which inherit
+   into the shadow root; without them the Old Blues defaults apply. */
 :host(ycl-quote-callout) {
-  --color-quote-callout-background: var(--color-slot-one, var(--component-themes-one-slot-one));
-  --color-quote-callout-accent: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  --color-quote-callout-background: var(--color-theme-primary, var(--color-blue-yale));
+  --color-quote-callout-accent: var(--color-basic-white);
   --color-quote-callout-quote: var(--color-quote-callout-accent);
   --color-quote-callout-attribution: var(--color-quote-callout-accent);
   --color-link-base: var(--color-quote-callout-accent);
   --color-link-hover: var(--color-quote-callout-accent);
 }
 
-:host(ycl-quote-callout[theme="two"]) {
-  --color-quote-callout-background: var(--color-slot-three, var(--component-themes-two-slot-three));
-  --color-quote-callout-accent: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+:host(ycl-quote-callout[theme="tertiary"]) {
+  --color-quote-callout-background: var(--color-theme-tertiary, var(--color-blue-light));
+  --color-quote-callout-accent: var(--color-gray-800);
 }
 
-:host(ycl-quote-callout[theme="three"]) {
-  --color-quote-callout-background: var(--color-slot-five, var(--component-themes-three-slot-five));
-  --color-quote-callout-accent: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+:host(ycl-quote-callout[theme="accent-2"]) {
+  --color-quote-callout-background: var(--color-theme-accent-2, var(--color-gray-800));
 }
 
-:host(ycl-quote-callout[theme="four"]) {
-  --color-quote-callout-background: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
-  --color-quote-callout-accent: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
+:host(ycl-quote-callout[theme="accent-1"]) {
+  --color-quote-callout-background: var(--color-theme-accent-1, var(--color-gray-100));
+  --color-quote-callout-accent: var(--color-gray-800);
 }
 
-:host(ycl-quote-callout[theme="five"]) {
-  --color-quote-callout-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
-  --color-quote-callout-accent: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
-}
-
-/* There's no component theme six or slot-nine in the current tokens release; a light gray
-   background keeps the theme's dark slot-seven text legible without them. */
-:host(ycl-quote-callout[theme="six"]) {
-  --color-quote-callout-background: var(--color-slot-nine, var(--color-gray-100));
-  --color-quote-callout-accent: var(--color-slot-seven, var(--color-gray-800));
+:host(ycl-quote-callout[theme="secondary"]) {
+  --color-quote-callout-background: var(--color-theme-secondary, var(--color-blue-medium));
 }
 
 /* Dark backgrounds get the lighter visited link colours. */
 :host(ycl-quote-callout:not([theme])),
-:host(ycl-quote-callout[theme="one"]),
-:host(ycl-quote-callout[theme="three"]) {
+:host(ycl-quote-callout[theme="primary"]),
+:host(ycl-quote-callout[theme="accent-2"]) {
   --color-link-visited-base: var(--color-link-visited-light);
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document (as index.html and Storybook do). The same goes for links nested in slotted content,
-   which ::slotted() can't reach. Global theme four swaps slots two and five so each component
-   theme gets its intended background. */
-[data-global-theme="one"] ycl-quote-callout {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-  --color-slot-three: var(--global-themes-one-colors-slot-three);
-  --color-slot-four: var(--global-themes-one-colors-slot-four);
-  --color-slot-five: var(--global-themes-one-colors-slot-five);
-  --color-slot-six: var(--global-themes-one-colors-slot-six);
-  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
+/* Neither the light nor the purple visited colours reach 4.5:1 on the mid and light blues, so
+   visited links there keep the accent colour. */
+:host(ycl-quote-callout[theme="secondary"]),
+:host(ycl-quote-callout[theme="tertiary"]) {
+  --color-link-visited-base: var(--color-quote-callout-accent);
+  --color-link-visited-hover: var(--color-quote-callout-accent);
 }
 
-[data-global-theme="two"] ycl-quote-callout {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-  --color-slot-three: var(--global-themes-two-colors-slot-three);
-  --color-slot-four: var(--global-themes-two-colors-slot-four);
-  --color-slot-five: var(--global-themes-two-colors-slot-five);
-  --color-slot-six: var(--global-themes-two-colors-slot-six);
-  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
-}
-
-[data-global-theme="three"] ycl-quote-callout {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-  --color-slot-three: var(--global-themes-three-colors-slot-three);
-  --color-slot-four: var(--global-themes-three-colors-slot-four);
-  --color-slot-five: var(--global-themes-three-colors-slot-five);
-  --color-slot-six: var(--global-themes-three-colors-slot-six);
-  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
-}
-
-[data-global-theme="four"] ycl-quote-callout {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-five);
-  --color-slot-three: var(--global-themes-four-colors-slot-three);
-  --color-slot-four: var(--global-themes-four-colors-slot-four);
-  --color-slot-five: var(--global-themes-four-colors-slot-two);
-  --color-slot-six: var(--global-themes-four-colors-slot-six);
-  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
-}
-
-[data-global-theme="five"] ycl-quote-callout {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-  --color-slot-three: var(--global-themes-five-colors-slot-three);
-  --color-slot-four: var(--global-themes-five-colors-slot-four);
-  --color-slot-five: var(--global-themes-five-colors-slot-five);
-  --color-slot-six: var(--global-themes-five-colors-slot-six);
-  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
-}
-
-[data-global-theme="six"] ycl-quote-callout {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-  --color-slot-three: var(--global-themes-six-colors-slot-three);
-  --color-slot-four: var(--global-themes-six-colors-slot-four);
-  --color-slot-five: var(--global-themes-six-colors-slot-five);
-  --color-slot-six: var(--global-themes-six-colors-slot-six);
-  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
-  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
-}
-
-/* For accessibility, a lighter visited colour on this pairing's background. */
-[data-global-theme="four"] ycl-quote-callout[theme="three"] {
-  --color-link-visited-base: var(--color-gray-100);
-  --color-link-visited-hover: var(--color-slot-eight);
-}
-
+/* Links nested in slotted content are light DOM, which ::slotted() can't reach, so these rules
+   only take effect when base.css is also loaded in the document. */
 ycl-quote-callout a {
   color: var(--color-link-base);
 }

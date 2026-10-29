@@ -7,65 +7,57 @@ export default {
   argTypes: {
     heading: {control: 'text'},
     theme: {
-      name: 'Component Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['primary', 'tertiary', 'accent-2', 'accent-1', 'secondary'],
     },
     lineTreatment: {
       name: 'Line Treatment',
       type: 'select',
       options: ['default', 'all-strong-lines', 'all-light-lines', 'no-lines'],
     },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
 },
   args: {
     heading: 'This is a link grid',
-    theme: 'one',
+    theme: 'primary',
     lineTreatment: 'default',
-    globalTheme: 'one',
 },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-link-grid theme="${args.theme}" line-treatment="${args.lineTreatment}">
-        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+    `<ycl-link-grid theme="${args.theme}" line-treatment="${args.lineTreatment}">
+      <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
 
-        <ycl-heading level="3" slot="heading-one">Heading for link group one</ycl-heading>
-        <text-link slot="links-one" href="#">This is a link</text-link>
-        <text-link slot="links-one" href="#">This is another link</text-link>
-        <text-link slot="links-one" href="https://google.com">This is a very long link that will wrap lines</text-link>
-        <text-link slot="links-one" href="https://google.com/download.pdf">Link #4</text-link>
+      <ycl-heading level="3" slot="heading-one">Heading for link group one</ycl-heading>
+      <text-link slot="links-one" href="#">This is a link</text-link>
+      <text-link slot="links-one" href="#">This is another link</text-link>
+      <text-link slot="links-one" href="https://google.com">This is a very long link that will wrap lines</text-link>
+      <text-link slot="links-one" href="https://google.com/download.pdf">Link #4</text-link>
 
-        <ycl-heading level="3" slot="heading-two">Heading for link group two</ycl-heading>
-        <text-link slot="links-two" href="#">This is a link in the second column</text-link>
-        <text-link slot="links-two" href="#">This is another link, column two</text-link>
-        <text-link slot="links-two" href="#">This is a very long link that will wrap lines</text-link>
-        <text-link slot="links-two" href="#">Link #4 column 2</text-link>
-        <text-link slot="links-two" href="#">Link #5 column 2</text-link>
-        <text-link slot="links-two" href="#">Link #6 column 2</text-link>
+      <ycl-heading level="3" slot="heading-two">Heading for link group two</ycl-heading>
+      <text-link slot="links-two" href="#">This is a link in the second column</text-link>
+      <text-link slot="links-two" href="#">This is another link, column two</text-link>
+      <text-link slot="links-two" href="#">This is a very long link that will wrap lines</text-link>
+      <text-link slot="links-two" href="#">Link #4 column 2</text-link>
+      <text-link slot="links-two" href="#">Link #5 column 2</text-link>
+      <text-link slot="links-two" href="#">Link #6 column 2</text-link>
 
-        <text-link slot="links-three" href="#">This is a link in the third column</text-link>
-        <text-link slot="links-three" href="#">This is another link</text-link>
-        <text-link slot="links-three" href="#">This is a very long link that will wrap lines</text-link>
-        <text-link slot="links-three" href="#">Link #4 column #3</text-link>
+      <text-link slot="links-three" href="#">This is a link in the third column</text-link>
+      <text-link slot="links-three" href="#">This is another link</text-link>
+      <text-link slot="links-three" href="#">This is a very long link that will wrap lines</text-link>
+      <text-link slot="links-three" href="#">Link #4 column #3</text-link>
 
-        <text-link slot="links-four" href="#">This is a link in the fourth column</text-link>
-        <text-link slot="links-four" href="#">This is another link in column 4</text-link>
-        <text-link slot="links-four" href="#">This is a very long link that will wrap lines</text-link>
-        <text-link slot="links-four" href="#">Link #4 column #4</text-link>
-      </ycl-link-grid>
-    </div>`,
+      <text-link slot="links-four" href="#">This is a link in the fourth column</text-link>
+      <text-link slot="links-four" href="#">This is another link in column 4</text-link>
+      <text-link slot="links-four" href="#">This is a very long link that will wrap lines</text-link>
+      <text-link slot="links-four" href="#">Link #4 column #4</text-link>
+    </ycl-link-grid>`,
 };
 
 export const Default = {};
 
 export const ThemeTwo = {
   args: {
-    theme: 'two',
+    theme: 'tertiary',
   },
 };
 

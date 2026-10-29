@@ -29,9 +29,9 @@ export default {
       options: ['cta', 'link'],
     },
     theme: {
-      name: 'Component Theme',
+      name: 'Color Option',
       type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      options: ['primary', 'accent-1', 'accent-2', 'tertiary', 'secondary'],
     },
     alignment: {
       name: 'Callout Alignment',
@@ -39,46 +39,36 @@ export default {
       options: ['center', 'left'],
     },
     overlay: {name: 'Overlay Background Image', control: 'boolean'},
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
   },
   args: {
     heading: 'Degree Programs',
     text: 'Designed for those who intend to pursue graduate and those who wish to immediately enter a career in which broad scientific training is beneficial.',
     linkText: 'Programs',
     linkType: 'cta',
-    theme: 'one',
+    theme: 'primary',
     alignment: 'center',
     overlay: false,
-    globalTheme: 'one',
   },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
-        ${item(args)}
-      </ycl-callout>
-    </div>`,
+    `<ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
+      ${item(args)}
+    </ycl-callout>`,
 };
 
 export const Default = {};
 
 export const Double = {
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
-        ${item(args)}
-        ${item({...args, heading: 'Research Opportunities', text: 'Work alongside faculty on projects spanning the sciences, humanities, and social sciences.', linkText: 'Find a lab'})}
-      </ycl-callout>
-    </div>`,
+    `<ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
+      ${item(args)}
+      ${item({...args, heading: 'Research Opportunities', text: 'Work alongside faculty on projects spanning the sciences, humanities, and social sciences.', linkText: 'Find a lab'})}
+    </ycl-callout>`,
 };
 
 export const Themed = {
   args: {
-    theme: 'four',
+    theme: 'tertiary',
   },
 };
 
