@@ -35,7 +35,7 @@ export class DirectoryListingCard extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "directory-listing-card")];
 		this.#shadow.appendChild(document.importNode(directoryListingCardTemplate.content, true));
 		this.link = this.#shadow.querySelector(".directory-listing-card__heading-link");

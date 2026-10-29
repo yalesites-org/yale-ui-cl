@@ -26,7 +26,7 @@ export class FactsAndFigures extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "facts-and-figures")];
 		this.#shadow.appendChild(document.importNode(factsAndFiguresTemplate.content, true));
 

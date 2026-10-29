@@ -14,7 +14,7 @@ export class Table extends HTMLElement { #shadow;
 
   constructor() {
     super();
-    this.#shadow = this.attachShadow({ mode: 'closed' });
+    this.#shadow = this.attachShadow({ mode: 'open' });
 	this.#shadow.appendChild(document.importNode(tableTemplate.content, true));
     this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, 'table')];
   }

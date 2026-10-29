@@ -44,7 +44,7 @@ export class AccordionItem extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed"});
+		this.#shadow = this.attachShadow({ mode: "open"});
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "accordion")];
 		this.#shadow.appendChild(document.importNode(accordionItemTemplate.content, true));
 		this.trigger = this.#shadow.querySelector(".accordion-item__toggle");
@@ -77,7 +77,7 @@ export class Accordion extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "accordion")];
 		this.#shadow.appendChild(document.importNode(accordionOuterTemplate.content, true),);
 		this.#shadow.querySelector(".accordion__expand-all").addEventListener("click", () => this.setAll(true));

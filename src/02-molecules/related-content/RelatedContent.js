@@ -34,7 +34,7 @@ export class RelatedContentItem extends HTMLElement {
 		super();
 		this.#internals = this.attachInternals();
 		this.#internals.role = "article";
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "related-content")];
 		this.#shadow.appendChild(document.importNode(relatedContentItemTemplate.content, true));
 		this.link = this.#shadow.querySelector(".related-card__link");
@@ -66,7 +66,7 @@ export class RelatedContent extends HTMLElement {
 	constructor() {
 		super();
 		this.#internals = this.attachInternals();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "related-content")];
 		this.#shadow.appendChild(document.importNode(relatedContentTemplate.content, true));
 		this.headingWrapper = this.#shadow.querySelector(".related-content__heading");

@@ -35,4 +35,14 @@ describe("ycl-alert", () => {
 		expect(shadowOf(alert).querySelector(".alert__text").hidden).toBe(true);
 		expect(shadowOf(alert).querySelector(".alert__link").hidden).toBe(true);
 	});
+
+	it("names its landmark by type, or by label when set", () => {
+		const landmark = (alert) => shadowOf(alert).querySelector("section").getAttribute("aria-label");
+		const names = ["emergency", "announcement", "marketing"].map((type) => landmark(mount(`<ycl-alert type="${type}">Text</ycl-alert>`)));
+		expect(new Set(names).size).toBe(3);
+		const alert = mount(`<ycl-alert label="Campus closure">Text</ycl-alert>`);
+		expect(landmark(alert)).toBe("Campus closure");
+		alert.label = "Road closure";
+		expect(landmark(alert)).toBe("Road closure");
+	});
 });

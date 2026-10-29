@@ -37,7 +37,7 @@ export class ActionBanner extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "action-banner")];
 		this.#shadow.appendChild(document.importNode(actionBannerTemplate.content, true));
 		this.#banner = this.#shadow.querySelector(".cta-banner");

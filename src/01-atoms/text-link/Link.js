@@ -16,7 +16,7 @@ export class TextLink extends HTMLElement {
 	constructor() {
 		super();
 		this.#shadow = this.attachShadow({
-			mode: 'closed'
+			mode: 'open'
 		});
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, 'text-link')];
 		this.#shadow.appendChild(document.importNode(linkTemplate.content, true));

@@ -19,6 +19,10 @@ export default {
     heading: {control: 'text'},
     content: {control: 'text'},
     linkContent: {name: 'Link Text', control: 'text'},
+    label: {
+      control: 'text',
+      description: 'Names the alert landmark. Defaults to one name per type; set it when a page has more than one alert of the same type.',
+    },
     alertId: {
       name: 'Alert ID',
       control: 'text',
@@ -30,11 +34,12 @@ export default {
     heading: 'This is the heading for the alert',
     content: 'This is an optional text for more information if needed.',
     linkContent: 'Optional link',
+    label: '',
     alertId: '',
   },
 
   render: (args) =>
-    `<ycl-alert type="${args.type}"${args.alertId ? ` alert-id="${args.alertId}"` : ''}>
+    `<ycl-alert type="${args.type}"${args.label ? ` label="${args.label}"` : ''}${args.alertId ? ` alert-id="${args.alertId}"` : ''}>
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
       <p>${args.content}</p>
       <text-link slot="link" href="https://www.yale.edu">${args.linkContent}</text-link>

@@ -16,7 +16,7 @@ export class VideoEmbed extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "video-embed")];
 		this.#shadow.appendChild(document.importNode(videoEmbedTemplate.content, true));
 		this.container = this.#shadow.querySelector(".video-embed");

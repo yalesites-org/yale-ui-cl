@@ -22,7 +22,7 @@ export class Heading extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "heading")];
 		const content = document.importNode(headingTemplate.content, true);
 		this.prefixIcon = content.querySelector(".heading__prefix-icon");

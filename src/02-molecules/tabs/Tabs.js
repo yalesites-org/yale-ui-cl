@@ -40,6 +40,7 @@ export class Tabs extends HTMLElement {
 	#observer;
 	#resizeObserver;
 	#tabs = [];
+	#shown;
 
 	static get observedAttributes() {
 		return ["label"];
@@ -47,7 +48,7 @@ export class Tabs extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed", slotAssignment: "manual" });
+		this.#shadow = this.attachShadow({ mode: "open", slotAssignment: "manual" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "tabs")];
 		this.#shadow.appendChild(document.importNode(tabsTemplate.content, true));
 		this.root = this.#shadow.querySelector(".tabs");
@@ -155,6 +156,10 @@ export class Tabs extends HTMLElement {
 	// Keeps exactly one tab selected, defaulting to the first, and mirrors that onto the ARIA state.
 	#update(preferred) {
 		const selected = preferred ?? this.#tabs.find((tab) => tab.hasAttribute("selected")) ?? this.#tabs[0];
+		// Fade a panel in only when the selection moves, not on first render or a rebuild that keeps
+		// the same tab: the panel the page loads with should be there at full strength from the start.
+		const fade = this.#shown !== undefined && this.#shown !== selected;
+		this.#shown = selected;
 		const buttons = this.nav.querySelectorAll('[role="tab"]');
 		const panels = this.panels.querySelectorAll('[role="tabpanel"]');
 		this.#tabs.forEach((tab, i) => {
@@ -164,6 +169,7 @@ export class Tabs extends HTMLElement {
 			buttons[i].setAttribute("aria-selected", String(isSelected));
 			buttons[i].tabIndex = isSelected ? 0 : -1;
 			panels[i].hidden = !isSelected;
+			if (!isSelected || fade) panels[i].classList.toggle("tabs__container--fade", isSelected);
 		});
 		this.updateOverflow();
 	}

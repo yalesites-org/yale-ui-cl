@@ -21,7 +21,7 @@ export class LinkGrid extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed", slotAssignment: "manual" });
+		this.#shadow = this.attachShadow({ mode: "open", slotAssignment: "manual" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "link-grid")];
 		this.#shadow.appendChild(document.importNode(linkGridTemplate.content, true));
 		this.#observer = new MutationObserver((records) => {

@@ -30,7 +30,7 @@ export class Radio extends HTMLElement {
 	constructor() {
 		super();
 		this.internals_ = this.attachInternals();
-		this.#shadow = this.attachShadow({ mode: "closed", delegatesFocus: true });
+		this.#shadow = this.attachShadow({ mode: "open", delegatesFocus: true });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "radio")];
 		this.#shadow.appendChild(document.importNode(radioTemplate.content, true));
 		this.input = this.#shadow.querySelector("input");

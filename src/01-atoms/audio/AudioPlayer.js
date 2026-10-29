@@ -83,7 +83,7 @@ export class AudioPlayer extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "audio")];
 		this.#shadow.appendChild(document.importNode(audioTemplate.content, true));
 		const $ = (selector) => this.#shadow.querySelector(selector);

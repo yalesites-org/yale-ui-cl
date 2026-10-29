@@ -16,7 +16,7 @@ export class ImageBanner extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "image-banner")];
 		this.#shadow.appendChild(document.importNode(imageBannerTemplate.content, true));
 		const caption = this.#shadow.querySelector(".image-banner__caption");

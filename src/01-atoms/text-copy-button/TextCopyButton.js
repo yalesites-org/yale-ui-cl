@@ -21,7 +21,7 @@ export class TextCopyButton extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed", delegatesFocus: true });
+		this.#shadow = this.attachShadow({ mode: "open", delegatesFocus: true });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "text-copy-button")];
 		this.#shadow.appendChild(document.importNode(textCopyButtonTemplate.content, true));
 		this.button = this.#shadow.querySelector(".text-copy-button__button");

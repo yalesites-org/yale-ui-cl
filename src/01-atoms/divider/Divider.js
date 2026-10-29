@@ -20,7 +20,7 @@ export class Divider extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "divider")];
 		this.#shadow.appendChild(document.importNode(dividerTemplate.content, true));
 		this.line = this.#shadow.querySelector(".divider");

@@ -25,7 +25,7 @@ export class QuoteCallout extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "quote-callout")];
 		this.#shadow.appendChild(document.importNode(quoteCalloutTemplate.content, true));
 

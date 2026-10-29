@@ -32,7 +32,7 @@ export class PageTitle extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "page-title")];
 		this.#shadow.appendChild(document.importNode(pageTitleTemplate.content, true));
 		this.heading = this.#shadow.querySelector(".page-title__heading");

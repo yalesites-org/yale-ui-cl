@@ -244,7 +244,9 @@
     transition-delay: 0s;
   }
 
-  .tabs__container:not([hidden]) {
+  /* Only panels revealed by changing tabs fade in (Tabs.js sets the class), so the initial panel
+     renders at full opacity. */
+  .tabs__container--fade:not([hidden]) {
     animation: tabs-fade-in 800ms ease-in-out;
   }
 }

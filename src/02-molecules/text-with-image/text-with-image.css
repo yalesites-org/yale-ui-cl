@@ -363,6 +363,9 @@ ycl-text-with-image picture[slot="image"] img {
   color: var(--color-gray-800);
 }
 
+/* The overline's gray-500 and the caption's gray-800 are for the default white background; on a
+   themed background they fall below contrast minimums, so both take the theme's text colour. */
+:host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image__overline,
 :host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image__caption {
   color: var(--color-text);
 }

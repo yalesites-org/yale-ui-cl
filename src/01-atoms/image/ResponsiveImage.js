@@ -15,7 +15,7 @@ export class ResponsiveImage extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "image")];
 		this.#shadow.appendChild(document.importNode(imageTemplate.content, true));
 		this.figure = this.#shadow.querySelector(".figure");

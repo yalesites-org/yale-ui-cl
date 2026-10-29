@@ -56,7 +56,7 @@ export class DataTable extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "data-table")];
 		this.#shadow.appendChild(document.importNode(dataTableTemplate.content, true));
 		this.search = this.#shadow.querySelector("text-input");

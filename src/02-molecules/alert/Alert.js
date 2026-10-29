@@ -4,6 +4,7 @@ import { iconSvg } from "../../01-atoms/icons/icons.js";
 
 const STORAGE_PREFIX = "ys-alert-id-";
 const STATES = ["expanded", "collapsed", "dismissed"];
+const DEFAULT_LABELS = { emergency: "Emergency alert", announcement: "Announcement", marketing: "Marketing alert" };
 
 // Storage only remembers state between page loads; when it's blocked (private browsing, policy)
 // or full, the alert must keep working with its state living in the attribute alone.
@@ -40,12 +41,12 @@ export class Alert extends HTMLElement {
 	#restored = false;
 
 	static get observedAttributes() {
-		return ["type", "state"];
+		return ["type", "state", "label"];
 	}
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "alert")];
 		this.#shadow.appendChild(document.importNode(alertTemplate.content, true));
 		this.alert = this.#shadow.querySelector(".alert");
@@ -74,7 +75,8 @@ export class Alert extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
-		this.#render();
+		if (name === "label") this.#renderLabel();
+		else this.#render();
 	}
 
 	#render() {
@@ -82,7 +84,7 @@ export class Alert extends HTMLElement {
 		const iconName = { emergency: "triangle-exclamation", announcement: "circle-info" }[this.type];
 		this.icon.innerHTML = iconName ? iconSvg(iconName) : "";
 		this.icon.hidden = !iconName;
-		this.alert.setAttribute("aria-label", emergency ? "Emergency alert" : "Announcement");
+		this.#renderLabel();
 
 		this.toggle.querySelector(".visually-hidden").textContent = emergency ? "Hide alert details" : "Close alert";
 		this.toggle.querySelector(".alert__toggle-icon").innerHTML = iconSvg(emergency ? "angle-down" : "xmark");
@@ -94,6 +96,12 @@ export class Alert extends HTMLElement {
 			this.toggle.removeAttribute("aria-expanded");
 			this.toggle.removeAttribute("aria-controls");
 		}
+	}
+
+	// The section is a landmark, and landmarks of the same kind need distinct names, so each type gets
+	// its own default and authors can set label when a page has more than one of a type.
+	#renderLabel() {
+		this.alert.setAttribute("aria-label", this.label || DEFAULT_LABELS[this.type] || DEFAULT_LABELS.announcement);
 	}
 
 	clickHandler = () => {
@@ -114,6 +122,9 @@ export class Alert extends HTMLElement {
 
 	get type() { return this.getAttribute("type") || "announcement"; }
 	set type(value) { this.setAttribute("type", value); }
+
+	get label() { return this.getAttribute("label"); }
+	set label(value) { this.setAttribute("label", value); }
 
 	get state() { return this.getAttribute("state") || "expanded"; }
 	set state(value) { this.setAttribute("state", value); }

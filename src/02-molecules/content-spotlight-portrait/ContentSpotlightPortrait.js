@@ -36,7 +36,7 @@ export class ContentSpotlightPortrait extends HTMLElement {
 
 	constructor() {
 		super();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "content-spotlight-portrait")];
 		this.#shadow.appendChild(document.importNode(contentSpotlightPortraitTemplate.content, true));
 

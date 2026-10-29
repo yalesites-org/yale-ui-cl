@@ -44,7 +44,7 @@ export class TextInput extends HTMLElement {
 	constructor() {
 		super();
 		this.internals_ = this.attachInternals();
-		this.#shadow = this.attachShadow({ mode: "closed" });
+		this.#shadow = this.attachShadow({ mode: "open" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "text-input")];
 		this.#shadow.appendChild(
 			document.importNode(textInputTemplate.content, true),
