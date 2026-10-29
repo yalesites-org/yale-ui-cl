@@ -1,16 +1,16 @@
-import "./TextWithImage";
+import "./ContentSpotlightPortrait";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/image/ResponsiveImage";
 
 // Self-contained placeholder so the stories don't depend on an image host.
 const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
-	`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${Math.round(h / 8)}" fill="#4a4a4a">${w} x ${h}</text></svg>`
+	`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${Math.round(w / 8)}" fill="#4a4a4a">${w} x ${h}</text></svg>`
 )}`;
 
 export default {
-	title: "Molecules/Content Spotlight Landscape",
-	component: "ycl-text-with-image",
+	title: "Organisms/Content Spotlight Portrait",
+	component: "ycl-content-spotlight-portrait",
 	argTypes: {
 		overline: { control: "text" },
 		heading: { control: "text" },
@@ -23,10 +23,6 @@ export default {
 			name: "Component Theme",
 			type: "select",
 			options: ["default", "one", "two", "three", "four", "five", "six"],
-		},
-		width: {
-			type: "select",
-			options: ["site", "highlight"],
 		},
 		position: {
 			name: "Image Position",
@@ -43,10 +39,6 @@ export default {
 			type: "select",
 			options: ["inline", "offset"],
 		},
-		focus: {
-			type: "select",
-			options: ["equal", "image", "content"],
-		},
 		globalTheme: {
 			name: "Site Global Theme",
 			type: "select",
@@ -57,23 +49,21 @@ export default {
 		overline: "By Charlyn Paradis",
 		heading: "Admitted Students Envision Themselves as Yale Chemists During Visiting Days",
 		subheading: "Submitted February 28, 2022",
-		text: "Prospective students joined the Yale Chemistry community on Feb. 10 – 11 to learn about the research program and campus life at the much anticipated ‘Visiting Days’ event. See more at <text-link href=\"https://www.yale.edu\">Yale</text-link>.",
+		text: "Prospective students joined the <text-link href=\"https://www.yale.edu\">Yale</text-link> Chemistry community on Feb. 10 – 11 to learn about the research program and campus life at the much anticipated ‘Visiting Days’ event.",
 		linkContent: "Visiting Days",
 		linkTwoContent: "View all featured content",
 		caption: "This is an image caption.",
 		theme: "default",
-		width: "site",
 		position: "image-left",
-		verticalAlign: "top",
+		verticalAlign: "middle",
 		imageStyle: "inline",
-		focus: "equal",
 		globalTheme: "one",
 	},
 
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
-			<ycl-text-with-image theme="${args.theme}" width="${args.width}" position="${args.position}" vertical-align="${args.verticalAlign}" image-style="${args.imageStyle}" focus="${args.focus}">
-				<ycl-image slot="image"><img src="${placeholder(900, 600)}" alt="Students touring a chemistry lab"></ycl-image>
+			<ycl-content-spotlight-portrait theme="${args.theme}" position="${args.position}" vertical-align="${args.verticalAlign}" image-style="${args.imageStyle}">
+				<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="Portrait of a chemistry student"></ycl-image>
 				${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
 				${args.overline ? `<p slot="overline">${args.overline}</p>` : ""}
 				<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
@@ -81,20 +71,16 @@ export default {
 				${args.linkContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkContent}</text-link>` : ""}
 				${args.linkTwoContent ? `<text-link slot="ctas" href="https://www.yale.edu">${args.linkTwoContent}</text-link>` : ""}
 				<p>${args.text}</p>
-			</ycl-text-with-image>
+			</ycl-content-spotlight-portrait>
 		</div>`,
 };
 
 export const Default = {};
 
 export const ImageRight = {
-	args: { position: "image-right", focus: "image" },
+	args: { position: "image-right" },
 };
 
 export const Themed = {
-	args: { theme: "one" },
-};
-
-export const Offset = {
-	args: { imageStyle: "offset", verticalAlign: "middle" },
+	args: { theme: "three" },
 };

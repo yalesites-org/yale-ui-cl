@@ -1,6 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./audio.css?inline";
-import { iconSvg } from "../icons/icons.js";
+import { iconSvg } from "../../01-atoms/icons/icons.js";
 
 const speeds = [
 	{ modifier: "half", rate: 0.5, label: "0.5x" },
