@@ -21,8 +21,10 @@
 	content: '*';
 }
 
-/* Same field look as text-input (CLT gives the textarea the form-item__textfield class too) */
-.form-item__textfield {
+/* Same field look as text-input (CLT gives the textarea the form-item__textfield class too).
+   Scoped to the textarea: in the document stylesheet this layer comes after text-input's, so bare
+   .form-item__textfield / .form-item__inner rules here would restyle single-line inputs. */
+.form-item__textarea {
 	display: block;
 	border: var(--border-thickness-1) solid var(--color-form-item-border);
 	padding: var(--size-spacing-4);
@@ -31,23 +33,20 @@
 	line-height: 1.4;
 	/* White even on coloured sections, where the page background would otherwise show through */
 	background-color: var(--color-basic-white);
-}
-
-.form-item__textarea {
 	resize: vertical;
 }
 
-.form-item__textfield::placeholder {
+.form-item__textarea::placeholder {
 	color: var(--color-form-item-placeholder);
 	font-style: italic;
 	opacity: 1;
 }
 
-.form-item__textfield:focus {
+.form-item__textarea:focus {
 	border-color: var(--color-form-item-border-focus);
 }
 
-.form-item__textfield--error {
+.form-item__textarea.form-item__textfield--error {
 	border-width: var(--border-thickness-2);
 	border-color: var(--color-form-item-error);
 	/* Room for the 1.7rem error icon so typed text doesn't run under it */
@@ -59,7 +58,7 @@
 	background-size: 1.7rem;
 }
 
-.form-item__textfield--error:focus {
+.form-item__textarea.form-item__textfield--error:focus {
 	border-color: var(--color-form-item-error);
 }
 
@@ -74,7 +73,7 @@
 	color: var(--color-form-item-error);
 }
 
-.form-item__inner {
+.form-item__inner:has(> .form-item__textarea) {
 	width: 100%;
 	max-width: 25rem;
 	margin-inline-start: auto;

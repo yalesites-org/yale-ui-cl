@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import "./Textarea.js";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
+import baseCss from "../../styles/base.css?raw";
+import bundledCss from "../../styles/base.css?inline";
 
 const inner = (element) => shadowOf(element).querySelector("textarea");
 
@@ -71,5 +73,34 @@ describe("text-area", () => {
 	it("has a white background so it reads on coloured sections", () => {
 		const element = mount(`<text-area style="color-scheme: dark"></text-area>`);
 		expect(getComputedStyle(inner(element)).backgroundColor).toBe("rgb(255, 255, 255)");
+	});
+
+	it("has its stylesheet imported into the document stylesheet", () => {
+		expect(baseCss).toMatch(/@import "\.\.\/01-atoms\/textarea\/textarea\.css" layer\(components\.textarea\);/);
+	});
+
+	it("leaves single-line text fields alone in the document stylesheet", () => {
+		// Light-DOM markup styled by the bundled document stylesheet, where textarea.css's layer
+		// comes after text-input's: its rules must only reach the textarea.
+		const host = mount(`<div></div>`);
+		const root = host.attachShadow({ mode: "open" });
+		const sheet = new CSSStyleSheet();
+		sheet.replaceSync(bundledCss);
+		root.adoptedStyleSheets = [sheet];
+		root.innerHTML = `
+			<div class="form-item"><div class="form-item__inner"><input class="form-item__textfield form-item__textfield--error"></div></div>
+			<div class="form-item"><div class="form-item__inner"><textarea class="form-item__textfield form-item__textarea form-item__textfield--error"></textarea></div></div>`;
+		const [input, textarea] = root.querySelectorAll(".form-item__textfield");
+		const inputStyle = getComputedStyle(input);
+		expect(inputStyle.display).not.toBe("block");
+		expect(inputStyle.maxWidth).toBe("none");
+		expect(inputStyle.backgroundPositionX).toBe("97%");
+		expect(inputStyle.backgroundPositionY).toBe("50%");
+
+		const textareaStyle = getComputedStyle(textarea);
+		expect(textareaStyle.display).toBe("block");
+		expect(textareaStyle.maxWidth).toBe("100%");
+		expect(textareaStyle.resize).toBe("vertical");
+		expect(textareaStyle.backgroundPositionY).not.toBe("50%");
 	});
 });
