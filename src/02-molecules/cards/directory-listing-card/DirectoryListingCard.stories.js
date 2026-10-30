@@ -2,29 +2,28 @@ import "./DirectoryListingCard";
 import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/text-link/Link";
 import "../../../01-atoms/image/ResponsiveImage";
+import { attrs, attributeArg, slotArg, placeholder } from "../../../../.storybook/story-helpers.js";
 
-// Self-contained placeholder so the stories don't depend on an image host.
-const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
-	`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${Math.round(h / 8)}" fill="#4a4a4a">${w} x ${h}</text></svg>`
-)}`;
+const textSlot = (description) => slotArg(`${description} Omitted when empty.`, { control: "text" });
 
 export default {
 	title: "Molecules/Cards/Directory Listing Card",
 	component: "ycl-directory-listing-card",
 	argTypes: {
-		overline: { control: "text" },
-		heading: { control: "text" },
-		subheading: { control: "text" },
-		snippet: { control: "text" },
-		email: { control: "text" },
-		phone: { control: "text" },
-		href: { control: "text" },
-		layout: {
+		href: attributeArg("Profile link. The whole card is clickable; without it the card is not a link.", { control: "text" }),
+		layout: attributeArg("The collection the card sits in, which changes its layout.", {
 			name: "Collection Type",
-			type: "select",
+			control: "select",
 			options: ["profile-directory", "directory-listing"],
-		},
-		featured: { control: "boolean" },
+		}),
+		featured: attributeArg("Featured (larger) card style.", { control: "boolean" }),
+		image: slotArg("Portrait (slot=\"image\"), usually a ycl-image.", { control: false }),
+		overline: textSlot("Text above the name (slot=\"overline\")."),
+		heading: textSlot("Name (slot=\"heading\")."),
+		subheading: textSlot("Title (slot=\"subheading\")."),
+		snippet: textSlot("Text (default slot)."),
+		email: textSlot("Email address, rendered as a mailto link (slot=\"email\")."),
+		phone: textSlot("Phone number, rendered as a tel link (slot=\"phone\")."),
 	},
 	args: {
 		overline: "Humanities",
@@ -38,28 +37,24 @@ export default {
 		featured: true,
 	},
 
-	render: (args) =>
-		`<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-8);">
+	render: (args) => {
+		const slots = [
+			`<ycl-image slot="image"><img src="${placeholder(400, 400)}" alt=""></ycl-image>`,
+			args.overline ? `<span slot="overline">${args.overline}</span>` : "",
+			args.heading ? `<ycl-heading level="3" slot="heading">${args.heading}</ycl-heading>` : "",
+			args.subheading ? `<span slot="subheading">${args.subheading}</span>` : "",
+			args.snippet ? `<p>${args.snippet}</p>` : "",
+			args.email ? `<text-link slot="email" href="mailto:${args.email}">Email</text-link>` : "",
+			args.phone ? `<text-link slot="phone" href="tel:${args.phone.replace(/[^\d+]/g, "")}">${args.phone}</text-link>` : "",
+		].filter(Boolean);
+		return `<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-8);">
 			<li>
-				<ycl-directory-listing-card href="${args.href}" layout="${args.layout}" ${args.featured ? "featured" : ""}>
-					<ycl-image slot="image"><img src="${placeholder(400, 400)}" alt=""></ycl-image>
-					<span slot="overline">${args.overline}</span>
-					<ycl-heading level="3" slot="heading">${args.heading}</ycl-heading>
-					<span slot="subheading">${args.subheading}</span>
-					<p>${args.snippet}</p>
-					${args.email ? `<text-link slot="email" href="mailto:${args.email}">Email</text-link>` : ""}
-					${args.phone ? `<text-link slot="phone" href="tel:${args.phone.replace(/[^\d+]/g, "")}">${args.phone}</text-link>` : ""}
+				<ycl-directory-listing-card${attrs({ href: args.href, layout: args.layout, featured: args.featured })}>
+					${slots.join("\n\t\t\t\t\t")}
 				</ycl-directory-listing-card>
 			</li>
-		</ul>`,
+		</ul>`;
+	},
 };
 
 export const Default = {};
-
-export const NotFeatured = {
-	args: { featured: false },
-};
-
-export const DirectoryListing = {
-	args: { layout: "directory-listing" },
-};

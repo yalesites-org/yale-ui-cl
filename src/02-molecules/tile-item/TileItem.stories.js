@@ -1,22 +1,25 @@
 import "./TileItem";
 import "../../01-atoms/icons/Icon";
 import "../../01-atoms/image/ResponsiveImage";
-
-// Self-contained placeholder so the stories don't depend on an image host.
-const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
-	`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${Math.round(h / 8)}" fill="#4a4a4a">${w} x ${h}</text></svg>`
-)}`;
+import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme, placeholder } from "../../../.storybook/story-helpers.js";
 
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = `<ycl-icon slot="icon" name="lightbulb-solid"></ycl-icon>`;
 
 const tile = (args, heading) => `
 	<li>
-		<ycl-tile-item theme="${args.theme}" alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""} style="min-height: 18rem;">
+		<ycl-tile-item${attrs({
+			theme: args.theme,
+			alignment: args.alignment,
+			"vertical-alignment": args.verticalAlignment,
+			href: args.href,
+			animated: args.animated,
+			style: "min-height: 18rem;",
+		})}>
 			${args.presentation === "icon" ? icon : ""}
-			${args.presentation === "heading" ? `<span slot="heading">${heading}</span>` : ""}
+			${args.presentation === "heading" && heading ? `<span slot="heading">${heading}</span>` : ""}
 			${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
-			${args.content}
+			${args.content ?? ""}
 		</ycl-tile-item>
 	</li>`;
 
@@ -24,35 +27,34 @@ export default {
 	title: "Molecules/Tile Item",
 	component: "ycl-tile-item",
 	argTypes: {
-		heading: { control: "text" },
-		content: { control: "text" },
-		href: { name: "Content Link", control: "text" },
-		presentation: {
-			name: "Presentation Style",
-			type: "select",
-			options: ["heading", "icon", "text-only"],
-		},
-		alignment: {
-			type: "select",
+		href: attributeArg("Makes the content a link to this URL.", { name: "Content Link", control: "text" }),
+		alignment: attributeArg("Horizontal alignment; left is the default.", {
+			control: "select",
 			options: ["left", "center", "right"],
-		},
-		verticalAlignment: {
+			mapping: { left: undefined },
+		}),
+		verticalAlignment: attributeArg("vertical-alignment: where the content sits in the tile; top is the default.", {
 			name: "Vertical Alignment",
-			type: "select",
+			control: "select",
 			options: ["top", "bottom"],
-		},
-		theme: {
+			mapping: { top: undefined },
+		}),
+		theme: attributeArg("Color theme; one is the default.", {
 			name: "Component Theme",
-			type: "select",
+			control: "select",
 			options: ["one", "two", "three", "four", "five", "six"],
-		},
-		withImage: { name: "With Image", control: "boolean" },
-		animated: { name: "With Animation", control: "boolean" },
-		globalTheme: {
-			name: "Site Global Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-		},
+			mapping: { one: undefined },
+		}),
+		animated: attributeArg("Adds a hover animation.", { name: "With Animation", control: "boolean" }),
+		presentation: slotArg("What fills the top of the tile: the heading slot, the icon slot (an icon or inline SVG), or nothing.", {
+			name: "Presentation Style",
+			control: "select",
+			options: ["heading", "icon", "text-only"],
+		}),
+		heading: slotArg("Heading of the first tile (slot=\"heading\"), used when Presentation Style is heading.", { control: "text" }),
+		content: slotArg("Tile text (default slot).", { control: "text" }),
+		withImage: slotArg("Fill the image slot (slot=\"image\").", { name: "With Image", control: "boolean" }),
+		globalTheme: globalThemeArgType,
 	},
 	args: {
 		heading: "01",
@@ -67,26 +69,12 @@ export default {
 		globalTheme: "one",
 	},
 
-	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
+	render: (args) => withGlobalTheme(args.globalTheme, `
 			<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-6);">
 				${tile(args, args.heading)}
 				${tile(args, "02")}
 				${tile(args, "03")}
-			</ul>
-		</div>`,
+			</ul>`),
 };
 
 export const Default = {};
-
-export const Icon = {
-	args: { presentation: "icon", theme: "three", alignment: "center" },
-};
-
-export const TextOnlyBottom = {
-	args: { presentation: "text-only", verticalAlignment: "bottom", theme: "two", href: "" },
-};
-
-export const WithImage = {
-	args: { withImage: true, animated: true },
-};

@@ -3,15 +3,26 @@ import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 import overlayImage from "../../assets/avif-test-image.avif";
+import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+
+const link = (args) => {
+  if (!args.linkText) return '';
+  return args.linkType === 'link'
+    ? `<text-link slot="link" href="https://www.yale.edu">${args.linkText}</text-link>`
+    : `<cta-link slot="link" class="outline" href="https://www.yale.edu">${args.linkText}</cta-link>`;
+};
 
 const item = (args) => `
-  <ycl-callout-item>
-    <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-    <p>${args.text}</p>
-    ${args.linkType === 'link'
-    ? `<text-link slot="link" href="https://www.yale.edu">${args.linkText}</text-link>`
-    : `<cta-link slot="link" class="outline" href="https://www.yale.edu">${args.linkText}</cta-link>`}
+  <ycl-callout-item>${args.heading ? `
+    <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}${args.text ? `
+    <p>${args.text}</p>` : ''}
+    ${link(args)}
   </ycl-callout-item>`;
+
+const callout = (args, items) => withGlobalTheme(args.globalTheme, `
+      <ycl-callout${attrs({ theme: args.theme, alignment: args.alignment, 'overlay-image': args.overlay && overlayImage })}>
+        ${items}
+      </ycl-callout>`);
 
 export default {
   title: 'Molecules/Callout',
@@ -20,30 +31,32 @@ export default {
     layout: 'fullscreen',
   },
   argTypes: {
-    heading: {control: 'text'},
-    text: {control: 'text'},
-    linkText: {name: 'Link Text', control: 'text'},
-    linkType: {
-      name: 'Link Type',
-      type: 'select',
-      options: ['cta', 'link'],
-    },
-    theme: {
+    theme: attributeArg('Component theme.', {
       name: 'Component Theme',
-      type: 'select',
+      control: 'select',
       options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    alignment: {
+    }),
+    alignment: attributeArg('Content alignment. Defaults to center.', {
       name: 'Callout Alignment',
-      type: 'select',
+      control: 'select',
       options: ['center', 'left'],
-    },
-    overlay: {name: 'Overlay Background Image', control: 'boolean'},
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
+    }),
+    overlay: attributeArg('overlay-image: URL of an image drawn behind the callouts. Shown here with a sample image.', {
+      name: 'Overlay Background Image',
+      control: 'boolean',
+    }),
+    items: slotArg('ycl-callout-item elements (default slot). Each item takes slot="heading", text in its default slot and slot="link".', {
+      control: false,
+    }),
+    heading: slotArg('Item heading (slot="heading" on ycl-callout-item). Omitted when empty.', { control: 'text' }),
+    text: slotArg('Item text (default slot of ycl-callout-item). Omitted when empty.', { control: 'text' }),
+    linkText: slotArg('Item link (slot="link" on ycl-callout-item). Omitted when empty.', { name: 'Link Text', control: 'text' }),
+    linkType: slotArg('Whether the item link is a cta-link or a text-link.', {
+      name: 'Link Type',
+      control: 'select',
+      options: ['cta', 'link'],
+    }),
+    globalTheme: globalThemeArgType,
   },
   args: {
     heading: 'Degree Programs',
@@ -56,40 +69,19 @@ export default {
     globalTheme: 'one',
   },
 
-  render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
-        ${item(args)}
-      </ycl-callout>
-    </div>`,
+  render: (args) => callout(args, item(args)),
 };
 
 export const Default = {};
 
 export const Double = {
-  render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
-        ${item(args)}
-        ${item({...args, heading: 'Research Opportunities', text: 'Work alongside faculty on projects spanning the sciences, humanities, and social sciences.', linkText: 'Find a lab'})}
-      </ycl-callout>
-    </div>`,
-};
-
-export const Themed = {
-  args: {
-    theme: 'four',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Two callout items side by side in one callout. Controls edit a single item, so they cannot add a second one.',
+      },
+    },
   },
-};
-
-export const WithOverlay = {
-  args: {
-    overlay: true,
-  },
-};
-
-export const TextLink = {
-  args: {
-    linkType: 'link',
-  },
+  render: (args) => callout(args, `${item(args)}
+        ${item({...args, heading: 'Research Opportunities', text: 'Work alongside faculty on projects spanning the sciences, humanities, and social sciences.', linkText: 'Find a lab'})}`),
 };

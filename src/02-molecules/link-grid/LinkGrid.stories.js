@@ -1,38 +1,38 @@
 import "./LinkGrid";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
+import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
 export default {
   title: 'Molecules/Link Grid',
   component: 'ycl-link-grid',
   argTypes: {
-    heading: {control: 'text'},
-    theme: {
+    theme: attributeArg('Color theme.', {
       name: 'Component Theme',
-      type: 'select',
+      control: 'select',
       options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    lineTreatment: {
+    }),
+    lineTreatment: attributeArg('line-treatment: how the rules between links are drawn.', {
       name: 'Line Treatment',
-      type: 'select',
+      control: 'select',
       options: ['default', 'all-strong-lines', 'all-light-lines', 'no-lines'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-},
+    }),
+    heading: slotArg('Grid heading (slot="heading"). Omitted when empty.', { control: 'text' }),
+    columnSlots: slotArg('Links go in slot="links-one" to "links-four", one list item each; optional column headings in slot="heading-one" to "heading-four". Only columns with links are drawn.', {
+      name: 'Column slots',
+      control: false,
+    }),
+    globalTheme: globalThemeArgType,
+  },
   args: {
     heading: 'This is a link grid',
     theme: 'one',
     lineTreatment: 'default',
     globalTheme: 'one',
-},
+  },
 
-  render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-link-grid theme="${args.theme}" line-treatment="${args.lineTreatment}">
-        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+  render: (args) => withGlobalTheme(args.globalTheme, `
+      <ycl-link-grid${attrs({ theme: args.theme, 'line-treatment': args.lineTreatment })}>
+        ${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
 
         <ycl-heading level="3" slot="heading-one">Heading for link group one</ycl-heading>
         <text-link slot="links-one" href="#">This is a link</text-link>
@@ -57,26 +57,7 @@ export default {
         <text-link slot="links-four" href="#">This is another link in column 4</text-link>
         <text-link slot="links-four" href="#">This is a very long link that will wrap lines</text-link>
         <text-link slot="links-four" href="#">Link #4 column #4</text-link>
-      </ycl-link-grid>
-    </div>`,
+      </ycl-link-grid>`),
 };
 
 export const Default = {};
-
-export const ThemeTwo = {
-  args: {
-    theme: 'two',
-  },
-};
-
-export const AllStrongLines = {
-  args: {
-    lineTreatment: 'all-strong-lines',
-  },
-};
-
-export const NoLines = {
-  args: {
-    lineTreatment: 'no-lines',
-  },
-};

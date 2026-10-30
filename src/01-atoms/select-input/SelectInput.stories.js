@@ -1,94 +1,54 @@
 import "./SelectInput";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+
+const options = ['This is an option', 'This is another option', 'This is a third option'];
+
 export default {
 	title: 'Atoms/Select Input',
 	component: 'select-input',
 	argTypes: {
-		label: {
-			control: 'text'
-		},
-		required: {
+		name: attributeArg('Name the value is submitted under with its form.', { control: 'text' }),
+		value: attributeArg('Selected value (the text or value of one of the options).', { control: 'text' }),
+		placeholder: attributeArg('Passed to the inner select; browsers do not show a placeholder on selects.', { control: 'text' }),
+		autocomplete: attributeArg('Autocomplete hint passed to the inner select.', { control: 'text' }),
+		required: attributeArg('Adds the "required" class: the field is required and its label is marked required.', { control: 'boolean' }),
+		disabled: attributeArg('Disables the field.', { control: 'boolean' }),
+		label: slotArg('Field label (slot="label").', { control: 'text' }),
+		instructions: slotArg('Help text under the field (slot="instructions"). Omitted when empty.', { control: 'text' }),
+		errors: slotArg('Error message (slot="errors"); any content marks the field invalid. Omitted when empty.', { control: 'text' }),
+		grouped: slotArg('Wrap the `<option>`s in an `<optgroup>`. Options and optgroups are children of the element and move into the inner select.', {
+			name: 'Option groups',
 			control: 'boolean',
-			mapping: {
-				true: "required",
-				false: "",
-		},
-	},
-		
-		autocomplete: {
-			control: 'text',
-		},
-		
-		placeholder: {
-			control: 'text',
-		},
-		
-		instructions: {
-			control: 'text'
-		},
-		errors: {
-			control: 'text'
-		},
+		}),
 	},
 	args: {
+		name: 'example',
+		value: '',
+		placeholder: '',
+		autocomplete: '',
+		required: false,
+		disabled: false,
 		label: 'Example Select',
 		instructions: 'This is an example instruction.',
-		errors: 'This is an example error',
-		required: false,
+		errors: '',
+		grouped: false,
 	},
-
-	render: (args) =>
-		`<select-input class="${args.required}"> 
-		<span slot="label">${args.label}</span>
-		<span slot="instructions">This is an example instruction</span>
-		<span slot="errors">This is an error.</span>
-	</select-input>`
+	render: (args) => {
+		const optionMarkup = options.map((option) => `<option>${option}</option>`).join('');
+		return `<select-input${attrs({
+			name: args.name,
+			value: args.value,
+			placeholder: args.placeholder,
+			autocomplete: args.autocomplete,
+			class: args.required && 'required',
+			disabled: args.disabled,
+		})}>
+	<span slot="label">${args.label ?? ''}</span>${args.instructions ? `
+	<span slot="instructions">${args.instructions}</span>` : ''}${args.errors ? `
+	<span slot="errors">${args.errors}</span>` : ''}
+	${args.grouped ? `<optgroup label="Example group">${optionMarkup}</optgroup>` : optionMarkup}
+</select-input>`;
+	},
 };
 
-export const Example = {
-	args: {
-        errors: "",
-        label: "Name"
-    },
-	render:(args) =>
-		`<select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
-		<span slot="label">${args.label}</span>
-		<span slot="instructions">${args.instructions}</span>
-		<span slot="errors">${args.errors}</span>
-		<option>This is an option</option>
-		<option>This is another option</option>
-	</select-input>`,
-};
-
-export const WithError = {
-    args: {
-        label: "Yale HomePage",
-        instructions: "This is an example instruction.",
-        errors: "This has an error.",
-        required: false,
-    },
-    render:args => `<select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
-        <span slot="label">${args.label}</span>
-        <span slot="instructions">${args.instructions}</span>
-        <span slot="errors">${args.errors}</span>
-		<option>Example Value 1</option>
-		<option>Example Value 2</option>
-    </select-input>`
-};
-
-export const RequiredWithGroups = {
-    args: {
-        label: "Yale HomePage",
-        instructions: "This is an example instruction.",
-        errors: "",
-        required: true
-    },
-    render:args => `<select-input placeholder="${args.placeholder}" autocomplete="${args.autocomplete}" class="${args.required}">
-        <span slot="label">${args.label}</span>
-        <span slot="instructions">${args.instructions}</span>
-        <span slot="errors">${args.errors}</span>
-    	<optgroup label="Example 1">
-    	<option>This is one option</option>
-    	<option>This is another option!</option>
-    	</optgroup>
-    </select-input>`
-};
+export const Default = {};

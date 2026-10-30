@@ -1,35 +1,28 @@
 import "./CustomCard";
 import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/image/ResponsiveImage";
+import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme, placeholder } from "../../../../.storybook/story-helpers.js";
 
-// Self-contained placeholder so the stories don't depend on an image host.
-const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
-	`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${Math.round(h / 8)}" fill="#4a4a4a">${w} x ${h}</text></svg>`
-)}`;
-
-const card = (args, heading, snippet) => `
-	<li>
-		<ycl-custom-card href="${args.href}" ${args.featured ? "featured" : ""}>
-			${args.withImage ? `<ycl-image slot="image" ratio="3x2"><img src="${placeholder(600, 400)}" alt=""></ycl-image>` : ""}
-			<ycl-heading level="3" slot="heading">${heading}</ycl-heading>
-			<p>${snippet}</p>
-		</ycl-custom-card>
-	</li>`;
+const card = (args, heading, snippet) =>
+	`<ycl-custom-card${attrs({ href: args.href, featured: args.featured })}>${args.withImage ? `
+			<ycl-image slot="image" ratio="3x2"><img src="${placeholder(600, 400)}" alt=""></ycl-image>` : ""}${heading ? `
+			<ycl-heading level="3" slot="heading">${heading}</ycl-heading>` : ""}${snippet ? `
+			<p>${snippet}</p>` : ""}
+		</ycl-custom-card>`;
 
 export default {
 	title: "Molecules/Cards/Custom Card",
 	component: "ycl-custom-card",
 	argTypes: {
-		heading: { control: "text" },
-		snippet: { control: "text" },
-		href: { control: "text" },
-		featured: { control: "boolean" },
-		withImage: { name: "With Image", control: "boolean" },
-		globalTheme: {
-			name: "Site Global Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-		},
+		href: attributeArg("Card link. The whole card is clickable; without it the card is not a link.", { control: "text" }),
+		featured: attributeArg("Featured (larger) card style.", { control: "boolean" }),
+		heading: slotArg("Card heading (slot=\"heading\"). Omitted when empty.", { control: "text" }),
+		snippet: slotArg("Card text (default slot); hidden when empty.", { control: "text" }),
+		withImage: slotArg("Card image (slot=\"image\"). Without one, a decorative colour bar shows instead.", {
+			name: "With Image",
+			control: "boolean",
+		}),
+		globalTheme: globalThemeArgType,
 	},
 	args: {
 		heading: "Card Title",
@@ -40,18 +33,24 @@ export default {
 		globalTheme: "one",
 	},
 
-	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: var(--size-spacing-8);">
-				${card(args, args.heading, args.snippet)}
-				${card(args, "Undergraduate Research", "Find opportunities to work with faculty on original research.")}
-				${card(args, "Visiting Campus", "Plan a visit, take a tour, and explore New Haven.")}
-			</ul>
-		</div>`,
+	render: (args) => withGlobalTheme(args.globalTheme, `<div style="max-width: 24rem;">
+			${card(args, args.heading, args.snippet)}
+		</div>`),
 };
 
 export const Default = {};
 
-export const WithoutImage = {
-	args: { withImage: false, featured: false },
+export const CardGrid = {
+	parameters: {
+		docs: {
+			description: {
+				story: "Several cards in a list laid out as a grid. Controls edit a single card, so they cannot compose a group of them.",
+			},
+		},
+	},
+	render: (args) => withGlobalTheme(args.globalTheme, `<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: var(--size-spacing-8);">
+			<li>${card(args, args.heading, args.snippet)}</li>
+			<li>${card(args, "Undergraduate Research", "Find opportunities to work with faculty on original research.")}</li>
+			<li>${card(args, "Visiting Campus", "Plan a visit, take a tour, and explore New Haven.")}</li>
+		</ul>`),
 };
