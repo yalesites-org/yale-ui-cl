@@ -58,7 +58,7 @@ const section = (heading, body) =>
 		${body}`);
 const page = (id, body) =>
 	`<ycl-link-skip href="#${id}">Skip to main content</ycl-link-skip>
-	${body.header ?? ""}
+	${body.header ? `<header>${body.header}</header>` : ""}
 	<main id="${id}" tabindex="-1" style="display: flex; flex-direction: column; gap: var(--size-spacing-10); padding-block-end: var(--size-spacing-10);">
 		${body.main}
 	</main>

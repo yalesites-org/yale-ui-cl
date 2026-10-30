@@ -13,11 +13,15 @@ const examples = Object.entries(composed).map(([exportName, Story]) => {
 	if (typeof output === "string") document.body.innerHTML = output;
 	else document.body.replaceChildren(output);
 	const elements = [...document.body.querySelectorAll("*")];
+	// A story may return a plain wrapper node (e.g. for event listeners); its children are the page.
+	const root = typeof output === "string" ? document.body : output;
 	const result = {
 		exportName,
 		name: module[exportName].name ?? "",
 		tags: new Set(elements.map((el) => el.localName).filter((name) => name.includes("-"))),
 		pageTitles: elements.filter((el) => el.localName === "ycl-page-title").length,
+		topLevel: [...root.children].map((el) => el.localName),
+		headers: elements.filter((el) => el.localName === "header").length,
 	};
 	document.body.replaceChildren();
 	return result;
@@ -40,5 +44,11 @@ describe("Page examples", () => {
 		expect(name).not.toMatch(contentTypeWords);
 		for (const tag of tags) expect(tag).not.toMatch(contentTypeWords);
 		expect(pageTitles).toBe(1);
+	});
+
+	it.each(examples)("$exportName keeps all top-level content inside landmarks", ({ topLevel, headers }) => {
+		const outside = topLevel.filter((name) => name !== "ycl-link-skip" && !["header", "main", "footer"].includes(name));
+		expect(outside).toEqual([]);
+		expect(headers).toBeLessThanOrEqual(1);
 	});
 });
