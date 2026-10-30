@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import "./Alert.js";
 import { mount, shadowOf } from "../../../test/helpers.js";
+import { icons } from "../../01-atoms/icons/icons.js";
 
 const toggle = (alert) => shadowOf(alert).querySelector(".alert__toggle");
 
@@ -34,5 +35,14 @@ describe("ycl-alert", () => {
 		</ycl-alert>`);
 		expect(shadowOf(alert).querySelector(".alert__text").hidden).toBe(true);
 		expect(shadowOf(alert).querySelector(".alert__link").hidden).toBe(true);
+	});
+
+	it("uses the outline icons YaleSites uses", () => {
+		const path = (alert, selector) => shadowOf(alert).querySelector(`${selector} path`).getAttribute("d");
+		const announcement = mount(`<ycl-alert type="announcement">Text</ycl-alert>`);
+		expect(path(announcement, ".alert__icon")).toBe(icons["circle-info-regular"].path);
+		expect(path(announcement, ".alert__toggle-icon")).toBe(icons["xmark-regular"].path);
+		const emergency = mount(`<ycl-alert type="emergency">Text</ycl-alert>`);
+		expect(path(emergency, ".alert__icon")).toBe(icons["triangle-exclamation-regular"].path);
 	});
 });

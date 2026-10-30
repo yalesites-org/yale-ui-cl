@@ -59,10 +59,13 @@
   display: inline !important;
 }
 
-/* The underline slides in when anywhere on the result is hovered. */
+/* The title is bold, as YaleSites' clickable heading links are. The underline slides in when
+   anywhere on the result is hovered. */
 .search-result__heading-link {
   --thickness: var(--link-underline-size-default);
   color: currentcolor;
+  font-weight: var(--font-weights-yalenew-bold);
+  letter-spacing: var(--font-letter-spacing-yalenew-bold);
   text-decoration: none;
   background-image: linear-gradient(currentcolor, currentcolor);
   background-position: 0 1.05em;
@@ -114,6 +117,47 @@
 .search-result__breadcrumbs {
   font: var(--font-style-body-s);
   color: var(--color-basic-brown-gray);
+}
+
+/* Slotted breadcrumbs follow the YaleSites breadcrumbs inside a search result: a wrapping row of
+   links with no underline, separated by a slanted bar centred in the gap between items. Nested
+   breadcrumb markup is light DOM, out of reach of ::slotted(), so these are document rules that
+   only apply when base.css is also loaded in the document. */
+ycl-search-result > [slot="breadcrumbs"] :is(ol, ul) {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ycl-search-result > [slot="breadcrumbs"] li {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+ycl-search-result > [slot="breadcrumbs"] li:not(:last-child) {
+  margin-right: var(--size-spacing-5);
+  padding-right: var(--size-spacing-5);
+}
+
+ycl-search-result > [slot="breadcrumbs"] li:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  transform: skew(-15deg) translateX(50%);
+}
+
+ycl-search-result > [slot="breadcrumbs"] a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ycl-search-result > [slot="breadcrumbs"] text-link {
+  --link-underline-thickness: 0;
+  --color-link-base: currentcolor;
+  --color-link-visited-base: currentcolor;
 }
 
 .search-result__highlighted,

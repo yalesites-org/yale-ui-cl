@@ -118,7 +118,69 @@
   --color-slot-nine: var(--global-themes-six-colors-slot-nine);
 }
 
-/* The accordion group. */
+/* The accordion group. Width and alignment mirror the YaleSites accordion options, reflected
+   onto .accordion as data attributes: width caps the group at a layout width (content by
+   default), centred within the site gutter; left alignment keeps the controls and items to the
+   content width at the start of a wider group. */
+.accordion {
+  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
+     spacing tokens it steps through. */
+  --accordion-gutter: var(--size-spacing-5);
+
+  padding-inline: var(--accordion-gutter);
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  .accordion {
+    --accordion-gutter: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  .accordion {
+    --accordion-gutter: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl */
+@media (min-width: 1200px) {
+  .accordion {
+    --accordion-gutter: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl */
+@media (min-width: 1400px) {
+  .accordion {
+    --accordion-gutter: var(--size-spacing-10);
+  }
+}
+
+.accordion__inner {
+  width: 100%;
+  max-width: var(--accordion-width, var(--size-component-layout-width-content));
+  margin-inline: auto;
+}
+
+.accordion[data-component-width="highlight"] {
+  --accordion-width: var(--size-component-layout-width-highlight);
+}
+
+.accordion[data-component-width="site"] {
+  --accordion-width: var(--size-component-layout-width-site);
+}
+
+.accordion[data-component-width="max"] {
+  --accordion-width: var(--size-component-layout-width-max);
+}
+
+.accordion[data-component-alignment="left"] .accordion__controls,
+.accordion[data-component-alignment="left"] .accordion__items ::slotted(ycl-accordion-item) {
+  max-width: var(--size-component-layout-width-content);
+}
+
 .accordion__heading ::slotted(*) {
   margin: 0 0 var(--size-spacing-5);
 }
@@ -128,6 +190,10 @@
   margin: 0 0 var(--size-spacing-5);
   padding: 0;
   display: flex;
+}
+
+.accordion__controls[hidden] {
+  display: none;
 }
 
 .accordion__controls > *:not(:last-child) {
@@ -142,7 +208,8 @@
   fill: currentColor;
 }
 
-.accordion__icon--up {
+/* The toggle-all arrow points up once everything is open. */
+.accordion__toggle-all[aria-expanded="true"] .accordion__icon {
   transform: rotate(180deg);
 }
 

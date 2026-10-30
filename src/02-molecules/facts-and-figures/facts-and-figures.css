@@ -123,8 +123,11 @@
 }
 
 /* The Twig stat's padding is vertical only; its group adds the horizontal padding. A standalone
-   stat on a coloured background needs it too, so `padded` adds it here. */
+   stat on a coloured background needs it too, so `padded` adds it here. border-box keeps that
+   padding inside the card: without it the full-width inner overflows by the padding, and the
+   rule above the stat runs out to the card's edges. */
 .facts-and-figures__inner {
+  box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;

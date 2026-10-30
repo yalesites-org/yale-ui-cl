@@ -55,6 +55,9 @@
 
 /* max-height is what lets the dismissal animate. */
 .alert {
+  /* The text-link descender halo matches the alert's own background, as in YaleSites. */
+  --color-text-shadow: var(--color-alert-background);
+
   position: relative;
   z-index: 3;
   background-color: var(--color-alert-background);

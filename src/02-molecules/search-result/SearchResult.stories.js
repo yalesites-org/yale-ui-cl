@@ -24,13 +24,14 @@ export default {
     isCas: false,
 },
 
-  // Breadcrumbs are slotted, so any breadcrumb markup can be dropped in; this is a minimal stand-in.
+  // Breadcrumbs are slotted, so any breadcrumb markup can be dropped in; a list of links gets the
+  // YaleSites breadcrumb treatment (no underline, bar separators) from search-result.css.
   render: (args) =>
     `<ycl-search-result href="${args.url}" content-type="${args.contentType}"${args.isCas ? ' cas' : ''}>
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
       <nav slot="breadcrumbs" aria-label="Breadcrumb">
-        <ol style="display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0;">
-          ${breadcrumbs.map((crumb, i) => `<li>${i ? '/ ' : ''}<text-link href="#" style="--color-link-base: currentColor; --color-link-visited-base: currentColor;">${crumb}</text-link></li>`).join('')}
+        <ol>
+          ${breadcrumbs.map((crumb) => `<li><text-link href="#">${crumb}</text-link></li>`).join('')}
         </ol>
       </nav>
       ${args.highlighted ? `<p slot="highlighted">${args.highlighted}</p>` : ''}

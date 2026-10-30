@@ -48,7 +48,7 @@ export default {
 					<span slot="subheading">${args.subheading}</span>
 					<p>${args.snippet}</p>
 					${args.email ? `<text-link slot="email" href="mailto:${args.email}">Email</text-link>` : ""}
-					${args.phone ? `<text-link slot="phone" href="tel:${args.phone.replace(/[^\d+]/g, "")}">${args.phone}</text-link>` : ""}
+					${args.phone ? `<p slot="phone">${args.phone}</p>` : ""}
 				</ycl-directory-listing-card>
 			</li>
 		</ul>`,

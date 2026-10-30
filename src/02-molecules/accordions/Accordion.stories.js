@@ -10,6 +10,16 @@ export default {
       type: 'select',
       options: ['default', 'one', 'two', 'three', 'four', 'five', 'six'],
     },
+    width: {
+      name: 'Width',
+      type: 'select',
+      options: ['content', 'highlight', 'site', 'max'],
+    },
+    alignment: {
+      name: 'Alignment',
+      type: 'select',
+      options: ['center', 'left'],
+    },
     globalTheme: {
       name: 'Site Global Theme',
       type: 'select',
@@ -19,12 +29,14 @@ export default {
   args: {
     heading: 'Frequently Asked Questions',
     theme: 'default',
+    width: 'content',
+    alignment: 'center',
     globalTheme: 'one',
 },
 
   render: (args) =>
     `<div data-global-theme="${args.globalTheme}">
-      <ycl-accordion theme="${args.theme}">
+      <ycl-accordion theme="${args.theme}" width="${args.width}" alignment="${args.alignment}">
         <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
         <ycl-accordion-item>
           <ycl-heading level="3" slot="heading">How do I apply?</ycl-heading>
@@ -47,5 +59,12 @@ export const Default = {};
 export const Themed = {
   args: {
     theme: 'one',
+  },
+};
+
+export const SiteWidthLeftAligned = {
+  args: {
+    width: 'site',
+    alignment: 'left',
   },
 };
