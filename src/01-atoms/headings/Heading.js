@@ -14,6 +14,17 @@ headingTemplate.innerHTML = `
 
 const levels = ["1", "2", "3", "4", "5", "6"];
 
+/**
+ * A heading (h1 to h6) with an optional prefix, prefix icon and link.
+ * @attr {"1"|"2"|"3"|"4"|"5"|"6"} level - The heading level. Defaults to 2.
+ * @attr {"h1"|"h2"|"h3"|"h4"|"h5"|"h6"|"1"|"2"|"3"|"4"|"5"|"6"} appearance - Look of another level, without changing the outline level.
+ * @attr {string} prefix - Short text shown before the heading.
+ * @attr {string} prefix-icon - Name of an icon (see ycl-icon) shown before the heading.
+ * @attr {string} href - Makes the heading text a link to this URL.
+ * @attr {string} id - Makes the heading a link target; it also gets tabindex="-1" so focus can land on it.
+ * @slot - The heading text.
+ * @csspart prefix - The prefix text.
+ */
 export class Heading extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

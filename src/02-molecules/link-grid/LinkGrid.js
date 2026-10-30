@@ -15,6 +15,20 @@ linkGridTemplate.innerHTML = `
 
 // Slots are assigned by hand so every slotted link can get its own <li>: named slots can only
 // project into a single place, which would leave the links without real list markup.
+/**
+ * A heading over up to four columns of links. Each child goes to the column named by its slot attribute.
+ * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme.
+ * @attr {"default"|"all-strong-lines"|"all-light-lines"|"no-lines"} line-treatment - Lines between links.
+ * @slot heading - The grid heading.
+ * @slot heading-one - Heading of column one. Also heading-two, heading-three and heading-four.
+ * @slot heading-two - Heading of column two.
+ * @slot heading-three - Heading of column three.
+ * @slot heading-four - Heading of column four.
+ * @slot links-one - Links in column one; one element per link. Also links-two, links-three and links-four.
+ * @slot links-two - Links in column two.
+ * @slot links-three - Links in column three.
+ * @slot links-four - Links in column four.
+ */
 export class LinkGrid extends HTMLElement {
 	#shadow;
 	#observer;

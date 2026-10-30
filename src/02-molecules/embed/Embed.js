@@ -10,6 +10,16 @@ embedTemplate.innerHTML = `
 
 // Without a src, the default slot renders instead, for script-driven embeds (Instagram, X,
 // Bluesky) whose blockquote and <script> have to live in the document to run.
+/**
+ * An embedded iframe (form, map, calendar, audio, video), or slotted embed code for script-driven embeds.
+ * @attr {string} src - URL to load in the iframe. Without it, the slotted content shows instead.
+ * @attr {string} label - Accessible title for the iframe.
+ * @attr {"form"|"audio"|"video"|"map"|"calendar"|"unknown"} type - Kind of embed; sets the frame's size.
+ * @attr {"lazy"|"eager"} loading - When to load the iframe. Defaults to lazy.
+ * @attr {boolean} allowfullscreen - Lets the embed go full screen.
+ * @attr {"max"|"site"|"highlight"|"content"} width - Width of the embed.
+ * @slot - Embed code that has to run in the page, such as an Instagram or X blockquote and its `<script>`.
+ */
 export class Embed extends HTMLElement {
 	#shadow;
 	#inner;

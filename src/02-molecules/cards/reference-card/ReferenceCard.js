@@ -36,6 +36,25 @@ referenceCardTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A card for a post, event, profile or resource. With an href, the whole card is a link.
+ * @attr {string} href - URL the card links to.
+ * @attr {string} overlay - Text shown over the image, such as "Video". Also added to the link name.
+ * @attr {"grid"|"list"|"condensed"|"single"} layout - Card layout. Defaults to grid.
+ * @attr {boolean} featured - Larger, featured presentation.
+ * @attr {"profile"|"resource"} source - Adjusts the image for profile photos or resource thumbnails.
+ * @slot categories - Category links.
+ * @slot eyebrow - Text above the heading.
+ * @slot prefix - Text before the heading.
+ * @slot heading - The card heading.
+ * @slot pronouns - Pronouns, for profiles.
+ * @slot subheading - Text under the heading.
+ * @slot overline - A date or other short line, often a ycl-date-time.
+ * @slot tags - Tag links.
+ * @slot - Summary text.
+ * @slot ctas - Links or buttons.
+ * @slot image - The card image.
+ */
 export class ReferenceCard extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

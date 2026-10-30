@@ -15,6 +15,12 @@ readTimeTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * Shows the estimated reading time of some content on the page.
+ * @attr {string} label - Label text. Defaults to "Estimated read time".
+ * @attr {string} target - CSS selector of the content to measure. Defaults to #main-content, then the element's parent.
+ * @attr {number} words-per-minute - Reading speed. Defaults to 200.
+ */
 export class ReadTime extends HTMLElement {
 	#shadow;
 	#observer;

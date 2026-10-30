@@ -7,6 +7,12 @@ ctaTemplate.innerHTML = `<a class="cta" href="#"><slot>Default Link</slot></a>`;
 
 const currentURL = window.location.origin;
 
+/**
+ * A call-to-action link styled as a button.
+ * @attr {string} href - The link URL.
+ * @attr {string} class - Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary.
+ * @slot - The link text.
+ */
 export class Cta extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["href", "class"];

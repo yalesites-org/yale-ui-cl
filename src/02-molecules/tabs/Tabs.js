@@ -21,6 +21,12 @@ tabsTemplate.innerHTML = `
 
 // A tab's label and panel content. It renders nothing itself: ycl-tabs builds the tab and
 // tabpanel in its own shadow root and slots this element into the panel.
+/**
+ * One tab of a ycl-tabs: its label and panel content.
+ * @attr {string} label - The tab's label.
+ * @attr {boolean} selected - Whether this tab is selected. Defaults to the first tab.
+ * @slot - The panel content.
+ */
 export class Tab extends HTMLElement {
 	get label() { return this.getAttribute("label") ?? ""; }
 	set label(value) { this.setAttribute("label", value); }
@@ -35,6 +41,12 @@ export class Tab extends HTMLElement {
 // Tabs and panels live together in this shadow root so aria-controls/aria-labelledby can reference
 // each other (ID references can't cross shadow boundaries). Slots are assigned by hand so each
 // ycl-tab child can be projected into its own panel.
+/**
+ * Tabbed panels. Children are ycl-tab elements.
+ * @attr {string} label - Accessible name of the tab list.
+ * @attr {"one"|"two"|"three"} theme - Color theme.
+ * @slot - ycl-tab elements.
+ */
 export class Tabs extends HTMLElement {
 	#shadow;
 	#observer;

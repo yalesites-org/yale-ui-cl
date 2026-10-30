@@ -23,6 +23,13 @@ relatedContentItemTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * One linked item inside a ycl-related-content.
+ * @attr {string} href - URL the item links to.
+ * @attr {string} type - Content type shown above the title, such as Post or Event.
+ * @attr {string} category - Category shown after the type.
+ * @slot heading - The title, as a heading element.
+ */
 export class RelatedContentItem extends HTMLElement {
 	#shadow;
 	#internals;
@@ -59,6 +66,12 @@ export class RelatedContentItem extends HTMLElement {
 	set href(value) { this.setAttribute("href", value); }
 }
 
+/**
+ * A list of links to related content. Children are ycl-related-content-item elements.
+ * @attr {"site"|"content"} width - Width of the section. Defaults to site.
+ * @slot heading - The section heading. It also names the region.
+ * @slot - ycl-related-content-item elements.
+ */
 export class RelatedContent extends HTMLElement {
 	#shadow;
 	#internals;

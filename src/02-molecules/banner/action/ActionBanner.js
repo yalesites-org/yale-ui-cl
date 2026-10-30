@@ -25,6 +25,18 @@ actionBannerTemplate.innerHTML = `
 // Host attributes are mirrored onto the inner wrapper as data attributes with their defaults
 // filled in, because the default button alignment depends on the layout and CSS can't express
 // "attribute absent" defaults that cleanly.
+/**
+ * A banner with an image, heading, text and action buttons.
+ * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to one.
+ * @attr {"bottom"|"left"|"right"} layout - Where the content box sits on the image. Defaults to bottom.
+ * @attr {"left"|"center"|"right"} button-alignment - Alignment of the actions. Defaults to right for the bottom layout, left otherwise.
+ * @attr {"site"|"full"} width - Site width or full browser width. Defaults to site.
+ * @attr {string} overlay-image - URL of a decorative image laid over the content background.
+ * @slot image - The background image.
+ * @slot heading - The heading.
+ * @slot - The text.
+ * @slot actions - Links or buttons, such as cta-link elements.
+ */
 export class ActionBanner extends HTMLElement {
 	#shadow;
 	#banner;

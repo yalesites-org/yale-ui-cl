@@ -2,7 +2,7 @@ import "./Lists.js";
 
 export default {
   title: 'Atoms/Lists',
-  component: 'yc-list',
+  component: 'ycl-list',
   argTypes: {
     type: {      
       name: "List Type",

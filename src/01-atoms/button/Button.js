@@ -12,6 +12,17 @@ buttonTemplate.innerHTML = `<button class="button cta" type="button"><slot></slo
 // A <button> styled as a CTA, or an <a> when given an href (matching yds-control.twig). Dropdowns
 // are always buttons, whatever the href. CTA variants come from the class attribute, as on
 // cta-link (e.g. class="filled radius-pill").
+/**
+ * A button styled as a call to action. Renders a `<button>`, or a link when given an href.
+ * @attr {string} class - Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary.
+ * @attr {string} href - Makes the button a link to this URL (not for control-type="dropdown").
+ * @attr {"button"|"submit"|"reset"} type - What the button does in a form. Defaults to button.
+ * @attr {boolean} disabled - Disables the button.
+ * @attr {"true"|"false"} expanded - For toggle buttons: whether the controlled content is open. Leave it off for ordinary buttons.
+ * @attr {string} label - Accessible name, for a button whose visible text is not enough.
+ * @attr {"default"|"dropdown"} control-type - dropdown adds a down arrow and keeps the control a `<button>`.
+ * @slot - The button text.
+ */
 export class Button extends HTMLElement {
 	#shadow;
 	#internals;

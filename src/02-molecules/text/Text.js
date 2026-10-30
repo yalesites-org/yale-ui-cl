@@ -14,6 +14,13 @@ textTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A block of rich text (paragraphs, lists, links) with the library's typography.
+ * @attr {"default"|"emphasized"} variation - emphasized uses a larger type size.
+ * @attr {"center"|"left"} alignment - Alignment of the block.
+ * @attr {"content"|"highlight"|"max"} width - Width of the block.
+ * @slot - The rich text.
+ */
 export class Text extends HTMLElement {
 	#shadow;
 

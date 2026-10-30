@@ -14,11 +14,14 @@
   "author": "Nick Taylor",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "custom-elements.json",
+    "AI-GUIDE.md"
   ],
   "main": "./dist/yale-ui-cl.js",
   "module": "./dist/yale-ui-cl.js",
   "style": "./dist/yale-ui-cl.css",
+  "customElements": "custom-elements.json",
   "exports": {
     ".": {
       "import": "./dist/yale-ui-cl.js",
@@ -26,22 +29,26 @@
     },
     "./style.css": "./dist/yale-ui-cl.css",
     "./package.json": "./package.json",
+    "./custom-elements.json": "./custom-elements.json",
+    "./AI-GUIDE.md": "./AI-GUIDE.md",
     "./*": "./dist/*.js"
   },
   "sideEffects": true,
   "scripts": {
-    "test": "vitest run",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "test": "npm run analyze && vitest run",
+    "storybook": "npm run analyze && storybook dev -p 6006",
+    "build-storybook": "npm run analyze && storybook build",
     "dev": "vite",
-    "build": "vite build && vite build --mode bundle",
+    "build": "npm run analyze && vite build && vite build --mode bundle",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "analyze": "cem analyze --config custom-elements-manifest.config.mjs"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
     "@csstools/postcss-sass": "^5.1.1",
+    "@custom-elements-manifest/analyzer": "^0.11.0",
     "@eslint/js": "^10.0.1",
     "@storybook/addon-a11y": "^10.2.0",
     "@storybook/addon-docs": "^10.2.0",

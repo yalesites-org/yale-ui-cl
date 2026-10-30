@@ -36,6 +36,12 @@ accordionItemTemplate.innerHTML = `
 	</div>
 `
 
+/**
+ * One collapsible section of a ycl-accordion.
+ * @attr {boolean} expanded - Whether the section is open.
+ * @slot heading - The section heading, shown on the toggle button.
+ * @slot - The section content.
+ */
 export class AccordionItem extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
@@ -72,6 +78,12 @@ export class AccordionItem extends HTMLElement {
 }
 
 
+/**
+ * A set of collapsible sections with Expand All and Collapse All controls. Children are ycl-accordion-item elements.
+ * @attr {"default"|"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme.
+ * @slot heading - A heading for the whole accordion.
+ * @slot - ycl-accordion-item elements.
+ */
 export class Accordion extends HTMLElement {
 	#shadow;
 
@@ -84,6 +96,7 @@ export class Accordion extends HTMLElement {
 		this.#shadow.querySelector(".accordion__collapse-all").addEventListener("click", () => this.setAll(false));
 	}
 
+	/** Opens (true) or closes (false) every item. */
 	setAll(expanded) {
 		this.querySelectorAll(":scope > ycl-accordion-item").forEach((item) => {
 			item.expanded = expanded;

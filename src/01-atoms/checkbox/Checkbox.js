@@ -10,6 +10,17 @@ checkboxTemplate.innerHTML = `
 `;
 
 // One checkbox; group several inside a <fieldset> with a <legend>, as the Twig template does.
+/**
+ * A form-associated checkbox with its label. Group several inside a `<fieldset>` with a `<legend>`.
+ * @attr {boolean} checked - Whether the box is checked.
+ * @attr {boolean} disabled - Disables the checkbox.
+ * @attr {boolean} required - The box must be checked for the form to submit.
+ * @attr {string} value - The value submitted with the form when checked. Defaults to "on".
+ * @attr {string} name - The form field name.
+ * @slot - The label text.
+ * @fires change - When the user checks or unchecks the box.
+ * @fires input - When the user checks or unchecks the box.
+ */
 export class Checkbox extends HTMLElement {
 	#shadow;
 	#connected = false;

@@ -18,6 +18,13 @@ pullQuoteTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A quote set off from the text, with an attribution.
+ * @attr {"bar-left"|"bar-right"|"quote-left"} variant - Decoration style. Defaults to bar-left.
+ * @attr {"one"|"two"|"three"} theme - Color theme.
+ * @slot - The quote.
+ * @slot attribution - Who said it.
+ */
 export class PullQuote extends HTMLElement {
 	#shadow;
 

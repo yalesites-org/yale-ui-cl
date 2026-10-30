@@ -1,0 +1,4060 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/audio/AudioPlayer.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An audio player with play/pause, progress, playback speed and volume controls.",
+          "name": "AudioPlayer",
+          "slots": [
+            {
+              "description": "Content shown above the controls, such as a title or transcript link.",
+              "name": ""
+            },
+            {
+              "description": "Your own `<audio>` element (for example with several `<source>`s) to use instead of src.",
+              "name": "audio"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "play",
+              "description": "Starts playback. Returns the media element's play() promise."
+            },
+            {
+              "kind": "method",
+              "name": "pause",
+              "description": "Pauses playback."
+            },
+            {
+              "kind": "field",
+              "name": "playing",
+              "description": "Whether the audio is playing.",
+              "readonly": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL of the audio file. Ignored when an `<audio>` is slotted into \"audio\"."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-audio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AudioPlayer",
+          "declaration": {
+            "name": "AudioPlayer",
+            "module": "src/01-atoms/audio/AudioPlayer.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-audio",
+          "declaration": {
+            "name": "AudioPlayer",
+            "module": "src/01-atoms/audio/AudioPlayer.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/button/Button.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A button styled as a call to action. Renders a `<button>`, or a link when given an href.",
+          "name": "Button",
+          "slots": [
+            {
+              "description": "The button text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "Makes the button a link to this URL (not for control-type=\"dropdown\")."
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "\"button\"|\"submit\"|\"reset\""
+              },
+              "description": "What the button does in a form. Defaults to button."
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Disables the button."
+            },
+            {
+              "name": "expanded",
+              "type": {
+                "text": "\"true\"|\"false\""
+              },
+              "description": "For toggle buttons: whether the controlled content is open. Leave it off for ordinary buttons."
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name, for a button whose visible text is not enough."
+            },
+            {
+              "name": "control-type",
+              "type": {
+                "text": "\"default\"|\"dropdown\""
+              },
+              "description": "dropdown adds a down arrow and keeps the control a `<button>`."
+            },
+            {
+              "name": "class",
+              "type": {
+                "text": "string"
+              },
+              "description": "Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/01-atoms/button/Button.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/01-atoms/button/Button.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/checkbox/Checkbox.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A form-associated checkbox with its label. Group several inside a `<fieldset>` with a `<legend>`.",
+          "name": "Checkbox",
+          "slots": [
+            {
+              "description": "The label text.",
+              "name": ""
+            }
+          ],
+          "events": [
+            {
+              "description": "When the user checks or unchecks the box.",
+              "name": "change"
+            },
+            {
+              "description": "When the user checks or unchecks the box.",
+              "name": "input"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether the box is checked."
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Disables the checkbox."
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "The box must be checked for the form to submit."
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The value submitted with the form when checked. Defaults to \"on\"."
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The form field name.",
+              "name": "name"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-checkbox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Checkbox",
+          "declaration": {
+            "name": "Checkbox",
+            "module": "src/01-atoms/checkbox/Checkbox.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-checkbox",
+          "declaration": {
+            "name": "Checkbox",
+            "module": "src/01-atoms/checkbox/Checkbox.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/cta/Cta.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A call-to-action link styled as a button.",
+          "name": "Cta",
+          "slots": [
+            {
+              "description": "The link text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "The link URL."
+            },
+            {
+              "name": "class",
+              "type": {
+                "text": "string"
+              },
+              "description": "Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "cta-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Cta",
+          "declaration": {
+            "name": "Cta",
+            "module": "src/01-atoms/cta/Cta.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "cta-link",
+          "declaration": {
+            "name": "Cta",
+            "module": "src/01-atoms/cta/Cta.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/date-time/DateTime.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Formats a date, time or date range the way YaleSites does.",
+          "name": "DateTime",
+          "slots": [
+            {
+              "description": "Fallback text shown when start is missing or invalid.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "start",
+              "type": {
+                "text": "string"
+              },
+              "description": "Start date: ISO 8601 or a Unix timestamp in seconds. Without a valid start, the slotted content shows instead."
+            },
+            {
+              "name": "end",
+              "type": {
+                "text": "string"
+              },
+              "description": "End date, for a range. Same formats as start."
+            },
+            {
+              "name": "format",
+              "type": {
+                "text": "\"date_and_time\"|\"time\"|\"date\"|\"day__full\"|\"day__long\"|\"month_year\"|\"year_only\"|\"same_day_diff_time\"|\"date_time_multiple_days\"|\"localist_same_day\"|\"all_day\"|\"localist_all_day\""
+              },
+              "description": "How to format the date. Defaults to date_and_time."
+            },
+            {
+              "name": "all-day",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the date(s) followed by \"All day\"."
+            },
+            {
+              "name": "time-zone",
+              "type": {
+                "text": "string"
+              },
+              "description": "IANA time zone, such as America/New_York. Defaults to the visitor's."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-date-time",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DateTime",
+          "declaration": {
+            "name": "DateTime",
+            "module": "src/01-atoms/date-time/DateTime.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-date-time",
+          "declaration": {
+            "name": "DateTime",
+            "module": "src/01-atoms/date-time/DateTime.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/divider/Divider.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A horizontal rule.",
+          "name": "Divider",
+          "cssProperties": [
+            {
+              "description": "Line color. Set it to a token, such as var(--color-blue-yale).",
+              "name": "--color-divider"
+            },
+            {
+              "description": "Line thickness. Set it to a token, such as var(--size-thickness-2).",
+              "name": "--thickness-divider"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "animate",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Expands the line out the first time it scrolls into view."
+            },
+            {
+              "type": {
+                "text": "\"100\"|\"75\"|\"50\"|\"25\""
+              },
+              "description": "Width as a percentage of the container. Defaults to 100.",
+              "name": "width"
+            },
+            {
+              "type": {
+                "text": "\"center\"|\"left\"|\"right\""
+              },
+              "description": "Horizontal position when narrower than the container. Defaults to center.",
+              "name": "position"
+            },
+            {
+              "type": {
+                "text": "\"hairline\"|\"1\"|\"2\"|\"4\"|\"6\"|\"8\""
+              },
+              "description": "Line thickness.",
+              "name": "thickness"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Divider",
+          "declaration": {
+            "name": "Divider",
+            "module": "src/01-atoms/divider/Divider.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-divider",
+          "declaration": {
+            "name": "Divider",
+            "module": "src/01-atoms/divider/Divider.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/headings/Heading.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A heading (h1 to h6) with an optional prefix, prefix icon and link.",
+          "name": "Heading",
+          "cssParts": [
+            {
+              "description": "The prefix text.",
+              "name": "prefix"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The heading text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "\"1\"|\"2\"|\"3\"|\"4\"|\"5\"|\"6\""
+              },
+              "description": "The heading level. Defaults to 2."
+            },
+            {
+              "name": "prefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Short text shown before the heading."
+            },
+            {
+              "name": "prefix-icon",
+              "type": {
+                "text": "string"
+              },
+              "description": "Name of an icon (see ycl-icon) shown before the heading."
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "Makes the heading text a link to this URL."
+            },
+            {
+              "name": "id",
+              "type": {
+                "text": "string"
+              },
+              "description": "Makes the heading a link target; it also gets tabindex=\"-1\" so focus can land on it."
+            },
+            {
+              "type": {
+                "text": "\"h1\"|\"h2\"|\"h3\"|\"h4\"|\"h5\"|\"h6\"|\"1\"|\"2\"|\"3\"|\"4\"|\"5\"|\"6\""
+              },
+              "description": "Look of another level, without changing the outline level.",
+              "name": "appearance"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-heading",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "src/01-atoms/headings/Heading.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-heading",
+          "declaration": {
+            "name": "Heading",
+            "module": "src/01-atoms/headings/Heading.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/icons/Icon.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An icon from the library's icon set. Decorative unless given a label.",
+          "name": "Icon",
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Icon name from src/01-atoms/icons/icons.js, such as circle-info, envelope-solid or arrow-up-right."
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name. Without it the icon is hidden from screen readers."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/01-atoms/icons/Icon.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/01-atoms/icons/Icon.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/icons/icons.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "icons",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ \"angle-down\": { viewBox: \"0 0 448 512\", path: \"M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z\" }, \"angle-right\": { viewBox: \"0 0 320 512\", path: \"M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z\" }, \"arrow-up-right\": { viewBox: \"0 0 384 512\", path: \"M384 96c0-17.7-14.3-32-32-32L128 64c-17.7 0-32 14.3-32 32s14.3 32 32 32L274.7 128 9.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L320 173.3 320 320c0 17.7 14.3 32 32 32s32-14.3 32-32l0-224z\" }, \"arrow-up-right-from-square\": { viewBox: \"0 0 512 512\", path: \"M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0-201.4 201.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3 448 192c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 96C35.8 96 0 131.8 0 176L0 432c0 44.2 35.8 80 80 80l256 0c44.2 0 80-35.8 80-80l0-80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 80c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l80 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 96z\" }, \"atom-solid\": { viewBox: \"0 0 512 512\", path: \"M256 398.8c-11.8 5.1-23.4 9.7-34.9 13.5c16.7 33.8 31 35.7 34.9 35.7s18.1-1.9 34.9-35.7c-11.4-3.9-23.1-8.4-34.9-13.5zM446 256c33 45.2 44.3 90.9 23.6 128c-20.2 36.3-62.5 49.3-115.2 43.2c-22 52.1-55.6 84.8-98.4 84.8s-76.4-32.7-98.4-84.8c-52.7 6.1-95-6.8-115.2-43.2C21.7 346.9 33 301.2 66 256c-33-45.2-44.3-90.9-23.6-128c20.2-36.3 62.5-49.3 115.2-43.2C179.6 32.7 213.2 0 256 0s76.4 32.7 98.4 84.8c52.7-6.1 95 6.8 115.2 43.2c20.7 37.1 9.4 82.8-23.6 128zm-65.8 67.4c-1.7 14.2-3.9 28-6.7 41.2c31.8 1.4 38.6-8.7 40.2-11.7c2.3-4.2 7-17.9-11.9-48.1c-6.8 6.3-14 12.5-21.6 18.6zm-6.7-175.9c2.8 13.1 5 26.9 6.7 41.2c7.6 6.1 14.8 12.3 21.6 18.6c18.9-30.2 14.2-44 11.9-48.1c-1.6-2.9-8.4-13-40.2-11.7zM290.9 99.7C274.1 65.9 259.9 64 256 64s-18.1 1.9-34.9 35.7c11.4 3.9 23.1 8.4 34.9 13.5c11.8-5.1 23.4-9.7 34.9-13.5zm-159 88.9c1.7-14.3 3.9-28 6.7-41.2c-31.8-1.4-38.6 8.7-40.2 11.7c-2.3 4.2-7 17.9 11.9 48.1c6.8-6.3 14-12.5 21.6-18.6zM110.2 304.8C91.4 335 96 348.7 98.3 352.9c1.6 2.9 8.4 13 40.2 11.7c-2.8-13.1-5-26.9-6.7-41.2c-7.6-6.1-14.8-12.3-21.6-18.6zM336 256a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zm-80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z\" }, \"bluesky\": { viewBox: \"0 0 640 640\", path: \"M439.8 358.7C436.5 358.3 433.1 357.9 429.8 357.4C433.2 357.8 436.5 358.3 439.8 358.7zM320 291.1C293.9 240.4 222.9 145.9 156.9 99.3C93.6 54.6 69.5 62.3 53.6 69.5C35.3 77.8 32 105.9 32 122.4C32 138.9 41.1 258 47 277.9C66.5 343.6 136.1 365.8 200.2 358.6C203.5 358.1 206.8 357.7 210.2 357.2C206.9 357.7 203.6 358.2 200.2 358.6C106.3 372.6 22.9 406.8 132.3 528.5C252.6 653.1 297.1 501.8 320 425.1C342.9 501.8 369.2 647.6 505.6 528.5C608 425.1 533.7 372.5 439.8 358.6C436.5 358.2 433.1 357.8 429.8 357.3C433.2 357.7 436.5 358.2 439.8 358.6C503.9 365.7 573.4 343.5 593 277.9C598.9 258 608 139 608 122.4C608 105.8 604.7 77.7 586.4 69.5C570.6 62.4 546.4 54.6 483.2 99.3C417.1 145.9 346.1 240.4 320 291.1z\" }, \"book-solid\": { viewBox: \"0 0 448 512\", path: \"M96 0C43 0 0 43 0 96L0 416c0 53 43 96 96 96l288 0 32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L384 0 96 0zm0 384l256 0 0 64L96 448c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16zm16 48l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z\" }, \"building-columns-solid\": { viewBox: \"0 0 512 512\", path: \"M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160l0 8c0 13.3 10.7 24 24 24l400 0c13.3 0 24-10.7 24-24l0-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224l-64 0 0 196.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512l448 0c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1L448 224l-64 0 0 192-40 0 0-192-64 0 0 192-48 0 0-192-64 0 0 192-40 0 0-192zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z\" }, \"calendar-solid\": { viewBox: \"0 0 448 512\", path: \"M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z\" }, \"chalkboard-user-solid\": { viewBox: \"0 0 640 512\", path: \"M160 64c0-35.3 28.7-64 64-64L576 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64l-239.2 0c-11.8-25.5-29.9-47.5-52.4-64l99.6 0 0-32c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 32 64 0 0-288L224 64l0 49.1C205.2 102.2 183.3 96 160 96l0-32zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352l53.3 0C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7L26.7 512C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z\" }, \"chart-line-solid\": { viewBox: \"0 0 512 512\", path: \"M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64L0 400c0 44.2 35.8 80 80 80l400 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 416c-8.8 0-16-7.2-16-16L64 64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z\" }, \"circle-chevron-solid\": { viewBox: \"0 0 512 512\", path: \"M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM135 241c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l87 87 87-87c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9L273 345c-9.4 9.4-24.6 9.4-33.9 0L135 241z\" }, \"circle-exclamation\": { viewBox: \"0 0 512 512\", path: \"M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z\" }, \"circle-info\": { viewBox: \"0 0 512 512\", path: \"M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z\" }, \"circle-pause-regular\": { viewBox: \"0 0 512 512\", path: \"M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm224-72l0 144c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-144c0-13.3 10.7-24 24-24s24 10.7 24 24zm112 0l0 144c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-144c0-13.3 10.7-24 24-24s24 10.7 24 24z\" }, \"circle-play-regular\": { viewBox: \"0 0 512 512\", path: \"M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z\" }, \"clock-rotate-left\": { viewBox: \"0 0 512 512\", path: \"M75 75L41 41C25.9 25.9 0 36.6 0 57.9L0 168c0 13.3 10.7 24 24 24l110.1 0c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24l0 104c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65 0-94.1c0-13.3-10.7-24-24-24z\" }, \"cloud-rain-solid\": { viewBox: \"0 0 512 512\", path: \"M96 320c-53 0-96-43-96-96c0-42.5 27.6-78.6 65.9-91.2C64.7 126.1 64 119.1 64 112C64 50.1 114.1 0 176 0c43.1 0 80.5 24.3 99.2 60c14.7-17.1 36.5-28 60.8-28c44.2 0 80 35.8 80 80c0 5.5-.6 10.8-1.6 16c.5 0 1.1 0 1.6 0c53 0 96 43 96 96s-43 96-96 96L96 320zm-6.8 52c1.3-2.5 3.9-4 6.8-4s5.4 1.5 6.8 4l35.1 64.6c4.1 7.5 6.2 15.8 6.2 24.3l0 3c0 26.5-21.5 48-48 48s-48-21.5-48-48l0-3c0-8.5 2.1-16.9 6.2-24.3L89.2 372zm160 0c1.3-2.5 3.9-4 6.8-4s5.4 1.5 6.8 4l35.1 64.6c4.1 7.5 6.2 15.8 6.2 24.3l0 3c0 26.5-21.5 48-48 48s-48-21.5-48-48l0-3c0-8.5 2.1-16.9 6.2-24.3L249.2 372zm124.9 64.6L409.2 372c1.3-2.5 3.9-4 6.8-4s5.4 1.5 6.8 4l35.1 64.6c4.1 7.5 6.2 15.8 6.2 24.3l0 3c0 26.5-21.5 48-48 48s-48-21.5-48-48l0-3c0-8.5 2.1-16.9 6.2-24.3z\" }, \"code-solid\": { viewBox: \"0 0 640 512\", path: \"M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z\" }, \"dollar-sign-solid\": { viewBox: \"0 0 320 512\", path: \"M160 0c17.7 0 32 14.3 32 32l0 35.7c1.6 .2 3.1 .4 4.7 .7c.4 .1 .7 .1 1.1 .2l48 8.8c17.4 3.2 28.9 19.9 25.7 37.2s-19.9 28.9-37.2 25.7l-47.5-8.7c-31.3-4.6-58.9-1.5-78.3 6.2s-27.2 18.3-29 28.1c-2 10.7-.5 16.7 1.2 20.4c1.8 3.9 5.5 8.3 12.8 13.2c16.3 10.7 41.3 17.7 73.7 26.3l2.9 .8c28.6 7.6 63.6 16.8 89.6 33.8c14.2 9.3 27.6 21.9 35.9 39.5c8.5 17.9 10.3 37.9 6.4 59.2c-6.9 38-33.1 63.4-65.6 76.7c-13.7 5.6-28.6 9.2-44.4 11l0 33.4c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-34.9c-.4-.1-.9-.1-1.3-.2l-.2 0s0 0 0 0c-24.4-3.8-64.5-14.3-91.5-26.3c-16.1-7.2-23.4-26.1-16.2-42.2s26.1-23.4 42.2-16.2c20.9 9.3 55.3 18.5 75.2 21.6c31.9 4.7 58.2 2 76-5.3c16.9-6.9 24.6-16.9 26.8-28.9c1.9-10.6 .4-16.7-1.3-20.4c-1.9-4-5.6-8.4-13-13.3c-16.4-10.7-41.5-17.7-74-26.3l-2.8-.7s0 0 0 0C119.4 279.3 84.4 270 58.4 253c-14.2-9.3-27.5-22-35.8-39.6c-8.4-17.9-10.1-37.9-6.1-59.2C23.7 116 52.3 91.2 84.8 78.3c13.3-5.3 27.9-8.9 43.2-11L128 32c0-17.7 14.3-32 32-32z\" }, \"envelope-solid\": { viewBox: \"0 0 512 512\", path: \"M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z\" }, \"face-frown-solid\": { viewBox: \"0 0 512 512\", path: \"M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z\" }, \"face-smile-solid\": { viewBox: \"0 0 512 512\", path: \"M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM164.1 325.5C182 346.2 212.6 368 256 368s74-21.8 91.9-42.5c5.8-6.7 15.9-7.4 22.6-1.6s7.4 15.9 1.6 22.6C349.8 372.1 311.1 400 256 400s-93.8-27.9-116.1-53.5c-5.8-6.7-5.1-16.8 1.6-22.6s16.8-5.1 22.6 1.6zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z\" }, \"facebook\": { viewBox: \"0 0 448 512\", path: \"M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z\" }, \"flask-solid\": { viewBox: \"0 0 448 512\", path: \"M288 0L160 0 128 0C110.3 0 96 14.3 96 32s14.3 32 32 32l0 132.8c0 11.8-3.3 23.5-9.5 33.5L10.3 406.2C3.6 417.2 0 429.7 0 442.6C0 480.9 31.1 512 69.4 512l309.2 0c38.3 0 69.4-31.1 69.4-69.4c0-12.8-3.6-25.4-10.3-36.4L329.5 230.4c-6.2-10.1-9.5-21.7-9.5-33.5L320 64c17.7 0 32-14.3 32-32s-14.3-32-32-32L288 0zM192 196.8L192 64l64 0 0 132.8c0 23.7 6.6 46.9 19 67.1L309.5 320l-171 0L173 263.9c12.4-20.2 19-43.4 19-67.1z\" }, \"gauge-simple-solid\": { viewBox: \"0 0 512 512\", path: \"M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3L280 88c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 204.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64z\" }, \"gauge-solid\": { viewBox: \"0 0 512 512\", path: \"M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3L280 88c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 204.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64zM144 176a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm-16 80a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM400 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z\" }, \"globe-solid\": { viewBox: \"0 0 512 512\", path: \"M352 256c0 22.2-1.2 43.6-3.3 64l-185.3 0c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64l185.3 0c2.2 20.4 3.3 41.8 3.3 64zm28.8-64l123.1 0c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64l-123.1 0c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32l-116.7 0c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0l-176.6 0c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0L18.6 160C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192l123.1 0c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64L8.1 320C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6l176.6 0c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352l116.7 0zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6l116.7 0z\" }, \"graduation-cap-solid\": { viewBox: \"0 0 640 512\", path: \"M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9l0 28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5l0-24.6c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z\" }, \"hand-holding-dollar-solid\": { viewBox: \"0 0 576 512\", path: \"M312 24l0 10.5c6.4 1.2 12.6 2.7 18.2 4.2c12.8 3.4 20.4 16.6 17 29.4s-16.6 20.4-29.4 17c-10.9-2.9-21.1-4.9-30.2-5c-7.3-.1-14.7 1.7-19.4 4.4c-2.1 1.3-3.1 2.4-3.5 3c-.3 .5-.7 1.2-.7 2.8c0 .3 0 .5 0 .6c.2 .2 .9 1.2 3.3 2.6c5.8 3.5 14.4 6.2 27.4 10.1l.9 .3s0 0 0 0c11.1 3.3 25.9 7.8 37.9 15.3c13.7 8.6 26.1 22.9 26.4 44.9c.3 22.5-11.4 38.9-26.7 48.5c-6.7 4.1-13.9 7-21.3 8.8l0 10.6c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-11.4c-9.5-2.3-18.2-5.3-25.6-7.8c-2.1-.7-4.1-1.4-6-2c-12.6-4.2-19.4-17.8-15.2-30.4s17.8-19.4 30.4-15.2c2.6 .9 5 1.7 7.3 2.5c13.6 4.6 23.4 7.9 33.9 8.3c8 .3 15.1-1.6 19.2-4.1c1.9-1.2 2.8-2.2 3.2-2.9c.4-.6 .9-1.8 .8-4.1l0-.2c0-1 0-2.1-4-4.6c-5.7-3.6-14.3-6.4-27.1-10.3l-1.9-.6c-10.8-3.2-25-7.5-36.4-14.4c-13.5-8.1-26.5-22-26.6-44.1c-.1-22.9 12.9-38.6 27.7-47.4c6.4-3.8 13.3-6.4 20.2-8.2L264 24c0-13.3 10.7-24 24-24s24 10.7 24 24zM568.2 336.3c13.1 17.8 9.3 42.8-8.5 55.9L433.1 485.5c-23.4 17.2-51.6 26.5-80.7 26.5L192 512 32 512c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l36.8 0 44.9-36c22.7-18.2 50.9-28 80-28l78.3 0 16 0 64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0-16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l120.6 0 119.7-88.2c17.8-13.1 42.8-9.3 55.9 8.5zM193.6 384c0 0 0 0 0 0l-.9 0c.3 0 .6 0 .9 0z\" }, \"instagram\": { viewBox: \"0 0 448 512\", path: \"M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z\" }, \"leaf-solid\": { viewBox: \"0 0 512 512\", path: \"M272 96c-78.6 0-145.1 51.5-167.7 122.5c33.6-17 71.5-26.5 111.7-26.5l88 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-16 0-72 0s0 0 0 0c-16.6 0-32.7 1.9-48.3 5.4c-25.9 5.9-49.9 16.4-71.4 30.7c0 0 0 0 0 0C38.3 298.8 0 364.9 0 440l0 16c0 13.3 10.7 24 24 24s24-10.7 24-24l0-16c0-48.7 20.7-92.5 53.8-123.2C121.6 392.3 190.3 448 272 448l1 0c132.1-.7 239-130.9 239-291.4c0-42.6-7.5-83.1-21.1-119.6c-2.6-6.9-12.7-6.6-16.2-.1C455.9 72.1 418.7 96 376 96L272 96z\" }, \"lightbulb-solid\": { viewBox: \"0 0 384 512\", path: \"M272 384c9.6-31.9 29.5-59.1 49.2-86.2c0 0 0 0 0 0c5.2-7.1 10.4-14.2 15.4-21.4c19.8-28.5 31.4-63 31.4-100.3C368 78.8 289.2 0 192 0S16 78.8 16 176c0 37.3 11.6 71.9 31.4 100.3c5 7.2 10.2 14.3 15.4 21.4c0 0 0 0 0 0c19.8 27.1 39.7 54.4 49.2 86.2l160 0zM192 512c44.2 0 80-35.8 80-80l0-16-160 0 0 16c0 44.2 35.8 80 80 80zM112 176c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-61.9 50.1-112 112-112c8.8 0 16 7.2 16 16s-7.2 16-16 16c-44.2 0-80 35.8-80 80z\" }, \"linkedin\": { viewBox: \"0 0 448 512\", path: \"M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z\" }, \"location-dot-solid\": { viewBox: \"0 0 384 512\", path: \"M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z\" }, \"lock-solid\": { viewBox: \"0 0 448 512\", path: \"M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z\" }, \"mountain-sun-solid\": { viewBox: \"0 0 640 512\", path: \"M560 160A80 80 0 1 0 560 0a80 80 0 1 0 0 160zM55.9 512l325.2 0 75 0 122.8 0c33.8 0 61.1-27.4 61.1-61.1c0-11.2-3.1-22.2-8.9-31.8l-132-216.3C495 196.1 487.8 192 480 192s-15 4.1-19.1 10.7l-48.2 79L286.8 81c-6.6-10.6-18.3-17-30.8-17s-24.1 6.4-30.8 17L8.6 426.4C3 435.3 0 445.6 0 456.1C0 487 25 512 55.9 512z\" }, \"pencil-solid\": { viewBox: \"0 0 512 512\", path: \"M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1 0 32c0 8.8 7.2 16 16 16l32 0zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z\" }, \"people-group-solid\": { viewBox: \"0 0 640 512\", path: \"M72 88a56 56 0 1 1 112 0A56 56 0 1 1 72 88zM64 245.7C54 256.9 48 271.8 48 288s6 31.1 16 42.3l0-84.7zm144.4-49.3C178.7 222.7 160 261.2 160 304c0 34.3 12 65.8 32 90.5l0 21.5c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-26.8C26.2 371.2 0 332.7 0 288c0-61.9 50.1-112 112-112l32 0c24 0 46.2 7.5 64.4 20.3zM448 416l0-21.5c20-24.7 32-56.2 32-90.5c0-42.8-18.7-81.3-48.4-107.7C449.8 183.5 472 176 496 176l32 0c61.9 0 112 50.1 112 112c0 44.7-26.2 83.2-64 101.2l0 26.8c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32zm8-328a56 56 0 1 1 112 0A56 56 0 1 1 456 88zM576 245.7l0 84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM320 32a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM240 304c0 16.2 6 31 16 42.3l0-84.7c-10 11.3-16 26.1-16 42.3zm144-42.3l0 84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM448 304c0 44.7-26.2 83.2-64 101.2l0 42.8c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-42.8c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112l32 0c61.9 0 112 50.1 112 112z\" }, \"piggy-bank-solid\": { viewBox: \"0 0 576 512\", path: \"M400 96l0 .7c-5.3-.4-10.6-.7-16-.7L256 96c-16.5 0-32.5 2.1-47.8 6c-.1-2-.2-4-.2-6c0-53 43-96 96-96s96 43 96 96zm-16 32c3.5 0 7 .1 10.4 .3c4.2 .3 8.4 .7 12.6 1.3C424.6 109.1 450.8 96 480 96l11.5 0c10.4 0 18 9.8 15.5 19.9l-13.8 55.2c15.8 14.8 28.7 32.8 37.5 52.9l13.3 0c17.7 0 32 14.3 32 32l0 96c0 17.7-14.3 32-32 32l-32 0c-9.1 12.1-19.9 22.9-32 32l0 64c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-32-128 0 0 32c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-64c-34.9-26.2-58.7-66.3-63.2-112L68 304c-37.6 0-68-30.4-68-68s30.4-68 68-68l4 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-4 0c-11 0-20 9-20 20s9 20 20 20l31.2 0c12.1-59.8 57.7-107.5 116.3-122.8c12.9-3.4 26.5-5.2 40.5-5.2l128 0zm64 136a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z\" }, \"recycle-solid\": { viewBox: \"0 0 512 512\", path: \"M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448l0 32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 32 96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z\" }, \"sack-dollar-solid\": { viewBox: \"0 0 512 512\", path: \"M320 96H192L144.6 24.9C137.5 14.2 145.1 0 157.9 0H354.1c12.8 0 20.4 14.2 13.3 24.9L320 96zM192 128H320c3.8 2.5 8.1 5.3 13 8.4C389.7 172.7 512 250.9 512 416c0 53-43 96-96 96H96c-53 0-96-43-96-96C0 250.9 122.3 172.7 179 136.4l0 0 0 0c4.8-3.1 9.2-5.9 13-8.4zm84 88c0-11-9-20-20-20s-20 9-20 20v14c-7.6 1.7-15.2 4.4-22.2 8.5c-13.9 8.3-25.9 22.8-25.8 43.9c.1 20.3 12 33.1 24.7 40.7c11 6.6 24.7 10.8 35.6 14l1.7 .5c12.6 3.8 21.8 6.8 28 10.7c5.1 3.2 5.8 5.4 5.9 8.2c.1 5-1.8 8-5.9 10.5c-5 3.1-12.9 5-21.4 4.7c-11.1-.4-21.5-3.9-35.1-8.5c-2.3-.8-4.7-1.6-7.2-2.4c-10.5-3.5-21.8 2.2-25.3 12.6s2.2 21.8 12.6 25.3c1.9 .6 4 1.3 6.1 2.1l0 0 0 0c8.3 2.9 17.9 6.2 28.2 8.4V424c0 11 9 20 20 20s20-9 20-20V410.2c8-1.7 16-4.5 23.2-9c14.3-8.9 25.1-24.1 24.8-45c-.3-20.3-11.7-33.4-24.6-41.6c-11.5-7.2-25.9-11.6-37.1-15l0 0-.7-.2c-12.8-3.9-21.9-6.7-28.3-10.5c-5.2-3.1-5.3-4.9-5.3-6.7c0-3.7 1.4-6.5 6.2-9.3c5.4-3.2 13.6-5.1 21.5-5c9.6 .1 20.2 2.2 31.2 5.2c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-6.5-1.7-13.7-3.4-21.1-4.7V216z\" }, \"sort\": { viewBox: \"0 0 320 512\", path: \"M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z\" }, \"sort-down\": { viewBox: \"0 0 320 512\", path: \"M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128z\" }, \"sort-up\": { viewBox: \"0 0 320 512\", path: \"M182.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z\" }, \"tree-solid\": { viewBox: \"0 0 448 512\", path: \"M210.6 5.9L62 169.4c-3.9 4.2-6 9.8-6 15.5C56 197.7 66.3 208 79.1 208l24.9 0L30.6 281.4c-4.2 4.2-6.6 10-6.6 16C24 309.9 34.1 320 46.6 320L80 320 5.4 409.5C1.9 413.7 0 419 0 424.5c0 13 10.5 23.5 23.5 23.5L192 448l0 32c0 17.7 14.3 32 32 32s32-14.3 32-32l0-32 168.5 0c13 0 23.5-10.5 23.5-23.5c0-5.5-1.9-10.8-5.4-15L368 320l33.4 0c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16L344 208l24.9 0c12.7 0 23.1-10.3 23.1-23.1c0-5.7-2.1-11.3-6-15.5L237.4 5.9C234 2.1 229.1 0 224 0s-10 2.1-13.4 5.9z\" }, \"triangle-exclamation\": { viewBox: \"0 0 512 512\", path: \"M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z\" }, \"user-solid\": { viewBox: \"0 0 448 512\", path: \"M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z\" }, \"volume-high-solid\": { viewBox: \"0 0 640 512\", path: \"M533.6 32.5C598.5 85.2 640 165.8 640 256s-41.5 170.7-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64l0 384c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352 64 352c-35.3 0-64-28.7-64-64l0-64c0-35.3 28.7-64 64-64l67.8 0L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z\" }, \"volume-xmark-solid\": { viewBox: \"0 0 576 512\", path: \"M301.1 34.8C312.6 40 320 51.4 320 64l0 384c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352 64 352c-35.3 0-64-28.7-64-64l0-64c0-35.3 28.7-64 64-64l67.8 0L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z\" }, \"weibo\": { viewBox: \"0 0 512 512\", path: \"M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z\" }, \"x-twitter\": { viewBox: \"0 0 512 512\", path: \"M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z\" }, \"xmark\": { viewBox: \"0 0 384 512\", path: \"M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z\" }, \"youtube\": { viewBox: \"0 0 576 512\", path: \"M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z\" }, }"
+        },
+        {
+          "kind": "function",
+          "name": "iconSvg",
+          "parameters": [
+            {
+              "name": "name"
+            },
+            {
+              "name": "className",
+              "default": "\"\""
+            },
+            {
+              "name": "label",
+              "default": "\"\""
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "icons",
+          "declaration": {
+            "name": "icons",
+            "module": "src/01-atoms/icons/icons.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "iconSvg",
+          "declaration": {
+            "name": "iconSvg",
+            "module": "src/01-atoms/icons/icons.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/image/ResponsiveImage.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An image with an optional caption and fixed aspect ratio.",
+          "name": "ResponsiveImage",
+          "slots": [
+            {
+              "description": "The `<img>` or `<picture>`.",
+              "name": ""
+            },
+            {
+              "description": "The caption. When present, the image becomes a figure.",
+              "name": "caption"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"16x9\"|\"4x3\"|\"3x2\"|\"2x3\"|\"1x1\"|\"1x1.6\""
+              },
+              "description": "Crops the image to this aspect ratio.",
+              "name": "ratio"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-image",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ResponsiveImage",
+          "declaration": {
+            "name": "ResponsiveImage",
+            "module": "src/01-atoms/image/ResponsiveImage.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-image",
+          "declaration": {
+            "name": "ResponsiveImage",
+            "module": "src/01-atoms/image/ResponsiveImage.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/lists/Lists.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Styles a slotted `<ul>` or `<ol>` as a taxonomy list.",
+          "name": "List",
+          "slots": [
+            {
+              "description": "A `<ul>` or `<ol>`.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "class",
+              "type": {
+                "text": "\"categories\"|\"tags\""
+              },
+              "description": "categories or tags turns the list into a taxonomy list of that kind."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-list",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "List",
+          "declaration": {
+            "name": "List",
+            "module": "src/01-atoms/lists/Lists.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-list",
+          "declaration": {
+            "name": "List",
+            "module": "src/01-atoms/lists/Lists.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/radio/Radio.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A form-associated radio button with its label. Radios with the same name form a group; wrap a group in a `<fieldset>` with a `<legend>`.",
+          "name": "Radio",
+          "slots": [
+            {
+              "description": "The label text.",
+              "name": ""
+            }
+          ],
+          "events": [
+            {
+              "description": "When the user selects this radio, including with the arrow keys.",
+              "name": "change"
+            },
+            {
+              "description": "When the user selects this radio, including with the arrow keys.",
+              "name": "input"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether this radio is selected."
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Disables the radio."
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "One radio in the group must be selected for the form to submit."
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The value submitted with the form when selected. Defaults to \"on\"."
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "The group and form field name."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-radio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Radio",
+          "declaration": {
+            "name": "Radio",
+            "module": "src/01-atoms/radio/Radio.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-radio",
+          "declaration": {
+            "name": "Radio",
+            "module": "src/01-atoms/radio/Radio.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/select-input/SelectInput.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A form-associated select field with label, instructions and error text. Put `<option>` and `<optgroup>` elements inside.",
+          "name": "SelectInput",
+          "slots": [
+            {
+              "description": "The `<option>` and `<optgroup>` elements.",
+              "name": ""
+            },
+            {
+              "description": "The label text.",
+              "name": "label"
+            },
+            {
+              "description": "Help text shown under the field.",
+              "name": "instructions"
+            },
+            {
+              "description": "Error text. Any content here marks the field invalid.",
+              "name": "errors"
+            }
+          ],
+          "events": [
+            {
+              "description": "When the user picks an option.",
+              "name": "input"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "class",
+              "type": {
+                "text": "string"
+              },
+              "description": "Add required to make a choice required."
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Placeholder text."
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "The form field name."
+            },
+            {
+              "name": "autocomplete",
+              "type": {
+                "text": "string"
+              },
+              "description": "The autocomplete hint, as on `<select>`."
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The selected option's value."
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Disables the field."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "select-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SelectInput",
+          "declaration": {
+            "name": "SelectInput",
+            "module": "src/01-atoms/select-input/SelectInput.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "select-input",
+          "declaration": {
+            "name": "SelectInput",
+            "module": "src/01-atoms/select-input/SelectInput.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/table/Table.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A styled, horizontally scrollable wrapper for a `<table>`.",
+          "name": "Table",
+          "slots": [
+            {
+              "description": "A `<table>`.",
+              "name": ""
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "yc-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Table",
+          "declaration": {
+            "name": "Table",
+            "module": "src/01-atoms/table/Table.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "yc-table",
+          "declaration": {
+            "name": "Table",
+            "module": "src/01-atoms/table/Table.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/text-copy-button/TextCopyButton.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A button that copies the text in its \"text\" slot to the clipboard.",
+          "name": "TextCopyButton",
+          "slots": [
+            {
+              "description": "The button label. Defaults to \"Copy\".",
+              "name": ""
+            },
+            {
+              "description": "The text to copy, also shown on the page.",
+              "name": "text"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "text",
+              "description": "The text that will be copied.",
+              "readonly": true
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<{text: string, button: HTMLElement}>"
+              },
+              "description": "After a successful copy. Cancelable: preventDefault() keeps the label from changing to the confirmation.",
+              "name": "text-copy-button:copied"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-text-copy-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TextCopyButton",
+          "declaration": {
+            "name": "TextCopyButton",
+            "module": "src/01-atoms/text-copy-button/TextCopyButton.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-text-copy-button",
+          "declaration": {
+            "name": "TextCopyButton",
+            "module": "src/01-atoms/text-copy-button/TextCopyButton.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/text-input/TextInput.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A form-associated text field with label, instructions and error text.",
+          "name": "TextInput",
+          "slots": [
+            {
+              "description": "The label text.",
+              "name": "label"
+            },
+            {
+              "description": "Help text shown under the field.",
+              "name": "instructions"
+            },
+            {
+              "description": "Error text. Any content here marks the field invalid.",
+              "name": "errors"
+            }
+          ],
+          "events": [
+            {
+              "description": "When the user edits the value.",
+              "name": "input"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "class",
+              "type": {
+                "text": "string"
+              },
+              "description": "Add required to make the field required."
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Placeholder text."
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "The form field name."
+            },
+            {
+              "name": "autocomplete",
+              "type": {
+                "text": "string"
+              },
+              "description": "The autocomplete hint, as on `<input>`."
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The field value."
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Disables the field."
+            },
+            {
+              "name": "valid",
+              "type": {
+                "text": "string"
+              },
+              "description": "Not used: validity comes from the errors slot and the field's own constraints."
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "\"text\"|\"email\"|\"tel\"|\"number\"|\"date\"|\"datetime-local\""
+              },
+              "description": "The input type. Defaults to text."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "text-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TextInput",
+          "declaration": {
+            "name": "TextInput",
+            "module": "src/01-atoms/text-input/TextInput.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "text-input",
+          "declaration": {
+            "name": "TextInput",
+            "module": "src/01-atoms/text-input/TextInput.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/text-link/Link.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An inline text link. Links to other sites get an external-link icon.",
+          "name": "TextLink",
+          "slots": [
+            {
+              "description": "The link text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "The link URL."
+            },
+            {
+              "name": "class",
+              "type": {
+                "text": "string"
+              },
+              "description": "An ordinary class attribute; text-link has no style variants."
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "description": "Where to open the link, as on `<a>`."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "text-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TextLink",
+          "declaration": {
+            "name": "TextLink",
+            "module": "src/01-atoms/text-link/Link.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "text-link",
+          "declaration": {
+            "name": "TextLink",
+            "module": "src/01-atoms/text-link/Link.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/01-atoms/video-embed/VideoEmbed.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A responsive video player frame. Give it a src and video-title, or slot the provider's embed code.",
+          "name": "VideoEmbed",
+          "slots": [
+            {
+              "description": "A provider's embed code (an `<iframe>`, `<video>`, etc.) to use instead of src.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "Embed URL; the component builds the iframe. A slotted embed wins over src."
+            },
+            {
+              "name": "video-title",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible title for the built iframe. Required with src."
+            },
+            {
+              "type": {
+                "text": "\"16x9\"|\"4x3\"|\"1x1\""
+              },
+              "description": "Aspect ratio. Defaults to 16x9.",
+              "name": "ratio"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-video-embed",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "VideoEmbed",
+          "declaration": {
+            "name": "VideoEmbed",
+            "module": "src/01-atoms/video-embed/VideoEmbed.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-video-embed",
+          "declaration": {
+            "name": "VideoEmbed",
+            "module": "src/01-atoms/video-embed/VideoEmbed.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/accordions/Accordion.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One collapsible section of a ycl-accordion.",
+          "name": "AccordionItem",
+          "slots": [
+            {
+              "description": "The section heading, shown on the toggle button.",
+              "name": "heading"
+            },
+            {
+              "description": "The section content.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether the section is open."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-accordion-item",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A set of collapsible sections with Expand All and Collapse All controls. Children are ycl-accordion-item elements.",
+          "name": "Accordion",
+          "slots": [
+            {
+              "description": "A heading for the whole accordion.",
+              "name": "heading"
+            },
+            {
+              "description": "ycl-accordion-item elements.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "setAll",
+              "parameters": [
+                {
+                  "name": "expanded"
+                }
+              ],
+              "description": "Opens (true) or closes (false) every item."
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"default\"|\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-accordion",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AccordionItem",
+          "declaration": {
+            "name": "AccordionItem",
+            "module": "src/02-molecules/accordions/Accordion.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Accordion",
+          "declaration": {
+            "name": "Accordion",
+            "module": "src/02-molecules/accordions/Accordion.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-accordion",
+          "declaration": {
+            "name": "Accordion",
+            "module": "src/02-molecules/accordions/Accordion.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-accordion-item",
+          "declaration": {
+            "name": "AccordionItem",
+            "module": "src/02-molecules/accordions/Accordion.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/alert/Alert.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A site-wide alert banner. Emergency alerts collapse; others are dismissed. The state is remembered per alert-id.",
+          "name": "Alert",
+          "slots": [
+            {
+              "description": "The alert heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The alert text.",
+              "name": ""
+            },
+            {
+              "description": "A link, such as a text-link.",
+              "name": "link"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": {
+                "text": "\"announcement\"|\"emergency\"|\"marketing\""
+              },
+              "description": "Kind of alert. Defaults to announcement."
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"expanded\"|\"collapsed\"|\"dismissed\""
+              },
+              "description": "Current state. Defaults to expanded."
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Unique id used to remember the state in localStorage between page loads.",
+              "name": "alert-id"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/02-molecules/alert/Alert.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-alert",
+          "declaration": {
+            "name": "Alert",
+            "module": "src/02-molecules/alert/Alert.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/banner/action/ActionBanner.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A banner with an image, heading, text and action buttons.",
+          "name": "ActionBanner",
+          "slots": [
+            {
+              "description": "The background image.",
+              "name": "image"
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The text.",
+              "name": ""
+            },
+            {
+              "description": "Links or buttons, such as cta-link elements.",
+              "name": "actions"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "theme",
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme. Defaults to one."
+            },
+            {
+              "name": "layout",
+              "type": {
+                "text": "\"bottom\"|\"left\"|\"right\""
+              },
+              "description": "Where the content box sits on the image. Defaults to bottom."
+            },
+            {
+              "name": "button-alignment",
+              "type": {
+                "text": "\"left\"|\"center\"|\"right\""
+              },
+              "description": "Alignment of the actions. Defaults to right for the bottom layout, left otherwise."
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "\"site\"|\"full\""
+              },
+              "description": "Site width or full browser width. Defaults to site."
+            },
+            {
+              "name": "overlay-image",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL of a decorative image laid over the content background."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-action-banner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ActionBanner",
+          "declaration": {
+            "name": "ActionBanner",
+            "module": "src/02-molecules/banner/action/ActionBanner.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-action-banner",
+          "declaration": {
+            "name": "ActionBanner",
+            "module": "src/02-molecules/banner/action/ActionBanner.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/banner/image/ImageBanner.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A large image banner with an optional caption.",
+          "name": "ImageBanner",
+          "slots": [
+            {
+              "description": "The `<img>` or `<picture>`.",
+              "name": ""
+            },
+            {
+              "description": "The caption.",
+              "name": "caption"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme of the caption.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"tall\"|\"short\"|\"mini\""
+              },
+              "description": "Banner height. Defaults to tall.",
+              "name": "size"
+            },
+            {
+              "type": {
+                "text": "\"site\"|\"full\""
+              },
+              "description": "Site width or full browser width. Defaults to site.",
+              "name": "width"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-image-banner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImageBanner",
+          "declaration": {
+            "name": "ImageBanner",
+            "module": "src/02-molecules/banner/image/ImageBanner.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-image-banner",
+          "declaration": {
+            "name": "ImageBanner",
+            "module": "src/02-molecules/banner/image/ImageBanner.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/callout/Callout.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One callout inside a ycl-callout.",
+          "name": "CalloutItem",
+          "slots": [
+            {
+              "description": "The callout heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The callout text.",
+              "name": ""
+            },
+            {
+              "description": "A link or button, usually a cta-link.",
+              "name": "link"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-callout-item",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A band of one or more highlighted callouts. Children are ycl-callout-item elements.",
+          "name": "Callout",
+          "slots": [
+            {
+              "description": "ycl-callout-item elements.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "overlay-image",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL of a decorative image laid over the background."
+            },
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme. Defaults to one.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"center\"|\"left\""
+              },
+              "description": "Text alignment. Defaults to center.",
+              "name": "alignment"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-callout",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CalloutItem",
+          "declaration": {
+            "name": "CalloutItem",
+            "module": "src/02-molecules/callout/Callout.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Callout",
+          "declaration": {
+            "name": "Callout",
+            "module": "src/02-molecules/callout/Callout.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-callout",
+          "declaration": {
+            "name": "Callout",
+            "module": "src/02-molecules/callout/Callout.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-callout-item",
+          "declaration": {
+            "name": "CalloutItem",
+            "module": "src/02-molecules/callout/Callout.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/cards/custom-card/CustomCard.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A card with a heading, text and optional image. With an href, the whole card is a link.",
+          "name": "CustomCard",
+          "slots": [
+            {
+              "description": "The card heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The card text.",
+              "name": ""
+            },
+            {
+              "description": "The card image. Without one, a color bar shows instead.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the card links to."
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Larger, featured presentation.",
+              "name": "featured"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-custom-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CustomCard",
+          "declaration": {
+            "name": "CustomCard",
+            "module": "src/02-molecules/cards/custom-card/CustomCard.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-custom-card",
+          "declaration": {
+            "name": "CustomCard",
+            "module": "src/02-molecules/cards/custom-card/CustomCard.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/cards/directory-listing-card/DirectoryListingCard.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A person card for directory listings, with contact details. Only the heading is a link.",
+          "name": "DirectoryListingCard",
+          "slots": [
+            {
+              "description": "Text above the heading.",
+              "name": "overline"
+            },
+            {
+              "description": "The person's name.",
+              "name": "heading"
+            },
+            {
+              "description": "Text under the heading, such as a title.",
+              "name": "subheading"
+            },
+            {
+              "description": "Summary text.",
+              "name": ""
+            },
+            {
+              "description": "An email link.",
+              "name": "email"
+            },
+            {
+              "description": "A phone number.",
+              "name": "phone"
+            },
+            {
+              "description": "The person's photo.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the heading links to."
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Larger, featured presentation.",
+              "name": "featured"
+            },
+            {
+              "type": {
+                "text": "\"directory-listing\"|\"profile-directory\""
+              },
+              "description": "Card layout.",
+              "name": "layout"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-directory-listing-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DirectoryListingCard",
+          "declaration": {
+            "name": "DirectoryListingCard",
+            "module": "src/02-molecules/cards/directory-listing-card/DirectoryListingCard.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-directory-listing-card",
+          "declaration": {
+            "name": "DirectoryListingCard",
+            "module": "src/02-molecules/cards/directory-listing-card/DirectoryListingCard.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/cards/reference-card/ReferenceCard.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A card for a post, event, profile or resource. With an href, the whole card is a link.",
+          "name": "ReferenceCard",
+          "slots": [
+            {
+              "description": "Category links.",
+              "name": "categories"
+            },
+            {
+              "description": "Text above the heading.",
+              "name": "eyebrow"
+            },
+            {
+              "description": "Text before the heading.",
+              "name": "prefix"
+            },
+            {
+              "description": "The card heading.",
+              "name": "heading"
+            },
+            {
+              "description": "Pronouns, for profiles.",
+              "name": "pronouns"
+            },
+            {
+              "description": "Text under the heading.",
+              "name": "subheading"
+            },
+            {
+              "description": "A date or other short line, often a ycl-date-time.",
+              "name": "overline"
+            },
+            {
+              "description": "Tag links.",
+              "name": "tags"
+            },
+            {
+              "description": "Summary text.",
+              "name": ""
+            },
+            {
+              "description": "Links or buttons.",
+              "name": "ctas"
+            },
+            {
+              "description": "The card image.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the card links to."
+            },
+            {
+              "name": "overlay",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown over the image, such as \"Video\". Also added to the link name."
+            },
+            {
+              "type": {
+                "text": "\"grid\"|\"list\"|\"condensed\"|\"single\""
+              },
+              "description": "Card layout. Defaults to grid.",
+              "name": "layout"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Larger, featured presentation.",
+              "name": "featured"
+            },
+            {
+              "type": {
+                "text": "\"profile\"|\"resource\""
+              },
+              "description": "Adjusts the image for profile photos or resource thumbnails.",
+              "name": "source"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-reference-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ReferenceCard",
+          "declaration": {
+            "name": "ReferenceCard",
+            "module": "src/02-molecules/cards/reference-card/ReferenceCard.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-reference-card",
+          "declaration": {
+            "name": "ReferenceCard",
+            "module": "src/02-molecules/cards/reference-card/ReferenceCard.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/content-spotlight-portrait/ContentSpotlightPortrait.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Text beside a portrait-shaped image.",
+          "name": "ContentSpotlightPortrait",
+          "slots": [
+            {
+              "description": "Text above the heading.",
+              "name": "overline"
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "Text under the heading.",
+              "name": "subheading"
+            },
+            {
+              "description": "The text.",
+              "name": ""
+            },
+            {
+              "description": "Links or buttons.",
+              "name": "ctas"
+            },
+            {
+              "description": "The image.",
+              "name": "image"
+            },
+            {
+              "description": "The image caption.",
+              "name": "caption"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"default\"|\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme. Defaults to default.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"image-left\"|\"image-right\""
+              },
+              "description": "Which side the image is on. Defaults to image-left.",
+              "name": "position"
+            },
+            {
+              "type": {
+                "text": "\"top\"|\"middle\"|\"bottom\""
+              },
+              "description": "Vertical alignment of the text. Defaults to middle.",
+              "name": "vertical-align"
+            },
+            {
+              "type": {
+                "text": "\"inline\"|\"offset\""
+              },
+              "description": "offset shifts the image off the background. Defaults to inline.",
+              "name": "image-style"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-content-spotlight-portrait",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ContentSpotlightPortrait",
+          "declaration": {
+            "name": "ContentSpotlightPortrait",
+            "module": "src/02-molecules/content-spotlight-portrait/ContentSpotlightPortrait.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-content-spotlight-portrait",
+          "declaration": {
+            "name": "ContentSpotlightPortrait",
+            "module": "src/02-molecules/content-spotlight-portrait/ContentSpotlightPortrait.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/data-table/DataTable.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Adds search and column sorting to a slotted `<table>`. Set aria-sort on a header to presort; add data-no-sort to a header to make it unsortable; put data-sort-value on a cell to sort by that instead of its text.",
+          "name": "DataTable",
+          "slots": [
+            {
+              "description": "A `<table>` with a `<thead>`.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "query",
+              "description": "The search text. Setting it filters the rows."
+            },
+            {
+              "kind": "field",
+              "name": "refresh",
+              "description": "Re-applies sorting and filtering. Call it after changing the table's rows."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Label for the search field. Defaults to \"Search\"."
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Placeholder for the search field."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-data-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DataTable",
+          "declaration": {
+            "name": "DataTable",
+            "module": "src/02-molecules/data-table/DataTable.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-data-table",
+          "declaration": {
+            "name": "DataTable",
+            "module": "src/02-molecules/data-table/DataTable.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/embed/Embed.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An embedded iframe (form, map, calendar, audio, video), or slotted embed code for script-driven embeds.",
+          "name": "Embed",
+          "slots": [
+            {
+              "description": "Embed code that has to run in the page, such as an Instagram or X blockquote and its `<script>`.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL to load in the iframe. Without it, the slotted content shows instead."
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible title for the iframe."
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "\"form\"|\"audio\"|\"video\"|\"map\"|\"calendar\"|\"unknown\""
+              },
+              "description": "Kind of embed; sets the frame's size."
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "\"lazy\"|\"eager\""
+              },
+              "description": "When to load the iframe. Defaults to lazy."
+            },
+            {
+              "name": "allowfullscreen",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lets the embed go full screen."
+            },
+            {
+              "type": {
+                "text": "\"max\"|\"site\"|\"highlight\"|\"content\""
+              },
+              "description": "Width of the embed.",
+              "name": "width"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-embed",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Embed",
+          "declaration": {
+            "name": "Embed",
+            "module": "src/02-molecules/embed/Embed.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-embed",
+          "declaration": {
+            "name": "Embed",
+            "module": "src/02-molecules/embed/Embed.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/facts-and-figures/FactsAndFigures.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A statistic with supporting text and an optional icon.",
+          "name": "FactsAndFigures",
+          "slots": [
+            {
+              "description": "A decorative icon, such as a ycl-icon.",
+              "name": "icon"
+            },
+            {
+              "description": "The statistic.",
+              "name": "stat"
+            },
+            {
+              "description": "Supporting text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"default\"|\"one\"|\"two\"|\"three\"|\"four\"|\"five\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"center\"|\"left\""
+              },
+              "description": "Text alignment. Defaults to center.",
+              "name": "alignment"
+            },
+            {
+              "type": {
+                "text": "\"basic\"|\"plain\""
+              },
+              "description": "basic draws a rule above the statistic. Defaults to basic.",
+              "name": "presentation"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds horizontal padding, for a stat on its own on a colored background.",
+              "name": "padded"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-facts-and-figures",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FactsAndFigures",
+          "declaration": {
+            "name": "FactsAndFigures",
+            "module": "src/02-molecules/facts-and-figures/FactsAndFigures.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-facts-and-figures",
+          "declaration": {
+            "name": "FactsAndFigures",
+            "module": "src/02-molecules/facts-and-figures/FactsAndFigures.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/image/ImageBlock.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A content image with an optional caption.",
+          "name": "ImageBlock",
+          "slots": [
+            {
+              "description": "The image: an `<img>`, `<picture>` or ycl-image.",
+              "name": ""
+            },
+            {
+              "description": "The caption.",
+              "name": "caption"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"content\"|\"highlight\"|\"site\"|\"max\""
+              },
+              "description": "Width of the image.",
+              "name": "width"
+            },
+            {
+              "type": {
+                "text": "\"center\"|\"left\""
+              },
+              "description": "Alignment of the image.",
+              "name": "alignment"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-image-block",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImageBlock",
+          "declaration": {
+            "name": "ImageBlock",
+            "module": "src/02-molecules/image/ImageBlock.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-image-block",
+          "declaration": {
+            "name": "ImageBlock",
+            "module": "src/02-molecules/image/ImageBlock.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/inline-message/InlineMessage.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A short highlighted message with an icon, heading, text and link.",
+          "name": "InlineMessage",
+          "slots": [
+            {
+              "description": "A decorative icon to use instead of the default one.",
+              "name": "icon"
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The text.",
+              "name": ""
+            },
+            {
+              "description": "A link.",
+              "name": "link"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": {
+                "text": "\"general\"|\"marketing\""
+              },
+              "description": "Kind of message; sets the default icon. Defaults to general."
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "\"none\""
+              },
+              "description": "none hides the icon."
+            },
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-inline-message",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "InlineMessage",
+          "declaration": {
+            "name": "InlineMessage",
+            "module": "src/02-molecules/inline-message/InlineMessage.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-inline-message",
+          "declaration": {
+            "name": "InlineMessage",
+            "module": "src/02-molecules/inline-message/InlineMessage.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/link-grid/LinkGrid.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A heading over up to four columns of links. Each child goes to the column named by its slot attribute.",
+          "name": "LinkGrid",
+          "slots": [
+            {
+              "description": "The grid heading.",
+              "name": "heading"
+            },
+            {
+              "description": "Heading of column one. Also heading-two, heading-three and heading-four.",
+              "name": "heading-one"
+            },
+            {
+              "description": "Heading of column two.",
+              "name": "heading-two"
+            },
+            {
+              "description": "Heading of column three.",
+              "name": "heading-three"
+            },
+            {
+              "description": "Heading of column four.",
+              "name": "heading-four"
+            },
+            {
+              "description": "Links in column one; one element per link. Also links-two, links-three and links-four.",
+              "name": "links-one"
+            },
+            {
+              "description": "Links in column two.",
+              "name": "links-two"
+            },
+            {
+              "description": "Links in column three.",
+              "name": "links-three"
+            },
+            {
+              "description": "Links in column four.",
+              "name": "links-four"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"default\"|\"all-strong-lines\"|\"all-light-lines\"|\"no-lines\""
+              },
+              "description": "Lines between links.",
+              "name": "line-treatment"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-link-grid",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LinkGrid",
+          "declaration": {
+            "name": "LinkGrid",
+            "module": "src/02-molecules/link-grid/LinkGrid.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-link-grid",
+          "declaration": {
+            "name": "LinkGrid",
+            "module": "src/02-molecules/link-grid/LinkGrid.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/link-group/LinkGroup.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One or two columns of links, each with an optional heading. Each child goes to the column named by its slot attribute.",
+          "name": "LinkGroup",
+          "slots": [
+            {
+              "description": "Heading of column one.",
+              "name": "heading-one"
+            },
+            {
+              "description": "Heading of column two.",
+              "name": "heading-two"
+            },
+            {
+              "description": "Links in column one; one element per link.",
+              "name": "links-one"
+            },
+            {
+              "description": "Links in column two; one element per link.",
+              "name": "links-two"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-link-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LinkGroup",
+          "declaration": {
+            "name": "LinkGroup",
+            "module": "src/02-molecules/link-group/LinkGroup.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-link-group",
+          "declaration": {
+            "name": "LinkGroup",
+            "module": "src/02-molecules/link-group/LinkGroup.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/link-skip/LinkSkip.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A \"Skip to main content\" link that only shows when it has keyboard focus. Place it first in the page.",
+          "name": "LinkSkip",
+          "slots": [
+            {
+              "description": "The link text. Defaults to \"Skip to main content\".",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "The target. Defaults to #main-content."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-link-skip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LinkSkip",
+          "declaration": {
+            "name": "LinkSkip",
+            "module": "src/02-molecules/link-skip/LinkSkip.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-link-skip",
+          "declaration": {
+            "name": "LinkSkip",
+            "module": "src/02-molecules/link-skip/LinkSkip.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/modal/Modal.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A modal dialog with a heading and a close button.",
+          "name": "Modal",
+          "slots": [
+            {
+              "description": "The dialog title.",
+              "name": "heading"
+            },
+            {
+              "description": "The dialog content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Opens the dialog."
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "description": "Closes the dialog."
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "description": "Whether the dialog is open. Reflects the open attribute."
+            }
+          ],
+          "events": [
+            {
+              "name": "open",
+              "type": {
+                "text": "Event"
+              },
+              "description": "When the dialog opens."
+            },
+            {
+              "description": "When the dialog closes, however it was closed.",
+              "name": "close"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether the dialog is open."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-modal",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Modal",
+          "declaration": {
+            "name": "Modal",
+            "module": "src/02-molecules/modal/Modal.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-modal",
+          "declaration": {
+            "name": "Modal",
+            "module": "src/02-molecules/modal/Modal.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/page-title/PageTitle.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The page's one h1 title, with optional overline, image, metadata and social links.",
+          "name": "PageTitle",
+          "slots": [
+            {
+              "description": "Text above the title.",
+              "name": "overline"
+            },
+            {
+              "description": "The title text.",
+              "name": ""
+            },
+            {
+              "description": "Content after the title.",
+              "name": "extra"
+            },
+            {
+              "description": "An image.",
+              "name": "image"
+            },
+            {
+              "description": "Metadata, such as the date and author.",
+              "name": "meta"
+            },
+            {
+              "description": "More content after the metadata.",
+              "name": "meta-extra"
+            },
+            {
+              "description": "Share links, such as a ycl-social-links.",
+              "name": "social-links"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "prefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Short text shown before the title."
+            },
+            {
+              "type": {
+                "text": "\"site\"|\"highlight\"|\"content\"|\"max\""
+              },
+              "description": "Width of the title area.",
+              "name": "width"
+            },
+            {
+              "type": {
+                "text": "\"hidden\"|\"visually-hidden\""
+              },
+              "description": "hidden removes the title; visually-hidden keeps it for screen readers only.",
+              "name": "display"
+            },
+            {
+              "type": {
+                "text": "\"event\""
+              },
+              "description": "event puts the image beside the title on wide screens.",
+              "name": "variation"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-page-title",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PageTitle",
+          "declaration": {
+            "name": "PageTitle",
+            "module": "src/02-molecules/page-title/PageTitle.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-page-title",
+          "declaration": {
+            "name": "PageTitle",
+            "module": "src/02-molecules/page-title/PageTitle.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/pager/Pager.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Page-number navigation. Links go to base-url with ?page=N.",
+          "name": "Pager",
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<{page: number}>"
+              },
+              "description": "When a page link is clicked. Cancelable: preventDefault() stops the navigation so the page can update itself.",
+              "name": "ycl-page-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current",
+              "type": {
+                "text": "number"
+              },
+              "description": "The current page, from 1."
+            },
+            {
+              "name": "total-pages",
+              "type": {
+                "text": "number"
+              },
+              "description": "The number of pages. With one page, nothing shows."
+            },
+            {
+              "name": "base-url",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the page links are built from."
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name of the navigation. Defaults to \"Pagination\"."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-pager",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Pager",
+          "declaration": {
+            "name": "Pager",
+            "module": "src/02-molecules/pager/Pager.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-pager",
+          "declaration": {
+            "name": "Pager",
+            "module": "src/02-molecules/pager/Pager.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/pull-quote/PullQuote.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A quote set off from the text, with an attribution.",
+          "name": "PullQuote",
+          "slots": [
+            {
+              "description": "The quote.",
+              "name": ""
+            },
+            {
+              "description": "Who said it.",
+              "name": "attribution"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"bar-left\"|\"bar-right\"|\"quote-left\""
+              },
+              "description": "Decoration style. Defaults to bar-left.",
+              "name": "variant"
+            },
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-pull-quote",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "PullQuote",
+          "declaration": {
+            "name": "PullQuote",
+            "module": "src/02-molecules/pull-quote/PullQuote.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-pull-quote",
+          "declaration": {
+            "name": "PullQuote",
+            "module": "src/02-molecules/pull-quote/PullQuote.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/quick-links/QuickLinks.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A heading, optional description and image, and a list of links. Every child without a slot attribute is a link.",
+          "name": "QuickLinks",
+          "slots": [
+            {
+              "description": "The links; one element per link.",
+              "name": ""
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "A description. It puts the text beside the links.",
+              "name": "description"
+            },
+            {
+              "description": "An image.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"promotional\"|\"subtle\""
+              },
+              "description": "Visual style. Defaults to promotional.",
+              "name": "variation"
+            },
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-quick-links",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "QuickLinks",
+          "declaration": {
+            "name": "QuickLinks",
+            "module": "src/02-molecules/quick-links/QuickLinks.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-quick-links",
+          "declaration": {
+            "name": "QuickLinks",
+            "module": "src/02-molecules/quick-links/QuickLinks.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/quote-callout/QuoteCallout.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A large quote with an attribution and optional image.",
+          "name": "QuoteCallout",
+          "slots": [
+            {
+              "description": "The quote.",
+              "name": ""
+            },
+            {
+              "description": "Who said it.",
+              "name": "attribution"
+            },
+            {
+              "description": "An image, shown with variant=\"image\".",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"bar\"|\"quote\"|\"image\""
+              },
+              "description": "Decoration style; image shows the image slot. Defaults to bar.",
+              "name": "variant"
+            },
+            {
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "description": "Side the quote sits on. Defaults to left.",
+              "name": "quote-alignment"
+            },
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-quote-callout",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "QuoteCallout",
+          "declaration": {
+            "name": "QuoteCallout",
+            "module": "src/02-molecules/quote-callout/QuoteCallout.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-quote-callout",
+          "declaration": {
+            "name": "QuoteCallout",
+            "module": "src/02-molecules/quote-callout/QuoteCallout.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/read-time/ReadTime.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Shows the estimated reading time of some content on the page.",
+          "name": "ReadTime",
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Label text. Defaults to \"Estimated read time\"."
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "description": "CSS selector of the content to measure. Defaults to #main-content, then the element's parent."
+            },
+            {
+              "name": "words-per-minute",
+              "type": {
+                "text": "number"
+              },
+              "description": "Reading speed. Defaults to 200."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-read-time",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ReadTime",
+          "declaration": {
+            "name": "ReadTime",
+            "module": "src/02-molecules/read-time/ReadTime.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-read-time",
+          "declaration": {
+            "name": "ReadTime",
+            "module": "src/02-molecules/read-time/ReadTime.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/related-content/RelatedContent.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One linked item inside a ycl-related-content.",
+          "name": "RelatedContentItem",
+          "slots": [
+            {
+              "description": "The title, as a heading element.",
+              "name": "heading"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the item links to."
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "string"
+              },
+              "description": "Content type shown above the title, such as Post or Event."
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "string"
+              },
+              "description": "Category shown after the type."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-related-content-item",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A list of links to related content. Children are ycl-related-content-item elements.",
+          "name": "RelatedContent",
+          "slots": [
+            {
+              "description": "The section heading. It also names the region.",
+              "name": "heading"
+            },
+            {
+              "description": "ycl-related-content-item elements.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"site\"|\"content\""
+              },
+              "description": "Width of the section. Defaults to site.",
+              "name": "width"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-related-content",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "RelatedContentItem",
+          "declaration": {
+            "name": "RelatedContentItem",
+            "module": "src/02-molecules/related-content/RelatedContent.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "RelatedContent",
+          "declaration": {
+            "name": "RelatedContent",
+            "module": "src/02-molecules/related-content/RelatedContent.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-related-content",
+          "declaration": {
+            "name": "RelatedContent",
+            "module": "src/02-molecules/related-content/RelatedContent.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-related-content-item",
+          "declaration": {
+            "name": "RelatedContentItem",
+            "module": "src/02-molecules/related-content/RelatedContent.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/search-result/SearchResult.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One search result: content type, linked title, breadcrumbs and text.",
+          "name": "SearchResult",
+          "slots": [
+            {
+              "description": "The title, as a heading element.",
+              "name": "heading"
+            },
+            {
+              "description": "Breadcrumbs.",
+              "name": "breadcrumbs"
+            },
+            {
+              "description": "Text with the search terms highlighted.",
+              "name": "highlighted"
+            },
+            {
+              "description": "Summary text.",
+              "name": "teaser"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL of the result."
+            },
+            {
+              "name": "content-type",
+              "type": {
+                "text": "string"
+              },
+              "description": "Content type shown above the title."
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Needs a Yale login: shows a lock and hides everything but the title.",
+              "name": "cas"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-search-result",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SearchResult",
+          "declaration": {
+            "name": "SearchResult",
+            "module": "src/02-molecules/search-result/SearchResult.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-search-result",
+          "declaration": {
+            "name": "SearchResult",
+            "module": "src/02-molecules/search-result/SearchResult.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/social-links/SocialLinks.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Icon links to social media profiles. Each platform attribute holds a URL; platforms without one are not shown.",
+          "name": "SocialLinks",
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "X (formerly Twitter) URL.",
+              "name": "x-twitter"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Facebook URL.",
+              "name": "facebook"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "YouTube URL.",
+              "name": "youtube"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Instagram URL.",
+              "name": "instagram"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Weibo URL.",
+              "name": "weibo"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "LinkedIn URL.",
+              "name": "linkedin"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Bluesky URL.",
+              "name": "bluesky"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-social-links",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SocialLinks",
+          "declaration": {
+            "name": "SocialLinks",
+            "module": "src/02-molecules/social-links/SocialLinks.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-social-links",
+          "declaration": {
+            "name": "SocialLinks",
+            "module": "src/02-molecules/social-links/SocialLinks.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/tabs/Tabs.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One tab of a ycl-tabs: its label and panel content.",
+          "name": "Tab",
+          "slots": [
+            {
+              "description": "The panel content.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The tab's label.",
+              "name": "label"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether this tab is selected. Defaults to the first tab.",
+              "name": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-tab",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "Tabbed panels. Children are ycl-tab elements.",
+          "name": "Tabs",
+          "slots": [
+            {
+              "description": "ycl-tab elements.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name of the tab list."
+            },
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-tabs",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tab",
+          "declaration": {
+            "name": "Tab",
+            "module": "src/02-molecules/tabs/Tabs.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Tabs",
+          "declaration": {
+            "name": "Tabs",
+            "module": "src/02-molecules/tabs/Tabs.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-tab",
+          "declaration": {
+            "name": "Tab",
+            "module": "src/02-molecules/tabs/Tabs.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-tabs",
+          "declaration": {
+            "name": "Tabs",
+            "module": "src/02-molecules/tabs/Tabs.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/taxonomy-display/TaxonomyDisplay.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One labelled group of terms inside a ycl-taxonomy-display.",
+          "name": "TaxonomyDisplayItem",
+          "slots": [
+            {
+              "description": "The term links. Shows \"None\" when empty.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "The group label, such as Categories."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-taxonomy-display-item",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A list of taxonomy term groups. Children are ycl-taxonomy-display-item elements.",
+          "name": "TaxonomyDisplay",
+          "slots": [
+            {
+              "description": "ycl-taxonomy-display-item elements.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"default\"|\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"content\"|\"highlight\""
+              },
+              "description": "Width of the list.",
+              "name": "width"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-taxonomy-display",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TaxonomyDisplayItem",
+          "declaration": {
+            "name": "TaxonomyDisplayItem",
+            "module": "src/02-molecules/taxonomy-display/TaxonomyDisplay.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "TaxonomyDisplay",
+          "declaration": {
+            "name": "TaxonomyDisplay",
+            "module": "src/02-molecules/taxonomy-display/TaxonomyDisplay.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-taxonomy-display",
+          "declaration": {
+            "name": "TaxonomyDisplay",
+            "module": "src/02-molecules/taxonomy-display/TaxonomyDisplay.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-taxonomy-display-item",
+          "declaration": {
+            "name": "TaxonomyDisplayItem",
+            "module": "src/02-molecules/taxonomy-display/TaxonomyDisplay.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/text-with-image/TextWithImage.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Text beside an image.",
+          "name": "TextWithImage",
+          "slots": [
+            {
+              "description": "Text above the heading.",
+              "name": "overline"
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "Text under the heading.",
+              "name": "subheading"
+            },
+            {
+              "description": "The text.",
+              "name": ""
+            },
+            {
+              "description": "Links or buttons.",
+              "name": "ctas"
+            },
+            {
+              "description": "The image.",
+              "name": "image"
+            },
+            {
+              "description": "The image caption.",
+              "name": "caption"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"default\"|\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme. Defaults to default.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"site\"|\"highlight\""
+              },
+              "description": "Width of the component. Defaults to site.",
+              "name": "width"
+            },
+            {
+              "type": {
+                "text": "\"image-left\"|\"image-right\""
+              },
+              "description": "Which side the image is on. Defaults to image-left.",
+              "name": "position"
+            },
+            {
+              "type": {
+                "text": "\"top\"|\"middle\"|\"bottom\""
+              },
+              "description": "Vertical alignment of the text. Defaults to top.",
+              "name": "vertical-align"
+            },
+            {
+              "type": {
+                "text": "\"inline\"|\"offset\""
+              },
+              "description": "offset shifts the image off the background. Defaults to inline.",
+              "name": "image-style"
+            },
+            {
+              "type": {
+                "text": "\"equal\"|\"image\"|\"content\""
+              },
+              "description": "Which side gets more width. Defaults to equal.",
+              "name": "focus"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-text-with-image",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TextWithImage",
+          "declaration": {
+            "name": "TextWithImage",
+            "module": "src/02-molecules/text-with-image/TextWithImage.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-text-with-image",
+          "declaration": {
+            "name": "TextWithImage",
+            "module": "src/02-molecules/text-with-image/TextWithImage.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/text/Text.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A block of rich text (paragraphs, lists, links) with the library's typography.",
+          "name": "Text",
+          "slots": [
+            {
+              "description": "The rich text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"default\"|\"emphasized\""
+              },
+              "description": "emphasized uses a larger type size.",
+              "name": "variation"
+            },
+            {
+              "type": {
+                "text": "\"center\"|\"left\""
+              },
+              "description": "Alignment of the block.",
+              "name": "alignment"
+            },
+            {
+              "type": {
+                "text": "\"content\"|\"highlight\"|\"max\""
+              },
+              "description": "Width of the block.",
+              "name": "width"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Text",
+          "declaration": {
+            "name": "Text",
+            "module": "src/02-molecules/text/Text.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-text",
+          "declaration": {
+            "name": "Text",
+            "module": "src/02-molecules/text/Text.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/tile-item/TileItem.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A colored tile with an icon or heading, text and optional image. With an href, the whole tile is a link.",
+          "name": "TileItem",
+          "slots": [
+            {
+              "description": "A decorative icon, such as a ycl-icon.",
+              "name": "icon"
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The text.",
+              "name": ""
+            },
+            {
+              "description": "A background image.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the tile links to."
+            },
+            {
+              "type": {
+                "text": "\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme. Defaults to one.",
+              "name": "theme"
+            },
+            {
+              "type": {
+                "text": "\"left\"|\"center\"|\"right\""
+              },
+              "description": "Text alignment. Defaults to left.",
+              "name": "alignment"
+            },
+            {
+              "type": {
+                "text": "\"top\"|\"bottom\""
+              },
+              "description": "Where the content sits. Defaults to top.",
+              "name": "vertical-alignment"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Animates the tile on hover.",
+              "name": "animated"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-tile-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TileItem",
+          "declaration": {
+            "name": "TileItem",
+            "module": "src/02-molecules/tile-item/TileItem.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-tile-item",
+          "declaration": {
+            "name": "TileItem",
+            "module": "src/02-molecules/tile-item/TileItem.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/video/Video.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A video with an optional heading and text.",
+          "name": "Video",
+          "slots": [
+            {
+              "description": "The video, usually a ycl-video-embed.",
+              "name": ""
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The text.",
+              "name": "text"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"left\"|\"center\""
+              },
+              "description": "Alignment of the heading and text. Defaults to left.",
+              "name": "alignment"
+            },
+            {
+              "type": {
+                "text": "\"max\"|\"site\"|\"highlight\"|\"content\""
+              },
+              "description": "Width of the video. Defaults to content.",
+              "name": "width"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-video",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Video",
+          "declaration": {
+            "name": "Video",
+            "module": "src/02-molecules/video/Video.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-video",
+          "declaration": {
+            "name": "Video",
+            "module": "src/02-molecules/video/Video.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/wrapped-callout/WrappedCallout.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A callout box floated beside body text that wraps around it.",
+          "name": "WrappedCallout",
+          "slots": [
+            {
+              "description": "The callout content.",
+              "name": "callout"
+            },
+            {
+              "description": "The body text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "description": "Side the callout floats to. Defaults to left.",
+              "name": "alignment"
+            },
+            {
+              "type": {
+                "text": "\"default\"|\"one\"|\"two\"|\"three\"|\"four\"|\"five\"|\"six\""
+              },
+              "description": "Color theme of the callout.",
+              "name": "theme"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-wrapped-callout",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "WrappedCallout",
+          "declaration": {
+            "name": "WrappedCallout",
+            "module": "src/02-molecules/wrapped-callout/WrappedCallout.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-wrapped-callout",
+          "declaration": {
+            "name": "WrappedCallout",
+            "module": "src/02-molecules/wrapped-callout/WrappedCallout.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/wrapped-image/WrappedImage.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An image floated beside body text that wraps around it.",
+          "name": "WrappedImage",
+          "slots": [
+            {
+              "description": "The image.",
+              "name": "image"
+            },
+            {
+              "description": "The image caption.",
+              "name": "caption"
+            },
+            {
+              "description": "The body text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "description": "Side the image floats to. Defaults to left.",
+              "name": "alignment"
+            },
+            {
+              "type": {
+                "text": "\"floated\"|\"offset\""
+              },
+              "description": "offset shifts the image off the text. Defaults to floated.",
+              "name": "image-style"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-wrapped-image",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "WrappedImage",
+          "declaration": {
+            "name": "WrappedImage",
+            "module": "src/02-molecules/wrapped-image/WrappedImage.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-wrapped-image",
+          "declaration": {
+            "name": "WrappedImage",
+            "module": "src/02-molecules/wrapped-image/WrappedImage.js"
+          }
+        }
+      ]
+    }
+  ]
+}
