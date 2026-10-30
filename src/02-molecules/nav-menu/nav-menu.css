@@ -1,0 +1,174 @@
+/* Custom elements default to display: inline. Gray 800 text on white and the link blue on white
+   both clear WCAG AA (4.5:1). Visited links keep the menu colours (see the :visited rules below):
+   a menu reads as navigation, not as body copy. */
+:host(ycl-nav-menu) {
+  display: block;
+  --color-nav-menu-text: var(--color-gray-800);
+  --color-nav-menu-action: var(--color-link-base);
+  --color-nav-menu-current: var(--color-blue-yale);
+  --color-nav-menu-background: var(--color-basic-white);
+  --color-nav-menu-border: var(--color-gray-300);
+}
+
+.nav-menu__list,
+.nav-menu__submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-spacing-2);
+}
+
+.nav-menu__item {
+  position: relative;
+}
+
+/* Top-level links and toggles share one look. The links are Text Link atoms (class "link") with
+   the underline turned off; the current page is marked by a bar instead. */
+.nav-menu__link,
+.nav-menu__toggle {
+  --link-underline-thickness: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--size-spacing-3);
+  box-sizing: border-box;
+  min-height: var(--size-click-target-minimum);
+  margin: 0;
+  padding: var(--size-spacing-3) var(--size-spacing-4);
+  border: 0;
+  border-bottom: var(--size-thickness-4) solid transparent;
+  background: none;
+  color: var(--color-nav-menu-text);
+  font: inherit;
+  font-weight: var(--font-weights-mallory-medium);
+  line-height: normal;
+  text-align: start;
+  cursor: pointer;
+}
+
+.nav-menu__link:hover,
+.nav-menu__link:visited:hover,
+.nav-menu__toggle:hover,
+.nav-menu__toggle[aria-expanded="true"] {
+  color: var(--color-nav-menu-action);
+}
+
+.nav-menu__link:visited {
+  color: var(--color-nav-menu-text);
+}
+
+.nav-menu__link[aria-current="page"],
+.nav-menu__toggle.is-current {
+  border-bottom-color: var(--color-nav-menu-current);
+}
+
+/* An inset ring, so it stays inside the dropdown box and the vertical submenu's rule.
+   !important because the shared *:focus-visible rule (outline-offset: +2px) sits in the later
+   util layer and beats normal declarations here; an important declaration in an earlier layer
+   wins over it. */
+.nav-menu__link:focus-visible,
+.nav-menu__toggle:focus-visible,
+.nav-menu__sublink:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-nav-menu-action) !important;
+  outline-offset: calc(-1 * var(--size-thickness-2)) !important;
+}
+
+/* Same dropdown arrow as the Button atom's dropdown control. */
+.nav-menu__icon {
+  height: 1em;
+  width: 1em;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+[aria-expanded="true"] > .nav-menu__icon {
+  transform: rotate(180deg);
+}
+
+.nav-menu__submenu[hidden] {
+  display: none;
+}
+
+/* Child links are Text Link atoms too, with the underline off: as block rows a full-width line
+   under each would read as body-copy links rather than menu items. They share the top-level text
+   colour and hover colour; the atom's border-box keeps padding and the inset focus ring inside the
+   dropdown. */
+.nav-menu__sublink {
+  --link-underline-thickness: 0;
+  --link-display: block;
+  --link-padding: var(--size-spacing-3) var(--size-spacing-5);
+  width: 100%;
+  min-height: var(--size-click-target-minimum);
+  background-image: none;
+  color: var(--color-nav-menu-text);
+}
+
+.nav-menu__sublink:visited {
+  color: var(--color-nav-menu-text);
+}
+
+.nav-menu__sublink:hover,
+.nav-menu__sublink:visited:hover {
+  color: var(--color-nav-menu-action);
+}
+
+.nav-menu__sublink[aria-current="page"],
+.nav-menu__sublink[aria-current="page"]:visited {
+  color: var(--color-nav-menu-current);
+  font-weight: var(--font-weights-mallory-medium);
+  box-shadow: inset var(--size-thickness-4) 0 0 var(--color-nav-menu-current);
+}
+
+/* Horizontal (default): dropdowns float below their toggle. */
+[data-layout="horizontal"] .nav-menu__submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  min-width: 14rem;
+  padding-block: var(--size-spacing-3);
+  background-color: var(--color-nav-menu-background);
+  border: var(--size-thickness-1) solid var(--color-nav-menu-border);
+  box-shadow: 0 var(--size-spacing-2) var(--size-spacing-5) hsl(0 0% 0% / 15%);
+}
+
+/* Vertical: a stacked list whose dropdowns expand inline, pushing later items down. */
+[data-layout="vertical"] .nav-menu__list {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+[data-layout="vertical"] .nav-menu__link,
+[data-layout="vertical"] .nav-menu__toggle {
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 0;
+  border-left: var(--size-thickness-4) solid transparent;
+}
+
+[data-layout="vertical"] .nav-menu__link[aria-current="page"],
+[data-layout="vertical"] .nav-menu__toggle.is-current {
+  border-left-color: var(--color-nav-menu-current);
+}
+
+[data-layout="vertical"] .nav-menu__submenu {
+  margin-inline-start: var(--size-spacing-5);
+  border-left: var(--size-thickness-1) solid var(--color-nav-menu-border);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav-menu__icon {
+    transition: transform var(--animation-speed-default) ease-in-out;
+  }
+
+  .nav-menu__link,
+  .nav-menu__toggle,
+  .nav-menu__sublink {
+    transition: color var(--animation-speed-default) ease-in-out;
+  }
+}

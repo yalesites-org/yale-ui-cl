@@ -1,0 +1,29 @@
+/* --size-wordmark sets the height; the width follows the viewBox's aspect ratio. */
+:host(ycl-wordmark) {
+  display: inline-block;
+  color: var(--color-blue-yale);
+  line-height: 0;
+}
+
+:host(ycl-wordmark[color="white"]) {
+  color: var(--color-basic-white);
+}
+
+.wordmark {
+  display: inline-block;
+  color: inherit;
+}
+
+.wordmark__svg {
+  display: block;
+  height: var(--size-wordmark, var(--size-spacing-8));
+  width: auto;
+}
+
+/* The ring follows the wordmark's color so it contrasts on the dark backgrounds the white variant
+   is for. !important because the shared *:focus-visible rule sits in the later util layer and
+   beats normal declarations here; an important declaration in an earlier layer wins over it. */
+a.wordmark:focus-visible {
+  outline: var(--size-thickness-2) solid currentColor !important;
+  outline-offset: var(--size-thickness-2) !important;
+}

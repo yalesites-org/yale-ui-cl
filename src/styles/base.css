@@ -16,6 +16,7 @@
 @import "../01-atoms/checkbox/checkbox.css" layer(components.checkbox);
 @import "../01-atoms/radio/radio.css" layer(components.radio);
 @import "../01-atoms/divider/divider.css" layer(components.divider);
+@import "../01-atoms/wordmark/wordmark.css" layer(components.wordmark);
 @import "../01-atoms/headings/heading.css" layer(components.heading);
 @import "../01-atoms/image/image.css" layer(components.image);
 @import "../01-atoms/icons/icon.css" layer(components.icon);
@@ -56,3 +57,4 @@
 @import "../02-molecules/tabs/tabs.css" layer(components.tabs);
 @import "../02-molecules/quick-links/quick-links.css" layer(components.quick-links);
 @import "../02-molecules/data-table/data-table.css" layer(components.data-table);
+@import "../02-molecules/nav-menu/nav-menu.css" layer(components.nav-menu);
