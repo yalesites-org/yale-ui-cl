@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Welcome" />
+
+# Yale UI Component Library
+
+The Yale UI Component Library (UICL) is a set of Web Components for YaleSites.
+The components are plain Custom Elements. They need no framework.
+Their styles come from the YaleSites design tokens in `@yalesites-org/tokens`.
+Each component renders into a closed shadow DOM, so page styles do not leak in.
+Most tags start with `ycl-`, for example `<ycl-button>` and `<ycl-alert>`. A few do not yet, such as `<cta-link>` and `<text-input>`.
+
+## Who it is for
+
+UICL is for developers who build Yale web pages and apps outside Drupal and YaleSites.
+Use it when you want the YaleSites look without the YaleSites platform.
+It works in plain HTML and alongside any framework.
+
+## How to load it
+
+The package is not on npm yet. To use it today, build it from this repository and install the local copy:
+
+```bash
+npm ci
+npm run build
+# then, in your project:
+npm install ../path/to/yale-ui-cl
+```
+
+Load the stylesheet once per page. It holds the design tokens, base typography and component styles.
+
+```js
+import 'yale-ui-cl/style.css';
+```
+
+Then load the components. Import the full bundle to register every component:
+
+```js
+import 'yale-ui-cl';
+```
+
+Or import a single component entry. The entry name is the tag with any `ycl-` or `yc-` prefix removed:
+
+```js
+import 'yale-ui-cl/button';
+```
+
+Then use the tags in your HTML:
+
+```html
+<ycl-button class="filled radius-soft" href="https://www.yale.edu">
+  Visit Yale
+</ycl-button>
+```
+
+## How this Storybook is organized
+
+Components follow atomic design. The sidebar groups them by tier:
+
+- **Introduction**: this page.
+- **Atoms**: small single-purpose parts, such as buttons, links, inputs and icons.
+- **Molecules**: groups of atoms that form a pattern, such as alerts, cards, tabs and banners.
+
+Each component page has live examples, a controls panel for its attributes, and the HTML source.
