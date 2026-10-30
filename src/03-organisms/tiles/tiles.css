@@ -1,0 +1,21 @@
+/* Custom elements default to display: inline. */
+:host(ycl-tiles) {
+  display: block;
+}
+
+/* A grid list: one column on narrow screens, as many 16rem-plus columns as fit above that.
+   Grid rows stretch their cells, and each cell is itself a grid so the slotted tile stretches to
+   the row's height too (the tile then fills its host; see tile-item.css). Rows take the height of
+   their tallest tile's content, as in YaleSites; there's no minimum height. */
+.tiles__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
+  gap: var(--size-spacing-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tiles__item {
+  display: grid;
+}

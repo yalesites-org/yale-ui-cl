@@ -1,0 +1,224 @@
+/* Custom elements default to display: inline. */
+:host(ycl-facts-and-figures) {
+  display: block;
+}
+
+:host(ycl-facts-and-figures) [hidden] {
+  display: none !important;
+}
+
+/* Group themes, one to six, as in YaleSites' single Theme setting. No theme, or a value outside
+   one to six, is theme one. Each theme maps the background and text to the same colour slots as
+   the YaleSites facts and figures group; the slots come from the site's global theme when one is
+   set (see below), otherwise from that component theme's tokens. The colours are inherited, so
+   slotted content picks them up, and stats inside the group have no background of their own
+   (see .facts-and-figures__item below). */
+:host(ycl-facts-and-figures) {
+  --color-facts-and-figures-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-facts-and-figures-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+  /* Text links anywhere in the group (the group link is a ycl-text-link, as in YaleSites) take
+     the group's text colour, visited included, so they stay readable on every theme. Their
+     underline animation still marks hover. */
+  --color-link-base: var(--color-facts-and-figures-text);
+  --color-link-hover: var(--color-facts-and-figures-text);
+  --color-link-visited-base: var(--color-facts-and-figures-text);
+  --color-link-visited-hover: var(--color-facts-and-figures-text);
+}
+
+:host(ycl-facts-and-figures[theme="two"]) {
+  --color-facts-and-figures-background: var(--color-slot-four, var(--component-themes-two-slot-four));
+  --color-facts-and-figures-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+}
+
+:host(ycl-facts-and-figures[theme="three"]) {
+  --color-facts-and-figures-background: var(--color-slot-five, var(--component-themes-three-slot-five));
+  --color-facts-and-figures-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
+}
+
+:host(ycl-facts-and-figures[theme="four"]) {
+  --color-facts-and-figures-background: var(--color-slot-two, var(--component-themes-four-colors-slot-two));
+  --color-facts-and-figures-text: var(--color-slot-eight, var(--component-themes-four-colors-slot-eight));
+}
+
+:host(ycl-facts-and-figures[theme="five"]) {
+  --color-facts-and-figures-background: var(--color-slot-three, var(--component-themes-five-colors-slot-three));
+  --color-facts-and-figures-text: var(--color-slot-seven, var(--component-themes-five-colors-slot-seven));
+}
+
+/* There's no component-themes-six in the current tokens release; without a global theme,
+   gray-100 stands in for the light background (as in tile-item.css), with theme one's dark text. */
+:host(ycl-facts-and-figures[theme="six"]) {
+  --color-facts-and-figures-background: var(--color-slot-nine, var(--color-gray-100));
+  --color-facts-and-figures-text: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+}
+
+/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
+   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
+   document. As in YaleSites, global theme four swaps slots two and five for the group. */
+[data-global-theme="one"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-one-colors-slot-one);
+  --color-slot-two: var(--global-themes-one-colors-slot-two);
+  --color-slot-three: var(--global-themes-one-colors-slot-three);
+  --color-slot-four: var(--global-themes-one-colors-slot-four);
+  --color-slot-five: var(--global-themes-one-colors-slot-five);
+  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
+}
+
+[data-global-theme="two"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-two-colors-slot-one);
+  --color-slot-two: var(--global-themes-two-colors-slot-two);
+  --color-slot-three: var(--global-themes-two-colors-slot-three);
+  --color-slot-four: var(--global-themes-two-colors-slot-four);
+  --color-slot-five: var(--global-themes-two-colors-slot-five);
+  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
+}
+
+[data-global-theme="three"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-three-colors-slot-one);
+  --color-slot-two: var(--global-themes-three-colors-slot-two);
+  --color-slot-three: var(--global-themes-three-colors-slot-three);
+  --color-slot-four: var(--global-themes-three-colors-slot-four);
+  --color-slot-five: var(--global-themes-three-colors-slot-five);
+  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
+}
+
+[data-global-theme="four"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-four-colors-slot-one);
+  --color-slot-two: var(--global-themes-four-colors-slot-five);
+  --color-slot-three: var(--global-themes-four-colors-slot-three);
+  --color-slot-four: var(--global-themes-four-colors-slot-four);
+  --color-slot-five: var(--global-themes-four-colors-slot-two);
+  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
+}
+
+[data-global-theme="five"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-five-colors-slot-one);
+  --color-slot-two: var(--global-themes-five-colors-slot-two);
+  --color-slot-three: var(--global-themes-five-colors-slot-three);
+  --color-slot-four: var(--global-themes-five-colors-slot-four);
+  --color-slot-five: var(--global-themes-five-colors-slot-five);
+  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
+}
+
+[data-global-theme="six"] ycl-facts-and-figures {
+  --color-slot-one: var(--global-themes-six-colors-slot-one);
+  --color-slot-two: var(--global-themes-six-colors-slot-two);
+  --color-slot-three: var(--global-themes-six-colors-slot-three);
+  --color-slot-four: var(--global-themes-six-colors-slot-four);
+  --color-slot-five: var(--global-themes-six-colors-slot-five);
+  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
+  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+}
+
+/* The group. It's its own stacking context so the background image can sit at z-index -1
+   without dropping behind the page. */
+.facts-and-figures {
+  position: relative;
+  z-index: 0;
+  padding: var(--size-spacing-9) var(--size-spacing-7);
+  background-color: var(--color-facts-and-figures-background);
+  color: var(--color-facts-and-figures-text);
+}
+
+.facts-and-figures__inner {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: var(--size-spacing-6);
+}
+
+/* Slotted headings keep their semantics but take the group heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.facts-and-figures__heading ::slotted(*) {
+  font: var(--font-style-heading-h2-yale-new) !important;
+  margin: 0 !important;
+  color: inherit;
+}
+
+.facts-and-figures__intro {
+  font: var(--font-style-body-default);
+  max-width: 48rem;
+}
+
+.facts-and-figures__intro ::slotted(p) {
+  margin: 0;
+}
+
+/* A grid list of stats: one column on narrow screens, as many 14rem-plus columns as fit above
+   that. Each cell is a grid so the slotted stat stretches to its row's height. */
+.facts-and-figures__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--size-spacing-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts-and-figures__item {
+  display: grid;
+}
+
+/* Stats take the group's colours and have no background of their own, whatever their own theme
+   (YaleSites forces the stat theme to "default" inside a group). They keep vertical padding only,
+   unless `padded` is set. An outer ::slotted() declaration wins over the item's own :host rules. */
+.facts-and-figures__item ::slotted(ycl-facts-and-figures-item) {
+  --color-facts-and-figures-item-theme: transparent;
+  --color-facts-and-figures-item-content: currentcolor;
+}
+
+.facts-and-figures__item ::slotted(ycl-facts-and-figures-item:not([padded])) {
+  --facts-and-figures-item-padding-inline: 0;
+}
+
+/* ycl-cta-link sets default action colours on its own host, which would beat the theme's inherited
+   ones; an outer ::slotted() declaration wins over :host, so the group's theme reaches the CTA. */
+.facts-and-figures__link ::slotted(ycl-cta-link) {
+  --color-action: var(--color-facts-and-figures-text);
+  --color-action-secondary: var(--color-facts-and-figures-background);
+}
+
+/* Background image, behind the content, tinted with the group's theme colour so the text over it
+   keeps its contrast. */
+.facts-and-figures__image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* ::slotted() can't reach the <img> inside a slotted <picture>, so that one is sized from the
+   document (base.css loads this file into the page too). */
+.facts-and-figures__image ::slotted(img),
+.facts-and-figures__image ::slotted(picture),
+ycl-facts-and-figures > picture[slot="image"] img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* A slotted ycl-image fills the group, cropping its image to cover it. */
+.facts-and-figures__image ::slotted(ycl-image) {
+  height: 100%;
+  --image-fill-height: 100%;
+}
+
+.facts-and-figures__image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: var(--color-facts-and-figures-background);
+  opacity: 0.85;
+}

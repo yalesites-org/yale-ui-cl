@@ -1,5 +1,8 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./tile-item.css?inline";
+import * as Util from "../../utility.js";
+
+const currentURL = window.location.origin;
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -11,8 +14,9 @@ const watchSlot = (slot, onChange) => {
 };
 
 // The Twig presentation styles (heading, icon, text-only) fall out of what's slotted: the icon
-// and heading wrappers hide themselves when empty. With an href the content becomes a link whose
-// ::after stretches over the tile, making the whole tile clickable.
+// and heading wrappers hide themselves when empty, and a presentation attribute shows only its
+// area. With an href the content becomes a link whose ::after stretches over the tile, making the
+// whole tile clickable.
 const tileItemTemplate = document.createElement("template");
 tileItemTemplate.innerHTML = `
 	<div class="tile__item" data-component-has-image="false">
@@ -54,11 +58,21 @@ export class TileItem extends HTMLElement {
 			this.content.classList.toggle("tile__item__link", newValue !== null);
 			if (newValue === null) this.content.removeAttribute("href");
 			else this.content.setAttribute("href", newValue);
+			// Same external/download/new-window icon as ycl-cta-link and ycl-text-link. Without an
+			// href the old icon is just removed: the <a> isn't a web link, so none is added.
+			Util.updateLinkIcon(this.content.querySelector(".fa-icon"), this.content, currentURL);
 		}
 	}
 
 	get href() { return this.getAttribute("href"); }
 	set href(value) { this.setAttribute("href", value); }
+
+	get presentation() { return this.getAttribute("presentation"); }
+	set presentation(value) { this.setAttribute("presentation", value); }
+
+	// Bottom unless the attribute is top, matching the CSS.
+	get verticalAlignment() { return this.getAttribute("vertical-alignment") === "top" ? "top" : "bottom"; }
+	set verticalAlignment(value) { this.setAttribute("vertical-alignment", value); }
 
 	get theme() { return this.getAttribute("theme") ?? "one"; }
 	set theme(value) { this.setAttribute("theme", value); }

@@ -42,3 +42,7 @@ For CTAs, fade is the default animation and needs no attribute; `animate` takes 
 ### Renamed attribute
 
 The `variation` attribute on `ycl-quick-links`, `ycl-page-title` and `ycl-text` is now `variant`, matching `ycl-pull-quote` and `ycl-quote-callout`. For example, `<ycl-page-title variation="event">` becomes `<ycl-page-title variant="event">`.
+
+### Facts and Figures is now a group
+
+`<ycl-facts-and-figures>` (entry `yale-ui-cl/facts-and-figures`) is now the group: a heading, intro, link and image slot plus a list of stats. A single stat is now `<ycl-facts-and-figures-item>` (entry `yale-ui-cl/facts-and-figures-item`). Old single-stat markup using `<ycl-facts-and-figures>` still loads but renders as an empty group, so rename it. For example, `<ycl-facts-and-figures><span slot="stat">14</span>Residential colleges</ycl-facts-and-figures>` becomes `<ycl-facts-and-figures-item><span slot="stat">14</span>Residential colleges</ycl-facts-and-figures-item>`. When it is one of several stats, wrap the items in a `<ycl-facts-and-figures>` group.

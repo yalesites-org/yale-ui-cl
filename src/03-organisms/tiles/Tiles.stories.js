@@ -1,4 +1,4 @@
-import "./TileItem";
+import "./Tiles";
 import "../../01-atoms/icons/Icon";
 import "../../01-atoms/image/ResponsiveImage";
 
@@ -10,19 +10,20 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = `<ycl-icon slot="icon" name="lightbulb-solid"></ycl-icon>`;
 
+// Alignment, vertical alignment and presentation are set once on ycl-tiles, which copies them
+// onto every tile. Every tile gets a heading and an icon; presentation shows one, or neither. The
+// rest is per tile.
 const tile = (args, heading) => `
-	<li>
-		<ycl-tile-item theme="${args.theme}" alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""} style="min-height: 18rem;">
-			${args.presentation === "icon" ? icon : ""}
-			${args.presentation === "heading" ? `<span slot="heading">${heading}</span>` : ""}
-			${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
-			${args.content}
-		</ycl-tile-item>
-	</li>`;
+	<ycl-tile-item theme="${args.theme}" ${args.href ? `href="${args.href}"` : ""} ${args.animated ? "animated" : ""}>
+		${icon}
+		<span slot="heading">${heading}</span>
+		${args.withImage ? `<ycl-image slot="image"><img src="${placeholder(600, 600)}" alt=""></ycl-image>` : ""}
+		${args.content}
+	</ycl-tile-item>`;
 
 export default {
-	title: "Molecules/Tile Item",
-	component: "ycl-tile-item",
+	title: "Organisms/Tiles",
+	component: "ycl-tiles",
 	argTypes: {
 		heading: { control: "text" },
 		content: { control: "text" },
@@ -60,7 +61,7 @@ export default {
 		href: "https://www.yale.edu",
 		presentation: "heading",
 		alignment: "left",
-		verticalAlignment: "top",
+		verticalAlignment: "bottom",
 		theme: "one",
 		withImage: false,
 		animated: false,
@@ -69,11 +70,11 @@ export default {
 
 	render: (args) =>
 		`<div data-global-theme="${args.globalTheme}">
-			<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-6);">
+			<ycl-tiles alignment="${args.alignment}" vertical-alignment="${args.verticalAlignment}" presentation="${args.presentation}">
 				${tile(args, args.heading)}
 				${tile(args, "02")}
 				${tile(args, "03")}
-			</ul>
+			</ycl-tiles>
 		</div>`,
 };
 
