@@ -13,7 +13,7 @@ accordionOuterTemplate.innerHTML = `
 			<div class="accordion__heading"><slot name="heading"></slot></div>
 			<ul aria-label="Section controls" class="accordion__controls" hidden>
 				<li class="item">
-					<button class="accordion__toggle-all" type="button" aria-expanded="false"><span class="accordion__toggle-all-label">Expand All</span> ${angleDownIcon("accordion__icon")}</button>
+					<button class="accordion__toggle-all" type="button"><span class="accordion__toggle-all-label">Expand All</span> ${angleDownIcon("accordion__icon")}</button>
 				</li>
 			</ul>
 			<div class="accordion__items"><slot></slot></div>
@@ -131,7 +131,9 @@ export class Accordion extends HTMLElement {
 		const expanded = this.#allExpanded(items);
 		this.#controls.hidden = items.length < 2;
 		this.#label.textContent = expanded ? "Collapse All" : "Expand All";
-		this.#toggle.setAttribute("aria-expanded", String(expanded));
+		// No expanded state for screen readers: the label already says what the button does, and
+		// both would read "Collapse All, expanded". data-expanded only rotates the arrow.
+		this.#toggle.toggleAttribute("data-expanded", expanded);
 	}
 
 	setAll(expanded) {

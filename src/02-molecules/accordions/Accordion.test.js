@@ -28,21 +28,46 @@ describe("ycl-accordion", () => {
 
 	const toggleAll = (accordion) => shadowOf(accordion).querySelector(".accordion__toggle-all");
 
+	// The label alone tells screen readers what the button does; aria-expanded would contradict it
+	// ("Collapse All, expanded"). data-expanded only drives the arrow rotation.
+	const expectToggleAll = (accordion, label, allExpanded) => {
+		const button = toggleAll(accordion);
+		expect(button.textContent.trim()).toBe(label);
+		expect(button.hasAttribute("aria-expanded")).toBe(false);
+		expect(button.hasAttribute("data-expanded")).toBe(allExpanded);
+	};
+
 	it("has one Expand All button that toggles to Collapse All", () => {
 		const accordion = mount(markup);
 		const items = [...accordion.children];
 		expect(shadowOf(accordion).querySelectorAll(".accordion__controls button")).toHaveLength(1);
-		expect(toggleAll(accordion).textContent.trim()).toBe("Expand All");
-		expect(toggleAll(accordion).getAttribute("aria-expanded")).toBe("false");
+		expectToggleAll(accordion, "Expand All", false);
 
 		toggleAll(accordion).click();
 		expect(items.map((item) => item.expanded)).toEqual([true, true]);
-		expect(toggleAll(accordion).textContent.trim()).toBe("Collapse All");
-		expect(toggleAll(accordion).getAttribute("aria-expanded")).toBe("true");
+		expectToggleAll(accordion, "Collapse All", true);
 
 		toggleAll(accordion).click();
 		expect(items.map((item) => item.expanded)).toEqual([false, false]);
-		expect(toggleAll(accordion).textContent.trim()).toBe("Expand All");
+		expectToggleAll(accordion, "Expand All", false);
+	});
+
+	it("rotates the toggle-all arrow once every item is open", () => {
+		const accordion = mount(markup);
+		const icon = shadowOf(accordion).querySelector(".accordion__toggle-all .accordion__icon");
+		// Read the end state, never a frame mid-transition, if a transition is ever added.
+		icon.style.transition = "none";
+		const isFlipped = () => {
+			const { a, d } = new DOMMatrix(getComputedStyle(icon).transform);
+			return a < -0.99 && d < -0.99;
+		};
+		const isUnrotated = () => new DOMMatrix(getComputedStyle(icon).transform).isIdentity;
+
+		expect(isUnrotated()).toBe(true);
+		toggleAll(accordion).click();
+		expect(isFlipped()).toBe(true);
+		toggleAll(accordion).click();
+		expect(isUnrotated()).toBe(true);
 	});
 
 	it("reads Collapse All when every item starts expanded, even before the items upgrade", () => {
@@ -53,11 +78,11 @@ describe("ycl-accordion", () => {
 				<ycl-accordion-item expanded><span slot="heading">One</span>Body</ycl-accordion-item>
 				<ycl-accordion-item expanded><span slot="heading">Two</span>Body</ycl-accordion-item>
 			</ycl-accordion>`);
-		expect(toggleAll(accordion).textContent.trim()).toBe("Collapse All");
-		expect(toggleAll(accordion).getAttribute("aria-expanded")).toBe("true");
+		expectToggleAll(accordion, "Collapse All", true);
 
 		toggleAll(accordion).click();
 		expect([...accordion.children].map((item) => item.expanded)).toEqual([false, false]);
+		expectToggleAll(accordion, "Expand All", false);
 	});
 
 	it("follows items opened and closed one at a time", async () => {
@@ -65,10 +90,10 @@ describe("ycl-accordion", () => {
 		const items = [...accordion.children];
 		trigger(items[1]).click();
 		await settle();
-		expect(toggleAll(accordion).textContent.trim()).toBe("Collapse All");
+		expectToggleAll(accordion, "Collapse All", true);
 		trigger(items[0]).click();
 		await settle();
-		expect(toggleAll(accordion).textContent.trim()).toBe("Expand All");
+		expectToggleAll(accordion, "Expand All", false);
 	});
 
 	it("hides the controls when there's only one item", async () => {

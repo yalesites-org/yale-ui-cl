@@ -209,7 +209,7 @@
 }
 
 /* The toggle-all arrow points up once everything is open. */
-.accordion__toggle-all[aria-expanded="true"] .accordion__icon {
+.accordion__toggle-all[data-expanded] .accordion__icon {
   transform: rotate(180deg);
 }
 
