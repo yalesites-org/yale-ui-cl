@@ -1,8 +1,5 @@
 import "./ResponsiveImage";
-
-// Inline SVG placeholders so the stories don't depend on image files being served.
-const placeholder = (width, height, label) =>
-  `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" fill="#4a4a4a" font-family="sans-serif" font-size="${height / 8}" text-anchor="middle" dominant-baseline="middle">${label}</text></svg>`)}`;
+import { attrs, attributeArg, slotArg, placeholder } from "../../../.storybook/story-helpers.js";
 
 const ratios = {
   '16x9': [1600, 900],
@@ -17,21 +14,26 @@ export default {
   title: 'Atoms/Image',
   component: 'ycl-image',
   argTypes: {
-    aspectRatio: {
+    aspectRatio: attributeArg('ratio: crops the image to a fixed aspect ratio. Empty keeps the image\'s own shape.', {
       name: 'Aspect Ratio',
-      type: 'select',
-      options: Object.keys(ratios),
-    },
-    caption: { control: 'text' },
+      control: 'select',
+      options: ['', ...Object.keys(ratios)],
+    }),
+    alt: slotArg('Alt text of the slotted `<img>` (default slot takes an `<img>` or `<picture>`).', { control: 'text' }),
+    caption: slotArg('slot="caption": caption content. With a caption the image is exposed as a figure. Omitted when empty.', {
+      control: 'text',
+    }),
   },
   args: {
     aspectRatio: '16x9',
+    alt: 'Sterling Memorial Library at dusk',
     caption: '',
   },
   render: (args) => {
-    const [width, height] = ratios[args.aspectRatio];
-    return `<ycl-image ratio="${args.aspectRatio}" style="max-width: 40rem;">
-      <img src="${placeholder(width, height, args.aspectRatio)}" alt="A ${args.aspectRatio.replace('x', ' by ')} image">
+    const [width, height] = ratios[args.aspectRatio] ?? ratios['3x2'];
+    const label = args.aspectRatio || 'Natural size';
+    return `<ycl-image${attrs({ ratio: args.aspectRatio })} style="max-width: 40rem;">
+      <img src="${placeholder(width, height, label)}" alt="${args.alt ?? ''}">
       ${args.caption ? `<p slot="caption">${args.caption}</p>` : ''}
     </ycl-image>`;
   },
@@ -39,14 +41,14 @@ export default {
 
 export const Default = {};
 
-export const Figure = {
-  args: {
-    aspectRatio: '3x2',
-    caption: 'Sterling Memorial Library at dusk. Photo by <a href="#">Yale Office of Public Affairs</a>.',
-  },
-};
-
 export const ResponsivePicture = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Slots a `<picture>` with art-directed `<source>`s instead of a single `<img>`. That is different child markup, which a control cannot switch on.',
+      },
+    },
+  },
   render: () =>
     `<ycl-image style="max-width: 40rem;">
       <picture>
@@ -58,6 +60,13 @@ export const ResponsivePicture = {
 };
 
 export const Ratios = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Every ratio side by side for comparison. Controls render one image at a time.',
+      },
+    },
+  },
   render: () =>
     `<div style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
       ${Object.entries(ratios).map(([ratio, [width, height]]) =>

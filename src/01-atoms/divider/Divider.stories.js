@@ -1,29 +1,34 @@
 import "./Divider";
+import { attrs, attributeArg } from "../../../.storybook/story-helpers.js";
+
 export default {
   title: 'Atoms/Divider',
   component: 'ycl-divider',
   argTypes: {
-    width: {
+    width: attributeArg('width: percentage of the container the line spans.', {
       name: 'Divider width',
-      type: 'select',
+      control: 'select',
       options: ['100', '75', '50', '25'],
-    },
-    position: {
+    }),
+    position: attributeArg('position: alignment of a line narrower than its container.', {
       name: 'Divider position',
-      type: 'select',
+      control: 'select',
       options: ['center', 'left', 'right'],
-    },
-    thickness: {
+    }),
+    thickness: attributeArg('thickness: line thickness token.', {
       name: 'Line thickness',
-      type: 'select',
+      control: 'select',
       options: ['hairline', '1', '2', '4', '6', '8'],
-    },
-    dividerColor: {
+    }),
+    animate: attributeArg('animate: the line expands out the first time it scrolls into view.', {
+      name: 'Animate on scroll',
+      control: 'boolean',
+    }),
+    dividerColor: attributeArg('style: line color, set through the --color-divider custom property.', {
       name: 'Line color',
-      type: 'select',
+      control: 'select',
       options: ['gray-500', 'blue-yale', 'basic-brown-gray'],
-    },
-    animate: { name: 'Animate on scroll', control: 'boolean' },
+    }),
   },
   args: {
     width: '100',
@@ -33,40 +38,28 @@ export default {
     animate: false,
   },
   render: (args) =>
-    `<ycl-divider width="${args.width}" position="${args.position}" thickness="${args.thickness}" ${args.animate ? 'animate' : ''} style="--color-divider: var(--color-${args.dividerColor});"></ycl-divider>`,
+    `<ycl-divider${attrs({
+      width: args.width,
+      position: args.position,
+      thickness: args.thickness,
+      animate: args.animate,
+      style: args.dividerColor && `--color-divider: var(--color-${args.dividerColor});`,
+    })}></ycl-divider>`,
 };
 
 export const Default = {};
 
-export const Widths = {
-  render: () =>
-    ['25', '50', '75', '100'].map((width) =>
-      `<ycl-divider width="${width}" thickness="2" style="margin-block: 2rem;"></ycl-divider>`).join(''),
-};
-
-export const Positions = {
-  render: () =>
-    ['left', 'center', 'right'].map((position) =>
-      `<ycl-divider width="50" position="${position}" thickness="2" style="margin-block: 2rem;"></ycl-divider>`).join(''),
-};
-
-export const Thicknesses = {
-  render: () =>
-    ['hairline', '1', '2', '4', '6', '8'].map((thickness) =>
-      `<ycl-divider thickness="${thickness}" style="margin-block: 2rem;"></ycl-divider>`).join(''),
-};
-
-export const BlueYale = {
-  args: {
-    thickness: '8',
-    dividerColor: 'blue-yale',
+export const AllVariants = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Every width, position and thickness stacked for comparison. Controls render one divider at a time, so they cannot lay several out side by side.',
+      },
+    },
   },
-};
-
-export const Animated = {
-  args: {
-    width: '75',
-    thickness: '4',
-    animate: true,
-  },
+  render: () => [
+    ...['25', '50', '75', '100'].map((width) => `<ycl-divider width="${width}" thickness="2" style="margin-block: 2rem;"></ycl-divider>`),
+    ...['left', 'center', 'right'].map((position) => `<ycl-divider width="50" position="${position}" thickness="2" style="margin-block: 2rem;"></ycl-divider>`),
+    ...['hairline', '1', '2', '4', '6', '8'].map((thickness) => `<ycl-divider thickness="${thickness}" style="margin-block: 2rem;"></ycl-divider>`),
+  ].join(''),
 };

@@ -1,5 +1,6 @@
 import "./Text";
 import "../../01-atoms/text-link/Link";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
 
 const sampleContent = `
   <h2>About YDS</h2>
@@ -36,37 +37,33 @@ export default {
   title: 'Molecules/Text',
   component: 'ycl-text',
   argTypes: {
-    variation: {
+    variation: attributeArg('emphasized sets the text in a highlighted block.', {
       name: 'Text Field Variation',
-      type: 'select',
+      control: 'select',
       options: ['default', 'emphasized'],
-    },
-    alignment: {
+      mapping: { default: undefined },
+    }),
+    alignment: attributeArg('Position of the text column; center is the default.', {
       name: 'Alignment',
-      type: 'select',
+      control: 'select',
       options: ['center', 'left'],
-    },
-},
+      mapping: { center: undefined },
+    }),
+    width: attributeArg('Maximum width of the text column.', {
+      control: 'select',
+      options: ['default', 'content', 'highlight', 'max'],
+      mapping: { default: undefined },
+    }),
+    content: slotArg('Rich text (headings, paragraphs, lists, code) in the default slot.', { control: false }),
+  },
   args: {
     variation: 'default',
     alignment: 'center',
-},
+    width: 'default',
+  },
 
   render: (args) =>
-    `<ycl-text variation="${args.variation}" alignment="${args.alignment}">${sampleContent}</ycl-text>`,
+    `<ycl-text${attrs({ variation: args.variation, alignment: args.alignment, width: args.width })}>${sampleContent}</ycl-text>`,
 };
 
 export const Default = {};
-
-export const Emphasized = {
-  render: () =>
-    `<ycl-text variation="emphasized">
-      <p>Yale Divinity School educates and prepares the scholars, ministers, and leaders of the future.</p>
-    </ycl-text>`,
-};
-
-export const LeftAligned = {
-  args: {
-    alignment: 'left',
-  },
-};

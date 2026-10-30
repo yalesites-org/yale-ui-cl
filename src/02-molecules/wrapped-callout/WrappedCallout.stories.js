@@ -1,6 +1,7 @@
 import "./WrappedCallout";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
+import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
 
 const body = `
   <p>HRBPs work closely with departmental leadership on strategic initiatives related to their workforce and work environments. This includes supporting positive relations between management and staff, alignment with university policies, and developing strategies geared towards talent, engagement, wellness, or belonging for the organization and its employees who are at the heart of it all.</p>
@@ -14,23 +15,23 @@ export default {
     layout: 'fullscreen',
   },
   argTypes: {
-    alignment: {
+    alignment: attributeArg('Side the callout floats on; left is the default.', {
       name: 'Callout Alignment',
-      type: 'select',
+      control: 'select',
       options: ['left', 'right'],
-    },
-    calloutHeading: {name: 'Callout Heading', control: 'text'},
-    showContent: {name: 'Show Body Text', control: 'boolean'},
-    theme: {
+      mapping: { left: undefined },
+    }),
+    theme: attributeArg('Callout background theme.', {
       name: 'Component Theme',
-      type: 'select',
+      control: 'select',
       options: ['default', 'one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
+    }),
+    calloutHeading: slotArg('Heading in the callout (slot="callout", alongside a paragraph). Omitted when empty.', {
+      name: 'Callout Heading',
+      control: 'text',
+    }),
+    showContent: slotArg('Body text the callout wraps into (default slot).', { name: 'Show Body Text', control: 'boolean' }),
+    globalTheme: globalThemeArgType,
   },
   args: {
     alignment: 'left',
@@ -40,32 +41,12 @@ export default {
     globalTheme: 'one',
   },
 
-  render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-wrapped-callout alignment="${args.alignment}" theme="${args.theme}">
-        <ycl-heading level="2" slot="callout">${args.calloutHeading}</ycl-heading>
+  render: (args) => withGlobalTheme(args.globalTheme, `
+      <ycl-wrapped-callout${attrs({ alignment: args.alignment, theme: args.theme })}>
+        ${args.calloutHeading ? `<ycl-heading level="2" slot="callout">${args.calloutHeading}</ycl-heading>` : ''}
         <p slot="callout"><text-link href="https://www.myworkday.com" target="_blank">Find your HR Business Partner</text-link> by department, manager, or campus location in Workday.</p>
         ${args.showContent ? body : ''}
-      </ycl-wrapped-callout>
-    </div>`,
+      </ycl-wrapped-callout>`),
 };
 
 export const Default = {};
-
-export const RightAligned = {
-  args: {
-    alignment: 'right',
-  },
-};
-
-export const CalloutOnly = {
-  args: {
-    showContent: false,
-  },
-};
-
-export const Themed = {
-  args: {
-    theme: 'three',
-  },
-};

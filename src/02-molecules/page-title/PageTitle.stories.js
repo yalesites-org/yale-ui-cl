@@ -2,35 +2,60 @@ import "./PageTitle";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/date-time/DateTime";
 import "../../01-atoms/image/ResponsiveImage";
-
-// Inline placeholder so the story needs no network or image assets.
-const placeholder = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><rect width="16" height="9" fill="#dddddd"/></svg>')}`;
+import { attrs, attributeArg, slotArg, placeholder } from "../../../.storybook/story-helpers.js";
 
 export default {
   title: 'Molecules/Page Title',
   component: 'ycl-page-title',
   argTypes: {
-    heading: {control: 'text'},
-    prefix: {control: 'text'},
-    showMeta: {name: 'Meta', control: 'boolean'},
-    socialLinks: {name: 'Social Links', control: 'boolean'},
-    width: {
+    prefix: attributeArg('Prefix shown before the heading text.', { control: 'text' }),
+    width: attributeArg('How wide the title runs.', {
       name: 'Width',
-      type: 'select',
+      control: 'select',
       options: ['site', 'highlight', 'content', 'max'],
-    },
-},
+    }),
+    variation: attributeArg('variation="event" lays the title out beside an image (slot="image").', {
+      control: 'select',
+      options: ['default', 'event'],
+      mapping: { default: undefined },
+    }),
+    display: attributeArg('visually-hidden keeps the title for screen readers but hides it on screen; hidden hides it entirely.', {
+      control: 'select',
+      options: ['default', 'visually-hidden', 'hidden'],
+      mapping: { default: undefined },
+    }),
+    heading: slotArg('Heading text (default slot), always rendered as the page\'s h1.', { control: 'text' }),
+    overline: slotArg('Text above the heading (slot="overline"). Omitted when empty.', { control: 'text' }),
+    showMeta: slotArg('Byline and date (slot="meta").', { name: 'Meta', control: 'boolean' }),
+    showImage: slotArg('Image (slot="image"), used by the event variation.', { name: 'Image', control: 'boolean' }),
+    socialLinks: slotArg('Share links (slot="social-links").', { name: 'Social Links', control: 'boolean' }),
+    otherSlots: slotArg('slot="extra" sits under the heading; slot="meta-extra" under the meta.', {
+      name: 'extra, meta-extra',
+      control: false,
+    }),
+  },
   args: {
     heading: 'Davis Team Project Wins Award for Research',
     prefix: '',
-    showMeta: true,
-    socialLinks: false,
+    overline: '',
     width: 'site',
-},
+    variation: 'default',
+    display: 'default',
+    showMeta: true,
+    showImage: false,
+    socialLinks: false,
+  },
 
   render: (args) =>
-    `<ycl-page-title width="${args.width}"${args.prefix ? ` prefix="${args.prefix}"` : ''}>
-      ${args.heading}
+    `<ycl-page-title${attrs({
+      width: args.width,
+      prefix: args.prefix,
+      variation: args.variation,
+      display: args.display,
+    })}>
+      ${args.heading ?? ''}
+      ${args.overline ? `<span slot="overline">${args.overline}</span>` : ''}
+      ${args.showImage ? `<ycl-image slot="image" ratio="16x9"><img src="${placeholder(16, 9, '')}" alt="Graduates gathered on Old Campus"></ycl-image>` : ''}
       ${args.showMeta ? `<span slot="meta">By Charlyn Paradis</span>
       <ycl-date-time slot="meta" start="2022-01-25T12:00:00" format="date"></ycl-date-time>` : ''}
       ${args.socialLinks ? `<div slot="social-links" style="display: flex; gap: 1rem;">
@@ -41,31 +66,3 @@ export default {
 };
 
 export const Default = {};
-
-export const WithPrefix = {
-  args: {
-    prefix: 'Feature',
-  },
-};
-
-export const WithSocialLinks = {
-  args: {
-    socialLinks: true,
-  },
-};
-
-export const Event = {
-  render: () =>
-    `<ycl-page-title variation="event">
-      Yale Commencement 2026
-      <ycl-image slot="image" ratio="16x9"><img src="${placeholder}" alt="Graduates gathered on Old Campus"></ycl-image>
-      <ycl-date-time slot="meta" start="2026-05-18T12:00:00" format="day__long"></ycl-date-time>
-      <span slot="meta">Old Campus</span>
-    </ycl-page-title>`,
-};
-
-export const VisuallyHidden = {
-  render: () =>
-    `<ycl-page-title display="visually-hidden">About the School</ycl-page-title>
-    <p>The page title is still announced by screen readers but isn't shown.</p>`,
-};
