@@ -20,6 +20,15 @@ quoteCalloutTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A large quote with an attribution and optional image.
+ * @attr {"bar"|"quote"|"image"} variant - Decoration style; image shows the image slot. Defaults to bar.
+ * @attr {"left"|"right"} quote-alignment - Side the quote sits on. Defaults to left.
+ * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme.
+ * @slot - The quote.
+ * @slot attribution - Who said it.
+ * @slot image - An image, shown with variant="image".
+ */
 export class QuoteCallout extends HTMLElement {
 	#shadow;
 

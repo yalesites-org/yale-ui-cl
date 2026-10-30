@@ -31,6 +31,20 @@ contentSpotlightPortraitTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * Text beside a portrait-shaped image.
+ * @attr {"default"|"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to default.
+ * @attr {"image-left"|"image-right"} position - Which side the image is on. Defaults to image-left.
+ * @attr {"top"|"middle"|"bottom"} vertical-align - Vertical alignment of the text. Defaults to middle.
+ * @attr {"inline"|"offset"} image-style - offset shifts the image off the background. Defaults to inline.
+ * @slot overline - Text above the heading.
+ * @slot heading - The heading.
+ * @slot subheading - Text under the heading.
+ * @slot - The text.
+ * @slot ctas - Links or buttons.
+ * @slot image - The image.
+ * @slot caption - The image caption.
+ */
 export class ContentSpotlightPortrait extends HTMLElement {
 	#shadow;
 

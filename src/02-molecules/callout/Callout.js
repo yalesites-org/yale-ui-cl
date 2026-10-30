@@ -22,6 +22,12 @@ calloutItemTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * One callout inside a ycl-callout.
+ * @slot heading - The callout heading.
+ * @slot - The callout text.
+ * @slot link - A link or button, usually a cta-link.
+ */
 export class CalloutItem extends HTMLElement {
 	#shadow;
 
@@ -33,6 +39,13 @@ export class CalloutItem extends HTMLElement {
 	}
 }
 
+/**
+ * A band of one or more highlighted callouts. Children are ycl-callout-item elements.
+ * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to one.
+ * @attr {"center"|"left"} alignment - Text alignment. Defaults to center.
+ * @attr {string} overlay-image - URL of a decorative image laid over the background.
+ * @slot - ycl-callout-item elements.
+ */
 export class Callout extends HTMLElement {
 	#shadow;
 

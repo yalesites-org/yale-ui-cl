@@ -14,6 +14,13 @@ imageBlockTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A content image with an optional caption.
+ * @attr {"content"|"highlight"|"site"|"max"} width - Width of the image.
+ * @attr {"center"|"left"} alignment - Alignment of the image.
+ * @slot - The image: an `<img>`, `<picture>` or ycl-image.
+ * @slot caption - The caption.
+ */
 export class ImageBlock extends HTMLElement {
 	#shadow;
 

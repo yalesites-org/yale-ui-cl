@@ -45,6 +45,12 @@ const sortKey = (cell) => (cell?.dataset.sortValue ?? cell?.textContent ?? "").t
 // header row becomes a sort button. The table stays in the light DOM so its markup, caption and
 // page styles are the author's; sorting reorders the rows in place and filtering sets [hidden].
 // The sorted column is whichever header carries aria-sort, so authors can presort by setting it.
+/**
+ * Adds search and column sorting to a slotted `<table>`. Set aria-sort on a header to presort; add data-no-sort to a header to make it unsortable; put data-sort-value on a cell to sort by that instead of its text.
+ * @attr {string} label - Label for the search field. Defaults to "Search".
+ * @attr {string} placeholder - Placeholder for the search field.
+ * @slot - A `<table>` with a `<thead>`.
+ */
 export class DataTable extends HTMLElement {
 	#shadow;
 	#observer;
@@ -92,6 +98,7 @@ export class DataTable extends HTMLElement {
 	get placeholder() { return this.getAttribute("placeholder"); }
 	set placeholder(value) { this.setAttribute("placeholder", value); }
 
+	/** The search text. Setting it filters the rows. */
 	get query() { return this.search.value ?? ""; }
 	set query(value) {
 		this.search.value = value;
@@ -104,6 +111,7 @@ export class DataTable extends HTMLElement {
 
 	// Re-applies headers, sort and filter from scratch, so it's safe to call after any change to the
 	// table. Our own DOM writes would re-trigger the observer forever, so their records are dropped.
+	/** Re-applies sorting and filtering. Call it after changing the table's rows. */
 	refresh = () => {
 		this.#enhanceHeaders();
 		this.#sort();

@@ -11,6 +11,14 @@ imageBannerTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A large image banner with an optional caption.
+ * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme of the caption.
+ * @attr {"tall"|"short"|"mini"} size - Banner height. Defaults to tall.
+ * @attr {"site"|"full"} width - Site width or full browser width. Defaults to site.
+ * @slot - The `<img>` or `<picture>`.
+ * @slot caption - The caption.
+ */
 export class ImageBanner extends HTMLElement {
 	#shadow;
 

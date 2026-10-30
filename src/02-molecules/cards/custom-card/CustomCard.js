@@ -24,6 +24,14 @@ customCardTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A card with a heading, text and optional image. With an href, the whole card is a link.
+ * @attr {string} href - URL the card links to.
+ * @attr {boolean} featured - Larger, featured presentation.
+ * @slot heading - The card heading.
+ * @slot - The card text.
+ * @slot image - The card image. Without one, a color bar shows instead.
+ */
 export class CustomCard extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

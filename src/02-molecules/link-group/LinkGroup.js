@@ -15,6 +15,13 @@ linkGroupTemplate.innerHTML = `
 
 // Slots are assigned by hand so every slotted link can get its own <li>: named slots can only
 // project into a single place, which would leave the links without real list markup.
+/**
+ * One or two columns of links, each with an optional heading. Each child goes to the column named by its slot attribute.
+ * @slot heading-one - Heading of column one.
+ * @slot heading-two - Heading of column two.
+ * @slot links-one - Links in column one; one element per link.
+ * @slot links-two - Links in column two; one element per link.
+ */
 export class LinkGroup extends HTMLElement {
 	#shadow;
 	#observer;

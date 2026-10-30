@@ -31,6 +31,22 @@ textWithImageTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * Text beside an image.
+ * @attr {"default"|"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to default.
+ * @attr {"site"|"highlight"} width - Width of the component. Defaults to site.
+ * @attr {"image-left"|"image-right"} position - Which side the image is on. Defaults to image-left.
+ * @attr {"top"|"middle"|"bottom"} vertical-align - Vertical alignment of the text. Defaults to top.
+ * @attr {"inline"|"offset"} image-style - offset shifts the image off the background. Defaults to inline.
+ * @attr {"equal"|"image"|"content"} focus - Which side gets more width. Defaults to equal.
+ * @slot overline - Text above the heading.
+ * @slot heading - The heading.
+ * @slot subheading - Text under the heading.
+ * @slot - The text.
+ * @slot ctas - Links or buttons.
+ * @slot image - The image.
+ * @slot caption - The image caption.
+ */
 export class TextWithImage extends HTMLElement {
 	#shadow;
 

@@ -8,6 +8,13 @@ videoEmbedTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A responsive video player frame. Give it a src and video-title, or slot the provider's embed code.
+ * @attr {string} src - Embed URL; the component builds the iframe. A slotted embed wins over src.
+ * @attr {string} video-title - Accessible title for the built iframe. Required with src.
+ * @attr {"16x9"|"4x3"|"1x1"} ratio - Aspect ratio. Defaults to 16x9.
+ * @slot - A provider's embed code (an `<iframe>`, `<video>`, etc.) to use instead of src.
+ */
 export class VideoEmbed extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

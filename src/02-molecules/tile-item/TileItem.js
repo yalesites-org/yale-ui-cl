@@ -25,6 +25,18 @@ tileItemTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A colored tile with an icon or heading, text and optional image. With an href, the whole tile is a link.
+ * @attr {string} href - URL the tile links to.
+ * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to one.
+ * @attr {"left"|"center"|"right"} alignment - Text alignment. Defaults to left.
+ * @attr {"top"|"bottom"} vertical-alignment - Where the content sits. Defaults to top.
+ * @attr {boolean} animated - Animates the tile on hover.
+ * @slot icon - A decorative icon, such as a ycl-icon.
+ * @slot heading - The heading.
+ * @slot - The text.
+ * @slot image - A background image.
+ */
 export class TileItem extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

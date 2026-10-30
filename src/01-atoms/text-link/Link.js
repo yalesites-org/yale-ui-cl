@@ -7,6 +7,13 @@ const linkTemplate = document.createElement('template');
 linkTemplate.innerHTML = `<a class="link" href="#"><slot></slot></a>`;
 const currentURL = window.location.origin;
 
+/**
+ * An inline text link. Links to other sites get an external-link icon.
+ * @attr {string} href - The link URL.
+ * @attr {string} target - Where to open the link, as on `<a>`.
+ * @attr {string} class - An ordinary class attribute; text-link has no style variants.
+ * @slot - The link text.
+ */
 export class TextLink extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

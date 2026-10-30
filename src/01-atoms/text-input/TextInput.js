@@ -12,6 +12,21 @@ textInputTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A form-associated text field with label, instructions and error text.
+ * @attr {string} class - Add required to make the field required.
+ * @attr {string} placeholder - Placeholder text.
+ * @attr {string} name - The form field name.
+ * @attr {string} autocomplete - The autocomplete hint, as on `<input>`.
+ * @attr {string} value - The field value.
+ * @attr {boolean} disabled - Disables the field.
+ * @attr {string} valid - Not used: validity comes from the errors slot and the field's own constraints.
+ * @attr {"text"|"email"|"tel"|"number"|"date"|"datetime-local"} type - The input type. Defaults to text.
+ * @slot label - The label text.
+ * @slot instructions - Help text shown under the field.
+ * @slot errors - Error text. Any content here marks the field invalid.
+ * @fires input - When the user edits the value.
+ */
 export class TextInput extends HTMLElement {
 	#shadow;
 	static formAssociated = true;

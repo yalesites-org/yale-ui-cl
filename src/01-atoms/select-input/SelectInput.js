@@ -14,6 +14,20 @@ selectInputTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A form-associated select field with label, instructions and error text. Put `<option>` and `<optgroup>` elements inside.
+ * @attr {string} class - Add required to make a choice required.
+ * @attr {string} placeholder - Placeholder text.
+ * @attr {string} name - The form field name.
+ * @attr {string} autocomplete - The autocomplete hint, as on `<select>`.
+ * @attr {string} value - The selected option's value.
+ * @attr {boolean} disabled - Disables the field.
+ * @slot - The `<option>` and `<optgroup>` elements.
+ * @slot label - The label text.
+ * @slot instructions - Help text shown under the field.
+ * @slot errors - Error text. Any content here marks the field invalid.
+ * @fires input - When the user picks an option.
+ */
 export class SelectInput extends HTMLElement {
 	#shadow;
 	static formAssociated = true;

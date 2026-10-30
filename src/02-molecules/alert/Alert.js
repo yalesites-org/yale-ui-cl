@@ -35,6 +35,15 @@ alertTemplate.innerHTML = `
 	</section>
 `;
 
+/**
+ * A site-wide alert banner. Emergency alerts collapse; others are dismissed. The state is remembered per alert-id.
+ * @attr {"announcement"|"emergency"|"marketing"} type - Kind of alert. Defaults to announcement.
+ * @attr {"expanded"|"collapsed"|"dismissed"} state - Current state. Defaults to expanded.
+ * @attr {string} alert-id - Unique id used to remember the state in localStorage between page loads.
+ * @slot heading - The alert heading.
+ * @slot - The alert text.
+ * @slot link - A link, such as a text-link.
+ */
 export class Alert extends HTMLElement {
 	#shadow;
 	#restored = false;

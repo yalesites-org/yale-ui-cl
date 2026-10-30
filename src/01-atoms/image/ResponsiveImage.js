@@ -10,6 +10,12 @@ imageTemplate.innerHTML = `
 `;
 
 // Not named Image, which would shadow the global HTMLImageElement constructor for importers.
+/**
+ * An image with an optional caption and fixed aspect ratio.
+ * @attr {"16x9"|"4x3"|"3x2"|"2x3"|"1x1"|"1x1.6"} ratio - Crops the image to this aspect ratio.
+ * @slot - The `<img>` or `<picture>`.
+ * @slot caption - The caption. When present, the image becomes a figure.
+ */
 export class ResponsiveImage extends HTMLElement {
 	#shadow;
 

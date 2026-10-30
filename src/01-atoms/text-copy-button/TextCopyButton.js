@@ -15,6 +15,12 @@ textCopyButtonTemplate.innerHTML = `
 // Copies the text slotted into "text" to the clipboard. On success it fires a cancelable,
 // bubbling `text-copy-button:copied` event (detail: { text, button }); calling preventDefault()
 // suppresses the visible label swap so the page can show its own feedback.
+/**
+ * A button that copies the text in its "text" slot to the clipboard.
+ * @slot - The button label. Defaults to "Copy".
+ * @slot text - The text to copy, also shown on the page.
+ * @fires {CustomEvent<{text: string, button: HTMLElement}>} text-copy-button:copied - After a successful copy. Cancelable: preventDefault() keeps the label from changing to the confirmation.
+ */
 export class TextCopyButton extends HTMLElement {
 	#shadow;
 	#timer;
@@ -36,6 +42,7 @@ export class TextCopyButton extends HTMLElement {
 		clearTimeout(this.#timer);
 	}
 
+	/** The text that will be copied. */
 	get text() {
 		return this.textSlot
 			.assignedNodes({ flatten: true })
