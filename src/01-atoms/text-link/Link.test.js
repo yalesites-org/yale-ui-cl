@@ -19,4 +19,11 @@ describe("text-link", () => {
 		expect(link(element).querySelectorAll(".fa-icon")).toHaveLength(1);
 		expect(link(element).querySelector(".fa-icon").ariaLabel).toBe("(link is a download)");
 	});
+
+	it("forwards aria-current to the inner link, where focus lands", () => {
+		const element = mount(`<text-link href="/about" aria-current="page">About</text-link>`);
+		expect(link(element).getAttribute("aria-current")).toBe("page");
+		element.removeAttribute("aria-current");
+		expect(link(element).hasAttribute("aria-current")).toBe(false);
+	});
 });

@@ -1,0 +1,211 @@
+/* Custom elements default to display: inline. */
+:host(ycl-breadcrumbs) {
+  --breadcrumbs-hover: var(--menu-link-color, var(--color-link-base));
+
+  display: block;
+}
+
+:host(ycl-breadcrumbs[hidden]) {
+  display: none;
+}
+
+.breadcrumbs__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* A context with its own spacing (e.g. a search result) can set this to 0. */
+  padding-bottom: var(--breadcrumbs-spacing-after, calc(var(--size-spacing-7) + var(--size-spacing-1)));
+}
+
+.breadcrumbs__wrapper[hidden] {
+  display: none;
+}
+
+/* The menu-link look: text colour at rest, link colour on hover. */
+.breadcrumbs__button,
+.breadcrumbs__item ::slotted(*) {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: var(--font-weights-mallory-book);
+  letter-spacing: 0.2px;
+}
+
+.breadcrumbs__button:hover,
+.breadcrumbs__item ::slotted(a:hover) {
+  color: var(--breadcrumbs-hover);
+}
+
+.breadcrumbs__button {
+  display: none;
+  font: var(--font-style-body-s);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  min-height: var(--size-click-target-minimum);
+  cursor: pointer;
+}
+
+.breadcrumbs__icon {
+  transform: rotate(90deg);
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+}
+
+.breadcrumbs__inner {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+}
+
+.breadcrumbs__control {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-click-target-minimum);
+  width: var(--size-click-target-minimum);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.breadcrumbs__control:hover {
+  color: var(--color-link-base);
+}
+
+.breadcrumbs__control-icon {
+  height: 1.5em;
+  width: 1.5em;
+  fill: currentColor;
+}
+
+.breadcrumbs__control--left {
+  left: 0;
+  transform: rotate(90deg);
+}
+
+.breadcrumbs__control--right {
+  right: 0;
+  transform: rotate(-90deg);
+}
+
+[data-scroll-indicator='left'] .breadcrumbs__control--left,
+[data-scroll-indicator='right'] .breadcrumbs__control--right,
+[data-scroll-indicator='both'] .breadcrumbs__control {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Wide trails stay on one row and scroll, with the scrollbar replaced by the arrows. */
+.breadcrumbs__menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow: auto;
+  scrollbar-width: none;
+  /* Keeps a crumb scrolled into view on focus clear of the overlaid arrows, as in tabs.css. */
+  scroll-padding-inline: var(--size-click-target-minimum);
+}
+
+.breadcrumbs__menu::-webkit-scrollbar {
+  display: none;
+}
+
+:host([wrap]) .breadcrumbs__menu {
+  flex-wrap: wrap;
+  overflow: visible;
+}
+
+.breadcrumbs__item {
+  font: var(--font-style-body-s);
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* The alt text after the slash keeps the decorative "|" from being read out. */
+.breadcrumbs__item:not(:last-child) {
+  margin-right: var(--size-spacing-5);
+  padding-right: var(--size-spacing-5);
+}
+
+.breadcrumbs__item:not(:last-child)::after {
+  content: '|' / '';
+  position: absolute;
+  right: 0;
+  transform: skew(-15deg) translateX(50%);
+}
+
+.breadcrumbs__item ::slotted(*) {
+  display: flex;
+  align-items: center;
+  min-height: var(--size-click-target-minimum);
+}
+
+.breadcrumbs__item ::slotted(a:focus-visible) {
+  outline-offset: -2px;
+}
+
+/* A slotted text-link gets the same look through its styling hooks (its <a> is in a closed
+   shadow root): text colour at rest, the menu-link hover colour captured on the item, and no
+   underline. */
+.breadcrumbs__item ::slotted(text-link) {
+  --color-link-base: var(--color-text);
+  --color-link-visited-base: var(--color-text);
+  --color-link-hover: var(--breadcrumbs-hover);
+  --color-link-visited-hover: var(--breadcrumbs-hover);
+  --link-underline-thickness: 0;
+}
+
+/* The current page reads as plain text rather than a link. */
+.breadcrumbs__item ::slotted([aria-current='page']) {
+  --color-link-base: var(--color-basic-brown-gray);
+  --color-link-visited-base: var(--color-basic-brown-gray);
+  --color-link-hover: var(--color-basic-brown-gray);
+  --color-link-visited-hover: var(--color-basic-brown-gray);
+
+  color: var(--color-basic-brown-gray);
+  font-weight: var(--font-weights-mallory-book);
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .breadcrumbs__button,
+  .breadcrumbs__item ::slotted(a) {
+    transition: color var(--animation-speed-default) ease-in-out;
+  }
+
+  .breadcrumbs__control {
+    transition:
+      opacity var(--animation-speed-default) ease-in-out,
+      visibility var(--animation-speed-default) ease-in-out;
+  }
+
+  .breadcrumbs__menu {
+    scroll-behavior: smooth;
+  }
+}
+
+/* 991.95px is --break-mobile-max; custom properties can't be used in media queries.
+   Long trails collapse behind a button naming the parent page until it's pressed. */
+@media (max-width: 991.95px) {
+  .breadcrumbs__wrapper--collapsible[data-breadcrumbs-overflow='hidden'] .breadcrumbs__button {
+    display: flex;
+    align-items: center;
+    gap: var(--size-spacing-3);
+  }
+
+  .breadcrumbs__wrapper--collapsible[data-breadcrumbs-overflow='hidden'] .breadcrumbs__inner {
+    display: none;
+  }
+}
