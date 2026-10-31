@@ -51,4 +51,18 @@ describe("ycl-text-input", () => {
 		await settle();
 		expect(inner(element).ariaInvalid).toBe("false");
 	});
+
+	it("has a white background so it reads on coloured sections", () => {
+		// A dark colour scheme would otherwise give the native field a dark UA background
+		const element = mount(`<ycl-text-input style="color-scheme: dark"></ycl-text-input>`);
+		expect(getComputedStyle(inner(element)).backgroundColor).toBe("rgb(255, 255, 255)");
+	});
+
+	it("leaves room for the error icon so text does not run under it", async () => {
+		const element = mount(`<ycl-text-input><span slot="errors">Required</span></ycl-text-input>`);
+		await settle();
+		const style = getComputedStyle(inner(element));
+		// --size-spacing-4 (0.75rem) plus the 1.7rem icon
+		expect(parseFloat(style.paddingRight)).toBeCloseTo(parseFloat(style.paddingLeft) + 1.7 * 16, 0);
+	});
 });
