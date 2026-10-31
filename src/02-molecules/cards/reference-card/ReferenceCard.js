@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./reference-card.css?inline";
+import { updateLinkIcon } from "../../../utility.js";
 
 // Runs onChange(filled) whenever a slot gains or loses content, so empty optional parts can be
 // hidden instead of leaving stray spacing. Whitespace-only text doesn't count as content.
@@ -69,6 +70,9 @@ export class ReferenceCard extends HTMLElement {
 			// An <a> without href isn't a link, so a card with no URL simply isn't clickable.
 			if (newValue === null) this.link.removeAttribute("href");
 			else this.link.setAttribute("href", newValue);
+			// External and file links get the external/download icon after the title, as YaleSites'
+			// link treatment adds to linked card headings.
+			updateLinkIcon(this.link.querySelector(".fa-icon"), this.link, window.location.origin);
 		}
 		if (name === "overlay") {
 			this.overlayText.textContent = newValue ?? "";

@@ -357,10 +357,13 @@ ycl-text-with-image picture[slot="image"] img {
   height: auto;
 }
 
+/* Brown-gray, like every YaleSites image caption (its figcaption only carries the shared
+   .caption class). On a component theme the caption sits on the theme's colour, where brown-gray
+   wouldn't be legible, so it takes the theme's text colour there instead. */
 .text-with-image__caption {
   font: var(--font-style-body-s-condensed);
   margin-top: var(--size-spacing-4);
-  color: var(--color-gray-800);
+  color: var(--color-basic-brown-gray);
 }
 
 :host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image__caption {

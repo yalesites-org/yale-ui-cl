@@ -139,6 +139,13 @@ ycl-custom-card picture[slot="image"] img {
     0.15em 0 var(--color-text-shadow), -0.15em 0 var(--color-text-shadow);
 }
 
+/* The external/download icon after a linked title. */
+.custom-card__heading-link .fa-icon {
+  height: 0.75em;
+  width: 0.75em;
+  fill: currentColor;
+}
+
 /* Stretch the link's hit area over the whole card. */
 .custom-card__heading-link[href]::after {
   content: "";

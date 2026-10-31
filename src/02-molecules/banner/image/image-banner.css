@@ -144,8 +144,8 @@
   object-fit: cover;
 }
 
-/* The caption sits on a fixed white bar, so it uses slot-seven, the palette's "text on a light
-   background" colour, rather than the theme's text colour. */
+/* The caption sits on a fixed white bar in brown-gray, the shared YaleSites caption colour,
+   rather than the theme's text colour. */
 .image-banner__caption {
   position: absolute;
   bottom: 0;
@@ -154,7 +154,7 @@
   width: 100%;
   padding: var(--size-spacing-2);
   background-color: var(--color-basic-white);
-  color: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+  color: var(--color-basic-brown-gray);
   font: var(--font-style-body-xs);
   text-align: center;
 }

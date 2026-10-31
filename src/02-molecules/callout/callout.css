@@ -202,6 +202,9 @@ ycl-callout-item a:visited {
 
 /* The callout group. */
 .callouts {
+  /* The text-link descender halo matches the callout background, as in YaleSites. */
+  --color-text-shadow: var(--color-callouts-background);
+
   position: relative;
   color: var(--color-text);
   background-color: var(--color-callouts-background);
@@ -275,6 +278,11 @@ ycl-callout-item a:visited {
   height: 100%;
   max-width: 40rem;
   margin-inline: auto;
+}
+
+/* A callout on its own spans the content width rather than stopping at 40rem, as in YaleSites. */
+:host(ycl-callout-item:only-child) .callout__inner {
+  max-width: var(--size-component-layout-width-content);
 }
 
 /* Slotted headings keep their semantics but take the callout's type style.
