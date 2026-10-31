@@ -1,7 +1,7 @@
 import "./Textarea";
 export default {
 	title: "Atoms/Textarea",
-	component: "text-area",
+	component: "ycl-text-area",
 	argTypes: {
 		label: { control: "text" },
 		required: {
@@ -22,11 +22,11 @@ export default {
 		required: false,
 	},
 	render: (args) =>
-		`<text-area placeholder="${args.placeholder}" rows="${args.rows}" class="${args.required}">
+		`<ycl-text-area placeholder="${args.placeholder}" rows="${args.rows}" ${args.required}>
 		<span slot="label">${args.label}</span>
 		<span slot="instructions">${args.instructions}</span>
 		<span slot="errors">${args.errors}</span>
-	</text-area>`,
+	</ycl-text-area>`,
 };
 
 export const Example = {};

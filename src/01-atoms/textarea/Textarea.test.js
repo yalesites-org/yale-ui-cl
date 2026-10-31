@@ -6,9 +6,9 @@ import bundledCss from "../../styles/base.css?inline";
 
 const inner = (element) => shadowOf(element).querySelector("textarea");
 
-describe("text-area", () => {
+describe("ycl-text-area", () => {
 	it("labels the inner textarea and describes it with instructions and errors", () => {
-		const element = mount(`<text-area><span slot="label">Message</span><span slot="instructions">Be brief</span></text-area>`);
+		const element = mount(`<ycl-text-area><span slot="label">Message</span><span slot="instructions">Be brief</span></ycl-text-area>`);
 		const textarea = inner(element);
 		expect(textarea.labels[0].querySelector("slot").assignedNodes()[0].textContent).toBe("Message");
 		expect(textarea.getAttribute("aria-describedby")).toBe("instructions errors");
@@ -17,7 +17,7 @@ describe("text-area", () => {
 	});
 
 	it("reflects attributes onto the inner textarea", () => {
-		const element = mount(`<text-area placeholder="Say hello" autocomplete="off" rows="8" disabled></text-area>`);
+		const element = mount(`<ycl-text-area placeholder="Say hello" autocomplete="off" rows="8" disabled></ycl-text-area>`);
 		const textarea = inner(element);
 		expect(textarea.placeholder).toBe("Say hello");
 		expect(textarea.autocomplete).toBe("off");
@@ -26,13 +26,13 @@ describe("text-area", () => {
 	});
 
 	it("submits its value with the form", () => {
-		const form = mount(`<form><text-area name="message" value="Hello"></text-area></form>`);
+		const form = mount(`<form><ycl-text-area name="message" value="Hello"></ycl-text-area></form>`);
 		expect(inner(form.firstElementChild).value).toBe("Hello");
 		expect(new FormData(form).get("message")).toBe("Hello");
 	});
 
 	it("updates its value as the user types", () => {
-		const form = mount(`<form><text-area name="message"></text-area></form>`);
+		const form = mount(`<form><ycl-text-area name="message"></ycl-text-area></form>`);
 		const element = form.firstElementChild;
 		inner(element).value = "Line one\nLine two";
 		inner(element).dispatchEvent(new Event("input"));
@@ -41,7 +41,7 @@ describe("text-area", () => {
 	});
 
 	it("is invalid while required and empty", () => {
-		const element = mount(`<text-area class="required"></text-area>`);
+		const element = mount(`<ycl-text-area required></ycl-text-area>`);
 		expect(element.required).toBe(true);
 		expect(element.internals_.validity.valueMissing).toBe(true);
 		expect(shadowOf(element).querySelector("label").classList).toContain("form-item__label--required");
@@ -50,7 +50,7 @@ describe("text-area", () => {
 	});
 
 	it("shows the error state only while the errors slot has content", async () => {
-		const element = mount(`<text-area><span slot="errors"></span></text-area>`);
+		const element = mount(`<ycl-text-area><span slot="errors"></span></ycl-text-area>`);
 		await settle();
 		expect(inner(element).ariaInvalid).toBe("false");
 		expect(inner(element).classList).not.toContain("form-item__textfield--error");
@@ -71,7 +71,7 @@ describe("text-area", () => {
 	});
 
 	it("has a white background so it reads on coloured sections", () => {
-		const element = mount(`<text-area style="color-scheme: dark"></text-area>`);
+		const element = mount(`<ycl-text-area style="color-scheme: dark"></ycl-text-area>`);
 		expect(getComputedStyle(inner(element)).backgroundColor).toBe("rgb(255, 255, 255)");
 	});
 

@@ -12,9 +12,9 @@ const table = (columns) => `
 		<tbody><tr>${"<td>Cell</td>".repeat(columns)}</tr></tbody>
 	</table>`;
 
-describe("yc-table", () => {
+describe("ycl-table", () => {
 	it("scrolls sideways instead of overflowing the page", async () => {
-		const element = mount(`<yc-table style="display: block; width: 300px">${table(10)}</yc-table>`);
+		const element = mount(`<ycl-table style="display: block; width: 300px">${table(10)}</ycl-table>`);
 		await frame();
 		const scroller = wrapper(element);
 		expect(getComputedStyle(scroller).overflowX).toBe("auto");
@@ -23,7 +23,7 @@ describe("yc-table", () => {
 	});
 
 	it("makes the wrapper a labelled, focusable region only while it scrolls", async () => {
-		const element = mount(`<yc-table style="display: block; width: 300px">${table(10)}</yc-table>`);
+		const element = mount(`<ycl-table style="display: block; width: 300px">${table(10)}</ycl-table>`);
 		await frame();
 		const scroller = wrapper(element);
 		expect(scroller.tabIndex).toBe(0);
@@ -38,7 +38,7 @@ describe("yc-table", () => {
 	});
 
 	it("relabels the region when the caption text changes", async () => {
-		const element = mount(`<yc-table style="display: block; width: 300px">${table(10)}</yc-table>`);
+		const element = mount(`<ycl-table style="display: block; width: 300px">${table(10)}</ycl-table>`);
 		await frame();
 		element.querySelector("caption").textContent = "Updated results";
 		await frame();
@@ -46,7 +46,7 @@ describe("yc-table", () => {
 	});
 
 	it("keeps the tab stop while focused, and drops it on blur once the table fits", async () => {
-		const element = mount(`<yc-table style="display: block; width: 300px">${table(10)}</yc-table>`);
+		const element = mount(`<ycl-table style="display: block; width: 300px">${table(10)}</ycl-table>`);
 		await frame();
 		const scroller = wrapper(element);
 		scroller.focus();
@@ -65,13 +65,13 @@ describe("yc-table", () => {
 	});
 
 	it("does not add a tab stop to a table that fits", async () => {
-		const element = mount(`<yc-table style="display: block; width: 2000px">${table(2)}</yc-table>`);
+		const element = mount(`<ycl-table style="display: block; width: 2000px">${table(2)}</ycl-table>`);
 		await frame();
 		expect(wrapper(element).hasAttribute("tabindex")).toBe(false);
 	});
 
 	it("sets table text in the body-s-condensed style", () => {
-		const element = mount(`<yc-table>${table(2)}</yc-table>`);
+		const element = mount(`<ycl-table>${table(2)}</ycl-table>`);
 		const style = getComputedStyle(element.querySelector("td"));
 		expect(style.fontFamily).toContain("Mallory Compact");
 		expect(style.lineHeight).not.toBe("normal");

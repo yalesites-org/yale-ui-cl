@@ -12,13 +12,13 @@ textareaTemplate.innerHTML = `
 	</div>
 `;
 
-// Multi-line counterpart to text-input: same label, instructions, errors and form participation.
+// Multi-line counterpart to ycl-text-input: same label, instructions, errors and form participation.
 export class Textarea extends HTMLElement {
 	#shadow;
 	static formAssociated = true;
 
 	static get observedAttributes() {
-		return ["class", "placeholder", "name", "autocomplete", "value", "disabled", "rows"];
+		return ["required", "placeholder", "name", "autocomplete", "value", "disabled", "rows"];
 	}
 
 	constructor() {
@@ -55,7 +55,7 @@ export class Textarea extends HTMLElement {
 	get autocomplete() { return this.getAttribute("autocomplete"); }
 	get name() { return this.getAttribute("name"); }
 	get rows() { return this.input.rows; }
-	get required() { return this.classList.contains("required"); }
+	get required() { return this.hasAttribute("required"); }
 
 	set placeholder(value) { this.setAttribute("placeholder", value); }
 	set value(text) { this.setAttribute("value", text); }
@@ -66,7 +66,7 @@ export class Textarea extends HTMLElement {
 	set autocomplete(value) { this.setAttribute("autocomplete", value); }
 	set name(value) { this.setAttribute("name", value); }
 	set rows(value) { this.setAttribute("rows", value); }
-	set required(value) { this.classList.toggle("required", Boolean(value)); }
+	set required(value) { this.toggleAttribute("required", Boolean(value)); }
 }
 
-if (!customElements.get("text-area")) customElements.define("text-area", Textarea);
+if (!customElements.get("ycl-text-area")) customElements.define("ycl-text-area", Textarea);

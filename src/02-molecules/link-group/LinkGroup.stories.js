@@ -17,14 +17,14 @@ export default {
     `<ycl-link-group>
       ${args.headingOne ? `<ycl-heading level="2" slot="heading-one">${args.headingOne}</ycl-heading>` : ''}
       ${args.headingTwo ? `<ycl-heading level="2" slot="heading-two">${args.headingTwo}</ycl-heading>` : ''}
-      <text-link slot="links-one" href="#">This is a link</text-link>
-      <text-link slot="links-one" href="#">This is another link</text-link>
-      <text-link slot="links-one" href="#">This is a very long link that will wrap lines</text-link>
-      <text-link slot="links-one" href="https://google.com">Link #4</text-link>
-      <text-link slot="links-two" href="#">This is a link</text-link>
-      <text-link slot="links-two" href="#">This is another link</text-link>
-      <text-link slot="links-two" href="#">This is a very long link that will wrap lines</text-link>
-      <text-link slot="links-two" href="https://google.com/download.pdf">Link #4</text-link>
+      <ycl-text-link slot="links-one" href="#">This is a link</ycl-text-link>
+      <ycl-text-link slot="links-one" href="#">This is another link</ycl-text-link>
+      <ycl-text-link slot="links-one" href="#">This is a very long link that will wrap lines</ycl-text-link>
+      <ycl-text-link slot="links-one" href="https://google.com">Link #4</ycl-text-link>
+      <ycl-text-link slot="links-two" href="#">This is a link</ycl-text-link>
+      <ycl-text-link slot="links-two" href="#">This is another link</ycl-text-link>
+      <ycl-text-link slot="links-two" href="#">This is a very long link that will wrap lines</ycl-text-link>
+      <ycl-text-link slot="links-two" href="https://google.com/download.pdf">Link #4</ycl-text-link>
     </ycl-link-group>`,
 };
 

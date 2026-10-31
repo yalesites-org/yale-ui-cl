@@ -53,7 +53,7 @@ export default {
         ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
         <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
         <p>${args.content}</p>
-        <text-link slot="link" href="#">${args.linkContent}</text-link>
+        <ycl-text-link slot="link" href="#">${args.linkContent}</ycl-text-link>
       </ycl-inline-message>
     </div>`,
 };
