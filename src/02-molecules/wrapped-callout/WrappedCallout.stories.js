@@ -44,7 +44,7 @@ export default {
     `<div data-global-theme="${args.globalTheme}">
       <ycl-wrapped-callout alignment="${args.alignment}" theme="${args.theme}">
         <ycl-heading level="2" slot="callout">${args.calloutHeading}</ycl-heading>
-        <p slot="callout"><text-link href="https://www.myworkday.com" target="_blank">Find your HR Business Partner</text-link> by department, manager, or campus location in Workday.</p>
+        <p slot="callout"><ycl-text-link href="https://www.myworkday.com" target="_blank">Find your HR Business Partner</ycl-text-link> by department, manager, or campus location in Workday.</p>
         ${args.showContent ? body : ''}
       </ycl-wrapped-callout>
     </div>`,

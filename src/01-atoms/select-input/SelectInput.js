@@ -31,7 +31,7 @@ export class SelectInput extends HTMLElement {
 	}
 	
 	static get observedAttributes() {
-		return ["class", "placeholder", "name", "autocomplete", "value", "disabled"];
+		return ["required", "placeholder", "name", "autocomplete", "value", "disabled"];
 	}
 	
 	constructor() {
@@ -79,7 +79,7 @@ export class SelectInput extends HTMLElement {
 	get disabled() { return this.getAttribute("disabled");}
 	get autocomplete() { return this.getAttribute("autocomplete");}
 	get name() { return this.getAttribute("name"); }
-	get required() { return this.classList.contains("required"); }
+	get required() { return this.hasAttribute("required"); }
 
 	set placeholder(value) { this.setAttribute("placeholder", value); }
 	set value(text) { this.setAttribute("value", text); }
@@ -89,10 +89,10 @@ export class SelectInput extends HTMLElement {
 	}
 	set autocomplete(value) { this.setAttribute("autocomplete", value);}
 	set name(value) { this.setAttribute("name", value); }
-	set required(value) { this.classList.toggle("required", Boolean(value)); }
+	set required(value) { this.toggleAttribute("required", Boolean(value)); }
 	
 		
 	
 }
 
-if (!customElements.get("select-input")) customElements.define("select-input", SelectInput);
+if (!customElements.get("ycl-select-input")) customElements.define("ycl-select-input", SelectInput);

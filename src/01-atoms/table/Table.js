@@ -21,4 +21,4 @@ export class Table extends HTMLElement { #shadow;
 }
 
  
-if (!customElements.get("yc-table")) customElements.define("yc-table", Table);
+if (!customElements.get("ycl-table")) customElements.define("ycl-table", Table);

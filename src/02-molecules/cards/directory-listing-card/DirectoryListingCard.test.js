@@ -7,7 +7,7 @@ describe("ycl-directory-listing-card", () => {
 		const list = mount(stories.render({ ...stories.args, ...Default.args }));
 		const phone = list.querySelector('[slot="phone"]');
 		expect(phone.textContent.trim()).toBe(stories.args.phone);
-		expect(phone.matches("a, text-link")).toBe(false);
-		expect(phone.querySelector("a, text-link")).toBeNull();
+		expect(phone.matches("a, ycl-text-link")).toBe(false);
+		expect(phone.querySelector("a, ycl-text-link")).toBeNull();
 	});
 });

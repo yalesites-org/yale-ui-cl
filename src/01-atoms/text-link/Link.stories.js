@@ -1,11 +1,11 @@
 import "./Link";
 
 const link = (args) =>
-  `<text-link class="" href="${args.URL}" link-style="${args.linkStyle}"${args.chevron ? ' chevron' : ''}>${args.label}</text-link>`;
+  `<ycl-text-link href="${args.URL}" link-style="${args.linkStyle}"${args.chevron ? ' chevron' : ''}>${args.label}</ycl-text-link>`;
 
 export default {
   title: 'Atoms/Text Link',
-  component: 'text-link',
+  component: 'ycl-text-link',
   argTypes: {
     label: {control: 'text'},
     URL: {control: 'text'},

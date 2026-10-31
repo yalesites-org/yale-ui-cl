@@ -1,5 +1,5 @@
 /* Styling hooks, read from inherited custom properties so a parent component can restyle a
-   slotted text-link (its <a> is in a closed shadow root):
+   slotted ycl-text-link (its <a> is in a closed shadow root):
    - --color-link-base, --color-link-hover, --color-link-visited-base, --color-link-visited-hover
    - --link-underline-thickness: 0 removes the underline
    - --link-display and --link-padding: put padding on the <a> itself so all of it is clickable
@@ -103,11 +103,11 @@
 /* Components that paint their own coloured surface hand the halo that colour; these don't publish
    one, so the halo is matched (or dropped) for them here rather than drawn in white. These rules
    only take effect when base.css is also loaded in the document. */
-ycl-inline-message text-link {
+ycl-inline-message ycl-text-link {
   --color-text-shadow: var(--color-inline-message-background);
 }
 
-ycl-action-banner text-link {
+ycl-action-banner ycl-text-link {
   --color-text-shadow: transparent;
 }
 

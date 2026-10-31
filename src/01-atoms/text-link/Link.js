@@ -13,7 +13,7 @@ const currentURL = window.location.origin;
 export class TextLink extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
-		return ["href", "class", "target", "link-style", "chevron"];
+		return ["href", "target", "link-style", "chevron"];
 	}
 
 	constructor() {
@@ -30,7 +30,6 @@ export class TextLink extends HTMLElement {
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
 		if (name === "href") this.link.href = newValue;
-		if (name === "class") Util.addVariant(newValue, this.link, "link");
 		if (name === "target") this.link.target = newValue;
 		if (name === "link-style") this.link.dataset.linkStyle = this.linkStyle;
 		this.#updateIcon();
@@ -81,4 +80,4 @@ export class TextLink extends HTMLElement {
 }
 
 
-if (!customElements.get("text-link")) customElements.define("text-link", TextLink);
+if (!customElements.get("ycl-text-link")) customElements.define("ycl-text-link", TextLink);

@@ -31,7 +31,7 @@ export default {
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
       <nav slot="breadcrumbs" aria-label="Breadcrumb">
         <ol>
-          ${breadcrumbs.map((crumb) => `<li><text-link href="#">${crumb}</text-link></li>`).join('')}
+          ${breadcrumbs.map((crumb) => `<li><ycl-text-link href="#">${crumb}</ycl-text-link></li>`).join('')}
         </ol>
       </nav>
       ${args.highlighted ? `<p slot="highlighted">${args.highlighted}</p>` : ''}

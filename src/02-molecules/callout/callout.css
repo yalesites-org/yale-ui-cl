@@ -306,9 +306,9 @@ ycl-callout-item a:visited {
   margin-top: var(--size-spacing-4);
 }
 
-/* cta-link sets default action colours on its own host, which would beat the theme's inherited
+/* ycl-cta-link sets default action colours on its own host, which would beat the theme's inherited
    ones; an outer ::slotted() declaration wins over :host, so the theme reaches the CTA. */
-.callout__inner > slot[name="link"]::slotted(cta-link) {
+.callout__inner > slot[name="link"]::slotted(ycl-cta-link) {
   margin-top: var(--size-spacing-6);
   --color-action: inherit;
   --color-action-secondary: inherit;

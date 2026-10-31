@@ -154,7 +154,7 @@ ycl-search-result > [slot="breadcrumbs"] a {
   text-decoration: none;
 }
 
-ycl-search-result > [slot="breadcrumbs"] text-link {
+ycl-search-result > [slot="breadcrumbs"] ycl-text-link {
   --link-underline-thickness: 0;
   --color-link-base: currentcolor;
   --color-link-visited-base: currentcolor;
