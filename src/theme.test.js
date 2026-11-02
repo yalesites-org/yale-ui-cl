@@ -91,6 +91,19 @@ describe("single color theme", () => {
 		}
 	});
 
+	it("describes each color option in one line in Storybook", () => {
+		for (const tag of Object.keys(OPTIONS)) {
+			const theme = storyFor(tag).default.argTypes.theme;
+			expect(theme.description, tag).toBeTruthy();
+			expect(theme.control?.type, tag).toBe("select");
+			for (const option of theme.options) {
+				const label = theme.control.labels?.[option];
+				expect(label, `${tag} ${option}`).toMatch(new RegExp(`^${option}: \\S`));
+				expect(label, `${tag} ${option}`).not.toMatch(/\n/);
+			}
+		}
+	});
+
 	it("names no story after a numbered theme", () => {
 		const numbered = /Theme\s*(One|Two|Three|Four|Five|Six)/i;
 		for (const { default: meta, ...exports } of stories) {

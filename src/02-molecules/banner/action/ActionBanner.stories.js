@@ -3,6 +3,7 @@ import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/cta/Cta";
 import "../../../01-atoms/text-link/Link";
 import "../../../01-atoms/image/ResponsiveImage";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../../00-tokens/theme/color-options.js";
 
 // Inline placeholders so the story doesn't depend on hosted images.
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#978d85"/><text x="800" y="450" font-family="sans-serif" font-size="96" fill="#fff" text-anchor="middle" dominant-baseline="middle">16 x 9</text></svg>')}`;
@@ -31,8 +32,9 @@ export default {
     linkContentTwo: {control: 'text'},
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-action-banner') },
     },
     linkStyle: {
       name: 'Link Style',

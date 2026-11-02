@@ -1,6 +1,7 @@
 import "./QuoteCallout";
 import "../../01-atoms/image/ResponsiveImage";
 import quoteImage from "../../assets/avif-test-image.avif";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 export default {
   title: 'Molecules/Quote Callout',
@@ -20,8 +21,9 @@ export default {
     },
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-quote-callout') },
     },
   },
   args: {

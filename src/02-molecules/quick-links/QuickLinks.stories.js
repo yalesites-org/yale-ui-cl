@@ -2,6 +2,7 @@ import "./QuickLinks";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/image/ResponsiveImage";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // A local stand-in for a photo so the story doesn't depend on a network image.
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><defs><linearGradient id="g" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient></defs><rect width="16" height="9" fill="url(#g)"/></svg>')}`;
@@ -22,8 +23,9 @@ export default {
     },
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-quick-links') },
     },
 },
   args: {

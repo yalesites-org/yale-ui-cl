@@ -1,4 +1,5 @@
 import "./PullQuote";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 export default {
   title: 'Molecules/Pull Quote',
@@ -13,8 +14,9 @@ export default {
     },
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'tertiary', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-pull-quote') },
     },
   },
   args: {

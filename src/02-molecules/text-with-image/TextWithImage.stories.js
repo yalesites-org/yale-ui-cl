@@ -2,6 +2,7 @@ import "./TextWithImage";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/image/ResponsiveImage";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // Self-contained placeholder so the stories don't depend on an image host.
 const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
@@ -21,8 +22,9 @@ export default {
 		caption: { control: "text" },
 		theme: {
 			name: "Color Option",
-			type: "select",
+			description: COLOR_OPTION_DESCRIPTION,
 			options: ["default", "primary", "secondary", "tertiary", "accent-1", "accent-2"],
+			control: { type: "select", labels: colorOptionLabels("ycl-text-with-image") },
 		},
 		width: {
 			type: "select",

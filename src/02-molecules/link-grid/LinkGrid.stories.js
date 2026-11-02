@@ -1,6 +1,7 @@
 import "./LinkGrid";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 export default {
   title: 'Molecules/Link Grid',
   component: 'ycl-link-grid',
@@ -8,8 +9,9 @@ export default {
     heading: {control: 'text'},
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-link-grid') },
     },
     lineTreatment: {
       name: 'Line Treatment',

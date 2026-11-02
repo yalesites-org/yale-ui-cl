@@ -1,5 +1,6 @@
 import "./Accordion";
 import "../../01-atoms/headings/Heading";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 export default {
   title: 'Molecules/Accordion',
   component: 'ycl-accordion',
@@ -7,8 +8,9 @@ export default {
     heading: {control: 'text'},
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['default', 'primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-accordion') },
     },
 },
   args: {

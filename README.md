@@ -63,6 +63,31 @@ default option, so the attribute is only needed for the others:
 | `ycl-tile-item`                    | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
 | `ycl-wrapped-callout`              | `default` (no border color), **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2` |
 
+What each option does, with the default palette (Storybook shows the same lines in each
+component's "Color Option" control):
+
+- `default`: no background
+- `primary`: Yale blue background, white text
+- `secondary`: medium blue background, white text
+- `tertiary`: light blue background, gray-800 text
+- `accent-1`: light gray background, gray-800 text
+- `accent-2`: dark gray background, white text
+
+Some components use the option to color one part instead of the background. There, the option
+colors only that part, for example "`primary`: Yale blue left bar on light gray items":
+
+| Component             | The option colors                                   | `default`             |
+| --------------------- | --------------------------------------------------- | --------------------- |
+| `ycl-accordion`       | the left bar on light gray items                    | no bar, no background |
+| `ycl-image-banner`    | the background behind the image                     |                       |
+| `ycl-link-grid`       | the column lines                                    |                       |
+| `ycl-pull-quote`      | the quote bar or quote mark                         |                       |
+| `ycl-tabs`            | the top border on the selected tab                  |                       |
+| `ycl-wrapped-callout` | the callout border                                  | no border color       |
+
+Two components differ in one option: `ycl-facts-and-figures`' `default` has no background and takes
+the text color around it, and `ycl-inline-message`'s `accent-1` has Yale blue text.
+
 `ycl-text-copy-button`, `ycl-custom-card` and `ycl-reference-card` have no options but use the
 palette too (`secondary` for link hover, `primary`/`secondary` for card accents).
 

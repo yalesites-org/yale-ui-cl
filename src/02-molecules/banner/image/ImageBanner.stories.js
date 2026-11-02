@@ -1,5 +1,6 @@
 import "./ImageBanner";
 import "../../../01-atoms/image/ResponsiveImage";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../../00-tokens/theme/color-options.js";
 
 // An inline placeholder so the story doesn't depend on a hosted image.
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#978d85"/><text x="800" y="450" font-family="sans-serif" font-size="96" fill="#fff" text-anchor="middle" dominant-baseline="middle">16 x 9</text></svg>')}`;
@@ -13,8 +14,9 @@ export default {
   argTypes: {
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-image-banner') },
     },
     size: {
       name: 'Image Size',

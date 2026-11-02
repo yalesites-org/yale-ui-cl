@@ -1,5 +1,6 @@
 import "./FactsAndFigures";
 import "../../01-atoms/icons/Icon";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = (name) => `<ycl-icon slot="icon" name="${name}"></ycl-icon>`;
@@ -12,8 +13,9 @@ export default {
 		content: { control: "text" },
 		theme: {
 			name: "Color Option",
-			type: "select",
+			description: COLOR_OPTION_DESCRIPTION,
 			options: ["default", "primary", "secondary", "tertiary", "accent-1", "accent-2"],
+			control: { type: "select", labels: colorOptionLabels("ycl-facts-and-figures") },
 		},
 		alignment: {
 			type: "select",

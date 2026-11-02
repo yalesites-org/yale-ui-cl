@@ -1,13 +1,15 @@
 import "./Tabs";
 import "../../01-atoms/text-link/Link";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 export default {
   title: 'Molecules/Tabs',
   component: 'ycl-tabs',
   argTypes: {
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-tabs') },
     },
 },
   args: {

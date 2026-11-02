@@ -3,6 +3,7 @@ import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 import overlayImage from "../../assets/avif-test-image.avif";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 const item = (args) => `
   <ycl-callout-item>
@@ -30,8 +31,9 @@ export default {
     },
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-callout') },
     },
     alignment: {
       name: 'Callout Alignment',

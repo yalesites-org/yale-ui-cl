@@ -2,6 +2,7 @@ import "./InlineMessage";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/icons/Icon";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 export default {
   title: 'Molecules/Inline Message',
@@ -27,8 +28,9 @@ export default {
     linkContent: {name: 'Link Text', control: 'text'},
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-inline-message') },
     },
   },
   args: {

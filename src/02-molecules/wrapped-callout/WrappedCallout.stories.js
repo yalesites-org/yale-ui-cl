@@ -1,6 +1,7 @@
 import "./WrappedCallout";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 const body = `
   <p>HRBPs work closely with departmental leadership on strategic initiatives related to their workforce and work environments. This includes supporting positive relations between management and staff, alignment with university policies, and developing strategies geared towards talent, engagement, wellness, or belonging for the organization and its employees who are at the heart of it all.</p>
@@ -23,8 +24,9 @@ export default {
     showContent: {name: 'Show Body Text', control: 'boolean'},
     theme: {
       name: 'Color Option',
-      type: 'select',
+      description: COLOR_OPTION_DESCRIPTION,
       options: ['default', 'primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-wrapped-callout') },
     },
   },
   args: {
