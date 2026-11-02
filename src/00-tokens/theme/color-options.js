@@ -20,10 +20,13 @@ const TEXT = {
 	"accent-2": "white",
 };
 
+// An object with one entry per palette color option, e.g. { primary: describe("primary"), ... }.
+const byColor = (describe) => Object.fromEntries(Object.keys(COLORS).map((name) => [name, describe(name)]));
+
 // Most options set the component's background and text color.
 const SHARED = {
 	default: "no background",
-	...Object.fromEntries(Object.keys(COLORS).map((name) => [name, `${COLORS[name]} background, ${TEXT[name]} text`])),
+	...byColor((name) => `${COLORS[name]} background, ${TEXT[name]} text`),
 };
 
 // Components whose options color one part of the component instead of its background.
@@ -43,12 +46,12 @@ const OVERRIDES = {
 };
 
 // The description of each option for a component, keyed by option name.
-export function colorOptionDescriptions(tag) {
+function colorOptionDescriptions(tag) {
 	const accent = ACCENTS[tag];
 	const descriptions = accent
 		? {
 				default: accent.default ?? SHARED.default,
-				...Object.fromEntries(Object.keys(COLORS).map((name) => [name, `${COLORS[name]} ${accent.part}`])),
+				...byColor((name) => `${COLORS[name]} ${accent.part}`),
 			}
 		: SHARED;
 	return { ...descriptions, ...OVERRIDES[tag] };
