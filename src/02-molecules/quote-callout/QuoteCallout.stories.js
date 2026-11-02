@@ -21,7 +21,7 @@ export default {
     theme: {
       name: 'Color Option',
       type: 'select',
-      options: ['primary', 'tertiary', 'accent-2', 'accent-1', 'secondary'],
+      options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
     },
   },
   args: {

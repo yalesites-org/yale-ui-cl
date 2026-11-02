@@ -17,7 +17,7 @@ export default {
     theme: {
       name: 'Color Option',
       type: 'select',
-      options: ['default', 'primary', 'accent-1', 'accent-2', 'tertiary', 'secondary'],
+      options: ['default', 'primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
     },
     showTaxonomy: {name: 'Show Taxonomy', control: 'boolean'},
 },

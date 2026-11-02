@@ -44,24 +44,24 @@ default option, so the attribute is only needed for the others:
 <ycl-callout theme="secondary">…</ycl-callout>
 ```
 
-| Component                          | Options (default first)                                                |
+| Component                          | Options (palette order, the component's default in bold)               |
 | ---------------------------------- | ---------------------------------------------------------------------- |
-| `ycl-accordion`                    | `default` (no accent), `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2` |
-| `ycl-action-banner`                | `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary`             |
-| `ycl-callout`                      | `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary`             |
-| `ycl-content-spotlight-portrait`   | `default` (no background), `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary` |
-| `ycl-facts-and-figures`            | `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2`, `default` (no background) |
-| `ycl-image-banner`                 | `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary`             |
-| `ycl-inline-message`               | `accent-1`, `primary`, `secondary`, `tertiary`, `accent-2`             |
-| `ycl-link-grid`                    | `primary`, `tertiary`, `accent-2`, `accent-1`, `secondary`             |
-| `ycl-pull-quote`                   | `primary`, `tertiary`, `accent-2`                                      |
-| `ycl-quick-links`                  | `primary`, `accent-1`, `accent-2`                                      |
-| `ycl-quote-callout`                | `primary`, `tertiary`, `accent-2`, `accent-1`, `secondary`             |
-| `ycl-tabs`                         | `primary`, `secondary`, `accent-2`                                     |
-| `ycl-taxonomy-display`             | `default` (no background), `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary` |
-| `ycl-text-with-image`              | `default` (no background), `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary` |
-| `ycl-tile-item`                    | `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2`             |
-| `ycl-wrapped-callout`              | `primary`, `default` (no border color), `secondary`, `tertiary`, `accent-1`, `accent-2` |
+| `ycl-accordion`                    | **`default`** (no accent), `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2` |
+| `ycl-action-banner`                | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
+| `ycl-callout`                      | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
+| `ycl-content-spotlight-portrait`   | **`default`** (no background), `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2` |
+| `ycl-facts-and-figures`            | `default` (no background), **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2` |
+| `ycl-image-banner`                 | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
+| `ycl-inline-message`               | `primary`, `secondary`, `tertiary`, **`accent-1`**, `accent-2`         |
+| `ycl-link-grid`                    | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
+| `ycl-pull-quote`                   | **`primary`**, `tertiary`, `accent-2`                                  |
+| `ycl-quick-links`                  | **`primary`**, `accent-1`, `accent-2`                                  |
+| `ycl-quote-callout`                | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
+| `ycl-tabs`                         | **`primary`**, `secondary`, `accent-2`                                 |
+| `ycl-taxonomy-display`             | **`default`** (no background), `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2` |
+| `ycl-text-with-image`              | **`default`** (no background), `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2` |
+| `ycl-tile-item`                    | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
+| `ycl-wrapped-callout`              | `default` (no border color), **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2` |
 
 `ycl-text-copy-button`, `ycl-custom-card` and `ycl-reference-card` have no options but use the
 palette too (`secondary` for link hover, `primary`/`secondary` for card accents).

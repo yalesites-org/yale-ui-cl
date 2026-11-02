@@ -84,6 +84,13 @@ describe("single color theme", () => {
 		}
 	});
 
+	it("lists each component's color options in palette order in Storybook", () => {
+		for (const tag of Object.keys(OPTIONS)) {
+			const options = storyFor(tag).default.argTypes.theme.options;
+			expect(options, tag).toEqual(["default", ...PALETTE].filter((name) => options.includes(name)));
+		}
+	});
+
 	it("names no story after a numbered theme", () => {
 		const numbered = /Theme\s*(One|Two|Three|Four|Five|Six)/i;
 		for (const { default: meta, ...exports } of stories) {

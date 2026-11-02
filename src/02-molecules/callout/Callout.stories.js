@@ -31,7 +31,7 @@ export default {
     theme: {
       name: 'Color Option',
       type: 'select',
-      options: ['primary', 'accent-1', 'accent-2', 'tertiary', 'secondary'],
+      options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
     },
     alignment: {
       name: 'Callout Alignment',
