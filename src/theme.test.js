@@ -2,12 +2,12 @@ import { describe, expect, it } from "vitest";
 import "./main.js";
 import { composedElements, mount, settle, shadowOf } from "../test/helpers.js";
 
-// The single colour theme: pages set these five inherited custom properties (or leave them unset
+// The single color theme: pages set these five inherited custom properties (or leave them unset
 // for the Old Blues defaults) and components pick one with their theme attribute.
 // This file deliberately doesn't load base.css: themes must work from the shadow-root styles alone.
 const PALETTE = ["primary", "secondary", "tertiary", "accent-1", "accent-2"];
 
-// The colour options each themed component offers, default first. "default" is a component's
+// The color options each themed component offers, default first. "default" is a component's
 // unthemed look where it has one.
 const OPTIONS = {
 	"ycl-accordion": ["default", "primary", "secondary", "tertiary", "accent-1", "accent-2"],
@@ -33,7 +33,7 @@ const storyFor = (tag) => stories.find((module) => module.default.component === 
 
 const css = import.meta.glob("./**/*.css", { query: "?raw", import: "default", eager: true });
 
-// Resolves any CSS colour to the rgb() string getComputedStyle reports.
+// Resolves any CSS color to the rgb() string getComputedStyle reports.
 function rgb(color) {
 	const probe = document.createElement("span");
 	probe.style.color = color;
@@ -43,7 +43,7 @@ function rgb(color) {
 	return value;
 }
 
-// All colours painted anywhere in the component.
+// All colors painted anywhere in the component.
 function paintedColors(root) {
 	const colors = new Set();
 	for (const el of composedElements(root)) {
@@ -64,7 +64,7 @@ function render(tag, theme) {
 	return meta.render(args);
 }
 
-describe("single colour theme", () => {
+describe("single color theme", () => {
 	it("leaves no global themes or numbered theme options in component styles", () => {
 		for (const [file, source] of Object.entries(css)) {
 			expect(source, file).not.toMatch(/data-global-theme|global-themes-|component-themes-|color-slot-/);
@@ -72,7 +72,7 @@ describe("single colour theme", () => {
 		}
 	});
 
-	it("offers the palette names as each component's colour options in Storybook", () => {
+	it("offers the palette names as each component's color options in Storybook", () => {
 		for (const [tag, options] of Object.entries(OPTIONS)) {
 			const meta = storyFor(tag)?.default;
 			expect(meta, tag).toBeDefined();
@@ -94,7 +94,18 @@ describe("single colour theme", () => {
 		}
 	});
 
-	it("renders the primary colour by default without the document stylesheet", () => {
+	it("spells color the US way in the README and stories", () => {
+		const prose = {
+			...import.meta.glob("../README.md", { query: "?raw", import: "default", eager: true }),
+			...import.meta.glob(["./**/*.stories.js", "./**/*.mdx"], { query: "?raw", import: "default", eager: true }),
+		};
+		expect(Object.keys(prose)).toContain("../README.md");
+		for (const [file, source] of Object.entries(prose)) {
+			expect(source, file).not.toMatch(/colo[u]r/i);
+		}
+	});
+
+	it("renders the primary color by default without the document stylesheet", () => {
 		const callout = mount(`<ycl-callout><ycl-callout-item><p>Text</p></ycl-callout-item></ycl-callout>`);
 		const group = shadowOf(callout).querySelector(".callouts");
 		expect(getComputedStyle(group).backgroundColor).toBe(rgb("hsl(210, 100%, 21%)"));
@@ -116,13 +127,13 @@ describe("single colour theme", () => {
 		expect(getComputedStyle(group).backgroundColor).toBe(rgb("hsl(210, 100%, 21%)"));
 	});
 
-	// Gives each palette entry a distinct colour and checks each option paints with its own entry,
+	// Gives each palette entry a distinct color and checks each option paints with its own entry,
 	// and the attribute-less default with the default option's.
 	describe.each(Object.entries(OPTIONS))("%s", (tag, options) => {
 		const sentinels = Object.fromEntries(PALETTE.map((name, i) => [name, `rgb(${201 + i}, ${11 + i}, ${31 + i})`]));
 		const palette = PALETTE.map((name) => `--color-theme-${name}: ${sentinels[name]}`).join("; ");
 
-		it.each(options.filter((option) => option !== "default"))("paints the %s option with that palette colour", async (option) => {
+		it.each(options.filter((option) => option !== "default"))("paints the %s option with that palette color", async (option) => {
 			const wrapper = mount(`<div style="${palette}">${render(tag, option)}</div>`);
 			await settle();
 			const component = wrapper.querySelector(tag);

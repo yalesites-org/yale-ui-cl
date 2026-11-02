@@ -9,7 +9,7 @@ import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 
 // The page palette: five inherited custom properties that every themed component reads. Their
-// defaults are the Old Blues colours components fall back to when a page sets nothing.
+// defaults are the Old Blues colors components fall back to when a page sets nothing.
 const PALETTE = {
 	primary: { label: "Primary", fallback: "#00366b" },
 	secondary: { label: "Secondary", fallback: "#276bbe" },
@@ -77,7 +77,7 @@ export default {
 		docs: {
 			description: {
 				component:
-					"Pick the five palette colours and see how themed components use them. A page sets the same custom properties on any ancestor of the components (for example `:root`), and each component chooses a palette colour with its `theme` attribute. Check the contrast of the colours you pick: text colours on each option are fixed for the default palette.",
+					"Pick the five palette colors and see how themed components use them. A page sets the same custom properties on any ancestor of the components (for example `:root`), and each component chooses a palette color with its `theme` attribute. Check the contrast of the colors you pick: text colors on each option are fixed for the default palette.",
 			},
 		},
 	},
@@ -111,7 +111,7 @@ export const AllOptions = {
 			${names.map((name) => `<ycl-callout theme="${name}">
 				<ycl-callout-item>
 					<ycl-heading level="2" slot="heading">${PALETTE[name].label}</ycl-heading>
-					<p>The ${name} colour option.</p>
+					<p>The ${name} color option.</p>
 					<ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">Learn more</ycl-cta-link>
 				</ycl-callout-item>
 			</ycl-callout>`).join("")}

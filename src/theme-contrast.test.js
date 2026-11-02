@@ -3,7 +3,7 @@ import "./styles/base.css";
 import "./main.js";
 import { composedElements, mount, settle } from "../test/helpers.js";
 
-// WCAG 2.1 AA text and link-state contrast for every themed component in each of its colour
+// WCAG 2.1 AA text and link-state contrast for every themed component in each of its color
 // options, with the default palette and the document stylesheet loaded, as a page would have it.
 const THEMED = [
 	"ycl-accordion",
@@ -46,7 +46,7 @@ function composedParent(el) {
 
 function parse(color) {
 	const m = color.match(/rgba?\(([\d.]+),? ([\d.]+),? ([\d.]+)(?:,? \/?\s*([\d.]+))?\)/);
-	if (!m) throw new Error(`Unparsed colour ${color}`);
+	if (!m) throw new Error(`Unparsed color ${color}`);
 	return { r: +m[1], g: +m[2], b: +m[3], a: m[4] === undefined ? 1 : +m[4] };
 }
 
@@ -70,7 +70,7 @@ function contrast(a, b) {
 	return (hi + 0.05) / (lo + 0.05);
 }
 
-// The opaque colour behind an element: its own and its ancestors' backgrounds composited over
+// The opaque color behind an element: its own and its ancestors' backgrounds composited over
 // the page's white. Returns null when an image sits behind it.
 function backdrop(el) {
 	const layers = [];
@@ -124,7 +124,7 @@ describe.each(THEMED)("%s contrast", (tag) => {
 
 	it.each(options)("meets 4.5:1 for text and links with the %s option", async (option) => {
 		// Images would hide the backgrounds being measured; the image banner keeps its text on a
-		// coloured panel, which is what's measured.
+		// colored panel, which is what's measured.
 		const args = { ...meta.args, ...(option && { theme: option }), overlay: false };
 		const wrapper = mount(`<div>${meta.render(args)}</div>`);
 		await settle();
@@ -139,8 +139,8 @@ describe.each(THEMED)("%s contrast", (tag) => {
 	});
 });
 
-// Hover and visited colours. Browsers hide :visited from getComputedStyle and a test can't hover
-// into a closed shadow root, so each state's colour is resolved from the custom properties the
+// Hover and visited colors. Browsers hide :visited from getComputedStyle and a test can't hover
+// into a closed shadow root, so each state's color is resolved from the custom properties the
 // component's CSS paints that state with, in the control's own scope.
 const LINK = {
 	hover: "var(--color-link-hover)",
@@ -148,7 +148,7 @@ const LINK = {
 	"visited hover": "var(--color-link-visited-hover)",
 };
 
-// Controls whose states don't follow LINK, by component: [selector, states]. A state is a colour,
+// Controls whose states don't follow LINK, by component: [selector, states]. A state is a color,
 // or { color, background } when it also changes the control's background. ycl-text-link's inner
 // .link always follows LINK (link.css); any other link does unless listed here.
 const CONTROLS = {
@@ -166,9 +166,9 @@ const CONTROLS = {
 	],
 	"ycl-tabs": [[".tabs__link, .tabs__control", { hover: "var(--color-link-base)" }]],
 	"ycl-text-copy-button": [[".text-copy-button__button", { hover: "var(--color-link-hover)" }]],
-	// Hover underlines the link without changing its colour.
+	// Hover underlines the link without changing its color.
 	"ycl-tile-item": [[".tile__item__link", { visited: LINK.visited, "visited hover": LINK["visited hover"] }]],
-	// Links only get a base colour, which :visited and :hover keep.
+	// Links only get a base color, which :visited and :hover keep.
 	"ycl-wrapped-callout": [["a", {}]],
 };
 
@@ -181,7 +181,7 @@ function statesFor(tag, el) {
 	return el.matches("a[href]:not(.cta)") ? LINK : null;
 }
 
-// The colour a CSS colour expression resolves to in an element's scope: inherited custom
+// The color a CSS color expression resolves to in an element's scope: inherited custom
 // properties and currentcolor resolve as they would on the element's own children.
 function resolve(el, property, expression) {
 	const probe = document.createElement("span");
@@ -202,7 +202,7 @@ function measureStates(tag, component) {
 		const rect = el.getBoundingClientRect();
 		if (rect.width <= 1 || rect.height <= 1) continue;
 		// Links draw their underline as a background image, so the backdrop is measured from the
-		// parent, with the control's own background colour on top.
+		// parent, with the control's own background color on top.
 		const parent = backdrop(composedParent(el));
 		if (!parent) continue;
 		const behind = over(parse(style.backgroundColor), parent);
