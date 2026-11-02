@@ -149,7 +149,7 @@ const LINK = {
 };
 
 // Controls whose states don't follow LINK, by component: [selector, states]. A state is a colour,
-// or { color, background } when it also changes the control's background. text-link's inner
+// or { color, background } when it also changes the control's background. ycl-text-link's inner
 // .link always follows LINK (link.css); any other link does unless listed here.
 const CONTROLS = {
 	"ycl-accordion": [
@@ -173,7 +173,7 @@ const CONTROLS = {
 };
 
 function statesFor(tag, el) {
-	// cta-link's .cta is a button-styled action, not a text link.
+	// ycl-cta-link's .cta is a button-styled action, not a text link.
 	if (el.matches(".cta")) return null;
 	if (el.matches(".link")) return LINK;
 	const control = CONTROLS[tag]?.find(([selector]) => el.matches(selector));
@@ -226,14 +226,14 @@ const PLAIN_LINKS = new Set([
 	"ycl-wrapped-callout",
 ]);
 
-// Most stories have no inline links, so a text-link (and a plain link where the component styles
+// Most stories have no inline links, so a ycl-text-link (and a plain link where the component styles
 // those) is added to the first paragraph of slotted content outside the action slots. Quick
 // links' story slots only cta-links, so it also gets a plain link, which it styles itself.
 function addLinks(tag, component) {
 	if (tag === "ycl-quick-links") component.insertAdjacentHTML("beforeend", `<a href="#plain">Plain link</a>`);
 	const paragraph = [...component.querySelectorAll("p")].find((p) => !p.closest("[slot='ctas'], [slot='actions']"));
 	if (!paragraph) return;
-	paragraph.insertAdjacentHTML("beforeend", ` <text-link href="#text-link">Text link</text-link>`);
+	paragraph.insertAdjacentHTML("beforeend", ` <ycl-text-link href="#text-link">Text link</ycl-text-link>`);
 	if (PLAIN_LINKS.has(tag)) paragraph.insertAdjacentHTML("beforeend", ` <a href="#plain">Plain link</a>`);
 }
 

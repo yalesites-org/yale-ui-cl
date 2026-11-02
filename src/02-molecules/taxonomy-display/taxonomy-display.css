@@ -13,7 +13,7 @@
    option (or "default") the display sits on a light gray background. Pages set the palette with
    the --color-theme-* custom properties, which inherit into the shadow root; without them the Old
    Blues defaults apply.
-   Colours are handed to the items (and to any slotted text-link) through inherited custom
+   Colours are handed to the items (and to any slotted ycl-text-link) through inherited custom
    properties. */
 :host(ycl-taxonomy-display) {
   padding-block: var(--size-spacing-6);

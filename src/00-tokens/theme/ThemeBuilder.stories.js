@@ -37,13 +37,13 @@ const components = (option) => `
 			<ycl-callout-item>
 				<ycl-heading level="2" slot="heading">Degree Programs</ycl-heading>
 				<p>Designed for those who intend to pursue graduate study or a career in the sciences.</p>
-				<cta-link slot="link" class="outline" href="https://www.yale.edu">Programs</cta-link>
+				<ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">Programs</ycl-cta-link>
 			</ycl-callout-item>
 		</ycl-callout>
 		<ycl-action-banner theme="${option}">
 			<ycl-heading level="2" slot="heading">Visit campus</ycl-heading>
 			<p>Tours run every weekday during the academic year.</p>
-			<cta-link slot="actions" class="filled" href="https://www.yale.edu">Plan a visit</cta-link>
+			<ycl-cta-link slot="actions" variant="filled" href="https://www.yale.edu">Plan a visit</ycl-cta-link>
 		</ycl-action-banner>
 		<ycl-quote-callout theme="${option}">
 			<p>Light and truth.</p>
@@ -52,7 +52,7 @@ const components = (option) => `
 		<ycl-inline-message theme="${option}">
 			<ycl-heading level="2" slot="heading">Registration is open</ycl-heading>
 			<p>Register for spring courses by January 10.</p>
-			<text-link slot="link" href="https://www.yale.edu">Course registration</text-link>
+			<ycl-text-link slot="link" href="https://www.yale.edu">Course registration</ycl-text-link>
 		</ycl-inline-message>
 		<ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-6);">
 			<li>
@@ -112,7 +112,7 @@ export const AllOptions = {
 				<ycl-callout-item>
 					<ycl-heading level="2" slot="heading">${PALETTE[name].label}</ycl-heading>
 					<p>The ${name} colour option.</p>
-					<cta-link slot="link" class="outline" href="https://www.yale.edu">Learn more</cta-link>
+					<ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">Learn more</ycl-cta-link>
 				</ycl-callout-item>
 			</ycl-callout>`).join("")}
 		</div>`,
