@@ -1,7 +1,7 @@
 import "./Table";
 export default {
   title: 'Atoms/Table',
-  component: 'yc-table',
+  component: 'ycl-table',
   argTypes: {
     label: {control: 'text'},
     
@@ -9,15 +9,12 @@ export default {
   args: {
     label: 'Example Table',
 },
-
-  render: (args) => 
-    `<cta-link class="${args.fill} ${args.animate} ${args.radius}" href="${args.URL}">${args.label}</cta-link>`,
 };
 
 export const Default = {
 
   render: () =>
-    `<yc-table>
+    `<ycl-table>
       <table>
         <thead>
           <tr>
@@ -34,7 +31,7 @@ export const Default = {
           </tr>
         </tbody>
       </table>
-    </yc-table>
+    </ycl-table>
         `
 };
 
