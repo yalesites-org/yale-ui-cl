@@ -14,10 +14,10 @@ const dataTableTemplate = document.createElement("template");
 dataTableTemplate.innerHTML = `
 	<div class="data-table">
 		<div class="data-table__search">
-			<text-input class="data-table__input"><span slot="label">Search</span></text-input>
+			<ycl-text-input class="data-table__input"><span slot="label">Search</span></ycl-text-input>
 			<p class="data-table__status" role="status"></p>
 		</div>
-		<yc-table><slot></slot></yc-table>
+		<ycl-table><slot></slot></ycl-table>
 	</div>
 `;
 
@@ -59,7 +59,7 @@ export class DataTable extends HTMLElement {
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "data-table")];
 		this.#shadow.appendChild(document.importNode(dataTableTemplate.content, true));
-		this.search = this.#shadow.querySelector("text-input");
+		this.search = this.#shadow.querySelector("ycl-text-input");
 		this.searchLabel = this.#shadow.querySelector('[slot="label"]');
 		this.status = this.#shadow.querySelector(".data-table__status");
 

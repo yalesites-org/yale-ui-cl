@@ -207,10 +207,10 @@
   outline-offset: var(--size-thickness-2);
 }
 
-/* A slotted text-link draws the same sliding underline itself. Its colours come from the inherited
+/* A slotted ycl-text-link draws the same sliding underline itself. Its colours come from the inherited
    --color-link-* properties, so the global theme's hover colour above reaches it without a rule here;
    only the box needs setting. */
-.link-grid__list-item ::slotted(text-link) {
+.link-grid__list-item ::slotted(ycl-text-link) {
   text-align: left;
 }
 

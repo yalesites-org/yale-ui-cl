@@ -30,7 +30,7 @@ export default {
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
       <nav slot="breadcrumbs" aria-label="Breadcrumb">
         <ol style="display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0;">
-          ${breadcrumbs.map((crumb, i) => `<li>${i ? '/ ' : ''}<text-link href="#" style="--color-link-base: currentColor; --color-link-visited-base: currentColor;">${crumb}</text-link></li>`).join('')}
+          ${breadcrumbs.map((crumb, i) => `<li>${i ? '/ ' : ''}<ycl-text-link href="#" style="--color-link-base: currentColor; --color-link-visited-base: currentColor;">${crumb}</ycl-text-link></li>`).join('')}
         </ol>
       </nav>
       ${args.highlighted ? `<p slot="highlighted">${args.highlighted}</p>` : ''}

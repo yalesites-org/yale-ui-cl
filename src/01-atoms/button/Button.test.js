@@ -5,8 +5,8 @@ import { mount, shadowOf } from "../../../test/helpers.js";
 const control = (element) => shadowOf(element).querySelector(".button");
 
 describe("ycl-button", () => {
-	it("renders a button with CTA variants from its class", () => {
-		const element = mount(`<ycl-button class="filled radius-pill">Go</ycl-button>`);
+	it("renders a button with CTA variants from its attributes", () => {
+		const element = mount(`<ycl-button variant="filled" radius="pill">Go</ycl-button>`);
 		expect(control(element).localName).toBe("button");
 		expect(control(element).className).toBe("button cta cta--filled cta--radius-pill");
 	});

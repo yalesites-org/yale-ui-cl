@@ -37,7 +37,7 @@ export default {
     `<ycl-alert type="${args.type}"${args.alertId ? ` alert-id="${args.alertId}"` : ''}>
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
       <p>${args.content}</p>
-      <text-link slot="link" href="https://www.yale.edu">${args.linkContent}</text-link>
+      <ycl-text-link slot="link" href="https://www.yale.edu">${args.linkContent}</ycl-text-link>
     </ycl-alert>
     ${args.alertId ? resetButton : ''}`,
 };
@@ -68,6 +68,6 @@ export const AllTypes = {
       `<ycl-alert type="${type}">
         <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
         <p>${args.content}</p>
-        <text-link slot="link" href="https://www.yale.edu">${args.linkContent}</text-link>
+        <ycl-text-link slot="link" href="https://www.yale.edu">${args.linkContent}</ycl-text-link>
       </ycl-alert>`).join(''),
 };

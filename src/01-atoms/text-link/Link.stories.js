@@ -1,7 +1,7 @@
 import "./Link";
 export default {
   title: 'Atoms/Text Link',
-  component: 'text-link',
+  component: 'ycl-text-link',
   argTypes: {
     label: {control: 'text'},
     URL: {control: 'text'},
@@ -12,7 +12,7 @@ export default {
 },
 
   render: (args) => 
-    `<text-link class="" href="${args.URL}">${args.label}</text-link>`,
+    `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`,
 };
 
 export const InternalLink = {
@@ -21,7 +21,7 @@ export const InternalLink = {
     label: "Home"
   },
   render:(args) =>
-    `<text-link class="" href="${args.URL}">${args.label}</text-link>`
+    `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`
 };
 
 export const ExternalLink = {
@@ -29,7 +29,7 @@ export const ExternalLink = {
     label: "Yale Homepage",
     URL: "https://www.yale.edu"
   },
-  render:args => `<text-link class="" href="${args.URL}">${args.label}</text-link>`
+  render:args => `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`
 };
 
 export const DownloadLink = {
@@ -37,5 +37,5 @@ export const DownloadLink = {
     label: "Yale Homepage",
     URL: "https://www.yale.edu/download.pdf"
   },
-  render:args => `<text-link class="" href="${args.URL}">${args.label}</text-link>`
+  render:args => `<ycl-text-link href="${args.URL}">${args.label}</ycl-text-link>`
 };

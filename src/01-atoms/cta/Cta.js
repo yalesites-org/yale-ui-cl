@@ -9,7 +9,7 @@ const currentURL = window.location.origin;
 
 export class Cta extends HTMLElement { #shadow;
   static get observedAttributes() {
-    return ["href", "class"];
+    return ["href", ...Util.ctaAttributes];
   }
 
   constructor() {
@@ -24,9 +24,7 @@ export class Cta extends HTMLElement { #shadow;
     this.icon = this.#shadow.querySelector(".fa-icon");
 	if (oldValue === newValue) return;
 	if (name === "href") this.link.href = newValue;
-	if (name === "class") {
-		Util.addVariant(newValue, this.link, "cta");
-	}
+	if (Util.ctaAttributes.includes(name)) Util.addVariant(Util.ctaVariants(this), this.link, "cta");
   Util.updateLinkIcon(this.icon, this.link, currentURL);
   }
   
@@ -36,4 +34,4 @@ export class Cta extends HTMLElement { #shadow;
 }
 
  
-if (!customElements.get("cta-link")) customElements.define("cta-link", Cta);
+if (!customElements.get("ycl-cta-link")) customElements.define("ycl-cta-link", Cta);

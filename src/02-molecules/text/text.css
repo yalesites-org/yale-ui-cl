@@ -33,7 +33,7 @@
 }
 
 /* Intro text: the slotted prose inherits the larger size. */
-:host(ycl-text[variation="emphasized"]) .text-field {
+:host(ycl-text[variant="emphasized"]) .text-field {
   font: var(--font-style-body-xl);
 }
 

@@ -73,7 +73,7 @@
   outline-offset: var(--size-thickness-2);
 }
 
-/* A slotted text-link gets the same box through text-link's styling hooks, which put the padding
+/* A slotted ycl-text-link gets the same box through ycl-text-link's styling hooks, which put the padding
    on its inner <a> so the whole box is clickable, and drop its underline. Colours go through the
    inherited --color-link-* properties: currentColor makes the link take the surrounding text
    colour, and hover keeps the site link colour (captured on the list item before it's
@@ -82,7 +82,7 @@
   --color-link-group-hover: var(--color-link-base);
 }
 
-.link-group__list-item ::slotted(text-link) {
+.link-group__list-item ::slotted(ycl-text-link) {
   --color-link-base: currentColor;
   --color-link-visited-base: currentColor;
   --color-link-hover: var(--color-link-group-hover);
