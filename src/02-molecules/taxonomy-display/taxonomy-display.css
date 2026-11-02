@@ -10,14 +10,13 @@
 }
 
 /* Colour options, named after the palette colour each one takes its background from. With no
-   option (or "default") the display sits on a light gray background. Pages set the palette with
-   the --color-theme-* custom properties, which inherit into the shadow root; without them the Old
-   Blues defaults apply.
+   option (or "default") the display has no background and keeps the page's text and link
+   colors. Pages set the palette with the --color-theme-* custom properties, which inherit into
+   the shadow root; without them the Old Blues defaults apply.
    Colours are handed to the items (and to any slotted ycl-text-link) through inherited custom
-   properties. */
+   properties. The vertical padding applies to every option. */
 :host(ycl-taxonomy-display) {
   padding-block: var(--size-spacing-6);
-  background-color: var(--color-gray-100);
 }
 
 :host(ycl-taxonomy-display[theme]:not([theme="default"])) {

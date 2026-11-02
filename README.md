@@ -58,7 +58,7 @@ default option, so the attribute is only needed for the others:
 | `ycl-quick-links`                  | `primary`, `accent-1`, `accent-2`                                      |
 | `ycl-quote-callout`                | `primary`, `tertiary`, `accent-2`, `accent-1`, `secondary`             |
 | `ycl-tabs`                         | `primary`, `secondary`, `accent-2`                                     |
-| `ycl-taxonomy-display`             | `default` (light gray), `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary` |
+| `ycl-taxonomy-display`             | `default` (no background), `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary` |
 | `ycl-text-with-image`              | `default` (no background), `primary`, `accent-1`, `accent-2`, `tertiary`, `secondary` |
 | `ycl-tile-item`                    | `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2`             |
 | `ycl-wrapped-callout`              | `primary`, `default` (no border color), `secondary`, `tertiary`, `accent-1`, `accent-2` |

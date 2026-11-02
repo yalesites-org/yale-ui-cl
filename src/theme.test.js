@@ -127,6 +127,18 @@ describe("single color theme", () => {
 		expect(getComputedStyle(group).backgroundColor).toBe(rgb("hsl(210, 100%, 21%)"));
 	});
 
+	it("gives the taxonomy display no background of its own by default", async () => {
+		const transparent = "rgba(0, 0, 0, 0)";
+		for (const attr of ["", ` theme="default"`]) {
+			const display = mount(`<ycl-taxonomy-display${attr}></ycl-taxonomy-display>`);
+			await settle();
+			expect(getComputedStyle(display).backgroundColor, attr || "no theme").toBe(transparent);
+		}
+		const accent = mount(`<ycl-taxonomy-display theme="accent-1"></ycl-taxonomy-display>`);
+		await settle();
+		expect(getComputedStyle(accent).backgroundColor).not.toBe(transparent);
+	});
+
 	// Gives each palette entry a distinct color and checks each option paints with its own entry,
 	// and the attribute-less default with the default option's.
 	describe.each(Object.entries(OPTIONS))("%s", (tag, options) => {
