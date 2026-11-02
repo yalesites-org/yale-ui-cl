@@ -31,7 +31,7 @@ export default {
 
 export const Default = {};
 
-export const ThemeTwo = {
+export const Secondary = {
   args: {
     theme: 'secondary',
   },

@@ -84,6 +84,16 @@ describe("single colour theme", () => {
 		}
 	});
 
+	it("names no story after a numbered theme", () => {
+		const numbered = /Theme\s*(One|Two|Three|Four|Five|Six)/i;
+		for (const { default: meta, ...exports } of stories) {
+			for (const [exportName, story] of Object.entries(exports)) {
+				expect(exportName, meta.title).not.toMatch(numbered);
+				expect(story?.name ?? "", `${meta.title} ${exportName}`).not.toMatch(numbered);
+			}
+		}
+	});
+
 	it("renders the primary colour by default without the document stylesheet", () => {
 		const callout = mount(`<ycl-callout><ycl-callout-item><p>Text</p></ycl-callout-item></ycl-callout>`);
 		const group = shadowOf(callout).querySelector(".callouts");

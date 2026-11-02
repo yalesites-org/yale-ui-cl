@@ -61,7 +61,8 @@ export const Subtle = {
   },
 };
 
-export const ThemeTwo = {
+export const Accent1 = {
+  name: 'Accent 1',
   args: {
     theme: 'accent-1',
   },
