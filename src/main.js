@@ -39,7 +39,7 @@ export { SearchResult } from "./02-molecules/search-result/SearchResult.js";
 export { RelatedContent, RelatedContentItem } from "./02-molecules/related-content/RelatedContent.js";
 export { Text } from "./02-molecules/text/Text.js";
 export { ImageBlock } from "./02-molecules/image/ImageBlock.js";
-export { ReferenceCard } from "./02-molecules/cards/reference-card/ReferenceCard.js";
+export { ContentCard } from "./02-molecules/cards/content-card/ContentCard.js";
 export { CustomCard } from "./02-molecules/cards/custom-card/CustomCard.js";
 export { DirectoryListingCard } from "./02-molecules/cards/directory-listing-card/DirectoryListingCard.js";
 export { TileItem } from "./02-molecules/tile-item/TileItem.js";

@@ -90,7 +90,7 @@
   color: inherit;
 }
 
-/* The Twig atom leaves the prefix unstyled; this follows the page title / reference card
+/* The Twig atom leaves the prefix unstyled; this follows the page title / content card
    eyebrow treatment (uppercase, brown-gray) at a size relative to the heading. */
 .heading__prefix {
   display: block;
