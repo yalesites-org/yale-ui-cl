@@ -19,7 +19,10 @@ It works in plain HTML and alongside any framework.
 
 The package is not on npm yet. To use it today, build it from this repository and install the local copy:
 
+The install needs a GitHub token with `read:packages` access in the `YALESITES_BUILD_TOKEN` environment variable, because `@yalesites-org/tokens` comes from GitHub Packages.
+
 ```bash
+export YALESITES_BUILD_TOKEN=<your GitHub token>
 npm ci
 npm run build
 # then, in your project:
