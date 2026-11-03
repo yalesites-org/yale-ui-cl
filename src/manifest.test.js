@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import manifest from "../custom-elements.json";
 import guide from "../llms.txt?raw";
+import { ctaAttributes } from "./utility.js";
 
 // Keeps custom-elements.json (and so the Storybook docs and llms.txt) in step with the code, in
 // both directions: every element, attribute, CSS attribute hook, slot and event the code uses must
@@ -137,6 +138,9 @@ for (const element of elements) {
 
 const declaredAttributes = (tag) => declarations.get(tag)?.attributes ?? [];
 
+// The modifier class prefix ctaVariants (utility.js) gives each CTA attribute's value.
+const ctaModifierPrefixes = { variant: "", size: "", animate: "animate-", radius: "radius-" };
+
 // Global HTML attributes a component's CSS may style without declaring them (`:host([hidden])`).
 const globalHostAttributes = new Set(["hidden", "slot", "id", "class", "style", "lang", "dir", "role"]);
 
@@ -184,6 +188,19 @@ describe("custom-elements.json", () => {
 			for (const name of declared()) {
 				const honoured = observed.includes(name) || read.includes(name) || hooks.has(name);
 				expect(honoured, `${tag}[${name}] is declared, but nothing observes, reads or styles it`).toBe(true);
+			}
+		});
+
+		// CTA options (ycl-cta-link, ycl-button) become cta.css modifier classes through ctaVariants:
+		// variant="filled" -> cta--filled, animate="wipe" -> cta--animate-wipe, and so on, so each
+		// declared value needs a rule.
+		it.runIf(ctaAttributes.every((name) => observed.includes(name)))("styles every CTA option value it declares", () => {
+			const css = sheets.map((sheet) => stylesheets[sheet]).join("\n");
+			for (const [name, prefix] of Object.entries(ctaModifierPrefixes)) {
+				const attribute = declaredAttributes(tag).find((a) => a.name === name);
+				for (const value of literalValues(attribute)) {
+					expect(css, `${tag}[${name}="${value}"] has no --${prefix}${value} rule`).toMatch(new RegExp(`--${prefix}${value}(?![\\w-])`));
+				}
 			}
 		});
 
