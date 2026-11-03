@@ -10,7 +10,7 @@ const taxonomyTypes = ["categories", "tags"];
 
 /**
  * Styles a slotted `<ul>` or `<ol>` as a taxonomy list.
- * @attr {"categories"|"tags"} class - categories or tags turns the list into a taxonomy list of that kind.
+ * @attr {"categories"|"tags"} type - Turns the list into a taxonomy list of that kind.
  * @slot - A `<ul>` or `<ol>`.
  */
 export class List extends HTMLElement { #shadow;

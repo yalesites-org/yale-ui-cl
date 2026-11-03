@@ -42,7 +42,7 @@ alertTemplate.innerHTML = `
  * @attr {string} alert-id - Unique id used to remember the state in localStorage between page loads.
  * @slot heading - The alert heading.
  * @slot - The alert text.
- * @slot link - A link, such as a text-link.
+ * @slot link - A link, such as a ycl-text-link.
  */
 export class Alert extends HTMLElement {
 	#shadow;

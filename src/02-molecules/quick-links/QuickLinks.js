@@ -20,7 +20,7 @@ quickLinksTemplate.innerHTML = `
 // Children with slot="heading", "description" or "image" go there; every other child is a link.
 /**
  * A heading, optional description and image, and a list of links. Every child without a slot attribute is a link.
- * @attr {"promotional"|"subtle"} variation - Visual style. Defaults to promotional.
+ * @attr {"promotional"|"subtle"} variant - Visual style. Defaults to promotional.
  * @attr {"one"|"two"|"three"} theme - Color theme.
  * @slot - The links; one element per link.
  * @slot heading - The heading.

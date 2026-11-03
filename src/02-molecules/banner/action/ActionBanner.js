@@ -35,7 +35,7 @@ actionBannerTemplate.innerHTML = `
  * @slot image - The background image.
  * @slot heading - The heading.
  * @slot - The text.
- * @slot actions - Links or buttons, such as cta-link elements.
+ * @slot actions - Links or buttons, such as ycl-cta-link elements.
  */
 export class ActionBanner extends HTMLElement {
 	#shadow;

@@ -14,7 +14,10 @@ buttonTemplate.innerHTML = `<button class="button cta" type="button"><slot></slo
 // ycl-cta-link (e.g. variant="filled" radius="pill").
 /**
  * A button styled as a call to action. Renders a `<button>`, or a link when given an href.
- * @attr {string} class - Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary.
+ * @attr {"filled"|"outline"|"secondary"} variant - Visual style. Without it the CTA has no fill or border.
+ * @attr {"small"|"medium"|"large"} size - Size of the CTA.
+ * @attr {"none"|"rise"|"wipe"} animate - Hover animation. Leave it off for the default fade; none turns animation off.
+ * @attr {"soft"|"pill"} radius - Corner rounding. Leave it off for square corners.
  * @attr {string} href - Makes the button a link to this URL (not for control-type="dropdown").
  * @attr {"button"|"submit"|"reset"} type - What the button does in a form. Defaults to button.
  * @attr {boolean} disabled - Disables the button.

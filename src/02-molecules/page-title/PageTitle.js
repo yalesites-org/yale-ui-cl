@@ -29,7 +29,7 @@ pageTitleTemplate.innerHTML = `
  * @attr {string} prefix - Short text shown before the title.
  * @attr {"site"|"highlight"|"content"|"max"} width - Width of the title area.
  * @attr {"hidden"|"visually-hidden"} display - hidden removes the title; visually-hidden keeps it for screen readers only.
- * @attr {"event"} variation - event puts the image beside the title on wide screens.
+ * @attr {"event"} variant - event puts the image beside the title on wide screens.
  * @slot overline - Text above the title.
  * @slot - The title text.
  * @slot extra - Content after the title.

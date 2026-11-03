@@ -10,7 +10,10 @@ const currentURL = window.location.origin;
 /**
  * A call-to-action link styled as a button.
  * @attr {string} href - The link URL.
- * @attr {string} class - Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary.
+ * @attr {"filled"|"outline"|"secondary"} variant - Visual style. Without it the CTA has no fill or border.
+ * @attr {"small"|"medium"|"large"} size - Size of the CTA.
+ * @attr {"none"|"rise"|"wipe"} animate - Hover animation. Leave it off for the default fade; none turns animation off.
+ * @attr {"soft"|"pill"} radius - Corner rounding. Leave it off for square corners.
  * @slot - The link text.
  */
 export class Cta extends HTMLElement { #shadow;

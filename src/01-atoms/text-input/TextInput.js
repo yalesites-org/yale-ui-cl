@@ -14,7 +14,7 @@ textInputTemplate.innerHTML = `
 
 /**
  * A form-associated text field with label, instructions and error text.
- * @attr {string} class - Add required to make the field required.
+ * @attr {boolean} required - Makes the field required.
  * @attr {string} placeholder - Placeholder text.
  * @attr {string} name - The form field name.
  * @attr {string} autocomplete - The autocomplete hint, as on `<input>`.

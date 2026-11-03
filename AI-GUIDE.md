@@ -23,17 +23,17 @@ Or per component, with a bundler. Each import registers the tags in that file, a
 import "yale-ui-cl/style.css";   // tokens, reset and typography: always load it
 import "yale-ui-cl/callout";     // ycl-callout and ycl-callout-item
 import "yale-ui-cl/heading";     // ycl-heading
-import "yale-ui-cl/cta-link";    // cta-link
+import "yale-ui-cl/cta-link";    // ycl-cta-link
 ```
 
-The import path is the tag without its `ycl-` or `yc-` prefix (`ycl-accordion` is `yale-ui-cl/accordion`, `yc-table` is `yale-ui-cl/table`). Child elements come with their parent.
+The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-ui-cl/accordion`, `ycl-table` is `yale-ui-cl/table`). Child elements come with their parent.
 
 ## Components
 
 | Tag | Purpose |
 | --- | --- |
-| `cta-link` | Call-to-action link styled as a button |
-| `text-link` | Inline text link |
+| `ycl-cta-link` | Call-to-action link styled as a button |
+| `ycl-text-link` | Inline text link |
 | `ycl-button` | Button, or a link styled as one when given `href` |
 | `ycl-text-copy-button` | Copies text to the clipboard |
 | `ycl-heading` | Heading h1 to h6, with optional prefix and link |
@@ -42,11 +42,11 @@ The import path is the tag without its `ycl-` or `yc-` prefix (`ycl-accordion` i
 | `ycl-divider` | Horizontal rule |
 | `ycl-date-time` | Formatted date, time or date range |
 | `ycl-list` | Taxonomy list (categories, tags) around a `<ul>` or `<ol>` |
-| `yc-table` | Styled, scrollable wrapper for a `<table>` |
+| `ycl-table` | Styled, scrollable wrapper for a `<table>` |
 | `ycl-audio` | Audio player |
 | `ycl-video-embed` | Responsive video iframe |
-| `text-input` | Text field with label, instructions and errors |
-| `select-input` | Select field with label, instructions and errors |
+| `ycl-text-input` | Text field with label, instructions and errors |
+| `ycl-select-input` | Select field with label, instructions and errors |
 | `ycl-checkbox` | Checkbox |
 | `ycl-radio` | Radio button; same `name` makes a group |
 | `ycl-accordion` | Collapsible sections; contains `ycl-accordion-item` |
@@ -92,12 +92,12 @@ The import path is the tag without its `ycl-` or `yc-` prefix (`ycl-accordion` i
 
 ## Naming rules
 
-- Use tag names exactly as listed. Most start with `ycl-`; the exceptions are `cta-link`, `text-link`, `text-input`, `select-input` and `yc-table`. Do not invent tags or add or remove prefixes.
+- Use tag names exactly as listed. Every tag starts with `ycl-`. Do not invent tags or drop the prefix (there is no `cta-link` or `yc-table`).
 - Attributes are kebab-case (`overlay-image`, `button-alignment`). Use only the values the manifest lists. Boolean attributes are on when present (`<ycl-accordion-item expanded>`).
 - Put content into a named slot with `slot="name"` on a direct child: `<ycl-heading slot="heading">`. Children with no `slot` attribute go into the default slot.
 - Child elements go directly inside their parent: `ycl-accordion-item` in `ycl-accordion`, `ycl-callout-item` in `ycl-callout`, `ycl-tab` in `ycl-tabs`, `ycl-taxonomy-display-item` in `ycl-taxonomy-display`, `ycl-related-content-item` in `ycl-related-content`.
 - Use `ycl-heading` for headings inside components, with the right `level` for the page outline.
-- `cta-link` and `ycl-button` take style variants in `class` (for example `class="filled radius-pill"`), as listed in the manifest. `text-link` has none.
+- Options are attributes, never `class`. `ycl-cta-link` and `ycl-button` take `variant`, `size`, `animate` and `radius` (for example `variant="filled" radius="pill" animate="wipe"`); leave `animate` off for the default fade. `ycl-list` takes `type="tags"` or `type="categories"`. `ycl-text-input` and `ycl-select-input` take the boolean `required`. `ycl-text-link` has no style options.
 
 ## Colors: tokens only
 
@@ -116,7 +116,7 @@ A callout with a button:
   <ycl-callout-item>
     <ycl-heading level="2" slot="heading">Degree Programs</ycl-heading>
     <p>Programs for students who plan to go on to graduate study or a career in science.</p>
-    <cta-link slot="link" class="outline" href="https://www.yale.edu">Programs</cta-link>
+    <ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">Programs</ycl-cta-link>
   </ycl-callout-item>
 </ycl-callout>
 ```
@@ -143,8 +143,8 @@ Text beside an image, with two links:
 <ycl-text-with-image theme="one" position="image-right">
   <ycl-heading level="2" slot="heading">Visit campus</ycl-heading>
   <p>Tours run every weekday.</p>
-  <cta-link slot="ctas" class="filled" href="/visit">Plan a visit</cta-link>
-  <text-link slot="ctas" href="/maps">Campus maps</text-link>
+  <ycl-cta-link slot="ctas" variant="filled" href="/visit">Plan a visit</ycl-cta-link>
+  <ycl-text-link slot="ctas" href="/maps">Campus maps</ycl-text-link>
   <ycl-image slot="image"><img src="campus.jpg" alt="Students walking across Old Campus"></ycl-image>
 </ycl-text-with-image>
 ```

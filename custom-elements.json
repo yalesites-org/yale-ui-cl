@@ -131,11 +131,32 @@
               "description": "dropdown adds a down arrow and keeps the control a `<button>`."
             },
             {
-              "name": "class",
               "type": {
-                "text": "string"
+                "text": "\"filled\"|\"outline\"|\"secondary\""
               },
-              "description": "Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary."
+              "description": "Visual style. Without it the CTA has no fill or border.",
+              "name": "variant"
+            },
+            {
+              "type": {
+                "text": "\"small\"|\"medium\"|\"large\""
+              },
+              "description": "Size of the CTA.",
+              "name": "size"
+            },
+            {
+              "type": {
+                "text": "\"none\"|\"rise\"|\"wipe\""
+              },
+              "description": "Hover animation. Leave it off for the default fade; none turns animation off.",
+              "name": "animate"
+            },
+            {
+              "type": {
+                "text": "\"soft\"|\"pill\""
+              },
+              "description": "Corner rounding. Leave it off for square corners.",
+              "name": "radius"
             }
           ],
           "superclass": {
@@ -253,6 +274,47 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/01-atoms/cta/cta-story-options.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "optionAttributes",
+          "parameters": [
+            {
+              "name": "args"
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "optionArgTypes",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ variant: { name: 'Variant', type: 'select', options: ['filled', 'outline'], }, animate: { name: 'Animation Type', type: 'select', options: ['none', 'fade', 'rise', 'wipe'], }, radius: { name: 'Radius Type', type: 'select', options: ['none', 'soft', 'pill'], }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "optionAttributes",
+          "declaration": {
+            "name": "optionAttributes",
+            "module": "src/01-atoms/cta/cta-story-options.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "optionArgTypes",
+          "declaration": {
+            "name": "optionArgTypes",
+            "module": "src/01-atoms/cta/cta-story-options.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/01-atoms/cta/Cta.js",
       "declarations": [
         {
@@ -274,17 +336,38 @@
               "description": "The link URL."
             },
             {
-              "name": "class",
               "type": {
-                "text": "string"
+                "text": "\"filled\"|\"outline\"|\"secondary\""
               },
-              "description": "Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary."
+              "description": "Visual style. Without it the CTA has no fill or border.",
+              "name": "variant"
+            },
+            {
+              "type": {
+                "text": "\"small\"|\"medium\"|\"large\""
+              },
+              "description": "Size of the CTA.",
+              "name": "size"
+            },
+            {
+              "type": {
+                "text": "\"none\"|\"rise\"|\"wipe\""
+              },
+              "description": "Hover animation. Leave it off for the default fade; none turns animation off.",
+              "name": "animate"
+            },
+            {
+              "type": {
+                "text": "\"soft\"|\"pill\""
+              },
+              "description": "Corner rounding. Leave it off for square corners.",
+              "name": "radius"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "cta-link",
+          "tagName": "ycl-cta-link",
           "customElement": true
         }
       ],
@@ -299,7 +382,7 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "cta-link",
+          "name": "ycl-cta-link",
           "declaration": {
             "name": "Cta",
             "module": "src/01-atoms/cta/Cta.js"
@@ -716,11 +799,11 @@
           ],
           "attributes": [
             {
-              "name": "class",
+              "name": "type",
               "type": {
                 "text": "\"categories\"|\"tags\""
               },
-              "description": "categories or tags turns the list into a taxonomy list of that kind."
+              "description": "Turns the list into a taxonomy list of that kind."
             }
           ],
           "superclass": {
@@ -842,13 +925,9 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A form-associated select field with label, instructions and error text. Put `<option>` and `<optgroup>` elements inside.",
+          "description": "A form-associated select field with label, instructions and error text. Put `<option>` and `<optgroup>` elements inside; they are moved into the internal `<select>` rather than slotted.",
           "name": "SelectInput",
           "slots": [
-            {
-              "description": "The `<option>` and `<optgroup>` elements.",
-              "name": ""
-            },
             {
               "description": "The label text.",
               "name": "label"
@@ -870,11 +949,11 @@
           ],
           "attributes": [
             {
-              "name": "class",
+              "name": "required",
               "type": {
-                "text": "string"
+                "text": "boolean"
               },
-              "description": "Add required to make a choice required."
+              "description": "Makes a choice required."
             },
             {
               "name": "placeholder",
@@ -915,7 +994,7 @@
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "select-input",
+          "tagName": "ycl-select-input",
           "customElement": true
         }
       ],
@@ -930,7 +1009,7 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "select-input",
+          "name": "ycl-select-input",
           "declaration": {
             "name": "SelectInput",
             "module": "src/01-atoms/select-input/SelectInput.js"
@@ -955,7 +1034,7 @@
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "yc-table",
+          "tagName": "ycl-table",
           "customElement": true
         }
       ],
@@ -970,7 +1049,7 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "yc-table",
+          "name": "ycl-table",
           "declaration": {
             "name": "Table",
             "module": "src/01-atoms/table/Table.js"
@@ -1069,11 +1148,11 @@
           ],
           "attributes": [
             {
-              "name": "class",
+              "name": "required",
               "type": {
-                "text": "string"
+                "text": "boolean"
               },
-              "description": "Add required to make the field required."
+              "description": "Makes the field required."
             },
             {
               "name": "placeholder",
@@ -1128,7 +1207,7 @@
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "text-input",
+          "tagName": "ycl-text-input",
           "customElement": true
         }
       ],
@@ -1143,7 +1222,7 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "text-input",
+          "name": "ycl-text-input",
           "declaration": {
             "name": "TextInput",
             "module": "src/01-atoms/text-input/TextInput.js"
@@ -1174,13 +1253,6 @@
               "description": "The link URL."
             },
             {
-              "name": "class",
-              "type": {
-                "text": "string"
-              },
-              "description": "An ordinary class attribute; text-link has no style variants."
-            },
-            {
               "name": "target",
               "type": {
                 "text": "string"
@@ -1191,7 +1263,7 @@
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "text-link",
+          "tagName": "ycl-text-link",
           "customElement": true
         }
       ],
@@ -1206,7 +1278,7 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "text-link",
+          "name": "ycl-text-link",
           "declaration": {
             "name": "TextLink",
             "module": "src/01-atoms/text-link/Link.js"
@@ -1405,7 +1477,7 @@
               "name": ""
             },
             {
-              "description": "A link, such as a text-link.",
+              "description": "A link, such as a ycl-text-link.",
               "name": "link"
             }
           ],
@@ -1480,7 +1552,7 @@
               "name": ""
             },
             {
-              "description": "Links or buttons, such as cta-link elements.",
+              "description": "Links or buttons, such as ycl-cta-link elements.",
               "name": "actions"
             }
           ],
@@ -1632,7 +1704,7 @@
               "name": ""
             },
             {
-              "description": "A link or button, usually a cta-link.",
+              "description": "A link or button, usually a ycl-cta-link.",
               "name": "link"
             }
           ],
@@ -2781,7 +2853,7 @@
                 "text": "\"event\""
               },
               "description": "event puts the image beside the title on wide screens.",
-              "name": "variation"
+              "name": "variant"
             }
           ],
           "superclass": {
@@ -2975,7 +3047,7 @@
                 "text": "\"promotional\"|\"subtle\""
               },
               "description": "Visual style. Defaults to promotional.",
-              "name": "variation"
+              "name": "variant"
             },
             {
               "type": {
@@ -3736,7 +3808,7 @@
                 "text": "\"default\"|\"emphasized\""
               },
               "description": "emphasized uses a larger type size.",
-              "name": "variation"
+              "name": "variant"
             },
             {
               "type": {

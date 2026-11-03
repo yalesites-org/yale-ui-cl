@@ -26,7 +26,7 @@ calloutItemTemplate.innerHTML = `
  * One callout inside a ycl-callout.
  * @slot heading - The callout heading.
  * @slot - The callout text.
- * @slot link - A link or button, usually a cta-link.
+ * @slot link - A link or button, usually a ycl-cta-link.
  */
 export class CalloutItem extends HTMLElement {
 	#shadow;
