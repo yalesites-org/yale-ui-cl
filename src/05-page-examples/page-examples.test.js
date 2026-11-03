@@ -3,6 +3,7 @@ import { setProjectAnnotations } from "@storybook/web-components-vite";
 import { composeStories } from "storybook/preview-api";
 import preview from "../../.storybook/preview.js";
 import * as module from "./PageExamples.stories.js";
+import "../styles/base.css";
 
 const meta = module.default;
 const composed = composeStories(module, setProjectAnnotations(preview));
@@ -66,6 +67,28 @@ describe("Page examples", () => {
 			const maxWidth = parseFloat(getComputedStyle(wrapper).maxWidth);
 			const expected = Number.isNaN(maxWidth) ? available : Math.min(available, maxWidth);
 			expect(wrapper.getBoundingClientRect().width).toBeCloseTo(expected, 0);
+		}
+	});
+
+	it("stretches every grid item's content to the row height on the Department homepage", async () => {
+		document.body.style.width = "1280px";
+		document.body.style.margin = "0";
+		document.body.innerHTML = composed.DepartmentHomepage();
+		try {
+			await customElements.whenDefined("ycl-custom-card");
+			// Make one card's text longer than its row-mates' so the row is taller than the shorter cards,
+			// whatever font the browser falls back to.
+			document.querySelector("ycl-custom-card p").append(" Extra text that wraps onto more lines than the other cards in this row.".repeat(3));
+			const items = [...document.querySelectorAll("main ul[style*=\"display: grid\"] > li")];
+			expect(items.length).toBeGreaterThan(0);
+			await Promise.all(items.map((li) => li.firstElementChild.updateComplete));
+			const mismatched = items
+				.map((li) => [li.firstElementChild.localName, li.getBoundingClientRect().height, li.firstElementChild.getBoundingClientRect().height])
+				.filter(([, row, child]) => Math.abs(row - child) > 1);
+			expect(mismatched).toEqual([]);
+		} finally {
+			document.body.replaceChildren();
+			document.body.removeAttribute("style");
 		}
 	});
 

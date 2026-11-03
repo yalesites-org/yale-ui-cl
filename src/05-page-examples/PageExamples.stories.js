@@ -52,7 +52,7 @@ const bannerImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:/
 const contained = (html) =>
 	`<div style="width: 100%; box-sizing: border-box; max-width: var(--size-component-layout-width-site); margin-inline: auto; padding-inline: var(--size-spacing-6);">${html}</div>`;
 const grid = (items, min = "18rem") =>
-	`<ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(${min}, 1fr)); gap: var(--size-spacing-8);">${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+	`<ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(${min}, 1fr)); gap: var(--size-spacing-8);">${items.map((item) => `<li style="display: grid;">${item}</li>`).join("")}</ul>`;
 const section = (heading, body) =>
 	contained(`<ycl-heading level="2" style="margin-block-end: var(--size-spacing-6);">${heading}</ycl-heading>
 		${body}`);
