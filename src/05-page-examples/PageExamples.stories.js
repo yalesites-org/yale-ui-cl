@@ -50,7 +50,7 @@ const bannerImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:/
 
 // Page-level layout only: centres free-standing content (headings, lists of cards) at site width.
 const contained = (html) =>
-	`<div style="max-width: var(--size-component-layout-width-site); margin-inline: auto; padding-inline: var(--size-spacing-6);">${html}</div>`;
+	`<div style="width: 100%; box-sizing: border-box; max-width: var(--size-component-layout-width-site); margin-inline: auto; padding-inline: var(--size-spacing-6);">${html}</div>`;
 const grid = (items, min = "18rem") =>
 	`<ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(${min}, 1fr)); gap: var(--size-spacing-8);">${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
 const section = (heading, body) =>
@@ -108,7 +108,7 @@ const departmentHomepage = () => page("homepage-main", {
 		<ycl-quick-links theme="one" variation="promotional">
 			<ycl-heading level="2" slot="heading">Get started</ycl-heading>
 			<p slot="description">The pages people visit most often.</p>
-			<ycl-image slot="image"><img src="${placeholder(1600, 900)}" alt=""></ycl-image>
+			<ycl-image slot="image"><img src="${bannerImage}" alt=""></ycl-image>
 			<cta-link class="outline" href="#">Undergraduate study</cta-link>
 			<cta-link class="outline" href="#">Graduate admissions</cta-link>
 			<cta-link class="outline" href="#">Faculty and research groups</cta-link>

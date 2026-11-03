@@ -51,4 +51,30 @@ describe("Page examples", () => {
 		expect(outside).toEqual([]);
 		expect(headers).toBeLessThanOrEqual(1);
 	});
+
+	it("stretches contained sections to the site width inside the flex <main>", async () => {
+		document.body.style.width = "1280px";
+		document.body.style.margin = "0";
+		document.body.innerHTML = composed.DepartmentHomepage();
+		await customElements.whenDefined("ycl-heading");
+		const main = document.querySelector("main");
+		const mainStyle = getComputedStyle(main);
+		const available = main.clientWidth - parseFloat(mainStyle.paddingLeft) - parseFloat(mainStyle.paddingRight);
+		const wrappers = [...main.children].filter((el) => el.localName === "div" && el.style.marginInline === "auto");
+		expect(wrappers.length).toBeGreaterThan(0);
+		for (const wrapper of wrappers) {
+			const maxWidth = parseFloat(getComputedStyle(wrapper).maxWidth);
+			const expected = Number.isNaN(maxWidth) ? available : Math.min(available, maxWidth);
+			expect(wrapper.getBoundingClientRect().width).toBeCloseTo(expected, 0);
+		}
+	});
+
+	it("gives the Department homepage quick links band a background image with no size label", () => {
+		document.body.innerHTML = composed.DepartmentHomepage();
+		const img = document.querySelector("ycl-quick-links [slot=\"image\"] img");
+		const svg = decodeURIComponent(img.getAttribute("src"));
+		document.body.replaceChildren();
+		expect(svg).not.toContain("<text");
+		expect(svg).not.toMatch(/\d+ x \d+/);
+	});
 });
