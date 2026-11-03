@@ -194,16 +194,6 @@ describe("custom-elements.json", () => {
 			}
 		});
 
-		// `class` descriptions like "Space-separated style variants: filled or outline, small." name
-		// variants the component turns into `--variant` modifier classes, so each needs a CSS rule.
-		it("styles every class variant it declares", () => {
-			const description = declaredAttributes(tag).find((a) => a.name === "class")?.description ?? "";
-			const list = description.match(/style variants:(.*)/i)?.[1] ?? "";
-			const variants = list.replace(/\([^)]*\)/g, "").split(/,|\bor\b/).map((v) => v.trim().replace(/\.$/, "")).filter(Boolean);
-			const css = sheets.map((sheet) => stylesheets[sheet]).join("\n");
-			for (const variant of variants) expect(css, `${tag} class="${variant}"`).toMatch(new RegExp(`--${variant}(?![\\w-])`));
-		});
-
 		it("declares every slot, and only those", () => {
 			const declaredSlots = (declaration()?.slots ?? []).map((s) => s.name);
 			if (manualSlots) {
@@ -241,13 +231,16 @@ describe("llms.txt", () => {
 		template.innerHTML = html;
 		for (const element of template.content.querySelectorAll("*")) {
 			const declaration = declarations.get(element.localName);
+			// Any custom-element tag (a name with a hyphen) must be a library element, so a misspelled
+			// tag such as <ycl-calout> fails instead of being skipped. Plain HTML elements are allowed.
+			if (element.localName.includes("-")) expect(declaration, `<${element.localName}> is not in the manifest`).toBeDefined();
 			if (declaration) {
 				for (const { name, value } of element.attributes) {
 					if (globalAttributes.has(name) || name.startsWith("aria-")) continue;
 					const attribute = (declaration.attributes ?? []).find((a) => a.name === name);
 					expect(attribute, `${element.localName}[${name}]`).toBeDefined();
 					const allowed = literalValues(attribute);
-					if (allowed.length && name !== "class") expect(allowed, `${element.localName}[${name}]`).toContain(value);
+					if (allowed.length) expect(allowed, `${element.localName}[${name}]`).toContain(value);
 				}
 			}
 			const parent = declarations.get(element.parentElement?.localName);

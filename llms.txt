@@ -103,7 +103,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 
 Never hard-code a color (no hex, `rgb()`, `hsl()` or named colors) in markup or CSS for these components.
 
-1. Prefer the component's own attributes: `theme="one"` to `"six"` (and `"default"` where listed), plus `data-global-theme="one"` to `"six"` on an ancestor such as `<body>` for the site-wide palette.
+1. Prefer the component's own attributes: `theme`, whose values vary by component (most take `"one"` to `"six"`, some also `"default"`; `ycl-pull-quote`, `ycl-quick-links` and `ycl-tabs` take `"one"` to `"three"`; `ycl-facts-and-figures` takes `"default"` and `"one"` to `"five"`), so use only the values the manifest lists for that tag, plus `data-global-theme="one"` to `"six"` on an ancestor such as `<body>` for the site-wide palette.
 2. For your own page CSS, use the `@yalesites-org/tokens` custom properties, such as `var(--color-blue-yale)` or `var(--color-gray-100)`. `yale-ui-cl.css` defines them on `:root`.
 3. Pages may only restyle components through these custom properties: `--color-text`, `--color-heading`, `--color-background`, `--color-link-base`, `--color-link-hover`, `--color-link-visited-base`, `--color-link-visited-hover`, plus any component custom properties listed in the manifest (such as `--color-divider` on `ycl-divider`). Set them to tokens. Every other token is baked into the components at build time, so redefining it has no effect.
 
