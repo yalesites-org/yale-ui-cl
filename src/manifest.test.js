@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import manifest from "../custom-elements.json";
-import guide from "../AI-GUIDE.md?raw";
+import guide from "../llms.txt?raw";
 
-// Keeps custom-elements.json (and so the Storybook docs and AI-GUIDE.md) in step with the code, in
+// Keeps custom-elements.json (and so the Storybook docs and llms.txt) in step with the code, in
 // both directions: every element, attribute, CSS attribute hook, slot and event the code uses must
 // be declared, and every attribute, slot and event declared must be honoured by the code.
 // `npm test` runs `npm run analyze` first, so a stale committed manifest shows up as a git diff.
@@ -223,7 +223,7 @@ describe("custom-elements.json", () => {
 	});
 });
 
-describe("AI-GUIDE.md", () => {
+describe("llms.txt", () => {
 	it.each([...declarations.keys()])("mentions %s", (tag) => {
 		expect(guide).toMatch(new RegExp(`(^|[^\\w-])${tag}(?![\\w-])`));
 	});

@@ -16,7 +16,7 @@
   "files": [
     "dist",
     "custom-elements.json",
-    "AI-GUIDE.md"
+    "llms.txt"
   ],
   "main": "./dist/yale-ui-cl.js",
   "module": "./dist/yale-ui-cl.js",
@@ -30,7 +30,7 @@
     "./style.css": "./dist/yale-ui-cl.css",
     "./package.json": "./package.json",
     "./custom-elements.json": "./custom-elements.json",
-    "./AI-GUIDE.md": "./AI-GUIDE.md",
+    "./llms.txt": "./llms.txt",
     "./*": "./dist/*.js"
   },
   "sideEffects": true,
