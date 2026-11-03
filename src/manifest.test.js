@@ -5,7 +5,7 @@ import guide from "../llms.txt?raw";
 // Keeps custom-elements.json (and so the Storybook docs and llms.txt) in step with the code, in
 // both directions: every element, attribute, CSS attribute hook, slot and event the code uses must
 // be declared, and every attribute, slot and event declared must be honoured by the code.
-// `npm test` runs `npm run analyze` first, so a stale committed manifest shows up as a git diff.
+// `npm test` runs `npm run analyze` first, and CI fails if that leaves a git diff in the committed manifest.
 
 const sources = import.meta.glob(["./01-atoms/**/*.js", "./02-molecules/**/*.js", "!**/*.stories.js", "!**/*.test.js"], {
 	query: "?raw",
@@ -140,13 +140,6 @@ const declaredAttributes = (tag) => declarations.get(tag)?.attributes ?? [];
 // Global HTML attributes a component's CSS may style without declaring them (`:host([hidden])`).
 const globalHostAttributes = new Set(["hidden", "slot", "id", "class", "style", "lang", "dir", "role"]);
 
-// Declared attributes (`tag[name]`) and slots (`tag slot:name`) that nothing in the element's own
-// code, CSS or <slot> elements handles, each with the reason it is still honoured. Keep this tiny:
-// an entry here should be the exception, not a way to skip drift.
-const honouredElsewhere = new Map([
-	["select-input slot:", "<option> and <optgroup> children are moved into the shadow <select> (syncOptions), not slotted."],
-]);
-
 describe("custom-elements.json", () => {
 	it("finds every component source", () => {
 		expect(elements.length).toBe(defineCalls);
@@ -189,7 +182,7 @@ describe("custom-elements.json", () => {
 		it("honours every declared attribute", () => {
 			const hooks = new Set(cssHooks().map((hook) => hook.name));
 			for (const name of declared()) {
-				const honoured = observed.includes(name) || read.includes(name) || hooks.has(name) || honouredElsewhere.has(`${tag}[${name}]`);
+				const honoured = observed.includes(name) || read.includes(name) || hooks.has(name);
 				expect(honoured, `${tag}[${name}] is declared, but nothing observes, reads or styles it`).toBe(true);
 			}
 		});
@@ -200,8 +193,7 @@ describe("custom-elements.json", () => {
 				// Manually assigned components take unslotted children by default; only named slots are in the code.
 				expect(declaredSlots.filter(Boolean).sort()).toEqual(slots.filter(Boolean).sort());
 			} else {
-				const handled = declaredSlots.filter((name) => honouredElsewhere.has(`${tag} slot:${name}`));
-				expect(declaredSlots.sort()).toEqual(unique([...slots, ...handled]).sort());
+				expect(declaredSlots.sort()).toEqual([...slots].sort());
 			}
 		});
 
