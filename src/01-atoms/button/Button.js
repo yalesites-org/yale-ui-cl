@@ -10,8 +10,8 @@ const buttonTemplate = document.createElement("template");
 buttonTemplate.innerHTML = `<button class="button cta" type="button"><slot></slot></button>`;
 
 // A <button> styled as a CTA, or an <a> when given an href (matching yds-control.twig). Dropdowns
-// are always buttons, whatever the href. CTA variants come from the class attribute, as on
-// cta-link (e.g. class="filled radius-pill").
+// are always buttons, whatever the href. CTA variants come from the same attributes as
+// ycl-cta-link (e.g. variant="filled" radius="pill").
 /**
  * A button styled as a call to action. Renders a `<button>`, or a link when given an href.
  * @attr {string} class - Space-separated style variants: filled or outline, radius-soft or radius-pill, animate-rise, animate-wipe or animate-none (the default animation is a fade), small, medium or large, secondary.
@@ -31,7 +31,7 @@ export class Button extends HTMLElement {
 	static formAssociated = true;
 
 	static get observedAttributes() {
-		return ["href", "type", "disabled", "expanded", "label", "control-type", "class"];
+		return ["href", "type", "disabled", "expanded", "label", "control-type", ...Util.ctaAttributes];
 	}
 
 	constructor() {
@@ -89,7 +89,7 @@ export class Button extends HTMLElement {
 		const control = this.#control;
 
 		control.className = "button cta";
-		Util.addVariant(this.getAttribute("class"), control, "cta");
+		Util.addVariant(Util.ctaVariants(this), control, "cta");
 
 		if (this.#isLink) {
 			control.href = this.href;

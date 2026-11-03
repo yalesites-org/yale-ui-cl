@@ -7,6 +7,21 @@ export function addVariant(classNames, componentObject, componentName) {
 	variants.forEach((c) => {componentObject.classList.add(componentName + "--" + c)});
 };
 
+// CTA options shared by ycl-cta-link and ycl-button. Each maps to a cta.css modifier:
+// variant="filled" -> cta--filled, size="large" -> cta--large, animate="wipe" -> cta--animate-wipe,
+// radius="pill" -> cta--radius-pill. Fade is the default animation, so it needs no attribute.
+export const ctaAttributes = ["variant", "size", "animate", "radius"];
+
+export function ctaVariants(host) {
+	const modifier = (name, prefix = "") => {
+		const value = host.getAttribute(name);
+		return value ? prefix + value : null;
+	};
+	return [modifier("variant"), modifier("size"), modifier("animate", "animate-"), modifier("radius", "radius-")]
+		.filter(Boolean)
+		.join(" ");
+}
+
 export function createErrorIcon() {
 		const errorIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 		const errorIconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");

@@ -24,12 +24,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '25'
-          cache: 'npm' 
+          node-version: '24'
+          cache: 'npm'
       - name: Install dependencies
-        run: npm ci 
+        run: npm ci
         env:
           YALESITES_BUILD_TOKEN: ${{ secrets.YALESITES_BUILD_TOKEN }}
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run tests
+        run: npm test
       - name: Build Storybook
         run: npm run build-storybook
       # Upload pages artifact
