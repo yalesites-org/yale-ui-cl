@@ -1,4 +1,4 @@
-import "./ReferenceCard";
+import "./ContentCard";
 import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/cta/Cta";
 import "../../../01-atoms/image/ResponsiveImage";
@@ -15,18 +15,18 @@ const collectionStyle = (layout) => layout === "grid"
 
 const card = (args, { heading, snippet, overline, image = placeholder(600, 400), extra = "" }) => `
 	<li>
-		<ycl-reference-card href="${args.href}" layout="${args.layout}" ${args.featured ? "featured" : ""} ${args.overlay ? `overlay="${args.overlay}"` : ""} ${args.source ? `source="${args.source}"` : ""}>
+		<ycl-content-card href="${args.href}" layout="${args.layout}" ${args.featured ? "featured" : ""} ${args.overlay ? `overlay="${args.overlay}"` : ""} ${args.source ? `source="${args.source}"` : ""}>
 			${args.withImage ? `<ycl-image slot="image"><img src="${image}" alt=""></ycl-image>` : ""}
 			<ycl-heading level="3" slot="heading">${heading}</ycl-heading>
 			${overline ? `<ycl-date-time slot="overline" start="${overline}" format="date" time-zone="America/New_York">${overline}</ycl-date-time>` : ""}
 			${snippet ? `<p>${snippet}</p>` : ""}
 			${extra}
-		</ycl-reference-card>
+		</ycl-content-card>
 	</li>`;
 
 export default {
-	title: "Molecules/Cards/Reference Card",
-	component: "ycl-reference-card",
+	title: "Molecules/Cards/Content Card",
+	component: "ycl-content-card",
 	argTypes: {
 		heading: { control: "text" },
 		snippet: { control: "text" },

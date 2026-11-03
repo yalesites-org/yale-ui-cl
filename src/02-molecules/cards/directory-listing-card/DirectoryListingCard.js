@@ -10,7 +10,7 @@ const watchSlot = (slot, onChange) => {
 	update();
 };
 
-// Unlike the reference card, only the heading is a link here: the email link must stay
+// Unlike the content card, only the heading is a link here: the email link must stay
 // separately clickable. The link is rendered here so it can be dropped when there's no href.
 const directoryListingCardTemplate = document.createElement("template");
 directoryListingCardTemplate.innerHTML = `

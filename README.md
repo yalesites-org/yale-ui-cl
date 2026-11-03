@@ -42,3 +42,13 @@ For CTAs, fade is the default animation and needs no attribute; `animate` takes 
 ### Renamed attribute
 
 The `variation` attribute on `ycl-quick-links`, `ycl-page-title` and `ycl-text` is now `variant`, matching `ycl-pull-quote` and `ycl-quote-callout`. For example, `<ycl-page-title variation="event">` becomes `<ycl-page-title variant="event">`.
+
+## Migration: Reference Card is now Content Card
+
+| | Old | New |
+|-|-----|-----|
+| Tag | `ycl-reference-card` | `ycl-content-card` |
+| Export | `ReferenceCard` | `ContentCard` |
+| Per-component entry | `yale-ui-cl/reference-card` | `yale-ui-cl/content-card` |
+
+The old tag, export, and entry names were removed, not aliased.

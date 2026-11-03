@@ -40,7 +40,7 @@
 @import "../02-molecules/related-content/related-content.css" layer(components.related-content);
 @import "../02-molecules/text/text.css" layer(components.text);
 @import "../02-molecules/image/image.css" layer(components.image-block);
-@import "../02-molecules/cards/reference-card/reference-card.css" layer(components.reference-card);
+@import "../02-molecules/cards/content-card/content-card.css" layer(components.content-card);
 @import "../02-molecules/cards/custom-card/custom-card.css" layer(components.custom-card);
 @import "../02-molecules/cards/directory-listing-card/directory-listing-card.css" layer(components.directory-listing-card);
 @import "../02-molecules/tile-item/tile-item.css" layer(components.tile-item);
