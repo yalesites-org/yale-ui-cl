@@ -1,11 +1,11 @@
 # Yale UI Component Library
 
-`yale-ui-cl` is a set of framework-free Web Components (Custom Elements v1) for YaleSites. It is for developers who build Yale web pages and apps outside Drupal and YaleSites but want the YaleSites look.
+`yale-ui-cl` is an open set of framework-free Web Components (Custom Elements v1). It is for developers who build Yale web pages and apps, in plain HTML or alongside any framework.
 
 - Components are plain `HTMLElement` subclasses. No framework is needed.
 - Styles come from the YaleSites design tokens in [`@yalesites-org/tokens`](https://github.com/yalesites-org).
 - Each component renders into a closed shadow DOM.
-- Most tags start with `ycl-` (for example `ycl-button`, `ycl-alert`, `ycl-tabs`). A few do not yet, such as `cta-link`, `text-link`, `text-input`, `select-input` and `yc-table`.
+- Every tag starts with `ycl-` (for example `ycl-button`, `ycl-alert`, `ycl-tabs`).
 
 The components are built with [Vite](https://vite.dev) and documented in [Storybook](https://storybook.js.org).
 
@@ -47,7 +47,7 @@ The package is not published yet. Build it with `npm run build`, then install it
 
 - `dist/yale-ui-cl.js`: the full bundle as an ES module (also `dist/yale-ui-cl.umd.cjs` for UMD/CommonJS).
 - `dist/yale-ui-cl.css`: the document styles (design tokens, reset, typography, component styles).
-- `dist/<name>.js`: one ES entry per component, named after its tag with any `ycl-` or `yc-` prefix removed (for example `button`, `accordion`, `data-table`, `table`, `cta-link`).
+- `dist/<name>.js`: one ES entry per component, named after its tag with the `ycl-` prefix removed (for example `button`, `accordion`, `data-table`, `table`, `cta-link`).
 
 Always load the stylesheet. Then load either the full bundle or the components you need:
 
@@ -62,7 +62,7 @@ import 'yale-ui-cl/button';
 ```
 
 ```html
-<ycl-button class="filled radius-soft" href="https://www.yale.edu">Visit Yale</ycl-button>
+<ycl-button variant="filled" radius="soft" href="https://www.yale.edu">Visit Yale</ycl-button>
 ```
 
 Loading the same component from a single entry and from the full bundle is safe; each tag is registered once.
