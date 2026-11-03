@@ -35,7 +35,7 @@ const table = ({ presort } = {}) => `
         <td>${credits}</td>
         <td>${fee}</td>
         <td data-sort-value="${iso}">${start}</td>
-        <td><text-link href="#">View</text-link></td>
+        <td><ycl-text-link href="#">View</ycl-text-link></td>
       </tr>`).join('')}
     </tbody>
   </table>`;

@@ -10,12 +10,12 @@ const patternImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:
 
 const links = (args) => {
   if (args.linkStyle === 'none') return '';
-  if (args.linkStyle === 'text-link') {
-    return `<text-link slot="actions" href="https://google.com">${args.linkContent}</text-link>
-      <text-link slot="actions" href="https://yale.edu">${args.linkContentTwo}</text-link>`;
+  if (args.linkStyle === 'ycl-text-link') {
+    return `<ycl-text-link slot="actions" href="https://google.com">${args.linkContent}</ycl-text-link>
+      <ycl-text-link slot="actions" href="https://yale.edu">${args.linkContentTwo}</ycl-text-link>`;
   }
-  return `<cta-link slot="actions" class="filled" href="https://google.com">${args.linkContent}</cta-link>
-    <cta-link slot="actions" class="outline" href="https://yale.edu">${args.linkContentTwo}</cta-link>`;
+  return `<ycl-cta-link slot="actions" variant="filled" href="https://google.com">${args.linkContent}</ycl-cta-link>
+    <ycl-cta-link slot="actions" variant="outline" href="https://yale.edu">${args.linkContentTwo}</ycl-cta-link>`;
 };
 
 export default {
@@ -42,7 +42,7 @@ export default {
     linkStyle: {
       name: 'Link Style',
       type: 'select',
-      options: ['cta', 'text-link', 'none'],
+      options: ['cta', 'ycl-text-link', 'none'],
     },
     layout: {
       name: 'Content Layout',
@@ -120,6 +120,6 @@ export const WithOverlay = {
 export const Themed = {
   args: {
     theme: 'two',
-    linkStyle: 'text-link',
+    linkStyle: 'ycl-text-link',
   },
 };
