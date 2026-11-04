@@ -1,0 +1,17 @@
+name: Set up project
+description: Install Node (version from .nvmrc) and npm dependencies
+inputs:
+  npm-token:
+    description: Token that can read @yalesites-org packages on GitHub Packages
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+    - run: npm ci
+      shell: bash
+      env:
+        YALESITES_BUILD_TOKEN: ${{ inputs.npm-token }}

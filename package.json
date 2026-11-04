@@ -37,10 +37,13 @@
     "build": "vite build && vite build --mode bundle",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
     "@csstools/postcss-sass": "^5.1.1",
     "@eslint/js": "^10.0.1",
     "@storybook/addon-a11y": "^10.2.0",
@@ -68,5 +71,9 @@
     "vite": "^7.3.1",
     "vite-plugin-css-injected-by-js": "^4.0.1",
     "vitest": "^4.0.17"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=24"
   }
 }

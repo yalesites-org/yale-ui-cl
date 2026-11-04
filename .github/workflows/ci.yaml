@@ -1,0 +1,55 @@
+name: CI
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop]
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          npm-token: ${{ secrets.YALESITES_BUILD_TOKEN }}
+      - run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          npm-token: ${{ secrets.YALESITES_BUILD_TOKEN }}
+      # Vitest runs in real Chromium via Playwright (see vitest.config.js)
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          npm-token: ${{ secrets.YALESITES_BUILD_TOKEN }}
+      - run: npm run build
+      - run: npm run build-storybook
+      - name: Report library bundle size
+        run: du -sh dist/* | sort -h | tail -20
+
+  audit:
+    runs-on: ubuntu-latest
+    # Report-only until the existing high and critical findings are fixed.
+    # Remove this line to make the job fail on them, then mark it required.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          npm-token: ${{ secrets.YALESITES_BUILD_TOKEN }}
+      - run: npm audit --audit-level=high
