@@ -1,26 +1,14 @@
 import "./Button";
 import "../text-input/TextInput";
+import { optionAttributes, optionArgTypes } from "../cta/cta-story-options.js";
+
 export default {
   title: 'Atoms/Button',
   component: 'ycl-button',
   argTypes: {
     content: {control: 'text'},
     href: {control: 'text'},
-    fill: {
-      name: 'Fill Type',
-      type: 'select',
-      options: ['outline', 'filled'],
-    },
-    radius: {
-      name: 'Radius Type',
-      type: 'select',
-      options: ['none', 'radius-soft', 'radius-pill'],
-    },
-    animate: {
-      name: 'Animation Type',
-      type: 'select',
-      options: ['animate-fade', 'animate-none', 'animate-rise', 'animate-wipe'],
-    },
+    ...optionArgTypes,
     controlType: {
       name: 'Control Type',
       type: 'select',
@@ -35,9 +23,9 @@ export default {
   args: {
     content: 'Show more events',
     href: '',
-    fill: 'outline',
+    variant: 'outline',
+    animate: 'fade',
     radius: 'none',
-    animate: 'animate-fade',
     controlType: 'default',
     expanded: 'none',
     disabled: false,
@@ -45,7 +33,7 @@ export default {
 
   render: (args) =>
     `<ycl-button
-      class="${[args.fill, args.radius, args.animate].filter((c) => c && c !== 'none' && c !== 'animate-fade').join(' ')}"
+      ${optionAttributes(args)}
       ${args.href ? `href="${args.href}"` : ''}
       ${args.controlType === 'dropdown' ? 'control-type="dropdown"' : ''}
       ${args.expanded !== 'none' ? `expanded="${args.expanded}"` : ''}
@@ -56,14 +44,14 @@ export const Default = {};
 
 export const Filled = {
   args: {
-    fill: 'filled',
+    variant: 'filled',
   },
 };
 
 export const Pill = {
   args: {
-    fill: 'filled',
-    radius: 'radius-pill',
+    variant: 'filled',
+    radius: 'pill',
   },
 };
 
@@ -92,9 +80,9 @@ export const Disabled = {
 export const InAForm = {
   render: () =>
     `<form onsubmit="event.preventDefault(); this.querySelector('output').value = 'Submitted';">
-      <text-input name="email" type="email">
+      <ycl-text-input name="email" type="email">
         <span slot="label">Email address</span>
-      </text-input>
+      </ycl-text-input>
       <ycl-button type="submit">Subscribe</ycl-button>
       <ycl-button type="reset">Clear</ycl-button>
       <output role="status"></output>

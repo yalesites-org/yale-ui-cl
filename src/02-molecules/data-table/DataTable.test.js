@@ -92,7 +92,7 @@ describe("ycl-data-table", () => {
 
 	it("filters as the user types", () => {
 		const el = mount(markup);
-		const input = shadowOf(shadowOf(el).querySelector("text-input")).querySelector("input");
+		const input = shadowOf(shadowOf(el).querySelector("ycl-text-input")).querySelector("input");
 		input.value = "bob";
 		input.dispatchEvent(new InputEvent("input", { bubbles: true, composed: true }));
 		expect(visible(el)).toEqual(["Bob"]);
