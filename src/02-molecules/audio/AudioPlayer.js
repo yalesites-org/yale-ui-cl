@@ -72,6 +72,12 @@ const formatTime = (seconds) => {
 };
 
 // Not named Audio, which would shadow the global HTMLAudioElement constructor for importers.
+/**
+ * An audio player with play/pause, progress, playback speed and volume controls.
+ * @attr {string} src - URL of the audio file. Ignored when an `<audio>` is slotted into "audio".
+ * @slot - Content shown above the controls, such as a title or transcript link.
+ * @slot audio - Your own `<audio>` element (for example with several `<source>`s) to use instead of src.
+ */
 export class AudioPlayer extends HTMLElement {
 	#shadow;
 	#audio;
@@ -173,14 +179,17 @@ export class AudioPlayer extends HTMLElement {
 		}
 	};
 
+	/** Starts playback. Returns the media element's play() promise. */
 	play() {
 		return this.#audio.play();
 	}
 
+	/** Pauses playback. */
 	pause() {
 		this.#audio.pause();
 	}
 
+	/** Whether the audio is playing. */
 	get playing() { return !this.#audio.paused; }
 
 	#setPlaying(playing) {

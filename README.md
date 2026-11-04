@@ -192,6 +192,10 @@ These components moved tiers:
 
 Package import paths such as `yale-ui-cl/tabs` are unchanged, because build entries are named after the element tag. Source paths under `src/` did change, so anything importing from `src/` directly must update the path.
 
+## Using UICL with AI coding tools
+
+[llms.txt](llms.txt) is a short guide for AI coding tools: the available components, naming rules, the tokens-only color rule and example markup. [custom-elements.json](custom-elements.json) is the machine-readable list of every element with its attributes, slots and events; it is generated from the components' JSDoc by `npm run analyze`, which `npm test`, `npm run storybook`, `npm run build` and `npm run build-storybook` run first. Commit the regenerated file with the component change; a stale manifest shows up as a diff after running any of them, CI fails the pull request when the committed file is stale, and `src/manifest.test.js` fails when the JSDoc and the code disagree. Both files ship in the package.
+
 ## Migration: one naming pattern and attribute-based options
 
 Every custom element now uses the `ycl-` prefix, and options are set with attributes instead of `class`. The old tag names and class-based options were removed, not deprecated, so existing markup needs updating. Per-component entry names (`yale-ui-cl/cta-link`, `yale-ui-cl/table`, ...) are unchanged.

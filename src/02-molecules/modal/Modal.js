@@ -21,6 +21,14 @@ modalTemplate.innerHTML = `
 	</dialog>
 `;
 
+/**
+ * A modal dialog with a heading and a close button.
+ * @attr {boolean} open - Whether the dialog is open.
+ * @slot heading - The dialog title.
+ * @slot - The dialog content.
+ * @fires open - When the dialog opens.
+ * @fires close - When the dialog closes, however it was closed.
+ */
 export class Modal extends HTMLElement {
 	#shadow;
 	#dialog;
@@ -89,9 +97,12 @@ export class Modal extends HTMLElement {
 		this.dispatchEvent(new Event("close"));
 	};
 
+	/** Opens the dialog. */
 	show() { this.open = true; }
+	/** Closes the dialog. */
 	close() { this.open = false; }
 
+	/** Whether the dialog is open. Reflects the open attribute. */
 	get open() { return this.hasAttribute("open"); }
 	set open(value) {
 		if (value) this.setAttribute("open", "");

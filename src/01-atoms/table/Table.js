@@ -7,6 +7,10 @@ tableTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A styled, horizontally scrollable wrapper for a `<table>`.
+ * @slot - A `<table>`.
+ */
 export class Table extends HTMLElement { #shadow;
   #resizeObserver;
   #mutationObserver;

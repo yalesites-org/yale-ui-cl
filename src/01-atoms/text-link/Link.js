@@ -10,6 +10,12 @@ linkTemplate.innerHTML = `<a class="link" href="#" data-link-style="underline"><
 const LINK_STYLES = ["underline", "no-underline", "no-animation"];
 const currentURL = window.location.origin;
 
+/**
+ * An inline text link. Links to other sites get an external-link icon.
+ * @attr {string} href - The link URL.
+ * @attr {string} target - Where to open the link, as on `<a>`.
+ * @slot - The link text.
+ */
 export class TextLink extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

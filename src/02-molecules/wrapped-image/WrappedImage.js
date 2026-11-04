@@ -29,6 +29,14 @@ wrappedImageTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * An image floated beside body text that wraps around it.
+ * @attr {"left"|"right"} alignment - Side the image floats to. Defaults to left.
+ * @attr {"floated"|"offset"} image-style - offset shifts the image off the text. Defaults to floated.
+ * @slot image - The image.
+ * @slot caption - The image caption.
+ * @slot - The body text.
+ */
 export class WrappedImage extends HTMLElement {
 	#shadow;
 

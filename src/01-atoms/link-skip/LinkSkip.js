@@ -7,6 +7,11 @@ linkSkipTemplate.innerHTML = `
 `;
 
 // The link stays visually hidden until it takes keyboard focus (see link-skip.css).
+/**
+ * A "Skip to main content" link that only shows when it has keyboard focus. Place it first in the page.
+ * @attr {string} href - The target. Defaults to #main-content.
+ * @slot - The link text. Defaults to "Skip to main content".
+ */
 export class LinkSkip extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

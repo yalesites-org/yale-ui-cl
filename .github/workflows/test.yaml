@@ -27,3 +27,5 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run tests
         run: npm test
+      - name: Check custom-elements.json is up to date
+        run: git diff --exit-code -- custom-elements.json
