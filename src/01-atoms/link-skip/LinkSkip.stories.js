@@ -1,6 +1,6 @@
 import "./LinkSkip";
 export default {
-  title: 'Molecules/Link Skip',
+  title: 'Atoms/Link Skip',
   component: 'ycl-link-skip',
   argTypes: {
     content: {control: 'text'},

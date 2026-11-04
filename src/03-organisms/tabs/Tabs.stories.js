@@ -2,7 +2,7 @@ import "./Tabs";
 import "../../01-atoms/text-link/Link";
 import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 export default {
-  title: 'Molecules/Tabs',
+  title: 'Organisms/Tabs',
   component: 'ycl-tabs',
   argTypes: {
     theme: {

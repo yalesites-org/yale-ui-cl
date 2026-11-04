@@ -180,6 +180,18 @@ Other design tokens (`--color-blue-yale` and so on) are locked into the componen
 time, so redefining them on a page doesn't restyle components; only the `--color-theme-*`
 properties and the themeable text, heading, background and link colors do.
 
+## Component tiers
+
+Components live in `src/01-atoms`, `src/02-molecules` and `src/03-organisms`, and the Storybook sidebar uses the same tiers (Atoms, Molecules, Organisms).
+
+These components moved tiers:
+
+- Audio Player: to Molecules
+- Action Banner, Image Banner, Content Spotlight Portrait, Content Spotlight Landscape (`text-with-image`) and Tabs: to Organisms
+- Link Skip and Read Time: to Atoms
+
+Package import paths such as `yale-ui-cl/tabs` are unchanged, because build entries are named after the element tag. Source paths under `src/` did change, so anything importing from `src/` directly must update the path.
+
 ## Migration: one naming pattern and attribute-based options
 
 Every custom element now uses the `ycl-` prefix, and options are set with attributes instead of `class`. The old tag names and class-based options were removed, not deprecated, so existing markup needs updating. Per-component entry names (`yale-ui-cl/cta-link`, `yale-ui-cl/table`, ...) are unchanged.
