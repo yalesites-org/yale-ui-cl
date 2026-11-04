@@ -29,7 +29,7 @@ tileItemTemplate.innerHTML = `
 /**
  * A colored tile with an icon or heading, text and optional image. With an href, the whole tile is a link.
  * @attr {string} href - URL the tile links to.
- * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to one.
+ * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
  * @attr {"left"|"center"|"right"} alignment - Text alignment. Defaults to left.
  * @attr {"top"|"bottom"} vertical-alignment - Where the content sits. Defaults to top.
  * @attr {boolean} animated - Animates the tile on hover.

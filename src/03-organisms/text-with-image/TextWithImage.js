@@ -33,7 +33,7 @@ textWithImageTemplate.innerHTML = `
 
 /**
  * Text beside an image.
- * @attr {"default"|"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to default.
+ * @attr {"default"|"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to default.
  * @attr {"site"|"highlight"} width - Width of the component. Defaults to site.
  * @attr {"image-left"|"image-right"} position - Which side the image is on. Defaults to image-left.
  * @attr {"top"|"middle"|"bottom"} vertical-align - Vertical alignment of the text. Defaults to top.

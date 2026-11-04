@@ -70,7 +70,7 @@ export class TaxonomyDisplayItem extends HTMLElement {
 
 /**
  * A list of taxonomy term groups. Children are ycl-taxonomy-display-item elements.
- * @attr {"default"|"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme.
+ * @attr {"default"|"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to default.
  * @attr {"content"|"highlight"} width - Width of the list.
  * @slot - ycl-taxonomy-display-item elements.
  */

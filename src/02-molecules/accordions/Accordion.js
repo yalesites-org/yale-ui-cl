@@ -83,7 +83,7 @@ export class AccordionItem extends HTMLElement {
 
 /**
  * A set of collapsible sections with Expand All and Collapse All controls. Children are ycl-accordion-item elements.
- * @attr {"default"|"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme.
+ * @attr {"default"|"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to default.
  * @slot heading - A heading for the whole accordion.
  * @slot - ycl-accordion-item elements.
  */

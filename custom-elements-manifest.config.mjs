@@ -28,7 +28,7 @@ const sortModules = () => ({
 });
 
 export default {
-	globs: ["src/01-atoms/**/*.js", "src/02-molecules/**/*.js"],
+	globs: ["src/01-atoms/**/*.js", "src/02-molecules/**/*.js", "src/03-organisms/**/*.js"],
 	exclude: ["**/*.stories.js", "**/*.test.js"],
 	outdir: ".",
 	litelement: false,

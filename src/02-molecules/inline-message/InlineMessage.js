@@ -29,7 +29,7 @@ inlineMessageTemplate.innerHTML = `
  * A short highlighted message with an icon, heading, text and link.
  * @attr {"general"|"marketing"} type - Kind of message; sets the default icon. Defaults to general.
  * @attr {"none"} icon - none hides the icon.
- * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme.
+ * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to accent-1.
  * @slot icon - A decorative icon to use instead of the default one.
  * @slot heading - The heading.
  * @slot - The text.

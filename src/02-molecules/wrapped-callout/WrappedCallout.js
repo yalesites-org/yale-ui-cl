@@ -22,7 +22,7 @@ wrappedCalloutTemplate.innerHTML = `
 /**
  * A callout box floated beside body text that wraps around it.
  * @attr {"left"|"right"} alignment - Side the callout floats to. Defaults to left.
- * @attr {"default"|"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme of the callout.
+ * @attr {"default"|"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option for the callout, from the page palette. Defaults to primary.
  * @slot callout - The callout content.
  * @slot - The body text.
  */

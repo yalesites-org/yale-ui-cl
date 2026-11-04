@@ -12,7 +12,21 @@ textareaTemplate.innerHTML = `
 	</div>
 `;
 
-// Multi-line counterpart to ycl-text-input: same label, instructions, errors and form participation.
+/**
+ * A form-associated multi-line text field: the counterpart to ycl-text-input, with the same label,
+ * instructions, error text and form participation.
+ * @attr {boolean} required - Makes the field required.
+ * @attr {string} placeholder - Placeholder text.
+ * @attr {string} name - The form field name.
+ * @attr {string} autocomplete - The autocomplete hint, as on `<textarea>`.
+ * @attr {string} value - The field value.
+ * @attr {boolean} disabled - Disables the field.
+ * @attr {number} rows - Visible height in lines. Defaults to 5.
+ * @slot label - The label text.
+ * @slot instructions - Help text shown under the field.
+ * @slot errors - Error text. Any content here marks the field invalid.
+ * @fires input - When the user edits the value.
+ */
 export class Textarea extends HTMLElement {
 	#shadow;
 	static formAssociated = true;

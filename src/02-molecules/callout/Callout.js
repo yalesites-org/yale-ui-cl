@@ -41,7 +41,7 @@ export class CalloutItem extends HTMLElement {
 
 /**
  * A band of one or more highlighted callouts. Children are ycl-callout-item elements.
- * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme. Defaults to one.
+ * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
  * @attr {"center"|"left"} alignment - Text alignment. Defaults to center.
  * @attr {string} overlay-image - URL of a decorative image laid over the background.
  * @slot - ycl-callout-item elements.

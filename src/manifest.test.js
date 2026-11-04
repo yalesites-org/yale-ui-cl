@@ -8,15 +8,15 @@ import { ctaAttributes } from "./utility.js";
 // be declared, and every attribute, slot and event declared must be honoured by the code.
 // `npm test` runs `npm run analyze` first, and CI fails if that leaves a git diff in the committed manifest.
 
-const sources = import.meta.glob(["./01-atoms/**/*.js", "./02-molecules/**/*.js", "!**/*.stories.js", "!**/*.test.js"], {
+const sources = import.meta.glob(["./01-atoms/**/*.js", "./02-molecules/**/*.js", "./03-organisms/**/*.js", "!**/*.stories.js", "!**/*.test.js"], {
 	query: "?raw",
 	import: "default",
 	eager: true,
 });
-const stylesheets = import.meta.glob(["./01-atoms/**/*.css", "./02-molecules/**/*.css"], { query: "?raw", import: "default", eager: true });
+const stylesheets = import.meta.glob(["./01-atoms/**/*.css", "./02-molecules/**/*.css", "./03-organisms/**/*.css"], { query: "?raw", import: "default", eager: true });
 // Importing the modules registers every element, so observed attributes are read from the live
 // classes (SocialLinks computes its list). Vite only takes literal globs, hence the repetition.
-import.meta.glob(["./01-atoms/**/*.js", "./02-molecules/**/*.js", "!**/*.stories.js", "!**/*.test.js"], { eager: true });
+import.meta.glob(["./01-atoms/**/*.js", "./02-molecules/**/*.js", "./03-organisms/**/*.js", "!**/*.stories.js", "!**/*.test.js"], { eager: true });
 
 const declarations = new Map(
 	manifest.modules.flatMap((mod) => mod.declarations ?? []).filter((d) => d.customElement && d.tagName).map((d) => [d.tagName, d]),

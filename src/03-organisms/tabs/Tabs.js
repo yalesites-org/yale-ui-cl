@@ -44,7 +44,7 @@ export class Tab extends HTMLElement {
 /**
  * Tabbed panels. Children are ycl-tab elements.
  * @attr {string} label - Accessible name of the tab list.
- * @attr {"one"|"two"|"three"} theme - Color theme.
+ * @attr {"primary"|"secondary"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
  * @slot - ycl-tab elements.
  */
 export class Tabs extends HTMLElement {

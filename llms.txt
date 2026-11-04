@@ -47,6 +47,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-video-embed` | Responsive video iframe |
 | `ycl-text-input` | Text field with label, instructions and errors |
 | `ycl-select-input` | Select field with label, instructions and errors |
+| `ycl-text-area` | Multi-line text field with label, instructions and errors |
 | `ycl-checkbox` | Checkbox |
 | `ycl-radio` | Radio button; same `name` makes a group |
 | `ycl-accordion` | Collapsible sections; contains `ycl-accordion-item` |
@@ -97,13 +98,13 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 - Put content into a named slot with `slot="name"` on a direct child: `<ycl-heading slot="heading">`. Children with no `slot` attribute go into the default slot.
 - Child elements go directly inside their parent: `ycl-accordion-item` in `ycl-accordion`, `ycl-callout-item` in `ycl-callout`, `ycl-tab` in `ycl-tabs`, `ycl-taxonomy-display-item` in `ycl-taxonomy-display`, `ycl-related-content-item` in `ycl-related-content`.
 - Use `ycl-heading` for headings inside components, with the right `level` for the page outline.
-- Options are attributes, never `class`. `ycl-cta-link` and `ycl-button` take `variant`, `size`, `animate` and `radius` (for example `variant="filled" radius="pill" animate="wipe"`); leave `animate` off for the default fade. `ycl-list` takes `type="tags"` or `type="categories"`. `ycl-text-input` and `ycl-select-input` take the boolean `required`. `ycl-text-link` has no style options.
+- Options are attributes, never `class`. `ycl-cta-link` and `ycl-button` take `variant`, `size`, `animate` and `radius` (for example `variant="filled" radius="pill" animate="wipe"`); leave `animate` off for the default fade. `ycl-list` takes `type="tags"` or `type="categories"`. `ycl-text-input`, `ycl-text-area` and `ycl-select-input` take the boolean `required`. `ycl-text-link` has no style options.
 
 ## Colors: tokens only
 
 Never hard-code a color (no hex, `rgb()`, `hsl()` or named colors) in markup or CSS for these components.
 
-1. Prefer the component's own attributes: `theme`, whose values vary by component (most take `"one"` to `"six"`, some also `"default"`; `ycl-pull-quote`, `ycl-quick-links` and `ycl-tabs` take `"one"` to `"three"`; `ycl-facts-and-figures` takes `"default"` and `"one"` to `"five"`), so use only the values the manifest lists for that tag, plus `data-global-theme="one"` to `"six"` on an ancestor such as `<body>` for the site-wide palette.
+1. Prefer the component's own `theme` attribute. Each themed component picks one color from the page palette: `"primary"`, `"secondary"`, `"tertiary"`, `"accent-1"` or `"accent-2"`, and some also take `"default"` for an unthemed look. Not every component offers every option, so use only the values the manifest lists for that tag. A page sets its palette with the `--color-theme-primary`, `--color-theme-secondary`, `--color-theme-tertiary`, `--color-theme-accent-1` and `--color-theme-accent-2` custom properties on an ancestor such as `:root`, set to tokens; left unset, they fall back to the Old Blues palette. There is no `data-global-theme` attribute.
 2. For your own page CSS, use the `@yalesites-org/tokens` custom properties, such as `var(--color-blue-yale)` or `var(--color-gray-100)`. `yale-ui-cl.css` defines them on `:root`.
 3. Pages may only restyle components through these custom properties: `--color-text`, `--color-heading`, `--color-background`, `--color-link-base`, `--color-link-hover`, `--color-link-visited-base`, `--color-link-visited-hover`, plus any component custom properties listed in the manifest (such as `--color-divider` on `ycl-divider`). Set them to tokens. Every other token is baked into the components at build time, so redefining it has no effect.
 
@@ -112,7 +113,7 @@ Never hard-code a color (no hex, `rgb()`, `hsl()` or named colors) in markup or 
 A callout with a button:
 
 ```html
-<ycl-callout theme="two" alignment="center">
+<ycl-callout theme="secondary" alignment="center">
   <ycl-callout-item>
     <ycl-heading level="2" slot="heading">Degree Programs</ycl-heading>
     <p>Programs for students who plan to go on to graduate study or a career in science.</p>
@@ -140,7 +141,7 @@ An accordion:
 Text beside an image, with two links:
 
 ```html
-<ycl-text-with-image theme="one" position="image-right">
+<ycl-text-with-image theme="primary" position="image-right">
   <ycl-heading level="2" slot="heading">Visit campus</ycl-heading>
   <p>Tours run every weekday.</p>
   <ycl-cta-link slot="ctas" variant="filled" href="/visit">Plan a visit</ycl-cta-link>

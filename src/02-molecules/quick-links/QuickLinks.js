@@ -21,7 +21,7 @@ quickLinksTemplate.innerHTML = `
 /**
  * A heading, optional description and image, and a list of links. Every child without a slot attribute is a link.
  * @attr {"promotional"|"subtle"} variant - Visual style. Defaults to promotional.
- * @attr {"one"|"two"|"three"} theme - Color theme.
+ * @attr {"primary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
  * @slot - The links; one element per link.
  * @slot heading - The heading.
  * @slot description - A description. It puts the text beside the links.

@@ -24,7 +24,7 @@ quoteCalloutTemplate.innerHTML = `
  * A large quote with an attribution and optional image.
  * @attr {"bar"|"quote"|"image"} variant - Decoration style; image shows the image slot. Defaults to bar.
  * @attr {"left"|"right"} quote-alignment - Side the quote sits on. Defaults to left.
- * @attr {"one"|"two"|"three"|"four"|"five"|"six"} theme - Color theme.
+ * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
  * @slot - The quote.
  * @slot attribution - Who said it.
  * @slot image - An image, shown with variant="image".

@@ -23,7 +23,7 @@ factsAndFiguresTemplate.innerHTML = `
 
 /**
  * A statistic with supporting text and an optional icon.
- * @attr {"default"|"one"|"two"|"three"|"four"|"five"} theme - Color theme.
+ * @attr {"default"|"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
  * @attr {"center"|"left"} alignment - Text alignment. Defaults to center.
  * @attr {"basic"|"plain"} presentation - basic draws a rule above the statistic. Defaults to basic.
  * @attr {boolean} padded - Adds horizontal padding, for a stat on its own on a colored background.
