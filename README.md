@@ -32,12 +32,14 @@ Every custom element now uses the `ycl-` prefix, and options are set with attrib
 
 | Element | Old | New |
 |---------|-----|-----|
-| `ycl-cta-link`, `ycl-button` | `class="filled radius-pill animate-wipe large"` | `variant="filled" radius="pill" animate="wipe" size="large"` |
+| `ycl-cta-link`, `ycl-button` | `class="filled radius-pill animate-wipe"` | `variant="filled" radius="pill" animate="wipe"` |
 | `ycl-list` | `class="tags"` or `class="categories"` | `type="tags"` or `type="categories"` |
 | `ycl-text-input`, `ycl-select-input` | `class="required"` | `required` |
 | `ycl-text-link` | `class="subtle"` | removed (it had no styles) |
 
 For CTAs, fade is the default animation and needs no attribute; `animate` takes `none`, `rise` or `wipe`.
+
+CTAs now match the YaleSites CTA: a CTA with no `variant` is filled (it used to look like an outline), so add `variant="outline"` where you relied on the old default. `variant` takes `filled` or `outline`; the `size` attribute and `variant="secondary"` were removed. `outline-weight="1"`, `"2"` (the default) or `"4"` sets the border thickness.
 
 ### Renamed attribute
 

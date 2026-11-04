@@ -14,10 +14,13 @@
   opacity: 0.5;
 }
 
-/* No hover swap on a disabled button. */
+/* No hover effect on a disabled button: no colour swap, wipe shadow or rise. A filled wipe's resting
+   shadow matches its background, so dropping it on hover leaves the button looking the same. */
 .button.cta:disabled:hover {
   color: var(--color-cta-text);
   background-color: var(--color-cta-bg);
+  box-shadow: none;
+  transform: none;
 }
 
 /* Firefox otherwise picks up normalize.css's dotted button focus ring. */
