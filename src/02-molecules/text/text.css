@@ -51,6 +51,19 @@ ycl-text :is(h1, h2, h3, h4, h5, h6):not([class]):not(:first-child) {
   margin-top: 1em;
 }
 
+/* The smaller headings get more room above them, and H6 is set in capitals, as in YaleSites. */
+ycl-text h5:not([class]):not(:first-child) {
+  margin-top: 1.4em;
+}
+
+ycl-text h6:not([class]) {
+  text-transform: var(--font-text-transform-h6-yale-new);
+}
+
+ycl-text h6:not([class]):not(:first-child) {
+  margin-top: 2em;
+}
+
 ycl-text p {
   margin-block-end: var(--font-spacing-paragraph);
 }
@@ -67,10 +80,20 @@ ycl-text li {
   padding-left: var(--size-spacing-1);
 }
 
+/* Code blocks take the dark Monokai Sublime base colours YaleSites' highlight.js theme gives them
+   (YaleSites highlights the syntax too; that needs highlight.js, which isn't bundled here). The
+   colours aren't tokens, so they're declared here under the names YaleSites uses. */
+ycl-text {
+  --color-hljs-text: #f8f8f2;
+  --color-hljs-background: #23241f;
+}
+
 ycl-text pre code {
   display: block;
   padding: var(--size-spacing-5);
   overflow-x: auto;
+  background: var(--color-hljs-background);
+  color: var(--color-hljs-text);
 }
 
 ycl-text a {

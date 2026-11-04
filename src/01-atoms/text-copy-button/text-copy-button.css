@@ -21,33 +21,14 @@
   text-decoration-thickness: 0.1em;
 }
 
-/* Global and basic themes are set by data attributes on ancestors in the page, which shadow-root
-   CSS can't see, so these rules only take effect when base.css is also loaded in the document. */
-[data-global-theme="one"] ycl-text-copy-button {
-  --color-link-hover: var(--global-themes-one-colors-slot-two);
+/* Hover takes the palette's secondary colour, which pages set with --color-theme-secondary. */
+:host(ycl-text-copy-button) {
+  --color-link-hover: var(--color-theme-secondary, var(--color-blue-medium));
 }
 
-[data-global-theme="two"] ycl-text-copy-button {
-  --color-link-hover: var(--global-themes-two-colors-slot-two);
-}
-
-[data-global-theme="three"] ycl-text-copy-button {
-  --color-link-hover: var(--global-themes-three-colors-slot-two);
-}
-
-[data-global-theme="four"] ycl-text-copy-button {
-  --color-link-hover: var(--global-themes-four-colors-slot-two);
-}
-
-[data-global-theme="five"] ycl-text-copy-button {
-  --color-link-hover: var(--global-themes-five-colors-slot-two);
-}
-
-[data-global-theme="six"] ycl-text-copy-button {
-  --color-link-hover: var(--global-themes-six-colors-slot-two);
-}
-
-/* Basic (section background) themes come after global themes so link colours keep their contrast on dark sections. */
+/* Basic themes are set by data attributes on ancestors in the page, which shadow-root CSS can't
+   see, so these rules only take effect when base.css is also loaded in the document. Rules from
+   the document beat :host, so link colours keep their contrast on dark sections. */
 [data-basic-theme="blue-yale"] ycl-text-copy-button {
   --color-link-base: var(--color-link-theme-blue-yale-base);
   --color-link-hover: var(--color-link-theme-blue-yale-hover);

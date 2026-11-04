@@ -5,6 +5,7 @@ import "./styles/base.css";
 export { Cta } from "./01-atoms/cta/Cta.js";
 export { TextLink } from "./01-atoms/text-link/Link.js";
 export { TextInput } from "./01-atoms/text-input/TextInput.js";
+export { Textarea } from "./01-atoms/textarea/Textarea.js";
 export { Table } from "./01-atoms/table/Table.js";
 export { DataTable } from "./02-molecules/data-table/DataTable.js";
 export { SelectInput } from "./01-atoms/select-input/SelectInput.js";
