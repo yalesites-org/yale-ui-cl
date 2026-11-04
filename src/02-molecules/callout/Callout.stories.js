@@ -3,16 +3,27 @@ import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 import overlayImage from "../../assets/avif-test-image.avif";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
 import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
-const item = (args) => `
-  <ycl-callout-item>
-    <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-    <p>${args.text}</p>
-    ${args.linkType === 'link'
+const link = (args) => {
+  if (!args.linkText) return '';
+  return args.linkType === 'link'
     ? `<ycl-text-link slot="link" href="https://www.yale.edu">${args.linkText}</ycl-text-link>`
-    : `<ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">${args.linkText}</ycl-cta-link>`}
+    : `<ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">${args.linkText}</ycl-cta-link>`;
+};
+
+const item = (args) => `
+  <ycl-callout-item>${args.heading ? `
+    <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}${args.text ? `
+    <p>${args.text}</p>` : ''}
+    ${link(args)}
   </ycl-callout-item>`;
+
+const callout = (args, items) => `
+      <ycl-callout${attrs({ theme: args.theme, alignment: args.alignment, 'overlay-image': args.overlay && overlayImage })}>
+        ${items}
+      </ycl-callout>`;
 
 export default {
   title: 'Molecules/Callout',
@@ -21,26 +32,31 @@ export default {
     layout: 'fullscreen',
   },
   argTypes: {
-    heading: {control: 'text'},
-    text: {control: 'text'},
-    linkText: {name: 'Link Text', control: 'text'},
-    linkType: {
-      name: 'Link Type',
-      type: 'select',
-      options: ['cta', 'link'],
-    },
-    theme: {
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
       name: 'Color Option',
-      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
       control: { type: 'select', labels: colorOptionLabels('ycl-callout') },
-    },
-    alignment: {
+    }),
+    alignment: attributeArg('Content alignment. Defaults to center.', {
       name: 'Callout Alignment',
-      type: 'select',
+      control: 'select',
       options: ['center', 'left'],
-    },
-    overlay: {name: 'Overlay Background Image', control: 'boolean'},
+    }),
+    overlay: attributeArg('overlay-image: URL of an image drawn behind the callouts. Shown here with a sample image.', {
+      name: 'Overlay Background Image',
+      control: 'boolean',
+    }),
+    items: slotArg('ycl-callout-item elements (default slot). Each item takes slot="heading", text in its default slot and slot="link".', {
+      control: false,
+    }),
+    heading: slotArg('Item heading (slot="heading" on ycl-callout-item). Omitted when empty.', { control: 'text' }),
+    text: slotArg('Item text (default slot of ycl-callout-item). Omitted when empty.', { control: 'text' }),
+    linkText: slotArg('Item link (slot="link" on ycl-callout-item). Omitted when empty.', { name: 'Link Text', control: 'text' }),
+    linkType: slotArg('Whether the item link is a ycl-cta-link (variant="outline") or a ycl-text-link.', {
+      name: 'Link Type',
+      control: 'select',
+      options: ['cta', 'link'],
+    }),
   },
   args: {
     heading: 'Degree Programs',
@@ -52,36 +68,19 @@ export default {
     overlay: false,
   },
 
-  render: (args) =>
-    `<ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
-      ${item(args)}
-    </ycl-callout>`,
+  render: (args) => callout(args, item(args)),
 };
 
 export const Default = {};
 
 export const Double = {
-  render: (args) =>
-    `<ycl-callout theme="${args.theme}" alignment="${args.alignment}"${args.overlay ? ` overlay-image="${overlayImage}"` : ''}>
-      ${item(args)}
-      ${item({...args, heading: 'Research Opportunities', text: 'Work alongside faculty on projects spanning the sciences, humanities, and social sciences.', linkText: 'Find a lab'})}
-    </ycl-callout>`,
-};
-
-export const Themed = {
-  args: {
-    theme: 'tertiary',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Two callout items side by side in one callout. Controls edit a single item, so they cannot add a second one.',
+      },
+    },
   },
-};
-
-export const WithOverlay = {
-  args: {
-    overlay: true,
-  },
-};
-
-export const TextLink = {
-  args: {
-    linkType: 'link',
-  },
+  render: (args) => callout(args, `${item(args)}
+        ${item({...args, heading: 'Research Opportunities', text: 'Work alongside faculty on projects spanning the sciences, humanities, and social sciences.', linkText: 'Find a lab'})}`),
 };

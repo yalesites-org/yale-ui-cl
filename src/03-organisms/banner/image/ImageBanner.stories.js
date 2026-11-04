@@ -1,5 +1,6 @@
 import "./ImageBanner";
 import "../../../01-atoms/image/ResponsiveImage";
+import { attrs, attributeArg, slotArg } from "../../../../.storybook/story-helpers.js";
 import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../../00-tokens/theme/color-options.js";
 
 // An inline placeholder so the story doesn't depend on a hosted image.
@@ -12,23 +13,24 @@ export default {
     layout: 'fullscreen',
   },
   argTypes: {
-    theme: {
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
       name: 'Color Option',
-      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
       control: { type: 'select', labels: colorOptionLabels('ycl-image-banner') },
-    },
-    size: {
+    }),
+    size: attributeArg('Banner height. Defaults to tall.', {
       name: 'Image Size',
-      type: 'select',
+      control: 'select',
       options: ['tall', 'short', 'mini'],
-    },
-    caption: {control: 'text'},
-    width: {
+      mapping: { tall: undefined },
+    }),
+    width: attributeArg('Site width or full bleed. Defaults to site.', {
       name: 'Banner Width',
-      type: 'select',
+      control: 'select',
       options: ['site', 'full'],
-    },
+    }),
+    image: slotArg('The image (default slot), usually a ycl-image.', { control: false }),
+    caption: slotArg('Caption bar (slot="caption"); hidden when empty.', { control: 'text' }),
   },
   args: {
     theme: 'primary',
@@ -37,29 +39,11 @@ export default {
     width: 'site',
   },
 
-  render: (args) =>
-    `<ycl-image-banner theme="${args.theme}" size="${args.size}" width="${args.width}">
-      <ycl-image><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>
-      ${args.caption ? `<span slot="caption">${args.caption}</span>` : ''}
-    </ycl-image-banner>`,
+  render: (args) => `
+      <ycl-image-banner${attrs({ theme: args.theme, size: args.size, width: args.width })}>
+        <ycl-image><img src="${placeholderImage}" alt="A 16 by 9 image"></ycl-image>${args.caption ? `
+        <span slot="caption">${args.caption}</span>` : ''}
+      </ycl-image-banner>`,
 };
 
 export const Default = {};
-
-export const Short = {
-  args: {
-    size: 'short',
-  },
-};
-
-export const Mini = {
-  args: {
-    size: 'mini',
-  },
-};
-
-export const FullWidth = {
-  args: {
-    width: 'full',
-  },
-};

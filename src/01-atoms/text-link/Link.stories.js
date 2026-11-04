@@ -1,72 +1,36 @@
 import "./Link";
-
-const link = (args) =>
-  `<ycl-text-link href="${args.URL}" link-style="${args.linkStyle}"${args.chevron ? ' chevron' : ''}>${args.label}</ycl-text-link>`;
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
 
 export default {
   title: 'Atoms/Text Link',
   component: 'ycl-text-link',
   argTypes: {
-    label: {control: 'text'},
-    URL: {control: 'text'},
-    linkStyle: {
-      name: 'Link Style',
-      type: 'select',
+    URL: attributeArg('href: link destination. External links and file downloads (e.g. .pdf) get an icon and a screen-reader note.', {
+      control: 'text',
+    }),
+    target: attributeArg('target: browsing context to open the link in. Omitted when empty.', {
+      control: 'select',
+      options: ['', '_self', '_blank'],
+    }),
+    linkStyle: attributeArg('link-style: underline treatment. "underline" (default), "no-underline" (the underline slides in on hover) or "no-animation" (a plain text underline that drops on hover).', {
+      name: 'link-style',
+      control: 'select',
       options: ['underline', 'no-underline', 'no-animation'],
-    },
-    chevron: {name: 'With Chevron', control: 'boolean'},
-},
+    }),
+    chevron: attributeArg('chevron: adds a decorative trailing chevron, which replaces the external/download icon.', {
+      control: 'boolean',
+    }),
+    label: slotArg('Link text (default slot).', { control: 'text' }),
+  },
   args: {
     label: 'Yale HomePage',
     URL: 'https://www.yale.edu',
+    target: '',
     linkStyle: 'underline',
     chevron: false,
-},
-
-  render: link,
-};
-
-export const InternalLink = {
-  args: {
-    URL: "/index.html",
-    label: "Home"
   },
+  render: (args) =>
+    `<ycl-text-link${attrs({ href: args.URL, target: args.target, 'link-style': args.linkStyle, chevron: args.chevron })}>${args.label ?? ''}</ycl-text-link>`,
 };
 
-export const ExternalLink = {
-  args: {
-    label: "Yale Homepage",
-    URL: "https://www.yale.edu"
-  },
-};
-
-export const DownloadLink = {
-  args: {
-    label: "Yale Homepage",
-    URL: "https://www.yale.edu/download.pdf"
-  },
-};
-
-export const NoUnderline = {
-  args: {
-    URL: "/index.html",
-    label: "This is a no-underline link",
-    linkStyle: "no-underline",
-  },
-};
-
-export const NoAnimation = {
-  args: {
-    URL: "/index.html",
-    label: "This is a long link without animated underlines",
-    linkStyle: "no-animation",
-  },
-};
-
-export const WithChevron = {
-  args: {
-    URL: "/index.html",
-    label: "This is a link with chevron",
-    chevron: true,
-  },
-};
+export const Default = {};

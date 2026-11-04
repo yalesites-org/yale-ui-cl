@@ -15,6 +15,8 @@ const unescapeStringSource = (code) => {
 };
 
 const preview = {
+  // Every component gets a generated docs page listing its attributes, slots and events.
+  tags: ['autodocs'],
   parameters: {
     // Axe violations fail the story's test (npm test) instead of only being reported.
     a11y: {

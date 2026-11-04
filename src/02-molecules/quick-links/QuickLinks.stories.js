@@ -2,6 +2,7 @@ import "./QuickLinks";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/image/ResponsiveImage";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
 import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // A local stand-in for a photo so the story doesn't depend on a network image.
@@ -14,58 +15,40 @@ export default {
     layout: 'fullscreen',
   },
   argTypes: {
-    heading: {control: 'text'},
-    description: {control: 'text'},
-    image: {name: 'With image', control: 'boolean'},
-    variant: {
-      type: 'select',
+    variant: attributeArg('promotional adds a colored background; subtle leaves it plain.', {
+      control: 'select',
       options: ['promotional', 'subtle'],
-    },
-    theme: {
+    }),
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
       name: 'Color Option',
-      description: COLOR_OPTION_DESCRIPTION,
       options: ['primary', 'accent-1', 'accent-2'],
       control: { type: 'select', labels: colorOptionLabels('ycl-quick-links') },
-    },
-},
+    }),
+    heading: slotArg('Heading (slot="heading"). Omitted when empty.', { control: 'text' }),
+    description: slotArg('Description (slot="description"). A description switches the layout from stacked to side by side. Omitted when empty.', {
+      control: 'text',
+    }),
+    image: slotArg('Image (slot="image").', { name: 'With image', control: 'boolean' }),
+    links: slotArg('Every other child is a link and gets its own list item.', { control: false }),
+  },
   args: {
     heading: 'Heading for Quick Links',
     description: 'This is a Quick Links description.',
     image: true,
     variant: 'promotional',
     theme: 'primary',
-},
+  },
 
-  render: (args) =>
-    `<ycl-quick-links theme="${args.theme}" variant="${args.variant}">
-      <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-      ${args.description ? `<p slot="description">${args.description}</p>` : ''}
-      ${args.image ? `<ycl-image slot="image"><img src="${placeholderImage}" alt=""></ycl-image>` : ''}
-      <ycl-cta-link variant="outline" href="#">This is a link</ycl-cta-link>
-      <ycl-cta-link variant="outline" href="https://google.com">This is another link</ycl-cta-link>
-      <ycl-cta-link variant="outline" href="https://google.com/download.pdf">This is a very long link that will wrap lines</ycl-cta-link>
-      <ycl-cta-link variant="outline" href="#">Link #4</ycl-cta-link>
-    </ycl-quick-links>`,
+  render: (args) => `
+      <ycl-quick-links${attrs({ theme: args.theme, variant: args.variant })}>
+        ${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
+        ${args.description ? `<p slot="description">${args.description}</p>` : ''}
+        ${args.image ? `<ycl-image slot="image"><img src="${placeholderImage}" alt=""></ycl-image>` : ''}
+        <ycl-cta-link variant="outline" href="#">This is a link</ycl-cta-link>
+        <ycl-cta-link variant="outline" href="https://google.com">This is another link</ycl-cta-link>
+        <ycl-cta-link variant="outline" href="https://google.com/download.pdf">This is a very long link that will wrap lines</ycl-cta-link>
+        <ycl-cta-link variant="outline" href="#">Link #4</ycl-cta-link>
+      </ycl-quick-links>`,
 };
 
 export const Default = {};
-
-export const Stacked = {
-  args: {
-    description: '',
-  },
-};
-
-export const Subtle = {
-  args: {
-    variant: 'subtle',
-    image: false,
-  },
-};
-
-export const Accent1 = {
-  name: 'Accent 1',
-  args: {
-    theme: 'accent-1',
-  },
-};

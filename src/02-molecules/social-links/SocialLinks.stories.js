@@ -1,44 +1,27 @@
 import "./SocialLinks";
+import { attrs, attributeArg } from "../../../.storybook/story-helpers.js";
+
+const platforms = [
+  ['xTwitter', 'x-twitter', 'X (formerly Twitter) URL', 'https://www.twitter.com'],
+  ['facebook', 'facebook', 'Facebook URL', 'https://www.facebook.com'],
+  ['youtube', 'youtube', 'YouTube URL', 'https://www.youtube.com'],
+  ['instagram', 'instagram', 'Instagram URL', 'https://www.instagram.com'],
+  ['weibo', 'weibo', 'Weibo URL', 'https://www.weibo.com'],
+  ['linkedin', 'linkedin', 'LinkedIn URL', 'https://www.linkedin.com'],
+  ['bluesky', 'bluesky', 'Bluesky URL', 'https://bsky.app/'],
+];
+
 export default {
   title: 'Molecules/Social Links',
   component: 'ycl-social-links',
-  argTypes: {
-    xTwitter: {name: 'X (formerly Twitter) URL', control: 'text'},
-    facebook: {name: 'Facebook URL', control: 'text'},
-    youtube: {name: 'YouTube URL', control: 'text'},
-    instagram: {name: 'Instagram URL', control: 'text'},
-    weibo: {name: 'Weibo URL', control: 'text'},
-    linkedin: {name: 'LinkedIn URL', control: 'text'},
-    bluesky: {name: 'Bluesky URL', control: 'text'},
-},
-  args: {
-    xTwitter: 'https://www.twitter.com',
-    facebook: 'https://www.facebook.com',
-    youtube: 'https://www.youtube.com',
-    instagram: 'https://www.instagram.com',
-    weibo: 'https://www.weibo.com',
-    linkedin: 'https://www.linkedin.com',
-    bluesky: 'https://bsky.app/',
-},
+  argTypes: Object.fromEntries(platforms.map(([key, attribute, name]) => [
+    key,
+    attributeArg(`${attribute} attribute: profile URL. Clear it to hide the platform.`, { name, control: 'text' }),
+  ])),
+  args: Object.fromEntries(platforms.map(([key, , , url]) => [key, url])),
 
   render: (args) =>
-    `<ycl-social-links
-      x-twitter="${args.xTwitter}"
-      facebook="${args.facebook}"
-      youtube="${args.youtube}"
-      instagram="${args.instagram}"
-      weibo="${args.weibo}"
-      linkedin="${args.linkedin}"
-      bluesky="${args.bluesky}"
-    ></ycl-social-links>`,
+    `<ycl-social-links${attrs(Object.fromEntries(platforms.map(([key, attribute]) => [attribute, args[key]])))}></ycl-social-links>`,
 };
 
 export const Default = {};
-
-export const SomePlatforms = {
-  args: {
-    xTwitter: '',
-    weibo: '',
-    bluesky: '',
-  },
-};
