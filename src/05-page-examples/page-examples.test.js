@@ -40,6 +40,10 @@ describe("Page examples", () => {
 	});
 
 	it.each(examples)("$exportName is a generic page built from UICL components", ({ exportName, name, tags, pageTitles }) => {
+		// The story module's static imports have already registered every component by now, so an
+		// unregistered hyphenated tag is a stale or misspelled name that renders as an unknown element.
+		const notDefined = [...tags].filter((tag) => !customElements.get(tag));
+		expect(notDefined).toEqual([]);
 		expect(tags.size).toBeGreaterThanOrEqual(8);
 		expect(exportName).not.toMatch(contentTypeWords);
 		expect(name).not.toMatch(contentTypeWords);

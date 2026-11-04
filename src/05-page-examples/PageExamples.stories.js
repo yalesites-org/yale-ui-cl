@@ -92,7 +92,7 @@ const departmentHomepage = () => page("homepage-main", {
 	header: `<ycl-alert type="announcement">
 		<ycl-heading level="2" slot="heading">Spring open house registration is open</ycl-heading>
 		<p>Prospective students and families can sign up for a tour of the labs and teaching spaces.</p>
-		<text-link slot="link" href="#">Register for a visit</text-link>
+		<ycl-text-link slot="link" href="#">Register for a visit</ycl-text-link>
 	</ycl-alert>`,
 	main: `
 		<ycl-page-title display="visually-hidden">Department of Chemistry</ycl-page-title>
@@ -101,18 +101,18 @@ const departmentHomepage = () => page("homepage-main", {
 			<ycl-image slot="image"><img src="${bannerImage}" alt="Students working at a lab bench"></ycl-image>
 			<ycl-heading level="2" slot="heading">Discovery starts at the molecular level</ycl-heading>
 			<p>Our students and faculty work across chemistry, biology, physics, and materials science.</p>
-			<cta-link slot="actions" class="filled" href="#">Explore programs</cta-link>
-			<cta-link slot="actions" class="outline" href="#">Visit the department</cta-link>
+			<ycl-cta-link slot="actions" variant="filled" href="#">Explore programs</ycl-cta-link>
+			<ycl-cta-link slot="actions" variant="outline" href="#">Visit the department</ycl-cta-link>
 		</ycl-action-banner>
 
-		<ycl-quick-links theme="one" variation="promotional">
+		<ycl-quick-links theme="one" variant="promotional">
 			<ycl-heading level="2" slot="heading">Get started</ycl-heading>
 			<p slot="description">The pages people visit most often.</p>
 			<ycl-image slot="image"><img src="${bannerImage}" alt=""></ycl-image>
-			<cta-link class="outline" href="#">Undergraduate study</cta-link>
-			<cta-link class="outline" href="#">Graduate admissions</cta-link>
-			<cta-link class="outline" href="#">Faculty and research groups</cta-link>
-			<cta-link class="outline" href="#">Contact the department</cta-link>
+			<ycl-cta-link variant="outline" href="#">Undergraduate study</ycl-cta-link>
+			<ycl-cta-link variant="outline" href="#">Graduate admissions</ycl-cta-link>
+			<ycl-cta-link variant="outline" href="#">Faculty and research groups</ycl-cta-link>
+			<ycl-cta-link variant="outline" href="#">Contact the department</ycl-cta-link>
 		</ycl-quick-links>
 
 		${section("The department by the numbers", grid(departmentFacts.map(([icon, stat, label]) =>
@@ -122,7 +122,7 @@ const departmentHomepage = () => page("homepage-main", {
 			<ycl-image slot="image"><img src="${placeholder(900, 600)}" alt="Researchers reviewing results on a laptop in the lab"></ycl-image>
 			<p slot="overline">Research spotlight</p>
 			<ycl-heading level="2" slot="heading">Building tools to see proteins inside living cells</ycl-heading>
-			<text-link slot="ctas" href="#">Meet the research groups</text-link>
+			<ycl-text-link slot="ctas" href="#">Meet the research groups</ycl-text-link>
 			<p>Researchers in the department are developing new imaging techniques that show how proteins fold and move in real time.</p>
 		</ycl-text-with-image>
 
@@ -136,12 +136,12 @@ const departmentHomepage = () => page("homepage-main", {
 			<ycl-callout-item>
 				<ycl-heading level="2" slot="heading">Support the department</ycl-heading>
 				<p>Gifts fund student research, fellowships, and new teaching labs.</p>
-				<cta-link slot="link" class="outline" href="#">Make a gift</cta-link>
+				<ycl-cta-link slot="link" variant="outline" href="#">Make a gift</ycl-cta-link>
 			</ycl-callout-item>
 			<ycl-callout-item>
 				<ycl-heading level="2" slot="heading">Stay in touch</ycl-heading>
 				<p>Alumni can update their details and hear about reunions and talks.</p>
-				<cta-link slot="link" class="outline" href="#">Update your details</cta-link>
+				<ycl-cta-link slot="link" variant="outline" href="#">Update your details</ycl-cta-link>
 			</ycl-callout-item>
 		</ycl-callout>`,
 });
@@ -155,7 +155,7 @@ const programOverview = () => page("program-main", {
 
 		${contained(`<ycl-read-time target="#program-main"></ycl-read-time>`)}
 
-		<ycl-text variation="emphasized">
+		<ycl-text variant="emphasized">
 			<p>Environmental Studies brings together the natural sciences, social sciences, and humanities to understand and address environmental challenges.</p>
 		</ycl-text>
 
@@ -163,7 +163,7 @@ const programOverview = () => page("program-main", {
 			<ycl-image slot="image"><img src="${placeholder(900, 600)}" alt="Students taking water samples from a stream"></ycl-image>
 			<p slot="caption">Fieldwork is part of every year of the program.</p>
 			<p>The program is interdisciplinary by design. Students take a shared core of courses in ecology, policy, and environmental history, then build a concentration around a question that matters to them.</p>
-			<p>Fieldwork, internships, and a senior project connect classroom learning to real places and communities. Many students work with partners in New Haven and across Connecticut, and some travel further afield for summer research. Read more on the <text-link href="#">program requirements</text-link> page.</p>
+			<p>Fieldwork, internships, and a senior project connect classroom learning to real places and communities. Many students work with partners in New Haven and across Connecticut, and some travel further afield for summer research. Read more on the <ycl-text-link href="#">program requirements</ycl-text-link> page.</p>
 		</ycl-wrapped-image>
 
 		<ycl-pull-quote variant="bar-left" theme="one">
@@ -173,7 +173,7 @@ const programOverview = () => page("program-main", {
 
 		${section("How the program works", `<ycl-tabs theme="one" label="Program stages">
 			<ycl-tab label="First year">
-				<p>Take the introductory sequence and a first-year seminar. Meet with an <text-link href="#">adviser</text-link> to plan your path.</p>
+				<p>Take the introductory sequence and a first-year seminar. Meet with an <ycl-text-link href="#">adviser</ycl-text-link> to plan your path.</p>
 			</ycl-tab>
 			<ycl-tab label="Concentration">
 				<p>Choose a concentration such as climate, conservation, or environmental justice and take its core courses.</p>
@@ -193,13 +193,13 @@ const programOverview = () => page("program-main", {
 			<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="The director of undergraduate studies standing in a greenhouse"></ycl-image>
 			<p slot="overline">Faculty spotlight</p>
 			<ycl-heading level="2" slot="heading">Teaching ecology outdoors</ycl-heading>
-			<text-link slot="ctas" href="#">Meet the faculty</text-link>
+			<ycl-text-link slot="ctas" href="#">Meet the faculty</ycl-text-link>
 			<p>The program's introductory ecology course meets in the field for half of its sessions, from salt marshes to city parks.</p>
 		</ycl-content-spotlight-portrait>
 
 		<ycl-wrapped-callout alignment="left" theme="one">
 			<ycl-heading level="2" slot="callout">Declaring the major</ycl-heading>
-			<p slot="callout">Declare by the end of your sophomore year. <text-link href="#">See the steps</text-link>.</p>
+			<p slot="callout">Declare by the end of your sophomore year. <ycl-text-link href="#">See the steps</ycl-text-link>.</p>
 			<p>Most students declare after completing two introductory courses. Talk with the director of undergraduate studies about how courses you have already taken may count toward the major.</p>
 			<p>Students who study abroad can often count approved courses toward their concentration. Plan ahead so that your senior project timeline still works.</p>
 		</ycl-wrapped-callout>
@@ -234,18 +234,18 @@ const programOverview = () => page("program-main", {
 		<ycl-inline-message type="marketing" theme="one">
 			<ycl-heading level="2" slot="heading">Applications for summer fellowships are open</ycl-heading>
 			<p>Submit a short proposal and a faculty recommendation by February 15.</p>
-			<text-link slot="link" href="#">Apply for a fellowship</text-link>
+			<ycl-text-link slot="link" href="#">Apply for a fellowship</ycl-text-link>
 		</ycl-inline-message>
 
 		<ycl-link-group>
 			<ycl-heading level="2" slot="heading-one">For current students</ycl-heading>
 			<ycl-heading level="2" slot="heading-two">For prospective students</ycl-heading>
-			<text-link slot="links-one" href="#">Course requirements</text-link>
-			<text-link slot="links-one" href="#">Senior project guidelines</text-link>
-			<text-link slot="links-one" href="#">Internship opportunities</text-link>
-			<text-link slot="links-two" href="#">Why study the environment?</text-link>
-			<text-link slot="links-two" href="#">Talk to a student</text-link>
-			<text-link slot="links-two" href="#">Visit a class</text-link>
+			<ycl-text-link slot="links-one" href="#">Course requirements</ycl-text-link>
+			<ycl-text-link slot="links-one" href="#">Senior project guidelines</ycl-text-link>
+			<ycl-text-link slot="links-one" href="#">Internship opportunities</ycl-text-link>
+			<ycl-text-link slot="links-two" href="#">Why study the environment?</ycl-text-link>
+			<ycl-text-link slot="links-two" href="#">Talk to a student</ycl-text-link>
+			<ycl-text-link slot="links-two" href="#">Visit a class</ycl-text-link>
 		</ycl-link-group>
 
 		<ycl-related-content width="site">
@@ -256,8 +256,8 @@ const programOverview = () => page("program-main", {
 		</ycl-related-content>
 
 		${contained(`<ycl-taxonomy-display>
-			<ycl-taxonomy-display-item label="Audience"><text-link href="#">Undergraduates</text-link><text-link href="#">Prospective students</text-link></ycl-taxonomy-display-item>
-			<ycl-taxonomy-display-item label="Topic"><text-link href="#">Environment</text-link><text-link href="#">Policy</text-link></ycl-taxonomy-display-item>
+			<ycl-taxonomy-display-item label="Audience"><ycl-text-link href="#">Undergraduates</ycl-text-link><ycl-text-link href="#">Prospective students</ycl-text-link></ycl-taxonomy-display-item>
+			<ycl-taxonomy-display-item label="Topic"><ycl-text-link href="#">Environment</ycl-text-link><ycl-text-link href="#">Policy</ycl-text-link></ycl-taxonomy-display-item>
 		</ycl-taxonomy-display>`)}`,
 });
 
@@ -292,7 +292,7 @@ const directoryListing = () => page("directory-main", {
 		<ycl-page-title>Courses and Advising</ycl-page-title>
 
 		<ycl-text alignment="left">
-			<p>Find this year's courses, look up an adviser, and search the program handbook. Contact the <text-link href="#">program office</text-link> if you can't find what you need.</p>
+			<p>Find this year's courses, look up an adviser, and search the program handbook. Contact the <ycl-text-link href="#">program office</ycl-text-link> if you can't find what you need.</p>
 		</ycl-text>
 
 		${section("Courses this year", `<ycl-data-table label="Search courses" placeholder="Course, title or instructor">
@@ -312,7 +312,7 @@ const directoryListing = () => page("directory-main", {
 			<span slot="overline">${area}</span>
 			<ycl-heading level="3" slot="heading">${name}</ycl-heading>
 			<span slot="subheading">${title}</span>
-			<text-link slot="email" href="mailto:${email}">Email ${name}</text-link>
+			<ycl-text-link slot="email" href="mailto:${email}">Email ${name}</ycl-text-link>
 		</ycl-directory-listing-card>`), "16rem"))}
 
 		${section("Guides", grid(guides.map(([heading, text]) =>
@@ -328,13 +328,13 @@ const directoryListing = () => page("directory-main", {
 		<ycl-link-grid theme="one" line-treatment="default">
 			<ycl-heading level="2" slot="heading">Program office</ycl-heading>
 			<ycl-heading level="3" slot="heading-one">Forms</ycl-heading>
-			<text-link slot="links-one" href="#">Declare the major</text-link>
-			<text-link slot="links-one" href="#">Course substitution request</text-link>
+			<ycl-text-link slot="links-one" href="#">Declare the major</ycl-text-link>
+			<ycl-text-link slot="links-one" href="#">Course substitution request</ycl-text-link>
 			<ycl-heading level="3" slot="heading-two">Policies</ycl-heading>
-			<text-link slot="links-two" href="#">Academic integrity</text-link>
-			<text-link slot="links-two" href="#">Grading and credit</text-link>
-			<text-link slot="links-three" href="#">Office hours</text-link>
-			<text-link slot="links-three" href="#">Contact us</text-link>
+			<ycl-text-link slot="links-two" href="#">Academic integrity</ycl-text-link>
+			<ycl-text-link slot="links-two" href="#">Grading and credit</ycl-text-link>
+			<ycl-text-link slot="links-three" href="#">Office hours</ycl-text-link>
+			<ycl-text-link slot="links-three" href="#">Contact us</ycl-text-link>
 		</ycl-link-grid>`,
 });
 
