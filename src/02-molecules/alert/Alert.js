@@ -26,7 +26,7 @@ alertTemplate.innerHTML = `
 			<div class="alert__content">
 				<div class="alert__content-inner">
 					<div class="alert__heading"><slot name="heading"></slot></div>
-					<div class="alert__text" id="text"><slot></slot></div>
+					<div class="alert__text slotted-text" id="text"><slot></slot></div>
 				</div>
 				<div class="alert__link" id="link"><slot name="link"></slot></div>
 			</div>

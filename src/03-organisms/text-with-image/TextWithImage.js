@@ -18,7 +18,7 @@ textWithImageTemplate.innerHTML = `
 				<div class="text-with-image__overline"><slot name="overline"></slot></div>
 				<div class="text-with-image__heading"><slot name="heading"></slot></div>
 				<div class="text-with-image__subheading"><slot name="subheading"></slot></div>
-				<div class="text-with-image__text"><slot></slot></div>
+				<div class="text-with-image__text slotted-text"><slot></slot></div>
 				<div class="text-with-image__ctas"><slot name="ctas"></slot></div>
 			</div>
 			<div class="text-with-image__image">

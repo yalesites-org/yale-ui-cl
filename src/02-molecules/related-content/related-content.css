@@ -9,8 +9,10 @@
   display: none;
 }
 
+/* Page section spacing below; related content sets its own, larger top margin. */
 :host(ycl-related-content) {
   margin-block-start: var(--size-spacing-10);
+  margin-block-end: var(--spacing-page-section);
 }
 
 .related-content__inner {
