@@ -2,7 +2,11 @@
    slotted ycl-text-link (its <a> is in a closed shadow root):
    - --color-link-base, --color-link-hover, --color-link-visited-base, --color-link-visited-hover
    - --link-underline-thickness: 0 removes the underline
-   - --link-display and --link-padding: put padding on the <a> itself so all of it is clickable */
+   - --link-display and --link-padding: put padding on the <a> itself so all of it is clickable
+   - --color-text-shadow: the descender halo colour; set it to the background behind the link
+   The link-style attribute (reflected as data-link-style) picks one of the YaleSites styles:
+   underline (default), no-underline (the underline slides in on hover) or no-animation (a plain
+   text underline that drops on hover). */
 .link {
   /* The underline sits at the bottom of the link's own box; a fixed offset gets clipped when the
      font's line box is shorter than the offset. */
@@ -26,11 +30,32 @@
       color var(--animation-speed-default) ease-in-out;
   };
   background-size: 100% var(--thickness);
+  /* Descender halo: a text-shadow in the background colour, so the underline appears to break
+     around descenders. --color-text-shadow is inherited from whatever paints the surface behind
+     the link; without one the page background is assumed. */
+  --link-halo: var(--color-text-shadow, var(--color-background));
+  text-shadow:
+    0.03em 0 var(--link-halo),
+    -0.03em 0 var(--link-halo),
+    0 0.03em var(--link-halo),
+    0 -0.03em var(--link-halo),
+    0.06em 0 var(--link-halo),
+    -0.06em 0 var(--link-halo),
+    0.09em 0 var(--link-halo),
+    -0.09em 0 var(--link-halo),
+    0.12em 0 var(--link-halo),
+    -0.12em 0 var(--link-halo),
+    0.15em 0 var(--link-halo),
+    -0.15em 0 var(--link-halo);
 }
 
 .link svg {
   height: 1rem;
   width: 1rem;
+}
+
+.link__chevron {
+  padding-inline-start: var(--size-spacing-2);
 }
 
 .link:hover {
@@ -48,6 +73,42 @@
 
 .link:focus-visible {
   background-size: 0 var(--thickness);
+}
+
+/* no-underline: no underline until hovered, then it slides in. */
+.link[data-link-style="no-underline"] {
+  background-size: 0 var(--thickness);
+}
+
+.link[data-link-style="no-underline"]:hover {
+  background-size: 100% var(--thickness);
+}
+
+.link[data-link-style="no-underline"]:focus-visible {
+  background-size: 0 var(--thickness);
+}
+
+/* no-animation: a plain text underline that drops on hover, with no sliding bar and no halo. */
+.link[data-link-style="no-animation"] {
+  background-image: none;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  text-shadow: none;
+}
+
+.link[data-link-style="no-animation"]:hover {
+  text-decoration: none;
+}
+
+/* Components that paint their own coloured surface hand the halo that colour; these don't publish
+   one, so the halo is matched (or dropped) for them here rather than drawn in white. These rules
+   only take effect when base.css is also loaded in the document. */
+ycl-inline-message ycl-text-link {
+  --color-text-shadow: var(--color-inline-message-background);
+}
+
+ycl-action-banner ycl-text-link {
+  --color-text-shadow: transparent;
 }
 
 .link--external {

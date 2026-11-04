@@ -26,7 +26,7 @@ alertTemplate.innerHTML = `
 			<div class="alert__content">
 				<div class="alert__content-inner">
 					<div class="alert__heading"><slot name="heading"></slot></div>
-					<div class="alert__text" id="text"><slot></slot></div>
+					<div class="alert__text slotted-text" id="text"><slot></slot></div>
 				</div>
 				<div class="alert__link" id="link"><slot name="link"></slot></div>
 			</div>
@@ -88,13 +88,14 @@ export class Alert extends HTMLElement {
 
 	#render() {
 		const emergency = this.type === "emergency";
-		const iconName = { emergency: "triangle-exclamation", announcement: "circle-info" }[this.type];
+		// The outline (regular) icons, as in the YaleSites sprite.
+		const iconName = { emergency: "triangle-exclamation-regular", announcement: "circle-info-regular" }[this.type];
 		this.icon.innerHTML = iconName ? iconSvg(iconName) : "";
 		this.icon.hidden = !iconName;
 		this.alert.setAttribute("aria-label", emergency ? "Emergency alert" : "Announcement");
 
 		this.toggle.querySelector(".visually-hidden").textContent = emergency ? "Hide alert details" : "Close alert";
-		this.toggle.querySelector(".alert__toggle-icon").innerHTML = iconSvg(emergency ? "angle-down" : "xmark");
+		this.toggle.querySelector(".alert__toggle-icon").innerHTML = iconSvg(emergency ? "angle-down" : "xmark-regular");
 		// Only emergency alerts collapse; the others are dismissed, so there's nothing to expand.
 		if (emergency) {
 			this.toggle.setAttribute("aria-expanded", String(this.state !== "collapsed"));

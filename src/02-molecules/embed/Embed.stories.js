@@ -1,77 +1,64 @@
 import "./Embed";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+
 export default {
   title: 'Molecules/Embed',
   component: 'ycl-embed',
   argTypes: {
-    src: {control: 'text'},
-    label: {control: 'text'},
-    width: {
-      name: 'Width',
-      type: 'select',
-      options: ['max', 'site', 'highlight', 'content'],
-    },
-    type: {
+    src: attributeArg('URL loaded in the iframe. Without it, the default slot renders instead.', { control: 'text' }),
+    label: attributeArg('Accessible title of the iframe.', { control: 'text' }),
+    type: attributeArg('Kind of embed, which sets the iframe height and aspect ratio.', {
       name: 'Type',
-      type: 'select',
-      options: ['form', 'audio', 'map', 'calendar', 'video'],
-    },
-    loading: {
+      control: 'select',
+      options: ['form', 'audio', 'map', 'calendar', 'video', 'unknown'],
+    }),
+    width: attributeArg('Width of the embed. Defaults to site.', {
+      name: 'Width',
+      control: 'select',
+      options: ['max', 'site', 'highlight', 'content'],
+    }),
+    loading: attributeArg('Iframe loading. Defaults to lazy.', {
       name: 'Loading',
-      type: 'select',
+      control: 'select',
       options: ['lazy', 'eager'],
-    },
+    }),
+    allowfullscreen: attributeArg('Lets the iframe go full screen.', { control: 'boolean' }),
+    content: slotArg('Script-driven embed markup (default slot), shown when there is no src. See the Script Embed story.', {
+      control: false,
+    }),
   },
   args: {
     src: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/320687463',
     label: 'Example SoundCloud Track',
-    width: 'site',
     type: 'audio',
+    width: 'site',
     loading: 'lazy',
+    allowfullscreen: false,
   },
 
   render: (args) =>
-    `<ycl-embed src="${args.src}" label="${args.label}" width="${args.width}" type="${args.type}" loading="${args.loading}"></ycl-embed>`,
+    `<ycl-embed${attrs({
+      src: args.src,
+      label: args.label,
+      width: args.width,
+      type: args.type,
+      loading: args.loading,
+      allowfullscreen: args.allowfullscreen,
+    })}></ycl-embed>`,
 };
 
 export const Default = {};
 
-export const MicrosoftForms = {
-  args: {
-    src: 'https://forms.office.com/Pages/ResponsePage.aspx?id=u76M3Tkh-E20EU4-h6vrXJ-OMhrDFtBEifIUjjt2g_xURUVBU1IyUVlTVFFFNjJQQzJXM1pNMVozVi4u&embed=true',
-    label: 'Example Microsoft Form',
-    type: 'form',
-  },
-};
-
-export const GoogleMaps = {
-  args: {
-    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5993.31404257508!2d-72.92491802386455!3d41.316324371308916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e7d9b6cd624945%3A0xae34a2c4b4d30427!2sYale%20University!5e0!3m2!1sen!2sca!4v1746124034200!5m2!1sen!2sca',
-    label: 'Map of Yale University',
-    type: 'map',
-  },
-};
-
-export const GoogleCalendar = {
-  args: {
-    src: 'https://calendar.google.com/calendar/embed?src=en.usa%23holiday%40group.v.calendar.google.com&ctz=America%2FNew_York',
-    label: 'Example Google Calendar',
-    type: 'calendar',
-  },
-};
-
-export const Video = {
-  args: {
-    src: 'https://www.youtube.com/embed/GL5XhmKCXo0',
-    label: 'YouTube video player',
-    type: 'video',
-    width: 'content',
-  },
-};
-
-// Script-driven embeds go in the default slot instead of src.
 export const ScriptEmbed = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Script-driven embeds (X, Instagram, Bluesky) put a blockquote and script in the default slot instead of using src. Controls only set attributes, so they cannot build this slotted markup.',
+      },
+    },
+  },
   render: (args) =>
-    `<ycl-embed width="${args.width}">
+    `<ycl-embed${attrs({ width: args.width })}>
       <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Yale scientists find a common weed harbors important clues about how to create drought resistant crops in a world beset by climate change. <a href="https://twitter.com/yale_eeb">@yale_eeb</a></p>&mdash; Yale University (@Yale) <a href="https://twitter.com/Yale/status/1586724355089776640">October 30, 2022</a></blockquote>
       <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </ycl-embed>`,

@@ -23,7 +23,8 @@ const unescapeStringSource = (code) => {
 };
 
 const preview = {
-  // A Docs page for every component, built from the manifest entry for its component tag.
+  // A Docs page for every component, built from the manifest entry for its component tag: its
+  // attributes, slots and events.
   tags: ['autodocs'],
   parameters: {
     // Axe violations fail the story's test (npm test) instead of only being reported.
@@ -35,7 +36,7 @@ const preview = {
       // keeping each file's own story order. Storybook serializes this
       // function, so it can't reference anything outside its body.
       storySort: (a, b) => {
-        const tiers = ['Configure your project', 'Tokens', 'Atoms', 'Molecules', 'Organisms', 'Templates', 'Pages'];
+        const tiers = ['Introduction', 'Tokens', 'Atoms', 'Molecules', 'Organisms', 'Templates', 'Pages'];
         const rank = (title) => {
           const i = tiers.indexOf(title.split('/')[0]);
           return i === -1 ? tiers.length : i;

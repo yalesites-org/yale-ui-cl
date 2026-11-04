@@ -4,3 +4,61 @@
 @import "normalize.css/normalize.css" layer(reset);
 @import "../00-tokens/typography/typography.css" layer(tokens);
 @import "./utility.css" layer(util);
+
+/* A page-level box-sizing rule can't reach into shadow DOM, so each shadow root gets its own,
+   following YaleSites: border-box on the host, inherited by everything inside. Component CSS can
+   still override it, as this is the lowest layer. */
+@layer reset {
+  :host {
+    box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  /* YaleSites' layout gutter (--size-spacing-site-gutter) and page section spacing
+     (--spacing-page-section), which aren't tokens, for components to use. Components can override
+     them, as this is the lowest layer. 768px is --break-m, 992px --break-l, 1200px --break-xl,
+     1400px --break-2xl. */
+  :host {
+    --size-spacing-site-gutter: var(--size-spacing-5);
+    --spacing-page-section: var(--size-spacing-8);
+  }
+
+  @media (min-width: 768px) {
+    :host { --size-spacing-site-gutter: var(--size-spacing-6); }
+  }
+
+  @media (min-width: 992px) {
+    :host {
+      --size-spacing-site-gutter: var(--size-spacing-7);
+      --spacing-page-section: var(--size-spacing-10);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    :host { --size-spacing-site-gutter: var(--size-spacing-8); }
+  }
+
+  @media (min-width: 1400px) {
+    :host { --size-spacing-site-gutter: var(--size-spacing-10); }
+  }
+
+  /* Slotted text (add the class to the slot's wrapper): paragraphs take YaleSites' paragraph
+     spacing rather than the browser's, and the first and last children sit flush with the
+     wrapper. ::slotted() only reaches top-level slotted elements. */
+  .slotted-text ::slotted(p) {
+    margin-block: 0 var(--font-spacing-paragraph);
+  }
+
+  .slotted-text ::slotted(:first-child) {
+    margin-top: 0;
+  }
+
+  .slotted-text ::slotted(:last-child) {
+    margin-bottom: 0;
+  }
+}
