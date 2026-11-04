@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import lockTokens from "./postcss/lock-tokens.js";
 
 // One ES entry per component module, named after the tag of the class the file is named for
-// (Tabs.js -> ycl-tabs, not ycl-tab) minus the ycl-/yc- prefix, so `import "yale-ui-cl/accordion"`
+// (Tabs.js -> ycl-tabs, not ycl-tab) minus the ycl- prefix, so `import "yale-ui-cl/accordion"`
 // registers ycl-accordion and ycl-accordion-item. These names are public import paths.
 function componentEntries() {
 	const entries = {};
@@ -14,7 +14,7 @@ function componentEntries() {
 		);
 		if (!tags.size) continue;
 		const tag = tags.get(basename(file, ".js")) ?? [...tags.values()][0];
-		const name = tag.replace(/^ycl?-/, "");
+		const name = tag.replace(/^ycl-/, "");
 		if (entries[name]) throw new Error(`Entry name "${name}" is used by both ${entries[name]} and ${file}`);
 		entries[name] = resolve(import.meta.dirname, file);
 	}

@@ -24,7 +24,7 @@ export default {
 },
   args: {
     alt: 'A 16 by 9 image',
-    caption: 'This is the <text-link href="#">caption</text-link> for the 16:9 image above.',
+    caption: 'This is the <ycl-text-link href="#">caption</ycl-text-link> for the 16:9 image above.',
     width: 'content',
     alignment: 'center',
 },
