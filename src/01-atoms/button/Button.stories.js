@@ -12,24 +12,27 @@ export default {
       options: ['button', 'submit', 'reset'],
       mapping: { button: undefined },
     }),
-    fill: attributeArg('CTA fill, set as a class.', { name: 'Fill Type', control: 'select', options: ['outline', 'filled'] }),
-    secondary: attributeArg('Secondary color scheme (class "secondary").', { control: 'boolean' }),
-    size: attributeArg('Size, set as a class.', {
+    variant: attributeArg('variant: CTA fill style. "secondary" is a neutral grey outline.', {
+      name: 'Variant',
+      control: 'select',
+      options: ['outline', 'filled', 'secondary'],
+    }),
+    size: attributeArg('size: padding and font size; leave unset for the default size.', {
       control: 'select',
       options: ['default', 'small', 'medium', 'large'],
       mapping: { default: undefined },
     }),
-    radius: attributeArg('Corner radius, set as a class.', {
+    radius: attributeArg('radius: corner radius; square corners need no attribute.', {
       name: 'Radius Type',
       control: 'select',
-      options: ['none', 'radius-soft', 'radius-pill'],
+      options: ['none', 'soft', 'pill'],
       mapping: { none: undefined },
     }),
-    animate: attributeArg('Hover animation, set as a class.', {
+    animate: attributeArg('animate: hover animation. Fade is the default and needs no attribute; "none" turns it off.', {
       name: 'Animation Type',
       control: 'select',
-      options: ['animate-fade', 'animate-none', 'animate-rise', 'animate-wipe'],
-      mapping: { 'animate-fade': undefined },
+      options: ['none', 'fade', 'rise', 'wipe'],
+      mapping: { fade: undefined },
     }),
     controlType: attributeArg('control-type="dropdown" adds a dropdown arrow and always renders a button.', {
       name: 'Control Type',
@@ -50,29 +53,29 @@ export default {
     content: 'Show more events',
     href: '',
     type: 'button',
-    fill: 'outline',
-    secondary: false,
+    variant: 'outline',
     size: 'default',
+    animate: 'fade',
     radius: 'none',
-    animate: 'animate-fade',
     controlType: 'default',
     expanded: 'none',
     label: '',
     disabled: false,
   },
 
-  render: (args) => {
-    const classes = [args.fill, args.secondary && 'secondary', args.size, args.radius, args.animate].filter(Boolean).join(' ');
-    return `<ycl-button${attrs({
-      class: classes,
+  render: (args) =>
+    `<ycl-button${attrs({
+      variant: args.variant,
+      size: args.size,
+      radius: args.radius,
+      animate: args.animate,
       href: args.href,
       type: args.type,
       'control-type': args.controlType,
       expanded: args.expanded,
       label: args.label,
       disabled: args.disabled,
-    })}>${args.content ?? ''}</ycl-button>`;
-  },
+    })}>${args.content ?? ''}</ycl-button>`,
 };
 
 export const Default = {};
@@ -87,9 +90,9 @@ export const InAForm = {
   },
   render: () =>
     `<form onsubmit="event.preventDefault(); this.querySelector('output').value = 'Submitted';">
-      <text-input name="email" type="email">
+      <ycl-text-input name="email" type="email">
         <span slot="label">Email address</span>
-      </text-input>
+      </ycl-text-input>
       <ycl-button type="submit">Subscribe</ycl-button>
       <ycl-button type="reset">Clear</ycl-button>
       <output role="status"></output>

@@ -3,7 +3,7 @@ import { slotArg } from "../../../.storybook/story-helpers.js";
 
 export default {
   title: 'Atoms/Table',
-  component: 'yc-table',
+  component: 'ycl-table',
   argTypes: {
     caption: slotArg('Table caption, shown below the table. Omitted when empty.', { control: 'text' }),
     rowHeaders: slotArg('Make the first cell of each body row a row header (`<th scope="row">`).', { name: 'Row Headers', control: 'boolean' }),
@@ -28,7 +28,7 @@ export default {
             <td>Content ${i + 1}.3</td>
           </tr>`;
     }).join('');
-    return `<yc-table>
+    return `<ycl-table>
       <table>${args.caption ? `
         <caption>${args.caption}</caption>` : ''}
         <thead>
@@ -41,7 +41,7 @@ export default {
         <tbody>${rows}
         </tbody>
       </table>
-    </yc-table>`;
+    </ycl-table>`;
   },
 };
 

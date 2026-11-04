@@ -42,7 +42,7 @@ export default {
   render: (args) => withGlobalTheme(args.globalTheme, `
       <ycl-taxonomy-display${attrs({ theme: args.theme, width: args.width })}>
         ${items.map((item) => `<ycl-taxonomy-display-item label="${item.label}">
-          ${args.showTaxonomy ? item.terms.map((term) => `<text-link href="#">${term}</text-link>`).join('') : ''}
+          ${args.showTaxonomy ? item.terms.map((term) => `<ycl-text-link href="#">${term}</ycl-text-link>`).join('') : ''}
         </ycl-taxonomy-display-item>`).join('')}
       </ycl-taxonomy-display>`),
 };

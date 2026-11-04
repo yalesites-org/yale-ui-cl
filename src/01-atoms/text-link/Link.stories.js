@@ -3,7 +3,7 @@ import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.
 
 export default {
   title: 'Atoms/Text Link',
-  component: 'text-link',
+  component: 'ycl-text-link',
   argTypes: {
     URL: attributeArg('href: link destination. External links and file downloads (e.g. .pdf) get an icon and a screen-reader note.', {
       control: 'text',
@@ -12,17 +12,15 @@ export default {
       control: 'select',
       options: ['', '_self', '_blank'],
     }),
-    variant: attributeArg('class: variant names, each added to the inner link as `link--<name>`. Omitted when empty.', { control: 'text' }),
     label: slotArg('Link text (default slot).', { control: 'text' }),
   },
   args: {
     label: 'Yale HomePage',
     URL: 'https://www.yale.edu',
     target: '',
-    variant: '',
   },
   render: (args) =>
-    `<text-link${attrs({ class: args.variant, href: args.URL, target: args.target })}>${args.label ?? ''}</text-link>`,
+    `<ycl-text-link${attrs({ href: args.URL, target: args.target })}>${args.label ?? ''}</ycl-text-link>`,
 };
 
 export const Default = {};

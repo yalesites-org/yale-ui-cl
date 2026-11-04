@@ -12,9 +12,9 @@ const patternImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:
 const links = (args) => {
   if (args.linkStyle === 'none') return '';
   const [first, second] = args.linkStyle === 'text-link'
-    ? ['<text-link slot="actions" href="https://google.com">', '<text-link slot="actions" href="https://yale.edu">']
-    : ['<cta-link slot="actions" class="filled" href="https://google.com">', '<cta-link slot="actions" class="outline" href="https://yale.edu">'];
-  const tag = args.linkStyle === 'text-link' ? 'text-link' : 'cta-link';
+    ? ['<ycl-text-link slot="actions" href="https://google.com">', '<ycl-text-link slot="actions" href="https://yale.edu">']
+    : ['<ycl-cta-link slot="actions" variant="filled" href="https://google.com">', '<ycl-cta-link slot="actions" variant="outline" href="https://yale.edu">'];
+  const tag = args.linkStyle === 'text-link' ? 'ycl-text-link' : 'ycl-cta-link';
   return [
     args.linkContent ? `${first}${args.linkContent}</${tag}>` : '',
     args.linkContentTwo ? `${second}${args.linkContentTwo}</${tag}>` : '',
@@ -55,7 +55,7 @@ export default {
     heading: slotArg('Banner heading (slot="heading"). Omitted when empty.', { control: 'text' }),
     snippet: slotArg('Banner text (default slot). Omitted when empty.', { control: 'text' }),
     image: slotArg('Background image (slot="image"), usually a ycl-image.', { control: false }),
-    linkStyle: slotArg('What goes in slot="actions": cta-link buttons, text links, or nothing.', {
+    linkStyle: slotArg('What goes in slot="actions": ycl-cta-link buttons, ycl-text-link links, or nothing.', {
       name: 'Link Style',
       control: 'select',
       options: ['cta', 'text-link', 'none'],

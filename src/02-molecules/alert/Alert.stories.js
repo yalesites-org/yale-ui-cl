@@ -9,7 +9,7 @@ const alertMarkup = (args) =>
   `<ycl-alert${attrs({ type: args.type, state: args.state, 'alert-id': args.alertId })}>${args.heading ? `
       <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}${args.content ? `
       <p>${args.content}</p>` : ''}${args.linkContent ? `
-      <text-link slot="link" href="https://www.yale.edu">${args.linkContent}</text-link>` : ''}
+      <ycl-text-link slot="link" href="https://www.yale.edu">${args.linkContent}</ycl-text-link>` : ''}
     </ycl-alert>`;
 
 export default {

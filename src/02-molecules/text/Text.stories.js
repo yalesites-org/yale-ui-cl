@@ -7,9 +7,9 @@ const sampleContent = `
   <p>“From scholars and researchers to politicians and athletes, we have produced some of the world’s most influential leaders since the school’s inception in 1822. To date, we have put forward more presidents and deans of colleges, universities and seminaries, as well as heads of denominations, than any other divinity school or seminary in the United States.”</p>
   <h2>Admissions & Financial Aid</h2>
   <h3>Yale Divinity School - Inspiring the Minds That Inspire the World!</h3>
-  <p>Yale University Divinity School is a <text-link href="#">graduate professional school</text-link> within a world-class research university and is both a rigorous academic institution and an ecumenical community of faith. We educate and prepare the scholars, ministers, and leaders of the future.</p>
+  <p>Yale University Divinity School is a <ycl-text-link href="#">graduate professional school</ycl-text-link> within a world-class research university and is both a rigorous academic institution and an ecumenical community of faith. We educate and prepare the scholars, ministers, and leaders of the future.</p>
   <h4>Tuition and Financial Aid</h4>
-  <p><text-link href="https://www.yale.edu">Information</text-link> on the cost to attend, applying for financial aid, international student financial aid, fees, and more.</p>
+  <p><ycl-text-link href="https://www.yale.edu">Information</ycl-text-link> on the cost to attend, applying for financial aid, international student financial aid, fees, and more.</p>
   <h5>Financial planning with iGrad</h5>
   <p>A powerful online organizational tool to assist you in planning for your financial needs now and in the future.</p>
   <h6>How does it work?</h6>
@@ -37,8 +37,8 @@ export default {
   title: 'Molecules/Text',
   component: 'ycl-text',
   argTypes: {
-    variation: attributeArg('emphasized sets the text in a highlighted block.', {
-      name: 'Text Field Variation',
+    variant: attributeArg('emphasized sets the text in a highlighted block.', {
+      name: 'Text Field Variant',
       control: 'select',
       options: ['default', 'emphasized'],
       mapping: { default: undefined },
@@ -57,13 +57,13 @@ export default {
     content: slotArg('Rich text (headings, paragraphs, lists, code) in the default slot.', { control: false }),
   },
   args: {
-    variation: 'default',
+    variant: 'default',
     alignment: 'center',
     width: 'default',
   },
 
   render: (args) =>
-    `<ycl-text${attrs({ variation: args.variation, alignment: args.alignment, width: args.width })}>${sampleContent}</ycl-text>`,
+    `<ycl-text${attrs({ variant: args.variant, alignment: args.alignment, width: args.width })}>${sampleContent}</ycl-text>`,
 };
 
 export const Default = {};

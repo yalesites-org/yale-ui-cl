@@ -44,8 +44,8 @@ export default {
 			args.heading ? `<ycl-heading level="3" slot="heading">${args.heading}</ycl-heading>` : "",
 			args.subheading ? `<span slot="subheading">${args.subheading}</span>` : "",
 			args.snippet ? `<p>${args.snippet}</p>` : "",
-			args.email ? `<text-link slot="email" href="mailto:${args.email}">Email</text-link>` : "",
-			args.phone ? `<text-link slot="phone" href="tel:${args.phone.replace(/[^\d+]/g, "")}">${args.phone}</text-link>` : "",
+			args.email ? `<ycl-text-link slot="email" href="mailto:${args.email}">Email</ycl-text-link>` : "",
+			args.phone ? `<ycl-text-link slot="phone" href="tel:${args.phone.replace(/[^\d+]/g, "")}">${args.phone}</ycl-text-link>` : "",
 		].filter(Boolean);
 		return `<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-8);">
 			<li>

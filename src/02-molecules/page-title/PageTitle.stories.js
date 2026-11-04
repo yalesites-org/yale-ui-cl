@@ -14,7 +14,7 @@ export default {
       control: 'select',
       options: ['site', 'highlight', 'content', 'max'],
     }),
-    variation: attributeArg('variation="event" lays the title out beside an image (slot="image").', {
+    variant: attributeArg('variant="event" lays the title out beside an image (slot="image").', {
       control: 'select',
       options: ['default', 'event'],
       mapping: { default: undefined },
@@ -27,7 +27,7 @@ export default {
     heading: slotArg('Heading text (default slot), always rendered as the page\'s h1.', { control: 'text' }),
     overline: slotArg('Text above the heading (slot="overline"). Omitted when empty.', { control: 'text' }),
     showMeta: slotArg('Byline and date (slot="meta").', { name: 'Meta', control: 'boolean' }),
-    showImage: slotArg('Image (slot="image"), used by the event variation.', { name: 'Image', control: 'boolean' }),
+    showImage: slotArg('Image (slot="image"), used by the event variant.', { name: 'Image', control: 'boolean' }),
     socialLinks: slotArg('Share links (slot="social-links").', { name: 'Social Links', control: 'boolean' }),
     otherSlots: slotArg('slot="extra" sits under the heading; slot="meta-extra" under the meta.', {
       name: 'extra, meta-extra',
@@ -39,7 +39,7 @@ export default {
     prefix: '',
     overline: '',
     width: 'site',
-    variation: 'default',
+    variant: 'default',
     display: 'default',
     showMeta: true,
     showImage: false,
@@ -50,7 +50,7 @@ export default {
     `<ycl-page-title${attrs({
       width: args.width,
       prefix: args.prefix,
-      variation: args.variation,
+      variant: args.variant,
       display: args.display,
     })}>
       ${args.heading ?? ''}
@@ -59,8 +59,8 @@ export default {
       ${args.showMeta ? `<span slot="meta">By Charlyn Paradis</span>
       <ycl-date-time slot="meta" start="2022-01-25T12:00:00" format="date"></ycl-date-time>` : ''}
       ${args.socialLinks ? `<div slot="social-links" style="display: flex; gap: 1rem;">
-        <text-link href="https://www.facebook.com/sharer/sharer.php">Share on Facebook</text-link>
-        <text-link href="https://www.linkedin.com/sharing/share-offsite/">Share on LinkedIn</text-link>
+        <ycl-text-link href="https://www.facebook.com/sharer/sharer.php">Share on Facebook</ycl-text-link>
+        <ycl-text-link href="https://www.linkedin.com/sharing/share-offsite/">Share on LinkedIn</ycl-text-link>
       </div>` : ''}
     </ycl-page-title>`,
 };

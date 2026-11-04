@@ -8,8 +8,8 @@ import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } fro
 const link = (args) => {
   if (!args.linkText) return '';
   return args.linkType === 'link'
-    ? `<text-link slot="link" href="https://www.yale.edu">${args.linkText}</text-link>`
-    : `<cta-link slot="link" class="outline" href="https://www.yale.edu">${args.linkText}</cta-link>`;
+    ? `<ycl-text-link slot="link" href="https://www.yale.edu">${args.linkText}</ycl-text-link>`
+    : `<ycl-cta-link slot="link" variant="outline" href="https://www.yale.edu">${args.linkText}</ycl-cta-link>`;
 };
 
 const item = (args) => `
@@ -51,7 +51,7 @@ export default {
     heading: slotArg('Item heading (slot="heading" on ycl-callout-item). Omitted when empty.', { control: 'text' }),
     text: slotArg('Item text (default slot of ycl-callout-item). Omitted when empty.', { control: 'text' }),
     linkText: slotArg('Item link (slot="link" on ycl-callout-item). Omitted when empty.', { name: 'Link Text', control: 'text' }),
-    linkType: slotArg('Whether the item link is a cta-link or a text-link.', {
+    linkType: slotArg('Whether the item link is a ycl-cta-link (variant="outline") or a ycl-text-link.', {
       name: 'Link Type',
       control: 'select',
       options: ['cta', 'link'],

@@ -22,7 +22,7 @@ export default {
       options: ['unordered', 'ordered'],
     }),
     nested: slotArg('Nest lists inside the second item (ignored for taxonomy lists, which are flat).', { control: 'boolean' }),
-    type: attributeArg('class="categories" or class="tags" renders the list inline as a taxonomy list with dividers.', {
+    type: attributeArg('type="categories" or type="tags" renders the list inline as a taxonomy list with dividers.', {
       name: 'Taxonomy Type',
       control: 'select',
       options: ['none', 'categories', 'tags'],
@@ -41,7 +41,7 @@ export default {
     const items = (args.items ?? []).map((item, index) =>
       `<li>${item}${args.nested && !args.type && index === 1 ? nestedList(tag) : ''}</li>`,
     );
-    return `<ycl-list${attrs({ class: args.type })}>
+    return `<ycl-list${attrs({ type: args.type })}>
   <${tag}>
     ${items.join('\n    ')}
   </${tag}>

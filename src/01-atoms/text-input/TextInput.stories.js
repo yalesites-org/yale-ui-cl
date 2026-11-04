@@ -3,7 +3,7 @@ import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.
 
 export default {
 	title: 'Atoms/Text Input',
-	component: 'text-input',
+	component: 'ycl-text-input',
 	argTypes: {
 		type: attributeArg('Input type. Unsupported types fall back to text.', {
 			control: 'select',
@@ -13,7 +13,7 @@ export default {
 		value: attributeArg('Current value.', { control: 'text' }),
 		placeholder: attributeArg('Placeholder text shown while the field is empty.', { control: 'text' }),
 		autocomplete: attributeArg('Autocomplete hint passed to the inner input (e.g. "name", "email").', { control: 'text' }),
-		required: attributeArg('Adds the "required" class: the field is invalid while empty and its label is marked required.', { control: 'boolean' }),
+		required: attributeArg('required: the field is invalid while empty and its label is marked required.', { control: 'boolean' }),
 		disabled: attributeArg('Disables the field.', { control: 'boolean' }),
 		label: slotArg('Field label (slot="label").', { control: 'text' }),
 		instructions: slotArg('Help text under the label (slot="instructions"). Omitted when empty.', { control: 'text' }),
@@ -32,19 +32,19 @@ export default {
 		errors: '',
 	},
 	render: (args) =>
-		`<text-input${attrs({
+		`<ycl-text-input${attrs({
 			type: args.type,
 			name: args.name,
 			value: args.value,
 			placeholder: args.placeholder,
 			autocomplete: args.autocomplete,
-			class: args.required && 'required',
+			required: args.required,
 			disabled: args.disabled,
 		})}>
 	<span slot="label">${args.label ?? ''}</span>${args.instructions ? `
 	<span slot="instructions">${args.instructions}</span>` : ''}${args.errors ? `
 	<span slot="errors">${args.errors}</span>` : ''}
-</text-input>`,
+</ycl-text-input>`,
 };
 
 export const Default = {};
