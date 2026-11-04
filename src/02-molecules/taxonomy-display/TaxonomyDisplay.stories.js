@@ -1,6 +1,7 @@
 import "./TaxonomyDisplay";
 import "../../01-atoms/text-link/Link";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 const items = [
   {label: 'Audience', terms: ['Undergraduates', 'Graduates']},
@@ -15,11 +16,10 @@ export default {
     layout: 'fullscreen',
   },
   argTypes: {
-    theme: attributeArg('Background theme.', {
-      name: 'Component Theme',
-      control: 'select',
-      options: ['default', 'one', 'two', 'three', 'four', 'five', 'six'],
-      mapping: { default: undefined },
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
+      name: 'Color Option',
+      options: ['default', 'primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-taxonomy-display') },
     }),
     width: attributeArg('Maximum width of the block; site is the default.', {
       control: 'select',
@@ -30,21 +30,19 @@ export default {
       name: 'Show Taxonomy',
       control: 'boolean',
     }),
-    globalTheme: globalThemeArgType,
   },
   args: {
     theme: 'default',
     width: 'site',
-    globalTheme: 'one',
     showTaxonomy: true,
   },
 
-  render: (args) => withGlobalTheme(args.globalTheme, `
+  render: (args) => `
       <ycl-taxonomy-display${attrs({ theme: args.theme, width: args.width })}>
         ${items.map((item) => `<ycl-taxonomy-display-item label="${item.label}">
           ${args.showTaxonomy ? item.terms.map((term) => `<ycl-text-link href="#">${term}</ycl-text-link>`).join('') : ''}
         </ycl-taxonomy-display-item>`).join('')}
-      </ycl-taxonomy-display>`),
+      </ycl-taxonomy-display>`,
 };
 
 export const Default = {};

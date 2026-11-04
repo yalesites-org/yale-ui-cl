@@ -20,6 +20,14 @@ const names = (el) => [...el.table.tBodies[0].rows].map((row) => row.cells[0].te
 const visible = (el) => [...el.table.tBodies[0].rows].filter((row) => !row.hidden).map((row) => row.cells[0].textContent);
 const buttons = (el) => [...el.table.tHead.querySelectorAll("button")];
 const status = (el) => shadowOf(el).querySelector('[role="status"]').textContent;
+const frame = () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+const region = (el) => shadowOf(shadowOf(el).querySelector("ycl-table")).querySelector(".table-wrapper");
+const wide = (caption) => `
+	<table>
+		${caption}
+		<thead><tr>${"<th>Heading</th>".repeat(10)}</tr></thead>
+		<tbody><tr>${"<td>Cell</td>".repeat(10)}</tr></tbody>
+	</table>`;
 
 describe("ycl-data-table", () => {
 	it("turns sortable headers into buttons, keeping their content", () => {
@@ -106,5 +114,24 @@ describe("ycl-data-table", () => {
 		await settle();
 		expect(names(el)).toEqual(["Aaron", "alice", "Bob", "Charlie", "Zed"]);
 		expect(visible(el)).toEqual(["Aaron", "Bob", "Charlie"]);
+	});
+
+	it("names the scroll region of a wide table after its caption", async () => {
+		const el = mount(`<ycl-data-table style="display: block; width: 300px">${wide("<caption>Results</caption>")}</ycl-data-table>`);
+		await frame();
+		const scroller = region(el);
+		expect(scroller.getAttribute("role")).toBe("region");
+		expect(scroller.getAttribute("aria-label")).toBe("Results");
+
+		el.table.caption.textContent = "Updated results";
+		await frame();
+		expect(scroller.getAttribute("aria-label")).toBe("Updated results");
+	});
+
+	it("falls back to naming the scroll region Table when there is no caption", async () => {
+		const el = mount(`<ycl-data-table style="display: block; width: 300px">${wide("")}</ycl-data-table>`);
+		await frame();
+		expect(region(el).getAttribute("role")).toBe("region");
+		expect(region(el).getAttribute("aria-label")).toBe("Table");
 	});
 });

@@ -1,5 +1,5 @@
 import "./TextCopyButton";
-import { slotArg, eventArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+import { slotArg, eventArg } from "../../../.storybook/story-helpers.js";
 
 export default {
   title: 'Atoms/Text Copy Button',
@@ -18,13 +18,11 @@ export default {
       description: 'Basic theme of the section around the button (set on a wrapper).',
       table: { category: 'Page context' },
     },
-    globalTheme: globalThemeArgType,
   },
   args: {
     text: 'person@example.com',
     content: '(copy)',
     basicTheme: 'none',
-    globalTheme: 'one',
   },
 
   render: (args) => {
@@ -32,13 +30,13 @@ export default {
     const section = args.basicTheme
       ? `data-basic-theme="${args.basicTheme}" style="padding: 1rem; background-color: var(--basic-themes-${args.basicTheme}-background); color: var(--basic-themes-${args.basicTheme}-text);"`
       : 'style="padding: 1rem;"';
-    return withGlobalTheme(args.globalTheme, `
+    return `
       <div ${section}>
         <ycl-text-copy-button>
           <span slot="text">${args.text ?? ''}</span>
           ${args.content ?? ''}
         </ycl-text-copy-button>
-      </div>`);
+      </div>`;
   },
 };
 
@@ -52,10 +50,9 @@ export const RichText = {
       },
     },
   },
-  render: (args) =>
-    withGlobalTheme(args.globalTheme, `
-      <ycl-text-copy-button>
-        <div slot="text"><p>Adams, J. (2026). <em>The Department of Government Improvement</em>. Yale Institution for Social and Policy Studies.</p></div>
-        Copy citation
-      </ycl-text-copy-button>`),
+  render: () =>
+    `<ycl-text-copy-button>
+      <div slot="text"><p>Adams, J. (2026). <em>The Department of Government Improvement</em>. Yale Institution for Social and Policy Studies.</p></div>
+      Copy citation
+    </ycl-text-copy-button>`,
 };

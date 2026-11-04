@@ -23,7 +23,7 @@ export default {
 		subheading: textSlot("Title (slot=\"subheading\")."),
 		snippet: textSlot("Text (default slot)."),
 		email: textSlot("Email address, rendered as a mailto link (slot=\"email\")."),
-		phone: textSlot("Phone number, rendered as a tel link (slot=\"phone\")."),
+		phone: textSlot("Phone number, shown as plain text (slot=\"phone\")."),
 	},
 	args: {
 		overline: "Humanities",
@@ -45,7 +45,7 @@ export default {
 			args.subheading ? `<span slot="subheading">${args.subheading}</span>` : "",
 			args.snippet ? `<p>${args.snippet}</p>` : "",
 			args.email ? `<ycl-text-link slot="email" href="mailto:${args.email}">Email</ycl-text-link>` : "",
-			args.phone ? `<ycl-text-link slot="phone" href="tel:${args.phone.replace(/[^\d+]/g, "")}">${args.phone}</ycl-text-link>` : "",
+			args.phone ? `<p slot="phone">${args.phone}</p>` : "",
 		].filter(Boolean);
 		return `<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-8);">
 			<li>

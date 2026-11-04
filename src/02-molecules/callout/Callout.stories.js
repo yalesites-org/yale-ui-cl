@@ -3,7 +3,8 @@ import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/text-link/Link";
 import overlayImage from "../../assets/avif-test-image.avif";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 const link = (args) => {
   if (!args.linkText) return '';
@@ -19,10 +20,10 @@ const item = (args) => `
     ${link(args)}
   </ycl-callout-item>`;
 
-const callout = (args, items) => withGlobalTheme(args.globalTheme, `
+const callout = (args, items) => `
       <ycl-callout${attrs({ theme: args.theme, alignment: args.alignment, 'overlay-image': args.overlay && overlayImage })}>
         ${items}
-      </ycl-callout>`);
+      </ycl-callout>`;
 
 export default {
   title: 'Molecules/Callout',
@@ -31,10 +32,10 @@ export default {
     layout: 'fullscreen',
   },
   argTypes: {
-    theme: attributeArg('Component theme.', {
-      name: 'Component Theme',
-      control: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
+      name: 'Color Option',
+      options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-callout') },
     }),
     alignment: attributeArg('Content alignment. Defaults to center.', {
       name: 'Callout Alignment',
@@ -56,17 +57,15 @@ export default {
       control: 'select',
       options: ['cta', 'link'],
     }),
-    globalTheme: globalThemeArgType,
   },
   args: {
     heading: 'Degree Programs',
     text: 'Designed for those who intend to pursue graduate and those who wish to immediately enter a career in which broad scientific training is beneficial.',
     linkText: 'Programs',
     linkType: 'cta',
-    theme: 'one',
+    theme: 'primary',
     alignment: 'center',
     overlay: false,
-    globalTheme: 'one',
   },
 
   render: (args) => callout(args, item(args)),

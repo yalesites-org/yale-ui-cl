@@ -1,7 +1,8 @@
 import "./WrappedCallout";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 const body = `
   <p>HRBPs work closely with departmental leadership on strategic initiatives related to their workforce and work environments. This includes supporting positive relations between management and staff, alignment with university policies, and developing strategies geared towards talent, engagement, wellness, or belonging for the organization and its employees who are at the heart of it all.</p>
@@ -21,32 +22,30 @@ export default {
       options: ['left', 'right'],
       mapping: { left: undefined },
     }),
-    theme: attributeArg('Callout background theme.', {
-      name: 'Component Theme',
-      control: 'select',
-      options: ['default', 'one', 'two', 'three', 'four', 'five', 'six'],
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
+      name: 'Color Option',
+      options: ['default', 'primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-wrapped-callout') },
     }),
     calloutHeading: slotArg('Heading in the callout (slot="callout", alongside a paragraph). Omitted when empty.', {
       name: 'Callout Heading',
       control: 'text',
     }),
     showContent: slotArg('Body text the callout wraps into (default slot).', { name: 'Show Body Text', control: 'boolean' }),
-    globalTheme: globalThemeArgType,
   },
   args: {
     alignment: 'left',
     calloutHeading: 'Find Your Human Resources Business Partner',
     showContent: true,
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'primary',
   },
 
-  render: (args) => withGlobalTheme(args.globalTheme, `
+  render: (args) => `
       <ycl-wrapped-callout${attrs({ alignment: args.alignment, theme: args.theme })}>
         ${args.calloutHeading ? `<ycl-heading level="2" slot="callout">${args.calloutHeading}</ycl-heading>` : ''}
         <p slot="callout"><ycl-text-link href="https://www.myworkday.com" target="_blank">Find your HR Business Partner</ycl-text-link> by department, manager, or campus location in Workday.</p>
         ${args.showContent ? body : ''}
-      </ycl-wrapped-callout>`),
+      </ycl-wrapped-callout>`,
 };
 
 export const Default = {};

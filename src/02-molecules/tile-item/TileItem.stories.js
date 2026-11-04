@@ -1,7 +1,8 @@
 import "./TileItem";
 import "../../01-atoms/icons/Icon";
 import "../../01-atoms/image/ResponsiveImage";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme, placeholder } from "../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg, placeholder } from "../../../.storybook/story-helpers.js";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // Decorative, so unlabelled; an inline SVG can also go in the icon slot.
 const icon = `<ycl-icon slot="icon" name="lightbulb-solid"></ycl-icon>`;
@@ -39,11 +40,10 @@ export default {
 			options: ["top", "bottom"],
 			mapping: { top: undefined },
 		}),
-		theme: attributeArg("Color theme; one is the default.", {
-			name: "Component Theme",
-			control: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-			mapping: { one: undefined },
+		theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
+			name: "Color Option",
+			options: ["primary", "secondary", "tertiary", "accent-1", "accent-2"],
+			control: { type: "select", labels: colorOptionLabels("ycl-tile-item") },
 		}),
 		animated: attributeArg("Adds a hover animation.", { name: "With Animation", control: "boolean" }),
 		presentation: slotArg("What fills the top of the tile: the heading slot, the icon slot (an icon or inline SVG), or nothing.", {
@@ -54,7 +54,6 @@ export default {
 		heading: slotArg("Heading of the first tile (slot=\"heading\"), used when Presentation Style is heading.", { control: "text" }),
 		content: slotArg("Tile text (default slot).", { control: "text" }),
 		withImage: slotArg("Fill the image slot (slot=\"image\").", { name: "With Image", control: "boolean" }),
-		globalTheme: globalThemeArgType,
 	},
 	args: {
 		heading: "01",
@@ -63,18 +62,17 @@ export default {
 		presentation: "heading",
 		alignment: "left",
 		verticalAlignment: "top",
-		theme: "one",
+		theme: "primary",
 		withImage: false,
 		animated: false,
-		globalTheme: "one",
 	},
 
-	render: (args) => withGlobalTheme(args.globalTheme, `
+	render: (args) => `
 			<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-6);">
 				${tile(args, args.heading)}
 				${tile(args, "02")}
 				${tile(args, "03")}
-			</ul>`),
+			</ul>`,
 };
 
 export const Default = {};

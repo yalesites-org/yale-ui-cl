@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./tile-item.css?inline";
+import { updateLinkIcon } from "../../utility.js";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -54,13 +55,15 @@ export class TileItem extends HTMLElement {
 			this.content.classList.toggle("tile__item__link", newValue !== null);
 			if (newValue === null) this.content.removeAttribute("href");
 			else this.content.setAttribute("href", newValue);
+			// External and file links get the external/download icon, as YaleSites' text link does.
+			updateLinkIcon(this.content.querySelector(".fa-icon"), this.content, window.location.origin);
 		}
 	}
 
 	get href() { return this.getAttribute("href"); }
 	set href(value) { this.setAttribute("href", value); }
 
-	get theme() { return this.getAttribute("theme") ?? "one"; }
+	get theme() { return this.getAttribute("theme") ?? "primary"; }
 	set theme(value) { this.setAttribute("theme", value); }
 
 	get animated() { return this.hasAttribute("animated"); }

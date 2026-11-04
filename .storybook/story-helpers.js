@@ -19,18 +19,6 @@ export const attributeArg = (description, extra = {}) => documented('Attributes'
 export const slotArg = (description, extra = {}) => documented('Slots', description, extra);
 export const eventArg = (description, extra = {}) => documented('Events', description, { control: false, ...extra });
 
-// The site theme comes from data-global-theme on an ancestor; themed components read their colours from it.
-export const globalThemeArgType = {
-  name: 'Site Global Theme',
-  control: 'select',
-  options: ['none', 'one', 'two', 'three', 'four', 'five', 'six'],
-  description: 'data-global-theme on an ancestor element, standing in for the site theme; supplies the colours component themes use. "none" leaves the wrapper off.',
-  table: { category: 'Page context' },
-};
-
-export const withGlobalTheme = (theme, markup) =>
-  theme && theme !== 'none' ? `<div data-global-theme="${theme}">${markup}</div>` : markup;
-
 // Inline SVG placeholder image so stories don't depend on an image host. The label defaults to
 // the dimensions; pass '' for a plain grey box.
 export const placeholder = (width, height, label = `${width} x ${height}`) =>

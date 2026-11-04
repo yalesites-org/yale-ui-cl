@@ -12,15 +12,25 @@ export default {
       control: 'select',
       options: ['', '_self', '_blank'],
     }),
+    linkStyle: attributeArg('link-style: underline treatment. "underline" (default), "no-underline" (the underline slides in on hover) or "no-animation" (a plain text underline that drops on hover).', {
+      name: 'link-style',
+      control: 'select',
+      options: ['underline', 'no-underline', 'no-animation'],
+    }),
+    chevron: attributeArg('chevron: adds a decorative trailing chevron, which replaces the external/download icon.', {
+      control: 'boolean',
+    }),
     label: slotArg('Link text (default slot).', { control: 'text' }),
   },
   args: {
     label: 'Yale HomePage',
     URL: 'https://www.yale.edu',
     target: '',
+    linkStyle: 'underline',
+    chevron: false,
   },
   render: (args) =>
-    `<ycl-text-link${attrs({ href: args.URL, target: args.target })}>${args.label ?? ''}</ycl-text-link>`,
+    `<ycl-text-link${attrs({ href: args.URL, target: args.target, 'link-style': args.linkStyle, chevron: args.chevron })}>${args.label ?? ''}</ycl-text-link>`,
 };
 
 export const Default = {};

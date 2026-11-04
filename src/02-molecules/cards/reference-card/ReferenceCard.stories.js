@@ -3,7 +3,7 @@ import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/cta/Cta";
 import "../../../01-atoms/image/ResponsiveImage";
 import "../../../01-atoms/date-time/DateTime";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme, placeholder } from "../../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg, placeholder } from "../../../../.storybook/story-helpers.js";
 
 const collectionStyle = (layout) => layout === "grid"
 	? "list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: var(--size-spacing-8);"
@@ -32,9 +32,9 @@ const card = (args, { heading, snippet, overline, image = placeholder(600, 400),
 	</li>`;
 };
 
-const collection = (args, cards) => withGlobalTheme(args.globalTheme, `<ul style="${collectionStyle(args.layout)}">
+const collection = (args, cards) => `<ul style="${collectionStyle(args.layout)}">
 				${cards}
-			</ul>`);
+			</ul>`;
 
 export default {
 	title: "Molecules/Cards/Reference Card",
@@ -66,7 +66,6 @@ export default {
 		otherSlots: slotArg("Also available: slot=\"categories\", \"eyebrow\", \"prefix\", \"pronouns\", \"subheading\", \"tags\" and \"ctas\". See the Profile and Event With Ctas stories.", {
 			control: false,
 		}),
-		globalTheme: globalThemeArgType,
 	},
 	args: {
 		heading: "Wu Tsai Institute postdocs bridge disciplines in the study of cognition",
@@ -78,7 +77,6 @@ export default {
 		featured: true,
 		source: "none",
 		withImage: true,
-		globalTheme: "one",
 	},
 
 	render: (args) => {

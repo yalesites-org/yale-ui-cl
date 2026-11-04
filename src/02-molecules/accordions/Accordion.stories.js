@@ -1,16 +1,26 @@
 import "./Accordion";
 import "../../01-atoms/headings/Heading";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 export default {
   title: 'Molecules/Accordion',
   component: 'ycl-accordion',
   argTypes: {
-    theme: attributeArg('Component theme; "default" (or no attribute) is unthemed.', {
-      name: 'Component Theme',
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
+      name: 'Color Option',
+      options: ['default', 'primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-accordion') },
+    }),
+    width: attributeArg('Width of the accordion; "content" is the default.', {
+      name: 'Width',
       control: 'select',
-      options: ['default', 'one', 'two', 'three', 'four', 'five', 'six'],
-      mapping: { default: undefined },
+      options: ['content', 'highlight', 'site', 'max'],
+    }),
+    alignment: attributeArg('Alignment of the accordion within its width; "center" is the default.', {
+      name: 'Alignment',
+      control: 'select',
+      options: ['center', 'left'],
     }),
     expanded: attributeArg('expanded on a ycl-accordion-item opens it. Shown here on the first item.', {
       name: 'First Item Expanded',
@@ -20,17 +30,17 @@ export default {
     items: slotArg('ycl-accordion-item elements (default slot). Each item takes its toggle text in slot="heading" and its content in the default slot.', {
       control: false,
     }),
-    globalTheme: globalThemeArgType,
   },
   args: {
     heading: 'Frequently Asked Questions',
     theme: 'default',
+    width: 'content',
+    alignment: 'center',
     expanded: false,
-    globalTheme: 'one',
   },
 
-  render: (args) => withGlobalTheme(args.globalTheme, `
-      <ycl-accordion${attrs({ theme: args.theme })}>${args.heading ? `
+  render: (args) => `
+      <ycl-accordion${attrs({ theme: args.theme, width: args.width, alignment: args.alignment })}>${args.heading ? `
         <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
         <ycl-accordion-item${attrs({ expanded: args.expanded })}>
           <ycl-heading level="3" slot="heading">How do I apply?</ycl-heading>
@@ -44,7 +54,7 @@ export default {
           <ycl-heading level="3" slot="heading">Where can I find course listings?</ycl-heading>
           <p>Course listings are published each term.</p>
         </ycl-accordion-item>
-      </ycl-accordion>`),
+      </ycl-accordion>`,
 };
 
 export const Default = {};

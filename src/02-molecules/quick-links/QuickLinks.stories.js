@@ -2,7 +2,8 @@ import "./QuickLinks";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/cta/Cta";
 import "../../01-atoms/image/ResponsiveImage";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // A local stand-in for a photo so the story doesn't depend on a network image.
 const placeholderImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><defs><linearGradient id="g" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient></defs><rect width="16" height="9" fill="url(#g)"/></svg>')}`;
@@ -18,25 +19,27 @@ export default {
       control: 'select',
       options: ['promotional', 'subtle'],
     }),
-    theme: attributeArg('Color theme.', { name: 'Component Theme', control: 'select', options: ['one', 'two', 'three'] }),
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
+      name: 'Color Option',
+      options: ['primary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-quick-links') },
+    }),
     heading: slotArg('Heading (slot="heading"). Omitted when empty.', { control: 'text' }),
     description: slotArg('Description (slot="description"). A description switches the layout from stacked to side by side. Omitted when empty.', {
       control: 'text',
     }),
     image: slotArg('Image (slot="image").', { name: 'With image', control: 'boolean' }),
     links: slotArg('Every other child is a link and gets its own list item.', { control: false }),
-    globalTheme: globalThemeArgType,
   },
   args: {
     heading: 'Heading for Quick Links',
     description: 'This is a Quick Links description.',
     image: true,
     variant: 'promotional',
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'primary',
   },
 
-  render: (args) => withGlobalTheme(args.globalTheme, `
+  render: (args) => `
       <ycl-quick-links${attrs({ theme: args.theme, variant: args.variant })}>
         ${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
         ${args.description ? `<p slot="description">${args.description}</p>` : ''}
@@ -45,7 +48,7 @@ export default {
         <ycl-cta-link variant="outline" href="https://google.com">This is another link</ycl-cta-link>
         <ycl-cta-link variant="outline" href="https://google.com/download.pdf">This is a very long link that will wrap lines</ycl-cta-link>
         <ycl-cta-link variant="outline" href="#">Link #4</ycl-cta-link>
-      </ycl-quick-links>`),
+      </ycl-quick-links>`,
 };
 
 export const Default = {};

@@ -1,15 +1,16 @@
 import "./LinkGrid";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
-import { attrs, attributeArg, slotArg, globalThemeArgType, withGlobalTheme } from "../../../.storybook/story-helpers.js";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 export default {
   title: 'Molecules/Link Grid',
   component: 'ycl-link-grid',
   argTypes: {
-    theme: attributeArg('Color theme.', {
-      name: 'Component Theme',
-      control: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+    theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
+      name: 'Color Option',
+      options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-link-grid') },
     }),
     lineTreatment: attributeArg('line-treatment: how the rules between links are drawn.', {
       name: 'Line Treatment',
@@ -21,16 +22,14 @@ export default {
       name: 'Column slots',
       control: false,
     }),
-    globalTheme: globalThemeArgType,
   },
   args: {
     heading: 'This is a link grid',
-    theme: 'one',
+    theme: 'primary',
     lineTreatment: 'default',
-    globalTheme: 'one',
   },
 
-  render: (args) => withGlobalTheme(args.globalTheme, `
+  render: (args) => `
       <ycl-link-grid${attrs({ theme: args.theme, 'line-treatment': args.lineTreatment })}>
         ${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
 
@@ -57,7 +56,7 @@ export default {
         <ycl-text-link slot="links-four" href="#">This is another link in column 4</ycl-text-link>
         <ycl-text-link slot="links-four" href="#">This is a very long link that will wrap lines</ycl-text-link>
         <ycl-text-link slot="links-four" href="#">Link #4 column #4</ycl-text-link>
-      </ycl-link-grid>`),
+      </ycl-link-grid>`,
 };
 
 export const Default = {};
