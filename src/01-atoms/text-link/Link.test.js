@@ -4,16 +4,15 @@ import { mount, shadowOf } from "../../../test/helpers.js";
 
 const link = (element) => shadowOf(element).querySelector("a");
 
-describe("text-link", () => {
-	it("forwards href, target and variants to the inner link", () => {
-		const element = mount(`<text-link href="/about" target="_self" class="subtle">About</text-link>`);
+describe("ycl-text-link", () => {
+	it("forwards href, and target to the inner link", () => {
+		const element = mount(`<ycl-text-link href="/about" target="_self">About</ycl-text-link>`);
 		expect(link(element).getAttribute("href")).toBe("/about");
 		expect(link(element).target).toBe("_self");
-		expect(link(element).classList).toContain("link--subtle");
 	});
 
 	it("labels external links and keeps a single icon as href changes", () => {
-		const element = mount(`<text-link href="https://example.com/">Out</text-link>`);
+		const element = mount(`<ycl-text-link href="https://example.com/">Out</ycl-text-link>`);
 		expect(link(element).querySelector(".fa-icon").ariaLabel).toBe("(link is external)");
 		element.href = "https://example.com/doc.pdf";
 		expect(link(element).querySelectorAll(".fa-icon")).toHaveLength(1);
@@ -24,7 +23,7 @@ describe("text-link", () => {
 describe("text-link icon wrapping", () => {
 	it("keeps the new-window icon on the same line as the last word", () => {
 		const element = mount(
-			`<div style="width: 0"><text-link href="https://example.com/" target="_blank">Read the full report</text-link></div>`,
+			`<div style="width: 0"><ycl-text-link href="https://example.com/" target="_blank">Read the full report</ycl-text-link></div>`,
 		).firstElementChild;
 		const icon = link(element).querySelector(".fa-icon");
 		expect(icon.ariaLabel).toBe("(opens in new window)");

@@ -18,7 +18,7 @@ const atLeast = (px) => matchMedia(`(min-width: ${px}px)`).matches;
 
 describe("shared shadow styles", () => {
 	it("sizes shadow content with border-box", () => {
-		const input = mount(`<text-input label="Name"></text-input>`);
+		const input = mount(`<ycl-text-input label="Name"></ycl-text-input>`);
 		const root = shadowOf(input);
 		const field = root.querySelector(".form-item__textfield");
 		expect(getComputedStyle(field).boxSizing).toBe("border-box");
