@@ -1,6 +1,7 @@
 import "./TileItem";
 import "../../01-atoms/icons/Icon";
 import "../../01-atoms/image/ResponsiveImage";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // Self-contained placeholder so the stories don't depend on an image host.
 const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
@@ -42,17 +43,13 @@ export default {
 			options: ["top", "bottom"],
 		},
 		theme: {
-			name: "Component Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
+			name: "Color Option",
+			description: COLOR_OPTION_DESCRIPTION,
+			options: ["primary", "secondary", "tertiary", "accent-1", "accent-2"],
+			control: { type: "select", labels: colorOptionLabels("ycl-tile-item") },
 		},
 		withImage: { name: "With Image", control: "boolean" },
 		animated: { name: "With Animation", control: "boolean" },
-		globalTheme: {
-			name: "Site Global Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-		},
 	},
 	args: {
 		heading: "01",
@@ -61,30 +58,27 @@ export default {
 		presentation: "heading",
 		alignment: "left",
 		verticalAlignment: "top",
-		theme: "one",
+		theme: "primary",
 		withImage: false,
 		animated: false,
-		globalTheme: "one",
 	},
 
 	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-6);">
-				${tile(args, args.heading)}
-				${tile(args, "02")}
-				${tile(args, "03")}
-			</ul>
-		</div>`,
+		`<ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--size-spacing-6);">
+			${tile(args, args.heading)}
+			${tile(args, "02")}
+			${tile(args, "03")}
+		</ul>`,
 };
 
 export const Default = {};
 
 export const Icon = {
-	args: { presentation: "icon", theme: "three", alignment: "center" },
+	args: { presentation: "icon", theme: "tertiary", alignment: "center" },
 };
 
 export const TextOnlyBottom = {
-	args: { presentation: "text-only", verticalAlignment: "bottom", theme: "two", href: "" },
+	args: { presentation: "text-only", verticalAlignment: "bottom", theme: "secondary", href: "" },
 };
 
 export const WithImage = {

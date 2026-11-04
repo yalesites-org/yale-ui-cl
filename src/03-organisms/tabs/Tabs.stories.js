@@ -1,0 +1,50 @@
+import "./Tabs";
+import "../../01-atoms/text-link/Link";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
+export default {
+  title: 'Organisms/Tabs',
+  component: 'ycl-tabs',
+  argTypes: {
+    theme: {
+      name: 'Color Option',
+      description: COLOR_OPTION_DESCRIPTION,
+      options: ['primary', 'secondary', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-tabs') },
+    },
+},
+  args: {
+    theme: 'primary',
+},
+
+  render: (args) =>
+    `<ycl-tabs theme="${args.theme}" label="Registration">
+      <ycl-tab label="Before registration">
+        <p>Review the <ycl-text-link href="#">course catalog</ycl-text-link> and meet with your adviser to plan your schedule. Check that any prerequisites are complete and that you have no holds on your account.</p>
+      </ycl-tab>
+      <ycl-tab label="During registration">
+        <p>Registration opens by class year. Add courses to your worksheet ahead of time so you can submit as soon as your window opens.</p>
+        <p>If a course is full, join the <ycl-text-link href="#">waitlist</ycl-text-link> and check back regularly.</p>
+      </ycl-tab>
+      <ycl-tab label="Year-round">
+        <p>Keep your contact details up to date and review the <ycl-text-link href="#">academic calendar</ycl-text-link> for add/drop deadlines.</p>
+      </ycl-tab>
+    </ycl-tabs>`,
+};
+
+export const Default = {};
+
+export const Secondary = {
+  args: {
+    theme: 'secondary',
+  },
+};
+
+// Narrow the preview to see the scroll buttons appear.
+export const ManyTabs = {
+  render: (args) =>
+    `<ycl-tabs theme="${args.theme}" label="Schools">
+      ${['Architecture', 'Art', 'Divinity', 'Drama', 'Engineering & Applied Science', 'Environment', 'Law', 'Management', 'Medicine', 'Music', 'Nursing', 'Public Health']
+        .map((school, i) => `<ycl-tab label="${school}"${i === 2 ? ' selected' : ''}><p>Information about the School of ${school}.</p></ycl-tab>`)
+        .join('')}
+    </ycl-tabs>`,
+};

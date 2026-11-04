@@ -1,4 +1,5 @@
 import "./PullQuote";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 export default {
   title: 'Molecules/Pull Quote',
@@ -12,31 +13,24 @@ export default {
       options: ['bar-left', 'bar-right', 'quote-left'],
     },
     theme: {
-      name: 'Accent Theme',
-      type: 'select',
-      options: ['one', 'two', 'three'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      name: 'Color Option',
+      description: COLOR_OPTION_DESCRIPTION,
+      options: ['primary', 'tertiary', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-pull-quote') },
     },
   },
   args: {
     quote: 'Yale changed that thinking. It was evident in every class, every conversation, every project, that a business cannot exist in a vacuum, and that a business with the sole purpose of profit, with total disregard for its surroundings, will eventually fizzle out.',
     attribution: 'Annie Nymity',
     variant: 'bar-left',
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'primary',
   },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-pull-quote variant="${args.variant}" theme="${args.theme}">
-        <p>${args.quote}</p>
-        <span slot="attribution">${args.attribution}</span>
-      </ycl-pull-quote>
-    </div>`,
+    `<ycl-pull-quote variant="${args.variant}" theme="${args.theme}">
+      <p>${args.quote}</p>
+      <span slot="attribution">${args.attribution}</span>
+    </ycl-pull-quote>`,
 };
 
 export const Default = {};
@@ -55,6 +49,6 @@ export const QuoteLeft = {
 
 export const Themed = {
   args: {
-    theme: 'three',
+    theme: 'accent-2',
   },
 };

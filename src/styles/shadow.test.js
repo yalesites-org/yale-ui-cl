@@ -10,7 +10,7 @@ import "../02-molecules/page-title/PageTitle.js";
 import "../02-molecules/pull-quote/PullQuote.js";
 import "../02-molecules/quote-callout/QuoteCallout.js";
 import "../02-molecules/related-content/RelatedContent.js";
-import "../02-molecules/text-with-image/TextWithImage.js";
+import "../03-organisms/text-with-image/TextWithImage.js";
 import { mount, shadowOf } from "../../test/helpers.js";
 
 const rem = (n) => `${n * parseFloat(getComputedStyle(document.documentElement).fontSize)}px`;
