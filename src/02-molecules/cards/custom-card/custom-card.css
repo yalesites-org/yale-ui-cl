@@ -7,39 +7,6 @@
   display: none !important;
 }
 
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document. Slots one and two colour the bar and the heading link hover. */
-[data-global-theme="one"] ycl-custom-card {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-}
-
-[data-global-theme="two"] ycl-custom-card {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-}
-
-[data-global-theme="three"] ycl-custom-card {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-}
-
-[data-global-theme="four"] ycl-custom-card {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-two);
-}
-
-[data-global-theme="five"] ycl-custom-card {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-}
-
-[data-global-theme="six"] ycl-custom-card {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-}
-
 /* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
 ycl-custom-card picture[slot="image"] img {
   display: block;
@@ -51,8 +18,8 @@ ycl-custom-card picture[slot="image"] img {
 .custom-card {
   --card-border: var(--border-thickness-1) solid var(--color-gray-200);
   --color-text-shadow: var(--color-basic-white);
-  --color-card-bar-long: var(--color-slot-two, var(--color-blue-shale));
-  --color-card-bar-short: var(--color-slot-one, var(--color-blue-horizon));
+  --color-card-bar-long: var(--color-theme-secondary, var(--color-blue-medium));
+  --color-card-bar-short: var(--color-theme-primary, var(--color-blue-yale));
 
   height: 100%;
   display: flex;
@@ -160,7 +127,7 @@ ycl-custom-card picture[slot="image"] img {
 .custom-card:hover .custom-card__heading-link[href],
 .custom-card__heading-link[href]:focus-visible {
   background-size: 100% var(--thickness);
-  color: var(--color-slot-two, var(--color-link-hover));
+  color: var(--color-theme-secondary, var(--color-blue-medium));
 }
 
 .custom-card:hover .custom-card__heading-link[href]:visited {
@@ -216,7 +183,7 @@ ycl-custom-card picture[slot="image"] img {
 }
 
 /* A non-featured card without an image shows a two-tone bar across its top, whose short end
-   retracts on hover. With a global theme the bar takes the theme's slot colours. */
+   retracts on hover, in the palette's secondary and primary colours. */
 :host(ycl-custom-card:not([featured])) .custom-card[data-with-image="false"] .custom-card__image {
   background-color: var(--color-card-bar-long);
   position: relative;

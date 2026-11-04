@@ -8,39 +8,6 @@
   display: none !important;
 }
 
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document. Slot one colours the overlay; slot two is the heading link hover colour. */
-[data-global-theme="one"] ycl-reference-card {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-}
-
-[data-global-theme="two"] ycl-reference-card {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-}
-
-[data-global-theme="three"] ycl-reference-card {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-}
-
-[data-global-theme="four"] ycl-reference-card {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-two);
-}
-
-[data-global-theme="five"] ycl-reference-card {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-}
-
-[data-global-theme="six"] ycl-reference-card {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-}
-
 /* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
 ycl-reference-card picture[slot="image"] img {
   display: block;
@@ -58,7 +25,7 @@ ycl-reference-card:is(:not([layout]), [layout="grid"]) picture[slot="image"] img
    the data-collection-* attributes the Twig card reads from its card collection. */
 .reference-card {
   --color-text-shadow: var(--color-basic-white);
-  --color-overlay-background: var(--color-slot-one, var(--component-themes-one-slot-one));
+  --color-overlay-background: var(--color-theme-primary, var(--color-blue-yale));
 
   display: flex;
   flex-flow: column-reverse;
@@ -560,7 +527,7 @@ ycl-reference-card:is(:not([layout]), [layout="grid"]) picture[slot="image"] img
 .reference-card:hover .reference-card__heading-link[href],
 .reference-card__heading-link[href]:focus-visible {
   background-size: 100% var(--thickness);
-  color: var(--color-slot-two, var(--color-link-hover));
+  color: var(--color-theme-secondary, var(--color-blue-medium));
 }
 
 :host(ycl-reference-card[layout="single"]) .reference-card:hover .reference-card__heading-link[href],

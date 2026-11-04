@@ -59,7 +59,7 @@ export class ActionBanner extends HTMLElement {
 	#render() {
 		const layout = this.getAttribute("layout") || "bottom";
 		const alignment = this.getAttribute("button-alignment") || (layout === "bottom" ? "right" : "left");
-		this.#banner.dataset.componentTheme = this.getAttribute("theme") || "one";
+		this.#banner.dataset.componentTheme = this.getAttribute("theme") || "primary";
 		this.#banner.dataset.bannerContentLayout = layout;
 		this.#banner.dataset.bannerButtonAlignment = alignment;
 		this.#banner.dataset.bannerWidth = this.getAttribute("width") || "site";

@@ -4,7 +4,7 @@
   display: block;
 }
 
-/* Component themes.
+/* Colour options. "default" (or no theme attribute) is unthemed.
    Items render in their own shadow roots, so the accordion hands its theme down through
    inherited custom properties. Resetting them to `initial` first stops a theme leaking into an
    accordion nested inside a themed one. */
@@ -34,88 +34,27 @@
   --accordion-item-content-offset: var(--size-spacing-5);
 }
 
-/* Each theme takes its accent from one colour slot. The slots come from the site's global theme
-   when one is set (see below), otherwise from the component theme tokens. */
-:host(ycl-accordion[theme="one"]) {
-  --color-accordion-accent: var(--color-slot-one, var(--component-themes-one-slot-one));
+/* Each colour option takes its accent from the palette colour it's named after. Pages set the
+   palette with the --color-theme-* custom properties, which inherit into the shadow root; without
+   them the Old Blues defaults apply. */
+:host(ycl-accordion[theme="primary"]) {
+  --color-accordion-accent: var(--color-theme-primary, var(--color-blue-yale));
 }
 
-:host(ycl-accordion[theme="two"]) {
-  --color-accordion-accent: var(--color-slot-two, var(--component-themes-two-slot-two));
+:host(ycl-accordion[theme="secondary"]) {
+  --color-accordion-accent: var(--color-theme-secondary, var(--color-blue-medium));
 }
 
-:host(ycl-accordion[theme="three"]) {
-  --color-accordion-accent: var(--color-slot-three, var(--component-themes-three-slot-three));
+:host(ycl-accordion[theme="tertiary"]) {
+  --color-accordion-accent: var(--color-theme-tertiary, var(--color-blue-light));
 }
 
-:host(ycl-accordion[theme="four"]) {
-  --color-accordion-accent: var(--color-slot-four, var(--component-themes-four-colors-slot-four));
+:host(ycl-accordion[theme="accent-1"]) {
+  --color-accordion-accent: var(--color-theme-accent-1, var(--color-gray-100));
 }
 
-:host(ycl-accordion[theme="five"]) {
-  --color-accordion-accent: var(--color-slot-five, var(--component-themes-five-colors-slot-five));
-}
-
-/* slot-nine isn't in the current tokens release; gray-700 is what the reference renders without it. */
-:host(ycl-accordion[theme="six"]) {
-  --color-accordion-accent: var(--color-slot-nine, var(--color-gray-700));
-}
-
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document (as index.html and Storybook do). */
-[data-global-theme="one"] ycl-accordion {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-  --color-slot-three: var(--global-themes-one-colors-slot-three);
-  --color-slot-four: var(--global-themes-one-colors-slot-four);
-  --color-slot-five: var(--global-themes-one-colors-slot-five);
-  --color-slot-nine: var(--global-themes-one-colors-slot-nine);
-}
-
-[data-global-theme="two"] ycl-accordion {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-  --color-slot-three: var(--global-themes-two-colors-slot-three);
-  --color-slot-four: var(--global-themes-two-colors-slot-four);
-  --color-slot-five: var(--global-themes-two-colors-slot-five);
-  --color-slot-nine: var(--global-themes-two-colors-slot-nine);
-}
-
-[data-global-theme="three"] ycl-accordion {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-  --color-slot-three: var(--global-themes-three-colors-slot-three);
-  --color-slot-four: var(--global-themes-three-colors-slot-four);
-  --color-slot-five: var(--global-themes-three-colors-slot-five);
-  --color-slot-nine: var(--global-themes-three-colors-slot-nine);
-}
-
-[data-global-theme="four"] ycl-accordion {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-two);
-  --color-slot-three: var(--global-themes-four-colors-slot-three);
-  --color-slot-four: var(--global-themes-four-colors-slot-four);
-  --color-slot-five: var(--global-themes-four-colors-slot-five);
-  --color-slot-nine: var(--global-themes-four-colors-slot-nine);
-}
-
-[data-global-theme="five"] ycl-accordion {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-  --color-slot-three: var(--global-themes-five-colors-slot-three);
-  --color-slot-four: var(--global-themes-five-colors-slot-four);
-  --color-slot-five: var(--global-themes-five-colors-slot-five);
-  --color-slot-nine: var(--global-themes-five-colors-slot-nine);
-}
-
-[data-global-theme="six"] ycl-accordion {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-  --color-slot-three: var(--global-themes-six-colors-slot-three);
-  --color-slot-four: var(--global-themes-six-colors-slot-four);
-  --color-slot-five: var(--global-themes-six-colors-slot-five);
-  --color-slot-nine: var(--global-themes-six-colors-slot-nine);
+:host(ycl-accordion[theme="accent-2"]) {
+  --color-accordion-accent: var(--color-theme-accent-2, var(--color-gray-800));
 }
 
 /* The accordion group. */

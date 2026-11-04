@@ -60,7 +60,7 @@ export class TileItem extends HTMLElement {
 	get href() { return this.getAttribute("href"); }
 	set href(value) { this.setAttribute("href", value); }
 
-	get theme() { return this.getAttribute("theme") ?? "one"; }
+	get theme() { return this.getAttribute("theme") ?? "primary"; }
 	set theme(value) { this.setAttribute("theme", value); }
 
 	get animated() { return this.hasAttribute("animated"); }
