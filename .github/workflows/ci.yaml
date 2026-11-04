@@ -44,9 +44,6 @@ jobs:
 
   audit:
     runs-on: ubuntu-latest
-    # Report-only until the existing high and critical findings are fixed.
-    # Remove this line to make the job fail on them, then mark it required.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: ./.github/actions/setup
