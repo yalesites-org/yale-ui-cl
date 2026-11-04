@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./custom-card.css?inline";
+import { updateLinkIcon } from "../../../utility.js";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -51,6 +52,9 @@ export class CustomCard extends HTMLElement {
 			// An <a> without href isn't a link, so a card with no URL simply isn't clickable.
 			if (newValue === null) this.link.removeAttribute("href");
 			else this.link.setAttribute("href", newValue);
+			// External and file links get the external/download icon after the title, as YaleSites'
+			// link treatment adds to linked card headings.
+			updateLinkIcon(this.link.querySelector(".fa-icon"), this.link, window.location.origin);
 		}
 	}
 

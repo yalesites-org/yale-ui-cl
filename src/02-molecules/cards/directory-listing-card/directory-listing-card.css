@@ -63,10 +63,30 @@ ycl-directory-listing-card picture[slot="image"] img {
   }
 }
 
-/* 992px is --break-mobile. */
+/* 992px is --break-mobile. From there a directory listing crops its image to 3:2: the box takes
+   the ratio and the image covers it, whatever shape it was uploaded at. */
 @media (min-width: 992px) {
   :host(ycl-directory-listing-card[layout="directory-listing"]) .directory-listing-card__image {
+    position: relative;
     aspect-ratio: 3 / 2;
+    overflow: hidden;
+  }
+
+  :host(ycl-directory-listing-card[layout="directory-listing"]) .directory-listing-card__image ::slotted(*) {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* A slotted ycl-image fills the box too, cropping its image to cover it. */
+  :host(ycl-directory-listing-card[layout="directory-listing"]) .directory-listing-card__image ::slotted(ycl-image) {
+    --image-fill-height: 100%;
+  }
+
+  ycl-directory-listing-card[layout="directory-listing"] picture[slot="image"] img {
+    height: 100%;
+    object-fit: cover;
   }
 }
 
