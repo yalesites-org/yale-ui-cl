@@ -8,28 +8,31 @@
   --color-action-secondary: var(--color-basic-white);
 }
 
+/* Filled is the default (as in YaleSites), so a CTA with no variant, an unknown one or
+   variant="filled" (cta--filled has no rules of its own) is filled. */
 .cta {
-  --color-cta-bg: transparent;
-  --color-cta-bg-hover: var(--color-action);
+  --color-cta-bg: var(--color-action);
+  --color-cta-bg-hover: transparent;
   --color-cta-action-secondary: var(--color-basic-white);
   --color-cta-action: var(--color-blue-yale);
   --color-link-base: var(--color-blue-medium);
   --color-cta-border: var(--color-action);
-  --color-cta-text: var(--color-action);
-  --color-cta-text-hover: var(--color-action-secondary);
+  --color-cta-text: var(--color-action-secondary);
+  --color-cta-text-hover: var(--color-action);
   /* inline-flex keeps the label centred when a parent stretches the CTA (e.g. quick-links). */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border-radius: var(--border-radius-cta, var(--radius-0));
-  font-weight: 700;
+  /* No font-family: the CTA inherits Mallory from the page. */
+  font-weight: var(--font-weights-mallory-medium);
   line-height: 1;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  padding: var(--size-spacing-3);
+  padding: var(--size-spacing-3) var(--size-spacing-6);
+  min-height: var(--size-click-target-minimum);
   text-decoration: none;
   text-align: center;
-  border: solid var(--border-thickness-2) var(--color-cta-border);
+  border: var(--border-thickness-cta, var(--border-thickness-2)) solid var(--color-cta-border);
   color: var(--color-cta-text);
   background-color: var(--color-cta-bg);
   /* Fade is the default animation; the other animate variants replace this transition. */
@@ -39,7 +42,7 @@
 }
 
 .cta:hover {
-  color: var(--color-cta-text-hover);  
+  color: var(--color-cta-text-hover);
   background-color: var(--color-cta-bg-hover);
 }
 
@@ -50,12 +53,18 @@
   --color-cta-text-hover: var(--color-action-secondary);
 }
 
-.cta--filled {
-  --color-cta-bg: var(--color-action);
-  --color-cta-bg-hover: transparent;
-  --color-cta-border: var(--color-action);
-  --color-cta-text: var(--color-action-secondary);
-  --color-cta-text-hover: var(--color-action);
+/* No outline-weight attribute keeps the 2px default border. outline-weight="2" still sets it, so an
+   explicit 2 wins over a --border-thickness-cta inherited from outside. */
+.cta--outline-weight-1 {
+  --border-thickness-cta: var(--border-thickness-1);
+}
+
+.cta--outline-weight-2 {
+  --border-thickness-cta: var(--border-thickness-2);
+}
+
+.cta--outline-weight-4 {
+  --border-thickness-cta: var(--border-thickness-4);
 }
 
 .cta--radius-soft {
@@ -64,24 +73,6 @@
 
 .cta--radius-pill {
   --border-radius-cta: 100vmax;
-}
-
-.cta--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
-}
-.cta--small {
-  padding: 10px 16px;
-  font-size: 12px;
-}
-.cta--medium {
-  padding: 11px 20px;
-  font-size: 14px;
-}
-.cta--large {
-  padding: 12px 24px;
-  font-size: 16px;
 }
 
 .cta--animate-none {
@@ -110,11 +101,12 @@
   box-shadow: inset 6.5em 0 0 0 var(--color-cta-bg-hover);
 }
 
-.cta--filled.cta--animate-wipe {
-    box-shadow: inset -6.5em 0 0 0 var(--color-cta-bg);
+/* Anything not outline is filled, including a CTA with no variant. */
+.cta--animate-wipe:not(.cta--outline) {
+  box-shadow: inset -6.5em 0 0 0 var(--color-cta-bg);
 }
 
-.cta--filled.cta--animate-wipe:hover {
+.cta--animate-wipe:not(.cta--outline):hover {
   box-shadow: none;
 }
 
@@ -123,7 +115,3 @@
   width: 1rem;
   fill: currentColor;
 }
-
-
-
-

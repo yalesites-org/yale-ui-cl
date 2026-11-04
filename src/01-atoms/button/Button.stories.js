@@ -24,6 +24,7 @@ export default {
     content: 'Show more events',
     href: '',
     variant: 'outline',
+    outlineWeight: '2',
     animate: 'fade',
     radius: 'none',
     controlType: 'default',
