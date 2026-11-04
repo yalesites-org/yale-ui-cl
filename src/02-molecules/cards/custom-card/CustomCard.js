@@ -13,7 +13,7 @@ const watchSlot = (slot, onChange) => {
 
 // The heading link is rendered here rather than slotted so its ::after can stretch over the whole
 // card, making it clickable, and so it can be dropped when there's no href.
-// The image wrapper always renders: without an image it becomes the decorative colour bar.
+// The image wrapper always renders: without an image it becomes the decorative color bar.
 const customCardTemplate = document.createElement("template");
 customCardTemplate.innerHTML = `
 	<div class="custom-card" data-with-image="false">

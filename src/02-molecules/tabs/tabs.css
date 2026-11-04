@@ -3,12 +3,11 @@
   display: block;
 }
 
-/* Component themes. Each theme takes its accent from one colour slot. The slots come from the
-   site's global theme when one is set (see below), otherwise from global theme one, the YaleSites
-   default. Themes four and five have no overrides in the Twig either, so they render as theme one;
-   the Twig's theme six depends on slot-nine, which isn't in the current tokens release. */
+/* Colour options. Each takes its accent from the palette colour it's named after; primary is the
+   default. Pages set the palette with the --color-theme-* custom properties, which inherit into
+   the shadow root; without them the Old Blues defaults apply. */
 :host(ycl-tabs) {
-  --color-tabs-action: var(--color-slot-one, var(--global-themes-one-colors-slot-one));
+  --color-tabs-action: var(--color-theme-primary, var(--color-blue-yale));
   --color-tabs-background: var(--color-gray-100);
   --color-tabs-selected: var(--color-basic-white);
   --color-tabs-border: var(--color-gray-300);
@@ -17,51 +16,12 @@
   --size-tabs-control: 4rem;
 }
 
-:host(ycl-tabs[theme="two"]) {
-  --color-tabs-action: var(--color-slot-two, var(--global-themes-one-colors-slot-two));
+:host(ycl-tabs[theme="secondary"]) {
+  --color-tabs-action: var(--color-theme-secondary, var(--color-blue-medium));
 }
 
-:host(ycl-tabs[theme="three"]) {
-  --color-tabs-action: var(--color-slot-five, var(--global-themes-one-colors-slot-five));
-}
-
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document (as index.html and Storybook do). */
-[data-global-theme="one"] ycl-tabs {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-  --color-slot-five: var(--global-themes-one-colors-slot-five);
-}
-
-[data-global-theme="two"] ycl-tabs {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-  --color-slot-five: var(--global-themes-two-colors-slot-five);
-}
-
-[data-global-theme="three"] ycl-tabs {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-  --color-slot-five: var(--global-themes-three-colors-slot-five);
-}
-
-[data-global-theme="four"] ycl-tabs {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-two);
-  --color-slot-five: var(--global-themes-four-colors-slot-five);
-}
-
-[data-global-theme="five"] ycl-tabs {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-  --color-slot-five: var(--global-themes-five-colors-slot-five);
-}
-
-[data-global-theme="six"] ycl-tabs {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-  --color-slot-five: var(--global-themes-six-colors-slot-five);
+:host(ycl-tabs[theme="accent-2"]) {
+  --color-tabs-action: var(--color-theme-accent-2, var(--color-gray-800));
 }
 
 .tabs {

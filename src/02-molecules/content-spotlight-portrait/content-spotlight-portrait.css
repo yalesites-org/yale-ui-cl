@@ -7,13 +7,13 @@
   display: none !important;
 }
 
-/* Component themes.
-   Each theme maps its background, text and link colours to colour slots. The slots come from the
-   site's global theme when one is set (see below), otherwise from that component theme's tokens.
-   They're set on the host so slotted content inherits them. */
-:host(ycl-content-spotlight-portrait[theme="one"]) {
-  --color-background: var(--color-slot-one, var(--component-themes-one-slot-one));
-  --color-text: var(--color-slot-eight, var(--component-themes-one-slot-eight));
+/* Colour options, named after the palette colour each one takes its background from. Without
+   a theme (or with theme="default") the component has no background. Pages set the palette with
+   the --color-theme-* custom properties, which inherit into the shadow root; without them the
+   Old Blues defaults apply. The colours are set on the host so slotted content inherits them. */
+:host(ycl-content-spotlight-portrait[theme="primary"]) {
+  --color-background: var(--color-theme-primary, var(--color-blue-yale));
+  --color-text: var(--color-basic-white);
   --color-heading: var(--color-text);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
@@ -21,35 +21,17 @@
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-:host(ycl-content-spotlight-portrait[theme="two"]) {
-  --color-background: var(--color-slot-four, var(--component-themes-two-slot-four));
-  --color-text: var(--color-slot-seven, var(--component-themes-two-slot-seven));
+:host(ycl-content-spotlight-portrait[theme="accent-1"]) {
+  --color-background: var(--color-theme-accent-1, var(--color-gray-100));
+  --color-text: var(--color-gray-800);
   --color-heading: var(--color-text);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
 }
 
-:host(ycl-content-spotlight-portrait[theme="three"]) {
-  --color-background: var(--color-slot-five, var(--component-themes-three-slot-five));
-  --color-text: var(--color-slot-eight, var(--component-themes-three-slot-eight));
-  --color-heading: var(--color-text);
-  --color-link-base: var(--color-text);
-  --color-link-hover: var(--color-text);
-  --color-link-visited-base: var(--content-spotlight-portrait-global-visited, var(--color-link-visited-light));
-  --color-link-visited-hover: var(--content-spotlight-portrait-global-visited-hover, var(--color-link-visited-light-hover));
-}
-
-:host(ycl-content-spotlight-portrait[theme="four"]) {
-  --color-background: var(--color-slot-three, var(--component-themes-four-colors-slot-three));
-  --color-text: var(--color-slot-seven, var(--component-themes-four-colors-slot-seven));
-  --color-heading: var(--color-text);
-  --color-link-base: var(--color-text);
-  --color-link-hover: var(--color-text);
-}
-
-:host(ycl-content-spotlight-portrait[theme="five"]) {
-  --color-background: var(--color-slot-two, var(--component-themes-five-colors-slot-two));
-  --color-text: var(--color-slot-eight, var(--component-themes-five-colors-slot-eight));
+:host(ycl-content-spotlight-portrait[theme="accent-2"]) {
+  --color-background: var(--color-theme-accent-2, var(--color-gray-800));
+  --color-text: var(--color-basic-white);
   --color-heading: var(--color-text);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
@@ -57,90 +39,30 @@
   --color-link-visited-hover: var(--color-link-visited-light-hover);
 }
 
-/* There's no component-themes-six in the current tokens release, and slot-nine isn't in it
-   either; gray-100 stands in for the light background, with theme one's dark text slot. */
-:host(ycl-content-spotlight-portrait[theme="six"]) {
-  --color-background: var(--color-slot-nine, var(--color-gray-100));
-  --color-text: var(--color-slot-seven, var(--component-themes-one-slot-seven));
+:host(ycl-content-spotlight-portrait[theme="tertiary"]) {
+  --color-background: var(--color-theme-tertiary, var(--color-blue-light));
+  --color-text: var(--color-gray-800);
   --color-heading: var(--color-text);
   --color-link-base: var(--color-text);
   --color-link-hover: var(--color-text);
+  /* The purple visited colours fall short of 4.5:1 on this light blue. */
   --color-link-visited-base: var(--color-text);
   --color-link-visited-hover: var(--color-text);
 }
 
-/* Global themes are set by a data-global-theme attribute on an ancestor in the page, which
-   shadow-root CSS can't see, so these rules only take effect when base.css is also loaded in the
-   document. */
-[data-global-theme="one"] ycl-content-spotlight-portrait {
-  --color-slot-one: var(--global-themes-one-colors-slot-one);
-  --color-slot-two: var(--global-themes-one-colors-slot-two);
-  --color-slot-three: var(--global-themes-one-colors-slot-three);
-  --color-slot-four: var(--global-themes-one-colors-slot-four);
-  --color-slot-five: var(--global-themes-one-colors-slot-five);
-  --color-slot-seven: var(--global-themes-one-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-one-colors-slot-eight);
-}
-
-[data-global-theme="two"] ycl-content-spotlight-portrait {
-  --color-slot-one: var(--global-themes-two-colors-slot-one);
-  --color-slot-two: var(--global-themes-two-colors-slot-two);
-  --color-slot-three: var(--global-themes-two-colors-slot-three);
-  --color-slot-four: var(--global-themes-two-colors-slot-four);
-  --color-slot-five: var(--global-themes-two-colors-slot-five);
-  --color-slot-seven: var(--global-themes-two-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-two-colors-slot-eight);
-}
-
-[data-global-theme="three"] ycl-content-spotlight-portrait {
-  --color-slot-one: var(--global-themes-three-colors-slot-one);
-  --color-slot-two: var(--global-themes-three-colors-slot-two);
-  --color-slot-three: var(--global-themes-three-colors-slot-three);
-  --color-slot-four: var(--global-themes-three-colors-slot-four);
-  --color-slot-five: var(--global-themes-three-colors-slot-five);
-  --color-slot-seven: var(--global-themes-three-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-three-colors-slot-eight);
-}
-
-/* Global four swaps slots two and five so each component theme gets its intended background,
-   and needs lighter visited links on theme three. */
-[data-global-theme="four"] ycl-content-spotlight-portrait {
-  --color-slot-one: var(--global-themes-four-colors-slot-one);
-  --color-slot-two: var(--global-themes-four-colors-slot-five);
-  --color-slot-three: var(--global-themes-four-colors-slot-three);
-  --color-slot-four: var(--global-themes-four-colors-slot-four);
-  --color-slot-five: var(--global-themes-four-colors-slot-two);
-  --color-slot-seven: var(--global-themes-four-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-four-colors-slot-eight);
-}
-
-[data-global-theme="four"] ycl-content-spotlight-portrait[theme="three"] {
-  --content-spotlight-portrait-global-visited: var(--color-gray-100);
-  --content-spotlight-portrait-global-visited-hover: var(--global-themes-four-colors-slot-eight);
-}
-
-[data-global-theme="five"] ycl-content-spotlight-portrait {
-  --color-slot-one: var(--global-themes-five-colors-slot-one);
-  --color-slot-two: var(--global-themes-five-colors-slot-two);
-  --color-slot-three: var(--global-themes-five-colors-slot-three);
-  --color-slot-four: var(--global-themes-five-colors-slot-four);
-  --color-slot-five: var(--global-themes-five-colors-slot-five);
-  --color-slot-seven: var(--global-themes-five-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-five-colors-slot-eight);
-}
-
-[data-global-theme="six"] ycl-content-spotlight-portrait {
-  --color-slot-one: var(--global-themes-six-colors-slot-one);
-  --color-slot-two: var(--global-themes-six-colors-slot-two);
-  --color-slot-three: var(--global-themes-six-colors-slot-three);
-  --color-slot-four: var(--global-themes-six-colors-slot-four);
-  --color-slot-five: var(--global-themes-six-colors-slot-five);
-  --color-slot-seven: var(--global-themes-six-colors-slot-seven);
-  --color-slot-eight: var(--global-themes-six-colors-slot-eight);
+:host(ycl-content-spotlight-portrait[theme="secondary"]) {
+  --color-background: var(--color-theme-secondary, var(--color-blue-medium));
+  --color-text: var(--color-basic-white);
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  /* The light visited colours fall short of 4.5:1 on this mid blue. */
+  --color-link-visited-base: var(--color-text);
+  --color-link-visited-hover: var(--color-text);
 }
 
 /* Links in the slotted text and caption are light DOM, out of reach of ::slotted(), so they're
-   coloured from the document (again only when base.css is loaded there). */
+   coloured from the document, which only works when base.css is loaded there. */
 ycl-content-spotlight-portrait > :not([slot="ctas"]) a {
   color: var(--color-link-base);
 }
@@ -196,17 +118,13 @@ ycl-content-spotlight-portrait picture[slot="image"] img {
   }
 }
 
-/* With a component theme the component gets a background and vertical padding. */
+/* With a colour option the component gets a background and vertical padding. */
 :host(ycl-content-spotlight-portrait[theme]:not([theme="default"])) .content-spotlight-portrait {
   --color-text-shadow: var(--color-background);
 
   padding-block: var(--size-spacing-10);
   background-color: var(--color-background);
   color: var(--color-text);
-}
-
-:host(ycl-content-spotlight-portrait[theme="six"]) .content-spotlight-portrait {
-  --color-text-shadow: transparent;
 }
 
 .content-spotlight-portrait__inner {

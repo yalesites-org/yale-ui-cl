@@ -2,6 +2,7 @@ import "./InlineMessage";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/icons/Icon";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 export default {
   title: 'Molecules/Inline Message',
@@ -26,14 +27,10 @@ export default {
     content: {control: 'text'},
     linkContent: {name: 'Link Text', control: 'text'},
     theme: {
-      name: 'Component Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
-    },
-    globalTheme: {
-      name: 'Site Global Theme',
-      type: 'select',
-      options: ['one', 'two', 'three', 'four', 'five', 'six'],
+      name: 'Color Option',
+      description: COLOR_OPTION_DESCRIPTION,
+      options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
+      control: { type: 'select', labels: colorOptionLabels('ycl-inline-message') },
     },
   },
   args: {
@@ -43,19 +40,16 @@ export default {
     heading: 'This is a general message heading',
     content: 'This is a general message content',
     linkContent: 'This is a link',
-    theme: 'one',
-    globalTheme: 'one',
+    theme: 'accent-1',
   },
 
   render: (args) =>
-    `<div data-global-theme="${args.globalTheme}">
-      <ycl-inline-message type="${args.type}" theme="${args.theme}"${args.icon === 'none' ? ' icon="none"' : ''}>
-        ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
-        <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-        <p>${args.content}</p>
-        <ycl-text-link slot="link" href="#">${args.linkContent}</ycl-text-link>
-      </ycl-inline-message>
-    </div>`,
+    `<ycl-inline-message type="${args.type}" theme="${args.theme}"${args.icon === 'none' ? ' icon="none"' : ''}>
+      ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
+      <ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+      <p>${args.content}</p>
+      <ycl-text-link slot="link" href="#">${args.linkContent}</ycl-text-link>
+    </ycl-inline-message>`,
 };
 
 export const Default = {};
@@ -76,7 +70,7 @@ export const TextOnly = {
 
 export const Themed = {
   args: {
-    theme: 'three',
+    theme: 'secondary',
   },
 };
 

@@ -2,6 +2,7 @@ import "./ContentSpotlightPortrait";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
 import "../../01-atoms/image/ResponsiveImage";
+import { COLOR_OPTION_DESCRIPTION, colorOptionLabels } from "../../00-tokens/theme/color-options.js";
 
 // Self-contained placeholder so the stories don't depend on an image host.
 const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
@@ -20,9 +21,10 @@ export default {
 		linkTwoContent: { name: "Second Link Content", control: "text" },
 		caption: { control: "text" },
 		theme: {
-			name: "Component Theme",
-			type: "select",
-			options: ["default", "one", "two", "three", "four", "five", "six"],
+			name: "Color Option",
+			description: COLOR_OPTION_DESCRIPTION,
+			options: ["default", "primary", "secondary", "tertiary", "accent-1", "accent-2"],
+			control: { type: "select", labels: colorOptionLabels("ycl-content-spotlight-portrait") },
 		},
 		position: {
 			name: "Image Position",
@@ -39,11 +41,6 @@ export default {
 			type: "select",
 			options: ["inline", "offset"],
 		},
-		globalTheme: {
-			name: "Site Global Theme",
-			type: "select",
-			options: ["one", "two", "three", "four", "five", "six"],
-		},
 	},
 	args: {
 		overline: "By Charlyn Paradis",
@@ -57,22 +54,19 @@ export default {
 		position: "image-left",
 		verticalAlign: "middle",
 		imageStyle: "inline",
-		globalTheme: "one",
 	},
 
 	render: (args) =>
-		`<div data-global-theme="${args.globalTheme}">
-			<ycl-content-spotlight-portrait theme="${args.theme}" position="${args.position}" vertical-align="${args.verticalAlign}" image-style="${args.imageStyle}">
-				<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="Portrait of a chemistry student"></ycl-image>
-				${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
-				${args.overline ? `<p slot="overline">${args.overline}</p>` : ""}
-				<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
-				${args.subheading ? `<p slot="subheading">${args.subheading}</p>` : ""}
-				${args.linkContent ? `<ycl-text-link slot="ctas" href="https://www.yale.edu">${args.linkContent}</ycl-text-link>` : ""}
-				${args.linkTwoContent ? `<ycl-text-link slot="ctas" href="https://www.yale.edu">${args.linkTwoContent}</ycl-text-link>` : ""}
-				<p>${args.text}</p>
-			</ycl-content-spotlight-portrait>
-		</div>`,
+		`<ycl-content-spotlight-portrait theme="${args.theme}" position="${args.position}" vertical-align="${args.verticalAlign}" image-style="${args.imageStyle}">
+			<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="Portrait of a chemistry student"></ycl-image>
+			${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
+			${args.overline ? `<p slot="overline">${args.overline}</p>` : ""}
+			<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>
+			${args.subheading ? `<p slot="subheading">${args.subheading}</p>` : ""}
+			${args.linkContent ? `<ycl-text-link slot="ctas" href="https://www.yale.edu">${args.linkContent}</ycl-text-link>` : ""}
+			${args.linkTwoContent ? `<ycl-text-link slot="ctas" href="https://www.yale.edu">${args.linkTwoContent}</ycl-text-link>` : ""}
+			<p>${args.text}</p>
+		</ycl-content-spotlight-portrait>`,
 };
 
 export const Default = {};
@@ -82,5 +76,5 @@ export const ImageRight = {
 };
 
 export const Themed = {
-	args: { theme: "three" },
+	args: { theme: "accent-2" },
 };
