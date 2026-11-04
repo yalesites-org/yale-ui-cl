@@ -1,5 +1,5 @@
 import "../../02-molecules/callout/Callout";
-import "../../02-molecules/banner/action/ActionBanner";
+import "../../03-organisms/banner/action/ActionBanner";
 import "../../02-molecules/quote-callout/QuoteCallout";
 import "../../02-molecules/tile-item/TileItem";
 import "../../02-molecules/facts-and-figures/FactsAndFigures";
