@@ -1,20 +1,29 @@
 import "./DateTime";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+
 export default {
   title: 'Atoms/Date Time',
   component: 'ycl-date-time',
   argTypes: {
-    start: { name: 'Start (ISO 8601)', control: 'text' },
-    end: { name: 'End (ISO 8601)', control: 'text' },
-    format: {
+    start: attributeArg('start: ISO 8601 date or Unix timestamp in seconds. Without a parseable start, the slotted fallback shows.', {
+      name: 'Start (ISO 8601)',
+      control: 'text',
+    }),
+    end: attributeArg('end: optional end of a range. Omitted when empty.', { name: 'End (ISO 8601)', control: 'text' }),
+    format: attributeArg('format: named display format (matches the Twig template\'s formats).', {
       name: 'Format',
-      type: 'select',
+      control: 'select',
       options: [
         'date_and_time', 'time', 'date', 'day__full', 'day__long', 'month_year', 'year_only',
         'same_day_diff_time', 'date_time_multiple_days', 'localist_same_day', 'localist_all_day',
       ],
-    },
-    allDay: { name: 'All day', control: 'boolean' },
-    timeZone: { name: 'Time zone', control: 'text' },
+    }),
+    allDay: attributeArg('all-day: show only the date(s) followed by "All day".', { name: 'All day', control: 'boolean' }),
+    timeZone: attributeArg('time-zone: IANA time zone to display in. Defaults to the visitor\'s local time.', {
+      name: 'Time zone',
+      control: 'text',
+    }),
+    fallback: slotArg('Default slot: text shown when there is no parseable start date. Omitted when empty.', { control: 'text' }),
   },
   args: {
     start: '2026-10-14T18:30:00-04:00',
@@ -22,41 +31,17 @@ export default {
     format: 'date_and_time',
     allDay: false,
     timeZone: 'America/New_York',
+    fallback: 'Date to be announced',
   },
-  render: (args) =>
-    `<p>
-      <ycl-date-time start="${args.start}"${args.end ? ` end="${args.end}"` : ''} format="${args.format}"${args.allDay ? ' all-day' : ''}${args.timeZone ? ` time-zone="${args.timeZone}"` : ''}></ycl-date-time>
+  render: (args) => `<p>
+      <ycl-date-time${attrs({
+        start: args.start,
+        end: args.end,
+        format: args.format,
+        'all-day': args.allDay,
+        'time-zone': args.timeZone,
+      })}>${args.fallback ?? ''}</ycl-date-time>
     </p>`,
 };
 
 export const Default = {};
-
-export const Time = {
-  args: { format: 'time' },
-};
-
-export const TimeRange = {
-  args: {
-    format: 'same_day_diff_time',
-    end: '2026-10-14T20:00:00-04:00',
-  },
-};
-
-export const MultipleDays = {
-  args: {
-    format: 'date_time_multiple_days',
-    end: '2026-10-16T17:00:00-04:00',
-  },
-};
-
-export const AllDay = {
-  args: {
-    start: '2026-07-01T00:00:00-04:00',
-    end: '2026-07-05T00:00:00-04:00',
-    allDay: true,
-  },
-};
-
-export const LongDate = {
-  args: { format: 'day__long' },
-};

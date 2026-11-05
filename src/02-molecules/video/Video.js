@@ -14,6 +14,14 @@ videoTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A video with an optional heading and text.
+ * @attr {"left"|"center"} alignment - Alignment of the heading and text. Defaults to left.
+ * @attr {"max"|"site"|"highlight"|"content"} width - Width of the video. Defaults to content.
+ * @slot - The video, usually a ycl-video-embed.
+ * @slot heading - The heading.
+ * @slot text - The text.
+ */
 export class Video extends HTMLElement {
 	#shadow;
 	#content;

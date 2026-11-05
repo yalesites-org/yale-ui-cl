@@ -10,6 +10,11 @@
   display: none;
 }
 
+/* YaleSites pads every [data-component-width] component with the site gutter. */
+.content-image {
+  padding-inline: var(--size-spacing-site-gutter);
+}
+
 /* Content is the default width for this component. */
 .content-image__inner {
   width: 100%;

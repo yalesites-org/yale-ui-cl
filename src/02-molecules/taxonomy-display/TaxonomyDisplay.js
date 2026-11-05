@@ -26,6 +26,11 @@ taxonomyDisplayItemTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * One labelled group of terms inside a ycl-taxonomy-display.
+ * @attr {string} label - The group label, such as Categories.
+ * @slot - The term links. Shows "None" when empty.
+ */
 export class TaxonomyDisplayItem extends HTMLElement {
 	#shadow;
 	#internals;
@@ -63,6 +68,12 @@ export class TaxonomyDisplayItem extends HTMLElement {
 	set label(value) { this.setAttribute("label", value); }
 }
 
+/**
+ * A list of taxonomy term groups. Children are ycl-taxonomy-display-item elements.
+ * @attr {"default"|"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to default.
+ * @attr {"content"|"highlight"} width - Width of the list.
+ * @slot - ycl-taxonomy-display-item elements.
+ */
 export class TaxonomyDisplay extends HTMLElement {
 	#shadow;
 

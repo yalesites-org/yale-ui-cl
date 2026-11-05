@@ -21,6 +21,16 @@ factsAndFiguresTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A statistic with supporting text and an optional icon.
+ * @attr {"default"|"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
+ * @attr {"center"|"left"} alignment - Text alignment. Defaults to center.
+ * @attr {"basic"|"plain"} presentation - basic draws a rule above the statistic. Defaults to basic.
+ * @attr {boolean} padded - Adds horizontal padding, for a stat on its own on a colored background.
+ * @slot icon - A decorative icon, such as a ycl-icon.
+ * @slot stat - The statistic.
+ * @slot - Supporting text.
+ */
 export class FactsAndFigures extends HTMLElement {
 	#shadow;
 
@@ -35,7 +45,7 @@ export class FactsAndFigures extends HTMLElement {
 		});
 	}
 
-	get theme() { return this.getAttribute("theme") ?? "one"; }
+	get theme() { return this.getAttribute("theme") ?? "primary"; }
 	set theme(value) { this.setAttribute("theme", value); }
 
 	get alignment() { return this.getAttribute("alignment") ?? "center"; }
