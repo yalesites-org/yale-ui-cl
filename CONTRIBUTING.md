@@ -1,5 +1,8 @@
 # Contributing
 
+Contributions are internal only for now. Pull requests from forks cannot run `npm ci` until
+the `@yalesites-org/tokens` package is public.
+
 ## Branches
 
 - `develop` is where work lands. Branch from it and open PRs into it.
@@ -33,4 +36,4 @@ counts. CI checks it.
    and `Name.stories.js`.
 2. Add `@import "<path>" layer(components.<name>);` to `src/styles/base.css`.
 3. Use token custom properties (such as `--color-blue-yale`), not hardcoded values.
-4. Add a story and a test.
+4. Add a story (`Name.stories.js`) and a unit test (`Name.test.js`) in the same folder.

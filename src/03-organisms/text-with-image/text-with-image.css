@@ -1,0 +1,292 @@
+/* Custom elements default to display: inline. */
+:host(ycl-text-with-image) {
+  display: block;
+}
+
+:host(ycl-text-with-image) [hidden] {
+  display: none !important;
+}
+
+/* Colour options, named after the palette colour each one takes its background from. With no
+   option (or "default") the component has no background. Pages set the palette with the
+   --color-theme-* custom properties, which inherit into the shadow root; without them the Old
+   Blues defaults apply. The colours are set on the host so slotted content inherits them. */
+:host(ycl-text-with-image[theme="primary"]) {
+  --color-background: var(--color-theme-primary, var(--color-blue-yale));
+  --color-text: var(--color-basic-white);
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-text-with-image[theme="accent-1"]) {
+  --color-background: var(--color-theme-accent-1, var(--color-gray-100));
+  --color-text: var(--color-gray-800);
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+}
+
+:host(ycl-text-with-image[theme="accent-2"]) {
+  --color-background: var(--color-theme-accent-2, var(--color-gray-800));
+  --color-text: var(--color-basic-white);
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+:host(ycl-text-with-image[theme="tertiary"]) {
+  --color-background: var(--color-theme-tertiary, var(--color-blue-light));
+  --color-text: var(--color-gray-800);
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  /* The purple visited colours fall short of 4.5:1 on this light blue. */
+  --color-link-visited-base: var(--color-text);
+  --color-link-visited-hover: var(--color-text);
+}
+
+:host(ycl-text-with-image[theme="secondary"]) {
+  --color-background: var(--color-theme-secondary, var(--color-blue-medium));
+  --color-text: var(--color-basic-white);
+  --color-heading: var(--color-text);
+  --color-link-base: var(--color-text);
+  --color-link-hover: var(--color-text);
+  /* The light visited colours fall short of 4.5:1 on this mid blue. */
+  --color-link-visited-base: var(--color-text);
+  --color-link-visited-hover: var(--color-text);
+}
+
+/* Links in the slotted text and caption are light DOM, out of reach of ::slotted(), so they're
+   coloured from the document (again only when base.css is loaded there). */
+ycl-text-with-image > :not([slot="ctas"]) a {
+  color: var(--color-link-base);
+}
+
+ycl-text-with-image > :not([slot="ctas"]) a:visited {
+  color: var(--color-link-visited-base);
+}
+
+ycl-text-with-image > :not([slot="ctas"]) a:hover {
+  color: var(--color-link-hover);
+}
+
+/* A slotted <picture> can't be reached with ::slotted(), so its <img> is sized from the document. */
+ycl-text-with-image picture[slot="image"] img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The component. Its inline padding is the site gutter, which grows with the viewport.
+   --size-spacing-site-gutter isn't in the tokens release, so its steps are repeated here. */
+.text-with-image {
+  --color-text-shadow: var(--color-basic-white);
+
+  padding-inline: var(--size-spacing-5);
+}
+
+/* 768px is --break-m. */
+@media (min-width: 768px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l. */
+@media (min-width: 992px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl. */
+@media (min-width: 1200px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl. */
+@media (min-width: 1400px) {
+  .text-with-image {
+    padding-inline: var(--size-spacing-10);
+  }
+}
+
+/* With a colour option the component gets a background and vertical padding. */
+:host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image {
+  --color-text-shadow: var(--color-background);
+
+  padding-block: var(--size-spacing-10);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.text-with-image__inner {
+  --component-width: var(--size-component-layout-width-site);
+
+  display: grid;
+  width: 100%;
+  max-width: var(--component-width);
+  margin-inline: auto;
+}
+
+:host(ycl-text-with-image[width="highlight"]) .text-with-image__inner {
+  --component-width: var(--size-component-layout-width-highlight);
+}
+
+/* 991.95px is just under --break-mobile; below it the image stacks above the content. */
+@media (max-width: 991.95px) {
+  .text-with-image__inner {
+    gap: var(--size-spacing-6);
+  }
+
+  .text-with-image__content {
+    order: 1;
+  }
+}
+
+/* 992px is --break-mobile. */
+@media (min-width: 992px) {
+  .text-with-image__inner {
+    grid-template: "primary secondary";
+    grid-template-columns: 1fr 1fr;
+    gap: var(--size-spacing-8);
+    align-items: flex-start;
+  }
+
+  :host(ycl-text-with-image[vertical-align="middle"]) .text-with-image__inner {
+    align-items: center;
+  }
+
+  :host(ycl-text-with-image[vertical-align="bottom"]) .text-with-image__inner {
+    align-items: flex-end;
+  }
+
+  /* The offset style lets the image push past the site width. */
+  :host(ycl-text-with-image[image-style="offset"]) .text-with-image__inner {
+    --component-width: calc(var(--size-component-layout-width-site) + var(--size-spacing-10));
+  }
+
+  /* Focus gives the image or the content the wider column. */
+  :host(ycl-text-with-image[focus="content"]:not([position="image-right"])) .text-with-image__inner,
+  :host(ycl-text-with-image[focus="image"][position="image-right"]) .text-with-image__inner {
+    grid-template-columns: 3fr 5fr;
+  }
+
+  :host(ycl-text-with-image[focus="image"]:not([position="image-right"])) .text-with-image__inner,
+  :host(ycl-text-with-image[focus="content"][position="image-right"]) .text-with-image__inner {
+    grid-template-columns: 5fr 3fr;
+  }
+
+  .text-with-image__image {
+    margin-top: var(--size-spacing-2);
+    grid-area: primary;
+  }
+
+  .text-with-image__content {
+    grid-area: secondary;
+  }
+
+  :host(ycl-text-with-image[position="image-right"]) .text-with-image__image {
+    grid-area: secondary;
+  }
+
+  :host(ycl-text-with-image[position="image-right"]) .text-with-image__content {
+    grid-area: primary;
+  }
+
+  /* Balance the offset image with a margin on the content. */
+  :host(ycl-text-with-image[image-style="offset"][position="image-right"]) .text-with-image__content {
+    margin-inline-start: var(--size-spacing-8);
+  }
+
+  :host(ycl-text-with-image[image-style="offset"]:not([position="image-right"])) .text-with-image__content {
+    margin-inline-end: var(--size-spacing-8);
+  }
+}
+
+/* Content. Spacing goes between visible parts only, so hidden empty ones don't add any. */
+.text-with-image__content > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--size-spacing-5);
+}
+
+.text-with-image__overline {
+  font: var(--font-style-heading-h6-yale-new);
+  text-transform: var(--font-text-transform-h6-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-gray-500);
+}
+
+/* gray-500 doesn't reach 4.5:1 on the coloured backgrounds, so the overline takes the text colour. */
+:host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image__overline {
+  color: var(--color-text);
+}
+
+.text-with-image__heading {
+  font: var(--font-style-heading-h3-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-heading);
+}
+
+.text-with-image__subheading {
+  font: var(--font-style-heading-h5-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  color: var(--color-text);
+}
+
+/* Slotted headings keep their semantics but take the component's type styles.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.text-with-image__overline ::slotted(*),
+.text-with-image__heading ::slotted(*),
+.text-with-image__subheading ::slotted(*) {
+  font: inherit !important;
+  margin: 0 !important;
+}
+
+.text-with-image__text {
+  color: var(--color-text);
+}
+
+/* Slotted paragraph spacing comes from .slotted-text in the shared shadow styles. */
+
+.text-with-image__ctas {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-5);
+}
+
+/* Image and caption. */
+.text-with-image__image .figure {
+  margin: 0;
+}
+
+.text-with-image__image ::slotted(img),
+.text-with-image__image ::slotted(picture) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Brown-gray, like every YaleSites image caption (its figcaption only carries the shared
+   .caption class). On a component theme the caption sits on the theme's colour, where brown-gray
+   wouldn't be legible, so it takes the theme's text colour there instead. */
+.text-with-image__caption {
+  font: var(--font-style-body-s-condensed);
+  margin-top: var(--size-spacing-4);
+  color: var(--color-basic-brown-gray);
+}
+
+:host(ycl-text-with-image[theme]:not([theme="default"])) .text-with-image__caption {
+  color: var(--color-text);
+}
+
+.text-with-image__caption ::slotted(p) {
+  margin: 0;
+}

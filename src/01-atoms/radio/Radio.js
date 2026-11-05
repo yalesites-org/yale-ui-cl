@@ -15,6 +15,17 @@ const previousKeys = ["ArrowUp", "ArrowLeft"];
 // radios group the way native ones do (same name, same form owner, same DOM tree) and the group
 // behaviour is rebuilt here: one checked at a time, arrow keys, a single tab stop, group-level
 // required validity and set position. Wrap a group in a <fieldset> with a <legend>.
+/**
+ * A form-associated radio button with its label. Radios with the same name form a group; wrap a group in a `<fieldset>` with a `<legend>`.
+ * @attr {boolean} checked - Whether this radio is selected.
+ * @attr {boolean} disabled - Disables the radio.
+ * @attr {boolean} required - One radio in the group must be selected for the form to submit.
+ * @attr {string} value - The value submitted with the form when selected. Defaults to "on".
+ * @attr {string} name - The group and form field name.
+ * @slot - The label text.
+ * @fires change - When the user selects this radio, including with the arrow keys.
+ * @fires input - When the user selects this radio, including with the arrow keys.
+ */
 export class Radio extends HTMLElement {
 	#shadow;
 	#root;

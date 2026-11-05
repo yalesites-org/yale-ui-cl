@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./custom-card.css?inline";
+import { updateLinkIcon } from "../../../utility.js";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -12,7 +13,7 @@ const watchSlot = (slot, onChange) => {
 
 // The heading link is rendered here rather than slotted so its ::after can stretch over the whole
 // card, making it clickable, and so it can be dropped when there's no href.
-// The image wrapper always renders: without an image it becomes the decorative colour bar.
+// The image wrapper always renders: without an image it becomes the decorative color bar.
 const customCardTemplate = document.createElement("template");
 customCardTemplate.innerHTML = `
 	<div class="custom-card" data-with-image="false">
@@ -24,6 +25,14 @@ customCardTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A card with a heading, text and optional image. With an href, the whole card is a link.
+ * @attr {string} href - URL the card links to.
+ * @attr {boolean} featured - Larger, featured presentation.
+ * @slot heading - The card heading.
+ * @slot - The card text.
+ * @slot image - The card image. Without one, a color bar shows instead.
+ */
 export class CustomCard extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
@@ -51,6 +60,9 @@ export class CustomCard extends HTMLElement {
 			// An <a> without href isn't a link, so a card with no URL simply isn't clickable.
 			if (newValue === null) this.link.removeAttribute("href");
 			else this.link.setAttribute("href", newValue);
+			// External and file links get the external/download icon after the title, as YaleSites'
+			// link treatment adds to linked card headings.
+			updateLinkIcon(this.link.querySelector(".fa-icon"), this.link, window.location.origin);
 		}
 	}
 

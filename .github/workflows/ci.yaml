@@ -29,6 +29,8 @@ jobs:
       # Vitest runs in real Chromium via Playwright (see vitest.config.js)
       - run: npx playwright install --with-deps chromium
       - run: npm test
+      - name: Check custom-elements.json is up to date
+        run: git diff --exit-code -- custom-elements.json
 
   build:
     runs-on: ubuntu-latest

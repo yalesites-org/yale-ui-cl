@@ -18,13 +18,23 @@ inlineMessageTemplate.innerHTML = `
 			<div class="inline-message__icon"><slot name="icon"></slot></div>
 			<div class="inline-message__content">
 				<div class="inline-message__heading"><slot name="heading"></slot></div>
-				<div class="inline-message__text"><slot></slot></div>
+				<div class="inline-message__text slotted-text"><slot></slot></div>
 				<div class="inline-message__link"><slot name="link"></slot></div>
 			</div>
 		</div>
 	</section>
 `;
 
+/**
+ * A short highlighted message with an icon, heading, text and link.
+ * @attr {"general"|"marketing"} type - Kind of message; sets the default icon. Defaults to general.
+ * @attr {"none"} icon - none hides the icon.
+ * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to accent-1.
+ * @slot icon - A decorative icon to use instead of the default one.
+ * @slot heading - The heading.
+ * @slot - The text.
+ * @slot link - A link.
+ */
 export class InlineMessage extends HTMLElement {
 	#shadow;
 

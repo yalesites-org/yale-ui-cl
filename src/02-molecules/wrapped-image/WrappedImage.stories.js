@@ -1,27 +1,27 @@
 import "./WrappedImage";
 import "../../01-atoms/image/ResponsiveImage";
 import "../../01-atoms/text-link/Link";
-
-// Self-contained placeholder so the stories don't depend on an image host.
-const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
-	`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="#dddddd"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="${Math.round(h / 8)}" fill="#4a4a4a">${w} x ${h}</text></svg>`
-)}`;
+import { attrs, attributeArg, slotArg, placeholder } from "../../../.storybook/story-helpers.js";
 
 export default {
 	title: "Molecules/Wrapped Image",
 	component: "ycl-wrapped-image",
 	argTypes: {
-		caption: { control: "text" },
-		alignment: {
+		alignment: attributeArg("Side the image floats on; left is the default.", {
 			name: "Image Alignment",
-			type: "select",
+			control: "select",
 			options: ["left", "right"],
-		},
-		imageStyle: {
+			mapping: { left: undefined },
+		}),
+		imageStyle: attributeArg("image-style: offset pulls the image out past the text column; floated is the default.", {
 			name: "Image Style",
-			type: "select",
+			control: "select",
 			options: ["floated", "offset"],
-		},
+			mapping: { floated: undefined },
+		}),
+		image: slotArg("The image (slot=\"image\").", { control: false }),
+		caption: slotArg("Image caption (slot=\"caption\"). Omitted when empty.", { control: "text" }),
+		text: slotArg("Body text that wraps around the image (default slot).", { control: false }),
 	},
 	args: {
 		caption: "Dr. Davis's research group at the Kline Chemistry Laboratory.",
@@ -30,7 +30,7 @@ export default {
 	},
 
 	render: (args) =>
-		`<ycl-wrapped-image alignment="${args.alignment}" image-style="${args.imageStyle}">
+		`<ycl-wrapped-image${attrs({ alignment: args.alignment, "image-style": args.imageStyle })}>
 			<ycl-image slot="image"><img src="${placeholder(900, 600)}" alt="Researchers working in a laboratory"></ycl-image>
 			${args.caption ? `<p slot="caption">${args.caption}</p>` : ""}
 			<p>Dr. Davis’s research group at the Kline Chemistry Laboratory uses experiments at multiple scales – in vitro, single cell, and whole organism – to study fundamental and applied problems at the intersection of chemistry, physics, and biology. They develop new quantitative spectroscopic imaging techniques to elucidate the relationship between function and dynamics of proteins and RNA inside living cells.</p>
@@ -39,11 +39,3 @@ export default {
 };
 
 export const Default = {};
-
-export const AlignedRight = {
-	args: { alignment: "right" },
-};
-
-export const Offset = {
-	args: { imageStyle: "offset" },
-};

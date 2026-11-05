@@ -26,6 +26,16 @@ searchResultTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * One search result: content type, linked title, breadcrumbs and text.
+ * @attr {string} href - URL of the result.
+ * @attr {string} content-type - Content type shown above the title.
+ * @attr {boolean} cas - Needs a Yale login: shows a lock and hides everything but the title.
+ * @slot heading - The title, as a heading element.
+ * @slot breadcrumbs - Breadcrumbs.
+ * @slot highlighted - Text with the search terms highlighted.
+ * @slot teaser - Summary text.
+ */
 export class SearchResult extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
