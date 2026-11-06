@@ -83,9 +83,9 @@ const departmentCards = [
 ];
 
 const waysToGetInvolved = [
-	["one", "Join a research group"],
-	["two", "Become a peer tutor"],
-	["three", "Join the chemistry society"],
+	["primary", "Join a research group"],
+	["secondary", "Become a peer tutor"],
+	["tertiary", "Join the chemistry society"],
 ];
 
 const departmentHomepage = () => page("homepage-main", {
@@ -97,7 +97,7 @@ const departmentHomepage = () => page("homepage-main", {
 	main: `
 		<ycl-page-title display="visually-hidden">Department of Chemistry</ycl-page-title>
 
-		<ycl-action-banner theme="one" layout="left" button-alignment="left" width="full">
+		<ycl-action-banner theme="primary" layout="left" button-alignment="left" width="full">
 			<ycl-image slot="image"><img src="${bannerImage}" alt="Students working at a lab bench"></ycl-image>
 			<ycl-heading level="2" slot="heading">Discovery starts at the molecular level</ycl-heading>
 			<p>Our students and faculty work across chemistry, biology, physics, and materials science.</p>
@@ -105,7 +105,7 @@ const departmentHomepage = () => page("homepage-main", {
 			<ycl-cta-link slot="actions" variant="outline" href="#">Visit the department</ycl-cta-link>
 		</ycl-action-banner>
 
-		<ycl-quick-links theme="one" variant="promotional">
+		<ycl-quick-links theme="primary" variant="promotional">
 			<ycl-heading level="2" slot="heading">Get started</ycl-heading>
 			<p slot="description">The pages people visit most often.</p>
 			<ycl-image slot="image"><img src="${bannerImage}" alt=""></ycl-image>
@@ -116,7 +116,7 @@ const departmentHomepage = () => page("homepage-main", {
 		</ycl-quick-links>
 
 		${section("The department by the numbers", grid(departmentFacts.map(([icon, stat, label]) =>
-			`<ycl-facts-and-figures theme="one" padded><ycl-icon slot="icon" name="${icon}"></ycl-icon><span slot="stat">${stat}</span>${label}</ycl-facts-and-figures>`), "14rem"))}
+			`<ycl-facts-and-figures theme="primary" padded><ycl-icon slot="icon" name="${icon}"></ycl-icon><span slot="stat">${stat}</span>${label}</ycl-facts-and-figures>`), "14rem"))}
 
 		<ycl-text-with-image theme="default" width="site" position="image-left" vertical-align="middle" image-style="inline" focus="equal">
 			<ycl-image slot="image"><img src="${placeholder(900, 600)}" alt="Researchers reviewing results on a laptop in the lab"></ycl-image>
@@ -132,7 +132,7 @@ const departmentHomepage = () => page("homepage-main", {
 		${section("Ways to get involved", grid(waysToGetInvolved.map(([theme, label], i) =>
 			`<ycl-tile-item theme="${theme}" href="#" style="min-height: 14rem;"><span slot="heading">${String(i + 1).padStart(2, "0")}</span>${label}</ycl-tile-item>`), "14rem"))}
 
-		<ycl-callout theme="four" alignment="center">
+		<ycl-callout theme="tertiary" alignment="center">
 			<ycl-callout-item>
 				<ycl-heading level="2" slot="heading">Support the department</ycl-heading>
 				<p>Gifts fund student research, fellowships, and new teaching labs.</p>
@@ -147,7 +147,7 @@ const departmentHomepage = () => page("homepage-main", {
 });
 
 const programOverview = () => page("program-main", {
-	header: `<ycl-image-banner theme="one" size="short" width="full">
+	header: `<ycl-image-banner theme="primary" size="short" width="full">
 		<ycl-image><img src="${bannerImage}" alt="The courtyard outside the department building"></ycl-image>
 	</ycl-image-banner>`,
 	main: `
@@ -166,12 +166,12 @@ const programOverview = () => page("program-main", {
 			<p>Fieldwork, internships, and a senior project connect classroom learning to real places and communities. Many students work with partners in New Haven and across Connecticut, and some travel further afield for summer research. Read more on the <ycl-text-link href="#">program requirements</ycl-text-link> page.</p>
 		</ycl-wrapped-image>
 
-		<ycl-pull-quote variant="bar-left" theme="one">
+		<ycl-pull-quote variant="bar-left" theme="primary">
 			<p>The program taught me to look at a problem from every side, from the chemistry of the soil to the history of the town.</p>
 			<span slot="attribution">A recent graduate</span>
 		</ycl-pull-quote>
 
-		${section("How the program works", `<ycl-tabs theme="one" label="Program stages">
+		${section("How the program works", `<ycl-tabs theme="primary" label="Program stages">
 			<ycl-tab label="First year">
 				<p>Take the introductory sequence and a first-year seminar. Meet with an <ycl-text-link href="#">adviser</ycl-text-link> to plan your path.</p>
 			</ycl-tab>
@@ -189,7 +189,7 @@ const programOverview = () => page("program-main", {
 			<p slot="text">Students describe their fieldwork, senior projects, and life after graduation.</p>
 		</ycl-video>
 
-		<ycl-content-spotlight-portrait theme="one" position="image-left" vertical-align="middle" image-style="inline">
+		<ycl-content-spotlight-portrait theme="primary" position="image-left" vertical-align="middle" image-style="inline">
 			<ycl-image slot="image"><img src="${placeholder(400, 600)}" alt="The director of undergraduate studies standing in a greenhouse"></ycl-image>
 			<p slot="overline">Faculty spotlight</p>
 			<ycl-heading level="2" slot="heading">Teaching ecology outdoors</ycl-heading>
@@ -197,7 +197,7 @@ const programOverview = () => page("program-main", {
 			<p>The program's introductory ecology course meets in the field for half of its sessions, from salt marshes to city parks.</p>
 		</ycl-content-spotlight-portrait>
 
-		<ycl-wrapped-callout alignment="left" theme="one">
+		<ycl-wrapped-callout alignment="left" theme="primary">
 			<ycl-heading level="2" slot="callout">Declaring the major</ycl-heading>
 			<p slot="callout">Declare by the end of your sophomore year. <ycl-text-link href="#">See the steps</ycl-text-link>.</p>
 			<p>Most students declare after completing two introductory courses. Talk with the director of undergraduate studies about how courses you have already taken may count toward the major.</p>
@@ -209,7 +209,7 @@ const programOverview = () => page("program-main", {
 			<span slot="caption">Seniors present their projects at the spring symposium.</span>
 		</ycl-image-block>
 
-		<ycl-quote-callout variant="image" quote-alignment="left" theme="two">
+		<ycl-quote-callout variant="image" quote-alignment="left" theme="tertiary">
 			<ycl-image slot="image" ratio="1x1"><img src="${quoteImage}" alt=""></ycl-image>
 			<p>Every course asked us to connect what we learned to a real place. That's what made it stick.</p>
 			<span slot="attribution">Current student</span>
@@ -231,7 +231,7 @@ const programOverview = () => page("program-main", {
 			</ycl-accordion-item>
 		</ycl-accordion>`)}
 
-		<ycl-inline-message type="marketing" theme="one">
+		<ycl-inline-message type="marketing" theme="accent-1">
 			<ycl-heading level="2" slot="heading">Applications for summer fellowships are open</ycl-heading>
 			<p>Submit a short proposal and a faculty recommendation by February 15.</p>
 			<ycl-text-link slot="link" href="#">Apply for a fellowship</ycl-text-link>
@@ -325,7 +325,7 @@ const directoryListing = () => page("directory-main", {
 		</ycl-search-result>`).join("")}
 		<ycl-pager current="1" total-pages="4" base-url="#" label="Handbook pages"></ycl-pager>`)}
 
-		<ycl-link-grid theme="one" line-treatment="default">
+		<ycl-link-grid theme="primary" line-treatment="default">
 			<ycl-heading level="2" slot="heading">Program office</ycl-heading>
 			<ycl-heading level="3" slot="heading-one">Forms</ycl-heading>
 			<ycl-text-link slot="links-one" href="#">Declare the major</ycl-text-link>

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { setProjectAnnotations } from "@storybook/web-components-vite";
 import { composeStories } from "storybook/preview-api";
+import manifest from "../../custom-elements.json";
 import preview from "../../.storybook/preview.js";
 import * as module from "./PageExamples.stories.js";
 import "../styles/base.css";
@@ -23,10 +24,23 @@ const examples = Object.entries(composed).map(([exportName, Story]) => {
 		pageTitles: elements.filter((el) => el.localName === "ycl-page-title").length,
 		topLevel: [...root.children].map((el) => el.localName),
 		headers: elements.filter((el) => el.localName === "header").length,
+		attributes: elements.flatMap((el) => [...el.attributes].map((attr) => ({ tag: el.localName, name: attr.name, value: attr.value }))),
 	};
 	document.body.replaceChildren();
 	return result;
 });
+
+// The allowed values of each attribute whose declared type is a union of string literals such as
+// "primary"|"secondary", by tag and attribute name. Free-text, number and boolean types are left out.
+const literalUnion = /^\s*"[^"]*"(\s*\|\s*"[^"]*")*\s*$/;
+const allowedValues = new Map(
+	manifest.modules
+		.flatMap((mod) => mod.declarations ?? [])
+		.filter((d) => d.customElement && d.tagName)
+		.flatMap((d) => (d.attributes ?? [])
+			.filter((attr) => literalUnion.test(attr.type?.text ?? ""))
+			.map((attr) => [`${d.tagName} ${attr.name}`, [...attr.type.text.matchAll(/"([^"]*)"/g)].map((m) => m[1])])),
+);
 
 const contentTypeWords = /meta|event|post|profile|resource/i;
 
@@ -55,6 +69,14 @@ describe("Page examples", () => {
 		const outside = topLevel.filter((name) => name !== "ycl-link-skip" && !["header", "main", "footer"].includes(name));
 		expect(outside).toEqual([]);
 		expect(headers).toBeLessThanOrEqual(1);
+	});
+
+	it.each(examples)("$exportName only uses attribute values the manifest declares", ({ attributes }) => {
+		expect(allowedValues.has("ycl-callout theme")).toBe(true);
+		const invalid = attributes
+			.filter(({ tag, name, value }) => allowedValues.has(`${tag} ${name}`) && !allowedValues.get(`${tag} ${name}`).includes(value))
+			.map(({ tag, name, value }) => `<${tag} ${name}="${value}">`);
+		expect(invalid).toEqual([]);
 	});
 
 	it("stretches contained sections to the site width inside the flex <main>", async () => {
