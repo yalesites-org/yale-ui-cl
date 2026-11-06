@@ -176,7 +176,7 @@ describe("Page examples", () => {
 		return range.getClientRects()[0].left;
 	};
 
-	it.each(Object.keys(alignedAnchors).flatMap((exportName) => [1280, 375].map((width) => ({ exportName, width }))))(
+	it.each(Object.keys(alignedAnchors).flatMap((exportName) => [375, 1024, 1280, 1600].map((width) => ({ exportName, width }))))(
 		"$exportName lines up the left edge of every block's content at $width px",
 		async ({ exportName, width }) => {
 			const { innerWidth, innerHeight } = window;
@@ -197,6 +197,7 @@ describe("Page examples", () => {
 				const misaligned = edges.filter(([, left]) => Math.abs(left - reference) > 1).map(([label, left]) => `${label} starts at ${left}px, not ${reference}px`);
 				expect(misaligned).toEqual([]);
 			} finally {
+				document.body.replaceChildren();
 				await page.viewport(innerWidth, innerHeight);
 			}
 		},
