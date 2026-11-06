@@ -3,8 +3,9 @@ import * as previewModule from "../.storybook/preview.js";
 
 // Every component stories file (atoms and up), imported for real so their component modules
 // register their elements. The 00-tokens tier holds pages like the Theme Builder, which show
-// several components at once rather than documenting one.
-const modules = import.meta.glob("./0[1-9]-*/**/*.stories.js", { eager: true });
+// several components at once rather than documenting one, and 05-page-examples holds full sample
+// pages for the same reason.
+const modules = import.meta.glob(["./0[1-9]-*/**/*.stories.js", "!./05-page-examples/**"], { eager: true });
 
 // The exported stories, plus the meta's own render as its own entry when every story overrides it
 // (otherwise a story already exercises it).
