@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
 import { setProjectAnnotations } from "@storybook/web-components-vite";
 import { composeStories } from "storybook/preview-api";
 import manifest from "../../custom-elements.json";
@@ -117,6 +118,89 @@ describe("Page examples", () => {
 			document.body.removeAttribute("style");
 		}
 	});
+
+	// Where each block's content starts, by story. Each selector may match several elements; every
+	// match is an anchor. Shadow roots are closed, so these are light-DOM children, which render at
+	// their slotted position. Left out on purpose, as their content doesn't start at the page edge
+	// by design: the visually hidden page title on the homepage; the action banner, whose text sits
+	// inside its own padded panel; the centred callout; the pull quote and quote callout, which
+	// centre a content-width reading column; and the inline message, whose text follows its icon.
+	const alignedAnchors = {
+		DepartmentHomepage: [
+			"ycl-quick-links > ycl-heading[slot=\"heading\"]",
+			"main > div > ycl-heading",
+			// Image-left: the image starts the block and the text follows it.
+			"ycl-text-with-image > ycl-image[slot=\"image\"]",
+			"footer p",
+		],
+		ProgramOverview: [
+			"ycl-page-title",
+			"ycl-read-time",
+			"ycl-text > p",
+			"ycl-wrapped-image > p:not([slot])",
+			"main > div > ycl-heading",
+			"ycl-video > ycl-heading[slot=\"heading\"]",
+			"ycl-content-spotlight-portrait > ycl-image[slot=\"image\"]",
+			"ycl-wrapped-callout > p:not([slot])",
+			"ycl-image-block > ycl-image",
+			"ycl-accordion > ycl-heading[slot=\"heading\"]",
+			// The link group's column rule; its headings and links are inset from it by design.
+			"ycl-link-group",
+			"ycl-related-content > ycl-heading[slot=\"heading\"]",
+			// The first term group; later ones sit beside it on wide screens.
+			"ycl-taxonomy-display-item:first-of-type",
+			"footer p",
+		],
+		DirectoryListing: [
+			"ycl-page-title",
+			"ycl-text > p",
+			"main > div > ycl-heading",
+			"ycl-link-grid > ycl-heading[slot=\"heading\"]",
+			"footer p",
+		],
+	};
+
+	const settle = async () => {
+		const elements = [...document.body.querySelectorAll("*")];
+		await Promise.all([...new Set(elements.map((el) => el.localName).filter((name) => name.includes("-")))].map((tag) => customElements.whenDefined(tag)));
+		await Promise.all(elements.filter((el) => el.updateComplete).map((el) => el.updateComplete));
+		await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+	};
+
+	// The left edge of an anchor's content. For the page title that's its light-DOM text, measured
+	// with any prefix removed: the prefix sits in the closed shadow root at the start of the line.
+	const leftEdge = (el) => {
+		if (el.localName !== "ycl-page-title") return el.getBoundingClientRect().left;
+		const range = document.createRange();
+		range.selectNodeContents(el);
+		return range.getClientRects()[0].left;
+	};
+
+	it.each(Object.keys(alignedAnchors).flatMap((exportName) => [1280, 375].map((width) => ({ exportName, width }))))(
+		"$exportName lines up the left edge of every block's content at $width px",
+		async ({ exportName, width }) => {
+			const { innerWidth, innerHeight } = window;
+			await page.viewport(width, 900);
+			try {
+				const output = composed[exportName]();
+				if (typeof output === "string") document.body.innerHTML = output;
+				else document.body.replaceChildren(output);
+				document.querySelectorAll("ycl-page-title[prefix]").forEach((el) => el.removeAttribute("prefix"));
+				await settle();
+				const edges = alignedAnchors[exportName].flatMap((selector) => {
+					const matches = [...document.querySelectorAll(selector)];
+					// A missing anchor is a stale selector, not an aligned page.
+					expect(matches.length, selector).toBeGreaterThan(0);
+					return matches.map((el, i) => [`${selector} #${i + 1}`, Math.round(leftEdge(el) * 10) / 10]);
+				});
+				const reference = edges.find(([label]) => label.startsWith("main > div > ycl-heading"))[1];
+				const misaligned = edges.filter(([, left]) => Math.abs(left - reference) > 1).map(([label, left]) => `${label} starts at ${left}px, not ${reference}px`);
+				expect(misaligned).toEqual([]);
+			} finally {
+				await page.viewport(innerWidth, innerHeight);
+			}
+		},
+	);
 
 	it("gives the Department homepage quick links band a background image with no size label", () => {
 		document.body.innerHTML = composed.DepartmentHomepage();

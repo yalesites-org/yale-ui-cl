@@ -48,9 +48,23 @@ const placeholder = (w, h) => `data:image/svg+xml,${encodeURIComponent(
 )}`;
 const bannerImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#978d85"/></svg>')}`;
 
-// Page-level layout only: centres free-standing content (headings, lists of cards) at site width.
+// The components pad themselves with YaleSites' site gutter and centre their content at site width.
+// That gutter (--size-spacing-site-gutter) only exists inside their shadow roots, so the page
+// rebuilds its steps for its own wrappers. 768px is --break-m, 992px --break-l, 1200px --break-xl,
+// 1400px --break-2xl.
+const gutterStyles = `<style>
+	[data-page-gutter] { --page-gutter: var(--size-spacing-5); }
+	@media (min-width: 768px) { [data-page-gutter] { --page-gutter: var(--size-spacing-6); } }
+	@media (min-width: 992px) { [data-page-gutter] { --page-gutter: var(--size-spacing-7); } }
+	@media (min-width: 1200px) { [data-page-gutter] { --page-gutter: var(--size-spacing-8); } }
+	@media (min-width: 1400px) { [data-page-gutter] { --page-gutter: var(--size-spacing-10); } }
+</style>`;
+
+// Page-level layout only: gives content that has no gutter of its own (headings, lists of cards,
+// components that only cap their width) the same gutter and site width as the components, so its
+// left edge lines up with theirs at every viewport width.
 const contained = (html) =>
-	`<div style="width: 100%; box-sizing: border-box; max-width: var(--size-component-layout-width-site); margin-inline: auto; padding-inline: var(--size-spacing-6);">${html}</div>`;
+	`<div data-page-gutter style="width: 100%; box-sizing: border-box; max-width: calc(var(--size-component-layout-width-site) + 2 * var(--page-gutter)); margin-inline: auto; padding-inline: var(--page-gutter);">${html}</div>`;
 const grid = (items, min = "18rem") =>
 	`<ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(${min}, 1fr)); gap: var(--size-spacing-8);">${items.map((item) => `<li style="display: grid;">${item}</li>`).join("")}</ul>`;
 const section = (heading, body) =>
@@ -60,6 +74,7 @@ const page = (id, body) =>
 	`<ycl-link-skip href="#${id}">Skip to main content</ycl-link-skip>
 	${body.header ? `<header>${body.header}</header>` : ""}
 	<main id="${id}" tabindex="-1" style="display: flex; flex-direction: column; gap: var(--size-spacing-10); padding-block-end: var(--size-spacing-10);">
+		${gutterStyles}
 		${body.main}
 	</main>
 	<footer style="padding-block: var(--size-spacing-8);">
@@ -155,9 +170,9 @@ const programOverview = () => page("program-main", {
 
 		${contained(`<ycl-read-time target="#program-main"></ycl-read-time>`)}
 
-		<ycl-text variant="emphasized">
+		${contained(`<ycl-text variant="emphasized">
 			<p>Environmental Studies brings together the natural sciences, social sciences, and humanities to understand and address environmental challenges.</p>
-		</ycl-text>
+		</ycl-text>`)}
 
 		<ycl-wrapped-image alignment="right" image-style="floated">
 			<ycl-image slot="image"><img src="${placeholder(900, 600)}" alt="Students taking water samples from a stream"></ycl-image>
@@ -204,7 +219,7 @@ const programOverview = () => page("program-main", {
 			<p>Students who study abroad can often count approved courses toward their concentration. Plan ahead so that your senior project timeline still works.</p>
 		</ycl-wrapped-callout>
 
-		<ycl-image-block width="content" alignment="center">
+		<ycl-image-block width="site" alignment="left">
 			<ycl-image><img src="${placeholder(1600, 900)}" alt="Students presenting posters at the spring symposium" width="1600" height="900"></ycl-image>
 			<span slot="caption">Seniors present their projects at the spring symposium.</span>
 		</ycl-image-block>
@@ -215,7 +230,7 @@ const programOverview = () => page("program-main", {
 			<span slot="attribution">Current student</span>
 		</ycl-quote-callout>
 
-		${contained(`<ycl-accordion>
+		<ycl-accordion width="site" alignment="left">
 			<ycl-heading level="2" slot="heading">Frequently asked questions</ycl-heading>
 			<ycl-accordion-item>
 				<ycl-heading level="3" slot="heading">Can I double major?</ycl-heading>
@@ -229,7 +244,7 @@ const programOverview = () => page("program-main", {
 				<ycl-heading level="3" slot="heading">Who should I contact with questions?</ycl-heading>
 				<p>Email the program coordinator or stop by during weekly drop-in hours.</p>
 			</ycl-accordion-item>
-		</ycl-accordion>`)}
+		</ycl-accordion>
 
 		<ycl-inline-message type="marketing" theme="accent-1">
 			<ycl-heading level="2" slot="heading">Applications for summer fellowships are open</ycl-heading>
@@ -237,7 +252,7 @@ const programOverview = () => page("program-main", {
 			<ycl-text-link slot="link" href="#">Apply for a fellowship</ycl-text-link>
 		</ycl-inline-message>
 
-		<ycl-link-group>
+		${contained(`<ycl-link-group>
 			<ycl-heading level="2" slot="heading-one">For current students</ycl-heading>
 			<ycl-heading level="2" slot="heading-two">For prospective students</ycl-heading>
 			<ycl-text-link slot="links-one" href="#">Course requirements</ycl-text-link>
@@ -246,14 +261,14 @@ const programOverview = () => page("program-main", {
 			<ycl-text-link slot="links-two" href="#">Why study the environment?</ycl-text-link>
 			<ycl-text-link slot="links-two" href="#">Talk to a student</ycl-text-link>
 			<ycl-text-link slot="links-two" href="#">Visit a class</ycl-text-link>
-		</ycl-link-group>
+		</ycl-link-group>`)}
 
-		<ycl-related-content width="site">
+		${contained(`<ycl-related-content width="site">
 			<ycl-heading level="2" slot="heading">Related programs</ycl-heading>
 			<ycl-related-content-item href="#" type="Page" category="Program"><ycl-heading level="3" slot="heading">Ecology and Evolutionary Biology</ycl-heading></ycl-related-content-item>
 			<ycl-related-content-item href="#" type="Page" category="Program"><ycl-heading level="3" slot="heading">Global Affairs</ycl-heading></ycl-related-content-item>
 			<ycl-related-content-item href="#" type="Page" category="Certificate"><ycl-heading level="3" slot="heading">Energy Studies</ycl-heading></ycl-related-content-item>
-		</ycl-related-content>
+		</ycl-related-content>`)}
 
 		${contained(`<ycl-taxonomy-display>
 			<ycl-taxonomy-display-item label="Audience"><ycl-text-link href="#">Undergraduates</ycl-text-link><ycl-text-link href="#">Prospective students</ycl-text-link></ycl-taxonomy-display-item>
@@ -291,9 +306,9 @@ const directoryListing = () => page("directory-main", {
 	main: `
 		<ycl-page-title>Courses and Advising</ycl-page-title>
 
-		<ycl-text alignment="left">
+		${contained(`<ycl-text alignment="left">
 			<p>Find this year's courses, look up an adviser, and search the program handbook. Contact the <ycl-text-link href="#">program office</ycl-text-link> if you can't find what you need.</p>
-		</ycl-text>
+		</ycl-text>`)}
 
 		${section("Courses this year", `<ycl-data-table label="Search courses" placeholder="Course, title or instructor">
 			<table>
@@ -325,7 +340,7 @@ const directoryListing = () => page("directory-main", {
 		</ycl-search-result>`).join("")}
 		<ycl-pager current="1" total-pages="4" base-url="#" label="Handbook pages"></ycl-pager>`)}
 
-		<ycl-link-grid theme="primary" line-treatment="default">
+		${contained(`<ycl-link-grid theme="primary" line-treatment="default">
 			<ycl-heading level="2" slot="heading">Program office</ycl-heading>
 			<ycl-heading level="3" slot="heading-one">Forms</ycl-heading>
 			<ycl-text-link slot="links-one" href="#">Declare the major</ycl-text-link>
@@ -335,7 +350,7 @@ const directoryListing = () => page("directory-main", {
 			<ycl-text-link slot="links-two" href="#">Grading and credit</ycl-text-link>
 			<ycl-text-link slot="links-three" href="#">Office hours</ycl-text-link>
 			<ycl-text-link slot="links-three" href="#">Contact us</ycl-text-link>
-		</ycl-link-grid>`,
+		</ycl-link-grid>`)}`,
 });
 
 // The pager pages in place, rather than navigating the preview away.
