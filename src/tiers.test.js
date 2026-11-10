@@ -7,6 +7,7 @@ const TIERS = {
 	"01-atoms": "Atoms",
 	"02-molecules": "Molecules",
 	"03-organisms": "Organisms",
+	"05-page-examples": "Page examples",
 };
 
 const stories = Object.entries(import.meta.glob("./0*-*/**/*.stories.js", { eager: true })).map(([path, module]) => {
