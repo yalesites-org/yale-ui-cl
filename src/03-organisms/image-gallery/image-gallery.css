@@ -1,0 +1,85 @@
+/* Custom elements default to display: inline. */
+:host(ycl-image-gallery) {
+  display: block;
+  margin-bottom: var(--size-spacing-7);
+  --gallery-columns: 2;
+  --gallery-gap: var(--size-spacing-4);
+}
+
+:host(ycl-image-gallery[hidden]) {
+  display: none;
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  :host(ycl-image-gallery) {
+    --gallery-columns: 3;
+  }
+
+  :host(ycl-image-gallery[columns="2"]) {
+    --gallery-columns: 2;
+  }
+
+  :host(ycl-image-gallery[columns="4"]) {
+    --gallery-columns: 4;
+  }
+}
+
+.gallery__list {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-columns), minmax(0, 1fr));
+  gap: var(--gallery-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery__item {
+  min-width: 0;
+  margin: 0;
+}
+
+/* The button is only a hit area around the image, so it carries none of the browser's chrome. */
+.gallery__trigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gallery__trigger:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-blue-yale);
+  outline-offset: var(--size-spacing-1);
+}
+
+/* Items bring their own bottom margin and gutter for page layout; inside a grid the gap spaces them. */
+::slotted(*) {
+  display: block;
+  margin-bottom: 0;
+  /* Image Block pads itself with the site gutter; the grid has no gutter of its own to add. */
+  --size-spacing-site-gutter: 0;
+}
+
+.gallery__viewer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--size-spacing-4);
+}
+
+.gallery__stage {
+  min-width: 0;
+}
+
+.gallery__stage img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}

@@ -4035,6 +4035,76 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/03-organisms/image-gallery/ImageGallery.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A grid of images. Add `interactive` to open each image in a viewer with previous and next buttons.\nEvery child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item\nhas a caption. Each image needs alt text.",
+          "name": "ImageGallery",
+          "slots": [
+            {
+              "description": "The items.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "interactive",
+              "description": "Whether each image opens in a viewer. Reflects the interactive attribute."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name of the list of images."
+            },
+            {
+              "name": "interactive",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Opens each image in a viewer dialog."
+            },
+            {
+              "type": {
+                "text": "\"2\"|\"3\"|\"4\""
+              },
+              "description": "Columns from the medium breakpoint up. Defaults to 3.",
+              "name": "columns"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-image-gallery",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImageGallery",
+          "declaration": {
+            "name": "ImageGallery",
+            "module": "src/03-organisms/image-gallery/ImageGallery.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-image-gallery",
+          "declaration": {
+            "name": "ImageGallery",
+            "module": "src/03-organisms/image-gallery/ImageGallery.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/03-organisms/tabs/Tabs.js",
       "declarations": [
         {
