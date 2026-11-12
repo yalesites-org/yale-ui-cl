@@ -107,7 +107,9 @@ export class ImageGallery extends HTMLElement {
 		const viewer = this.#modal.querySelector(".gallery__viewer");
 		viewer.querySelector(".gallery__previous").addEventListener("click", (event) => this.#step(-1, event.currentTarget));
 		viewer.querySelector(".gallery__next").addEventListener("click", (event) => this.#step(1, event.currentTarget));
-		viewer.addEventListener("keydown", (event) => {
+		// On the modal, not the viewer: a freshly opened dialog focuses its close button, which is
+		// outside the viewer, and keydown still reaches the host from there.
+		this.#modal.addEventListener("keydown", (event) => {
 			const by = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
 			if (by) this.#step(by);
 		});
@@ -119,7 +121,9 @@ export class ImageGallery extends HTMLElement {
 	}
 
 	#clickHandler = (event) => {
-		const trigger = event.target.closest(".gallery__trigger");
+		// A click on the image lands on the slotted element, which closest() can't climb out of into
+		// this shadow root, so look along the event's path instead.
+		const trigger = event.composedPath().find((node) => node.classList?.contains("gallery__trigger"));
 		if (!trigger) return;
 		this.#show(Number(trigger.dataset.index));
 		this.#modal.show();

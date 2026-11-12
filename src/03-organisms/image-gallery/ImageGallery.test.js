@@ -48,6 +48,13 @@ describe("ycl-image-gallery", () => {
 			expect(modal(gallery).open).toBe(false);
 		});
 
+		it("opens when the image itself is clicked, as a mouse does", () => {
+			const gallery = mount(markup("interactive"));
+			gallery.children[1].querySelector("img").dispatchEvent(new MouseEvent("click", { bubbles: true, composed: true }));
+			expect(modal(gallery).open).toBe(true);
+			expect(heading(gallery)).toBe("Image 2 of 3");
+		});
+
 		it("opens the clicked image in the viewer with its position", () => {
 			const gallery = mount(markup("interactive"));
 			triggers(gallery)[1].click();
@@ -80,6 +87,14 @@ describe("ycl-image-gallery", () => {
 			shadowOf(gallery).querySelector(".gallery__viewer").dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
 			expect(viewerImage(gallery).alt).toBe("Gate");
 			shadowOf(gallery).querySelector(".gallery__viewer").dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+			expect(viewerImage(gallery).alt).toBe("Library");
+		});
+
+		it("steps with the arrow keys while the close button has focus, where a freshly opened viewer starts", () => {
+			const gallery = mount(markup("interactive"));
+			triggers(gallery)[0].click();
+			const close = shadowOf(modal(gallery)).querySelector(".modal__close");
+			close.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true, composed: true }));
 			expect(viewerImage(gallery).alt).toBe("Library");
 		});
 
