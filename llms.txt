@@ -89,6 +89,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-read-time` | Estimated reading time |
 | `ycl-pager` | Page-number navigation |
 | `ycl-modal` | Modal dialog |
+| `ycl-background-video` | Muted looping video behind content, with a pause button |
 | `ycl-data-table` | Search and sorting for a `<table>` |
 
 ## Naming rules

@@ -26,6 +26,7 @@
 @import "../02-molecules/embed/embed.css" layer(components.embed);
 @import "../02-molecules/video/video.css" layer(components.video);
 @import "../02-molecules/modal/modal.css" layer(components.modal);
+@import "../02-molecules/background-video/background-video.css" layer(components.background-video);
 @import "../03-organisms/banner/action/action-banner.css" layer(components.action-banner);
 @import "../03-organisms/banner/image/image-banner.css" layer(components.image-banner);
 @import "../02-molecules/alert/alert.css" layer(components.alert);

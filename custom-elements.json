@@ -1755,6 +1755,62 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/02-molecules/background-video/BackgroundVideo.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A muted, looping video that plays behind content, with a pause/play button (WCAG 2.2.2).\nWith prefers-reduced-motion it does not autoplay and shows the poster image.",
+          "name": "BackgroundVideo",
+          "slots": [
+            {
+              "description": "Content placed over the video.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL of the video file."
+            },
+            {
+              "name": "poster",
+              "type": {
+                "text": "string"
+              },
+              "description": "Image shown before the video loads and while it is paused."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-background-video",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BackgroundVideo",
+          "declaration": {
+            "name": "BackgroundVideo",
+            "module": "src/02-molecules/background-video/BackgroundVideo.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-background-video",
+          "declaration": {
+            "name": "BackgroundVideo",
+            "module": "src/02-molecules/background-video/BackgroundVideo.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/02-molecules/callout/Callout.js",
       "declarations": [
         {
