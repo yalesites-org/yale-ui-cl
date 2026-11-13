@@ -29,6 +29,7 @@
   display: block;
 }
 
+.section-header__top[hidden],
 .section-header__heading[hidden],
 .section-header__link[hidden],
 .section-header__text[hidden] {

@@ -24,6 +24,16 @@ describe("ycl-section-header", () => {
 		expect(link(element).hidden).toBe(true);
 	});
 
+	it("hides the top row when it has neither heading nor link, so intro-only headers start flush", async () => {
+		const element = mount(`<ycl-section-header><span slot="text">Intro</span></ycl-section-header>`);
+		await settle();
+		const top = part(element, ".section-header__top");
+		expect(top.hidden).toBe(true);
+		element.append(Object.assign(document.createElement("span"), { textContent: "Events" }));
+		await settle();
+		expect(top.hidden).toBe(false);
+	});
+
 	it("hides the link without an href, even when it has text", async () => {
 		const element = mount(`<ycl-section-header>Events<span slot="link">View all</span></ycl-section-header>`);
 		await settle();

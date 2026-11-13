@@ -38,6 +38,7 @@ export class SectionHeader extends HTMLElement {
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "section-header")];
 		this.#shadow.appendChild(document.importNode(sectionHeaderTemplate.content, true));
+		this.top = this.#shadow.querySelector(".section-header__top");
 		this.heading = this.#shadow.querySelector(".section-header__heading");
 		this.link = this.#shadow.querySelector(".section-header__link");
 		this.text = this.#shadow.querySelector(".section-header__text");
@@ -65,6 +66,8 @@ export class SectionHeader extends HTMLElement {
 		if (href) this.link.setAttribute("href", href);
 		else this.link.removeAttribute("href");
 		this.link.hidden = !href || !hasContent(this.slots.link);
+		// An empty row would still add a flex gap above the intro text.
+		this.top.hidden = this.heading.hidden && this.link.hidden;
 	}
 
 	get level() { return this.getAttribute("level"); }
