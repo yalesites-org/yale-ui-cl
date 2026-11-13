@@ -75,6 +75,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-tile-item` | Colored tile |
 | `ycl-facts-and-figures` | Statistic with supporting text |
 | `ycl-link-group` | One or two columns of links |
+| `ycl-section-header` | Optional heading, intro text and link above a group of items |
 | `ycl-link-grid` | Up to four columns of links |
 | `ycl-quick-links` | Heading, description and a list of links |
 | `ycl-link-skip` | "Skip to main content" link |
