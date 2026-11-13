@@ -140,6 +140,7 @@ describe("ycl-image-gallery", () => {
 			const gallery = mount(markup("interactive"));
 			triggers(gallery)[1].click();
 			expect(toggle(gallery).hidden).toBe(true);
+			expect(getComputedStyle(toggle(gallery)).display).toBe("none");
 		});
 
 		it("collapses the caption again on the next image", () => {

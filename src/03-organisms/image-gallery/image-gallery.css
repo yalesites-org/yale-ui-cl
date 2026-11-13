@@ -110,6 +110,12 @@
   cursor: pointer;
 }
 
+.viewer__close[hidden],
+.viewer__step[hidden],
+.viewer__caption-toggle[hidden] {
+  display: none;
+}
+
 .viewer__close:focus-visible,
 .viewer__step:focus-visible,
 .viewer__caption-toggle:focus-visible {
