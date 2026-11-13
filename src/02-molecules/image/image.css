@@ -65,6 +65,11 @@ ycl-image-block > picture img {
   margin-top: var(--size-spacing-4);
 }
 
+/* A host can hide the caption (the image gallery does, showing it in its viewer instead). */
+.content-image .caption:not([hidden]) {
+  display: var(--image-block-caption-display, block);
+}
+
 .content-image .caption ::slotted(p) {
   margin: 0;
 }

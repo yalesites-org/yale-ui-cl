@@ -24,12 +24,10 @@ export default {
   component: 'ycl-image-gallery',
   argTypes: {
     label: attributeArg('Accessible name of the list of images.', { control: 'text' }),
-    columns: attributeArg('Columns from the medium breakpoint up. Two columns on small screens.', {
-      control: 'select',
-      options: ['2', '3', '4'],
-      mapping: { 3: undefined },
+    narrow: attributeArg('Keeps two images across at every width, for a narrow column. Without it the grid is 2 across on small screens, 3 from the medium breakpoint and 4 from the large.', {
+      control: 'boolean',
     }),
-    interactive: attributeArg('Opens each image in a viewer with previous and next buttons. The viewer is a modal dialog: Escape closes it and the arrow keys step through the images.', {
+    interactive: attributeArg('Opens each image in a full-screen viewer with previous and next buttons that wrap around and a numbered pager. Escape closes it and the arrow keys step through the images.', {
       control: 'boolean',
     }),
     items: slotArg('The default slot: one `ycl-image` (or `ycl-image-block` when the image has a caption) per item. Every image needs alt text that describes it.', {
@@ -38,12 +36,12 @@ export default {
   },
   args: {
     label: 'Campus photos',
-    columns: '3',
+    narrow: false,
     interactive: false,
   },
 
   render: (args) =>
-    `<ycl-image-gallery${attrs({ label: args.label, columns: args.columns, interactive: args.interactive })}>
+    `<ycl-image-gallery${attrs({ label: args.label, narrow: args.narrow, interactive: args.interactive })}>
       ${images.map(item).join('\n      ')}
     </ycl-image-gallery>`,
 };
@@ -56,6 +54,12 @@ export const InteractiveGrid = {
   },
 };
 
+const captions = [
+  'Students cross the quad on the first warm day of spring.',
+  'The reading room, where long wooden tables hold the quiet of exam week.',
+  'The stone gate marks the old edge of campus and turns gold each October, when the leaves fall and visitors gather beneath it for photographs, a tradition that goes back generations.',
+];
+
 export const WithCaptions = {
   args: {
     interactive: true,
@@ -63,15 +67,21 @@ export const WithCaptions = {
   parameters: {
     docs: {
       description: {
-        story: 'Use `ycl-image-block` for items that have a caption. The caption shows under the thumbnail and in the viewer.',
+        story: 'Use `ycl-image-block` for items that have a caption. The caption shows in the viewer only, not under the thumbnail; a long one is trimmed with a Show more toggle.',
       },
     },
   },
   render: (args) =>
-    `<ycl-image-gallery${attrs({ label: args.label, columns: args.columns, interactive: args.interactive })}>
+    `<ycl-image-gallery${attrs({ label: args.label, narrow: args.narrow, interactive: args.interactive })}>
       ${images.slice(0, 3).map(([alt, label], index) => `<ycl-image-block>
         <ycl-image ratio="3x2"><img src="${photo(index + 1, label)}" alt="${alt}" width="1200" height="800"></ycl-image>
-        <span slot="caption">${alt}.</span>
+        <span slot="caption">${captions[index]}</span>
       </ycl-image-block>`).join('\n      ')}
     </ycl-image-gallery>`,
+};
+
+export const Narrow = {
+  args: {
+    narrow: true,
+  },
 };

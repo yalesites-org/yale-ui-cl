@@ -4039,7 +4039,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A grid of images. Add `interactive` to open each image in a viewer with previous and next buttons.\nEvery child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item\nhas a caption. Each image needs alt text.",
+          "description": "A grid of images: 2 across on small screens, 3 from the medium breakpoint, 4 from the large.\nAdd `interactive` to open each image in a full-screen viewer with previous and next buttons that\nwrap around, a numbered pager and the image's caption.\nEvery child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item\nhas a caption; captions show in the viewer only. Each image needs alt text.",
           "name": "ImageGallery",
           "slots": [
             {
@@ -4052,6 +4052,11 @@
               "kind": "field",
               "name": "interactive",
               "description": "Whether each image opens in a viewer. Reflects the interactive attribute."
+            },
+            {
+              "kind": "field",
+              "name": "narrow",
+              "description": "Whether the grid stays 2 across at every width. Reflects the narrow attribute."
             }
           ],
           "attributes": [
@@ -4067,14 +4072,14 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "Opens each image in a viewer dialog."
+              "description": "Opens each image in a full-screen viewer."
             },
             {
+              "name": "narrow",
               "type": {
-                "text": "\"2\"|\"3\"|\"4\""
+                "text": "boolean"
               },
-              "description": "Columns from the medium breakpoint up. Defaults to 3.",
-              "name": "columns"
+              "description": "Keeps 2 across at every width, for a narrow column."
             }
           ],
           "superclass": {

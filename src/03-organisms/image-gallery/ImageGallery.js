@@ -1,33 +1,43 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./image-gallery.css?inline";
-import "../../01-atoms/button/Button.js";
-import "../../02-molecules/modal/Modal.js";
+import { iconSvg } from "../../01-atoms/icons/icons.js";
 
 const galleryTemplate = document.createElement("template");
 galleryTemplate.innerHTML = `<ul class="gallery__list"></ul>`;
 
-// The viewer is built once, the first time the gallery is made interactive. It sits in the modal's
-// default slot; the heading carries the position and is a polite live region so a screen reader
-// hears it change as the person steps through.
+// The viewer is built once, the first time the gallery is made interactive. It is a native modal
+// dialog, full screen and dark, so the browser supplies the top layer, the inert page behind it and
+// Escape. The pager is a polite live region so a screen reader hears the position change.
+const closeIcon = iconSvg("xmark", "viewer__close-icon");
 const viewerTemplate = document.createElement("template");
 viewerTemplate.innerHTML = `
-	<ycl-modal>
-		<span slot="heading" aria-live="polite"></span>
-		<div class="gallery__viewer">
-			<ycl-button class="gallery__previous" label="Previous image" variant="outline">Previous</ycl-button>
-			<div class="gallery__stage"></div>
-			<ycl-button class="gallery__next" label="Next image" variant="outline">Next</ycl-button>
+	<dialog class="viewer" aria-label="Image viewer">
+		<button class="viewer__close" type="button" aria-label="Close viewer">${closeIcon}</button>
+		<div class="viewer__body">
+			<button class="viewer__previous viewer__step" type="button" aria-label="Previous image">${iconSvg("angle-right", "viewer__step-icon")}</button>
+			<div class="viewer__stage"></div>
+			<button class="viewer__next viewer__step" type="button" aria-label="Next image">${iconSvg("angle-right", "viewer__step-icon")}</button>
 		</div>
-	</ycl-modal>
+		<div class="viewer__caption" hidden>
+			<p class="viewer__caption-text"></p>
+			<button class="viewer__caption-toggle" type="button" aria-expanded="false" hidden>Show more</button>
+		</div>
+		<p class="viewer__pager" aria-live="polite"></p>
+	</dialog>
 `;
 
+// A caption longer than this gets the expand toggle.
+const CAPTION_LIMIT = 120;
+
 /**
- * A grid of images. Add `interactive` to open each image in a viewer with previous and next buttons.
+ * A grid of images: 2 across on small screens, 3 from the medium breakpoint, 4 from the large.
+ * Add `interactive` to open each image in a full-screen viewer with previous and next buttons that
+ * wrap around, a numbered pager and the image's caption.
  * Every child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item
- * has a caption. Each image needs alt text.
+ * has a caption; captions show in the viewer only. Each image needs alt text.
  * @attr {string} label - Accessible name of the list of images.
- * @attr {"2"|"3"|"4"} columns - Columns from the medium breakpoint up. Defaults to 3.
- * @attr {boolean} interactive - Opens each image in a viewer dialog.
+ * @attr {boolean} narrow - Keeps 2 across at every width, for a narrow column.
+ * @attr {boolean} interactive - Opens each image in a full-screen viewer.
  * @slot - The items.
  */
 export class ImageGallery extends HTMLElement {
@@ -35,11 +45,12 @@ export class ImageGallery extends HTMLElement {
 	#list;
 	#observer;
 	#items = [];
-	#modal = null;
+	#viewer = null;
+	#bodyOverflow = "";
 	#index = 0;
 
 	static get observedAttributes() {
-		return ["label", "interactive"];
+		return ["label", "interactive", "narrow"];
 	}
 
 	constructor() {
@@ -66,7 +77,7 @@ export class ImageGallery extends HTMLElement {
 		if (name === "label") {
 			if (newValue) this.#list.setAttribute("aria-label", newValue);
 			else this.#list.removeAttribute("aria-label");
-		} else if (this.isConnected) {
+		} else if (name === "interactive" && this.isConnected) {
 			this.#build();
 		}
 	}
@@ -74,6 +85,10 @@ export class ImageGallery extends HTMLElement {
 	/** Whether each image opens in a viewer. Reflects the interactive attribute. */
 	get interactive() { return this.hasAttribute("interactive"); }
 	set interactive(value) { this.toggleAttribute("interactive", Boolean(value)); }
+
+	/** Whether the grid stays 2 across at every width. Reflects the narrow attribute. */
+	get narrow() { return this.hasAttribute("narrow"); }
+	set narrow(value) { this.toggleAttribute("narrow", Boolean(value)); }
 
 	#build() {
 		this.#items = [...this.children];
@@ -100,26 +115,29 @@ export class ImageGallery extends HTMLElement {
 	}
 
 	#ensureViewer() {
-		if (this.#modal) return;
-		this.#modal = document.importNode(viewerTemplate.content, true).firstElementChild;
-		this.#shadow.append(this.#modal);
-		this.#modal.addEventListener("close", this.#closeHandler);
-		const viewer = this.#modal.querySelector(".gallery__viewer");
-		viewer.querySelector(".gallery__previous").addEventListener("click", (event) => this.#step(-1, event.currentTarget));
-		viewer.querySelector(".gallery__next").addEventListener("click", (event) => this.#step(1, event.currentTarget));
-		// On the modal, not the viewer: a freshly opened dialog focuses its close button, which is
-		// outside the viewer, and keydown still reaches the host from there.
-		this.#modal.addEventListener("keydown", (event) => {
+		if (this.#viewer) return;
+		this.#viewer = document.importNode(viewerTemplate.content, true).firstElementChild;
+		this.#shadow.append(this.#viewer);
+		const $ = (selector) => this.#viewer.querySelector(selector);
+		$(".viewer__previous").addEventListener("click", () => this.#show(this.#index - 1));
+		$(".viewer__next").addEventListener("click", () => this.#show(this.#index + 1));
+		$(".viewer__close").addEventListener("click", () => this.#viewer.close());
+		$(".viewer__caption-toggle").addEventListener("click", () => this.#expandCaption(!$(".viewer__caption-text").classList.contains("is-expanded")));
+		this.#viewer.addEventListener("close", this.#closeHandler);
+		// Keydown reaches the dialog from whichever control has focus, the close button included.
+		this.#viewer.addEventListener("keydown", (event) => {
 			const by = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
-			if (!by) return;
-			const from = event.composedPath().find((node) => node.classList?.contains("gallery__previous") || node.classList?.contains("gallery__next"));
-			this.#step(by, from);
+			if (by) this.#show(this.#index + by);
+		});
+		// A click on the backdrop lands on the dialog itself.
+		this.#viewer.addEventListener("click", (event) => {
+			if (event.target === this.#viewer) this.#viewer.close();
 		});
 	}
 
 	#removeViewer() {
-		this.#modal?.remove();
-		this.#modal = null;
+		this.#viewer?.remove();
+		this.#viewer = null;
 	}
 
 	#clickHandler = (event) => {
@@ -128,34 +146,41 @@ export class ImageGallery extends HTMLElement {
 		const trigger = event.composedPath().find((node) => node.classList?.contains("gallery__trigger"));
 		if (!trigger) return;
 		this.#show(Number(trigger.dataset.index));
-		this.#modal.show();
+		this.#bodyOverflow = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
+		this.#viewer.showModal();
 	};
 
-	#step(by, from) {
-		this.#show(this.#index + by);
-		// A button that just disabled itself would drop focus, so hand it to the other one.
-		if (from?.hasAttribute("disabled")) {
-			const other = from.classList.contains("gallery__next") ? ".gallery__previous" : ".gallery__next";
-			this.#modal.querySelector(other).focus();
-		}
-	}
-
+	// Steps past either end wrap round to the other.
 	#show(index) {
-		if (index < 0 || index >= this.#items.length) return;
-		this.#index = index;
-		// A copy, so the grid keeps its own. The grid's crop does not apply to the full view.
-		const copy = this.#items[index].cloneNode(true);
+		const count = this.#items.length;
+		this.#index = ((index % count) + count) % count;
+		// A copy, so the grid keeps its own. The grid's crop does not apply to the full view, and the
+		// caption moves to its own line below.
+		const copy = this.#items[this.#index].cloneNode(true);
+		const captionEl = copy.querySelector('[slot="caption"]');
+		const captionText = captionEl?.textContent.trim() ?? "";
+		captionEl?.remove();
 		for (const el of [copy, ...copy.querySelectorAll("[ratio]")]) el.removeAttribute("ratio");
-		this.#modal.querySelector(".gallery__stage").replaceChildren(copy);
-		this.#modal.querySelector('[slot="heading"]').textContent = `Image ${index + 1} of ${this.#items.length}`;
-		this.#modal.querySelector(".gallery__previous").toggleAttribute("disabled", index === 0);
-		this.#modal.querySelector(".gallery__next").toggleAttribute("disabled", index === this.#items.length - 1);
+		this.#viewer.querySelector(".viewer__stage").replaceChildren(copy);
+		this.#viewer.querySelector(".viewer__pager").textContent = `${this.#index + 1} / ${count}`;
+		this.#viewer.querySelector(".viewer__caption").hidden = !captionText;
+		this.#viewer.querySelector(".viewer__caption-text").textContent = captionText;
+		this.#viewer.querySelector(".viewer__caption-toggle").hidden = captionText.length <= CAPTION_LIMIT;
+		this.#expandCaption(false);
 	}
 
-	// Modal puts focus back on the element that was focused when it opened, which for a closed
-	// shadow root is this host. Send it to the image that was opened instead.
+	#expandCaption(expanded) {
+		this.#viewer.querySelector(".viewer__caption-text").classList.toggle("is-expanded", expanded);
+		const toggle = this.#viewer.querySelector(".viewer__caption-toggle");
+		toggle.setAttribute("aria-expanded", String(expanded));
+		toggle.textContent = expanded ? "Show less" : "Show more";
+	}
+
+	// Send focus to the image that was opened, and give the page its scroll back.
 	#closeHandler = () => {
-		this.#modal.querySelector(".gallery__stage").replaceChildren();
+		document.body.style.overflow = this.#bodyOverflow;
+		this.#viewer.querySelector(".viewer__stage").replaceChildren();
 		this.#list.querySelector(`.gallery__trigger[data-index="${this.#index}"]`)?.focus();
 	};
 }
