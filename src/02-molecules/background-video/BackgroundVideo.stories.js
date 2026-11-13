@@ -1,6 +1,9 @@
 import "./BackgroundVideo";
 import "../../01-atoms/headings/Heading";
 import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+// Inline poster so the story doesn't depend on an image host (the MDN poster URL 404s).
+const poster = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720"><rect width="100%" height="100%" fill="#1b3a5c"/></svg>')}`;
+
 export default {
   title: 'Molecules/Background Video',
   component: 'ycl-background-video',
@@ -20,13 +23,13 @@ export default {
   },
   args: {
     src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
-    poster: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/flower.png',
+    poster,
     content: 'Content over the video',
   },
 
   render: (args) =>
     `<ycl-background-video${attrs({ src: args.src, poster: args.poster })} style="min-height: 24rem; color: white;">
-      ${args.content ? `<ycl-heading level="2" style="padding: 2rem;">${args.content}</ycl-heading>` : ''}
+      ${args.content ? `<ycl-heading level="2" style="color: inherit; padding: 2rem;">${args.content}</ycl-heading>` : ''}
     </ycl-background-video>`,
 };
 
