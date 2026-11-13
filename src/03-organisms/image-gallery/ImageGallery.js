@@ -111,7 +111,9 @@ export class ImageGallery extends HTMLElement {
 		// outside the viewer, and keydown still reaches the host from there.
 		this.#modal.addEventListener("keydown", (event) => {
 			const by = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
-			if (by) this.#step(by);
+			if (!by) return;
+			const from = event.composedPath().find((node) => node.classList?.contains("gallery__previous") || node.classList?.contains("gallery__next"));
+			this.#step(by, from);
 		});
 	}
 

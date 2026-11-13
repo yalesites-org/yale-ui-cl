@@ -98,6 +98,15 @@ describe("ycl-image-gallery", () => {
 			expect(viewerImage(gallery).alt).toBe("Library");
 		});
 
+		it("keeps focus in the viewer when an arrow key disables the focused Next button", () => {
+			const gallery = mount(markup("interactive"));
+			triggers(gallery)[1].click();
+			next(gallery).focus();
+			next(gallery).dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true, composed: true }));
+			expect(next(gallery).hasAttribute("disabled")).toBe(true);
+			expect(shadowOf(gallery).activeElement).toBe(previous(gallery));
+		});
+
 		it("announces the position change politely", () => {
 			const gallery = mount(markup("interactive"));
 			triggers(gallery)[0].click();
