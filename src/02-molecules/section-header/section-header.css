@@ -1,0 +1,45 @@
+/* Custom elements default to display: inline. */
+:host(ycl-section-header) {
+  display: block;
+}
+
+/* A :host display rule would otherwise beat the UA's [hidden] rule. */
+:host(ycl-section-header[hidden]) {
+  display: none;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-4);
+  margin-bottom: var(--size-spacing-6);
+}
+
+.section-header__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--size-spacing-4) var(--size-spacing-6);
+}
+
+/* Custom elements need display restated before [hidden] works again. */
+.section-header__heading,
+.section-header__link {
+  display: block;
+}
+
+.section-header__heading[hidden],
+.section-header__link[hidden],
+.section-header__text[hidden] {
+  display: none;
+}
+
+/* Keeps the link on the right when the heading is absent. */
+.section-header__link {
+  margin-inline-start: auto;
+}
+
+.section-header__text {
+  max-width: var(--size-component-layout-width-content);
+}
