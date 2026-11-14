@@ -29,6 +29,7 @@ export { ActionBanner } from "./03-organisms/banner/action/ActionBanner.js";
 export { ImageBanner } from "./03-organisms/banner/image/ImageBanner.js";
 export { Alert } from "./02-molecules/alert/Alert.js";
 export { InlineMessage } from "./02-molecules/inline-message/InlineMessage.js";
+export { BannerContent } from "./02-molecules/banner-content/BannerContent.js";
 export { Callout, CalloutItem } from "./02-molecules/callout/Callout.js";
 export { QuoteCallout } from "./02-molecules/quote-callout/QuoteCallout.js";
 export { PullQuote } from "./02-molecules/pull-quote/PullQuote.js";

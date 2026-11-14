@@ -1755,6 +1755,77 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/02-molecules/banner-content/BannerContent.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The heading, text and actions that sit on top of a banner. Banners compose this instead of\neach carrying their own copy.",
+          "name": "BannerContent",
+          "slots": [
+            {
+              "description": "The heading, such as a ycl-heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The text.",
+              "name": ""
+            },
+            {
+              "description": "Links or buttons, such as ycl-cta-link elements.",
+              "name": "actions"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "theme",
+              "type": {
+                "text": "\"primary\"|\"secondary\"|\"tertiary\"|\"accent-1\"|\"accent-2\""
+              },
+              "description": "Color option, from the page palette. Defaults to primary."
+            },
+            {
+              "name": "placement",
+              "type": {
+                "text": "\"contained\"|\"full\""
+              },
+              "description": "contained keeps the content in a box of its own width, as when it overlays part of a banner; full lets it span the whole banner width. Defaults to contained."
+            },
+            {
+              "name": "button-alignment",
+              "type": {
+                "text": "\"left\"|\"center\"|\"right\""
+              },
+              "description": "Alignment of the actions. Defaults to left."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-banner-content",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BannerContent",
+          "declaration": {
+            "name": "BannerContent",
+            "module": "src/02-molecules/banner-content/BannerContent.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-banner-content",
+          "declaration": {
+            "name": "BannerContent",
+            "module": "src/02-molecules/banner-content/BannerContent.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/02-molecules/callout/Callout.js",
       "declarations": [
         {
