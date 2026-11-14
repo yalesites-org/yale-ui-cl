@@ -1,0 +1,177 @@
+/* Custom elements default to display: inline. */
+:host(ycl-banner-content) {
+  display: block;
+  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
+     spacing tokens it steps through. */
+  --banner-content-gutter: var(--size-spacing-5);
+}
+
+/* 768px is --break-m */
+@media (min-width: 768px) {
+  :host(ycl-banner-content) {
+    --banner-content-gutter: var(--size-spacing-6);
+  }
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  :host(ycl-banner-content) {
+    --banner-content-gutter: var(--size-spacing-7);
+  }
+}
+
+/* 1200px is --break-xl */
+@media (min-width: 1200px) {
+  :host(ycl-banner-content) {
+    --banner-content-gutter: var(--size-spacing-8);
+  }
+}
+
+/* 1400px is --break-2xl */
+@media (min-width: 1400px) {
+  :host(ycl-banner-content) {
+    --banner-content-gutter: var(--size-spacing-10);
+  }
+}
+
+.banner-content {
+  --banner-content-max-width: 37rem;
+  --color-text: var(--color-banner-text);
+  --color-banner-heading: var(--color-banner-text);
+  --color-banner-action: var(--color-banner-text);
+  --color-heading: var(--color-banner-heading);
+  --color-action: var(--color-banner-action);
+  --color-action-secondary: var(--color-banner-action-secondary);
+  --color-link-base: var(--color-banner-heading);
+  --color-link-hover: var(--color-banner-heading);
+
+  color: var(--color-text);
+  background-color: var(--color-banner-background);
+}
+
+/* Colour options, named after the palette colour each one takes its background from. Primary
+   is the default. Pages set the palette with the --color-theme-* custom properties, which inherit
+   into the shadow root; without them the Old Blues defaults apply. These are the same values the
+   banners use, so content looks the same wherever it sits. */
+.banner-content[data-component-theme="primary"] {
+  --color-banner-background: var(--color-theme-primary, var(--color-blue-yale));
+  --color-banner-text: var(--color-basic-white);
+  --color-banner-action-secondary: var(--color-banner-background);
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+.banner-content[data-component-theme="accent-1"] {
+  --color-banner-background: var(--color-theme-accent-1, var(--color-gray-100));
+  --color-banner-text: var(--color-gray-800);
+  --color-banner-action-secondary: var(--color-basic-white);
+}
+
+.banner-content[data-component-theme="accent-2"] {
+  --color-banner-background: var(--color-theme-accent-2, var(--color-gray-800));
+  --color-banner-text: var(--color-basic-white);
+  --color-banner-action-secondary: var(--color-theme-primary, var(--color-blue-yale));
+  --color-link-visited-base: var(--color-link-visited-light);
+  --color-link-visited-hover: var(--color-link-visited-light-hover);
+}
+
+.banner-content[data-component-theme="tertiary"] {
+  --color-banner-background: var(--color-theme-tertiary, var(--color-blue-light));
+  --color-banner-text: var(--color-gray-800);
+  --color-banner-action-secondary: var(--color-basic-white);
+  /* The purple visited colours fall short of 4.5:1 on this light blue. */
+  --color-link-visited-base: var(--color-banner-text);
+  --color-link-visited-hover: var(--color-banner-text);
+}
+
+.banner-content[data-component-theme="secondary"] {
+  --color-banner-background: var(--color-theme-secondary, var(--color-blue-medium));
+  --color-banner-text: var(--color-basic-white);
+  --color-banner-action-secondary: var(--color-theme-primary, var(--color-blue-yale));
+  /* The light visited colours fall short of 4.5:1 on this mid blue. */
+  --color-link-visited-base: var(--color-banner-text);
+  --color-link-visited-hover: var(--color-banner-text);
+}
+
+/* Placement. Contained is a box of its own width, as when the content overlays part of a banner.
+   Full spans the banner and lines the content up with the site width. */
+.banner-content__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: var(--size-spacing-6) var(--size-spacing-7) var(--size-spacing-7);
+}
+
+.banner-content[data-banner-placement="contained"] {
+  max-width: var(--banner-content-max-width);
+}
+
+.banner-content[data-banner-placement="full"] .banner-content__inner {
+  width: 100%;
+  max-width: calc(var(--size-component-layout-width-site) + (var(--banner-content-gutter) * 2));
+  margin-inline: auto;
+  padding-inline: var(--banner-content-gutter);
+}
+
+/* 992px is --break-l */
+@media (min-width: 992px) {
+  .banner-content[data-banner-placement="full"] .banner-content__inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-spacing-5);
+    padding-block: var(--size-spacing-5);
+  }
+}
+
+/* Slotted headings keep their semantics but take the banner heading's type style.
+   !important is needed because, without it, the document's h1-h6 rules beat ::slotted(). */
+.banner-content__heading {
+  font: var(--font-style-heading-h2-yale-new);
+  font-variant-numeric: oldstyle-nums;
+  margin-bottom: var(--size-spacing-2);
+}
+
+.banner-content__heading ::slotted(*) {
+  font: inherit !important;
+  color: inherit !important;
+  margin: 0 !important;
+}
+
+.banner-content__snippet {
+  font: var(--font-style-body-default-condensed);
+}
+
+/* The actions follow the text in the host's children, so the last paragraph is never :last-child. */
+.banner-content__snippet ::slotted(:last-of-type) {
+  margin-bottom: 0;
+}
+
+/* The actions. */
+.banner-content__actions {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--size-spacing-5);
+}
+
+.banner-content__actions[hidden] {
+  display: none;
+}
+
+.banner-content__actions[data-button-alignment="center"] {
+  justify-content: center;
+}
+
+.banner-content__actions[data-button-alignment="right"] {
+  justify-content: flex-end;
+}
+
+/* Set on the slotted elements themselves so they override any defaults a link component
+   declares on its own host. */
+.banner-content__actions ::slotted(*) {
+  --color-action: var(--color-banner-action);
+  --color-action-secondary: var(--color-banner-action-secondary);
+  flex: 0 0 auto;
+}

@@ -59,6 +59,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-wrapped-callout` | Callout box with body text wrapping around it |
 | `ycl-quote-callout` | Large quote with attribution |
 | `ycl-pull-quote` | Quote set off from the text |
+| `ycl-banner-content` | Heading, text and actions that sit on top of a banner |
 | `ycl-action-banner` | Banner with image, text and actions |
 | `ycl-image-banner` | Large image banner |
 | `ycl-page-title` | The page's h1 title area |

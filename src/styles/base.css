@@ -30,6 +30,7 @@
 @import "../03-organisms/banner/image/image-banner.css" layer(components.image-banner);
 @import "../02-molecules/alert/alert.css" layer(components.alert);
 @import "../02-molecules/inline-message/inline-message.css" layer(components.inline-message);
+@import "../02-molecules/banner-content/banner-content.css" layer(components.banner-content);
 @import "../02-molecules/callout/callout.css" layer(components.callout);
 @import "../02-molecules/quote-callout/quote-callout.css" layer(components.quote-callout);
 @import "../02-molecules/pull-quote/pull-quote.css" layer(components.pull-quote);
