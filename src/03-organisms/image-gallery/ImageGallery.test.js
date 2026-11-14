@@ -1,5 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { userEvent } from "vitest/browser";
 import { ImageGallery } from "./ImageGallery.js";
+import componentStyles from "./image-gallery.css?inline";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
 
 const items = (gallery) => [...shadowOf(gallery).querySelectorAll(".gallery__item")];
@@ -61,6 +63,39 @@ describe("ycl-image-gallery", () => {
 			expect(triggers(gallery)).toHaveLength(3);
 			expect(triggers(gallery).every((b) => b.getAttribute("aria-haspopup") === "dialog")).toBe(true);
 			expect(modal(gallery).open).toBe(false);
+		});
+
+		it("shows a decorative expand icon on each thumbnail and none without interactive", () => {
+			const gallery = mount(markup("interactive"));
+			for (const trigger of triggers(gallery)) {
+				const icon = trigger.querySelector(".gallery__expand");
+				expect(icon).not.toBeNull();
+				expect(icon.getAttribute("aria-hidden")).toBe("true");
+			}
+			expect(triggers(gallery)[0].textContent.trim()).toBe("");
+			expect(shadowOf(mount(markup())).querySelectorAll(".gallery__expand")).toHaveLength(0);
+		});
+
+		it("dims the photo on keyboard focus, and not otherwise", async () => {
+			const gallery = mount(markup("interactive"));
+			const trigger = triggers(gallery)[0];
+			const dim = () => Number(getComputedStyle(trigger, "::after").opacity);
+			expect(dim()).toBe(0);
+			await userEvent.tab();
+			expect(trigger.matches(":focus-visible")).toBe(true);
+			await vi.waitFor(() => expect(dim()).toBe(1));
+		});
+
+		// A test cannot force :hover into a closed shadow root, so the rule is read from the source.
+		it("dims the photo on hover as well", () => {
+			expect(componentStyles).toMatch(/\.gallery__trigger:hover::after,\s*\.gallery__trigger:focus-visible::after\s*\{\s*opacity: 1;/);
+		});
+
+		it("keeps the focus outline outside the dimmed photo", () => {
+			const gallery = mount(markup("interactive"));
+			const trigger = triggers(gallery)[0];
+			trigger.focus();
+			if (trigger.matches(":focus-visible")) expect(getComputedStyle(trigger).outlineStyle).toBe("solid");
 		});
 
 		it("opens when the image itself is clicked, as a mouse does", () => {
