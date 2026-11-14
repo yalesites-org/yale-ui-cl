@@ -1,0 +1,219 @@
+/* Custom elements default to display: inline. */
+:host(ycl-image-gallery) {
+  display: block;
+  margin-bottom: var(--size-spacing-7);
+  --gallery-columns: 2;
+  --gallery-gap: var(--size-spacing-4);
+}
+
+:host(ycl-image-gallery[hidden]) {
+  display: none;
+}
+
+/* 768px is --break-m, 992px is --break-l. A narrow gallery stays 2 across. */
+@media (min-width: 768px) {
+  :host(ycl-image-gallery:not([narrow])) {
+    --gallery-columns: 3;
+  }
+}
+
+@media (min-width: 992px) {
+  :host(ycl-image-gallery:not([narrow])) {
+    --gallery-columns: 4;
+  }
+}
+
+.gallery__list {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-columns), minmax(0, 1fr));
+  gap: var(--gallery-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery__item {
+  min-width: 0;
+  margin: 0;
+}
+
+/* The button is only a hit area around the image, so it carries none of the browser's chrome. */
+.gallery__trigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gallery__trigger:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-blue-yale);
+  outline-offset: var(--size-spacing-1);
+}
+
+/* Items bring their own bottom margin and gutter for page layout; inside a grid the gap spaces them. */
+::slotted(*) {
+  display: block;
+  margin-bottom: 0;
+  /* Image Block pads itself with the site gutter; the grid has no gutter of its own to add. */
+  --size-spacing-site-gutter: 0;
+  /* Captions show in the viewer only; Image Block reads this to hide its own. */
+  --image-block-caption-display: none;
+}
+
+/* The viewer is a full-screen dark dialog. */
+.viewer {
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  padding: var(--size-spacing-5);
+  border: 0;
+  background-color: var(--color-gray-900, #101010);
+  color: var(--color-basic-white);
+}
+
+/* Wide screens: Previous and Next flank the photo. Phones: the photo takes the full width and the
+   arrows sit either side of the counter beneath it. */
+.viewer[open] {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "close close close"
+    "previous stage next"
+    ". caption ."
+    ". pager .";
+  align-items: center;
+  gap: var(--size-spacing-4);
+}
+
+@media (max-width: 47.99rem) {
+  .viewer[open] {
+    grid-template-areas:
+      "close close close"
+      "stage stage stage"
+      "caption caption caption"
+      "previous pager next";
+  }
+}
+
+.viewer::backdrop {
+  background: #000;
+}
+
+.viewer__close {
+  grid-area: close;
+  justify-self: end;
+}
+
+.viewer__previous {
+  grid-area: previous;
+}
+
+.viewer__next {
+  grid-area: next;
+}
+
+.viewer__close,
+.viewer__step,
+.viewer__caption-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-spacing-7);
+  min-height: var(--size-spacing-7);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.viewer__close[hidden],
+.viewer__step[hidden],
+.viewer__caption-toggle[hidden] {
+  display: none;
+}
+
+.viewer__close:focus-visible,
+.viewer__step:focus-visible,
+.viewer__caption-toggle:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-basic-white);
+  outline-offset: var(--size-spacing-1);
+}
+
+.viewer__close-icon,
+.viewer__step-icon {
+  width: 1.5em;
+  height: 1.5em;
+  fill: currentColor;
+}
+
+/* There is no left-pointing icon, so Previous mirrors the right-pointing one. */
+.viewer__previous .viewer__step-icon {
+  transform: scaleX(-1);
+}
+
+.viewer__stage {
+  grid-area: stage;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  /* The photo is sized against the stage itself, whatever wraps it. */
+  container-type: size;
+}
+
+/* A photo of any shape stays whole inside the stage. */
+.viewer__stage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100cqw;
+  max-height: 100cqh;
+  object-fit: contain;
+}
+
+.viewer__caption {
+  grid-area: caption;
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+  text-align: center;
+  font: var(--font-style-body-s-condensed);
+}
+
+.viewer__caption-text {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.viewer__caption-text.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
+.viewer__caption-toggle {
+  margin-inline: auto;
+  text-decoration: underline;
+}
+
+.viewer__pager {
+  grid-area: pager;
+  margin: 0;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}

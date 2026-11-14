@@ -4035,6 +4035,81 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/03-organisms/image-gallery/ImageGallery.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A grid of images: 2 across on small screens, 3 from the medium breakpoint, 4 from the large.\nAdd `interactive` to open each image in a full-screen viewer with previous and next buttons that\nwrap around, a numbered pager and the image's caption.\nEvery child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item\nhas a caption; captions show in the viewer only. Each image needs alt text.",
+          "name": "ImageGallery",
+          "slots": [
+            {
+              "description": "The items.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "interactive",
+              "description": "Whether each image opens in a viewer. Reflects the interactive attribute."
+            },
+            {
+              "kind": "field",
+              "name": "narrow",
+              "description": "Whether the grid stays 2 across at every width. Reflects the narrow attribute."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name of the list of images."
+            },
+            {
+              "name": "interactive",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Opens each image in a full-screen viewer."
+            },
+            {
+              "name": "narrow",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Keeps 2 across at every width, for a narrow column."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-image-gallery",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImageGallery",
+          "declaration": {
+            "name": "ImageGallery",
+            "module": "src/03-organisms/image-gallery/ImageGallery.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-image-gallery",
+          "declaration": {
+            "name": "ImageGallery",
+            "module": "src/03-organisms/image-gallery/ImageGallery.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/03-organisms/tabs/Tabs.js",
       "declarations": [
         {
