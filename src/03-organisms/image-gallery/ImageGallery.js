@@ -13,11 +13,9 @@ const viewerTemplate = document.createElement("template");
 viewerTemplate.innerHTML = `
 	<dialog class="viewer" aria-label="Image viewer">
 		<button class="viewer__close" type="button" aria-label="Close viewer">${closeIcon}</button>
-		<div class="viewer__body">
-			<button class="viewer__previous viewer__step" type="button" aria-label="Previous image">${iconSvg("angle-right", "viewer__step-icon")}</button>
-			<div class="viewer__stage"></div>
-			<button class="viewer__next viewer__step" type="button" aria-label="Next image">${iconSvg("angle-right", "viewer__step-icon")}</button>
-		</div>
+		<button class="viewer__previous viewer__step" type="button" aria-label="Previous image">${iconSvg("angle-right", "viewer__step-icon")}</button>
+		<div class="viewer__stage"></div>
+		<button class="viewer__next viewer__step" type="button" aria-label="Next image">${iconSvg("angle-right", "viewer__step-icon")}</button>
 		<div class="viewer__caption" hidden>
 			<p class="viewer__caption-text"></p>
 			<button class="viewer__caption-toggle" type="button" aria-expanded="false" hidden>Show more</button>
@@ -25,9 +23,6 @@ viewerTemplate.innerHTML = `
 		<p class="viewer__pager" aria-live="polite"></p>
 	</dialog>
 `;
-
-// A caption longer than this gets the expand toggle.
-const CAPTION_LIMIT = 120;
 
 /**
  * A grid of images: 2 across on small screens, 3 from the medium breakpoint, 4 from the large.
@@ -124,6 +119,8 @@ export class ImageGallery extends HTMLElement {
 		$(".viewer__close").addEventListener("click", () => this.#viewer.close());
 		$(".viewer__caption-toggle").addEventListener("click", () => this.#expandCaption(!$(".viewer__caption-text").classList.contains("is-expanded")));
 		this.#viewer.addEventListener("close", this.#closeHandler);
+		// Fires when the dialog first opens (it has no size until then) and on every resize.
+		new ResizeObserver(() => this.#updateCaptionToggle()).observe(this.#viewer);
 		// Keydown reaches the dialog from whichever control has focus, the close button included.
 		this.#viewer.addEventListener("keydown", (event) => {
 			const by = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
@@ -149,6 +146,8 @@ export class ImageGallery extends HTMLElement {
 		this.#bodyOverflow = document.body.style.overflow;
 		document.body.style.overflow = "hidden";
 		this.#viewer.showModal();
+		// The caption has a size only now the dialog is open.
+		this.#updateCaptionToggle();
 	};
 
 	// Steps past either end wrap round to the other.
@@ -166,8 +165,16 @@ export class ImageGallery extends HTMLElement {
 		this.#viewer.querySelector(".viewer__pager").textContent = `${this.#index + 1} / ${count}`;
 		this.#viewer.querySelector(".viewer__caption").hidden = !captionText;
 		this.#viewer.querySelector(".viewer__caption-text").textContent = captionText;
-		this.#viewer.querySelector(".viewer__caption-toggle").hidden = captionText.length <= CAPTION_LIMIT;
 		this.#expandCaption(false);
+		this.#updateCaptionToggle();
+	}
+
+	// Offer Show more only when the two-line clamp hides text. That depends on the viewer's width,
+	// so it is measured, and again whenever the viewer is resized. An open caption keeps its toggle.
+	#updateCaptionToggle() {
+		const text = this.#viewer.querySelector(".viewer__caption-text");
+		if (text.classList.contains("is-expanded")) return;
+		this.#viewer.querySelector(".viewer__caption-toggle").hidden = text.scrollHeight <= text.clientHeight;
 	}
 
 	#expandCaption(expanded) {

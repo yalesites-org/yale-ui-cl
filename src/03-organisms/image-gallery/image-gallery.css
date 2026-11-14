@@ -80,10 +80,29 @@
   color: var(--color-basic-white);
 }
 
+/* Wide screens: Previous and Next flank the photo. Phones: the photo takes the full width and the
+   arrows sit either side of the counter beneath it. */
 .viewer[open] {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "close close close"
+    "previous stage next"
+    ". caption ."
+    ". pager .";
+  align-items: center;
   gap: var(--size-spacing-4);
+}
+
+@media (max-width: 47.99rem) {
+  .viewer[open] {
+    grid-template-areas:
+      "close close close"
+      "stage stage stage"
+      "caption caption caption"
+      "previous pager next";
+  }
 }
 
 .viewer::backdrop {
@@ -91,7 +110,16 @@
 }
 
 .viewer__close {
-  align-self: flex-end;
+  grid-area: close;
+  justify-self: end;
+}
+
+.viewer__previous {
+  grid-area: previous;
+}
+
+.viewer__next {
+  grid-area: next;
 }
 
 .viewer__close,
@@ -135,30 +163,30 @@
   transform: scaleX(-1);
 }
 
-.viewer__body {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--size-spacing-4);
-  flex: 1;
-  min-height: 0;
-}
-
 .viewer__stage {
+  grid-area: stage;
+  align-self: stretch;
   min-width: 0;
   min-height: 0;
-  height: 100%;
+  display: grid;
+  place-items: center;
+  /* The photo is sized against the stage itself, whatever wraps it. */
+  container-type: size;
 }
 
-/* Contain keeps a tall portrait photo whole inside the screen instead of scrolling. */
+/* A photo of any shape stays whole inside the stage. */
 .viewer__stage img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100cqw;
+  max-height: 100cqh;
   object-fit: contain;
 }
 
 .viewer__caption {
+  grid-area: caption;
+  width: 100%;
   max-width: 60rem;
   margin-inline: auto;
   text-align: center;
@@ -184,6 +212,7 @@
 }
 
 .viewer__pager {
+  grid-area: pager;
   margin: 0;
   text-align: center;
   font-variant-numeric: tabular-nums;

@@ -143,6 +143,40 @@ describe("ycl-image-gallery", () => {
 			expect(getComputedStyle(toggle(gallery)).display).toBe("none");
 		});
 
+		it("shows the toggle exactly when the two-line clamp hides text", () => {
+			// Mid-length: whether it is cut depends on the viewer's width, so compare with what is measured.
+			const mid = "A caption of middling length that may or may not wrap past two lines. ".repeat(2);
+			const gallery = mount(markup("interactive").replace("Sterling", mid));
+			triggers(gallery)[1].click();
+			const cut = caption(gallery).scrollHeight > caption(gallery).clientHeight;
+			expect(toggle(gallery).hidden).toBe(!cut);
+		});
+
+		it("shows no toggle for a caption that fits in two lines, even over 120 characters", async () => {
+			const gallery = mount(markup("interactive").replace("Sterling", "W ".repeat(61)));
+			triggers(gallery)[1].click();
+			modal(gallery).style.width = "2000px";
+			await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+			expect(caption(gallery).scrollHeight).toBeLessThanOrEqual(caption(gallery).clientHeight);
+			expect(toggle(gallery).hidden).toBe(true);
+		});
+
+		it("fits a photo of any shape inside the stage", async () => {
+			const tall = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="3000"/>');
+			const wide = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="400"/>');
+			const gallery = mount(markup("interactive", `<ycl-image><img src="${tall}" alt="Tall"></ycl-image><ycl-image><img src="${wide}" alt="Wide"></ycl-image>`));
+			const stage = shadowOf(gallery).querySelector(".viewer__stage");
+			triggers(gallery)[3].click();
+			for (const alt of ["Tall", "Wide"]) {
+				while (viewerImage(gallery).alt !== alt) next(gallery).click();
+				await settle();
+				const box = viewerImage(gallery).getBoundingClientRect();
+				const area = stage.getBoundingClientRect();
+				expect(box.height).toBeLessThanOrEqual(area.height + 1);
+				expect(box.width).toBeLessThanOrEqual(area.width + 1);
+			}
+		});
+
 		it("collapses the caption again on the next image", () => {
 			const gallery = mount(markup("interactive").replace("Sterling", long));
 			triggers(gallery)[1].click();
