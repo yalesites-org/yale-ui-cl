@@ -15,23 +15,24 @@
   padding-inline: var(--size-spacing-site-gutter);
 }
 
-/* Content is the default width for this component. */
+/* Content is the default width for this component. A host can lift the cap with
+   --image-block-max-width (the image gallery does, sizing the photo to its own viewer). */
 .content-image__inner {
   width: 100%;
-  max-width: var(--size-component-layout-width-content);
+  max-width: var(--image-block-max-width, var(--size-component-layout-width-content));
   margin-inline: auto;
 }
 
 :host(ycl-image-block[width="highlight"]) .content-image__inner {
-  max-width: var(--size-component-layout-width-highlight);
+  max-width: var(--image-block-max-width, var(--size-component-layout-width-highlight));
 }
 
 :host(ycl-image-block[width="site"]) .content-image__inner {
-  max-width: var(--size-component-layout-width-site);
+  max-width: var(--image-block-max-width, var(--size-component-layout-width-site));
 }
 
 :host(ycl-image-block[width="max"]) .content-image__inner {
-  max-width: var(--size-component-layout-width-max);
+  max-width: var(--image-block-max-width, var(--size-component-layout-width-max));
 }
 
 .content-image .figure {

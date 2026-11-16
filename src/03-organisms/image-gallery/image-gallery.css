@@ -178,7 +178,11 @@
    Block adds its site gutter on top of a full-width box and the photo sits off center. */
 .viewer__stage > * {
   --size-spacing-site-gutter: 0;
+  /* Image Block caps its box at a content width, but the photo is sized against the whole stage, so
+     on a wide stage the box would sit left of center and the photo spill right. */
+  --image-block-max-width: none;
   margin-bottom: 0;
+  width: 100%;
 }
 
 /* A photo of any shape stays whole inside the stage. */
