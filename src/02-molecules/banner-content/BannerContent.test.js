@@ -70,8 +70,37 @@ describe("ycl-banner-content", () => {
 		expect(panelWidth(full)).toBe("none");
 	});
 
-	it("leaves no bottom margin under the last paragraph, even with actions after it", () => {
+	it("leaves a gap between the text and the actions", async () => {
 		const element = mount(markup());
-		expect(getComputedStyle(element.querySelector("p")).marginBottom).toBe("0px");
+		await settle();
+		const text = part(element, ".banner-content__text").getBoundingClientRect();
+		const actions = part(element, ".banner-content__actions").getBoundingClientRect();
+		expect(actions.top - text.bottom).toBeGreaterThanOrEqual(16);
+	});
+
+	it("insets the contained text by the site gutter", () => {
+		const element = mount(markup());
+		const probe = document.createElement("div");
+		probe.style.paddingLeft = "var(--banner-content-gutter)";
+		part(element, ".banner-content").append(probe);
+		const gutter = getComputedStyle(probe).paddingLeft;
+		expect(getComputedStyle(part(element, ".banner-content__inner")).paddingLeft).toBe(gutter);
+	});
+
+	it.each([
+		["left", "start"],
+		["center", "center"],
+		["right", "end"],
+	])("moves the actions to the %s when button-alignment is %s", async (alignment, edge) => {
+		const element = mount(markup(` button-alignment="${alignment}"`));
+		await settle();
+		const panel = part(element, ".banner-content__inner").getBoundingClientRect();
+		const first = element.querySelector('[slot="actions"]').getBoundingClientRect();
+		const last = [...element.querySelectorAll('[slot="actions"]')].pop().getBoundingClientRect();
+		const leftSpace = first.left - panel.left;
+		const rightSpace = panel.right - last.right;
+		if (edge === "start") expect(leftSpace).toBeLessThan(rightSpace);
+		if (edge === "end") expect(rightSpace).toBeLessThan(leftSpace);
+		if (edge === "center") expect(Math.abs(leftSpace - rightSpace)).toBeLessThan(2);
 	});
 });

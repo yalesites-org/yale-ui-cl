@@ -99,8 +99,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: var(--size-spacing-6);
   box-sizing: border-box;
-  padding: var(--size-spacing-6) var(--size-spacing-7) var(--size-spacing-7);
+  padding: var(--size-spacing-6) var(--banner-content-gutter) var(--size-spacing-7);
 }
 
 .banner-content[data-banner-placement="contained"] {
@@ -123,6 +124,11 @@
     align-items: center;
     gap: var(--size-spacing-5);
     padding-block: var(--size-spacing-5);
+  }
+
+  .banner-content[data-banner-placement="full"] .banner-content__actions {
+    flex: 1 1 auto;
+    align-self: auto;
   }
 }
 
@@ -149,15 +155,20 @@
   margin-bottom: 0;
 }
 
-/* The actions. */
+/* The actions. They span the available width so the alignment has room to move them. */
 .banner-content__actions {
   display: flex;
+  align-self: stretch;
   flex-flow: row wrap;
   gap: var(--size-spacing-5);
 }
 
 .banner-content__actions[hidden] {
   display: none;
+}
+
+.banner-content__actions[data-button-alignment="left"] {
+  justify-content: flex-start;
 }
 
 .banner-content__actions[data-button-alignment="center"] {
