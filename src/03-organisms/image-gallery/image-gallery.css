@@ -49,6 +49,46 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
+  position: relative;
+}
+
+/* A dark veil over the photo on hover and keyboard focus. The outline sits outside the button, so
+   the veil never covers it. */
+.gallery__trigger::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 20%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.gallery__trigger:hover::after,
+.gallery__trigger:focus-visible::after {
+  opacity: 1;
+}
+
+/* Gray arrows on a white disc, as in the YaleSites gallery. The white disc keeps it readable on dark photos. Sits above the veil. */
+.gallery__expand {
+  position: absolute;
+  right: var(--size-spacing-3);
+  bottom: var(--size-spacing-3);
+  z-index: 1;
+  box-sizing: content-box;
+  width: 1rem;
+  height: 1rem;
+  padding: var(--size-spacing-2);
+  border-radius: 50%;
+  background-color: var(--color-basic-white);
+  fill: var(--color-gray-700);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__trigger::after {
+    transition: none;
+  }
 }
 
 .gallery__trigger:focus-visible {

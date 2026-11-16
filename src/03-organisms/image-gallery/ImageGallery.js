@@ -2,6 +2,8 @@ import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./image-gallery.css?inline";
 import { iconSvg } from "../../01-atoms/icons/icons.js";
 
+// Marks a thumbnail as one that opens a larger view. Decorative: the button's name comes from the image.
+const expandIcon = iconSvg("arrows-maximize", "gallery__expand");
 const galleryTemplate = document.createElement("template");
 galleryTemplate.innerHTML = `<ul class="gallery__list"></ul>`;
 
@@ -98,6 +100,7 @@ export class ImageGallery extends HTMLElement {
 				trigger.dataset.index = index;
 				trigger.setAttribute("aria-haspopup", "dialog");
 				trigger.append(slot);
+				trigger.insertAdjacentHTML("beforeend", expandIcon);
 				li.append(trigger);
 			} else {
 				li.append(slot);
