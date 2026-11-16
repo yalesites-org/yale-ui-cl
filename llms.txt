@@ -64,6 +64,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-page-title` | The page's h1 title area |
 | `ycl-text` | Block of rich text |
 | `ycl-image-block` | Content image with caption |
+| `ycl-image-gallery` | Grid of images; optionally opens each in a viewer |
 | `ycl-wrapped-image` | Image with body text wrapping around it |
 | `ycl-text-with-image` | Text beside an image |
 | `ycl-content-spotlight-portrait` | Text beside a portrait image |
