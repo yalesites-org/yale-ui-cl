@@ -23,6 +23,11 @@
   }
 }
 
+ycl-heading {
+  display: block;
+  margin-bottom: var(--size-spacing-5);
+}
+
 .gallery__list {
   display: grid;
   grid-template-columns: repeat(var(--gallery-columns), minmax(0, 1fr));
