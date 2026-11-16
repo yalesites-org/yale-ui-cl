@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { userEvent } from "vitest/browser";
 import { ImageGallery } from "./ImageGallery.js";
+import { iconSvg } from "../../01-atoms/icons/icons.js";
 import componentStyles from "./image-gallery.css?inline";
 import "../../02-molecules/image/ImageBlock.js";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
@@ -75,6 +76,19 @@ describe("ycl-image-gallery", () => {
 			}
 			expect(triggers(gallery)[0].textContent.trim()).toBe("");
 			expect(shadowOf(mount(markup())).querySelectorAll(".gallery__expand")).toHaveLength(0);
+		});
+
+		it("uses the arrows icon, gray on a white circle", () => {
+			const icon = triggers(mount(markup("interactive")))[0].querySelector(".gallery__expand");
+			const arrows = new DOMParser().parseFromString(iconSvg("arrows-maximize"), "image/svg+xml").querySelector("path");
+			expect(arrows).not.toBeNull();
+			expect(icon.querySelector("path").getAttribute("d")).toBe(arrows.getAttribute("d"));
+			expect(componentStyles).toMatch(/\.gallery__expand\s*\{[^}]*background-color: (?:var\(--color-basic-white\)|hsl\(0, 0%, 100%\))/);
+			expect(componentStyles).toMatch(/\.gallery__expand\s*\{[^}]*fill: (?:var\(--color-gray-|hsl\()/);
+		});
+
+		it("dims the photo by about 20%", () => {
+			expect(componentStyles).toMatch(/\.gallery__trigger::after\s*\{[^}]*background-color: rgb\(0 0 0 \/ 20%\)/);
 		});
 
 		it("dims the photo on keyboard focus, and not otherwise", async () => {
