@@ -182,7 +182,6 @@
      on a wide stage the box would sit left of center and the photo spill right. */
   --image-block-max-width: none;
   margin-bottom: 0;
-  width: 100%;
 }
 
 /* A photo of any shape stays whole inside the stage. */

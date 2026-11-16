@@ -189,15 +189,22 @@ describe("ycl-image-gallery", () => {
 		});
 
 		it("centers a captioned photo when the stage is wider than the Image Block content width", async () => {
-			const wide = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="400"/>');
-			const gallery = mount(markup("interactive").replace(`src="${pixel}" alt="Library"`, `src="${wide}" alt="Library"`));
-			triggers(gallery)[1].click();
-			modal(gallery).style.width = "1440px";
-			await settle();
-			const box = viewerImage(gallery).getBoundingClientRect();
-			const area = shadowOf(gallery).querySelector(".viewer__stage").getBoundingClientRect();
-			expect(area.width).toBeGreaterThan(900);
-			expect(Math.abs(box.left - area.left - (area.right - box.right))).toBeLessThanOrEqual(1);
+			const shapes = {
+				wide: '<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="400"/>',
+				tall: '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="3000"/>',
+				small: '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200"/>',
+			};
+			for (const svg of Object.values(shapes)) {
+				const src = "data:image/svg+xml," + encodeURIComponent(svg);
+				const gallery = mount(markup("interactive").replace(`src="${pixel}" alt="Library"`, `src="${src}" alt="Library"`));
+				triggers(gallery)[1].click();
+				modal(gallery).style.width = "1440px";
+				await settle();
+				const box = viewerImage(gallery).getBoundingClientRect();
+				const area = shadowOf(gallery).querySelector(".viewer__stage").getBoundingClientRect();
+				expect(area.width).toBeGreaterThan(900);
+				expect(Math.abs(box.left - area.left - (area.right - box.right))).toBeLessThanOrEqual(1);
+			}
 		});
 
 		it("collapses the caption again on the next image", () => {
