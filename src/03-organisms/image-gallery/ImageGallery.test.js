@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ImageGallery } from "./ImageGallery.js";
+import "../../02-molecules/image/ImageBlock.js";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
 
 const items = (gallery) => [...shadowOf(gallery).querySelectorAll(".gallery__item")];
@@ -175,6 +176,16 @@ describe("ycl-image-gallery", () => {
 				expect(box.height).toBeLessThanOrEqual(area.height + 1);
 				expect(box.width).toBeLessThanOrEqual(area.width + 1);
 			}
+		});
+
+		it("centers a captioned photo in the stage", async () => {
+			const wide = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="400"/>');
+			const gallery = mount(markup("interactive").replace(`src="${pixel}" alt="Library"`, `src="${wide}" alt="Library"`));
+			triggers(gallery)[1].click();
+			await settle();
+			const box = viewerImage(gallery).getBoundingClientRect();
+			const area = shadowOf(gallery).querySelector(".viewer__stage").getBoundingClientRect();
+			expect(Math.abs(box.left - area.left - (area.right - box.right))).toBeLessThanOrEqual(1);
 		});
 
 		it("collapses the caption again on the next image", () => {

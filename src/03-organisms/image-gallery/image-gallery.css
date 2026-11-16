@@ -174,6 +174,13 @@
   container-type: size;
 }
 
+/* The copy in the stage is not slotted, so the grid's ::slotted rule misses it. Without this, Image
+   Block adds its site gutter on top of a full-width box and the photo sits off center. */
+.viewer__stage > * {
+  --size-spacing-site-gutter: 0;
+  margin-bottom: 0;
+}
+
 /* A photo of any shape stays whole inside the stage. */
 .viewer__stage img {
   display: block;
