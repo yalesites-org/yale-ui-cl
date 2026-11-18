@@ -130,6 +130,11 @@
     flex: 1 1 auto;
     align-self: auto;
   }
+
+  /* Left puts the actions on their own row under the text. Right and center keep them beside it. */
+  .banner-content[data-banner-placement="full"] .banner-content__actions[data-button-alignment="left"] {
+    flex-basis: 100%;
+  }
 }
 
 /* Slotted headings keep their semantics but take the banner heading's type style.

@@ -21,7 +21,7 @@ bannerContentTemplate.innerHTML = `
  * each carrying their own copy.
  * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
  * @attr {"contained"|"full"} placement - contained keeps the content in a box of its own width, as when it overlays part of a banner; full lets it span the whole banner width. Defaults to contained.
- * @attr {"left"|"center"|"right"} button-alignment - Alignment of the actions. Defaults to left.
+ * @attr {"left"|"center"|"right"} button-alignment - Alignment of the actions. Defaults to right when placement is full and left otherwise. In a full placement at 992px and up, left drops the actions onto their own row under the text.
  * @slot heading - The heading, such as a ycl-heading.
  * @slot - The text.
  * @slot actions - Links or buttons, such as ycl-cta-link elements.
@@ -59,7 +59,8 @@ export class BannerContent extends HTMLElement {
 		const placement = this.getAttribute("placement");
 		this.#root.dataset.componentTheme = this.getAttribute("theme") || "primary";
 		this.#root.dataset.bannerPlacement = PLACEMENTS.includes(placement) ? placement : "contained";
-		this.#actions.dataset.buttonAlignment = this.getAttribute("button-alignment") || "left";
+		const fallback = this.#root.dataset.bannerPlacement === "full" ? "right" : "left";
+		this.#actions.dataset.buttonAlignment = this.getAttribute("button-alignment") || fallback;
 	}
 }
 

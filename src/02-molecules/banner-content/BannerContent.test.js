@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
 import "./BannerContent.js";
 import "../../01-atoms/headings/Heading.js";
 import "../../01-atoms/cta/Cta.js";
@@ -102,5 +103,27 @@ describe("ycl-banner-content", () => {
 		if (edge === "start") expect(leftSpace).toBeLessThan(rightSpace);
 		if (edge === "end") expect(rightSpace).toBeLessThan(leftSpace);
 		if (edge === "center") expect(Math.abs(leftSpace - rightSpace)).toBeLessThan(2);
+	});
+	it("puts full-width actions at the far right by default, like Action Banner", async () => {
+		await page.viewport(1200, 800);
+		const element = mount(markup(' placement="full"'));
+		await settle();
+		expect(part(element, ".banner-content__actions").dataset.buttonAlignment).toBe("right");
+		expect(window.innerWidth).toBeGreaterThanOrEqual(992);
+		const inner = part(element, ".banner-content__inner").getBoundingClientRect();
+		const last = [...element.querySelectorAll('[slot="actions"]')].pop().getBoundingClientRect();
+		expect(inner.right - last.right).toBeLessThan(inner.width / 2);
+		const first = element.querySelector('[slot="actions"]').getBoundingClientRect();
+		const text = part(element, ".banner-content__text").getBoundingClientRect();
+		expect(first.left).toBeGreaterThan(text.right);
+	});
+
+	it("drops full-width left-aligned actions onto their own row under the text", async () => {
+		await page.viewport(1200, 800);
+		const element = mount(markup(' placement="full" button-alignment="left"'));
+		await settle();
+		const text = part(element, ".banner-content__text").getBoundingClientRect();
+		const first = element.querySelector('[slot="actions"]').getBoundingClientRect();
+		expect(first.top).toBeGreaterThanOrEqual(text.bottom);
 	});
 });

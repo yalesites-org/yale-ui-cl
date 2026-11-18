@@ -1795,7 +1795,7 @@
               "type": {
                 "text": "\"left\"|\"center\"|\"right\""
               },
-              "description": "Alignment of the actions. Defaults to left."
+              "description": "Alignment of the actions. Defaults to right when placement is full and left otherwise. In a full placement at 992px and up, left drops the actions onto their own row under the text."
             }
           ],
           "superclass": {
