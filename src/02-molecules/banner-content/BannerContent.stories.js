@@ -34,7 +34,7 @@ export default {
       control: 'select',
       options: ['contained', 'full'],
     }),
-    buttonAlignment: attributeArg('button-alignment: alignment of the actions. Defaults to left.', {
+    buttonAlignment: attributeArg('button-alignment: alignment of the actions. Defaults to right when placement is full and left otherwise.', {
       name: 'Button Alignment',
       control: 'select',
       options: ['left', 'center', 'right'],
@@ -75,5 +75,5 @@ export default {
 export const Default = {};
 
 export const FullWidth = {
-  args: { placement: 'full' },
+  args: { placement: 'full', buttonAlignment: 'right' },
 };
