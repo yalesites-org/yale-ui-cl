@@ -63,7 +63,7 @@ ycl-heading {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgb(0 0 0 / 40%);
+  background-color: rgb(0 0 0 / 20%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -74,7 +74,7 @@ ycl-heading {
   opacity: 1;
 }
 
-/* White on a dark disc so it reads on any photo (well above 3:1). Sits above the veil. */
+/* Gray arrows on a white disc, as in the YaleSites gallery. The white disc keeps it readable on dark photos. Sits above the veil. */
 .gallery__expand {
   position: absolute;
   right: var(--size-spacing-3);
@@ -85,8 +85,8 @@ ycl-heading {
   height: 1rem;
   padding: var(--size-spacing-2);
   border-radius: 50%;
-  background-color: rgb(0 0 0 / 70%);
-  fill: var(--color-basic-white);
+  background-color: var(--color-basic-white);
+  fill: var(--color-gray-700);
   pointer-events: none;
 }
 
@@ -217,6 +217,16 @@ ycl-heading {
   place-items: center;
   /* The photo is sized against the stage itself, whatever wraps it. */
   container-type: size;
+}
+
+/* The copy in the stage is not slotted, so the grid's ::slotted rule misses it. Without this, Image
+   Block adds its site gutter on top of a full-width box and the photo sits off center. */
+.viewer__stage > * {
+  --size-spacing-site-gutter: 0;
+  /* Image Block caps its box at a content width, but the photo is sized against the whole stage, so
+     on a wide stage the box would sit left of center and the photo spill right. */
+  --image-block-max-width: none;
+  margin-bottom: 0;
 }
 
 /* A photo of any shape stays whole inside the stage. */

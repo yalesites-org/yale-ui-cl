@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { userEvent } from "vitest/browser";
 import { ImageGallery } from "./ImageGallery.js";
+import { iconSvg } from "../../01-atoms/icons/icons.js";
 import componentStyles from "./image-gallery.css?inline";
+import "../../02-molecules/image/ImageBlock.js";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
 
 const items = (gallery) => [...shadowOf(gallery).querySelectorAll(".gallery__item")];
@@ -123,6 +125,19 @@ describe("ycl-image-gallery", () => {
 			}
 			expect(triggers(gallery)[0].textContent.trim()).toBe("");
 			expect(shadowOf(mount(markup())).querySelectorAll(".gallery__expand")).toHaveLength(0);
+		});
+
+		it("uses the arrows icon, gray on a white circle", () => {
+			const icon = triggers(mount(markup("interactive")))[0].querySelector(".gallery__expand");
+			const arrows = new DOMParser().parseFromString(iconSvg("arrows-maximize"), "image/svg+xml").querySelector("path");
+			expect(arrows).not.toBeNull();
+			expect(icon.querySelector("path").getAttribute("d")).toBe(arrows.getAttribute("d"));
+			expect(componentStyles).toMatch(/\.gallery__expand\s*\{[^}]*background-color: (?:var\(--color-basic-white\)|hsl\(0, 0%, 100%\))/);
+			expect(componentStyles).toMatch(/\.gallery__expand\s*\{[^}]*fill: (?:var\(--color-gray-|hsl\()/);
+		});
+
+		it("dims the photo by about 20%", () => {
+			expect(componentStyles).toMatch(/\.gallery__trigger::after\s*\{[^}]*background-color: rgb\(0 0 0 \/ 20%\)/);
 		});
 
 		it("dims the photo on keyboard focus, and not otherwise", async () => {
@@ -258,6 +273,35 @@ describe("ycl-image-gallery", () => {
 				const area = stage.getBoundingClientRect();
 				expect(box.height).toBeLessThanOrEqual(area.height + 1);
 				expect(box.width).toBeLessThanOrEqual(area.width + 1);
+			}
+		});
+
+		it("centers a captioned photo in the stage", async () => {
+			const wide = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="400"/>');
+			const gallery = mount(markup("interactive").replace(`src="${pixel}" alt="Library"`, `src="${wide}" alt="Library"`));
+			triggers(gallery)[1].click();
+			await settle();
+			const box = viewerImage(gallery).getBoundingClientRect();
+			const area = shadowOf(gallery).querySelector(".viewer__stage").getBoundingClientRect();
+			expect(Math.abs(box.left - area.left - (area.right - box.right))).toBeLessThanOrEqual(1);
+		});
+
+		it("centers a captioned photo when the stage is wider than the Image Block content width", async () => {
+			const shapes = {
+				wide: '<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="400"/>',
+				tall: '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="3000"/>',
+				small: '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200"/>',
+			};
+			for (const svg of Object.values(shapes)) {
+				const src = "data:image/svg+xml," + encodeURIComponent(svg);
+				const gallery = mount(markup("interactive").replace(`src="${pixel}" alt="Library"`, `src="${src}" alt="Library"`));
+				triggers(gallery)[1].click();
+				modal(gallery).style.width = "1440px";
+				await settle();
+				const box = viewerImage(gallery).getBoundingClientRect();
+				const area = shadowOf(gallery).querySelector(".viewer__stage").getBoundingClientRect();
+				expect(area.width).toBeGreaterThan(900);
+				expect(Math.abs(box.left - area.left - (area.right - box.right))).toBeLessThanOrEqual(1);
 			}
 		});
 

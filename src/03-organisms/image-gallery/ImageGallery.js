@@ -4,7 +4,7 @@ import { iconSvg } from "../../01-atoms/icons/icons.js";
 import "../../01-atoms/headings/Heading.js";
 
 // Marks a thumbnail as one that opens a larger view. Decorative: the button's name comes from the image.
-const expandIcon = iconSvg("expand-solid", "gallery__expand");
+const expandIcon = iconSvg("arrows-maximize", "gallery__expand");
 const galleryTemplate = document.createElement("template");
 galleryTemplate.innerHTML = `<ul class="gallery__list"></ul>`;
 
