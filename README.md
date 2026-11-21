@@ -126,6 +126,7 @@ default option, so the attribute is only needed for the others:
 | ---------------------------------- | ---------------------------------------------------------------------- |
 | `ycl-accordion`                    | **`default`** (no accent), `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2` |
 | `ycl-action-banner`                | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
+| `ycl-banner-content`               | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
 | `ycl-callout`                      | **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2`         |
 | `ycl-content-spotlight-portrait`   | **`default`** (no background), `primary`, `secondary`, `tertiary`, `accent-1`, `accent-2` |
 | `ycl-facts-and-figures`            | `default` (no background), **`primary`**, `secondary`, `tertiary`, `accent-1`, `accent-2` |

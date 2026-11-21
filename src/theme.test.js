@@ -13,6 +13,7 @@ const OPTIONS = {
 	"ycl-accordion": ["default", "primary", "secondary", "tertiary", "accent-1", "accent-2"],
 	"ycl-action-banner": ["primary", "accent-1", "accent-2", "tertiary", "secondary"],
 	"ycl-image-banner": ["primary", "accent-1", "accent-2", "tertiary", "secondary"],
+	"ycl-banner-content": ["primary", "accent-1", "accent-2", "tertiary", "secondary"],
 	"ycl-callout": ["primary", "accent-1", "accent-2", "tertiary", "secondary"],
 	"ycl-content-spotlight-portrait": ["default", "primary", "accent-1", "accent-2", "tertiary", "secondary"],
 	"ycl-facts-and-figures": ["primary", "secondary", "tertiary", "accent-1", "accent-2", "default"],
