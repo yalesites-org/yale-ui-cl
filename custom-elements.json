@@ -4080,6 +4080,20 @@
                 "text": "boolean"
               },
               "description": "Keeps 2 across at every width, for a narrow column."
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "description": "Optional visible heading shown above the grid. It also names the viewer; without it the viewer is named \"Image viewer\"."
+            },
+            {
+              "name": "heading-level",
+              "type": {
+                "text": "\"1\"|\"2\"|\"3\"|\"4\"|\"5\"|\"6\""
+              },
+              "description": "The heading level, so it fits the page outline. Defaults to 2."
             }
           ],
           "superclass": {
