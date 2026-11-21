@@ -23,13 +23,13 @@
   }
 }
 
-/* 64px under the heading, 40px on phones, matching the YaleSites gallery heading. */
+/* 64px under the heading from 992px up, 40px below it, matching the YaleSites gallery heading. */
 ycl-heading {
   display: block;
   margin-bottom: var(--size-spacing-10);
 }
 
-@media (max-width: 47.99rem) {
+@media (max-width: 61.99rem) {
   ycl-heading {
     margin-bottom: var(--size-spacing-8);
   }
@@ -147,7 +147,7 @@ ycl-heading {
   gap: var(--size-spacing-4);
 }
 
-@media (max-width: 47.99rem) {
+@media (max-width: 61.99rem) {
   .viewer[open] {
     grid-template-areas:
       "close close close"

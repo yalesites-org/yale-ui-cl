@@ -63,9 +63,9 @@ describe("ycl-image-gallery", () => {
 		const heading = (gallery) => shadowOf(gallery).querySelector("ycl-heading");
 
 		// A test cannot resize the viewport inside a closed shadow root, so the rules are read from the source.
-		it("leaves 64px under the heading on desktop and 40px on phones", () => {
+		it("leaves 64px under the heading from 992px up and 40px below it", () => {
 			expect(componentStyles).toMatch(/ycl-heading\s*\{[^}]*margin-bottom: (?:var\(--size-spacing-10\)|4rem|64px)/);
-			expect(componentStyles).toMatch(/@media \(max-width: 47\.99rem\)\s*\{\s*ycl-heading\s*\{[^}]*margin-bottom: (?:var\(--size-spacing-8\)|2\.5rem|40px)/);
+			expect(componentStyles).toMatch(/@media \(max-width: 61\.99rem\)\s*\{\s*ycl-heading\s*\{[^}]*margin-bottom: (?:var\(--size-spacing-8\)|2\.5rem|40px)/);
 		});
 
 		it("shows no heading unless one is set", () => {
