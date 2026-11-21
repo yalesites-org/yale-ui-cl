@@ -126,4 +126,14 @@ describe("ycl-banner-content", () => {
 		const first = element.querySelector('[slot="actions"]').getBoundingClientRect();
 		expect(first.top).toBeGreaterThanOrEqual(text.bottom);
 	});
+
+	it.each(["", ' button-alignment="right"'])("lines stacked full-width actions up with the text at 768px (%s)", async (attr) => {
+		await page.viewport(768, 800);
+		const element = mount(markup(` placement="full"${attr}`));
+		await settle();
+		const text = part(element, ".banner-content__text").getBoundingClientRect();
+		const first = element.querySelector('[slot="actions"]').getBoundingClientRect();
+		expect(first.top).toBeGreaterThanOrEqual(text.bottom);
+		expect(Math.abs(first.left - text.left)).toBeLessThan(2);
+	});
 });

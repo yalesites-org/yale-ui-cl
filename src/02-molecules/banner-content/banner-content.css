@@ -13,6 +13,11 @@
   }
 }
 
+/* Stacked below 992px, right-aligned actions line up with the text. Wide screens put them beside it. */
+.banner-content[data-banner-placement="full"] .banner-content__actions[data-button-alignment="right"] {
+  justify-content: flex-start;
+}
+
 /* 992px is --break-l */
 @media (min-width: 992px) {
   :host(ycl-banner-content) {
@@ -115,6 +120,11 @@
   padding-inline: var(--banner-content-gutter);
 }
 
+/* Stacked below 992px, right-aligned actions line up with the text. Wide screens put them beside it. */
+.banner-content[data-banner-placement="full"] .banner-content__actions[data-button-alignment="right"] {
+  justify-content: flex-start;
+}
+
 /* 992px is --break-l */
 @media (min-width: 992px) {
   .banner-content[data-banner-placement="full"] .banner-content__inner {
@@ -134,6 +144,10 @@
   /* Left puts the actions on their own row under the text. Right and center keep them beside it. */
   .banner-content[data-banner-placement="full"] .banner-content__actions[data-button-alignment="left"] {
     flex-basis: 100%;
+  }
+
+  .banner-content[data-banner-placement="full"] .banner-content__actions[data-button-alignment="right"] {
+    justify-content: flex-end;
   }
 }
 
