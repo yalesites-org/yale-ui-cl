@@ -59,6 +59,66 @@ describe("ycl-image-gallery", () => {
 		expect(getComputedStyle(gallery.children[1]).getPropertyValue("--image-block-caption-display").trim()).toBe("none");
 	});
 
+	describe("heading", () => {
+		const heading = (gallery) => shadowOf(gallery).querySelector("ycl-heading");
+
+		// A test cannot resize the viewport inside a closed shadow root, so the rules are read from the source.
+		it("leaves 64px under the heading from 992px up and 40px below it", () => {
+			expect(componentStyles).toMatch(/ycl-heading\s*\{[^}]*margin-bottom: (?:var\(--size-spacing-10\)|4rem|64px)/);
+			expect(componentStyles).toMatch(/@media \(max-width: 61\.99rem\)\s*\{\s*ycl-heading\s*\{[^}]*margin-bottom: (?:var\(--size-spacing-8\)|2\.5rem|40px)/);
+		});
+
+		it("keeps the viewer's phone layout at 47.99rem, apart from the heading gap", () => {
+			expect(componentStyles).toMatch(/@media \(max-width: 47\.99rem\)\s*\{\s*\.viewer\[open\]/);
+			expect(componentStyles).not.toMatch(/@media \(max-width: 61\.99rem\)\s*\{\s*\.viewer\[open\]/);
+		});
+
+		it("shows no heading unless one is set", () => {
+			expect(heading(mount(markup()))).toBeNull();
+		});
+
+		it("shows the heading above the grid at the chosen level", async () => {
+			const gallery = mount(markup('heading="Around campus" heading-level="3"'));
+			const el = heading(gallery);
+			expect(el.textContent).toBe("Around campus");
+			expect(el.getAttribute("level")).toBe("3");
+			expect(el.nextElementSibling.localName).toBe("ul");
+		});
+
+		it("defaults to level 2 and follows attribute changes", async () => {
+			const gallery = mount(markup('heading="Around campus"'));
+			expect(heading(gallery).getAttribute("level")).toBe("2");
+			gallery.setAttribute("heading", "New title");
+			gallery.setAttribute("heading-level", "4");
+			expect(heading(gallery).textContent).toBe("New title");
+			expect(heading(gallery).getAttribute("level")).toBe("4");
+			gallery.removeAttribute("heading");
+			expect(heading(gallery)).toBeNull();
+		});
+
+		it("names the viewer after the heading, else Image viewer", async () => {
+			const gallery = mount(markup('interactive heading="Around campus"'));
+			expect(modal(gallery).getAttribute("aria-label")).toBe("Around campus");
+			gallery.setAttribute("heading", "Renamed");
+			expect(modal(gallery).getAttribute("aria-label")).toBe("Renamed");
+			gallery.removeAttribute("heading");
+			expect(modal(gallery).getAttribute("aria-label")).toBe("Image viewer");
+		});
+
+		it("treats a blank heading as none and falls back to level 2 for a bad level", () => {
+			expect(heading(mount(markup('heading="   "')))).toBeNull();
+			const gallery = mount(markup('heading="Around campus" heading-level="9"'));
+			expect(getComputedStyle(heading(gallery)).display).toBe("block");
+			expect(heading(gallery).getAttribute("level")).toBe("9");
+		});
+
+		it("names a viewer built after the heading was set", async () => {
+			const gallery = mount(markup('heading="Around campus"'));
+			gallery.setAttribute("interactive", "");
+			expect(modal(gallery).getAttribute("aria-label")).toBe("Around campus");
+		});
+	});
+
 	describe("interactive", () => {
 		it("wraps each item in a button that opens a viewer dialog", () => {
 			const gallery = mount(markup("interactive"));

@@ -23,6 +23,18 @@
   }
 }
 
+/* 64px under the heading from 992px up, 40px below it, matching the YaleSites gallery heading. */
+ycl-heading {
+  display: block;
+  margin-bottom: var(--size-spacing-10);
+}
+
+@media (max-width: 61.99rem) {
+  ycl-heading {
+    margin-bottom: var(--size-spacing-8);
+  }
+}
+
 .gallery__list {
   display: grid;
   grid-template-columns: repeat(var(--gallery-columns), minmax(0, 1fr));

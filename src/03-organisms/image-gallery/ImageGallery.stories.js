@@ -24,6 +24,11 @@ export default {
   component: 'ycl-image-gallery',
   argTypes: {
     label: attributeArg('Accessible name of the list of images.', { control: 'text' }),
+    heading: attributeArg('Optional visible heading shown above the grid. It also names the viewer; without it the viewer is named "Image viewer".', { control: 'text' }),
+    'heading-level': attributeArg('The heading level, so it fits the page outline. Defaults to 2.', {
+      control: 'select',
+      options: ['1', '2', '3', '4', '5', '6'],
+    }),
     narrow: attributeArg('Keeps two images across at every width, for a narrow column. Without it the grid is 2 across on small screens, 3 from the medium breakpoint and 4 from the large.', {
       control: 'boolean',
     }),
@@ -41,7 +46,7 @@ export default {
   },
 
   render: (args) =>
-    `<ycl-image-gallery${attrs({ label: args.label, narrow: args.narrow, interactive: args.interactive })}>
+    `<ycl-image-gallery${attrs({ label: args.label, heading: args.heading, 'heading-level': args['heading-level'], narrow: args.narrow, interactive: args.interactive })}>
       ${images.map(item).join('\n      ')}
     </ycl-image-gallery>`,
 };
@@ -72,12 +77,27 @@ export const WithCaptions = {
     },
   },
   render: (args) =>
-    `<ycl-image-gallery${attrs({ label: args.label, narrow: args.narrow, interactive: args.interactive })}>
+    `<ycl-image-gallery${attrs({ label: args.label, heading: args.heading, 'heading-level': args['heading-level'], narrow: args.narrow, interactive: args.interactive })}>
       ${images.slice(0, 3).map(([alt, label], index) => `<ycl-image-block>
         <ycl-image ratio="3x2"><img src="${photo(index + 1, label)}" alt="${alt}" width="1200" height="800"></ycl-image>
         <span slot="caption">${captions[index]}</span>
       </ycl-image-block>`).join('\n      ')}
     </ycl-image-gallery>`,
+};
+
+export const WithHeading = {
+  args: {
+    heading: 'Around campus',
+    'heading-level': '2',
+    interactive: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The heading shows above the grid and names the viewer. Set `heading-level` so it fits the page outline.',
+      },
+    },
+  },
 };
 
 export const Narrow = {

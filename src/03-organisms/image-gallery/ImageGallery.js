@@ -1,6 +1,7 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./image-gallery.css?inline";
 import { iconSvg } from "../../01-atoms/icons/icons.js";
+import "../../01-atoms/headings/Heading.js";
 
 // Marks a thumbnail as one that opens a larger view. Decorative: the button's name comes from the image.
 const expandIcon = iconSvg("arrows-maximize", "gallery__expand");
@@ -35,11 +36,14 @@ viewerTemplate.innerHTML = `
  * @attr {string} label - Accessible name of the list of images.
  * @attr {boolean} narrow - Keeps 2 across at every width, for a narrow column.
  * @attr {boolean} interactive - Opens each image in a full-screen viewer.
+ * @attr {string} heading - Optional visible heading shown above the grid. It also names the viewer; without it the viewer is named "Image viewer".
+ * @attr {"1"|"2"|"3"|"4"|"5"|"6"} heading-level - The heading level, so it fits the page outline. Defaults to 2.
  * @slot - The items.
  */
 export class ImageGallery extends HTMLElement {
 	#shadow;
 	#list;
+	#heading = null;
 	#observer;
 	#items = [];
 	#viewer = null;
@@ -47,7 +51,7 @@ export class ImageGallery extends HTMLElement {
 	#index = 0;
 
 	static get observedAttributes() {
-		return ["label", "interactive", "narrow"];
+		return ["label", "interactive", "narrow", "heading", "heading-level"];
 	}
 
 	constructor() {
@@ -76,7 +80,25 @@ export class ImageGallery extends HTMLElement {
 			else this.#list.removeAttribute("aria-label");
 		} else if (name === "interactive" && this.isConnected) {
 			this.#build();
+		} else if (name === "heading" || name === "heading-level") {
+			this.#renderHeading();
 		}
+	}
+
+	#renderHeading() {
+		const text = this.getAttribute("heading")?.trim();
+		if (text) {
+			if (!this.#heading) {
+				this.#heading = document.createElement("ycl-heading");
+				this.#shadow.prepend(this.#heading);
+			}
+			this.#heading.textContent = text;
+			this.#heading.setAttribute("level", this.getAttribute("heading-level") || "2");
+		} else {
+			this.#heading?.remove();
+			this.#heading = null;
+		}
+		this.#viewer?.setAttribute("aria-label", text || "Image viewer");
 	}
 
 	/** Whether each image opens in a viewer. Reflects the interactive attribute. */
@@ -115,6 +137,7 @@ export class ImageGallery extends HTMLElement {
 	#ensureViewer() {
 		if (this.#viewer) return;
 		this.#viewer = document.importNode(viewerTemplate.content, true).firstElementChild;
+		this.#renderHeading();
 		this.#shadow.append(this.#viewer);
 		const $ = (selector) => this.#viewer.querySelector(selector);
 		$(".viewer__previous").addEventListener("click", () => this.#show(this.#index - 1));
