@@ -68,6 +68,11 @@ describe("ycl-image-gallery", () => {
 			expect(componentStyles).toMatch(/@media \(max-width: 61\.99rem\)\s*\{\s*ycl-heading\s*\{[^}]*margin-bottom: (?:var\(--size-spacing-8\)|2\.5rem|40px)/);
 		});
 
+		it("keeps the viewer's phone layout at 47.99rem, apart from the heading gap", () => {
+			expect(componentStyles).toMatch(/@media \(max-width: 47\.99rem\)\s*\{\s*\.viewer\[open\]/);
+			expect(componentStyles).not.toMatch(/@media \(max-width: 61\.99rem\)\s*\{\s*\.viewer\[open\]/);
+		});
+
 		it("shows no heading unless one is set", () => {
 			expect(heading(mount(markup()))).toBeNull();
 		});

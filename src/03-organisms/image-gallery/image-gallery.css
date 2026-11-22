@@ -147,7 +147,7 @@ ycl-heading {
   gap: var(--size-spacing-4);
 }
 
-@media (max-width: 61.99rem) {
+@media (max-width: 47.99rem) {
   .viewer[open] {
     grid-template-areas:
       "close close close"
