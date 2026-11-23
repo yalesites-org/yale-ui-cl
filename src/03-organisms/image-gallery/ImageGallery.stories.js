@@ -128,6 +128,7 @@ export const Narrow = {
 };
 
 export const LinkToAPhoto = {
+  render: WithCaptionHeadings.render,
   args: {
     interactive: true,
   },
