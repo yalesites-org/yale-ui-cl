@@ -27,6 +27,13 @@ const markup = (attrs = "", extra = "") => `
 		<ycl-image><img src="${pixel}" alt="Gate"></ycl-image>${extra}
 	</ycl-image-gallery>`;
 
+const rich = (extra = "") => `
+	<ycl-image-gallery label="Rich" interactive>
+		<ycl-image-block><ycl-image><img src="${pixel}" alt="Library"></ycl-image><span slot="caption-heading" id="sterling">Sterling Library</span><span slot="caption">Open <a href="https://example.com">late</a>, <strong>bold</strong>, <div>inner text</div><script>window.x = 1</script>${extra}</span></ycl-image-block>
+		<ycl-image-block><ycl-image><img src="${pixel}" alt="Gate"></ycl-image><span slot="caption-heading">No id</span></ycl-image-block>
+		<ycl-image><img src="${pixel}" alt="Quad"></ycl-image>
+	</ycl-image-gallery>`;
+
 describe("ycl-image-gallery", () => {
 	it("lists each child in its own named list item", () => {
 		const gallery = mount(markup());
@@ -204,6 +211,80 @@ describe("ycl-image-gallery", () => {
 			const gallery = mount(markup("interactive"));
 			triggers(gallery)[0].click();
 			expect(shadowOf(gallery).querySelector(".viewer__caption").hidden).toBe(true);
+		});
+
+		it("shows a caption heading as an h2 with its id and tabindex", () => {
+			const gallery = mount(rich());
+			triggers(gallery)[0].click();
+			const heading = shadowOf(gallery).querySelector(".viewer__caption h2");
+			expect(heading.textContent).toBe("Sterling Library");
+			expect(heading.id).toBe("sterling");
+			expect(heading.getAttribute("tabindex")).toBe("-1");
+			expect(shadowOf(gallery).querySelectorAll(".viewer__stage [slot=caption-heading]")).toHaveLength(0);
+		});
+
+		it("copies caption markup, keeping links and formatting", () => {
+			const gallery = mount(rich());
+			triggers(gallery)[0].click();
+			const link = caption(gallery).querySelector("a");
+			expect(link.getAttribute("href")).toBe("https://example.com");
+			expect(caption(gallery).querySelector("strong").textContent).toBe("bold");
+			expect(caption(gallery).querySelector("script")).toBeNull();
+			expect(caption(gallery).querySelector("div")).toBeNull();
+			expect(caption(gallery).textContent).toContain("inner text");
+		});
+
+		it("sets no id on the heading when the author gives none, and shows nothing for a bare photo", () => {
+			const gallery = mount(rich());
+			triggers(gallery)[1].click();
+			const heading = shadowOf(gallery).querySelector(".viewer__caption h2");
+			expect(heading.textContent).toBe("No id");
+			expect(heading.hasAttribute("id")).toBe(false);
+			triggers(gallery)[2].click();
+			expect(shadowOf(gallery).querySelector(".viewer__caption").hidden).toBe(true);
+			expect(shadowOf(gallery).querySelector(".viewer__caption h2")).toBeNull();
+		});
+
+		it("keeps Show more working when the caption has a heading and links", () => {
+			const gallery = mount(rich(long));
+			triggers(gallery)[0].click();
+			expect(toggle(gallery).hidden).toBe(false);
+			toggle(gallery).click();
+			expect(caption(gallery).classList.contains("is-expanded")).toBe(true);
+			expect(shadowOf(gallery).querySelector(".viewer__caption h2")).not.toBeNull();
+		});
+
+		it("expands a collapsed caption when keyboard focus reaches a link in it", async () => {
+			const gallery = mount(rich(long));
+			triggers(gallery)[0].click();
+			expect(caption(gallery).classList.contains("is-expanded")).toBe(false);
+			const link = caption(gallery).querySelector("a");
+			for (let i = 0; i < 10 && shadowOf(gallery).activeElement !== link; i++) await userEvent.keyboard("{Tab}");
+			expect(shadowOf(gallery).activeElement).toBe(link);
+			expect(caption(gallery).classList.contains("is-expanded")).toBe(true);
+			expect(toggle(gallery).getAttribute("aria-expanded")).toBe("true");
+			expect(toggle(gallery).textContent).toBe("Show less");
+		});
+
+		it("leaves a collapsed caption alone when a mouse click focuses a link in it", () => {
+			const gallery = mount(rich(long));
+			triggers(gallery)[0].click();
+			const link = caption(gallery).querySelector("a");
+			// What a mouse press does: focus the link without the keyboard focus ring.
+			link.focus({ focusVisible: false });
+			expect(link.matches(":focus-visible")).toBe(false);
+			expect(caption(gallery).classList.contains("is-expanded")).toBe(false);
+		});
+
+		it("keeps focus in the viewer when the photo changes while a caption link has focus", () => {
+			const gallery = mount(rich());
+			triggers(gallery)[0].click();
+			caption(gallery).querySelector("a").focus();
+			key(caption(gallery).querySelector("a"), "ArrowRight");
+			expect(shadowOf(gallery).activeElement).toBe(next(gallery));
+			key(next(gallery), "ArrowRight");
+			expect(pager(gallery)).toBe("3 / 3");
+			expect(shadowOf(gallery).activeElement).toBe(next(gallery));
 		});
 
 		it("wraps around at both ends", () => {

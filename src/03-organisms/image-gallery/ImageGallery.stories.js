@@ -85,6 +85,27 @@ export const WithCaptions = {
     </ycl-image-gallery>`,
 };
 
+export const WithCaptionHeadings = {
+  args: {
+    interactive: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Add an element with `slot="caption-heading"` to an item. Its text becomes an `h2` above the caption in the viewer, and its `id`, if any, is kept so a link can point at it. Captions can hold `a`, `strong`, `em`, `br` and `p`. Caption markup is trusted: the component does not sanitize it, so the application that supplies it must clean any untrusted input first.',
+      },
+    },
+  },
+  render: (args) =>
+    `<ycl-image-gallery${attrs({ label: args.label, heading: args.heading, 'heading-level': args['heading-level'], narrow: args.narrow, interactive: args.interactive })}>
+      ${images.slice(0, 3).map(([alt, label], index) => `<ycl-image-block>
+        <ycl-image ratio="3x2"><img src="${photo(index + 1, label)}" alt="${alt}" width="1200" height="800"></ycl-image>
+        <span slot="caption-heading" id="photo-${index + 1}">${alt}</span>
+        <span slot="caption">${captions[index]} <a href="https://yale.edu">Learn more</a>.</span>
+      </ycl-image-block>`).join('\n      ')}
+    </ycl-image-gallery>`,
+};
+
 export const WithHeading = {
   args: {
     heading: 'Around campus',

@@ -4039,7 +4039,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A grid of images: 2 across on small screens, 3 from the medium breakpoint, 4 from the large.\nAdd `interactive` to open each image in a full-screen viewer with previous and next buttons that\nwrap around, a numbered pager and the image's caption.\nEvery child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item\nhas a caption; captions show in the viewer only. Each image needs alt text.",
+          "description": "A grid of images: 2 across on small screens, 3 from the medium breakpoint, 4 from the large.\nAdd `interactive` to open each image in a full-screen viewer with previous and next buttons that\nwrap around, a numbered pager and the image's caption.\nEvery child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item\nhas a caption; captions show in the viewer only. Each image needs alt text.\nAn item can also carry a caption heading: an element with `slot=\"caption-heading\"` (its text becomes an h2 in\nthe viewer, and its `id`, if any, is kept so a link can target it). Caption markup is copied as written, keeping\n`a`, `strong`, `em`, `br` and `p`; it is trusted and not sanitized, so clean untrusted input first.",
           "name": "ImageGallery",
           "slots": [
             {
