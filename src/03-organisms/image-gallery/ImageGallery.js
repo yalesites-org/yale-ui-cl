@@ -179,6 +179,8 @@ export class ImageGallery extends HTMLElement {
 		$(".viewer__next").addEventListener("click", () => this.#show(this.#index + 1));
 		$(".viewer__close").addEventListener("click", () => this.#viewer.close());
 		$(".viewer__caption-toggle").addEventListener("click", () => this.#expandCaption(!$(".viewer__caption-text").classList.contains("is-expanded")));
+		// Tabbing to a link inside a clamped caption opens the caption so the link shows in full.
+		$(".viewer__caption-text").addEventListener("focusin", () => this.#expandCaption(true));
 		this.#viewer.addEventListener("close", this.#closeHandler);
 		// Fires when the dialog first opens (it has no size until then) and on every resize.
 		new ResizeObserver(() => this.#updateCaptionToggle()).observe(this.#viewer);
