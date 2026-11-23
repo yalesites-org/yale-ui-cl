@@ -128,15 +128,23 @@ export const Narrow = {
 };
 
 export const LinkToAPhoto = {
-  render: WithCaptionHeadings.render,
   args: {
     interactive: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Add `#photo-2` to the page URL (or use a link to it) to open the viewer on the second photo. The hash is the `id` of the photo\'s caption heading, so only photos with one can be linked. The hash stays in the URL after the viewer closes.',
+        story: 'Use a link whose `href` is `#` plus the `id` of a photo\'s caption heading to open the viewer on that photo. Try "Jump to photo 2" or "Jump to photo 3". Opening the page with the hash in the URL does the same. Only photos with a caption heading `id` can be linked. Caption heading ids must be unique on a page: if two galleries share an id, both open. The hash stays in the URL after the viewer closes.',
       },
     },
   },
+  render: (args) =>
+    `<p><a href="#link-photo-2">Jump to photo 2</a> | <a href="#link-photo-3">Jump to photo 3</a></p>
+    <ycl-image-gallery${attrs({ label: args.label, heading: args.heading, 'heading-level': args['heading-level'], narrow: args.narrow, interactive: args.interactive })}>
+      ${images.slice(0, 3).map(([alt, label], index) => `<ycl-image-block>
+        <ycl-image ratio="3x2"><img src="${photo(index + 1, label)}" alt="${alt}" width="1200" height="800"></ycl-image>
+        <span slot="caption-heading" id="link-photo-${index + 1}">${alt}</span>
+        <span slot="caption">${captions[index]}</span>
+      </ycl-image-block>`).join('\n      ')}
+    </ycl-image-gallery>`,
 };
