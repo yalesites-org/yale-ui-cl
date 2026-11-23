@@ -126,3 +126,16 @@ export const Narrow = {
     narrow: true,
   },
 };
+
+export const LinkToAPhoto = {
+  args: {
+    interactive: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Add `#photo-2` to the page URL (or use a link to it) to open the viewer on the second photo. The hash is the `id` of the photo\'s caption heading, so only photos with one can be linked. The hash stays in the URL after the viewer closes.',
+      },
+    },
+  },
+};

@@ -398,4 +398,103 @@ describe("ycl-image-gallery", () => {
 			expect(viewerImage(gallery)).toBeNull();
 		});
 	});
+
+	describe("URL hash", () => {
+		const two = (attrs = "interactive") => `
+			<div>
+				<ycl-image-gallery label="A" ${attrs}>
+					<ycl-image-block><ycl-image><img src="${pixel}" alt="One"></ycl-image><span slot="caption-heading" id="one">One</span><span slot="caption">${long}</span></ycl-image-block>
+					<ycl-image-block><ycl-image><img src="${pixel}" alt="Two"></ycl-image><span slot="caption-heading" id="two">Two</span></ycl-image-block>
+				</ycl-image-gallery>
+				<ycl-image-gallery label="B" interactive>
+					<ycl-image-block><ycl-image><img src="${pixel}" alt="Three"></ycl-image><span slot="caption-heading" id="three">Three</span></ycl-image-block>
+				</ycl-image-gallery>
+			</div>`;
+		const galleries = (root) => [...root.querySelectorAll("ycl-image-gallery")];
+		const heading = (gallery) => shadowOf(gallery).querySelector(".viewer__caption-title");
+		const reset = () => history.replaceState(null, "", location.pathname + location.search);
+		const go = async (hash) => { location.hash = hash; await settle(); await settle(); };
+
+		it("opens the viewer on the photo named by the hash at load", async () => {
+			location.hash = "two";
+			const root = mount(two());
+			await settle();
+			const [a, b] = galleries(root);
+			expect(modal(a).open).toBe(true);
+			expect(pager(a)).toBe("2 / 2");
+			expect(modal(b).open).toBe(false);
+			reset();
+		});
+
+		it("opens on a hash that arrives after load and switches photo if already open", async () => {
+			const root = mount(two());
+			const [a] = galleries(root);
+			await go("one");
+			expect(modal(a).open).toBe(true);
+			expect(pager(a)).toBe("1 / 2");
+			await go("two");
+			expect(pager(a)).toBe("2 / 2");
+			reset();
+		});
+
+		it("opens only the gallery that holds the heading", async () => {
+			const root = mount(two());
+			const [a, b] = galleries(root);
+			await go("three");
+			expect(modal(b).open).toBe(true);
+			expect(modal(a).open).toBe(false);
+			reset();
+		});
+
+		it("focuses the caption heading and opens the caption fully", async () => {
+			const root = mount(two());
+			const [a] = galleries(root);
+			await go("one");
+			expect(shadowOf(a).activeElement).toBe(heading(a));
+			expect(caption(a).classList.contains("is-expanded")).toBe(true);
+			reset();
+		});
+
+		it("scrolls the gallery into view first, without smooth scrolling for reduced motion", async () => {
+			const root = mount(two());
+			const [a] = galleries(root);
+			const spy = vi.spyOn(a, "scrollIntoView");
+			const reduce = vi.spyOn(window, "matchMedia").mockReturnValue({ matches: true });
+			await go("one");
+			expect(spy).toHaveBeenCalledWith(expect.objectContaining({ behavior: "auto" }));
+			reduce.mockRestore();
+			await go("two");
+			expect(spy).toHaveBeenLastCalledWith(expect.objectContaining({ behavior: "smooth" }));
+			reset();
+		});
+
+		it("does nothing for an unknown id or an id outside any gallery", async () => {
+			const root = mount(two() + `<p id="outside">x</p>`);
+			const [a, b] = galleries(root);
+			await go("nope");
+			await go("outside");
+			expect(modal(a).open).toBe(false);
+			expect(modal(b).open).toBe(false);
+			reset();
+		});
+
+		it("ignores the hash without interactive", async () => {
+			const root = mount(two(""));
+			const [a] = galleries(root);
+			await go("one");
+			expect(modal(a)).toBeNull();
+			reset();
+		});
+
+		it("never writes or clears the hash", async () => {
+			const root = mount(two());
+			const [a] = galleries(root);
+			await go("one");
+			const done = closed(modal(a));
+			modal(a).close();
+			await done;
+			expect(location.hash).toBe("#one");
+			reset();
+		});
+	});
 });

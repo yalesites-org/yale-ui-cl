@@ -58,6 +58,10 @@ function captionNodes(source) {
  * An item can also carry a caption heading: an element with `slot="caption-heading"` (its text becomes an h2 in
  * the viewer, and its `id`, if any, is kept so a link can target it). Caption markup is copied as written, keeping
  * `a`, `strong`, `em`, `br` and `p`; it is trusted and not sanitized, so clean untrusted input first.
+ * A link can open the viewer on one photo: a URL hash that is the `id` of that photo's caption heading, for example
+ * `#sterling`. It works at load and when the hash changes later, and switches photo if the viewer is open. Only
+ * photos whose caption heading has an `id` can be linked. The component only reads the hash: it never writes or
+ * clears it, so the hash stays in the URL after the viewer closes, and clicking the same link again does nothing.
  * @attr {string} label - Accessible name of the list of images.
  * @attr {boolean} narrow - Keeps 2 across at every width, for a narrow column.
  * @attr {boolean} interactive - Opens each image in a full-screen viewer.
@@ -92,10 +96,16 @@ export class ImageGallery extends HTMLElement {
 	connectedCallback() {
 		this.#observer.observe(this, { childList: true });
 		this.#build();
+		window.addEventListener("hashchange", this.#hashHandler);
+		// A hash already in the URL opens the viewer once the page has parsed, so every item is there.
+		if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", this.#hashHandler, { once: true });
+		else this.#openFromHash();
 	}
 
 	disconnectedCallback() {
 		this.#observer.disconnect();
+		window.removeEventListener("hashchange", this.#hashHandler);
+		document.removeEventListener("DOMContentLoaded", this.#hashHandler);
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -193,13 +203,37 @@ export class ImageGallery extends HTMLElement {
 		// this shadow root, so look along the event's path instead.
 		const trigger = event.composedPath().find((node) => node.classList?.contains("gallery__trigger"));
 		if (!trigger) return;
-		this.#show(Number(trigger.dataset.index));
+		this.#open(Number(trigger.dataset.index));
+	};
+
+	#open(index) {
+		this.#show(index);
+		if (this.#viewer.open) return;
 		this.#bodyOverflow = document.body.style.overflow;
 		document.body.style.overflow = "hidden";
 		this.#viewer.showModal();
 		// The caption has a size only now the dialog is open.
 		this.#updateCaptionToggle();
-	};
+	}
+
+	#hashHandler = () => this.#openFromHash();
+
+	// A link to a photo is the id of its caption heading, as in YaleSites. The heading ends up in this
+	// shadow root, so the page's getElementById cannot reach it: match the id against the items instead.
+	// The component only reads the hash. It never writes or clears it.
+	#openFromHash() {
+		if (!this.interactive || !this.#viewer) return;
+		let id;
+		try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+		if (!id) return;
+		const index = this.#items.findIndex((item) => item.querySelector('[slot="caption-heading"]')?.id === id);
+		if (index < 0) return;
+		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		this.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+		this.#open(index);
+		this.#expandCaption(true);
+		this.#viewer.querySelector(".viewer__caption-title")?.focus();
+	}
 
 	// Steps past either end wrap round to the other.
 	#show(index) {
