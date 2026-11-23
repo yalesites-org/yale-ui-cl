@@ -254,6 +254,16 @@ describe("ycl-image-gallery", () => {
 			expect(shadowOf(gallery).querySelector(".viewer__caption h2")).not.toBeNull();
 		});
 
+		it("expands a collapsed caption when focus moves to a link in it", () => {
+			const gallery = mount(rich(long));
+			triggers(gallery)[0].click();
+			expect(caption(gallery).classList.contains("is-expanded")).toBe(false);
+			caption(gallery).querySelector("a").dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
+			expect(caption(gallery).classList.contains("is-expanded")).toBe(true);
+			expect(toggle(gallery).getAttribute("aria-expanded")).toBe("true");
+			expect(toggle(gallery).textContent).toBe("Show less");
+		});
+
 		it("wraps around at both ends", () => {
 			const gallery = mount(markup("interactive"));
 			triggers(gallery)[2].click();
