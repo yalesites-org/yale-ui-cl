@@ -254,14 +254,37 @@ describe("ycl-image-gallery", () => {
 			expect(shadowOf(gallery).querySelector(".viewer__caption h2")).not.toBeNull();
 		});
 
-		it("expands a collapsed caption when focus moves to a link in it", () => {
+		it("expands a collapsed caption when keyboard focus reaches a link in it", async () => {
 			const gallery = mount(rich(long));
 			triggers(gallery)[0].click();
 			expect(caption(gallery).classList.contains("is-expanded")).toBe(false);
-			caption(gallery).querySelector("a").dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
+			const link = caption(gallery).querySelector("a");
+			for (let i = 0; i < 10 && shadowOf(gallery).activeElement !== link; i++) await userEvent.keyboard("{Tab}");
+			expect(shadowOf(gallery).activeElement).toBe(link);
 			expect(caption(gallery).classList.contains("is-expanded")).toBe(true);
 			expect(toggle(gallery).getAttribute("aria-expanded")).toBe("true");
 			expect(toggle(gallery).textContent).toBe("Show less");
+		});
+
+		it("leaves a collapsed caption alone when a mouse click focuses a link in it", () => {
+			const gallery = mount(rich(long));
+			triggers(gallery)[0].click();
+			const link = caption(gallery).querySelector("a");
+			// What a mouse press does: focus the link without the keyboard focus ring.
+			link.focus({ focusVisible: false });
+			expect(link.matches(":focus-visible")).toBe(false);
+			expect(caption(gallery).classList.contains("is-expanded")).toBe(false);
+		});
+
+		it("keeps focus in the viewer when the photo changes while a caption link has focus", () => {
+			const gallery = mount(rich());
+			triggers(gallery)[0].click();
+			caption(gallery).querySelector("a").focus();
+			key(caption(gallery).querySelector("a"), "ArrowRight");
+			expect(shadowOf(gallery).activeElement).toBe(next(gallery));
+			key(next(gallery), "ArrowRight");
+			expect(pager(gallery)).toBe("3 / 3");
+			expect(shadowOf(gallery).activeElement).toBe(next(gallery));
 		});
 
 		it("wraps around at both ends", () => {

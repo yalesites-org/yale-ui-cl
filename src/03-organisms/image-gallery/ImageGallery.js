@@ -169,8 +169,11 @@ export class ImageGallery extends HTMLElement {
 		$(".viewer__next").addEventListener("click", () => this.#show(this.#index + 1));
 		$(".viewer__close").addEventListener("click", () => this.#viewer.close());
 		$(".viewer__caption-toggle").addEventListener("click", () => this.#expandCaption(!$(".viewer__caption-text").classList.contains("is-expanded")));
-		// Tabbing to a link inside a clamped caption opens the caption so the link shows in full.
-		$(".viewer__caption-text").addEventListener("focusin", () => this.#expandCaption(true));
+		// Tabbing to a link inside a clamped caption opens the caption so the link shows in full. A mouse
+		// click must not: the caption would grow under the pointer and the click would miss the link.
+		$(".viewer__caption-text").addEventListener("focusin", (event) => {
+			if (event.target.matches(":focus-visible")) this.#expandCaption(true);
+		});
 		this.#viewer.addEventListener("close", this.#closeHandler);
 		// Fires when the dialog first opens (it has no size until then) and on every resize.
 		new ResizeObserver(() => this.#updateCaptionToggle()).observe(this.#viewer);
@@ -206,6 +209,10 @@ export class ImageGallery extends HTMLElement {
 	// Steps past either end wrap round to the other.
 	#show(index) {
 		const count = this.#items.length;
+		// The caption's children are replaced below, which would drop focus to the page and end the
+		// arrow keys. Park focus on the Next button first.
+		const caption = this.#viewer.querySelector(".viewer__caption-text");
+		if (caption.contains(this.#shadow.activeElement)) this.#viewer.querySelector(".viewer__next").focus();
 		this.#index = ((index % count) + count) % count;
 		// A copy, so the grid keeps its own. The grid's crop does not apply to the full view, and the
 		// caption moves to its own line below.
