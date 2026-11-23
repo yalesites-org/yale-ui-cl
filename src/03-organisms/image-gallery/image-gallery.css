@@ -279,3 +279,33 @@ ycl-heading {
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
+
+.viewer__caption-title {
+  margin: 0 0 var(--size-spacing-2);
+  font: var(--font-style-body-default-condensed);
+  font-weight: 700;
+  color: var(--color-basic-white);
+}
+
+.viewer__caption-title:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-basic-white);
+  outline-offset: var(--size-spacing-1);
+}
+
+.viewer__caption-text p {
+  margin: 0;
+}
+
+.viewer__caption-text p + p {
+  margin-top: var(--size-spacing-2);
+}
+
+.viewer__caption-text a {
+  color: var(--color-basic-white);
+  text-decoration: underline;
+}
+
+.viewer__caption-text a:focus-visible {
+  outline: var(--size-thickness-2) solid var(--color-basic-white);
+  outline-offset: var(--size-spacing-1);
+}

@@ -20,12 +20,34 @@ viewerTemplate.innerHTML = `
 		<div class="viewer__stage"></div>
 		<button class="viewer__next viewer__step" type="button" aria-label="Next image">${iconSvg("angle-right", "viewer__step-icon")}</button>
 		<div class="viewer__caption" hidden>
-			<p class="viewer__caption-text"></p>
+			<div class="viewer__caption-heading"></div>
+			<div class="viewer__caption-text"></div>
 			<button class="viewer__caption-toggle" type="button" aria-expanded="false" hidden>Show more</button>
 		</div>
 		<p class="viewer__pager" aria-live="polite"></p>
 	</dialog>
 `;
+
+// Caption markup is trusted, the same as the rest of the item: this does not sanitize it. It keeps the
+// documented tags and unwraps the others, so a stray block element cannot break the viewer's layout.
+const captionTags = new Set(["A", "STRONG", "EM", "BR", "P"]);
+const dropTags = new Set(["SCRIPT", "STYLE", "TEMPLATE"]);
+function captionNodes(source) {
+	const out = [];
+	for (const node of source.childNodes) {
+		if (node.nodeType === Node.TEXT_NODE) out.push(node.cloneNode());
+		else if (node.nodeType === Node.ELEMENT_NODE && !dropTags.has(node.tagName)) {
+			if (captionTags.has(node.tagName)) {
+				const copy = node.cloneNode(false);
+				copy.append(...captionNodes(node));
+				out.push(copy);
+			} else {
+				out.push(...captionNodes(node));
+			}
+		}
+	}
+	return out;
+}
 
 /**
  * A grid of images: 2 across on small screens, 3 from the medium breakpoint, 4 from the large.
@@ -33,6 +55,9 @@ viewerTemplate.innerHTML = `
  * wrap around, a numbered pager and the image's caption.
  * Every child is one item: use a ycl-image (or a plain `<img>`), or a ycl-image-block when the item
  * has a caption; captions show in the viewer only. Each image needs alt text.
+ * An item can also carry a caption heading: an element with `slot="caption-heading"` (its text becomes an h2 in
+ * the viewer, and its `id`, if any, is kept so a link can target it). Caption markup is copied as written, keeping
+ * `a`, `strong`, `em`, `br` and `p`; it is trusted and not sanitized, so clean untrusted input first.
  * @attr {string} label - Accessible name of the list of images.
  * @attr {boolean} narrow - Keeps 2 across at every width, for a narrow column.
  * @attr {boolean} interactive - Opens each image in a full-screen viewer.
@@ -186,13 +211,28 @@ export class ImageGallery extends HTMLElement {
 		const captionEl = copy.querySelector('[slot="caption"]');
 		const captionText = captionEl?.textContent.trim() ?? "";
 		captionEl?.remove();
+		const headingEl = copy.querySelector('[slot="caption-heading"]');
+		const headingText = headingEl?.textContent.trim() ?? "";
+		const headingId = headingEl?.id;
+		headingEl?.remove();
 		for (const el of [copy, ...copy.querySelectorAll("[ratio]")]) el.removeAttribute("ratio");
 		this.#viewer.querySelector(".viewer__stage").replaceChildren(copy);
 		this.#viewer.querySelector(".viewer__pager").textContent = `${this.#index + 1} / ${count}`;
-		this.#viewer.querySelector(".viewer__caption").hidden = !captionText;
-		this.#viewer.querySelector(".viewer__caption-text").textContent = captionText;
+		this.#viewer.querySelector(".viewer__caption").hidden = !captionText && !headingText;
+		this.#viewer.querySelector(".viewer__caption-heading").replaceChildren(...this.#headingNodes(headingText, headingId));
+		this.#viewer.querySelector(".viewer__caption-text").replaceChildren(...(captionText ? captionNodes(captionEl) : []));
 		this.#expandCaption(false);
 		this.#updateCaptionToggle();
+	}
+
+	#headingNodes(text, id) {
+		if (!text) return [];
+		const heading = document.createElement("h2");
+		heading.className = "viewer__caption-title";
+		heading.textContent = text;
+		if (id) heading.id = id;
+		heading.tabIndex = -1;
+		return [heading];
 	}
 
 	// Offer Show more only when the two-line clamp hides text. That depends on the viewer's width,
