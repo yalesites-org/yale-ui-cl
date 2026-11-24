@@ -1858,6 +1858,123 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/02-molecules/cards/content-card/ContentCard.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A card for a post, event, profile or resource. With an href, the whole card is a link.",
+          "name": "ContentCard",
+          "slots": [
+            {
+              "description": "Category links.",
+              "name": "categories"
+            },
+            {
+              "description": "Text above the heading.",
+              "name": "eyebrow"
+            },
+            {
+              "description": "Text before the heading.",
+              "name": "prefix"
+            },
+            {
+              "description": "The card heading.",
+              "name": "heading"
+            },
+            {
+              "description": "Pronouns, for profiles.",
+              "name": "pronouns"
+            },
+            {
+              "description": "Text under the heading.",
+              "name": "subheading"
+            },
+            {
+              "description": "A date or other short line, often a ycl-date-time.",
+              "name": "overline"
+            },
+            {
+              "description": "Tag links.",
+              "name": "tags"
+            },
+            {
+              "description": "Summary text.",
+              "name": ""
+            },
+            {
+              "description": "Links or buttons.",
+              "name": "ctas"
+            },
+            {
+              "description": "The card image.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the card links to."
+            },
+            {
+              "name": "overlay",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown over the image, such as \"Video\". Also added to the link name."
+            },
+            {
+              "type": {
+                "text": "\"grid\"|\"list\"|\"condensed\"|\"single\""
+              },
+              "description": "Card layout. Defaults to grid.",
+              "name": "layout"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Larger, featured presentation.",
+              "name": "featured"
+            },
+            {
+              "type": {
+                "text": "\"profile\"|\"resource\""
+              },
+              "description": "Adjusts the image for profile photos or resource thumbnails.",
+              "name": "source"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-content-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ContentCard",
+          "declaration": {
+            "name": "ContentCard",
+            "module": "src/02-molecules/cards/content-card/ContentCard.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-content-card",
+          "declaration": {
+            "name": "ContentCard",
+            "module": "src/02-molecules/cards/content-card/ContentCard.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/02-molecules/cards/custom-card/CustomCard.js",
       "declarations": [
         {
@@ -2003,123 +2120,6 @@
           "declaration": {
             "name": "DirectoryListingCard",
             "module": "src/02-molecules/cards/directory-listing-card/DirectoryListingCard.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/02-molecules/cards/reference-card/ReferenceCard.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A card for a post, event, profile or resource. With an href, the whole card is a link.",
-          "name": "ReferenceCard",
-          "slots": [
-            {
-              "description": "Category links.",
-              "name": "categories"
-            },
-            {
-              "description": "Text above the heading.",
-              "name": "eyebrow"
-            },
-            {
-              "description": "Text before the heading.",
-              "name": "prefix"
-            },
-            {
-              "description": "The card heading.",
-              "name": "heading"
-            },
-            {
-              "description": "Pronouns, for profiles.",
-              "name": "pronouns"
-            },
-            {
-              "description": "Text under the heading.",
-              "name": "subheading"
-            },
-            {
-              "description": "A date or other short line, often a ycl-date-time.",
-              "name": "overline"
-            },
-            {
-              "description": "Tag links.",
-              "name": "tags"
-            },
-            {
-              "description": "Summary text.",
-              "name": ""
-            },
-            {
-              "description": "Links or buttons.",
-              "name": "ctas"
-            },
-            {
-              "description": "The card image.",
-              "name": "image"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "href",
-              "type": {
-                "text": "string"
-              },
-              "description": "URL the card links to."
-            },
-            {
-              "name": "overlay",
-              "type": {
-                "text": "string"
-              },
-              "description": "Text shown over the image, such as \"Video\". Also added to the link name."
-            },
-            {
-              "type": {
-                "text": "\"grid\"|\"list\"|\"condensed\"|\"single\""
-              },
-              "description": "Card layout. Defaults to grid.",
-              "name": "layout"
-            },
-            {
-              "type": {
-                "text": "boolean"
-              },
-              "description": "Larger, featured presentation.",
-              "name": "featured"
-            },
-            {
-              "type": {
-                "text": "\"profile\"|\"resource\""
-              },
-              "description": "Adjusts the image for profile photos or resource thumbnails.",
-              "name": "source"
-            }
-          ],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "ycl-reference-card",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ReferenceCard",
-          "declaration": {
-            "name": "ReferenceCard",
-            "module": "src/02-molecules/cards/reference-card/ReferenceCard.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "ycl-reference-card",
-          "declaration": {
-            "name": "ReferenceCard",
-            "module": "src/02-molecules/cards/reference-card/ReferenceCard.js"
           }
         }
       ]

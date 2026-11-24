@@ -1,4 +1,4 @@
-import "./ReferenceCard";
+import "./ContentCard";
 import "../../../01-atoms/headings/Heading";
 import "../../../01-atoms/cta/Cta";
 import "../../../01-atoms/image/ResponsiveImage";
@@ -20,7 +20,7 @@ const card = (args, { heading, snippet, overline, image = placeholder(600, 400),
 	].filter(Boolean);
 	return `
 	<li>
-		<ycl-reference-card${attrs({
+		<ycl-content-card${attrs({
 			href: args.href,
 			layout: args.layout,
 			featured: args.featured,
@@ -28,7 +28,7 @@ const card = (args, { heading, snippet, overline, image = placeholder(600, 400),
 			source: args.source,
 		})}>
 			${slots.join("\n\t\t\t")}
-		</ycl-reference-card>
+		</ycl-content-card>
 	</li>`;
 };
 
@@ -37,8 +37,8 @@ const collection = (args, cards) => `<ul style="${collectionStyle(args.layout)}"
 			</ul>`;
 
 export default {
-	title: "Molecules/Cards/Reference Card",
-	component: "ycl-reference-card",
+	title: "Molecules/Cards/Content Card",
+	component: "ycl-content-card",
 	argTypes: {
 		href: attributeArg("Card link. The whole card is clickable; without it the card is not a link.", { control: "text" }),
 		overlay: attributeArg("Label shown over the card image (e.g. \"Featured\"). Omitted when empty.", {

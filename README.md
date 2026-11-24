@@ -166,7 +166,7 @@ colors only that part, for example "`primary`: Yale blue left bar on light gray 
 Two components differ in one option: `ycl-facts-and-figures`' `default` has no background and takes
 the text color around it, and `ycl-inline-message`'s `accent-1` has Yale blue text.
 
-`ycl-text-copy-button`, `ycl-custom-card` and `ycl-reference-card` have no options but use the
+`ycl-text-copy-button`, `ycl-custom-card` and `ycl-content-card` have no options but use the
 palette too (`secondary` for link hover, `primary`/`secondary` for card accents).
 
 Text colors on each option are fixed (generally white on `primary`, `secondary` and `accent-2`; gray-800 on
@@ -226,3 +226,13 @@ CTAs now match the YaleSites CTA: a CTA with no `variant` is filled (it used to 
 ### Renamed attribute
 
 The `variation` attribute on `ycl-quick-links`, `ycl-page-title` and `ycl-text` is now `variant`, matching `ycl-pull-quote` and `ycl-quote-callout`. For example, `<ycl-page-title variation="event">` becomes `<ycl-page-title variant="event">`.
+
+## Migration: Reference Card is now Content Card
+
+| | Old | New |
+|-|-----|-----|
+| Tag | `ycl-reference-card` | `ycl-content-card` |
+| Export | `ReferenceCard` | `ContentCard` |
+| Per-component entry | `yale-ui-cl/reference-card` | `yale-ui-cl/content-card` |
+
+The old tag, export, and entry names were removed, not aliased.

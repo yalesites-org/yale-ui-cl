@@ -14,7 +14,7 @@ import "../03-organisms/banner/image/ImageBanner";
 import "../02-molecules/callout/Callout";
 import "../02-molecules/cards/custom-card/CustomCard";
 import "../02-molecules/cards/directory-listing-card/DirectoryListingCard";
-import "../02-molecules/cards/reference-card/ReferenceCard";
+import "../02-molecules/cards/content-card/ContentCard";
 import "../03-organisms/content-spotlight-portrait/ContentSpotlightPortrait";
 import "../02-molecules/data-table/DataTable";
 import "../02-molecules/facts-and-figures/FactsAndFigures";
@@ -331,7 +331,7 @@ const directoryListing = () => page("directory-main", {
 		</ycl-directory-listing-card>`), "16rem"))}
 
 		${section("Guides", grid(guides.map(([heading, text]) =>
-			`<ycl-reference-card href="#" layout="list"><ycl-image slot="image"><img src="${placeholder(600, 400)}" alt=""></ycl-image><ycl-heading level="3" slot="heading">${heading}</ycl-heading><p>${text}</p></ycl-reference-card>`), "100%"))}
+			`<ycl-content-card href="#" layout="list"><ycl-image slot="image"><img src="${placeholder(600, 400)}" alt=""></ycl-image><ycl-heading level="3" slot="heading">${heading}</ycl-heading><p>${text}</p></ycl-content-card>`), "100%"))}
 
 		${section("Handbook pages", `${handbookPages.map(([heading, source, teaser]) => `<ycl-search-result href="#" content-type="page">
 			<ycl-heading level="3" slot="heading">${heading}</ycl-heading>
