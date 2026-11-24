@@ -31,6 +31,14 @@ function pagerPages(current, total) {
 	return pages.flatMap((page, i) => (i > 0 && page - pages[i - 1] > 1 ? [null, page] : [page]));
 }
 
+/**
+ * Page-number navigation. Links go to base-url with ?page=N.
+ * @attr {number} current - The current page, from 1.
+ * @attr {number} total-pages - The number of pages. With one page, nothing shows.
+ * @attr {string} base-url - URL the page links are built from.
+ * @attr {string} label - Accessible name of the navigation. Defaults to "Pagination".
+ * @fires {CustomEvent<{page: number}>} ycl-page-change - When a page link is clicked. Cancelable: preventDefault() stops the navigation so the page can update itself.
+ */
 export class Pager extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

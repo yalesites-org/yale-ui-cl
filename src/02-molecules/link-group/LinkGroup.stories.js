@@ -1,17 +1,22 @@
 import "./LinkGroup";
 import "../../01-atoms/headings/Heading";
 import "../../01-atoms/text-link/Link";
+import { slotArg } from "../../../.storybook/story-helpers.js";
 export default {
   title: 'Molecules/Link Group',
   component: 'ycl-link-group',
   argTypes: {
-    headingOne: {control: 'text'},
-    headingTwo: {control: 'text'},
-},
+    headingOne: slotArg('Heading over the first column (slot="heading-one"). Omitted when empty.', { control: 'text' }),
+    headingTwo: slotArg('Heading over the second column (slot="heading-two"). Omitted when empty.', { control: 'text' }),
+    linkSlots: slotArg('Links go in slot="links-one" and slot="links-two"; each becomes its own list item.', {
+      name: 'Link slots',
+      control: false,
+    }),
+  },
   args: {
     headingOne: 'Heading for Link Group One',
     headingTwo: 'Heading for Link Group Two',
-},
+  },
 
   render: (args) =>
     `<ycl-link-group>
@@ -29,16 +34,3 @@ export default {
 };
 
 export const Default = {};
-
-export const SingleHeading = {
-  args: {
-    headingTwo: '',
-  },
-};
-
-export const NoHeadings = {
-  args: {
-    headingOne: '',
-    headingTwo: '',
-  },
-};

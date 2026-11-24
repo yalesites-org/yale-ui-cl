@@ -118,6 +118,13 @@
   box-shadow: none;
 }
 
+/* The icon's nowrap wrapper is the flex item, so it centres the icon itself rather than leaving it
+   on the text baseline, which would push the icon up and the CTA taller. */
+.cta .link-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
 .cta svg {
   height: 1rem;
   width: 1rem;

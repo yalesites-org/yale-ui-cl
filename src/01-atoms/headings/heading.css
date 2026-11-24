@@ -44,9 +44,15 @@
 :host(ycl-heading[level="6"]) {
   font: var(--font-style-heading-h6-yale-new);
   font-variant-numeric: oldstyle-nums;
+  text-transform: var(--font-text-transform-h6-yale-new);
 }
 
-/* appearance comes after level so it wins: it sets the look independently of the outline level. */
+/* appearance comes after level so it wins: it sets the look independently of the outline level.
+   H6 is set in capitals (as YaleSites' h6 type style is); any other appearance undoes that. */
+:host(ycl-heading[appearance]) {
+  text-transform: none;
+}
+
 :host(ycl-heading[appearance="h1"]),
 :host(ycl-heading[appearance="1"]) {
   font: var(--font-style-heading-h1-yale-new);
@@ -81,6 +87,7 @@
 :host(ycl-heading[appearance="6"]) {
   font: var(--font-style-heading-h6-yale-new);
   font-variant-numeric: oldstyle-nums;
+  text-transform: var(--font-text-transform-h6-yale-new);
 }
 
 :host(ycl-heading) .heading {

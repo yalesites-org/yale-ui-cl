@@ -23,6 +23,11 @@
   word-wrap: normal;
 }
 
+/* YaleSites pads every [data-component-width] component with the site gutter. */
+.page-title {
+  padding-inline: var(--size-spacing-site-gutter);
+}
+
 .page-title__inner {
   width: 100%;
   max-width: var(--size-component-layout-width-site);
