@@ -8,6 +8,7 @@ import { composedElements, mount, settle } from "../test/helpers.js";
 const THEMED = [
 	"ycl-accordion",
 	"ycl-action-banner",
+	"ycl-banner-content",
 	"ycl-callout",
 	"ycl-content-spotlight-portrait",
 	"ycl-custom-card",

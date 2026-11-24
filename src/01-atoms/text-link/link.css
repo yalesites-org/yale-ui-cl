@@ -107,7 +107,8 @@ ycl-inline-message ycl-text-link {
   --color-text-shadow: var(--color-inline-message-background);
 }
 
-ycl-action-banner ycl-text-link {
+ycl-action-banner ycl-text-link,
+ycl-banner-content ycl-text-link {
   --color-text-shadow: transparent;
 }
 
