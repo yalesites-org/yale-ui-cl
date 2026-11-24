@@ -56,6 +56,15 @@ function dateParts(date, timeZone) {
 	};
 }
 
+/**
+ * Formats a date, time or date range the way YaleSites does.
+ * @attr {string} start - Start date: ISO 8601 or a Unix timestamp in seconds. Without a valid start, the slotted content shows instead.
+ * @attr {string} end - End date, for a range. Same formats as start.
+ * @attr {"date_and_time"|"time"|"date"|"day__full"|"day__long"|"month_year"|"year_only"|"same_day_diff_time"|"date_time_multiple_days"|"localist_same_day"|"all_day"|"localist_all_day"} format - How to format the date. Defaults to date_and_time.
+ * @attr {boolean} all-day - Shows the date(s) followed by "All day".
+ * @attr {string} time-zone - IANA time zone, such as America/New_York. Defaults to the visitor's.
+ * @slot - Fallback text shown when start is missing or invalid.
+ */
 export class DateTime extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

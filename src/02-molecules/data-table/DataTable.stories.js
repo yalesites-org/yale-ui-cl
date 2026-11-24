@@ -1,5 +1,6 @@
 import "./DataTable";
 import "../../01-atoms/text-link/Link";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
 
 const courses = [
   ['CPSC 201', 'Introduction to Computer Science', 'Ozan Erat', 1, '$0', '2027-01-12', 'Jan 12, 2027'],
@@ -12,12 +13,12 @@ const courses = [
   ['PLSC 113', 'Introduction to American Politics', 'Grace Liu', 1, '$0', '2027-01-19', 'Jan 19, 2027'],
 ];
 
-const table = ({ presort } = {}) => `
-  <table>
-    <caption>Spring 2027 courses</caption>
+const table = ({ presort, caption } = {}) => `
+  <table>${caption ? `
+    <caption>${caption}</caption>` : ''}
     <thead>
       <tr>
-        <th scope="col"${presort ? ' aria-sort="ascending"' : ''}>Course</th>
+        <th scope="col"${attrs({ 'aria-sort': presort })}>Course</th>
         <th scope="col">Title</th>
         <th scope="col">Instructor</th>
         <th scope="col">Credits</th>
@@ -44,22 +45,28 @@ export default {
   title: 'Molecules/Data Table',
   component: 'ycl-data-table',
   argTypes: {
-    label: { control: 'text' },
-    placeholder: { control: 'text' },
+    label: attributeArg('Label for the search field. Defaults to "Search".', { control: 'text' }),
+    placeholder: attributeArg('Placeholder text for the search field.', { control: 'text' }),
+    caption: slotArg('Caption of the slotted table. Omitted when empty.', { control: 'text' }),
+    presort: slotArg('aria-sort on a header of the slotted table sorts by that column on load (shown on Course). Headers with data-no-sort are not sortable; cells can give a data-sort-value.', {
+      name: 'Presorted Column',
+      control: 'select',
+      options: ['none', 'ascending', 'descending'],
+      mapping: { none: undefined },
+    }),
+    content: slotArg('A `<table>` goes in the default slot; its header cells become sort buttons and the search filters its body rows.', {
+      control: false,
+    }),
   },
   args: {
     label: 'Search courses',
     placeholder: 'Course, title or instructor',
+    caption: 'Spring 2027 courses',
+    presort: 'none',
   },
 
   render: (args) =>
-    `<ycl-data-table label="${args.label}" placeholder="${args.placeholder}">${table()}</ycl-data-table>`,
+    `<ycl-data-table${attrs({ label: args.label, placeholder: args.placeholder })}>${table(args)}</ycl-data-table>`,
 };
 
 export const Default = {};
-
-// aria-sort on a header sorts by that column on load.
-export const Presorted = {
-  render: (args) =>
-    `<ycl-data-table label="${args.label}" placeholder="${args.placeholder}">${table({ presort: true })}</ycl-data-table>`,
-};

@@ -10,7 +10,7 @@ const watchSlot = (slot, onChange) => {
 	update();
 };
 
-// Unlike the reference card, only the heading is a link here: the email link must stay
+// Unlike the content card, only the heading is a link here: the email link must stay
 // separately clickable. The link is rendered here so it can be dropped when there's no href.
 const directoryListingCardTemplate = document.createElement("template");
 directoryListingCardTemplate.innerHTML = `
@@ -27,6 +27,19 @@ directoryListingCardTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A person card for directory listings, with contact details. Only the heading is a link.
+ * @attr {string} href - URL the heading links to.
+ * @attr {boolean} featured - Larger, featured presentation.
+ * @attr {"directory-listing"|"profile-directory"} layout - Card layout.
+ * @slot overline - Text above the heading.
+ * @slot heading - The person's name.
+ * @slot subheading - Text under the heading, such as a title.
+ * @slot - Summary text.
+ * @slot email - An email link.
+ * @slot phone - A phone number.
+ * @slot image - The person's photo.
+ */
 export class DirectoryListingCard extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

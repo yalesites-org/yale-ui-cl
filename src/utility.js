@@ -8,16 +8,27 @@ export function addVariant(classNames, componentObject, componentName) {
 };
 
 // CTA options shared by ycl-cta-link and ycl-button. Each maps to a cta.css modifier:
-// variant="filled" -> cta--filled, size="large" -> cta--large, animate="wipe" -> cta--animate-wipe,
-// radius="pill" -> cta--radius-pill. Fade is the default animation, so it needs no attribute.
-export const ctaAttributes = ["variant", "size", "animate", "radius"];
+// variant="outline" -> cta--outline, outline-weight="4" -> cta--outline-weight-4,
+// animate="wipe" -> cta--animate-wipe, radius="pill" -> cta--radius-pill. Values cta.css doesn't
+// define add no modifier, so an unknown variant falls back to the filled default and an unknown
+// weight to the 2px border. Fade is the default animation, so it needs no attribute.
+export const ctaAttributes = ["variant", "outline-weight", "animate", "radius"];
+
+const ctaVariantValues = ["filled", "outline"];
+const ctaOutlineWeights = ["1", "2", "4"];
 
 export function ctaVariants(host) {
-	const modifier = (name, prefix = "") => {
+	const modifier = (name, prefix = "", allowed = null) => {
 		const value = host.getAttribute(name);
-		return value ? prefix + value : null;
+		if (!value || (allowed && !allowed.includes(value))) return null;
+		return prefix + value;
 	};
-	return [modifier("variant"), modifier("size"), modifier("animate", "animate-"), modifier("radius", "radius-")]
+	return [
+		modifier("variant", "", ctaVariantValues),
+		modifier("outline-weight", "outline-weight-", ctaOutlineWeights),
+		modifier("animate", "animate-"),
+		modifier("radius", "radius-"),
+	]
 		.filter(Boolean)
 		.join(" ");
 }
@@ -68,6 +79,21 @@ export function createIconSvg(icon, label) {
 	}
 }
 
+// Wraps a link icon so it can't wrap onto a line of its own. A line can always break before an
+// atomic inline like an <svg>, so the icon sits in a nowrap span behind a word joiner (U+2060),
+// which forbids a break between the link's last word and the span. The joiner is hidden from
+// assistive tech so the link's accessible name is unchanged.
+function linkIconWrapper(svg) {
+	const wrapper = document.createElement("span");
+	wrapper.classList.add("link-icon");
+	wrapper.style.whiteSpace = "nowrap";
+	const joiner = document.createElement("span");
+	joiner.ariaHidden = "true";
+	joiner.textContent = "\u2060";
+	wrapper.append(joiner, svg);
+	return wrapper;
+}
+
 export function updateLinkIcon(icon, link, currentURL) {
 	// pathname excludes the query string and hash, so "file.pdf?x=1#page=2" still reads as "pdf"
 	const extension = link.pathname.split(".").pop().toLowerCase();
@@ -75,13 +101,17 @@ export function updateLinkIcon(icon, link, currentURL) {
 	// mailto:, tel:, etc. have an origin of "null", so only http(s) links can be external
 	const isWebLink = link.protocol === "http:" || link.protocol === "https:";
 
-	if (icon) icon.remove();
+	// Remove the previous icon along with its wrapper
+	if (icon) (icon.closest(".link-icon") ?? icon).remove();
+	link.querySelectorAll(":scope > .link-icon").forEach((wrapper) => wrapper.remove());
 
+	let svg;
 	if (isWebLink && downloadExts.includes(extension)) { // Download link
-		link.insertAdjacentElement("beforeend", createIconSvg("circle-arrow-down", "(link is a download)"));
+		svg = createIconSvg("circle-arrow-down", "(link is a download)");
+	} else if (link.target === "_blank") { // New window link, external or not
+		svg = createIconSvg("fa-arrow-up-right-from-square", "(opens in new window)");
 	} else if (isWebLink && link.origin !== currentURL) { // External link
-		link.insertAdjacentElement("beforeend", createIconSvg("arrow-up-right", "(link is external)"));
-	} else if (link.target === "_blank") { // New window link
-		link.insertAdjacentElement("beforeend", createIconSvg("fa-arrow-up-right-from-square", "(opens in new window)"));
+		svg = createIconSvg("arrow-up-right", "(link is external)");
 	}
+	if (svg) link.insertAdjacentElement("beforeend", linkIconWrapper(svg));
 }

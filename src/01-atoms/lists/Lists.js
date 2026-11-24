@@ -8,6 +8,11 @@ listTemplate.innerHTML = `
 
 const taxonomyTypes = ["categories", "tags"];
 
+/**
+ * Styles a slotted `<ul>` or `<ol>` as a taxonomy list.
+ * @attr {"categories"|"tags"} type - Turns the list into a taxonomy list of that kind.
+ * @slot - A `<ul>` or `<ol>`.
+ */
 export class List extends HTMLElement { #shadow;
   static get observedAttributes() {
     return ["type"];
