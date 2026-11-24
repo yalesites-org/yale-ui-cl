@@ -25,6 +25,7 @@ export { VideoEmbed } from "./01-atoms/video-embed/VideoEmbed.js";
 export { Embed } from "./02-molecules/embed/Embed.js";
 export { Video } from "./02-molecules/video/Video.js";
 export { Modal } from "./02-molecules/modal/Modal.js";
+export { BackgroundVideo } from "./02-molecules/background-video/BackgroundVideo.js";
 export { ActionBanner } from "./03-organisms/banner/action/ActionBanner.js";
 export { ImageBanner } from "./03-organisms/banner/image/ImageBanner.js";
 export { Alert } from "./02-molecules/alert/Alert.js";
