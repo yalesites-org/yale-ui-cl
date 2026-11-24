@@ -70,7 +70,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-video` | Video with heading and text |
 | `ycl-embed` | Embedded form, map, calendar, audio or video |
 | `ycl-custom-card` | Card with heading, text, image |
-| `ycl-reference-card` | Card for a post, event, profile or resource |
+| `ycl-content-card` | Card for a post, event, profile or resource |
 | `ycl-directory-listing-card` | Person card with contact details |
 | `ycl-tile-item` | Colored tile |
 | `ycl-facts-and-figures` | Statistic with supporting text |

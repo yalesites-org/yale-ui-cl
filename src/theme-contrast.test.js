@@ -18,7 +18,7 @@ const THEMED = [
 	"ycl-pull-quote",
 	"ycl-quick-links",
 	"ycl-quote-callout",
-	"ycl-reference-card",
+	"ycl-content-card",
 	"ycl-tabs",
 	"ycl-taxonomy-display",
 	"ycl-text-copy-button",
@@ -161,8 +161,8 @@ const CONTROLS = {
 	"ycl-custom-card": [[".custom-card__heading-link", { ...LINK, hover: "var(--color-theme-secondary, var(--color-blue-medium))" }]],
 	"ycl-quick-links": [["a", { hover: { color: "var(--color-action-secondary)", background: "var(--color-action)" } }]],
 	"ycl-quote-callout": [["a", { ...LINK, hover: "var(--color-quote-callout-accent)" }]],
-	"ycl-reference-card": [
-		[".reference-card__heading-link", { ...LINK, hover: "var(--color-theme-secondary, var(--color-blue-medium))" }],
+	"ycl-content-card": [
+		[".content-card__heading-link", { ...LINK, hover: "var(--color-theme-secondary, var(--color-blue-medium))" }],
 	],
 	"ycl-tabs": [[".tabs__link, .tabs__control", { hover: "var(--color-link-base)" }]],
 	"ycl-text-copy-button": [[".text-copy-button__button", { hover: "var(--color-link-hover)" }]],
