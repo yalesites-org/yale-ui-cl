@@ -1,7 +1,15 @@
 import "./NavMenu";
+
 export default {
   title: 'Molecules/Navigation Menu',
   component: 'ycl-nav-menu',
+  parameters: {
+    docs: {
+      description: {
+        component: 'Limits: an item with children is rendered as a dropdown toggle, so its own `href` and `current` are not used; to link the section\'s landing page, add it as the first child item. Only two levels are supported: children of a child item are not rendered.',
+      },
+    },
+  },
   argTypes: {
     layout: {
       name: 'Layout',

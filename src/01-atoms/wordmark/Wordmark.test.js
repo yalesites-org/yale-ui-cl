@@ -1,9 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { userEvent } from "vitest/browser";
+// The size and color tokens live on :root in the document stylesheet consumers load, so load them
+// here too; without them --size-spacing-8 is undefined and the svg falls back to its intrinsic size.
+import "@yalesites-org/tokens/build/css/tokens.css";
 import "./Wordmark.js";
 import { mount, shadowOf } from "../../../test/helpers.js";
 
 const named = (element) => shadowOf(element).querySelectorAll("[aria-label]");
+
+const svgBox = (element) => shadowOf(element).querySelector("svg").getBoundingClientRect();
+const rootFontSize = () => parseFloat(getComputedStyle(document.documentElement).fontSize);
+const VIEWBOX_RATIO = 106 / 46;
 
 describe("ycl-wordmark", () => {
 	it("renders the wordmark as an inline, hidden svg", () => {
@@ -103,5 +110,31 @@ describe("ycl-wordmark", () => {
 			if (expected) expect(style.color).toBe(expected);
 			expect(style.outlineColor).toBe(style.color);
 		}
+	});
+
+	it("sizes the svg to the --size-spacing-8 token by default, width following the viewBox", () => {
+		const element = mount(`<ycl-wordmark></ycl-wordmark>`);
+		const svg = shadowOf(element).querySelector("svg");
+		const token = getComputedStyle(svg).getPropertyValue("--size-spacing-8").trim();
+		expect(token).toMatch(/rem$/);
+		const expected = parseFloat(token) * rootFontSize();
+		expect(getComputedStyle(svg).height).toBe(`${expected}px`);
+		const { width, height } = svgBox(element);
+		expect(height).toBeCloseTo(expected, 1);
+		expect(width).toBeGreaterThan(0);
+		expect(width / height).toBeCloseTo(VIEWBOX_RATIO, 2);
+	});
+
+	it("lets --size-wordmark on the host override the height, scaling the width with it", () => {
+		const element = mount(`<ycl-wordmark></ycl-wordmark>`);
+		const before = svgBox(element);
+		element.style.setProperty("--size-wordmark", "4rem");
+		const svg = shadowOf(element).querySelector("svg");
+		const expected = 4 * rootFontSize();
+		expect(getComputedStyle(svg).height).toBe(`${expected}px`);
+		const { width, height } = svgBox(element);
+		expect(height).toBeCloseTo(expected, 1);
+		expect(width / height).toBeCloseTo(VIEWBOX_RATIO, 2);
+		expect(width / before.width).toBeCloseTo(expected / before.height, 2);
 	});
 });

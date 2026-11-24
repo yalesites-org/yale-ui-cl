@@ -13,6 +13,12 @@ wordmarkTemplate.innerHTML = `
 	</svg>
 `;
 
+/**
+ * The Yale wordmark, linked to yale.edu by default.
+ * @attr {string} href - Link target. Defaults to https://www.yale.edu; empty renders the mark with no link.
+ * @attr {"blue-yale"|"white"} color - Blue for light backgrounds, white for dark ones. Defaults to blue-yale.
+ * @cssprop --size-wordmark - Height of the mark; the width follows. Defaults to var(--size-spacing-8).
+ */
 export class Wordmark extends HTMLElement {
 	#shadow;
 	#svg;

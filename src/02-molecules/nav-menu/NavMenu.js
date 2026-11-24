@@ -16,6 +16,15 @@ navMenuTemplate.innerHTML = `
 // toggle (label) for those child links. It renders nothing itself: ycl-nav-menu reads these as data
 // and builds the whole menu in its own shadow root. The empty shadow root keeps an item from ever
 // rendering on its own.
+// Limits: an item with children is only a toggle, so its own href and current are not used; to
+// link the section's landing page, add it as the first child item. Only two levels are supported:
+// children of a child item are not rendered.
+/**
+ * One navigation menu entry: a link, or a dropdown toggle when it has ycl-nav-menu-item children (one level only).
+ * @attr {string} label - Text of the link or toggle.
+ * @attr {string} href - Link target. Not used on an item with children.
+ * @attr {boolean} current - Marks the link to the current page. Not used on an item with children.
+ */
 export class NavMenuItem extends HTMLElement {
 	constructor() {
 		super();
@@ -48,6 +57,11 @@ const childItems = (element) => [...element.children].filter((child) => child.lo
 //   separate shadow roots aren't list children, see Accordion.js) and one set of handlers sees them all.
 // Instead the links adopt the Text Link atom's stylesheet (class "link") and the toggles reuse the
 // Button atom's dropdown icon.
+/**
+ * Site navigation menu with dropdowns. Children are ycl-nav-menu-item elements.
+ * @attr {string} label - Accessible name of the navigation landmark. Defaults to Main.
+ * @attr {"horizontal"|"vertical"} layout - Horizontal floats dropdowns below their toggles; vertical expands them inline. Defaults to horizontal.
+ */
 export class NavMenu extends HTMLElement {
 	#shadow;
 	#observer;
@@ -58,6 +72,8 @@ export class NavMenu extends HTMLElement {
 	// Each rendered link and toggle, mapped to the ycl-nav-menu-item it was built from and which kind
 	// of element it is ("link" or "toggle"): a rebuild finds the new element for the same item.
 	#sources = new WeakMap();
+	// Whether a pointer is pressed inside the menu: see focusoutHandler.
+	#pressed = false;
 
 	static get observedAttributes() {
 		return ["label", "layout"];
@@ -127,17 +143,28 @@ export class NavMenu extends HTMLElement {
 	};
 
 	// A floating dropdown shouldn't linger over the page once the user has moved on. Inline
-	// (vertical) dropdowns are part of the page flow, so they stay open.
+	// (vertical) dropdowns are part of the page flow, so they stay open. No relatedTarget means focus
+	// left the page (Tab out of the document, the window losing focus), so that closes it too, unless
+	// a press inside the menu caused it: a press on non-focusable content, or on a toggle in macOS
+	// Safari (which doesn't focus buttons on click), also blurs to nothing, and the click decides.
+	// The press is consumed here, so a press whose pointerup the document never sees can't keep a
+	// later focus loss from closing the dropdown.
 	focusoutHandler = (event) => {
-		if (this.layout !== "horizontal" || !event.relatedTarget) return;
-		if (!this.#shadow.contains(event.relatedTarget)) this.#setOpen(null);
+		if (this.layout !== "horizontal") return;
+		const pressed = this.#pressed;
+		this.#pressed = false;
+		if (event.relatedTarget ? !this.#shadow.contains(event.relatedTarget) : !pressed) this.#setOpen(null);
 	};
 
 	// pointerdown rather than click: iOS Safari doesn't send click to the document for taps on
-	// non-interactive content.
+	// non-interactive content. A press inside the menu is noted for focusoutHandler until it ends.
 	documentPointerHandler = (event) => {
-		if (this.layout !== "horizontal" || event.composedPath().includes(this)) return;
-		this.#setOpen(null);
+		if (event.composedPath().includes(this)) this.#pressed = true;
+		else if (this.layout === "horizontal") this.#setOpen(null);
+	};
+
+	documentPointerEndHandler = () => {
+		this.#pressed = false;
 	};
 
 	// Opens the given toggle's dropdown (or none), closing any other: only one is open at a time.
@@ -156,6 +183,9 @@ export class NavMenu extends HTMLElement {
 		const method = on ? "addEventListener" : "removeEventListener";
 		document[method]("keydown", this.keydownHandler);
 		document[method]("pointerdown", this.documentPointerHandler);
+		document[method]("pointerup", this.documentPointerEndHandler);
+		document[method]("pointercancel", this.documentPointerEndHandler);
+		if (!on) this.#pressed = false;
 	}
 
 	// Reads attributes rather than the item's accessors: items may not be upgraded yet when the
@@ -195,6 +225,7 @@ export class NavMenu extends HTMLElement {
 				return li;
 			}
 
+			// An item with children becomes a toggle: its own href and current are not used.
 			const id = `nav-menu-submenu-${index}`;
 			const toggle = document.createElement("button");
 			toggle.type = "button";
@@ -217,6 +248,7 @@ export class NavMenu extends HTMLElement {
 			submenu.append(...children.map((child) => {
 				const childLi = document.createElement("li");
 				childLi.className = "nav-menu__subitem";
+				// Always a link: a child's own children (a third level) are not rendered.
 				const link = this.#link(child, "nav-menu__sublink");
 				this.#sources.set(link, { item: child, kind: "link" });
 				childLi.append(link);

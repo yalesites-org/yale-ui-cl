@@ -102,6 +102,33 @@ describe("ycl-nav-menu", () => {
 		expect(about.getAttribute("aria-expanded")).toBe("false");
 	});
 
+	it("closes when focus leaves the page in the horizontal layout", () => {
+		const menu = mount(markup);
+		const [about] = toggles(menu);
+		about.click();
+		const link = submenu(menu, about).querySelector("a");
+		link.focus();
+		link.dispatchEvent(new FocusEvent("focusout", { bubbles: true, composed: true, relatedTarget: null }));
+		expect(about.getAttribute("aria-expanded")).toBe("false");
+		expect(submenu(menu, about).hidden).toBe(true);
+	});
+
+	it("stays open when a press inside the menu takes focus off the page in the horizontal layout", () => {
+		const menu = mount(markup);
+		const [about] = toggles(menu);
+		about.click();
+		const link = submenu(menu, about).querySelector("a");
+		link.focus();
+		pointerdown(submenu(menu, about));
+		link.dispatchEvent(new FocusEvent("focusout", { bubbles: true, composed: true, relatedTarget: null }));
+		expect(about.getAttribute("aria-expanded")).toBe("true");
+		expect(submenu(menu, about).hidden).toBe(false);
+		document.dispatchEvent(new PointerEvent("pointerup"));
+		link.focus();
+		link.dispatchEvent(new FocusEvent("focusout", { bubbles: true, composed: true, relatedTarget: null }));
+		expect(about.getAttribute("aria-expanded")).toBe("false");
+	});
+
 	it("stays open on outside presses and focus loss in the vertical layout", () => {
 		const menu = mount(markup.replace("<ycl-nav-menu>", `<ycl-nav-menu layout="vertical">`));
 		const outside = document.createElement("button");
@@ -112,6 +139,11 @@ describe("ycl-nav-menu", () => {
 		pointerdown(document.body);
 		outside.focus();
 		expect(about.getAttribute("aria-expanded")).toBe("true");
+		const link = submenu(menu, about).querySelector("a");
+		link.focus();
+		link.dispatchEvent(new FocusEvent("focusout", { bubbles: true, composed: true, relatedTarget: null }));
+		expect(about.getAttribute("aria-expanded")).toBe("true");
+		expect(submenu(menu, about).hidden).toBe(false);
 	});
 
 	it("reflects the layout attribute, defaulting to horizontal", async () => {
@@ -259,7 +291,7 @@ describe("ycl-nav-menu", () => {
 			expect(add).not.toHaveBeenCalled();
 			toggles(menu)[0].click();
 			const added = add.mock.calls.map(([type, fn]) => [type, fn]);
-			expect(added.map(([type]) => type).sort()).toEqual(["keydown", "pointerdown"]);
+			expect(added.map(([type]) => type).sort()).toEqual(["keydown", "pointercancel", "pointerdown", "pointerup"]);
 			menu.remove();
 			const removed = remove.mock.calls.map(([type, fn]) => [type, fn]);
 			for (const call of added) expect(removed).toContainEqual(call);
