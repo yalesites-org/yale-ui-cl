@@ -23,6 +23,16 @@ socialLinksTemplate.innerHTML = `
 `;
 
 // Each platform is an attribute holding its URL; platforms without one aren't rendered.
+/**
+ * Icon links to social media profiles. Each platform attribute holds a URL; platforms without one are not shown.
+ * @attr {string} x-twitter - X (formerly Twitter) URL.
+ * @attr {string} facebook - Facebook URL.
+ * @attr {string} youtube - YouTube URL.
+ * @attr {string} instagram - Instagram URL.
+ * @attr {string} weibo - Weibo URL.
+ * @attr {string} linkedin - LinkedIn URL.
+ * @attr {string} bluesky - Bluesky URL.
+ */
 export class SocialLinks extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

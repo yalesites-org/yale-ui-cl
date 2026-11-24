@@ -18,6 +18,15 @@ quickLinksTemplate.innerHTML = `
 // Slots are assigned by hand so every slotted link can get its own <li>: named slots can only
 // project into a single place, which would leave the links without real list markup.
 // Children with slot="heading", "description" or "image" go there; every other child is a link.
+/**
+ * A heading, optional description and image, and a list of links. Every child without a slot attribute is a link.
+ * @attr {"promotional"|"subtle"} variant - Visual style. Defaults to promotional.
+ * @attr {"primary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
+ * @slot - The links; one element per link.
+ * @slot heading - The heading.
+ * @slot description - A description. It puts the text beside the links.
+ * @slot image - An image.
+ */
 export class QuickLinks extends HTMLElement {
 	#shadow;
 	#observer;

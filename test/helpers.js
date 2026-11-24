@@ -19,6 +19,24 @@ export function shadowOf(element) {
 	return root;
 }
 
+// Every element in a component's composed tree: the element itself, its light DOM, its shadow
+// root, and the shadow roots of everything inside them.
+export function composedElements(element) {
+	const roots = Element.prototype.attachShadow.roots;
+	const out = [element];
+	const visit = (node) => {
+		for (const el of node.querySelectorAll("*")) {
+			out.push(el);
+			const shadow = roots.get(el);
+			if (shadow) visit(shadow);
+		}
+	};
+	const shadow = roots.get(element);
+	if (shadow) visit(shadow);
+	visit(element);
+	return out;
+}
+
 // Parses markup into the document and returns the first element. The body is cleared after each test.
 export function mount(html) {
 	const template = document.createElement("template");

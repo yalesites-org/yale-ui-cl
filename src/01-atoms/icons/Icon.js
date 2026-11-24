@@ -7,6 +7,11 @@ iconTemplate.innerHTML = `
 	<svg class="icon" focusable="false" aria-hidden="true"><path></path></svg>
 `;
 
+/**
+ * An icon from the library's icon set. Decorative unless given a label.
+ * @attr {string} name - Icon name from src/01-atoms/icons/icons.js, such as circle-info, envelope-solid or arrow-up-right.
+ * @attr {string} label - Accessible name. Without it the icon is hidden from screen readers.
+ */
 export class Icon extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {

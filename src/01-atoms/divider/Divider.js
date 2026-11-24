@@ -10,6 +10,15 @@ dividerTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A horizontal rule.
+ * @attr {"100"|"75"|"50"|"25"} width - Width as a percentage of the container. Defaults to 100.
+ * @attr {"center"|"left"|"right"} position - Horizontal position when narrower than the container. Defaults to center.
+ * @attr {"hairline"|"1"|"2"|"4"|"6"|"8"} thickness - Line thickness.
+ * @attr {boolean} animate - Expands the line out the first time it scrolls into view.
+ * @cssprop --color-divider - Line color. Set it to a token, such as var(--color-blue-yale).
+ * @cssprop --thickness-divider - Line thickness. Set it to a token, such as var(--size-thickness-2).
+ */
 export class Divider extends HTMLElement {
 	#shadow;
 	#observer;

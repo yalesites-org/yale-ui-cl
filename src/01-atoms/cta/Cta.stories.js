@@ -1,14 +1,15 @@
 import "./Cta";
 import "../button/Button";
-import { optionAttributes, optionArgTypes } from "./cta-story-options.js";
+import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { ctaArgTypes, ctaAttributes } from "./cta-story-options.js";
 
 export default {
   title: 'Atoms/CTA',
   component: 'ycl-cta-link',
   argTypes: {
-    label: {control: 'text'},
-    URL: {control: 'text'},
-    ...optionArgTypes,
+    URL: attributeArg('href: link destination. External links get an external-link icon.', { control: 'text' }),
+    ...ctaArgTypes,
+    label: slotArg('Link text (default slot).', { control: 'text' }),
   },
   args: {
     label: 'Yale HomePage',
@@ -20,7 +21,10 @@ export default {
   },
 
   render: (args) =>
-    `<ycl-cta-link ${optionAttributes(args)} href="${args.URL}">${args.label}</ycl-cta-link>`,
+    `<ycl-cta-link${attrs({
+      href: args.URL,
+      ...ctaAttributes(args),
+    })}>${args.label ?? ''}</ycl-cta-link>`,
 };
 
 export const Filled = {

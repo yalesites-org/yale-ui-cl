@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./reference-card.css?inline";
+import { updateLinkIcon } from "../../../utility.js";
 
 // Runs onChange(filled) whenever a slot gains or loses content, so empty optional parts can be
 // hidden instead of leaving stray spacing. Whitespace-only text doesn't count as content.
@@ -36,6 +37,25 @@ referenceCardTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A card for a post, event, profile or resource. With an href, the whole card is a link.
+ * @attr {string} href - URL the card links to.
+ * @attr {string} overlay - Text shown over the image, such as "Video". Also added to the link name.
+ * @attr {"grid"|"list"|"condensed"|"single"} layout - Card layout. Defaults to grid.
+ * @attr {boolean} featured - Larger, featured presentation.
+ * @attr {"profile"|"resource"} source - Adjusts the image for profile photos or resource thumbnails.
+ * @slot categories - Category links.
+ * @slot eyebrow - Text above the heading.
+ * @slot prefix - Text before the heading.
+ * @slot heading - The card heading.
+ * @slot pronouns - Pronouns, for profiles.
+ * @slot subheading - Text under the heading.
+ * @slot overline - A date or other short line, often a ycl-date-time.
+ * @slot tags - Tag links.
+ * @slot - Summary text.
+ * @slot ctas - Links or buttons.
+ * @slot image - The card image.
+ */
 export class ReferenceCard extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
@@ -69,6 +89,9 @@ export class ReferenceCard extends HTMLElement {
 			// An <a> without href isn't a link, so a card with no URL simply isn't clickable.
 			if (newValue === null) this.link.removeAttribute("href");
 			else this.link.setAttribute("href", newValue);
+			// External and file links get the external/download icon after the title, as YaleSites'
+			// link treatment adds to linked card headings.
+			updateLinkIcon(this.link.querySelector(".fa-icon"), this.link, window.location.origin);
 		}
 		if (name === "overlay") {
 			this.overlayText.textContent = newValue ?? "";

@@ -1,5 +1,6 @@
 import "./Icon";
 import { icons } from "./icons.js";
+import { attrs, attributeArg } from "../../../.storybook/story-helpers.js";
 
 const names = Object.keys(icons);
 
@@ -7,21 +8,16 @@ export default {
   title: 'Atoms/Icon',
   component: 'ycl-icon',
   argTypes: {
-    name: {
-      name: 'Icon',
-      control: 'select',
-      options: names,
-    },
-    label: {
+    name: attributeArg('name: which icon to draw.', { name: 'Icon', control: 'select', options: names }),
+    label: attributeArg('label: accessible name. Leave empty for a decorative icon, which is hidden from screen readers.', {
       name: 'Accessible label',
-      description: 'Leave empty for a decorative icon',
       control: 'text',
-    },
-    size: {
+    }),
+    size: attributeArg('style: width and height, set inline on the host.', {
       name: 'Size',
       control: 'select',
       options: ['1em', '2rem', '4rem', '6rem'],
-    },
+    }),
   },
   args: {
     name: 'graduation-cap-solid',
@@ -29,19 +25,23 @@ export default {
     size: '4rem',
   },
   render: (args) =>
-    `<ycl-icon name="${args.name}" ${args.label ? `label="${args.label}"` : ''} style="width: ${args.size}; height: ${args.size};"></ycl-icon>`,
+    `<ycl-icon${attrs({
+      name: args.name,
+      label: args.label,
+      style: args.size && `width: ${args.size}; height: ${args.size};`,
+    })}></ycl-icon>`,
 };
 
 export const Default = {};
 
-export const Labelled = {
-  args: {
-    name: 'location-dot-solid',
-    label: 'Location',
-  },
-};
-
 export const InlineWithText = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Decorative icons sitting inline next to text and a link. Controls render a lone icon, so they cannot show it composed with surrounding content.',
+      },
+    },
+  },
   render: () =>
     `<p><ycl-icon name="calendar-solid"></ycl-icon> October 14, 2026</p>
     <p><ycl-icon name="envelope-solid"></ycl-icon> <a href="mailto:info@yale.edu">info@yale.edu</a></p>
@@ -49,6 +49,13 @@ export const InlineWithText = {
 };
 
 export const AllIcons = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Every available icon in a grid with its name. Controls show one icon at a time.',
+      },
+    },
+  },
   render: () =>
     `<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
       ${names.map((name) => `<figure style="margin: 0; width: 8rem; text-align: center;">

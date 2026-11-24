@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./tile-item.css?inline";
+import { updateLinkIcon } from "../../utility.js";
 
 // Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
 const watchSlot = (slot, onChange) => {
@@ -25,6 +26,18 @@ tileItemTemplate.innerHTML = `
 	</div>
 `;
 
+/**
+ * A colored tile with an icon or heading, text and optional image. With an href, the whole tile is a link.
+ * @attr {string} href - URL the tile links to.
+ * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to primary.
+ * @attr {"left"|"center"|"right"} alignment - Text alignment. Defaults to left.
+ * @attr {"top"|"bottom"} vertical-alignment - Where the content sits. Defaults to top.
+ * @attr {boolean} animated - Animates the tile on hover.
+ * @slot icon - A decorative icon, such as a ycl-icon.
+ * @slot heading - The heading.
+ * @slot - The text.
+ * @slot image - A background image.
+ */
 export class TileItem extends HTMLElement {
 	#shadow;
 	static get observedAttributes() {
@@ -54,13 +67,15 @@ export class TileItem extends HTMLElement {
 			this.content.classList.toggle("tile__item__link", newValue !== null);
 			if (newValue === null) this.content.removeAttribute("href");
 			else this.content.setAttribute("href", newValue);
+			// External and file links get the external/download icon, as YaleSites' text link does.
+			updateLinkIcon(this.content.querySelector(".fa-icon"), this.content, window.location.origin);
 		}
 	}
 
 	get href() { return this.getAttribute("href"); }
 	set href(value) { this.setAttribute("href", value); }
 
-	get theme() { return this.getAttribute("theme") ?? "one"; }
+	get theme() { return this.getAttribute("theme") ?? "primary"; }
 	set theme(value) { this.setAttribute("theme", value); }
 
 	get animated() { return this.hasAttribute("animated"); }
