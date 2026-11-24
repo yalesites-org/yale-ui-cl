@@ -8,16 +8,27 @@ export function addVariant(classNames, componentObject, componentName) {
 };
 
 // CTA options shared by ycl-cta-link and ycl-button. Each maps to a cta.css modifier:
-// variant="filled" -> cta--filled, size="large" -> cta--large, animate="wipe" -> cta--animate-wipe,
-// radius="pill" -> cta--radius-pill. Fade is the default animation, so it needs no attribute.
-export const ctaAttributes = ["variant", "size", "animate", "radius"];
+// variant="outline" -> cta--outline, outline-weight="4" -> cta--outline-weight-4,
+// animate="wipe" -> cta--animate-wipe, radius="pill" -> cta--radius-pill. Values cta.css doesn't
+// define add no modifier, so an unknown variant falls back to the filled default and an unknown
+// weight to the 2px border. Fade is the default animation, so it needs no attribute.
+export const ctaAttributes = ["variant", "outline-weight", "animate", "radius"];
+
+const ctaVariantValues = ["filled", "outline"];
+const ctaOutlineWeights = ["1", "2", "4"];
 
 export function ctaVariants(host) {
-	const modifier = (name, prefix = "") => {
+	const modifier = (name, prefix = "", allowed = null) => {
 		const value = host.getAttribute(name);
-		return value ? prefix + value : null;
+		if (!value || (allowed && !allowed.includes(value))) return null;
+		return prefix + value;
 	};
-	return [modifier("variant"), modifier("size"), modifier("animate", "animate-"), modifier("radius", "radius-")]
+	return [
+		modifier("variant", "", ctaVariantValues),
+		modifier("outline-weight", "outline-weight-", ctaOutlineWeights),
+		modifier("animate", "animate-"),
+		modifier("radius", "radius-"),
+	]
 		.filter(Boolean)
 		.join(" ");
 }
