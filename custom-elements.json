@@ -1497,6 +1497,62 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/01-atoms/wordmark/Wordmark.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The Yale wordmark, linked to yale.edu by default.",
+          "name": "Wordmark",
+          "cssProperties": [
+            {
+              "description": "Height of the mark; the width follows. Defaults to var(--size-spacing-8).",
+              "name": "--size-wordmark"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "Link target. Defaults to https://www.yale.edu; empty renders the mark with no link."
+            },
+            {
+              "type": {
+                "text": "\"blue-yale\"|\"white\""
+              },
+              "description": "Blue for light backgrounds, white for dark ones. Defaults to blue-yale.",
+              "name": "color"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-wordmark",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Wordmark",
+          "declaration": {
+            "name": "Wordmark",
+            "module": "src/01-atoms/wordmark/Wordmark.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-wordmark",
+          "declaration": {
+            "name": "Wordmark",
+            "module": "src/01-atoms/wordmark/Wordmark.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/02-molecules/accordions/Accordion.js",
       "declarations": [
         {
@@ -2708,6 +2764,105 @@
           "declaration": {
             "name": "Modal",
             "module": "src/02-molecules/modal/Modal.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/02-molecules/nav-menu/NavMenu.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One navigation menu entry: a link, or a dropdown toggle when it has ycl-nav-menu-item children (one level only).",
+          "name": "NavMenuItem",
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Text of the link or toggle.",
+              "name": "label"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Link target. Not used on an item with children.",
+              "name": "href"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks the link to the current page. Not used on an item with children.",
+              "name": "current"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-nav-menu-item",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "Site navigation menu with dropdowns. Children are ycl-nav-menu-item elements.",
+          "name": "NavMenu",
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name of the navigation landmark. Defaults to Main."
+            },
+            {
+              "name": "layout",
+              "type": {
+                "text": "\"horizontal\"|\"vertical\""
+              },
+              "description": "Horizontal floats dropdowns below their toggles; vertical expands them inline. Defaults to horizontal."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-nav-menu",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NavMenuItem",
+          "declaration": {
+            "name": "NavMenuItem",
+            "module": "src/02-molecules/nav-menu/NavMenu.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "NavMenu",
+          "declaration": {
+            "name": "NavMenu",
+            "module": "src/02-molecules/nav-menu/NavMenu.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-nav-menu-item",
+          "declaration": {
+            "name": "NavMenuItem",
+            "module": "src/02-molecules/nav-menu/NavMenu.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-nav-menu",
+          "declaration": {
+            "name": "NavMenu",
+            "module": "src/02-molecules/nav-menu/NavMenu.js"
           }
         }
       ]
