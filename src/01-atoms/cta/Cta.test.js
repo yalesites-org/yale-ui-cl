@@ -64,6 +64,7 @@ describe("ycl-cta-link", () => {
 
 	it("centres the link icon without growing the CTA", () => {
 		const element = mount(`<ycl-cta-link href="https://example.com/">Visit the site</ycl-cta-link>`);
+		const plain = mount(`<ycl-cta-link href="/">Visit the site</ycl-cta-link>`);
 		const anchor = link(element);
 		const icon = anchor.querySelector(".fa-icon");
 		expect(icon.ariaLabel).toBe("(link is external)");
@@ -74,8 +75,7 @@ describe("ycl-cta-link", () => {
 		const contentBottom = box.bottom - parseFloat(anchorStyle.borderBottomWidth) - parseFloat(anchorStyle.paddingBottom);
 		const iconBox = icon.getBoundingClientRect();
 
-		// The 1rem icon is the tallest thing in the CTA, so it should fill the content box exactly.
-		expect(contentBottom - contentTop).toBeCloseTo(iconBox.height, 1);
+		expect(box.height).toBeCloseTo(link(plain).getBoundingClientRect().height, 1);
 		expect(iconBox.top + iconBox.height / 2).toBeCloseTo((contentTop + contentBottom) / 2, 1);
 	});
 });

@@ -63,7 +63,7 @@ export const AllVariants = {
       '<ycl-cta-link href="#" radius="pill">Radius pill</ycl-cta-link>',
       '<ycl-cta-link href="https://www.yale.edu">External link</ycl-cta-link>',
       '<ycl-cta-link href="https://www.yale.edu/example.pdf">Download</ycl-cta-link>',
-      '<ycl-button control-type="dropdown" expanded="false">Dropdown</ycl-button>',
+      '<ycl-button control-type="dropdown">Dropdown</ycl-button>',
     ]),
     group('Outline', [
       '<ycl-cta-link variant="outline" href="#">Radius none</ycl-cta-link>',
@@ -71,7 +71,7 @@ export const AllVariants = {
       '<ycl-cta-link variant="outline" href="#" radius="pill">Radius pill</ycl-cta-link>',
       '<ycl-cta-link variant="outline" href="https://www.yale.edu">External link</ycl-cta-link>',
       '<ycl-cta-link variant="outline" href="https://www.yale.edu/example.pdf">Download</ycl-cta-link>',
-      '<ycl-button variant="outline" control-type="dropdown" expanded="false">Dropdown</ycl-button>',
+      '<ycl-button variant="outline" control-type="dropdown">Dropdown</ycl-button>',
     ]),
     group('Outline Weights', [
       '<ycl-cta-link variant="outline" outline-weight="1" href="#">Weight 1</ycl-cta-link>',
