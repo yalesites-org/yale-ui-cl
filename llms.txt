@@ -72,6 +72,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-custom-card` | Card with heading, text, image |
 | `ycl-content-card` | Card for a post, event, profile or resource |
 | `ycl-directory-listing-card` | Person card with contact details |
+| `ycl-card-collection` | Grid or list of cards with an optional heading, intro and link; contains `ycl-content-card` or `ycl-custom-card` |
 | `ycl-tile-item` | Colored tile |
 | `ycl-facts-and-figures` | Statistic with supporting text |
 | `ycl-link-group` | One or two columns of links |

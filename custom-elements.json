@@ -4005,6 +4005,81 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/03-organisms/card-collection/CardCollection.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A grid or list of cards with an optional heading, intro and \"view all\" link.\nPut ycl-content-card or ycl-custom-card elements directly inside. Content cards without their own\nlayout attribute are given the collection's layout, so they match it.",
+          "name": "CardCollection",
+          "slots": [
+            {
+              "description": "The cards.",
+              "name": ""
+            },
+            {
+              "description": "The heading text.",
+              "name": "heading"
+            },
+            {
+              "description": "Intro text under the heading.",
+              "name": "text"
+            },
+            {
+              "description": "The link text, for example \"View all\".",
+              "name": "link"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "layout",
+              "type": {
+                "text": "\"grid\"|\"list\""
+              },
+              "description": "Grid of up to three columns, or a single-column list. Defaults to grid."
+            },
+            {
+              "name": "level",
+              "type": {
+                "text": "\"1\"|\"2\"|\"3\"|\"4\"|\"5\"|\"6\""
+              },
+              "description": "Heading level, to fit the page outline. Defaults to 2."
+            },
+            {
+              "name": "link-href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL of the \"view all\" link."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-card-collection",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CardCollection",
+          "declaration": {
+            "name": "CardCollection",
+            "module": "src/03-organisms/card-collection/CardCollection.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-card-collection",
+          "declaration": {
+            "name": "CardCollection",
+            "module": "src/03-organisms/card-collection/CardCollection.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/03-organisms/content-spotlight-portrait/ContentSpotlightPortrait.js",
       "declarations": [
         {
