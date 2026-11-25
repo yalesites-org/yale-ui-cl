@@ -40,6 +40,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-icon` | Icon from the library's icon set |
 | `ycl-image` | Image with aspect ratio and caption |
 | `ycl-divider` | Horizontal rule |
+| `ycl-container` | Spacing container: centers content, caps its width and adds the site gutter. UICL has no page or section layouts |
 | `ycl-date-time` | Formatted date, time or date range |
 | `ycl-list` | Taxonomy list (categories, tags) around a `<ul>` or `<ol>` |
 | `ycl-table` | Styled, scrollable wrapper for a `<table>` |

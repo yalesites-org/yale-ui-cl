@@ -1,0 +1,36 @@
+/* A centered box whose spacing comes from the tokens: the site gutter on the sides (from
+   shadow.css), a layout-width cap on the content, and optional page section spacing above and
+   below. The cap is on the content, so the gutter is added to it. */
+:host(ycl-container) {
+  --width-container: var(--size-component-layout-width-site);
+  --gutter-container: var(--size-spacing-site-gutter);
+
+  display: block;
+  max-width: calc(var(--width-container) + 2 * var(--gutter-container));
+  margin-inline: auto;
+  padding-inline: var(--gutter-container);
+}
+
+:host(ycl-container[width="content"]) {
+  --width-container: var(--size-component-layout-width-content);
+}
+
+:host(ycl-container[width="highlight"]) {
+  --width-container: var(--size-component-layout-width-highlight);
+}
+
+:host(ycl-container[width="max"]) {
+  --width-container: var(--size-component-layout-width-max);
+}
+
+:host(ycl-container[width="full"]) {
+  max-width: none;
+}
+
+:host(ycl-container[gutter="none"]) {
+  --gutter-container: 0px;
+}
+
+:host(ycl-container[spacing="section"]) {
+  padding-block: var(--spacing-page-section);
+}
