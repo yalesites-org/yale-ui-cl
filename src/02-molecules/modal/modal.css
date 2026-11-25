@@ -1,44 +1,13 @@
 /* The dialog lives in the top layer, so the host itself takes no space in the page. */
 :host(ycl-modal) {
   display: contents;
-  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
-     spacing tokens it steps through. */
-  --modal-gutter: var(--size-spacing-5);
-}
-
-/* 768px is --break-m */
-@media (min-width: 768px) {
-  :host(ycl-modal) {
-    --modal-gutter: var(--size-spacing-6);
-  }
-}
-
-/* 992px is --break-l */
-@media (min-width: 992px) {
-  :host(ycl-modal) {
-    --modal-gutter: var(--size-spacing-7);
-  }
-}
-
-/* 1200px is --break-xl */
-@media (min-width: 1200px) {
-  :host(ycl-modal) {
-    --modal-gutter: var(--size-spacing-8);
-  }
-}
-
-/* 1400px is --break-2xl */
-@media (min-width: 1400px) {
-  :host(ycl-modal) {
-    --modal-gutter: var(--size-spacing-10);
-  }
 }
 
 .modal {
   box-sizing: border-box;
-  width: calc(100% - (var(--modal-gutter) * 2));
+  width: calc(100% - (var(--size-spacing-site-gutter) * 2));
   max-width: none;
-  max-height: calc(100vh - var(--modal-gutter));
+  max-height: calc(100vh - var(--size-spacing-site-gutter));
   padding: 0;
   border: 0;
   background-color: var(--color-basic-white);

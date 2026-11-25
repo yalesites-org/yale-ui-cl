@@ -1,37 +1,6 @@
 /* Custom elements default to display: inline. */
 :host(ycl-action-banner) {
   display: block;
-  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
-     spacing tokens it steps through. */
-  --action-banner-gutter: var(--size-spacing-5);
-}
-
-/* 768px is --break-m */
-@media (min-width: 768px) {
-  :host(ycl-action-banner) {
-    --action-banner-gutter: var(--size-spacing-6);
-  }
-}
-
-/* 992px is --break-l */
-@media (min-width: 992px) {
-  :host(ycl-action-banner) {
-    --action-banner-gutter: var(--size-spacing-7);
-  }
-}
-
-/* 1200px is --break-xl */
-@media (min-width: 1200px) {
-  :host(ycl-action-banner) {
-    --action-banner-gutter: var(--size-spacing-8);
-  }
-}
-
-/* 1400px is --break-2xl */
-@media (min-width: 1400px) {
-  :host(ycl-action-banner) {
-    --action-banner-gutter: var(--size-spacing-10);
-  }
 }
 
 /* The banner. */
@@ -190,7 +159,7 @@
   [data-banner-content-layout="left"] .cta-banner__content,
   [data-banner-content-layout="right"] .cta-banner__content {
     width: 100%;
-    max-width: calc(var(--size-component-layout-width-site) + (var(--action-banner-gutter) * 2));
+    max-width: calc(var(--size-component-layout-width-site) + (var(--size-spacing-site-gutter) * 2));
     min-height: 100%;
     justify-content: flex-start;
     align-items: center;
@@ -232,9 +201,9 @@
 /* 992px is --break-l */
 @media (min-width: 992px) {
   .cta-banner__wrap {
-    max-width: calc(var(--size-component-layout-width-site) + (var(--action-banner-gutter) * 2));
+    max-width: calc(var(--size-component-layout-width-site) + (var(--size-spacing-site-gutter) * 2));
     margin: 0 auto;
-    padding: var(--size-spacing-6) var(--action-banner-gutter) var(--size-spacing-7);
+    padding: var(--size-spacing-6) var(--size-spacing-site-gutter) var(--size-spacing-7);
   }
 
   [data-banner-content-layout="bottom"] .cta-banner__wrap {

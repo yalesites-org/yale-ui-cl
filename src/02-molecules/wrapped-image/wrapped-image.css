@@ -31,40 +31,11 @@ ycl-wrapped-image picture[slot="image"] img {
 }
 
 /* The component. Its inline padding is the site gutter, which grows with the viewport.
-   --size-spacing-site-gutter isn't in the tokens release, so its steps are repeated here.
    The offset style drops the gutter so the image can push towards the viewport edge. */
 .wrapped-image {
   --color-text-shadow: var(--color-basic-white);
 
-  padding-inline: var(--size-spacing-5);
-}
-
-/* 768px is --break-m. */
-@media (min-width: 768px) {
-  .wrapped-image {
-    padding-inline: var(--size-spacing-6);
-  }
-}
-
-/* 992px is --break-l. */
-@media (min-width: 992px) {
-  .wrapped-image {
-    padding-inline: var(--size-spacing-7);
-  }
-}
-
-/* 1200px is --break-xl. */
-@media (min-width: 1200px) {
-  .wrapped-image {
-    padding-inline: var(--size-spacing-8);
-  }
-}
-
-/* 1400px is --break-2xl. */
-@media (min-width: 1400px) {
-  .wrapped-image {
-    padding-inline: var(--size-spacing-10);
-  }
+  padding-inline: var(--size-spacing-site-gutter);
 }
 
 :host(ycl-wrapped-image[image-style="offset"]) .wrapped-image {

@@ -82,40 +82,11 @@ ycl-content-spotlight-portrait picture[slot="image"] img {
   height: auto;
 }
 
-/* The component. Its inline padding is the site gutter, which grows with the viewport.
-   --size-spacing-site-gutter isn't in the tokens release, so its steps are repeated here. */
+/* The component. Its inline padding is the site gutter, which grows with the viewport. */
 .content-spotlight-portrait {
   --color-text-shadow: var(--color-basic-white);
 
-  padding-inline: var(--size-spacing-5);
-}
-
-/* 768px is --break-m. */
-@media (min-width: 768px) {
-  .content-spotlight-portrait {
-    padding-inline: var(--size-spacing-6);
-  }
-}
-
-/* 992px is --break-l. */
-@media (min-width: 992px) {
-  .content-spotlight-portrait {
-    padding-inline: var(--size-spacing-7);
-  }
-}
-
-/* 1200px is --break-xl. */
-@media (min-width: 1200px) {
-  .content-spotlight-portrait {
-    padding-inline: var(--size-spacing-8);
-  }
-}
-
-/* 1400px is --break-2xl. */
-@media (min-width: 1400px) {
-  .content-spotlight-portrait {
-    padding-inline: var(--size-spacing-10);
-  }
+  padding-inline: var(--size-spacing-site-gutter);
 }
 
 /* With a colour option the component gets a background and vertical padding. */

@@ -36,11 +36,11 @@
   --color-background: var(--color-theme-accent-2, var(--color-gray-800));
 }
 
-/* The inline padding is the YaleSites site gutter, which isn't a token. */
+/* The inline padding is the YaleSites site gutter. */
 .quick-links {
   position: relative;
   overflow: hidden;
-  padding-inline: var(--size-spacing-5);
+  padding-inline: var(--size-spacing-site-gutter);
   background-color: var(--color-background);
   color: var(--color-text);
 }
@@ -195,10 +195,6 @@
 
 /* 768px is --break-m. */
 @media (min-width: 768px) {
-  .quick-links {
-    padding-inline: var(--size-spacing-6);
-  }
-
   .quick-links__text {
     gap: var(--size-spacing-5);
   }
@@ -210,10 +206,6 @@
 
 /* 992px is --break-l. */
 @media (min-width: 992px) {
-  .quick-links {
-    padding-inline: var(--size-spacing-7);
-  }
-
   .quick-links__inner {
     gap: var(--size-spacing-8);
   }
@@ -225,10 +217,6 @@
 
 /* 1200px is --break-xl. */
 @media (min-width: 1200px) {
-  .quick-links {
-    padding-inline: var(--size-spacing-8);
-  }
-
   .quick-links__inner {
     gap: var(--size-spacing-9);
   }
@@ -252,10 +240,6 @@
 
 /* 1400px is --break-2xl. */
 @media (min-width: 1400px) {
-  .quick-links {
-    padding-inline: var(--size-spacing-10);
-  }
-
   :host(ycl-quick-links:not([variant="subtle"])) [data-quick-links-layout="fluid"] .quick-links__links {
     grid-template-columns: 1fr 1fr 1fr;
   }
