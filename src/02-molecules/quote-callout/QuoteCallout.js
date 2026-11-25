@@ -1,9 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./quote-callout.css?inline";
-
-// Whitespace-only text (template formatting) doesn't count as content.
-const hasContent = (slot) => slot.assignedNodes({ flatten: true })
-	.some((node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim());
+import { watchSlot } from "../../utility.js";
 
 // variant, quote-alignment and theme are pure CSS (:host([attr])); the image wrapper only shows
 // for variant="image".
@@ -40,9 +37,7 @@ export class QuoteCallout extends HTMLElement {
 
 		// No attribution means no figcaption, or the em dash would be left on its own.
 		const attribution = this.#shadow.querySelector('slot[name="attribution"]');
-		const update = () => { attribution.parentElement.hidden = !hasContent(attribution); };
-		attribution.addEventListener("slotchange", update);
-		update();
+		watchSlot(attribution, (filled) => { attribution.parentElement.hidden = !filled; });
 	}
 }
 

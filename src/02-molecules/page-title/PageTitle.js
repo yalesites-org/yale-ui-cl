@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./page-title.css?inline";
+import { watchSlot } from "../../utility.js";
 import "../../01-atoms/headings/Heading.js";
 
 // A page has exactly one page title, so the heading lives in the shadow root rather than being
@@ -52,13 +53,10 @@ export class PageTitle extends HTMLElement {
 		this.heading = this.#shadow.querySelector(".page-title__heading");
 
 		// Wrappers start hidden and only show once something is slotted, so empty ones don't leave
-		// margins behind. slotchange never fires for a slot that stays empty.
+		// margins behind.
 		for (const [slotName, wrapper] of [["meta", ".basic-meta"], ["social-links", ".page-title__social-links"]]) {
-			const slot = this.#shadow.querySelector(`slot[name="${slotName}"]`);
 			const wrapperEl = this.#shadow.querySelector(wrapper);
-			slot.addEventListener("slotchange", () => {
-				wrapperEl.hidden = slot.assignedElements().length === 0;
-			});
+			watchSlot(this.#shadow.querySelector(`slot[name="${slotName}"]`), (filled) => { wrapperEl.hidden = !filled; });
 		}
 	}
 

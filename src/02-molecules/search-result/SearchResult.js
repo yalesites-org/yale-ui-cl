@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./search-result.css?inline";
+import { watchSlot } from "../../utility.js";
 import { iconSvg } from "../../01-atoms/icons/icons.js";
 
 // It's the only cue that a result needs a Yale login, so it
@@ -51,13 +52,10 @@ export class SearchResult extends HTMLElement {
 		this.contentTypeEl = this.#shadow.querySelector(".search-result__content-type");
 
 		// Wrappers start hidden and only show once something is slotted, so empty ones don't leave
-		// margins behind. slotchange never fires for a slot that stays empty.
+		// margins behind.
 		for (const name of ["breadcrumbs", "highlighted", "teaser"]) {
-			const slot = this.#shadow.querySelector(`slot[name="${name}"]`);
 			const wrapper = this.#shadow.querySelector(`.search-result__${name}`);
-			slot.addEventListener("slotchange", () => {
-				wrapper.hidden = slot.assignedElements().length === 0;
-			});
+			watchSlot(this.#shadow.querySelector(`slot[name="${name}"]`), (filled) => { wrapper.hidden = !filled; });
 		}
 	}
 

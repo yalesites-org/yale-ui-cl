@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./action-banner.css?inline";
+import { watchSlot } from "../../../utility.js";
 
 const actionBannerTemplate = document.createElement("template");
 actionBannerTemplate.innerHTML = `
@@ -57,9 +58,7 @@ export class ActionBanner extends HTMLElement {
 		this.#buttonGroup = this.#shadow.querySelector(".cta-banner__button-group");
 		const actionsSlot = this.#shadow.querySelector('slot[name="actions"]');
 		// An empty button group would still take up a flex gap.
-		actionsSlot.addEventListener("slotchange", () => {
-			this.#buttonGroup.hidden = actionsSlot.assignedElements().length === 0;
-		});
+		watchSlot(actionsSlot, (filled) => { this.#buttonGroup.hidden = !filled; });
 		this.#render();
 	}
 

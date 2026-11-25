@@ -1,6 +1,7 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./alert.css?inline";
 import { iconSvg } from "../../01-atoms/icons/icons.js";
+import { watchSlot } from "../../utility.js";
 
 const STORAGE_PREFIX = "ys-alert-id-";
 const STATES = ["expanded", "collapsed", "dismissed"];
@@ -13,10 +14,6 @@ const readState = (key) => {
 const writeState = (key, value) => {
 	try { localStorage.setItem(key, value); } catch { /* state is already on the element */ }
 };
-
-// Whitespace-only text (template formatting) doesn't count as content.
-const hasContent = (slot) => slot.assignedNodes({ flatten: true })
-	.some((node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim());
 
 const alertTemplate = document.createElement("template");
 alertTemplate.innerHTML = `
@@ -66,9 +63,7 @@ export class Alert extends HTMLElement {
 		for (const [selector, slotSelector] of [[".alert__text", "slot:not([name])"], [".alert__link", 'slot[name="link"]']]) {
 			const slot = this.#shadow.querySelector(slotSelector);
 			const wrapper = this.#shadow.querySelector(selector);
-			const update = () => { wrapper.hidden = !hasContent(slot); };
-			slot.addEventListener("slotchange", update);
-			update();
+			watchSlot(slot, (filled) => { wrapper.hidden = !filled; });
 		}
 		this.#render();
 	}

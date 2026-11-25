@@ -1,15 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./tile-item.css?inline";
-import { updateLinkIcon } from "../../utility.js";
-
-// Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
-const watchSlot = (slot, onChange) => {
-	const update = () => onChange(slot.assignedNodes({ flatten: true }).some(
-		(node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== ""
-	));
-	slot.addEventListener("slotchange", update);
-	update();
-};
+import { updateLinkIcon, watchSlot } from "../../utility.js";
 
 // The Twig presentation styles (heading, icon, text-only) fall out of what's slotted: the icon
 // and heading wrappers hide themselves when empty. With an href the content becomes a link whose

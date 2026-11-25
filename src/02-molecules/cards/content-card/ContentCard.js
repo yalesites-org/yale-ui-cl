@@ -1,16 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./content-card.css?inline";
-import { updateLinkIcon } from "../../../utility.js";
-
-// Runs onChange(filled) whenever a slot gains or loses content, so empty optional parts can be
-// hidden instead of leaving stray spacing. Whitespace-only text doesn't count as content.
-const watchSlot = (slot, onChange) => {
-	const update = () => onChange(slot.assignedNodes({ flatten: true }).some(
-		(node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== ""
-	));
-	slot.addEventListener("slotchange", update);
-	update();
-};
+import { updateLinkIcon, watchSlot } from "../../../utility.js";
 
 // The heading link is rendered here rather than slotted so its ::after can stretch over the whole
 // card (making it clickable) and so it can be dropped when there's no href. The visually hidden

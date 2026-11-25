@@ -7,6 +7,24 @@ export function addVariant(classNames, componentObject, componentName) {
 	variants.forEach((c) => {componentObject.classList.add(componentName + "--" + c)});
 };
 
+// Whether a slot has real content. Flattened, so a slot forwarded from a wrapping component counts
+// only for what it carries, and whitespace-only text (template formatting) doesn't count. A slot's
+// own fallback children don't count either: flattening an unassigned slot would return them.
+export function slotHasContent(slot) {
+	if (slot.assignedNodes().length === 0) return false;
+	return slot.assignedNodes({ flatten: true }).some(
+		(node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== ""
+	);
+}
+
+// Runs onChange(filled) now and whenever the slot gains or loses content, so empty optional parts
+// can be hidden instead of leaving stray spacing.
+export function watchSlot(slot, onChange) {
+	const update = () => onChange(slotHasContent(slot));
+	slot.addEventListener("slotchange", update);
+	update();
+}
+
 // CTA options shared by ycl-cta-link and ycl-button. Each maps to a cta.css modifier:
 // variant="outline" -> cta--outline, outline-weight="4" -> cta--outline-weight-4,
 // animate="wipe" -> cta--animate-wipe, radius="pill" -> cta--radius-pill. Values cta.css doesn't

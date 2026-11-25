@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./image-banner.css?inline";
+import { watchSlot } from "../../../utility.js";
 
 const imageBannerTemplate = document.createElement("template");
 imageBannerTemplate.innerHTML = `
@@ -28,11 +29,8 @@ export class ImageBanner extends HTMLElement {
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "image-banner")];
 		this.#shadow.appendChild(document.importNode(imageBannerTemplate.content, true));
 		const caption = this.#shadow.querySelector(".image-banner__caption");
-		const captionSlot = this.#shadow.querySelector('slot[name="caption"]');
 		// An empty caption would still draw its white bar over the image.
-		captionSlot.addEventListener("slotchange", () => {
-			caption.hidden = captionSlot.assignedNodes().length === 0;
-		});
+		watchSlot(this.#shadow.querySelector('slot[name="caption"]'), (filled) => { caption.hidden = !filled; });
 	}
 }
 

@@ -1,14 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./text-with-image.css?inline";
-
-// Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
-const watchSlot = (slot, onChange) => {
-	const update = () => onChange(slot.assignedNodes({ flatten: true }).some(
-		(node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== ""
-	));
-	slot.addEventListener("slotchange", update);
-	update();
-};
+import { watchSlot } from "../../utility.js";
 
 const textWithImageTemplate = document.createElement("template");
 textWithImageTemplate.innerHTML = `
