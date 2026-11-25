@@ -4190,6 +4190,62 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/03-organisms/site-header/SiteHeader.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Site header with the Yale wordmark, the site name and primary navigation. Put one ycl-nav-menu inside it.",
+          "name": "SiteHeader",
+          "slots": [
+            {
+              "description": "A ycl-nav-menu. The header sets its layout: horizontal on wide screens, vertical in the mobile menu.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "site-name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Name of the site, shown next to the wordmark."
+            },
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "Where the site name links. Defaults to /, also when empty (unlike ycl-wordmark, where empty means no link)."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-site-header",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SiteHeader",
+          "declaration": {
+            "name": "SiteHeader",
+            "module": "src/03-organisms/site-header/SiteHeader.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-site-header",
+          "declaration": {
+            "name": "SiteHeader",
+            "module": "src/03-organisms/site-header/SiteHeader.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/03-organisms/tabs/Tabs.js",
       "declarations": [
         {
