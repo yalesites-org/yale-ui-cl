@@ -3,6 +3,11 @@
   display: inline-block;
 }
 
+/* The display above beats the browser's own [hidden] rule, so restore it. */
+:host(ycl-button[hidden]) {
+  display: none;
+}
+
 /* The visual style comes from the CTA (.cta in cta.css). This layer loads after the CTA's, so it
    only sets what a native <button> needs on top of it and must not reset the CTA's box. */
 .button {
