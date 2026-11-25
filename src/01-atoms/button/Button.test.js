@@ -80,4 +80,11 @@ describe("ycl-button", () => {
 		expect(onClick).not.toHaveBeenCalled();
 		expect(onSubmit).not.toHaveBeenCalled();
 	});
+
+	it("is not displayed while it has the hidden attribute", () => {
+		const element = mount(`<ycl-button hidden>Go</ycl-button>`);
+		expect(getComputedStyle(element).display).toBe("none");
+		element.hidden = false;
+		expect(getComputedStyle(element).display).toBe("inline-block");
+	});
 });
