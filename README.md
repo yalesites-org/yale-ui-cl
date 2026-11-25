@@ -192,6 +192,18 @@ These components moved tiers:
 
 Package import paths such as `yale-ui-cl/tabs` are unchanged, because build entries are named after the element tag. Source paths under `src/` did change, so anything importing from `src/` directly must update the path.
 
+## Layout
+
+UICL ships no page or section layouts; how a page is laid out is up to whoever builds it. To keep pages built with UICL lined up, wrap content in `ycl-container`. Its spacing comes from the spacing tokens: it centers the content, caps it at a layout width (`width="site"` by default, or `content`, `highlight`, `max` or `full`), pads the sides with the responsive site gutter, and with `spacing="section"` adds the page section spacing above and below. `gutter="none"` drops the side padding for a container nested in another.
+
+```html
+<ycl-container width="content" spacing="section">
+  <ycl-heading level="2">Admissions</ycl-heading>
+  <p>Apply online through the admissions office.</p>
+  <ycl-cta-link href="https://www.yale.edu">Apply</ycl-cta-link>
+</ycl-container>
+```
+
 ## Using UICL with AI coding tools
 
 [llms.txt](llms.txt) is a short guide for AI coding tools: the available components, naming rules, the tokens-only color rule and example markup. [custom-elements.json](custom-elements.json) is the machine-readable list of every element with its attributes, slots and events; it is generated from the components' JSDoc by `npm run analyze`, which `npm test`, `npm run storybook`, `npm run build` and `npm run build-storybook` run first. Commit the regenerated file with the component change; a stale manifest shows up as a diff after running any of them, CI fails the pull request when the committed file is stale, and `src/manifest.test.js` fails when the JSDoc and the code disagree. Both files ship in the package.

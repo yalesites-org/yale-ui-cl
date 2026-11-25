@@ -11,10 +11,7 @@ import "../02-molecules/pull-quote/PullQuote.js";
 import "../02-molecules/quote-callout/QuoteCallout.js";
 import "../02-molecules/related-content/RelatedContent.js";
 import "../03-organisms/text-with-image/TextWithImage.js";
-import { mount, shadowOf } from "../../test/helpers.js";
-
-const rem = (n) => `${n * parseFloat(getComputedStyle(document.documentElement).fontSize)}px`;
-const atLeast = (px) => matchMedia(`(min-width: ${px}px)`).matches;
+import { atLeast, gutter, mount, pageSection, rem, shadowOf } from "../../test/helpers.js";
 
 describe("shared shadow styles", () => {
 	it("sizes shadow content with border-box", () => {
@@ -39,11 +36,8 @@ describe("shared shadow styles", () => {
 	);
 });
 
-// YaleSites' --spacing-page-section and --spacing-component-banner, by breakpoint.
-const pageSection = () => (atLeast(992) ? rem(4) : rem(2.5));
+// YaleSites' --spacing-component-banner, by breakpoint.
 const banner = () => rem(atLeast(1400) ? 6 : atLeast(1200) ? 5 : atLeast(992) ? 4 : 3);
-// YaleSites' --size-spacing-site-gutter.
-const gutter = () => rem(atLeast(1400) ? 4 : atLeast(1200) ? 2.5 : atLeast(992) ? 2 : atLeast(768) ? 1.5 : 1);
 
 describe("page section spacing", () => {
 	it.each([

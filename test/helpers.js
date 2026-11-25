@@ -48,3 +48,13 @@ export function mount(html) {
 
 // slotchange and MutationObserver callbacks run as microtasks after the change that caused them.
 export const settle = () => new Promise((resolve) => setTimeout(resolve));
+
+// YaleSites' responsive spacing, which src/styles/shadow.css gives every shadow root, as the
+// computed px string a test sees at the current viewport. 768px is --break-m, 992px --break-l,
+// 1200px --break-xl and 1400px --break-2xl.
+export const rem = (n) => `${n * parseFloat(getComputedStyle(document.documentElement).fontSize)}px`;
+export const atLeast = (px) => matchMedia(`(min-width: ${px}px)`).matches;
+// --spacing-page-section.
+export const pageSection = () => (atLeast(992) ? rem(4) : rem(2.5));
+// --size-spacing-site-gutter.
+export const gutter = () => rem(atLeast(1400) ? 4 : atLeast(1200) ? 2.5 : atLeast(992) ? 2 : atLeast(768) ? 1.5 : 1);
