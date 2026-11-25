@@ -1,15 +1,23 @@
 import { describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
 import "../01-atoms/text-input/TextInput.js";
 import "../01-atoms/divider/Divider.js";
 import "../02-molecules/accordions/Accordion.js";
+import "../02-molecules/embed/Embed.js";
 import "../02-molecules/alert/Alert.js";
 import "../02-molecules/callout/Callout.js";
 import "../02-molecules/image/ImageBlock.js";
 import "../02-molecules/inline-message/InlineMessage.js";
+import "../02-molecules/modal/Modal.js";
 import "../02-molecules/page-title/PageTitle.js";
 import "../02-molecules/pull-quote/PullQuote.js";
+import "../02-molecules/quick-links/QuickLinks.js";
 import "../02-molecules/quote-callout/QuoteCallout.js";
 import "../02-molecules/related-content/RelatedContent.js";
+import "../02-molecules/video/Video.js";
+import "../02-molecules/wrapped-image/WrappedImage.js";
+import "../03-organisms/banner/action/ActionBanner.js";
+import "../03-organisms/content-spotlight-portrait/ContentSpotlightPortrait.js";
 import "../03-organisms/text-with-image/TextWithImage.js";
 import { mount, shadowOf } from "../../test/helpers.js";
 
@@ -59,13 +67,55 @@ describe("page section spacing", () => {
 	});
 });
 
-describe("site gutter", () => {
-	it.each([
+// One width in each gutter step: below 768px, then 768, 992, 1200 and 1400px and up.
+const gutterWidths = [375, 800, 1000, 1250, 1500];
+
+// Each component that uses the gutter: its shadow part, the properties it sets from the gutter,
+// and the values they take for a gutter of g pixels.
+const sides = (style) => [style.paddingLeft, style.paddingRight];
+const gutterUses = [
+	...[
 		["ycl-image-block", ".content-image"],
 		["ycl-page-title", ".page-title"],
-	])("%s", (tag, selector) => {
-		const style = getComputedStyle(shadowOf(mount(`<${tag}></${tag}>`)).querySelector(selector));
-		expect(style.paddingLeft).toBe(gutter());
-		expect(style.paddingRight).toBe(gutter());
+		["ycl-alert", ".alert"],
+		["ycl-accordion", ".accordion"],
+		["ycl-video", ".video"],
+		["ycl-embed", ".embed"],
+		["ycl-quick-links", ".quick-links"],
+		["ycl-wrapped-image", ".wrapped-image"],
+		["ycl-text-with-image", ".text-with-image"],
+		["ycl-content-spotlight-portrait", ".content-spotlight-portrait"],
+	].map(([tag, selector]) => [tag, selector, sides, (g) => [`${g}px`, `${g}px`]]),
+	// The action banner pads its text with the gutter only from 992px; below that it keeps 2rem.
+	["ycl-action-banner", ".cta-banner__wrap", sides, (g) => (atLeast(992) ? [`${g}px`, `${g}px`] : [rem(2), rem(2)])],
+	["ycl-modal", ".modal", (style) => [style.maxHeight], (g) => [`${innerHeight - g}px`]],
+];
+
+// Computed style of a shadow part. A gutter given here is set inside the shadow root, unlayered so
+// it beats shadow.css, which shows the component reads the shared value rather than its own copy.
+const shadowStyle = (tag, selector, gutterValue) => {
+	const root = shadowOf(mount(`<${tag}></${tag}>`));
+	if (gutterValue) {
+		const sheet = new CSSStyleSheet();
+		sheet.replaceSync(`:host { --size-spacing-site-gutter: ${gutterValue}; }`);
+		root.adoptedStyleSheets = [...root.adoptedStyleSheets, sheet];
+	}
+	return getComputedStyle(root.querySelector(selector));
+};
+
+describe("site gutter", () => {
+	it("every component takes the shared gutter at every breakpoint", async () => {
+		const { innerWidth: startWidth, innerHeight: startHeight } = window;
+		try {
+			for (const width of gutterWidths) {
+				await page.viewport(width, 900);
+				for (const [tag, selector, read, expected] of gutterUses) {
+					expect.soft(read(shadowStyle(tag, selector)), `${tag} at ${width}px`).toEqual(expected(parseFloat(gutter())));
+					expect.soft(read(shadowStyle(tag, selector, "7px")), `${tag} at ${width}px, gutter 7px`).toEqual(expected(7));
+				}
+			}
+		} finally {
+			await page.viewport(startWidth, startHeight);
+		}
 	});
 });

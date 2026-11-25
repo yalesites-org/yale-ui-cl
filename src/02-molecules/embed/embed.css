@@ -2,37 +2,6 @@
 :host(ycl-embed) {
   display: block;
   --embed-width: var(--size-component-layout-width-site);
-  /* The site gutter is a YaleSites layout variable, not a token, so it's rebuilt here from the
-     spacing tokens it steps through. */
-  --embed-gutter: var(--size-spacing-5);
-}
-
-/* 768px is --break-m */
-@media (min-width: 768px) {
-  :host(ycl-embed) {
-    --embed-gutter: var(--size-spacing-6);
-  }
-}
-
-/* 992px is --break-l */
-@media (min-width: 992px) {
-  :host(ycl-embed) {
-    --embed-gutter: var(--size-spacing-7);
-  }
-}
-
-/* 1200px is --break-xl */
-@media (min-width: 1200px) {
-  :host(ycl-embed) {
-    --embed-gutter: var(--size-spacing-8);
-  }
-}
-
-/* 1400px is --break-2xl */
-@media (min-width: 1400px) {
-  :host(ycl-embed) {
-    --embed-gutter: var(--size-spacing-10);
-  }
 }
 
 :host(ycl-embed[width="max"]) {
@@ -53,7 +22,7 @@
 }
 
 .embed {
-  padding-inline: var(--embed-gutter);
+  padding-inline: var(--size-spacing-site-gutter);
 }
 
 .embed__inner {
