@@ -6,6 +6,7 @@ import "@yalesites-org/tokens/build/css/tokens.css";
 import "./SiteFooter.js";
 import "../../02-molecules/link-group/LinkGroup.js";
 import "../../02-molecules/social-links/SocialLinks.js";
+import "../../01-atoms/text-link/Link.js";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
 
 const ACCESSIBILITY_URL = "https://usability.yale.edu/web-accessibility/accessibility-yale";
@@ -110,6 +111,16 @@ describe("ycl-site-footer", () => {
 		for (const node of [legalLink(element, "accessibility"), legalLink(element, "privacy"), region(element, "copyright")]) {
 			expect(contrast(getComputedStyle(node).color, background)).toBeGreaterThanOrEqual(4.5);
 		}
+	});
+
+	it("gives slotted text links a descender halo in the footer's blue, not the page's white", async () => {
+		const element = mount(`<ycl-site-footer><ycl-link-group slot="links"><ycl-text-link slot="links-one" href="#">Directory</ycl-text-link></ycl-link-group></ycl-site-footer>`);
+		await settle();
+		const background = getComputedStyle(shadowOf(element).querySelector("footer")).backgroundColor;
+		const link = shadowOf(element.querySelector("ycl-text-link")).querySelector("a");
+		const halo = getComputedStyle(link).textShadow;
+		expect(halo).not.toBe("none");
+		expect(halo.startsWith(background)).toBe(true);
 	});
 
 	it("shows a visible focus ring on its links that contrasts with the background", async () => {

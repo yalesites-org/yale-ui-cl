@@ -10,6 +10,9 @@
   --color-link-hover: var(--color-blue-light);
   --color-link-visited-hover: var(--color-blue-light);
   --color-social-links-hover: var(--color-blue-light);
+  /* The surface behind slotted content is blue, so a text link's descender halo must be too. */
+  --color-background: var(--color-blue-yale);
+  --color-text-shadow: var(--color-blue-yale);
 
   display: block;
   container-type: inline-size;
