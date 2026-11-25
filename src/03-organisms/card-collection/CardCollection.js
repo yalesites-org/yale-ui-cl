@@ -65,15 +65,19 @@ export class CardCollection extends HTMLElement {
 		}
 		if (newValue === null) this.#header.removeAttribute(name);
 		else this.#header.setAttribute(name, newValue);
+		if (name === "link-href") this.#renderHeader();
 	}
 
+	// ycl-section-header shows the link only with an href, so link text alone leaves the header empty.
 	#renderHeader() {
-		this.#header.hidden = !this.#headerSlots.some(hasContent);
+		const [heading, text, link] = this.#headerSlots;
+		this.#header.hidden = !hasContent(heading) && !hasContent(text)
+			&& !(this.getAttribute("link-href") && hasContent(link));
 	}
 
 	#syncCardLayouts() {
 		const layout = this.layout;
-		for (const card of this.#cardSlot.assignedElements()) {
+		for (const card of this.#cardSlot.assignedElements({ flatten: true })) {
 			if (card.localName !== "ycl-content-card") continue;
 			const current = card.getAttribute("layout");
 			if (current !== null && current !== this.#written.get(card)) continue;

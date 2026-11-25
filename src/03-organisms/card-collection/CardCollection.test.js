@@ -42,6 +42,23 @@ describe("ycl-card-collection", () => {
 		expect(header(element).hidden).toBe(false);
 	});
 
+	it("keeps the header hidden when the link has text but no href", async () => {
+		const element = mount(`<ycl-card-collection><span slot="link">View all</span>${contentCards}</ycl-card-collection>`);
+		await settle();
+		expect(header(element).hidden).toBe(true);
+		element.setAttribute("link-href", "/news");
+		await settle();
+		expect(header(element).hidden).toBe(false);
+	});
+
+	it("lays out cards forwarded through another slot", async () => {
+		const host = mount(`<div>${contentCards}</div>`);
+		const root = host.attachShadow({ mode: "open" });
+		root.innerHTML = `<ycl-card-collection layout="list"><slot></slot></ycl-card-collection>`;
+		await settle();
+		for (const card of host.querySelectorAll("ycl-content-card")) expect(card.getAttribute("layout")).toBe("list");
+	});
+
 	it("shows the slotted cards, Content Card and Custom Card alike", async () => {
 		const element = mount(`<ycl-card-collection>
 			<ycl-content-card><span slot="heading">One</span></ycl-content-card>
