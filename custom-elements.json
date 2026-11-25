@@ -4190,6 +4190,70 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/03-organisms/site-footer/SiteFooter.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The Yale site footer. The Yale wordmark, the accessibility and privacy links and the copyright line are always shown;\neverything else is optional. It renders its own <footer> landmark, so use it as the page footer rather than inside\nanother <footer>, in a block-level, full-width context (its layout follows its own width).",
+          "name": "SiteFooter",
+          "slots": [
+            {
+              "description": "Free content beside the wordmark, such as an address or a short paragraph.",
+              "name": ""
+            },
+            {
+              "description": "Footer links, usually a ycl-link-group.",
+              "name": "links"
+            },
+            {
+              "description": "Social media links, usually a ycl-social-links.",
+              "name": "social"
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessibility link target. Defaults to Yale's accessibility page; empty uses the default.",
+              "name": "accessibility-href"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Privacy link target. Defaults to Yale's privacy statement; empty uses the default.",
+              "name": "privacy-href"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-site-footer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SiteFooter",
+          "declaration": {
+            "name": "SiteFooter",
+            "module": "src/03-organisms/site-footer/SiteFooter.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-site-footer",
+          "declaration": {
+            "name": "SiteFooter",
+            "module": "src/03-organisms/site-footer/SiteFooter.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/03-organisms/tabs/Tabs.js",
       "declarations": [
         {

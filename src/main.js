@@ -57,3 +57,4 @@ export { Pager } from "./02-molecules/pager/Pager.js";
 export { Tabs, Tab } from "./03-organisms/tabs/Tabs.js";
 export { QuickLinks } from "./02-molecules/quick-links/QuickLinks.js";
 export { NavMenu, NavMenuItem } from "./02-molecules/nav-menu/NavMenu.js";
+export { SiteFooter } from "./03-organisms/site-footer/SiteFooter.js";

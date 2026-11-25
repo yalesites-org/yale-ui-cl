@@ -82,6 +82,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-nav-menu` | Site navigation menu with dropdowns; contains `ycl-nav-menu-item` |
 | `ycl-nav-menu-item` | One menu link, or a dropdown of child items |
 | `ycl-social-links` | Social media icon links |
+| `ycl-site-footer` | Yale site footer; always shows the wordmark and the accessibility and privacy links |
 | `ycl-tabs` | Tabbed panels; contains `ycl-tab` |
 | `ycl-tab` | One tab and its panel |
 | `ycl-taxonomy-display` | Groups of taxonomy terms; contains `ycl-taxonomy-display-item` |
@@ -151,4 +152,18 @@ Text beside an image, with two links:
   <ycl-text-link slot="ctas" href="/maps">Campus maps</ycl-text-link>
   <ycl-image slot="image"><img src="campus.jpg" alt="Students walking across Old Campus"></ycl-image>
 </ycl-text-with-image>
+```
+
+A site footer with links and social links:
+
+```html
+<ycl-site-footer>
+  <p>149 Elm Street, New Haven, CT 06511</p>
+  <ycl-link-group slot="links">
+    <ycl-heading level="2" slot="heading-one">Resources</ycl-heading>
+    <ycl-text-link slot="links-one" href="/calendar">Calendar</ycl-text-link>
+    <ycl-text-link slot="links-one" href="/directory">Directory</ycl-text-link>
+  </ycl-link-group>
+  <ycl-social-links slot="social" instagram="https://www.instagram.com/yale"></ycl-social-links>
+</ycl-site-footer>
 ```

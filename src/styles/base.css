@@ -59,3 +59,4 @@
 @import "../02-molecules/quick-links/quick-links.css" layer(components.quick-links);
 @import "../02-molecules/data-table/data-table.css" layer(components.data-table);
 @import "../02-molecules/nav-menu/nav-menu.css" layer(components.nav-menu);
+@import "../03-organisms/site-footer/site-footer.css" layer(components.site-footer);

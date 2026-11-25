@@ -1,0 +1,107 @@
+/* Custom elements default to display: inline. The footer is Yale blue, and the colors it sets here
+   inherit into whatever is slotted, so a link group, social links or headings read white on it.
+   The values match the tokens' blue-yale link theme; the shared focus ring reads --color-link-base,
+   so it is white here too. */
+:host(ycl-site-footer) {
+  --color-text: var(--color-basic-white);
+  --color-heading: var(--color-basic-white);
+  --color-link-base: var(--color-basic-white);
+  --color-link-visited-base: var(--color-basic-white);
+  --color-link-hover: var(--color-blue-light);
+  --color-link-visited-hover: var(--color-blue-light);
+  --color-social-links-hover: var(--color-blue-light);
+
+  display: block;
+  container-type: inline-size;
+}
+
+.site-footer {
+  background-color: var(--color-blue-yale);
+  color: var(--color-basic-white);
+}
+
+.site-footer__inner {
+  box-sizing: border-box;
+  max-width: var(--size-component-layout-width-site);
+  margin: 0 auto;
+  padding-block: var(--size-spacing-10);
+  padding-inline: var(--size-spacing-6);
+}
+
+/* Restates [hidden] once display is set on these regions. */
+.site-footer [hidden] {
+  display: none !important;
+}
+
+.site-footer__primary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--size-spacing-8);
+}
+
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-6);
+}
+
+.site-footer__wordmark {
+  --size-wordmark: var(--size-spacing-10);
+}
+
+.site-footer__content ::slotted(*) {
+  margin-top: 0;
+}
+
+.site-footer__social {
+  margin-top: var(--size-spacing-8);
+}
+
+.site-footer__secondary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-spacing-4);
+  margin-top: var(--size-spacing-8);
+  padding-top: var(--size-spacing-6);
+  border-top: var(--size-thickness-1) solid var(--color-blue-light);
+  font-size: var(--font-size-14);
+}
+
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--size-spacing-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__legal-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-click-target-minimum);
+  color: var(--color-link-base);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.site-footer__legal-link:hover {
+  color: var(--color-link-hover);
+}
+
+.site-footer__copyright {
+  margin: 0;
+}
+
+/* 768px is --break-m; custom properties can't be used in container queries. */
+@container (min-width: 768px) {
+  .site-footer__primary {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+
+  .site-footer__inner {
+    padding-inline: var(--size-spacing-8);
+  }
+}
