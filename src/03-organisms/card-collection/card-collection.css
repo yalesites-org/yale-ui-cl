@@ -1,0 +1,30 @@
+/* Custom elements default to display: inline. Column counts follow the collection's own width, so
+   it fits a sidebar or a narrow region as well as the full page. */
+:host(ycl-card-collection) {
+  display: block;
+  container-type: inline-size;
+}
+
+/* A :host display rule would otherwise beat the UA's [hidden] rule. */
+:host(ycl-card-collection[hidden]) {
+  display: none;
+}
+
+.card-collection__cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--size-spacing-8) var(--size-spacing-6);
+}
+
+/* 768px is --break-m. Below it, content cards lay out image beside text, which needs a full row. */
+@container (min-width: 768px) {
+  :host(ycl-card-collection:not([layout="list"])) .card-collection__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 992px) {
+  :host(ycl-card-collection:not([layout="list"])) .card-collection__cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

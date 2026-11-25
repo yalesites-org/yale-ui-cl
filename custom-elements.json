@@ -61,17 +61,17 @@
             },
             {
               "type": {
-                "text": "\"filled\"|\"outline\"|\"secondary\""
+                "text": "\"filled\"|\"outline\""
               },
-              "description": "Visual style. Without it the CTA has no fill or border.",
+              "description": "Visual style. Without it the CTA is filled.",
               "name": "variant"
             },
             {
               "type": {
-                "text": "\"small\"|\"medium\"|\"large\""
+                "text": "\"1\"|\"2\"|\"4\""
               },
-              "description": "Size of the CTA.",
-              "name": "size"
+              "description": "Border thickness of an outline CTA. Leave it off for the default 2px.",
+              "name": "outline-weight"
             },
             {
               "type": {
@@ -206,37 +206,37 @@
       "path": "src/01-atoms/cta/cta-story-options.js",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "ctaArgTypes",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ variant: attributeArg('variant: fill style. No variant renders filled.', { name: 'Variant', control: 'select', options: ['filled', 'outline'], }), outlineWeight: attributeArg('outline-weight: border thickness for the outline variant; 2 is the default and needs no attribute.', { name: 'Outline Weight', control: 'select', options: ['1', '2', '4'], mapping: { 2: undefined }, }), animate: attributeArg('animate: hover animation. Fade is the default and needs no attribute; \"none\" turns it off.', { name: 'Animation Type', control: 'select', options: ['none', 'fade', 'rise', 'wipe'], mapping: { fade: undefined }, }), radius: attributeArg('radius: corner radius; square corners need no attribute.', { name: 'Radius Type', control: 'select', options: ['none', 'soft', 'pill'], mapping: { none: undefined }, }), }"
+        },
+        {
           "kind": "function",
-          "name": "optionAttributes",
+          "name": "ctaAttributes",
           "parameters": [
             {
               "name": "args"
             }
           ]
-        },
-        {
-          "kind": "variable",
-          "name": "optionArgTypes",
-          "type": {
-            "text": "object"
-          },
-          "default": "{ variant: { name: 'Variant', type: 'select', options: ['filled', 'outline'], }, animate: { name: 'Animation Type', type: 'select', options: ['none', 'fade', 'rise', 'wipe'], }, radius: { name: 'Radius Type', type: 'select', options: ['none', 'soft', 'pill'], }, }"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "optionAttributes",
+          "name": "ctaArgTypes",
           "declaration": {
-            "name": "optionAttributes",
+            "name": "ctaArgTypes",
             "module": "src/01-atoms/cta/cta-story-options.js"
           }
         },
         {
           "kind": "js",
-          "name": "optionArgTypes",
+          "name": "ctaAttributes",
           "declaration": {
-            "name": "optionArgTypes",
+            "name": "ctaAttributes",
             "module": "src/01-atoms/cta/cta-story-options.js"
           }
         }
@@ -266,17 +266,17 @@
             },
             {
               "type": {
-                "text": "\"filled\"|\"outline\"|\"secondary\""
+                "text": "\"filled\"|\"outline\""
               },
-              "description": "Visual style. Without it the CTA has no fill or border.",
+              "description": "Visual style. Without it the CTA is filled.",
               "name": "variant"
             },
             {
               "type": {
-                "text": "\"small\"|\"medium\"|\"large\""
+                "text": "\"1\"|\"2\"|\"4\""
               },
-              "description": "Size of the CTA.",
-              "name": "size"
+              "description": "Border thickness of an outline CTA. Leave it off for the default 2px.",
+              "name": "outline-weight"
             },
             {
               "type": {
@@ -1858,6 +1858,123 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/02-molecules/cards/content-card/ContentCard.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A card for a post, event, profile or resource. With an href, the whole card is a link.",
+          "name": "ContentCard",
+          "slots": [
+            {
+              "description": "Category links.",
+              "name": "categories"
+            },
+            {
+              "description": "Text above the heading.",
+              "name": "eyebrow"
+            },
+            {
+              "description": "Text before the heading.",
+              "name": "prefix"
+            },
+            {
+              "description": "The card heading.",
+              "name": "heading"
+            },
+            {
+              "description": "Pronouns, for profiles.",
+              "name": "pronouns"
+            },
+            {
+              "description": "Text under the heading.",
+              "name": "subheading"
+            },
+            {
+              "description": "A date or other short line, often a ycl-date-time.",
+              "name": "overline"
+            },
+            {
+              "description": "Tag links.",
+              "name": "tags"
+            },
+            {
+              "description": "Summary text.",
+              "name": ""
+            },
+            {
+              "description": "Links or buttons.",
+              "name": "ctas"
+            },
+            {
+              "description": "The card image.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL the card links to."
+            },
+            {
+              "name": "overlay",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown over the image, such as \"Video\". Also added to the link name."
+            },
+            {
+              "type": {
+                "text": "\"grid\"|\"list\"|\"condensed\"|\"single\""
+              },
+              "description": "Card layout. Defaults to grid.",
+              "name": "layout"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Larger, featured presentation.",
+              "name": "featured"
+            },
+            {
+              "type": {
+                "text": "\"profile\"|\"resource\""
+              },
+              "description": "Adjusts the image for profile photos or resource thumbnails.",
+              "name": "source"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-content-card",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ContentCard",
+          "declaration": {
+            "name": "ContentCard",
+            "module": "src/02-molecules/cards/content-card/ContentCard.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-content-card",
+          "declaration": {
+            "name": "ContentCard",
+            "module": "src/02-molecules/cards/content-card/ContentCard.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/02-molecules/cards/custom-card/CustomCard.js",
       "declarations": [
         {
@@ -2003,123 +2120,6 @@
           "declaration": {
             "name": "DirectoryListingCard",
             "module": "src/02-molecules/cards/directory-listing-card/DirectoryListingCard.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/02-molecules/cards/reference-card/ReferenceCard.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "A card for a post, event, profile or resource. With an href, the whole card is a link.",
-          "name": "ReferenceCard",
-          "slots": [
-            {
-              "description": "Category links.",
-              "name": "categories"
-            },
-            {
-              "description": "Text above the heading.",
-              "name": "eyebrow"
-            },
-            {
-              "description": "Text before the heading.",
-              "name": "prefix"
-            },
-            {
-              "description": "The card heading.",
-              "name": "heading"
-            },
-            {
-              "description": "Pronouns, for profiles.",
-              "name": "pronouns"
-            },
-            {
-              "description": "Text under the heading.",
-              "name": "subheading"
-            },
-            {
-              "description": "A date or other short line, often a ycl-date-time.",
-              "name": "overline"
-            },
-            {
-              "description": "Tag links.",
-              "name": "tags"
-            },
-            {
-              "description": "Summary text.",
-              "name": ""
-            },
-            {
-              "description": "Links or buttons.",
-              "name": "ctas"
-            },
-            {
-              "description": "The card image.",
-              "name": "image"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "href",
-              "type": {
-                "text": "string"
-              },
-              "description": "URL the card links to."
-            },
-            {
-              "name": "overlay",
-              "type": {
-                "text": "string"
-              },
-              "description": "Text shown over the image, such as \"Video\". Also added to the link name."
-            },
-            {
-              "type": {
-                "text": "\"grid\"|\"list\"|\"condensed\"|\"single\""
-              },
-              "description": "Card layout. Defaults to grid.",
-              "name": "layout"
-            },
-            {
-              "type": {
-                "text": "boolean"
-              },
-              "description": "Larger, featured presentation.",
-              "name": "featured"
-            },
-            {
-              "type": {
-                "text": "\"profile\"|\"resource\""
-              },
-              "description": "Adjusts the image for profile photos or resource thumbnails.",
-              "name": "source"
-            }
-          ],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "ycl-reference-card",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ReferenceCard",
-          "declaration": {
-            "name": "ReferenceCard",
-            "module": "src/02-molecules/cards/reference-card/ReferenceCard.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "ycl-reference-card",
-          "declaration": {
-            "name": "ReferenceCard",
-            "module": "src/02-molecules/cards/reference-card/ReferenceCard.js"
           }
         }
       ]
@@ -3999,6 +3999,81 @@
           "declaration": {
             "name": "ImageBanner",
             "module": "src/03-organisms/banner/image/ImageBanner.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/03-organisms/card-collection/CardCollection.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A grid or list of cards with an optional heading, intro and \"view all\" link.\nPut ycl-content-card or ycl-custom-card elements directly inside. Content cards without their own\nlayout attribute are given the collection's layout, so they match it.",
+          "name": "CardCollection",
+          "slots": [
+            {
+              "description": "The cards.",
+              "name": ""
+            },
+            {
+              "description": "The heading text.",
+              "name": "heading"
+            },
+            {
+              "description": "Intro text under the heading.",
+              "name": "text"
+            },
+            {
+              "description": "The link text, for example \"View all\".",
+              "name": "link"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "layout",
+              "type": {
+                "text": "\"grid\"|\"list\""
+              },
+              "description": "Grid of up to three columns, or a single-column list. Defaults to grid."
+            },
+            {
+              "name": "level",
+              "type": {
+                "text": "\"1\"|\"2\"|\"3\"|\"4\"|\"5\"|\"6\""
+              },
+              "description": "Heading level, to fit the page outline. Defaults to 2."
+            },
+            {
+              "name": "link-href",
+              "type": {
+                "text": "string"
+              },
+              "description": "URL of the \"view all\" link."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-card-collection",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CardCollection",
+          "declaration": {
+            "name": "CardCollection",
+            "module": "src/03-organisms/card-collection/CardCollection.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-card-collection",
+          "declaration": {
+            "name": "CardCollection",
+            "module": "src/03-organisms/card-collection/CardCollection.js"
           }
         }
       ]
