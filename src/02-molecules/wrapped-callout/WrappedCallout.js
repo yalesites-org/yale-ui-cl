@@ -1,9 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./wrapped-callout.css?inline";
-
-// Whitespace-only text (template formatting) doesn't count as content.
-const hasContent = (slot) => slot.assignedNodes({ flatten: true })
-	.some((node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim());
+import { watchSlot } from "../../utility.js";
 
 // The callout box comes first so the body text in the default slot flows around it when floated.
 // alignment and theme are pure CSS (:host([attr])).
@@ -38,13 +35,10 @@ export class WrappedCallout extends HTMLElement {
 		// The box only floats when there's body text to wrap around it.
 		const wrapper = this.#shadow.querySelector(".wrapped-callout");
 		for (const slot of this.#shadow.querySelectorAll("slot")) {
-			const update = () => {
-				const filled = hasContent(slot);
+			watchSlot(slot, (filled) => {
 				slot.parentElement.hidden = !filled;
 				if (!slot.name) wrapper.classList.toggle("wrapped-callout--has-content", filled);
-			};
-			slot.addEventListener("slotchange", update);
-			update();
+			});
 		}
 	}
 }

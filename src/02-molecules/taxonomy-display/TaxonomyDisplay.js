@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./taxonomy-display.css?inline";
+import { watchSlot } from "../../utility.js";
 
 const taxonomyDisplayTemplate = document.createElement("template");
 taxonomyDisplayTemplate.innerHTML = `
@@ -48,15 +49,12 @@ export class TaxonomyDisplayItem extends HTMLElement {
 		this.labelEl = this.#shadow.querySelector(".taxonomy-display__item__label");
 		this.listEl = this.#shadow.querySelector(".taxonomy-display__item__list");
 
-		// "None" shows until terms are slotted; slotchange never fires for a slot that stays empty.
-		const slot = this.#shadow.querySelector("slot");
+		// "None" shows until terms are slotted.
 		const none = this.#shadow.querySelector(".taxonomy-display__item__none");
-		slot.addEventListener("slotchange", () => {
-			const empty = slot.assignedElements().length === 0;
-			none.hidden = !empty;
-			this.listEl.classList.toggle("taxonomy-display__item__list--empty", empty);
+		watchSlot(this.#shadow.querySelector("slot"), (filled) => {
+			none.hidden = filled;
+			this.listEl.classList.toggle("taxonomy-display__item__list--empty", !filled);
 		});
-		this.listEl.classList.add("taxonomy-display__item__list--empty");
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {

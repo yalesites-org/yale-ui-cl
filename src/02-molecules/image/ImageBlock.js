@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./image.css?inline";
+import { watchSlot } from "../../utility.js";
 
 // The image (an <img>, <picture> or ycl-image) goes in the default slot, the caption in "caption".
 const imageBlockTemplate = document.createElement("template");
@@ -31,13 +32,10 @@ export class ImageBlock extends HTMLElement {
 		this.#shadow.appendChild(document.importNode(imageBlockTemplate.content, true));
 		const figure = this.#shadow.querySelector("figure");
 		const caption = this.#shadow.querySelector("figcaption");
-		const captionSlot = this.#shadow.querySelector('slot[name="caption"]');
 
 		// The Twig version only renders a <figure> when there's a caption; without one it's just the
-		// image, so the figure is presentational until a caption is slotted. slotchange never fires
-		// for a slot that stays empty, hence the captionless starting state.
-		captionSlot.addEventListener("slotchange", () => {
-			const hasCaption = captionSlot.assignedNodes().length > 0;
+		// image, so the figure is presentational until a caption is slotted.
+		watchSlot(this.#shadow.querySelector('slot[name="caption"]'), (hasCaption) => {
 			caption.hidden = !hasCaption;
 			if (hasCaption) figure.removeAttribute("role");
 			else figure.setAttribute("role", "none");

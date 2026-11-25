@@ -1,13 +1,10 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./inline-message.css?inline";
 import { iconSvg } from "../../01-atoms/icons/icons.js";
+import { watchSlot } from "../../utility.js";
 
 // Each type's default icon, from the shared icon registry.
 const typeIcons = { general: "circle-info", marketing: "circle-exclamation" };
-
-// Whitespace-only text (template formatting) doesn't count as content.
-const hasContent = (slot) => slot.assignedNodes({ flatten: true })
-	.some((node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim());
 
 // The icon slot's fallback is the type's default icon; authors can slot their own decorative
 // icon instead, or set icon="none" for a text-only message.
@@ -53,9 +50,7 @@ export class InlineMessage extends HTMLElement {
 		// Hide empty wrappers so the content column's gap doesn't leave holes.
 		for (const name of ["heading", "", "link"]) {
 			const slot = this.#shadow.querySelector(name ? `slot[name="${name}"]` : "slot:not([name])");
-			const update = () => { slot.parentElement.hidden = !hasContent(slot); };
-			slot.addEventListener("slotchange", update);
-			update();
+			watchSlot(slot, (filled) => { slot.parentElement.hidden = !filled; });
 		}
 		this.#render();
 	}

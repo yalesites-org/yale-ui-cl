@@ -1,14 +1,6 @@
 import { baseSheet, componentSheet } from "../../../styles/shadow.js";
 import componentStyles from "./directory-listing-card.css?inline";
-
-// Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
-const watchSlot = (slot, onChange) => {
-	const update = () => onChange(slot.assignedNodes({ flatten: true }).some(
-		(node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== ""
-	));
-	slot.addEventListener("slotchange", update);
-	update();
-};
+import { watchSlot } from "../../../utility.js";
 
 // Unlike the content card, only the heading is a link here: the email link must stay
 // separately clickable. The link is rendered here so it can be dropped when there's no href.

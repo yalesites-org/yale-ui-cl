@@ -1,14 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./wrapped-image.css?inline";
-
-// Runs onChange(filled) whenever a slot gains or loses content. Whitespace-only text doesn't count.
-const watchSlot = (slot, onChange) => {
-	const update = () => onChange(slot.assignedNodes({ flatten: true }).some(
-		(node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== ""
-	));
-	slot.addEventListener("slotchange", update);
-	update();
-};
+import { watchSlot } from "../../utility.js";
 
 // The image floats inside the same block formatting context as the text, so the slotted
 // paragraphs wrap around it just as they do in the Twig markup.

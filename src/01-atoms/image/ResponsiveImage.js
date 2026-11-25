@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./image.css?inline";
+import { watchSlot } from "../../utility.js";
 
 const imageTemplate = document.createElement("template");
 imageTemplate.innerHTML = `
@@ -26,17 +27,14 @@ export class ResponsiveImage extends HTMLElement {
 		this.#shadow.appendChild(document.importNode(imageTemplate.content, true));
 		this.figure = this.#shadow.querySelector(".figure");
 		this.caption = this.#shadow.querySelector(".caption");
-		this.#shadow.querySelector('slot[name="caption"]').addEventListener("slotchange", this.captionHandler);
+		// Like the Twig template, the image is only exposed as a figure when it has a caption;
+		// otherwise the figure is presentational and the slotted <img>/<picture> stands alone.
+		watchSlot(this.#shadow.querySelector('slot[name="caption"]'), (hasCaption) => {
+			this.caption.hidden = !hasCaption;
+			if (hasCaption) this.figure.removeAttribute("role");
+			else this.figure.setAttribute("role", "none");
+		});
 	}
-
-	// Like the Twig template, the image is only exposed as a figure when it has a caption;
-	// otherwise the figure is presentational and the slotted <img>/<picture> stands alone.
-	captionHandler = (event) => {
-		const hasCaption = event.target.assignedNodes().length > 0;
-		this.caption.hidden = !hasCaption;
-		if (hasCaption) this.figure.removeAttribute("role");
-		else this.figure.setAttribute("role", "none");
-	};
 }
 
 if (!customElements.get("ycl-image")) customElements.define("ycl-image", ResponsiveImage);
