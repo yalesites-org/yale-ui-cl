@@ -21,6 +21,8 @@ linkGroupTemplate.innerHTML = `
  * @slot heading-two - Heading of column two.
  * @slot links-one - Links in column one; one element per link.
  * @slot links-two - Links in column two; one element per link.
+ * @cssprop --color-link-group-border - Divider color. Defaults to var(--color-gray-700); set it on a dark surface.
+ * @cssprop --color-link-group-hover - Link hover color. Defaults to the inherited --color-link-base.
  */
 export class LinkGroup extends HTMLElement {
 	#shadow;
