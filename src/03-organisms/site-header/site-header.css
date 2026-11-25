@@ -1,0 +1,83 @@
+/* A white bar across the page; the content inside is held to the site width and gutter, in line
+   with the components below it. The header shows its toggle and panel with the hidden attribute
+   (see SiteHeader.js), so only spacing lives here. */
+:host(ycl-site-header) {
+  display: block;
+  --color-site-header-background: var(--color-basic-white);
+  --color-site-header-text: var(--color-blue-yale);
+  --color-site-header-border: var(--color-gray-300);
+}
+
+.site-header {
+  background-color: var(--color-site-header-background);
+  border-bottom: var(--size-thickness-1) solid var(--color-site-header-border);
+}
+
+.site-header__bar,
+.site-header__nav {
+  box-sizing: border-box;
+  max-width: calc(var(--size-component-layout-width-site) + 2 * var(--size-spacing-site-gutter));
+  margin-inline: auto;
+  padding-inline: var(--size-spacing-site-gutter);
+}
+
+.site-header__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-spacing-4);
+  padding-block: var(--size-spacing-4);
+}
+
+/* The wordmark and the site name, split by a thin rule. */
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--size-spacing-4);
+  min-width: 0;
+}
+
+.site-header__wordmark {
+  --size-wordmark: var(--size-spacing-7);
+  flex-shrink: 0;
+  padding-inline-end: var(--size-spacing-4);
+  border-inline-end: var(--size-thickness-1) solid var(--color-site-header-border);
+}
+
+.site-header__name {
+  color: var(--color-site-header-text);
+  font-family: var(--font-families-yalenew);
+  font-size: var(--font-size-23);
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.site-header__name:hover {
+  text-decoration: underline;
+}
+
+/* The mobile menu sits under the bar, the full width of the header. */
+.site-header__nav {
+  padding-block-end: var(--size-spacing-3);
+}
+
+/* The panel takes focus only from script, as a place to land when the toggle disappears. */
+.site-header__nav:focus {
+  outline: none;
+}
+
+/* ycl-button's :host sets a display, which would beat the built-in [hidden] rule. */
+:host(ycl-site-header) [hidden] {
+  display: none !important;
+}
+
+/* The wide layout. SiteHeader.js sets the class from its media query, so the breakpoint lives in
+   one place. */
+.site-header--wide .site-header__name {
+  font-size: var(--font-size-29);
+}
+
+.site-header--wide .site-header__nav {
+  padding-block-end: 0;
+}

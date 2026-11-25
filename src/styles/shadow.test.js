@@ -10,6 +10,7 @@ import "../02-molecules/page-title/PageTitle.js";
 import "../02-molecules/pull-quote/PullQuote.js";
 import "../02-molecules/quote-callout/QuoteCallout.js";
 import "../02-molecules/related-content/RelatedContent.js";
+import "../03-organisms/site-header/SiteHeader.js";
 import "../03-organisms/text-with-image/TextWithImage.js";
 import { mount, shadowOf } from "../../test/helpers.js";
 
@@ -63,6 +64,7 @@ describe("site gutter", () => {
 	it.each([
 		["ycl-image-block", ".content-image"],
 		["ycl-page-title", ".page-title"],
+		["ycl-site-header", ".site-header__bar"],
 	])("%s", (tag, selector) => {
 		const style = getComputedStyle(shadowOf(mount(`<${tag}></${tag}>`)).querySelector(selector));
 		expect(style.paddingLeft).toBe(gutter());

@@ -81,6 +81,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-link-skip` | "Skip to main content" link |
 | `ycl-nav-menu` | Site navigation menu with dropdowns; contains `ycl-nav-menu-item` |
 | `ycl-nav-menu-item` | One menu link, or a dropdown of child items |
+| `ycl-site-header` | Site header with the Yale wordmark, site name and primary navigation; contains one `ycl-nav-menu` |
 | `ycl-social-links` | Social media icon links |
 | `ycl-tabs` | Tabbed panels; contains `ycl-tab` |
 | `ycl-tab` | One tab and its panel |
@@ -99,7 +100,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 - Use tag names exactly as listed. Every tag starts with `ycl-`. Do not invent tags or drop the prefix (there is no `cta-link` or `yc-table`).
 - Attributes are kebab-case (`overlay-image`, `button-alignment`). Use only the values the manifest lists. Boolean attributes are on when present (`<ycl-accordion-item expanded>`).
 - Put content into a named slot with `slot="name"` on a direct child: `<ycl-heading slot="heading">`. Children with no `slot` attribute go into the default slot.
-- Child elements go directly inside their parent: `ycl-accordion-item` in `ycl-accordion`, `ycl-callout-item` in `ycl-callout`, `ycl-tab` in `ycl-tabs`, `ycl-taxonomy-display-item` in `ycl-taxonomy-display`, `ycl-related-content-item` in `ycl-related-content`, `ycl-nav-menu-item` in `ycl-nav-menu` (or in one `ycl-nav-menu-item`, for a dropdown; no deeper).
+- Child elements go directly inside their parent: `ycl-accordion-item` in `ycl-accordion`, `ycl-callout-item` in `ycl-callout`, `ycl-tab` in `ycl-tabs`, `ycl-taxonomy-display-item` in `ycl-taxonomy-display`, `ycl-related-content-item` in `ycl-related-content`, `ycl-nav-menu-item` in `ycl-nav-menu` (or in one `ycl-nav-menu-item`, for a dropdown; no deeper), and one `ycl-nav-menu` in `ycl-site-header` (the header sets the menu's `layout`).
 - Use `ycl-heading` for headings inside components, with the right `level` for the page outline.
 - Options are attributes, never `class`. `ycl-cta-link` and `ycl-button` take `variant` (`filled`, the default, or `outline`), `outline-weight` (`1`, `2` or `4`), `animate` and `radius` (for example `variant="outline" radius="pill" animate="wipe"`); leave `animate` off for the default fade. `ycl-list` takes `type="tags"` or `type="categories"`. `ycl-text-input`, `ycl-text-area` and `ycl-select-input` take the boolean `required`. `ycl-text-link` has no style options.
 
