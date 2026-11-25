@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import meta, * as stories from "./Button.stories.js";
 
-// ycl-button takes its CTA options (variant, size, animate, radius) as attributes and no longer
+// ycl-button takes its CTA options (variant, outline-weight, animate, radius) as attributes and no longer
 // reads `class`, so the stories must build attributes or their controls do nothing.
 const namedStories = Object.fromEntries(Object.entries(stories).filter(([name]) => name !== "default"));
 
@@ -47,16 +47,16 @@ describe("Button stories", () => {
 		expect(el.getAttribute("radius")).toBe("pill");
 	});
 
-	it("sets size and animate from their controls", () => {
-		const el = button(stories.Default, { size: "large", animate: "wipe" });
-		expect(el.getAttribute("size")).toBe("large");
+	it("sets outline-weight and animate from their controls", () => {
+		const el = button(stories.Default, { outlineWeight: "4", animate: "wipe" });
+		expect(el.getAttribute("outline-weight")).toBe("4");
 		expect(el.getAttribute("animate")).toBe("wipe");
 	});
 
-	it("adds no animate, radius or size attribute for the defaults", () => {
+	it("adds no animate, radius or outline-weight attribute for the defaults", () => {
 		const el = button(stories.Default);
 		expect(el.hasAttribute("animate")).toBe(false);
 		expect(el.hasAttribute("radius")).toBe(false);
-		expect(el.hasAttribute("size")).toBe(false);
+		expect(el.hasAttribute("outline-weight")).toBe(false);
 	});
 });

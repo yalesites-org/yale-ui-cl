@@ -1,40 +1,21 @@
 import "./Cta";
+import "../button/Button";
 import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { ctaArgTypes, ctaAttributes } from "./cta-story-options.js";
 
 export default {
   title: 'Atoms/CTA',
   component: 'ycl-cta-link',
   argTypes: {
     URL: attributeArg('href: link destination. External links get an external-link icon.', { control: 'text' }),
-    variant: attributeArg('variant: fill style. "secondary" is a neutral grey outline.', {
-      name: 'Variant',
-      control: 'select',
-      options: ['filled', 'outline', 'secondary'],
-    }),
-    size: attributeArg('size: padding and font size; leave unset for the default size.', {
-      control: 'select',
-      options: ['default', 'small', 'medium', 'large'],
-      mapping: { default: undefined },
-    }),
-    animate: attributeArg('animate: hover animation. Fade is the default and needs no attribute; "none" turns it off.', {
-      name: 'Animation Type',
-      control: 'select',
-      options: ['none', 'fade', 'rise', 'wipe'],
-      mapping: { fade: undefined },
-    }),
-    radius: attributeArg('radius: corner radius; square corners need no attribute.', {
-      name: 'Radius Type',
-      control: 'select',
-      options: ['none', 'soft', 'pill'],
-      mapping: { none: undefined },
-    }),
+    ...ctaArgTypes,
     label: slotArg('Link text (default slot).', { control: 'text' }),
   },
   args: {
     label: 'Yale HomePage',
     URL: 'https://www.yale.edu',
     variant: 'filled',
-    size: 'default',
+    outlineWeight: '2',
     animate: 'fade',
     radius: 'none',
   },
@@ -42,11 +23,70 @@ export default {
   render: (args) =>
     `<ycl-cta-link${attrs({
       href: args.URL,
-      variant: args.variant,
-      size: args.size,
-      animate: args.animate,
-      radius: args.radius,
+      ...ctaAttributes(args),
     })}>${args.label ?? ''}</ycl-cta-link>`,
 };
 
-export const Default = {};
+export const Filled = {
+  args: {
+    variant: 'filled',
+  },
+};
+
+export const Outline = {
+  args: {
+    variant: 'outline',
+  },
+};
+
+export const OutlinePill = {
+  args: {
+    variant: 'outline',
+    radius: 'pill',
+  },
+};
+
+const group = (heading, items) => `
+  <h2 style="margin-block: var(--size-spacing-6) var(--size-spacing-3);">${heading}</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: var(--size-spacing-4); align-items: center;">
+    ${items.join('\n    ')}
+  </div>`;
+
+// Every CTA option side by side, like the YaleSites component library's CTA page. No variant
+// renders filled.
+export const AllVariants = {
+  parameters: {controls: {disable: true}},
+  render: () => [
+    group('Filled', [
+      '<ycl-cta-link href="#">Radius none</ycl-cta-link>',
+      '<ycl-cta-link href="#" radius="soft">Radius soft</ycl-cta-link>',
+      '<ycl-cta-link href="#" radius="pill">Radius pill</ycl-cta-link>',
+      '<ycl-cta-link href="https://www.yale.edu">External link</ycl-cta-link>',
+      '<ycl-cta-link href="https://www.yale.edu/example.pdf">Download</ycl-cta-link>',
+      '<ycl-button control-type="dropdown">Dropdown</ycl-button>',
+    ]),
+    group('Outline', [
+      '<ycl-cta-link variant="outline" href="#">Radius none</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="#" radius="soft">Radius soft</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="#" radius="pill">Radius pill</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="https://www.yale.edu">External link</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="https://www.yale.edu/example.pdf">Download</ycl-cta-link>',
+      '<ycl-button variant="outline" control-type="dropdown">Dropdown</ycl-button>',
+    ]),
+    group('Outline Weights', [
+      '<ycl-cta-link variant="outline" outline-weight="1" href="#">Weight 1</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="#">Weight 2 (default)</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" outline-weight="4" href="#">Weight 4</ycl-cta-link>',
+    ]),
+    group('Hover Effects', [
+      '<ycl-cta-link href="#" animate="none">Filled none</ycl-cta-link>',
+      '<ycl-cta-link href="#">Filled fade</ycl-cta-link>',
+      '<ycl-cta-link href="#" animate="rise">Filled rise</ycl-cta-link>',
+      '<ycl-cta-link href="#" animate="wipe">Filled wipe</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="#" animate="none">Outline none</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="#">Outline fade</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="#" animate="rise">Outline rise</ycl-cta-link>',
+      '<ycl-cta-link variant="outline" href="#" animate="wipe">Outline wipe</ycl-cta-link>',
+    ]),
+  ].join('\n'),
+};

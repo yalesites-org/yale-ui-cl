@@ -166,7 +166,7 @@ colors only that part, for example "`primary`: Yale blue left bar on light gray 
 Two components differ in one option: `ycl-facts-and-figures`' `default` has no background and takes
 the text color around it, and `ycl-inline-message`'s `accent-1` has Yale blue text.
 
-`ycl-text-copy-button`, `ycl-custom-card` and `ycl-reference-card` have no options but use the
+`ycl-text-copy-button`, `ycl-custom-card` and `ycl-content-card` have no options but use the
 palette too (`secondary` for link hover, `primary`/`secondary` for card accents).
 
 Text colors on each option are fixed (generally white on `primary`, `secondary` and `accent-2`; gray-800 on
@@ -214,13 +214,25 @@ Every custom element now uses the `ycl-` prefix, and options are set with attrib
 
 | Element | Old | New |
 |---------|-----|-----|
-| `ycl-cta-link`, `ycl-button` | `class="filled radius-pill animate-wipe large"` | `variant="filled" radius="pill" animate="wipe" size="large"` |
+| `ycl-cta-link`, `ycl-button` | `class="filled radius-pill animate-wipe"` | `variant="filled" radius="pill" animate="wipe"` |
 | `ycl-list` | `class="tags"` or `class="categories"` | `type="tags"` or `type="categories"` |
 | `ycl-text-input`, `ycl-select-input` | `class="required"` | `required` |
 | `ycl-text-link` | `class="subtle"` | removed (it had no styles) |
 
 For CTAs, fade is the default animation and needs no attribute; `animate` takes `none`, `rise` or `wipe`.
 
+CTAs now match the YaleSites CTA: a CTA with no `variant` is filled (it used to look like an outline), so add `variant="outline"` where you relied on the old default. `variant` takes `filled` or `outline`; the `size` attribute and `variant="secondary"` were removed. `outline-weight="1"`, `"2"` (the default) or `"4"` sets the border thickness.
+
 ### Renamed attribute
 
 The `variation` attribute on `ycl-quick-links`, `ycl-page-title` and `ycl-text` is now `variant`, matching `ycl-pull-quote` and `ycl-quote-callout`. For example, `<ycl-page-title variation="event">` becomes `<ycl-page-title variant="event">`.
+
+## Migration: Reference Card is now Content Card
+
+| | Old | New |
+|-|-----|-----|
+| Tag | `ycl-reference-card` | `ycl-content-card` |
+| Export | `ReferenceCard` | `ContentCard` |
+| Per-component entry | `yale-ui-cl/reference-card` | `yale-ui-cl/content-card` |
+
+The old tag, export, and entry names were removed, not aliased.

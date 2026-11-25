@@ -70,7 +70,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 | `ycl-video` | Video with heading and text |
 | `ycl-embed` | Embedded form, map, calendar, audio or video |
 | `ycl-custom-card` | Card with heading, text, image |
-| `ycl-reference-card` | Card for a post, event, profile or resource |
+| `ycl-content-card` | Card for a post, event, profile or resource |
 | `ycl-directory-listing-card` | Person card with contact details |
 | `ycl-tile-item` | Colored tile |
 | `ycl-facts-and-figures` | Statistic with supporting text |
@@ -99,7 +99,7 @@ The import path is the tag without its `ycl-` prefix (`ycl-accordion` is `yale-u
 - Put content into a named slot with `slot="name"` on a direct child: `<ycl-heading slot="heading">`. Children with no `slot` attribute go into the default slot.
 - Child elements go directly inside their parent: `ycl-accordion-item` in `ycl-accordion`, `ycl-callout-item` in `ycl-callout`, `ycl-tab` in `ycl-tabs`, `ycl-taxonomy-display-item` in `ycl-taxonomy-display`, `ycl-related-content-item` in `ycl-related-content`.
 - Use `ycl-heading` for headings inside components, with the right `level` for the page outline.
-- Options are attributes, never `class`. `ycl-cta-link` and `ycl-button` take `variant`, `size`, `animate` and `radius` (for example `variant="filled" radius="pill" animate="wipe"`); leave `animate` off for the default fade. `ycl-list` takes `type="tags"` or `type="categories"`. `ycl-text-input`, `ycl-text-area` and `ycl-select-input` take the boolean `required`. `ycl-text-link` has no style options.
+- Options are attributes, never `class`. `ycl-cta-link` and `ycl-button` take `variant` (`filled`, the default, or `outline`), `outline-weight` (`1`, `2` or `4`), `animate` and `radius` (for example `variant="outline" radius="pill" animate="wipe"`); leave `animate` off for the default fade. `ycl-list` takes `type="tags"` or `type="categories"`. `ycl-text-input`, `ycl-text-area` and `ycl-select-input` take the boolean `required`. `ycl-text-link` has no style options.
 
 ## Colors: tokens only
 

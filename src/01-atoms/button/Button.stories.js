@@ -1,6 +1,7 @@
 import "./Button";
 import "../text-input/TextInput";
 import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
+import { ctaArgTypes, ctaAttributes } from "../cta/cta-story-options.js";
 
 export default {
   title: 'Atoms/Button',
@@ -12,28 +13,7 @@ export default {
       options: ['button', 'submit', 'reset'],
       mapping: { button: undefined },
     }),
-    variant: attributeArg('variant: CTA fill style. "secondary" is a neutral grey outline.', {
-      name: 'Variant',
-      control: 'select',
-      options: ['outline', 'filled', 'secondary'],
-    }),
-    size: attributeArg('size: padding and font size; leave unset for the default size.', {
-      control: 'select',
-      options: ['default', 'small', 'medium', 'large'],
-      mapping: { default: undefined },
-    }),
-    radius: attributeArg('radius: corner radius; square corners need no attribute.', {
-      name: 'Radius Type',
-      control: 'select',
-      options: ['none', 'soft', 'pill'],
-      mapping: { none: undefined },
-    }),
-    animate: attributeArg('animate: hover animation. Fade is the default and needs no attribute; "none" turns it off.', {
-      name: 'Animation Type',
-      control: 'select',
-      options: ['none', 'fade', 'rise', 'wipe'],
-      mapping: { fade: undefined },
-    }),
+    ...ctaArgTypes,
     controlType: attributeArg('control-type="dropdown" adds a dropdown arrow and always renders a button.', {
       name: 'Control Type',
       control: 'select',
@@ -54,7 +34,7 @@ export default {
     href: '',
     type: 'button',
     variant: 'outline',
-    size: 'default',
+    outlineWeight: '2',
     animate: 'fade',
     radius: 'none',
     controlType: 'default',
@@ -65,10 +45,7 @@ export default {
 
   render: (args) =>
     `<ycl-button${attrs({
-      variant: args.variant,
-      size: args.size,
-      radius: args.radius,
-      animate: args.animate,
+      ...ctaAttributes(args),
       href: args.href,
       type: args.type,
       'control-type': args.controlType,
