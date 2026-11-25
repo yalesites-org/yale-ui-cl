@@ -10,6 +10,9 @@
   --color-link-hover: var(--color-blue-light);
   --color-link-visited-hover: var(--color-blue-light);
   --color-social-links-hover: var(--color-blue-light);
+  /* A slotted ycl-link-group: light blue hover and dividers, since its gray dividers barely show on blue. */
+  --color-link-group-hover: var(--color-blue-light);
+  --color-link-group-border: var(--color-blue-light);
   /* The surface behind slotted content is blue, so a text link's descender halo must be too. */
   --color-background: var(--color-blue-yale);
   --color-text-shadow: var(--color-blue-yale);
@@ -23,12 +26,14 @@
   color: var(--color-basic-white);
 }
 
+/* The site width plus the shared site gutter (from shadow.css), so the content lines up with the
+   other full-width components on the page. */
 .site-footer__inner {
   box-sizing: border-box;
-  max-width: var(--size-component-layout-width-site);
+  max-width: calc(var(--size-component-layout-width-site) + 2 * var(--size-spacing-site-gutter));
   margin: 0 auto;
   padding-block: var(--size-spacing-10);
-  padding-inline: var(--size-spacing-6);
+  padding-inline: var(--size-spacing-site-gutter);
 }
 
 /* Restates [hidden] once display is set on these regions. */
@@ -102,9 +107,5 @@
 @container (min-width: 768px) {
   .site-footer__primary {
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  }
-
-  .site-footer__inner {
-    padding-inline: var(--size-spacing-8);
   }
 }

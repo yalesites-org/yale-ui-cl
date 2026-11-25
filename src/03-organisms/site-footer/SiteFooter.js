@@ -6,7 +6,7 @@ import "../../01-atoms/wordmark/Wordmark.js";
 // point the links at its own pages, but can't remove them.
 const legalLinks = [
 	{ name: "accessibility", label: "Accessibility at Yale", href: "https://usability.yale.edu/web-accessibility/accessibility-yale" },
-	{ name: "privacy", label: "Privacy policy", href: "https://privacy.yale.edu/resources/privacy-statement" },
+	{ name: "privacy", label: "Privacy Policy", href: "https://privacy.yale.edu/resources/privacy-statement" },
 ];
 
 const siteFooterTemplate = document.createElement("template");
@@ -25,7 +25,7 @@ siteFooterTemplate.innerHTML = `
 				<ul class="site-footer__legal">
 					${legalLinks.map(({ name, label }) => `<li><a class="site-footer__legal-link" data-link="${name}">${label}</a></li>`).join("")}
 				</ul>
-				<p class="site-footer__copyright">© <span class="site-footer__year"></span> Yale University. All rights reserved.</p>
+				<p class="site-footer__copyright">Copyright © <span class="site-footer__year"></span> Yale University. All rights reserved.</p>
 			</div>
 		</div>
 	</footer>

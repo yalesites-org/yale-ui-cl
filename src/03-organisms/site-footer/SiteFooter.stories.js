@@ -11,7 +11,7 @@ export default {
   parameters: { layout: 'fullscreen' },
   argTypes: {
     accessibilityHref: attributeArg('accessibility-href attribute: where "Accessibility at Yale" points. Empty uses Yale\'s accessibility page; the link is always shown.', { name: 'Accessibility link', control: 'text' }),
-    privacyHref: attributeArg('privacy-href attribute: where "Privacy policy" points. Empty uses Yale\'s privacy statement; the link is always shown.', { name: 'Privacy link', control: 'text' }),
+    privacyHref: attributeArg('privacy-href attribute: where "Privacy Policy" points. Empty uses Yale\'s privacy statement; the link is always shown.', { name: 'Privacy link', control: 'text' }),
     content: slotArg('Default slot: free content beside the wordmark, such as an address. Omitted when empty.', { control: 'text' }),
     links: slotArg('slot="links": footer links, usually a ycl-link-group. Omitted when off.', { name: 'Show links', control: 'boolean' }),
     social: slotArg('slot="social": a ycl-social-links. Omitted when off.', { name: 'Show social links', control: 'boolean' }),

@@ -2641,6 +2641,16 @@
           "kind": "class",
           "description": "One or two columns of links, each with an optional heading. Each child goes to the column named by its slot attribute.",
           "name": "LinkGroup",
+          "cssProperties": [
+            {
+              "description": "Divider color. Defaults to var(--color-gray-700); set it on a dark surface.",
+              "name": "--color-link-group-border"
+            },
+            {
+              "description": "Link hover color. Defaults to the inherited --color-link-base.",
+              "name": "--color-link-group-hover"
+            }
+          ],
           "slots": [
             {
               "description": "Heading of column one.",

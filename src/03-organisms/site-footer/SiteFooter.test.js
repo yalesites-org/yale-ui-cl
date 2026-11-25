@@ -7,7 +7,7 @@ import "./SiteFooter.js";
 import "../../02-molecules/link-group/LinkGroup.js";
 import "../../02-molecules/social-links/SocialLinks.js";
 import "../../01-atoms/text-link/Link.js";
-import { mount, settle, shadowOf } from "../../../test/helpers.js";
+import { mount, rgb, settle, shadowOf } from "../../../test/helpers.js";
 
 const ACCESSIBILITY_URL = "https://usability.yale.edu/web-accessibility/accessibility-yale";
 const PRIVACY_URL = "https://privacy.yale.edu/resources/privacy-statement";
@@ -48,7 +48,7 @@ describe("ycl-site-footer", () => {
 		const privacy = legalLink(element, "privacy");
 		expect(accessibility.textContent.trim()).toBe("Accessibility at Yale");
 		expect(accessibility.getAttribute("href")).toBe(ACCESSIBILITY_URL);
-		expect(privacy.textContent.trim()).toBe("Privacy policy");
+		expect(privacy.textContent.trim()).toBe("Privacy Policy");
 		expect(privacy.getAttribute("href")).toBe(PRIVACY_URL);
 	});
 
@@ -62,9 +62,9 @@ describe("ycl-site-footer", () => {
 		expect(legalLink(element, "accessibility").getAttribute("href")).toBe(ACCESSIBILITY_URL);
 	});
 
-	it("shows a copyright line for the current year", () => {
+	it("shows the YaleSites copyright line for the current year", () => {
 		const element = mount(`<ycl-site-footer></ycl-site-footer>`);
-		expect(region(element, "copyright").textContent).toContain(`© ${new Date().getFullYear()} Yale University`);
+		expect(region(element, "copyright").textContent.trim()).toBe(`Copyright © ${new Date().getFullYear()} Yale University. All rights reserved.`);
 	});
 
 	it("hides the optional regions until something is slotted into them", async () => {
@@ -121,6 +121,38 @@ describe("ycl-site-footer", () => {
 		const halo = getComputedStyle(link).textShadow;
 		expect(halo).not.toBe("none");
 		expect(halo.startsWith(background)).toBe(true);
+	});
+
+	it("themes a slotted link group for the blue background: light blue hover and dividers", async () => {
+		const element = mount(`<ycl-site-footer style="width: 1024px"><ycl-link-group slot="links"><a slot="links-one" href="#">Plain</a><ycl-text-link slot="links-two" href="#">Text link</ycl-text-link></ycl-link-group></ycl-site-footer>`);
+		await settle();
+		const expected = rgb(getComputedStyle(legalLink(element, "accessibility")).getPropertyValue("--color-link-hover"));
+		const group = element.querySelector("ycl-link-group");
+		for (const column of shadowOf(group).querySelectorAll(".link-group__links-column")) {
+			expect(getComputedStyle(column).borderLeftColor).toBe(expected);
+		}
+		const plain = element.querySelector("a");
+		await userEvent.hover(plain);
+		expect(getComputedStyle(plain).color).toBe(expected);
+		const textLink = element.querySelector("ycl-text-link");
+		await userEvent.hover(textLink);
+		// ycl-text-link animates its color, so wait for the transition to finish.
+		await expect.poll(() => getComputedStyle(shadowOf(textLink).querySelector("a")).color).toBe(expected);
+	});
+
+	// The gutter padding itself is checked with the other components in src/styles/shadow.test.js.
+	it("caps its content at the site width plus the site gutter on each side", async () => {
+		const element = mount(`<ycl-site-footer style="width: 4000px"></ycl-site-footer>`);
+		await settle();
+		const inner = region(element, "inner");
+		const probe = document.createElement("div");
+		probe.style.width = "var(--size-component-layout-width-site)";
+		inner.append(probe);
+		const site = probe.getBoundingClientRect().width;
+		probe.remove();
+		const style = getComputedStyle(inner);
+		expect(parseFloat(style.paddingLeft)).toBeGreaterThan(0);
+		expect(inner.getBoundingClientRect().width).toBe(site + parseFloat(style.paddingLeft) + parseFloat(style.paddingRight));
 	});
 
 	it("shows a visible focus ring on its links that contrasts with the background", async () => {
