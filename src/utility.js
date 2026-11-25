@@ -7,10 +7,6 @@ export function addVariant(classNames, componentObject, componentName) {
 	variants.forEach((c) => {componentObject.classList.add(componentName + "--" + c)});
 };
 
-// Whether a slot has anything to show. Whitespace-only text (template formatting) doesn't count.
-export const hasContent = (slot) => slot.assignedNodes({ flatten: true })
-	.some((node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== "");
-
 // CTA options shared by ycl-cta-link and ycl-button. Each maps to a cta.css modifier:
 // variant="outline" -> cta--outline, outline-weight="4" -> cta--outline-weight-4,
 // animate="wipe" -> cta--animate-wipe, radius="pill" -> cta--radius-pill. Values cta.css doesn't

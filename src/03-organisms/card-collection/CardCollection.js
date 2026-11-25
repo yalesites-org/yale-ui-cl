@@ -1,7 +1,10 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./card-collection.css?inline";
-import { hasContent } from "../../utility.js";
 import "../../02-molecules/section-header/SectionHeader.js";
+
+// Whether a slot has anything to show. Whitespace-only text (template formatting) doesn't count.
+const hasContent = (slot) => slot.assignedNodes({ flatten: true })
+	.some((node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim() !== "");
 
 // The header slots are forwarded into ycl-section-header, which hides each empty part itself.
 const cardCollectionTemplate = document.createElement("template");
@@ -30,6 +33,9 @@ cardCollectionTemplate.innerHTML = `
  */
 export class CardCollection extends HTMLElement {
 	#shadow;
+	#header;
+	#headerSlots;
+	#cardSlot;
 	// The layout the collection last wrote on each card, so it never overwrites one the author chose.
 	#written = new WeakMap();
 
@@ -42,12 +48,12 @@ export class CardCollection extends HTMLElement {
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "card-collection")];
 		this.#shadow.appendChild(document.importNode(cardCollectionTemplate.content, true));
-		this.header = this.#shadow.querySelector(".card-collection__header");
-		this.headerSlots = [...this.header.querySelectorAll("slot")];
-		this.cardSlot = this.#shadow.querySelector(".card-collection__cards slot");
+		this.#header = this.#shadow.querySelector(".card-collection__header");
+		this.#headerSlots = [...this.#header.querySelectorAll("slot")];
+		this.#cardSlot = this.#shadow.querySelector(".card-collection__cards slot");
 
-		for (const slot of this.headerSlots) slot.addEventListener("slotchange", () => this.#renderHeader());
-		this.cardSlot.addEventListener("slotchange", () => this.#syncCardLayouts());
+		for (const slot of this.#headerSlots) slot.addEventListener("slotchange", () => this.#renderHeader());
+		this.#cardSlot.addEventListener("slotchange", () => this.#syncCardLayouts());
 		this.#renderHeader();
 	}
 
@@ -57,17 +63,17 @@ export class CardCollection extends HTMLElement {
 			this.#syncCardLayouts();
 			return;
 		}
-		if (newValue === null) this.header.removeAttribute(name);
-		else this.header.setAttribute(name, newValue);
+		if (newValue === null) this.#header.removeAttribute(name);
+		else this.#header.setAttribute(name, newValue);
 	}
 
 	#renderHeader() {
-		this.header.hidden = !this.headerSlots.some(hasContent);
+		this.#header.hidden = !this.#headerSlots.some(hasContent);
 	}
 
 	#syncCardLayouts() {
 		const layout = this.layout;
-		for (const card of this.cardSlot.assignedElements()) {
+		for (const card of this.#cardSlot.assignedElements()) {
 			if (card.localName !== "ycl-content-card") continue;
 			const current = card.getAttribute("layout");
 			if (current !== null && current !== this.#written.get(card)) continue;
