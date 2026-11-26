@@ -5,6 +5,9 @@ import { iconSvg } from "../../01-atoms/icons/icons.js";
 // Each type's default icon, from the shared icon registry.
 const typeIcons = { general: "circle-info", marketing: "circle-exclamation" };
 
+// Landmark name used when the author sets no label.
+const DEFAULT_LABEL = "information";
+
 // Whitespace-only text (template formatting) doesn't count as content.
 const hasContent = (slot) => slot.assignedNodes({ flatten: true })
 	.some((node) => node.nodeType === Node.ELEMENT_NODE || node.textContent.trim());
@@ -13,7 +16,7 @@ const hasContent = (slot) => slot.assignedNodes({ flatten: true })
 // icon instead, or set icon="none" for a text-only message.
 const inlineMessageTemplate = document.createElement("template");
 inlineMessageTemplate.innerHTML = `
-	<section class="inline-message" aria-label="information">
+	<section class="inline-message" aria-label="${DEFAULT_LABEL}">
 		<div class="inline-message__inner">
 			<div class="inline-message__icon"><slot name="icon"></slot></div>
 			<div class="inline-message__content">
@@ -29,6 +32,7 @@ inlineMessageTemplate.innerHTML = `
  * A short highlighted message with an icon, heading, text and link.
  * @attr {"general"|"marketing"} type - Kind of message; sets the default icon. Defaults to general.
  * @attr {"none"} icon - none hides the icon.
+ * @attr {string} label - Accessible name of the message's landmark; give each message on a page its own. Defaults to "information".
  * @attr {"primary"|"secondary"|"tertiary"|"accent-1"|"accent-2"} theme - Color option, from the page palette. Defaults to accent-1.
  * @slot icon - A decorative icon to use instead of the default one.
  * @slot heading - The heading.
@@ -39,7 +43,7 @@ export class InlineMessage extends HTMLElement {
 	#shadow;
 
 	static get observedAttributes() {
-		return ["type", "icon"];
+		return ["type", "icon", "label"];
 	}
 
 	constructor() {
@@ -49,6 +53,7 @@ export class InlineMessage extends HTMLElement {
 		this.#shadow.appendChild(document.importNode(inlineMessageTemplate.content, true));
 		this.iconSlot = this.#shadow.querySelector('slot[name="icon"]');
 		this.iconWrapper = this.#shadow.querySelector(".inline-message__icon");
+		this.landmark = this.#shadow.querySelector(".inline-message");
 
 		// Hide empty wrappers so the content column's gap doesn't leave holes.
 		for (const name of ["heading", "", "link"]) {
@@ -62,7 +67,8 @@ export class InlineMessage extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (oldValue === newValue) return;
-		this.#render();
+		if (name === "label") this.landmark.setAttribute("aria-label", newValue || DEFAULT_LABEL);
+		else this.#render();
 	}
 
 	#render() {
@@ -72,6 +78,12 @@ export class InlineMessage extends HTMLElement {
 
 	get type() { return this.getAttribute("type") || "general"; }
 	set type(value) { this.setAttribute("type", value); }
+
+	get label() { return this.getAttribute("label"); }
+	set label(value) {
+		if (value == null) this.removeAttribute("label");
+		else this.setAttribute("label", value);
+	}
 
 	get icon() { return this.getAttribute("icon"); }
 	set icon(value) {
