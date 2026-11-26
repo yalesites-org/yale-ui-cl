@@ -3941,6 +3941,125 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/03-organisms/calendar/Calendar.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "One event shown by a ycl-calendar. Renders nothing itself.",
+          "name": "CalendarEvent",
+          "slots": [
+            {
+              "description": "The event title, as plain text.",
+              "name": ""
+            }
+          ],
+          "attributes": [
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Start, as an ISO 8601 date (\"2026-11-12\", all day) or local date-time (\"2026-11-12T16:00\").",
+              "name": "start"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Optional end, in the same form. A later date makes a multi-day event.",
+              "name": "end"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Optional link to the event's page.",
+              "name": "href"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Optional place.",
+              "name": "location"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-calendar-event",
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "A compact month calendar beside a list of the month's events. Children are ycl-calendar-event elements.\nToday is selected on load and the list runs from the selected day to the end of the month.",
+          "name": "Calendar",
+          "attributes": [
+            {
+              "name": "month",
+              "type": {
+                "text": "string"
+              },
+              "description": "Month to show first, as YYYY-MM. Defaults to the month of today."
+            },
+            {
+              "name": "today",
+              "type": {
+                "text": "string"
+              },
+              "description": "Overrides today's date, as YYYY-MM-DD (for demos and tests)."
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name of the calendar. Defaults to \"Event calendar\"."
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "ycl-calendar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CalendarEvent",
+          "declaration": {
+            "name": "CalendarEvent",
+            "module": "src/03-organisms/calendar/Calendar.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Calendar",
+          "declaration": {
+            "name": "Calendar",
+            "module": "src/03-organisms/calendar/Calendar.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-calendar-event",
+          "declaration": {
+            "name": "CalendarEvent",
+            "module": "src/03-organisms/calendar/Calendar.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "ycl-calendar",
+          "declaration": {
+            "name": "Calendar",
+            "module": "src/03-organisms/calendar/Calendar.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/03-organisms/content-spotlight-portrait/ContentSpotlightPortrait.js",
       "declarations": [
         {

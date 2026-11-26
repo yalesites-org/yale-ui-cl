@@ -54,4 +54,5 @@ export { LinkSkip } from "./01-atoms/link-skip/LinkSkip.js";
 export { SocialLinks } from "./02-molecules/social-links/SocialLinks.js";
 export { Pager } from "./02-molecules/pager/Pager.js";
 export { Tabs, Tab } from "./03-organisms/tabs/Tabs.js";
+export { Calendar, CalendarEvent } from "./03-organisms/calendar/Calendar.js";
 export { QuickLinks } from "./02-molecules/quick-links/QuickLinks.js";

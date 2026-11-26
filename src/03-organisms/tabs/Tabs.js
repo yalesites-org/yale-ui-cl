@@ -28,6 +28,9 @@ tabsTemplate.innerHTML = `
  * @slot - The panel content.
  */
 export class Tab extends HTMLElement {
+	// Only carries data for ycl-tabs, which renders it, so it has no shadow root.
+	static dataOnly = true;
+
 	get label() { return this.getAttribute("label") ?? ""; }
 	set label(value) { this.setAttribute("label", value); }
 

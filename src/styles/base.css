@@ -55,5 +55,6 @@
 @import "../02-molecules/social-links/social-links.css" layer(components.social-links);
 @import "../02-molecules/pager/pager.css" layer(components.pager);
 @import "../03-organisms/tabs/tabs.css" layer(components.tabs);
+@import "../03-organisms/calendar/calendar.css" layer(components.calendar);
 @import "../02-molecules/quick-links/quick-links.css" layer(components.quick-links);
 @import "../02-molecules/data-table/data-table.css" layer(components.data-table);
