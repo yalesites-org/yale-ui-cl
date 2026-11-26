@@ -48,3 +48,13 @@ export function mount(html) {
 
 // slotchange and MutationObserver callbacks run as microtasks after the change that caused them.
 export const settle = () => new Promise((resolve) => setTimeout(resolve));
+
+// Resolves any CSS color to the rgb() string getComputedStyle reports.
+export function rgb(color) {
+	const probe = document.createElement("span");
+	probe.style.color = color;
+	document.body.append(probe);
+	const value = getComputedStyle(probe).color;
+	probe.remove();
+	return value;
+}
