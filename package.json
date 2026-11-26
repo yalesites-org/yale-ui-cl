@@ -60,7 +60,7 @@
     "@storybook/web-components-vite": "^10.6.5",
     "@vitest/browser-playwright": "^4.1.12",
     "@vitest/coverage-v8": "^4.1.12",
-    "@yalesites-org/tokens": "~1.39.0",
+    "@yalesites-org/tokens": "~1.40.3",
     "eslint": "^10.4.0",
     "globals": "^17.6.0",
     "lit": "^3.3.3",

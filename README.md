@@ -90,6 +90,12 @@ Each component directory holds the component class, its CSS, its stories (`*.sto
 
 `postcss/lock-tokens.js` replaces most token references in component CSS with literal values at build time, so a page cannot restyle components by redefining tokens. Tokens listed in its `THEMEABLE` set stay as `var()` with the resolved value as a fallback.
 
+### Tokens version
+
+- **Pin:** `@yalesites-org/tokens` uses a tilde range on the minor YaleSites uses (1.40), so `npm install` only takes patch releases. Don't switch to a caret: tokens has shipped renames in patch releases (1.40.2).
+- **Check:** `src/tokens.test.js` checks the pin. It also fails when component CSS reads a custom property, with no fallback, that neither the tokens nor this repo defines.
+- **Upgrade:** change the range in `package.json`, run `npm install` and `npm test`, then compare the stories with the published `main` Storybook.
+
 `index.html` is not part of Storybook. It is a plain page that loads `src/main.js` and shows the components with their slots and attributes. Use it for manual smoke testing with `npm run dev`.
 
 ## Theming
