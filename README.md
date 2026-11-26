@@ -9,7 +9,61 @@
 
 The components are built with [Vite](https://vite.dev) and documented in [Storybook](https://storybook.js.org).
 
+## How to load it
+
+UICL is published to npm as [`yale-ui-cl`](https://www.npmjs.com/package/yale-ui-cl). You do not need a GitHub token to use it: the design tokens are already built into the package.
+
+### In a plain HTML page
+
+Add one stylesheet and one script from the jsDelivr CDN. `@1` gets the latest 1.x release; pin a full version such as `@1.2.0` if you want the page never to change.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.js"></script>
+```
+
+Then use the tags:
+
+```html
+<ycl-button variant="filled" radius="soft" href="https://www.yale.edu">Visit Yale</ycl-button>
+```
+
+To load only some components, keep the stylesheet and swap the full bundle for one script per component. The file name is the tag with the `ycl-` prefix removed:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/button.js"></script>
+```
+
+### With a bundler
+
+```bash
+npm install yale-ui-cl
+```
+
+```js
+import 'yale-ui-cl/style.css';
+
+// Every component:
+import 'yale-ui-cl';
+
+// Or just one:
+import 'yale-ui-cl/button';
+```
+
+Always load the stylesheet. Loading the same component from a single entry and from the full bundle is safe; each tag is registered once.
+
+### Why npm
+
+UICL is published to the public npm registry rather than to GitHub Pages or GitHub Packages:
+
+- Every npm version stays available, so a page that pins a version keeps working. A GitHub Pages deploy replaces the previous one.
+- jsDelivr and unpkg serve any npm package as a CDN with no extra setup, which gives the one-script-tag page.
+- Bundler users get a normal `npm install`, and the per-component entries (`yale-ui-cl/<name>`) work the same on npm and on the CDN.
+- GitHub Packages needs a token even to read, which would stop a plain HTML page from loading it.
+
 ## Requirements
+
+These are for working on the library itself, not for using it.
 
 - Node.js and npm.
 - Access to GitHub Packages. `@yalesites-org/tokens` is installed from `npm.pkg.github.com` (see `.npmrc`). Set a GitHub token with `read:packages` access in the `YALESITES_BUILD_TOKEN` environment variable before installing.
@@ -39,9 +93,7 @@ To run one test project only, use `npm test -- --project unit` or `npm test -- -
 
 The Storybook tests render every story and run accessibility (axe) checks on it. Any violation fails the run.
 
-## Using the built library
-
-The package is not published yet. Build it with `npm run build`, then install it from a local path (`npm install ../path/to/yale-ui-cl`) or copy the `dist/` folder.
+## What the build writes
 
 `npm run build` writes:
 
@@ -49,23 +101,13 @@ The package is not published yet. Build it with `npm run build`, then install it
 - `dist/yale-ui-cl.css`: the document styles (design tokens, reset, typography, component styles).
 - `dist/<name>.js`: one ES entry per component, named after its tag with the `ycl-` prefix removed (for example `button`, `accordion`, `data-table`, `table`, `cta-link`).
 
-Always load the stylesheet. Then load either the full bundle or the components you need:
+These files are what the npm package ships, so the paths above are also the CDN paths.
 
-```js
-import 'yale-ui-cl/style.css';
+## Publishing
 
-// Every component:
-import 'yale-ui-cl';
+Publishing is automatic. When the release-please pull request is merged into `main`, the `publish-npm` job in `.github/workflows/release.yaml` builds the release tag, then runs `npm publish --provenance --ignore-scripts` (the build runs in its own step, so no build tool sees the npm token). The version is the one release-please wrote to `package.json`.
 
-// Or just one:
-import 'yale-ui-cl/button';
-```
-
-```html
-<ycl-button variant="filled" radius="soft" href="https://www.yale.edu">Visit Yale</ycl-button>
-```
-
-Loading the same component from a single entry and from the full bundle is safe; each tag is registered once.
+The job needs an `NPM_TOKEN` repository secret: an npm granular access token that can publish `yale-ui-cl`. Write-capable granular tokens expire, so renew the secret before it lapses. Without a valid token the job fails and nothing is published, even though the GitHub release is still created.
 
 ## Project layout
 

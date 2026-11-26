@@ -17,42 +17,69 @@ It works in plain HTML and alongside any framework.
 
 ## How to load it
 
-The package is not on npm yet. To use it today, build it from this repository and install the local copy:
+UICL is published to npm as `yale-ui-cl`, and the jsDelivr CDN serves it.
+You need no build step and no token.
 
-The install needs a GitHub token with `read:packages` access in the `YALESITES_BUILD_TOKEN` environment variable, because `@yalesites-org/tokens` comes from GitHub Packages.
+### In a plain HTML page
 
-```bash
-export YALESITES_BUILD_TOKEN=<your GitHub token>
-npm ci
-npm run build
-# then, in your project:
-npm install ../path/to/yale-ui-cl
+Add one stylesheet and one script. The stylesheet holds the design tokens, base typography and component styles.
+`@1` gets the latest 1.x release; pin a full version such as `@1.2.0` if you want the page never to change.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.js"></script>
 ```
 
-Load the stylesheet once per page. It holds the design tokens, base typography and component styles.
+Here is a whole page you can copy into a file and open in a browser:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My UICL page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.js"></script>
+  </head>
+  <body>
+    <main>
+      <ycl-heading level="1">Welcome to my page</ycl-heading>
+      <ycl-accordion>
+        <ycl-accordion-item>
+          <span slot="heading">What is UICL?</span>
+          <p>A set of Web Components for Yale web pages and apps.</p>
+        </ycl-accordion-item>
+        <ycl-accordion-item>
+          <span slot="heading">Do I need a framework?</span>
+          <p>No. The components are plain HTML tags.</p>
+        </ycl-accordion-item>
+      </ycl-accordion>
+      <ycl-button variant="filled" radius="soft" href="https://www.yale.edu">Visit Yale</ycl-button>
+    </main>
+  </body>
+</html>
+```
+
+To load only some components, keep the stylesheet and swap the full bundle for one script per component.
+The file name is the tag with the `ycl-` prefix removed:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/button.js"></script>
+```
+
+### With a bundler
+
+```bash
+npm install yale-ui-cl
+```
+
+Load the stylesheet once, then the full bundle or single components:
 
 ```js
 import 'yale-ui-cl/style.css';
-```
-
-Then load the components. Import the full bundle to register every component:
-
-```js
-import 'yale-ui-cl';
-```
-
-Or import a single component entry. The entry name is the tag with the `ycl-` prefix removed:
-
-```js
-import 'yale-ui-cl/button';
-```
-
-Then use the tags in your HTML:
-
-```html
-<ycl-button variant="filled" radius="soft" href="https://www.yale.edu">
-  Visit Yale
-</ycl-button>
+import 'yale-ui-cl';         // every component
+import 'yale-ui-cl/button';  // or just one
 ```
 
 ## How this Storybook is organized

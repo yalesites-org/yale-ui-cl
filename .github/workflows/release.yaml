@@ -55,6 +55,32 @@ jobs:
           git merge origin/main --no-ff -m "chore: merge main into develop after ${TAG}"
           git push origin develop
 
+  # Publishes yale-ui-cl to the public npm registry, which jsDelivr and unpkg serve as a CDN.
+  # Needs an NPM_TOKEN repository secret (an npm granular access token that can publish yale-ui-cl; it expires, so renew it).
+  publish-npm:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm provenance
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name }}
+      - uses: ./.github/actions/setup
+        with:
+          npm-token: ${{ secrets.YALESITES_BUILD_TOKEN }}
+      # Added after the install, so npm ci never sees it. Single quotes keep the token out of the file:
+      # npm expands ${NODE_AUTH_TOKEN} when it reads it.
+      - run: echo '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}' >> "$HOME/.npmrc"
+      # Build without the npm token, then publish with --ignore-scripts (skips prepublishOnly's rebuild),
+      # so no build tool or devDependency ever runs with the token in its environment.
+      - run: npm run build
+      - run: npm publish --provenance --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   deploy-storybook:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
