@@ -1,5 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { addVariant, updateLinkIcon } from "./utility.js";
+import { addVariant, setHostRole, updateLinkIcon } from "./utility.js";
+
+describe("setHostRole", () => {
+	it("sets the role attribute on the host", () => {
+		const host = document.createElement("div");
+		setHostRole(host, "region");
+		expect(host.getAttribute("role")).toBe("region");
+	});
+
+	it("leaves a role the author set", () => {
+		const host = document.createElement("div");
+		host.setAttribute("role", "complementary");
+		setHostRole(host, "region");
+		expect(host.getAttribute("role")).toBe("complementary");
+	});
+});
 
 describe("addVariant", () => {
 	it("adds a BEM modifier per class name", () => {

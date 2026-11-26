@@ -1,5 +1,6 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./related-content.css?inline";
+import { setHostRole } from "../../utility.js";
 
 let headingCount = 0;
 
@@ -32,15 +33,12 @@ relatedContentItemTemplate.innerHTML = `
  */
 export class RelatedContentItem extends HTMLElement {
 	#shadow;
-	#internals;
 	static get observedAttributes() {
 		return ["href", "type", "category"];
 	}
 
 	constructor() {
 		super();
-		this.#internals = this.attachInternals();
-		this.#internals.role = "article";
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "related-content")];
 		this.#shadow.appendChild(document.importNode(relatedContentItemTemplate.content, true));
@@ -48,6 +46,10 @@ export class RelatedContentItem extends HTMLElement {
 		this.typeEl = this.#shadow.querySelector(".related-card__type");
 		this.categoryEl = this.#shadow.querySelector(".related-card__category");
 		this.separatorEl = this.#shadow.querySelector(".related-card__eyebrow-separator");
+	}
+
+	connectedCallback() {
+		setHostRole(this, "article");
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -74,11 +76,9 @@ export class RelatedContentItem extends HTMLElement {
  */
 export class RelatedContent extends HTMLElement {
 	#shadow;
-	#internals;
 
 	constructor() {
 		super();
-		this.#internals = this.attachInternals();
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "related-content")];
 		this.#shadow.appendChild(document.importNode(relatedContentTemplate.content, true));
@@ -94,12 +94,13 @@ export class RelatedContent extends HTMLElement {
 	#labelRegion(heading) {
 		this.headingWrapper.hidden = !heading;
 		if (!heading) {
-			this.#internals.role = null;
+			// Only drop the region role this component gives; any other role is the author's.
+			if (this.getAttribute("role") === "region") this.removeAttribute("role");
 			this.removeAttribute("aria-labelledby");
 			return;
 		}
 		if (!heading.id) heading.id = `ycl-related-content-heading-${++headingCount}`;
-		this.#internals.role = "region";
+		setHostRole(this, "region");
 		this.setAttribute("aria-labelledby", heading.id);
 	}
 }
