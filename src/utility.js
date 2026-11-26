@@ -7,6 +7,13 @@ export function addVariant(classNames, componentObject, componentName) {
 	variants.forEach((c) => {componentObject.classList.add(componentName + "--" + c)});
 };
 
+// Gives a host its default role as a role attribute, where axe can see it (a role set only through
+// ElementInternals is invisible to the a11y checks). A role the author set is left alone. Call it
+// from connectedCallback or later: a constructor may not add attributes.
+export function setHostRole(host, role) {
+	if (!host.hasAttribute("role")) host.setAttribute("role", role);
+}
+
 // CTA options shared by ycl-cta-link and ycl-button. Each maps to a cta.css modifier:
 // variant="outline" -> cta--outline, outline-weight="4" -> cta--outline-weight-4,
 // animate="wipe" -> cta--animate-wipe, radius="pill" -> cta--radius-pill. Values cta.css doesn't

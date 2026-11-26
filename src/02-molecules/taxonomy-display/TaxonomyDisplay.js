@@ -1,20 +1,21 @@
 import { baseSheet, componentSheet } from "../../styles/shadow.js";
 import componentStyles from "./taxonomy-display.css?inline";
+import { setHostRole } from "../../utility.js";
 
 const taxonomyDisplayTemplate = document.createElement("template");
 taxonomyDisplayTemplate.innerHTML = `
 	<div class="taxonomy-display">
 		<div class="taxonomy-display__inner">
 			<div class="taxonomy-display__content">
-				<div class="taxonomy-display__list" role="list"><slot></slot></div>
+				<div class="taxonomy-display__list"><slot></slot></div>
 			</div>
 		</div>
 	</div>
 `;
 
-// Each item lives in its own shadow root, so it can't be a real <li> of the parent's list; it takes
-// the listitem role through ElementInternals instead. The terms are slotted links grouped under
-// the label, which also names the group for screen readers.
+// Each item lives in its own shadow root, so it can't be a real <li> of the parent's list. The list
+// and listitem roles sit on the two hosts instead, where axe can see the parent-child pair. The
+// terms are slotted links grouped under the label, which also names the group for screen readers.
 const taxonomyDisplayItemTemplate = document.createElement("template");
 taxonomyDisplayItemTemplate.innerHTML = `
 	<div class="taxonomy-display__item">
@@ -33,15 +34,12 @@ taxonomyDisplayItemTemplate.innerHTML = `
  */
 export class TaxonomyDisplayItem extends HTMLElement {
 	#shadow;
-	#internals;
 	static get observedAttributes() {
 		return ["label"];
 	}
 
 	constructor() {
 		super();
-		this.#internals = this.attachInternals();
-		this.#internals.role = "listitem";
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "taxonomy-display")];
 		this.#shadow.appendChild(document.importNode(taxonomyDisplayItemTemplate.content, true));
@@ -57,6 +55,10 @@ export class TaxonomyDisplayItem extends HTMLElement {
 			this.listEl.classList.toggle("taxonomy-display__item__list--empty", empty);
 		});
 		this.listEl.classList.add("taxonomy-display__item__list--empty");
+	}
+
+	connectedCallback() {
+		setHostRole(this, "listitem");
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -82,6 +84,10 @@ export class TaxonomyDisplay extends HTMLElement {
 		this.#shadow = this.attachShadow({ mode: "closed" });
 		this.#shadow.adoptedStyleSheets = [baseSheet, componentSheet(componentStyles, "taxonomy-display")];
 		this.#shadow.appendChild(document.importNode(taxonomyDisplayTemplate.content, true));
+	}
+
+	connectedCallback() {
+		setHostRole(this, "list");
 	}
 }
 
