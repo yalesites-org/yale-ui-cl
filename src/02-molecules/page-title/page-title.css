@@ -6,8 +6,6 @@
   margin-bottom: var(--size-spacing-7);
 }
 
-/* A :host display rule would otherwise beat the UA's [hidden] rule. */
-:host(ycl-page-title[hidden]),
 :host(ycl-page-title[display="hidden"]) {
   display: none;
 }

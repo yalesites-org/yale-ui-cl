@@ -4,11 +4,6 @@
   display: block;
 }
 
-:host(ycl-related-content[hidden]),
-:host(ycl-related-content-item[hidden]) {
-  display: none;
-}
-
 /* Page section spacing below; related content sets its own, larger top margin. */
 :host(ycl-related-content) {
   margin-block-start: var(--size-spacing-10);

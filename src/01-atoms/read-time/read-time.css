@@ -4,10 +4,6 @@
   display: block;
 }
 
-:host(ycl-read-time[hidden]) {
-  display: none;
-}
-
 .read-time {
   font: var(--font-style-body-s);
   color: var(--color-gray-600);
