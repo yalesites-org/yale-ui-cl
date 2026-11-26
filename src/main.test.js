@@ -27,12 +27,14 @@ describe.each(Object.entries(library))("%s", (_, Component) => {
 	});
 });
 
-it("gives every component except ycl-tab a shadow root", () => {
-	const missing = Object.values(library)
-		.map((Component) => document.createElement(customElements.getName(Component)))
-		.filter((element) => {
-			try { return !shadowOf(element); } catch { return true; }
-		})
-		.map((element) => element.localName);
-	expect(missing).toEqual(["ycl-tab"]);
+// Data-only children (static dataOnly = true) are rendered by their parent; every other component has a shadow root.
+it("gives a shadow root to every component that isn't data-only, and to none that is", () => {
+	const hasShadow = (Component) => {
+		try { return Boolean(shadowOf(document.createElement(customElements.getName(Component)))); } catch { return false; }
+	};
+	const wrong = Object.values(library)
+		.filter((Component) => hasShadow(Component) === Boolean(Component.dataOnly))
+		.map((Component) => customElements.getName(Component));
+	expect(wrong).toEqual([]);
+	expect(Object.values(library).filter((Component) => Component.dataOnly).length).toBeGreaterThan(0);
 });
