@@ -176,6 +176,12 @@ purple visited colors fall short of 4.5:1 there. If you change the
 palette, keep each color's contrast with that text at 4.5:1 or more. The Storybook
 "Tokens/Theme Builder" story previews a palette on a set of components.
 
+To see any story in another YaleSites palette, use the palette switcher (the paint-brush
+**Palette** menu) in the Storybook toolbar. It lists every palette by the name editors see in
+YaleSites site settings, read from `@yalesites-org/tokens`, and repaints the current story without
+a reload. The choice stays as you move between stories. Storybook starts on Old Blues, the
+components' default, so stories and their tests render as before.
+
 Other design tokens (`--color-blue-yale` and so on) are locked into the component styles at build
 time, so redefining them on a page doesn't restyle components; only the `--color-theme-*`
 properties and the themeable text, heading, background and link colors do.

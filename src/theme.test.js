@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import "./main.js";
-import { composedElements, mount, settle, shadowOf } from "../test/helpers.js";
+import { composedElements, mount, rgb, settle, shadowOf } from "../test/helpers.js";
 
 // The single color theme: pages set these five inherited custom properties (or leave them unset
 // for the Old Blues defaults) and components pick one with their theme attribute.
@@ -32,16 +32,6 @@ const stories = Object.values(import.meta.glob("./0*/**/*.stories.js", { eager: 
 const storyFor = (tag) => stories.find((module) => module.default.component === tag);
 
 const css = import.meta.glob("./**/*.css", { query: "?raw", import: "default", eager: true });
-
-// Resolves any CSS color to the rgb() string getComputedStyle reports.
-function rgb(color) {
-	const probe = document.createElement("span");
-	probe.style.color = color;
-	document.body.append(probe);
-	const value = getComputedStyle(probe).color;
-	probe.remove();
-	return value;
-}
 
 // All colors painted anywhere in the component.
 function paintedColors(root) {

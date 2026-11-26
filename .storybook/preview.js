@@ -2,6 +2,7 @@
 
 import { setCustomElementsManifest } from '@storybook/web-components-vite';
 import customElements from '../custom-elements.json';
+import { DEFAULT_PALETTE, paletteGlobalType, withPalette } from './palettes.js';
 
 import ('../src/styles/base.css');
 
@@ -26,6 +27,15 @@ const preview = {
   // A Docs page for every component, built from the manifest entry for its component tag: its
   // attributes, slots and events.
   tags: ['autodocs'],
+  // A toolbar menu that repaints every story in any YaleSites palette. Storybook keeps the choice
+  // while moving between stories; it starts on Old Blues, the components' own default.
+  globalTypes: {
+    palette: paletteGlobalType,
+  },
+  initialGlobals: {
+    palette: DEFAULT_PALETTE.id,
+  },
+  decorators: [withPalette],
   parameters: {
     // Axe violations fail the story's test (npm test) instead of only being reported.
     a11y: {
