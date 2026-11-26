@@ -62,3 +62,13 @@
     margin-bottom: 0;
   }
 }
+
+/* Every component sets a :host display, which beats the browser's own [hidden] { display: none },
+   so the hidden attribute would do nothing. This restores it for all of them. It sits in util, the
+   last layer, so no components.* rule can override it. (On a page that loads yale-ui-cl.css,
+   normalize's document-level [hidden] rule also hides them.) */
+@layer util {
+  :host([hidden]) {
+    display: none;
+  }
+}

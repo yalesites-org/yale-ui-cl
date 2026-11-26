@@ -3,10 +3,6 @@
   display: block;
 }
 
-:host(ycl-search-result[hidden]) {
-  display: none;
-}
-
 .search-result {
   padding: var(--size-spacing-6) 0;
   border-bottom: var(--border-thickness-1) solid var(--color-gray-300);

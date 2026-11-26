@@ -6,10 +6,6 @@
   margin-bottom: var(--size-spacing-7);
 }
 
-:host(ycl-text[hidden]) {
-  display: none;
-}
-
 .text-field__inner {
   width: 100%;
   max-width: var(--size-component-layout-width-site);

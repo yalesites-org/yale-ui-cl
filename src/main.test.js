@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, onTestFinished } from "vitest";
 import * as library from "./main.js";
 import { shadowOf } from "../test/helpers.js";
 
@@ -25,6 +25,29 @@ describe.each(Object.entries(library))("%s", (_, Component) => {
 		element.remove();
 		expect(errors).toEqual([]);
 	});
+});
+
+// With yale-ui-cl.css loaded, normalize's document-level [hidden] rule beats any :host display
+// rule, so the document sheets are switched off to check that each component hides on its own
+// (as when a page loads one per-component entry without the full stylesheet).
+it("hides every component while it has the hidden attribute, without the document stylesheet", () => {
+	const documentSheets = [...document.styleSheets];
+	documentSheets.forEach((sheet) => (sheet.disabled = true));
+	onTestFinished(() => documentSheets.forEach((sheet) => (sheet.disabled = false)));
+
+	const elements = Object.values(library).map((Component) => {
+		const element = document.createElement(customElements.getName(Component));
+		document.body.append(element);
+		return element;
+	});
+	const display = () => elements.map((element) => [element.localName, getComputedStyle(element).display]);
+	const shown = display();
+
+	elements.forEach((element) => (element.hidden = true));
+	expect(display().filter(([, value]) => value !== "none")).toEqual([]);
+
+	elements.forEach((element) => (element.hidden = false));
+	expect(display()).toEqual(shown);
 });
 
 it("gives every component except ycl-tab a shadow root", () => {

@@ -4,11 +4,6 @@
   display: block;
 }
 
-:host(ycl-taxonomy-display[hidden]),
-:host(ycl-taxonomy-display-item[hidden]) {
-  display: none;
-}
-
 /* Colour options, named after the palette colour each one takes its background from. With no
    option (or "default") the display has no background and keeps the page's text and link
    colors. Pages set the palette with the --color-theme-* custom properties, which inherit into

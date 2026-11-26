@@ -6,10 +6,6 @@
   margin-bottom: var(--size-spacing-7);
 }
 
-:host(ycl-image-block[hidden]) {
-  display: none;
-}
-
 /* YaleSites pads every [data-component-width] component with the site gutter. */
 .content-image {
   padding-inline: var(--size-spacing-site-gutter);
