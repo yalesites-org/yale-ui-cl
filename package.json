@@ -78,7 +78,10 @@
     "vite-plugin-css-injected-by-js": "^4.0.1",
     "vitest": "^4.1.12"
   },
-  "private": true,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "engines": {
     "node": ">=24"
   }

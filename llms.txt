@@ -8,16 +8,18 @@ UICL (yale-ui-cl) is the Yale UI component library: vanilla custom elements with
 
 ## Loading the library
 
-The package is not published to a registry yet. Once installed, load it in one of two ways.
+The package is published to npm as `yale-ui-cl`. Load it in one of two ways.
 
-Whole library, from the build output:
+Whole library, in a plain HTML page, from the jsDelivr CDN (`@1` is the latest 1.x release):
 
 ```html
-<link rel="stylesheet" href="node_modules/yale-ui-cl/dist/yale-ui-cl.css">
-<script type="module" src="node_modules/yale-ui-cl/dist/yale-ui-cl.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/yale-ui-cl.js"></script>
 ```
 
-Or per component, with a bundler. Each import registers the tags in that file, and nothing else, so import every component your markup uses:
+On the CDN, one component is `https://cdn.jsdelivr.net/npm/yale-ui-cl@1/dist/<name>.js`, where `<name>` is the tag without its `ycl-` prefix.
+
+Or per component, with a bundler, after `npm install yale-ui-cl`. Each import registers the tags in that file, and nothing else, so import every component your markup uses:
 
 ```js
 import "yale-ui-cl/style.css";   // tokens, reset and typography: always load it
