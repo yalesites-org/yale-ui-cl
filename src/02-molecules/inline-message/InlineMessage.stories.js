@@ -20,6 +20,10 @@ export default {
       options: ['default', 'none'],
       mapping: { default: undefined },
     }),
+    label: attributeArg('Accessible name of the message\'s landmark. Give each message on a page its own; defaults to "information".', {
+      name: 'Label',
+      control: 'text',
+    }),
     theme: attributeArg(COLOR_OPTION_DESCRIPTION, {
       name: 'Color Option',
       options: ['primary', 'secondary', 'tertiary', 'accent-1', 'accent-2'],
@@ -33,6 +37,7 @@ export default {
   args: {
     type: 'general',
     icon: 'default',
+    label: '',
     customIcon: '',
     heading: 'This is a general message heading',
     content: 'This is a general message content',
@@ -41,7 +46,7 @@ export default {
   },
 
   render: (args) => `
-      <ycl-inline-message${attrs({ type: args.type, theme: args.theme, icon: args.icon })}>
+      <ycl-inline-message${attrs({ type: args.type, theme: args.theme, icon: args.icon, label: args.label })}>
         ${args.customIcon ? `<ycl-icon slot="icon" name="${args.customIcon}"></ycl-icon>` : ''}
         ${args.heading ? `<ycl-heading level="2" slot="heading">${args.heading}</ycl-heading>` : ''}
         ${args.content ? `<p>${args.content}</p>` : ''}
@@ -50,3 +55,20 @@ export default {
 };
 
 export const Default = {};
+
+// Two messages on one page, each with its own landmark name so screen reader users can tell them apart.
+export const TwoLabeledMessages = {
+  name: 'Two Labeled Messages',
+  parameters: { controls: { disable: true } },
+  render: () => `
+      <div style="display: grid; gap: var(--size-spacing-5);">
+        <ycl-inline-message label="Parking update">
+          <ycl-heading level="2" slot="heading">Lot C closes Friday</ycl-heading>
+          <p>Use Lot D on Friday while Lot C is repaved.</p>
+        </ycl-inline-message>
+        <ycl-inline-message type="marketing" label="Library hours">
+          <ycl-heading level="2" slot="heading">Extended hours during finals</ycl-heading>
+          <p>The library stays open until 2 a.m. through December 18.</p>
+        </ycl-inline-message>
+      </div>`,
+};

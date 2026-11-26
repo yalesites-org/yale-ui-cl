@@ -2456,6 +2456,13 @@
               "description": "none hides the icon."
             },
             {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name of the message's landmark; give each message on a page its own. Defaults to \"information\"."
+            },
+            {
               "type": {
                 "text": "\"primary\"|\"secondary\"|\"tertiary\"|\"accent-1\"|\"accent-2\""
               },
