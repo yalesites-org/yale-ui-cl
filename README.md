@@ -31,11 +31,11 @@ npx playwright install chromium   # once per machine, for the tests
 | `npm run build` | Build the library into `dist/`. |
 | `npm run build-storybook` | Build a static Storybook into `storybook-static/`. |
 | `npm run preview` | Serve the Vite build locally. |
-| `npm test` | Run all tests once in headless Chromium (unit tests and Storybook story tests). |
+| `npm test` | Run all tests once: unit tests and Storybook story tests in headless Chromium, build-tooling tests in Node. |
 | `npm run test:watch` | Run the tests in watch mode. |
 | `npx eslint .` | Lint the project. |
 
-To run one test project only, use `npm test -- --project unit` or `npm test -- --project storybook`.
+To run one test project only, use `npm test -- --project unit`, `npm test -- --project storybook` or `npm test -- --project node` (the `postcss/` build plugin).
 
 The Storybook tests render every story and run accessibility (axe) checks on it. Any violation fails the run.
 
@@ -88,12 +88,12 @@ index.html         Manual smoke-test page served by `npm run dev`
 
 Each component directory holds the component class, its CSS, its stories (`*.stories.js`) and its unit tests (`*.test.js`).
 
-`postcss/lock-tokens.js` replaces most token references in component CSS with literal values at build time, so a page cannot restyle components by redefining tokens. Tokens listed in its `THEMEABLE` set stay as `var()` with the resolved value as a fallback.
+`postcss/lock-tokens.js` replaces most token references in component CSS with literal values at build time, so a page cannot restyle components by redefining tokens. Tokens listed in its `THEMEABLE` set stay as `var()` with the resolved value as a fallback. It also fails the build when component CSS reads a name that looks like a token (it starts with the same word, such as `--color-`) but isn't in the tokens file and no component declares it, even inside a `var()` fallback. Names a page sets on purpose, such as the `--color-theme-*` palette, are listed in its `PAGE_PROVIDED` set.
 
 ### Tokens version
 
 - **Pin:** `@yalesites-org/tokens` uses a tilde range on the minor YaleSites uses (1.40), so `npm install` only takes patch releases. Don't switch to a caret: tokens has shipped renames in patch releases (1.40.2).
-- **Check:** `src/tokens.test.js` checks the pin. It also fails when component CSS reads a custom property, with no fallback, that neither the tokens nor this repo defines.
+- **Check:** `src/tokens.test.js` checks the pin. It also fails when component CSS reads a custom property, with no fallback, that neither the tokens nor this repo defines. A renamed token read with a fallback is caught by `postcss/lock-tokens.js` at build time instead.
 - **Upgrade:** change the range in `package.json`, run `npm install` and `npm test`, then compare the stories with the published `main` Storybook.
 
 `index.html` is not part of Storybook. It is a plain page that loads `src/main.js` and shows the components with their slots and attributes. Use it for manual smoke testing with `npm run dev`.

@@ -13,7 +13,8 @@ const declared = names(/(--[\w-]+)\s*:/g);
 const setInScript = names(/setProperty\(\s*["'](--[\w-]+)["']/g);
 
 // Custom property names read with no fallback (`var(--name)`). A read with a fallback isn't
-// checked, so a renamed token read that way falls back silently.
+// checked here: postcss/lock-tokens.js fails the build on an unknown token-like name either way.
+// This test still covers names that don't look like tokens (such as --cta-radius-soft).
 const read = names(/var\(\s*(--[\w-]+)\s*\)/g);
 
 const stripComments = (source) => source.replace(/\/\*[\s\S]*?\*\//g, "");
