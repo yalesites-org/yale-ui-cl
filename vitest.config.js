@@ -27,6 +27,15 @@ export default defineConfig((env) =>
 						browser: browser(),
 					},
 				},
+				// Build tooling (postcss/), which runs in Node rather than the browser.
+				{
+					extends: true,
+					test: {
+						name: "node",
+						include: ["postcss/**/*.test.js"],
+						environment: "node",
+					},
+				},
 				// Renders every story (and runs any play function) using .storybook/preview.js.
 				{
 					extends: true,
