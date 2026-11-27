@@ -22,6 +22,18 @@ describe("ycl-table", () => {
 		expect(element.getBoundingClientRect().width).toBe(300);
 	});
 
+	it.each(["display: flex", "display: grid"])("scrolls inside a 300px parent with %s instead of stretching it", async (style) => {
+		const parent = mount(`<div style="${style}; width: 300px"><ycl-table>${table(10)}</ycl-table></div>`);
+		await frame();
+		expect(parent.scrollWidth).toBe(300);
+		expect(wrapper(parent.firstElementChild).scrollWidth).toBeGreaterThan(300);
+	});
+
+	it("still hides with the hidden attribute", () => {
+		const element = mount(`<ycl-table hidden>${table(2)}</ycl-table>`);
+		expect(getComputedStyle(element).display).toBe("none");
+	});
+
 	it("makes the wrapper a labelled, focusable region only while it scrolls", async () => {
 		const element = mount(`<ycl-table style="display: block; width: 300px">${table(10)}</ycl-table>`);
 		await frame();

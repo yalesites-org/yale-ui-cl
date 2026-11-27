@@ -1,6 +1,8 @@
-/* Custom elements default to display: inline. */
+/* Custom elements default to display: inline. min-width: 0 lets a flex or grid parent shrink it to
+   fit, so a wide table scrolls inside ycl-table instead of pushing the page sideways. */
 :host(ycl-data-table) {
   display: block;
+  min-width: 0;
 }
 
 .data-table__search {
