@@ -10,13 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/yalesites-org/yale-ui-cl.git"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": "Nick Taylor",
   "type": "module",
   "files": [
     "dist",
     "custom-elements.json",
-    "llms.txt"
+    "llms.txt",
+    "LICENSE"
   ],
   "main": "./dist/yale-ui-cl.js",
   "module": "./dist/yale-ui-cl.js",
