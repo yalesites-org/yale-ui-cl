@@ -1,3 +1,14 @@
+/* Block, and shrinkable inside a flex or grid parent, so the wrapper below gets the parent's width
+   to scroll within instead of growing to the table's. */
+:host(ycl-table) {
+  display: block;
+  min-width: 0;
+}
+
+:host(ycl-table[hidden]) {
+  display: none;
+}
+
 /* Lives in ycl-table's shadow root: wide tables scroll sideways inside it rather than overflowing the page.
    The font is set here too so the slotted table inherits it even without the document stylesheet. */
 .table-wrapper {

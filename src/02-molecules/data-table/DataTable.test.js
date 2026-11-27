@@ -1,5 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
+import { setProjectAnnotations } from "@storybook/web-components-vite";
+import { composeStories } from "storybook/preview-api";
+import preview from "../../../.storybook/preview.js";
+import * as stories from "./DataTable.stories.js";
+import * as pages from "../../05-page-examples/PageExamples.stories.js";
 import "./DataTable.js";
+import "../../styles/base.css";
 import { mount, settle, shadowOf } from "../../../test/helpers.js";
 
 const markup = `
@@ -133,5 +140,56 @@ describe("ycl-data-table", () => {
 		await frame();
 		expect(region(el).getAttribute("role")).toBe("region");
 		expect(region(el).getAttribute("aria-label")).toBe("Table");
+	});
+});
+
+// WCAG 1.4.10 (reflow): a wide table scrolls inside its own box, never the page, at a phone width.
+describe("ycl-data-table on a 375px screen", () => {
+	const annotations = setProjectAnnotations(preview);
+	const pageOverflow = () => document.documentElement.scrollWidth - document.documentElement.clientWidth;
+	// Stories return markup or, for the page examples, a node.
+	const show = async (output) => {
+		if (typeof output === "string") document.body.innerHTML = output;
+		else document.body.replaceChildren(output);
+		await frame();
+	};
+	let size;
+	beforeAll(async () => {
+		size = [window.innerWidth, window.innerHeight];
+		await page.viewport(375, 812);
+	});
+	afterAll(() => page.viewport(...size));
+
+	it.each(Object.entries(composeStories(stories, annotations)))("the %s story doesn't scroll the page sideways", async (_, Story) => {
+		await show(Story());
+		expect(pageOverflow()).toBe(0);
+	});
+
+	it("the Courses page example doesn't scroll the page sideways", async () => {
+		await show(composeStories(pages, annotations).DirectoryListing());
+		expect(document.querySelector("ycl-data-table")).not.toBeNull();
+		expect(pageOverflow()).toBe(0);
+	});
+
+	// Flex and grid items don't shrink below their content by default, so a wide table would
+	// otherwise stretch its flex row or grid column past the screen.
+	it.each(["display: flex", "display: grid; grid-template-columns: auto"])("scrolls inside its own named region in a parent with %s", async (style) => {
+		await show(`<div style="${style}"><ycl-data-table>${wide("<caption>Results</caption>")}</ycl-data-table></div>`);
+		const el = document.querySelector("ycl-data-table");
+		expect(pageOverflow()).toBe(0);
+		expect(region(el).scrollWidth).toBeGreaterThan(region(el).clientWidth);
+		expect(region(el).tabIndex).toBe(0);
+		expect(region(el).getAttribute("role")).toBe("region");
+		expect(region(el).getAttribute("aria-label")).toBe("Results");
+	});
+
+	it("still searches and sorts inside a flex parent", async () => {
+		await show(`<div style="display: flex">${markup}</div>`);
+		const el = document.querySelector("ycl-data-table");
+		buttons(el)[0].click();
+		expect(names(el)).toEqual(["alice", "Bob", "Charlie"]);
+		el.query = "tall";
+		expect(visible(el)).toEqual(["Bob", "Charlie"]);
+		expect(pageOverflow()).toBe(0);
 	});
 });
