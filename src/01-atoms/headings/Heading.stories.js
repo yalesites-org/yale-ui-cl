@@ -2,6 +2,11 @@ import "./Heading";
 import { icons } from "../icons/icons.js";
 import { attrs, attributeArg, slotArg } from "../../../.storybook/story-helpers.js";
 
+// One heading per level, stacked. text is a string or a function of the level.
+const allLevels = (text) =>
+  ['1', '2', '3', '4', '5', '6'].map((level) =>
+    `<ycl-heading level="${level}" style="margin-bottom: 1rem;">${typeof text === 'function' ? text(level) : text}</ycl-heading>`).join('');
+
 export default {
   title: 'Atoms/Heading',
   component: 'ycl-heading',
@@ -56,7 +61,17 @@ export const AllLevels = {
       },
     },
   },
+  render: () => allLevels((level) => `Heading level ${level}`),
+};
+
+export const LongWord = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A single word longer than the line, such as a pasted URL, breaks onto new lines instead of making the page scroll sideways. Shown at every level in a 375px column.',
+      },
+    },
+  },
   render: () =>
-    ['1', '2', '3', '4', '5', '6'].map((level) =>
-      `<ycl-heading level="${level}" style="margin-bottom: 1rem;">Heading level ${level}</ycl-heading>`).join(''),
+    `<div style="max-width: 375px;">${allLevels('Pneumonoultramicroscopicsilicovolcanoconiosisxxxxxxx')}</div>`,
 };
