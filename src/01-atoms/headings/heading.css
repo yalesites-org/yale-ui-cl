@@ -8,6 +8,10 @@
   color: var(--color-heading);
   font: var(--font-style-heading-h2-yale-new);
   font-variant-numeric: oldstyle-nums;
+  /* A word longer than the line (a pasted URL, a long compound) breaks instead of making the page
+     scroll sideways, as YaleSites' heading does. break-word rather than anywhere leaves the
+     min-content width alone, so normal headings size and wrap exactly as before. */
+  overflow-wrap: break-word;
 }
 
 /* In a component's named slot the heading takes that component's color, as a plain hN would,
