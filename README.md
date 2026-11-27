@@ -236,3 +236,7 @@ The `variation` attribute on `ycl-quick-links`, `ycl-page-title` and `ycl-text` 
 | Per-component entry | `yale-ui-cl/reference-card` | `yale-ui-cl/content-card` |
 
 The old tag, export, and entry names were removed, not aliased.
+
+## License
+
+UICL is released under the [MIT License](LICENSE). It is meant to be loaded from public npm and CDNs by any YaleSites site or Yale team, so it needs a license that lets anyone use, copy and change it; `UNLICENSED` would grant nobody those rights, and license scanners would flag it. MIT is short, widely recognized and accepted by those scanners.
